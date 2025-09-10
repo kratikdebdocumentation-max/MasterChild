@@ -151,7 +151,8 @@ class SymbolManager:
             Quote data or None
         """
         try:
-            return api.get_quotes(exchange=exchange, token=token)
+            result = api.get_quotes(exchange=exchange, token=token)
+            return result
         except Exception as e:
             applicationLogger.error(f"Error getting quotes for {exchange}|{token}: {e}")
             return None

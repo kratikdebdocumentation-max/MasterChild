@@ -210,3 +210,140 @@ ValueError: time data '911' does not match format '%b'
 2025-09-11 01:21:41,161 - INFO - Order data saved to orders.csv
 2025-09-11 01:21:41,161 - INFO - Account 1 - B PENDING NewAck
 2025-09-11 01:21:41,161 - INFO - Account 1 - B PENDING NewAck
+2025-09-11 01:32:19,786 - INFO - Downloading master files...
+2025-09-11 01:32:19,787 - INFO - Finding expiry dates...
+2025-09-11 01:32:19,917 - INFO - System initialization completed successfully
+2025-09-11 01:32:20,267 - INFO - Generated fresh 2FA for account 1: 506166
+2025-09-11 01:32:20,975 - INFO - Master account initialized successfully
+2025-09-11 01:34:33,927 - INFO - Generated fresh 2FA for account 2: 530911
+2025-09-11 01:34:39,367 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 01:34:39,368 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 01:34:45,483 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:34:45,490 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:34:59,037 - INFO - Active accounts: [1, 2]
+2025-09-11 01:34:59,037 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-11 01:34:59,037 - INFO - Trading symbol: SENSEX2591181200CE, Price: 409.45
+2025-09-11 01:34:59,037 - INFO - Quantities: [20, '']
+2025-09-11 01:34:59,037 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:34:59,037 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': '', 'discloseqty': 0, 'price_type': 'LMT', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:34:59,701 - INFO - API response: None
+2025-09-11 01:34:59,701 - INFO - API response type: <class 'NoneType'>
+2025-09-11 01:34:59,701 - ERROR - Order placement failed: None
+2025-09-11 01:34:59,725 - INFO - API response: {'request_time': '01:35:00 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473330'}
+2025-09-11 01:34:59,726 - INFO - API response type: <class 'dict'>
+2025-09-11 01:34:59,726 - INFO - Buy order placed successfully: {'request_time': '01:35:00 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473330'}
+2025-09-11 01:34:59,733 - INFO - New order received: 25091000473330
+2025-09-11 01:34:59,735 - INFO - New order received: 25091000473330
+2025-09-11 01:34:59,742 - INFO - Updating order 25091000473330
+2025-09-11 01:34:59,744 - INFO - Updating order 25091000473330
+2025-09-11 01:34:59,748 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-11 01:34:59,748 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-11 01:34:59,752 - INFO - Order data saved to orders.csv
+2025-09-11 01:34:59,752 - INFO - Order data saved to orders.csv
+2025-09-11 01:34:59,752 - INFO - Account 1 - B PENDING NewAck
+2025-09-11 01:34:59,754 - INFO - PLACE BUY ORDER for Master1
+2025-09-11 01:37:52,118 - INFO - Downloading master files...
+2025-09-11 01:37:52,119 - INFO - Finding expiry dates...
+2025-09-11 01:37:52,202 - INFO - System initialization completed successfully
+2025-09-11 01:37:52,470 - INFO - Generated fresh 2FA for account 1: 529078
+2025-09-11 01:37:53,046 - INFO - Master account initialized successfully
+2025-09-11 01:37:56,021 - INFO - Generated fresh 2FA for account 2: 531218
+2025-09-11 01:38:01,524 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 01:38:01,525 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 01:38:10,002 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:38:10,008 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:38:16,801 - INFO - Active accounts: [1, 2]
+2025-09-11 01:38:16,802 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-11 01:38:16,803 - INFO - Trading symbol: SENSEX2591181200CE, Price: 409.45
+2025-09-11 01:38:16,803 - INFO - Quantities: [20, 20]
+2025-09-11 01:38:16,805 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:38:16,806 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:38:17,430 - INFO - API response: {'request_time': '01:38:18 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473331'}
+2025-09-11 01:38:17,430 - INFO - New order received: 25091000473331
+2025-09-11 01:38:17,430 - INFO - API response type: <class 'dict'>
+2025-09-11 01:38:17,445 - INFO - New order received: 25091000473331
+2025-09-11 01:38:17,446 - INFO - Buy order placed successfully: {'request_time': '01:38:18 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473331'}
+2025-09-11 01:38:17,456 - INFO - Order data saved to orders.csv
+2025-09-11 01:38:17,456 - INFO - Order data saved to orders.csv
+2025-09-11 01:38:17,457 - INFO - PLACE BUY ORDER for Master1
+2025-09-11 01:38:17,482 - INFO - API response: {'request_time': '01:38:18 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473332'}
+2025-09-11 01:38:17,484 - INFO - API response type: <class 'dict'>
+2025-09-11 01:38:17,484 - INFO - New order received: 25091000473332
+2025-09-11 01:38:17,486 - INFO - Buy order placed successfully: {'request_time': '01:38:18 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473332'}
+2025-09-11 01:38:17,490 - INFO - BUY ORDER Rejected for Master1
+2025-09-11 01:38:17,495 - INFO - Updating order 25091000473332
+2025-09-11 01:38:17,496 - INFO - Order data saved to orders.csv
+2025-09-11 01:38:17,499 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-11 01:38:17,503 - INFO - PLACE BUY ORDER for Child2
+2025-09-11 01:39:54,574 - INFO - Downloading master files...
+2025-09-11 01:39:54,575 - INFO - Finding expiry dates...
+2025-09-11 01:39:54,684 - INFO - System initialization completed successfully
+2025-09-11 01:39:54,987 - INFO - Generated fresh 2FA for account 1: 767244
+2025-09-11 01:39:55,620 - INFO - Master account initialized successfully
+2025-09-11 01:40:08,774 - INFO - Generated fresh 2FA for account 1: 159188
+2025-09-11 01:40:09,436 - INFO - Master account initialized successfully
+2025-09-11 01:42:08,290 - INFO - Generated fresh 2FA for account 2: 650653
+2025-09-11 01:42:14,198 - WARNING - Could not fetch price for SENSEX, using default strikes
+2025-09-11 01:42:17,015 - WARNING - Could not fetch price for NIFTY, using default strikes
+2025-09-11 01:42:22,793 - INFO - Getting token for trading symbol: NIFTY16SEP25CE24000
+2025-09-11 01:42:22,807 - ERROR - No token found for NIFTY16SEP25CE24000
+2025-09-11 01:42:22,838 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-11 01:42:29,097 - WARNING - Could not fetch price for SENSEX, using default strikes
+2025-09-11 01:42:36,263 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:42:36,269 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:43:54,274 - INFO - Downloading master files...
+2025-09-11 01:43:54,274 - INFO - Finding expiry dates...
+2025-09-11 01:43:54,381 - INFO - System initialization completed successfully
+2025-09-11 01:43:54,662 - INFO - Generated fresh 2FA for account 1: 743052
+2025-09-11 01:43:55,295 - INFO - Master account initialized successfully
+2025-09-11 01:44:28,870 - INFO - Downloading master files...
+2025-09-11 01:44:28,871 - INFO - Finding expiry dates...
+2025-09-11 01:44:28,958 - INFO - System initialization completed successfully
+2025-09-11 01:44:29,339 - INFO - Generated fresh 2FA for account 1: 496786
+2025-09-11 01:44:29,949 - INFO - Master account initialized successfully
+2025-09-11 01:45:26,103 - INFO - Application interrupted by user
+2025-09-11 01:45:29,285 - INFO - Generated fresh 2FA for account 1: 377993
+2025-09-11 01:46:17,065 - INFO - Downloading master files...
+2025-09-11 01:46:17,066 - INFO - Finding expiry dates...
+2025-09-11 01:46:17,180 - INFO - System initialization completed successfully
+2025-09-11 01:46:17,492 - INFO - Generated fresh 2FA for account 1: 627110
+2025-09-11 01:46:18,037 - INFO - Master account initialized successfully
+2025-09-11 01:46:46,360 - INFO - Downloading master files...
+2025-09-11 01:46:46,360 - INFO - Finding expiry dates...
+2025-09-11 01:46:46,479 - INFO - System initialization completed successfully
+2025-09-11 01:46:46,737 - INFO - Generated fresh 2FA for account 1: 318590
+2025-09-11 01:46:47,407 - INFO - Master account initialized successfully
+2025-09-11 01:47:18,551 - INFO - Generated fresh 2FA for account 2: 018808
+2025-09-11 01:47:24,062 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 01:47:24,064 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 01:47:30,318 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:47:30,318 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:47:36,588 - INFO - Active accounts: [1, 2]
+2025-09-11 01:47:36,588 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-11 01:47:36,588 - INFO - Trading symbol: SENSEX2591181200CE, Price: 409.45
+2025-09-11 01:47:36,588 - INFO - Quantities: [20, 20]
+2025-09-11 01:47:36,588 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:47:36,588 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:47:37,238 - INFO - API response: {'request_time': '01:47:38 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473338'}
+2025-09-11 01:47:37,238 - INFO - New order received: 25091000473338
+2025-09-11 01:47:37,238 - INFO - API response type: <class 'dict'>
+2025-09-11 01:47:37,246 - INFO - Updating order 25091000473338
+2025-09-11 01:47:37,246 - INFO - Buy order placed successfully: {'request_time': '01:47:38 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473338'}
+2025-09-11 01:47:37,248 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-11 01:47:37,253 - INFO - Order data saved to orders.csv
+2025-09-11 01:47:37,254 - INFO - Processing order status for Master1, button: True
+2025-09-11 01:47:37,255 - INFO - Order data: status=PENDING, reporttype=NewAck, trantype=B
+2025-09-11 01:47:37,257 - INFO - PLACE BUY ORDER for Master1
+2025-09-11 01:47:37,289 - INFO - API response: {'request_time': '01:47:38 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473339'}
+2025-09-11 01:47:37,291 - INFO - API response type: <class 'dict'>
+2025-09-11 01:47:37,292 - INFO - New order received: 25091000473339
+2025-09-11 01:47:37,293 - INFO - Buy order placed successfully: {'request_time': '01:47:38 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473339'}
+2025-09-11 01:47:37,301 - INFO - Updating order 25091000473339
+2025-09-11 01:47:37,304 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-11 01:47:37,305 - INFO - Order data saved to orders.csv
+2025-09-11 01:47:37,305 - INFO - Processing order status for Child2, button: True
+2025-09-11 01:47:37,305 - INFO - Order data: status=PENDING, reporttype=NewAck, trantype=B
+2025-09-11 01:47:37,306 - INFO - PLACE BUY ORDER for Child2

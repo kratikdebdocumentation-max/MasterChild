@@ -51,6 +51,18 @@ class OrderManager:
         
         def place_order(api, qty, index):
             try:
+                # Skip if quantity is empty or invalid
+                if not qty or qty == '' or qty == 0:
+                    applicationLogger.warning(f"Skipping buy order for account {index + 1}: Invalid quantity '{qty}'")
+                    return
+                
+                # Convert quantity to integer
+                try:
+                    qty = int(qty)
+                except (ValueError, TypeError):
+                    applicationLogger.error(f"Invalid quantity for account {index + 1}: '{qty}'")
+                    return
+                
                 # Determine correct exchange for options
                 if 'SENSEX' in trading_symbol:
                     exchange = 'BFO'
@@ -144,6 +156,18 @@ class OrderManager:
         
         def place_order(api, qty, index):
             try:
+                # Skip if quantity is empty or invalid
+                if not qty or qty == '' or qty == 0:
+                    applicationLogger.warning(f"Skipping sell order for account {index + 1}: Invalid quantity '{qty}'")
+                    return
+                
+                # Convert quantity to integer
+                try:
+                    qty = int(qty)
+                except (ValueError, TypeError):
+                    applicationLogger.error(f"Invalid quantity for account {index + 1}: '{qty}'")
+                    return
+                
                 # Determine correct exchange for options
                 if 'SENSEX' in trading_symbol:
                     exchange = 'BFO'
@@ -233,6 +257,18 @@ class OrderManager:
         """
         def modify_order(api, order_no, qty):
             try:
+                # Skip if quantity is empty or invalid
+                if not qty or qty == '' or qty == 0:
+                    applicationLogger.warning(f"Skipping modify order: Invalid quantity '{qty}'")
+                    return
+                
+                # Convert quantity to integer
+                try:
+                    qty = int(qty)
+                except (ValueError, TypeError):
+                    applicationLogger.error(f"Invalid quantity for modify order: '{qty}'")
+                    return
+                
                 # Determine correct exchange for options
                 if 'SENSEX' in trading_symbol:
                     exchange = 'BFO'

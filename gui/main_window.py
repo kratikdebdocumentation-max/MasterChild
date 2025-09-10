@@ -27,7 +27,7 @@ class MainWindow:
         # Initialize managers
         self.account_manager = AccountManager()
         self.order_manager = OrderManager()
-        self.websocket_manager = WebSocketManager(self.account_manager, self.order_manager)
+        self.websocket_manager = WebSocketManager(self.account_manager, self.order_manager, self)
         self.position_manager = PositionManager()
         self.symbol_manager = SymbolManager()
         self.expiry_manager = ExpiryManager()
@@ -257,9 +257,19 @@ class MainWindow:
             # Order status button
             status_button = tk.Button(
                 self.account_frame, text=f"Order Status {account_num}", 
-                width=15, height=2
+                width=15, height=2, bg="lightgray"
             )
             status_button.grid(row=i, column=2, padx=5, pady=5)
+            
+            # Store button reference for WebSocket updates
+            if account_num == 1:
+                self.master1_status_button = status_button
+            elif account_num == 2:
+                self.child2_status_button = status_button
+            elif account_num == 3:
+                self.child3_status_button = status_button
+            elif account_num == 4:
+                self.child4_status_button = status_button
             
             # MTM button
             mtm_button = tk.Button(
@@ -542,6 +552,10 @@ class MainWindow:
                 self.quantities[2] = 15
                 self.quantities[3] = 15
                 self.quantities[4] = 15
+            elif self.selected_index.get() == "SENSEX":
+                self.quantities[2] = 20
+                self.quantities[3] = 20
+                self.quantities[4] = 20
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -599,6 +613,10 @@ class MainWindow:
                 self.quantities[2] = 15
                 self.quantities[3] = 15
                 self.quantities[4] = 15
+            elif self.selected_index.get() == "SENSEX":
+                self.quantities[2] = 20
+                self.quantities[3] = 20
+                self.quantities[4] = 20
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -680,6 +698,10 @@ class MainWindow:
                 self.quantities[2] = 15
                 self.quantities[3] = 15
                 self.quantities[4] = 15
+            elif self.selected_index.get() == "SENSEX":
+                self.quantities[2] = 20
+                self.quantities[3] = 20
+                self.quantities[4] = 20
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -717,6 +739,10 @@ class MainWindow:
                 self.quantities[2] = 15
                 self.quantities[3] = 15
                 self.quantities[4] = 15
+            elif self.selected_index.get() == "SENSEX":
+                self.quantities[2] = 20
+                self.quantities[3] = 20
+                self.quantities[4] = 20
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
