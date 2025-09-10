@@ -61,20 +61,18 @@ class MainWindow:
         # Account display variables
         self.master1_value = tk.StringVar()
         self.child2_value = tk.StringVar()
-        self.child3_value = tk.StringVar()
-        self.child4_value = tk.StringVar()
         
         # Order numbers
         self.order_numbers = {
-            1: '', 2: '', 3: '', 4: ''
+            1: '', 2: ''
         }
         self.sell_order_numbers = {
-            1: '', 2: '', 3: '', 4: ''
+            1: '', 2: ''
         }
         
         # Quantities
         self.quantities = {
-            1: '', 2: '', 3: '', 4: ''
+            1: '', 2: ''
         }
     
     def create_widgets(self):
@@ -99,27 +97,13 @@ class MainWindow:
         self.login_frame = tk.Frame(self.root)
         self.login_frame.pack(side=tk.TOP, fill=tk.X, pady=10)
         
-        # Child account login buttons
+        # Child account login button
         self.login_button2 = tk.Button(
-            self.login_frame, text="CHILD2", 
+            self.login_frame, text="CHILD", 
             command=lambda: self.login_account(2), 
             width=20, height=3
         )
         self.login_button2.pack(side=tk.LEFT, padx=10)
-        
-        self.login_button3 = tk.Button(
-            self.login_frame, text="CHILD3", 
-            command=lambda: self.login_account(3), 
-            width=20, height=3
-        )
-        self.login_button3.pack(side=tk.LEFT, padx=10)
-        
-        self.login_button4 = tk.Button(
-            self.login_frame, text="CHILD4", 
-            command=lambda: self.login_account(4), 
-            width=20, height=3
-        )
-        self.login_button4.pack(side=tk.LEFT, padx=10)
         
         # Utility buttons
         self.release_button = ttk.Button(
@@ -232,10 +216,8 @@ class MainWindow:
         
         # Account buttons and displays
         accounts = [
-            (1, "MASTER1", self.master1_value),
-            (2, "CHILD2", self.child2_value),
-            (3, "CHILD3", self.child3_value),
-            (4, "CHILD4", self.child4_value)
+            (1, "MASTER", self.master1_value),
+            (2, "CHILD", self.child2_value)
         ]
         
         for i, (account_num, name, value_var) in enumerate(accounts):
@@ -266,10 +248,6 @@ class MainWindow:
                 self.master1_status_button = status_button
             elif account_num == 2:
                 self.child2_status_button = status_button
-            elif account_num == 3:
-                self.child3_status_button = status_button
-            elif account_num == 4:
-                self.child4_status_button = status_button
             
             # MTM button
             mtm_button = tk.Button(
@@ -368,10 +346,6 @@ class MainWindow:
             self.master1_value.set(client_name)
         elif account_num == 2:
             self.child2_value.set(client_name)
-        elif account_num == 3:
-            self.child3_value.set(client_name)
-        elif account_num == 4:
-            self.child4_value.set(client_name)
     
     def enable_account_buttons(self, account_num: int):
         """Enable buttons for an account"""
@@ -431,11 +405,9 @@ class MainWindow:
             else:
                 trading_symbol = f"{index}{expiry}{option}{strike}"
             
-            # Update all account displays
+            # Update account displays
             self.master1_value.set(trading_symbol)
             self.child2_value.set(trading_symbol)
-            self.child3_value.set(trading_symbol)
-            self.child4_value.set(trading_symbol)
             
             return trading_symbol
         return ""
@@ -542,20 +514,14 @@ class MainWindow:
             price = float(self.price_value.get())
             qty1 = int(self.qty1_var.get())
             
-            # Set quantities for all accounts
+            # Set quantities for Master and Child
             self.quantities[1] = qty1
             if self.selected_index.get() == "NIFTY":
                 self.quantities[2] = 25
-                self.quantities[3] = 25
-                self.quantities[4] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
-                self.quantities[3] = 15
-                self.quantities[4] = 15
             elif self.selected_index.get() == "SENSEX":
                 self.quantities[2] = 20
-                self.quantities[3] = 20
-                self.quantities[4] = 20
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -603,20 +569,14 @@ class MainWindow:
             price = float(self.price1_value.get())
             qty1 = int(self.qty1_var.get())
             
-            # Set quantities for all accounts
+            # Set quantities for Master and Child
             self.quantities[1] = qty1
             if self.selected_index.get() == "NIFTY":
                 self.quantities[2] = 25
-                self.quantities[3] = 25
-                self.quantities[4] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
-                self.quantities[3] = 15
-                self.quantities[4] = 15
             elif self.selected_index.get() == "SENSEX":
                 self.quantities[2] = 20
-                self.quantities[3] = 20
-                self.quantities[4] = 20
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -688,20 +648,14 @@ class MainWindow:
             price = float(self.modify_buy_value.get())
             qty1 = int(self.qty1_var.get())
             
-            # Set quantities for all accounts
+            # Set quantities for Master and Child
             self.quantities[1] = qty1
             if self.selected_index.get() == "NIFTY":
                 self.quantities[2] = 25
-                self.quantities[3] = 25
-                self.quantities[4] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
-                self.quantities[3] = 15
-                self.quantities[4] = 15
             elif self.selected_index.get() == "SENSEX":
                 self.quantities[2] = 20
-                self.quantities[3] = 20
-                self.quantities[4] = 20
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -729,20 +683,14 @@ class MainWindow:
             price = float(self.modify_sell_value.get())
             qty1 = int(self.qty1_var.get())
             
-            # Set quantities for all accounts
+            # Set quantities for Master and Child
             self.quantities[1] = qty1
             if self.selected_index.get() == "NIFTY":
                 self.quantities[2] = 25
-                self.quantities[3] = 25
-                self.quantities[4] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
-                self.quantities[3] = 15
-                self.quantities[4] = 15
             elif self.selected_index.get() == "SENSEX":
                 self.quantities[2] = 20
-                self.quantities[3] = 20
-                self.quantities[4] = 20
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()

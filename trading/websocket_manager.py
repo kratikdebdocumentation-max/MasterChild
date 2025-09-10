@@ -3,7 +3,7 @@ WebSocket management for real-time data feeds
 """
 import threading
 from typing import Callable, Dict, Any
-from logger import child2WSLogger, master1WSLogger, child3WSLogger, child4WSLogger, applicationLogger
+from logger import child2WSLogger, master1WSLogger, applicationLogger
 from utils.telegram_notifications import send_sos_message
 
 class WebSocketManager:
@@ -15,9 +15,7 @@ class WebSocketManager:
         self.main_window = main_window  # Reference to main window for button updates
         self.loggers = {
             1: master1WSLogger,
-            2: child2WSLogger,
-            3: child3WSLogger,
-            4: child4WSLogger
+            2: child2WSLogger
         }
     
     def setup_websocket_callbacks(self, account_num: int):
@@ -67,13 +65,9 @@ class WebSocketManager:
             # Determine entity name for logging
             entity = f"Account{account_num}"
             if account_num == 1:
-                entity = "Master1"
+                entity = "Master"
             elif account_num == 2:
-                entity = "Child2"
-            elif account_num == 3:
-                entity = "Child3"
-            elif account_num == 4:
-                entity = "Child4"
+                entity = "Child"
             
             # Debug logging
             applicationLogger.info(f"Processing order status for {entity}, button: {button is not None}")
@@ -166,9 +160,7 @@ class WebSocketManager:
         # Map account numbers to their corresponding buttons
         button_map = {
             1: getattr(self.main_window, 'master1_status_button', None),
-            2: getattr(self.main_window, 'child2_status_button', None),
-            3: getattr(self.main_window, 'child3_status_button', None),
-            4: getattr(self.main_window, 'child4_status_button', None)
+            2: getattr(self.main_window, 'child2_status_button', None)
         }
         
         return button_map.get(account_num)
@@ -185,10 +177,8 @@ class WebSocketManager:
         print(f" WS {entity} Data = {tick_data}")
         
         # Log to appropriate logger
-        logger = self.loggers.get(1 if entity == "Master1" else 
-                                2 if entity == "Child2" else 
-                                3 if entity == "Child3" else 
-                                4 if entity == "Child4" else 1)
+        logger = self.loggers.get(1 if entity == "Master" else 
+                                2 if entity == "Child" else 1)
         logger.info(f" WS {entity} Data = {tick_data}")
 
         # Check if it's an options order (NFO or BFO)

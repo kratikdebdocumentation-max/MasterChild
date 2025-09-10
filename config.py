@@ -11,7 +11,7 @@ class Config:
     RETENTION = "DAY"
     
     # Account settings
-    ACTIVE_CHILD_ACCOUNTS = [2, 3, 4]  # Child accounts to activate
+    ACTIVE_CHILD_ACCOUNTS = [2]  # Child accounts to activate
     
     # API settings
     API_TIMEOUT = 30
@@ -75,9 +75,7 @@ class Config:
         credentials = {}
         credential_files = [
             'credentials1.json',
-            'credentials2.json', 
-            'credentials3.json',
-            'credentials4.json'
+            'credentials2.json'
         ]
         
         for i, filename in enumerate(credential_files, 1):

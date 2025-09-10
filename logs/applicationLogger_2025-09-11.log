@@ -347,3 +347,44 @@ ValueError: time data '911' does not match format '%b'
 2025-09-11 01:47:37,305 - INFO - Processing order status for Child2, button: True
 2025-09-11 01:47:37,305 - INFO - Order data: status=PENDING, reporttype=NewAck, trantype=B
 2025-09-11 01:47:37,306 - INFO - PLACE BUY ORDER for Child2
+2025-09-11 01:54:25,679 - INFO - Downloading master files...
+2025-09-11 01:54:25,679 - INFO - Finding expiry dates...
+2025-09-11 01:54:25,777 - INFO - System initialization completed successfully
+2025-09-11 01:54:26,059 - INFO - Generated fresh 2FA for account 1: 858465
+2025-09-11 01:54:26,682 - INFO - Master account initialized successfully
+2025-09-11 01:56:06,851 - INFO - Downloading master files...
+2025-09-11 01:56:06,851 - INFO - Finding expiry dates...
+2025-09-11 01:56:06,943 - INFO - System initialization completed successfully
+2025-09-11 01:56:07,178 - INFO - Generated fresh 2FA for account 1: 844621
+2025-09-11 01:56:07,735 - INFO - Master account initialized successfully
+2025-09-11 01:56:10,488 - INFO - Generated fresh 2FA for account 2: 079534
+2025-09-11 01:56:15,925 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 01:56:15,926 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 01:56:21,924 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:56:21,939 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:56:26,629 - INFO - Active accounts: [1, 2]
+2025-09-11 01:56:26,629 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-11 01:56:26,629 - INFO - Trading symbol: SENSEX2591181200CE, Price: 409.45
+2025-09-11 01:56:26,629 - INFO - Quantities: [20, 20]
+2025-09-11 01:56:26,629 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:56:26,629 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:56:27,245 - INFO - API response: {'request_time': '01:56:28 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473347'}
+2025-09-11 01:56:27,245 - INFO - API response type: <class 'dict'>
+2025-09-11 01:56:27,245 - INFO - Buy order placed successfully: {'request_time': '01:56:28 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473347'}
+2025-09-11 01:56:27,260 - INFO - New order received: 25091000473347
+2025-09-11 01:56:27,267 - INFO - Updating order 25091000473347
+2025-09-11 01:56:27,272 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-11 01:56:27,276 - INFO - Order data saved to orders.csv
+2025-09-11 01:56:27,277 - INFO - Processing order status for Master, button: True
+2025-09-11 01:56:27,277 - INFO - Order data: status=PENDING, reporttype=NewAck, trantype=B
+2025-09-11 01:56:27,279 - INFO - PLACE BUY ORDER for Master
+2025-09-11 01:56:27,289 - INFO - API response: {'request_time': '01:56:28 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473348'}
+2025-09-11 01:56:27,292 - INFO - New order received: 25091000473348
+2025-09-11 01:56:27,292 - INFO - API response type: <class 'dict'>
+2025-09-11 01:56:27,303 - INFO - Updating order 25091000473348
+2025-09-11 01:56:27,306 - INFO - Buy order placed successfully: {'request_time': '01:56:28 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473348'}
+2025-09-11 01:56:27,315 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-11 01:56:27,316 - INFO - Order data saved to orders.csv
+2025-09-11 01:56:27,319 - INFO - Processing order status for Child, button: True
+2025-09-11 01:56:27,319 - INFO - Order data: status=PENDING, reporttype=NewAck, trantype=B
+2025-09-11 01:56:27,322 - INFO - PLACE BUY ORDER for Child
