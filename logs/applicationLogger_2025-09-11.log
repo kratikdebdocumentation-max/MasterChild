@@ -1,0 +1,212 @@
+2025-09-11 00:08:05,695 - INFO - Downloading master files...
+2025-09-11 00:08:05,696 - INFO - Finding expiry dates...
+2025-09-11 00:08:05,831 - INFO - System initialization completed successfully
+2025-09-11 00:08:07,592 - ERROR - Login failed for account 1: 'NoneType' object has no attribute 'get'
+2025-09-11 00:12:10,903 - INFO - Downloading master files...
+2025-09-11 00:12:10,903 - INFO - Finding expiry dates...
+2025-09-11 00:12:11,000 - INFO - System initialization completed successfully
+2025-09-11 00:12:11,844 - INFO - Master account initialized successfully
+2025-09-11 00:15:47,013 - ERROR - Login failed for account 2: 'NoneType' object has no attribute 'get'
+2025-09-11 00:17:01,823 - ERROR - Login failed for account 2: 'NoneType' object has no attribute 'get'
+2025-09-11 00:17:12,714 - INFO - Application interrupted by user
+2025-09-11 00:18:57,318 - INFO - Downloading master files...
+2025-09-11 00:18:57,318 - INFO - Finding expiry dates...
+2025-09-11 00:18:57,412 - INFO - System initialization completed successfully
+2025-09-11 00:18:58,348 - INFO - Master account initialized successfully
+2025-09-11 00:29:41,089 - INFO - Downloading master files...
+2025-09-11 00:29:41,089 - INFO - Finding expiry dates...
+2025-09-11 00:29:41,192 - INFO - System initialization completed successfully
+2025-09-11 00:29:41,259 - ERROR - Unexpected error: type object 'Config' has no attribute 'get_all_credentials'
+2025-09-11 00:29:55,894 - INFO - Downloading master files...
+2025-09-11 00:29:55,896 - INFO - Finding expiry dates...
+2025-09-11 00:29:55,989 - INFO - System initialization completed successfully
+2025-09-11 00:29:56,070 - ERROR - Unexpected error: type object 'Config' has no attribute 'get_all_credentials'
+2025-09-11 00:30:22,409 - INFO - Downloading master files...
+2025-09-11 00:30:22,411 - INFO - Finding expiry dates...
+2025-09-11 00:30:22,518 - INFO - System initialization completed successfully
+2025-09-11 00:30:22,612 - ERROR - Unexpected error: type object 'Config' has no attribute 'get_all_credentials'
+2025-09-11 00:30:32,941 - INFO - Downloading master files...
+2025-09-11 00:30:32,941 - INFO - Finding expiry dates...
+2025-09-11 00:30:33,029 - INFO - System initialization completed successfully
+2025-09-11 00:30:33,112 - ERROR - Unexpected error: type object 'Config' has no attribute 'get_all_credentials'
+2025-09-11 00:31:02,199 - INFO - Downloading master files...
+2025-09-11 00:31:02,199 - INFO - Finding expiry dates...
+2025-09-11 00:31:02,280 - INFO - System initialization completed successfully
+2025-09-11 00:31:03,183 - INFO - Master account initialized successfully
+2025-09-11 00:31:17,644 - INFO - Downloading master files...
+2025-09-11 00:31:17,646 - INFO - Finding expiry dates...
+2025-09-11 00:31:17,757 - INFO - System initialization completed successfully
+2025-09-11 00:31:18,686 - INFO - Master account initialized successfully
+2025-09-11 00:31:27,817 - INFO - Downloading master files...
+2025-09-11 00:31:27,817 - INFO - Finding expiry dates...
+2025-09-11 00:31:27,903 - INFO - System initialization completed successfully
+2025-09-11 00:31:28,874 - INFO - Master account initialized successfully
+2025-09-11 00:31:56,936 - INFO - Application interrupted by user
+2025-09-11 00:32:25,125 - INFO - Downloading master files...
+2025-09-11 00:32:25,125 - INFO - Finding expiry dates...
+2025-09-11 00:32:25,212 - INFO - System initialization completed successfully
+2025-09-11 00:32:26,002 - INFO - Master account initialized successfully
+2025-09-11 00:32:33,907 - INFO - Fetched NIFTY price: 24973.1
+2025-09-11 00:32:33,907 - INFO - Updated strikes for NIFTY based on price 24973.1: [24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200, 25250, 25300]
+2025-09-11 00:32:41,007 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 00:32:41,007 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 00:39:36,113 - ERROR - Error placing order: 'NoneType' object has no attribute 'get'
+2025-09-11 00:41:50,234 - INFO - Downloading master files...
+2025-09-11 00:41:50,234 - INFO - Finding expiry dates...
+2025-09-11 00:41:50,324 - INFO - System initialization completed successfully
+2025-09-11 00:41:51,229 - INFO - Master account initialized successfully
+2025-09-11 00:43:05,545 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 00:43:05,545 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 00:43:11,891 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 00:43:15,533 - INFO - Manually refreshed strikes for SENSEX at price 81425.15
+2025-09-11 00:43:25,698 - INFO - Active accounts: [1]
+2025-09-11 00:43:25,700 - INFO - Placing buy orders for accounts: [1]
+2025-09-11 00:43:25,700 - INFO - Trading symbol: SENSEX11SEP2581300PE, Price: 95.7
+2025-09-11 00:43:25,701 - INFO - Quantities: [20]
+2025-09-11 00:43:26,258 - ERROR - Order placement failed: None
+2025-09-11 00:45:08,148 - INFO - Downloading master files...
+2025-09-11 00:45:08,149 - INFO - Finding expiry dates...
+2025-09-11 00:45:08,263 - INFO - System initialization completed successfully
+2025-09-11 00:45:09,272 - INFO - Master account initialized successfully
+2025-09-11 00:45:49,625 - INFO - Downloading master files...
+2025-09-11 00:45:49,629 - INFO - Finding expiry dates...
+2025-09-11 00:45:49,745 - INFO - System initialization completed successfully
+2025-09-11 00:45:50,859 - INFO - Master account initialized successfully
+2025-09-11 00:46:45,411 - INFO - Downloading master files...
+2025-09-11 00:46:45,411 - INFO - Finding expiry dates...
+2025-09-11 00:46:45,519 - INFO - System initialization completed successfully
+2025-09-11 00:46:45,784 - INFO - Generated fresh 2FA for account 1: 319973
+2025-09-11 00:46:46,388 - INFO - Master account initialized successfully
+2025-09-11 00:55:43,206 - INFO - Generated fresh 2FA for account 1: 089683
+2025-09-11 00:55:43,950 - INFO - Master account initialized successfully
+2025-09-11 01:01:10,713 - INFO - Downloading master files...
+2025-09-11 01:01:10,713 - INFO - Finding expiry dates...
+2025-09-11 01:01:10,819 - INFO - System initialization completed successfully
+2025-09-11 01:01:11,098 - INFO - Generated fresh 2FA for account 1: 818319
+2025-09-11 01:01:11,830 - INFO - Master account initialized successfully
+2025-09-11 01:02:13,829 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 01:02:13,829 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 01:02:20,225 - INFO - Getting token for trading symbol: SENSEX2591181200C
+2025-09-11 01:02:20,225 - ERROR - Error getting token for SENSEX2591181200C: time data '911' does not match format '%b'
+2025-09-11 01:02:20,270 - ERROR - Traceback: Traceback (most recent call last):
+  File "C:\Users\krati\PycharmProjects\MasterChild_GUI\market_data\symbol_manager.py", line 57, in get_token
+    bfo_trading_symbol = self._convert_sensex_format(trading_symbol)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krati\PycharmProjects\MasterChild_GUI\market_data\symbol_manager.py", line 120, in _convert_sensex_format
+    month = datetime.strptime(month_str, "%b").month
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krati\AppData\Local\Programs\Python\Python312\Lib\_strptime.py", line 555, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krati\AppData\Local\Programs\Python\Python312\Lib\_strptime.py", line 333, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data '911' does not match format '%b'
+
+2025-09-11 01:04:34,179 - INFO - Downloading master files...
+2025-09-11 01:04:34,182 - INFO - Finding expiry dates...
+2025-09-11 01:04:34,291 - INFO - System initialization completed successfully
+2025-09-11 01:04:34,594 - INFO - Generated fresh 2FA for account 1: 836381
+2025-09-11 01:04:35,286 - INFO - Master account initialized successfully
+2025-09-11 01:05:30,765 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 01:05:30,767 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 01:05:39,818 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:05:39,818 - ERROR - Error getting token for SENSEX2591181200CE: time data '911' does not match format '%b'
+2025-09-11 01:05:39,818 - ERROR - Traceback: Traceback (most recent call last):
+  File "C:\Users\krati\PycharmProjects\MasterChild_GUI\market_data\symbol_manager.py", line 57, in get_token
+    bfo_trading_symbol = self._convert_sensex_format(trading_symbol)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krati\PycharmProjects\MasterChild_GUI\market_data\symbol_manager.py", line 120, in _convert_sensex_format
+    month = datetime.strptime(month_str, "%b").month
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krati\AppData\Local\Programs\Python\Python312\Lib\_strptime.py", line 555, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\krati\AppData\Local\Programs\Python\Python312\Lib\_strptime.py", line 333, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data '911' does not match format '%b'
+
+2025-09-11 01:09:28,915 - INFO - Downloading master files...
+2025-09-11 01:09:28,917 - INFO - Finding expiry dates...
+2025-09-11 01:09:29,000 - INFO - System initialization completed successfully
+2025-09-11 01:09:29,279 - INFO - Generated fresh 2FA for account 1: 621081
+2025-09-11 01:09:29,828 - INFO - Master account initialized successfully
+2025-09-11 01:09:58,306 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 01:09:58,306 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 01:10:12,434 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:10:12,445 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:10:20,270 - INFO - Active accounts: [1]
+2025-09-11 01:10:20,270 - INFO - Placing buy orders for accounts: [1]
+2025-09-11 01:10:20,270 - INFO - Trading symbol: SENSEX2591181200CE, Price: 409.45
+2025-09-11 01:10:20,270 - INFO - Quantities: [20]
+2025-09-11 01:10:20,270 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'MIS', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:10:20,468 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:10:20,468 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:10:20,468 - INFO - Token for SENSEX2591181200CE: 859358
+2025-09-11 01:10:20,468 - ERROR - API authentication check failed: 'ShoonyaApiPy' object has no attribute 'get_user_details'
+2025-09-11 01:10:20,967 - INFO - API response: None
+2025-09-11 01:10:20,969 - INFO - API response type: <class 'NoneType'>
+2025-09-11 01:10:20,969 - ERROR - Order placement failed: None
+2025-09-11 01:12:48,738 - INFO - Downloading master files...
+2025-09-11 01:12:48,738 - INFO - Finding expiry dates...
+2025-09-11 01:12:48,847 - INFO - System initialization completed successfully
+2025-09-11 01:12:49,132 - INFO - Generated fresh 2FA for account 1: 275707
+2025-09-11 01:12:49,727 - INFO - Master account initialized successfully
+2025-09-11 01:12:55,691 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 01:12:55,691 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 01:13:03,314 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:13:03,314 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:13:07,406 - INFO - Active accounts: [1]
+2025-09-11 01:13:07,406 - INFO - Placing buy orders for accounts: [1]
+2025-09-11 01:13:07,406 - INFO - Trading symbol: SENSEX2591181200CE, Price: 409.45
+2025-09-11 01:13:07,406 - INFO - Quantities: [20]
+2025-09-11 01:13:07,406 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'MIS', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:13:07,605 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:13:07,608 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:13:07,608 - INFO - Token for SENSEX2591181200CE: 859358
+2025-09-11 01:13:07,610 - ERROR - API authentication check failed: 'ShoonyaApiPy' object has no attribute 'get_orderbook'
+2025-09-11 01:13:08,143 - INFO - API response: None
+2025-09-11 01:13:08,144 - INFO - API response type: <class 'NoneType'>
+2025-09-11 01:13:08,144 - ERROR - Order placement failed: None
+2025-09-11 01:14:51,375 - INFO - Downloading master files...
+2025-09-11 01:14:51,375 - INFO - Finding expiry dates...
+2025-09-11 01:14:51,462 - INFO - System initialization completed successfully
+2025-09-11 01:14:51,722 - INFO - Generated fresh 2FA for account 1: 289053
+2025-09-11 01:14:52,303 - INFO - Master account initialized successfully
+2025-09-11 01:15:02,198 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 01:15:02,198 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 01:15:07,998 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:15:08,002 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:15:11,197 - INFO - Active accounts: [1]
+2025-09-11 01:15:11,197 - INFO - Placing buy orders for accounts: [1]
+2025-09-11 01:15:11,197 - INFO - Trading symbol: SENSEX2591181200CE, Price: 409.45
+2025-09-11 01:15:11,197 - INFO - Quantities: [20]
+2025-09-11 01:15:11,197 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'MIS', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:15:11,690 - INFO - API response: None
+2025-09-11 01:15:11,690 - INFO - API response type: <class 'NoneType'>
+2025-09-11 01:15:11,690 - ERROR - Order placement failed: None
+2025-09-11 01:21:21,726 - INFO - Downloading master files...
+2025-09-11 01:21:21,730 - INFO - Finding expiry dates...
+2025-09-11 01:21:21,822 - INFO - System initialization completed successfully
+2025-09-11 01:21:22,112 - INFO - Generated fresh 2FA for account 1: 270446
+2025-09-11 01:21:22,623 - INFO - Master account initialized successfully
+2025-09-11 01:21:30,260 - INFO - Fetched SENSEX price: 81425.15
+2025-09-11 01:21:30,261 - INFO - Updated strikes for SENSEX based on price 81425.15: [80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100]
+2025-09-11 01:21:36,595 - INFO - Getting token for trading symbol: SENSEX2591181200CE
+2025-09-11 01:21:36,608 - INFO - Found token for SENSEX2591181200CE: 859358
+2025-09-11 01:21:40,597 - INFO - Active accounts: [1]
+2025-09-11 01:21:40,598 - INFO - Placing buy orders for accounts: [1]
+2025-09-11 01:21:40,598 - INFO - Trading symbol: SENSEX2591181200CE, Price: 409.45
+2025-09-11 01:21:40,598 - INFO - Quantities: [20]
+2025-09-11 01:21:40,599 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591181200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 409.45, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-11 01:21:41,132 - INFO - API response: {'request_time': '01:21:42 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473320'}
+2025-09-11 01:21:41,132 - INFO - API response type: <class 'dict'>
+2025-09-11 01:21:41,132 - INFO - New order received: 25091000473320
+2025-09-11 01:21:41,132 - INFO - Buy order placed successfully: {'request_time': '01:21:42 11-09-2025', 'stat': 'Ok', 'norenordno': '25091000473320'}
+2025-09-11 01:21:41,132 - INFO - New order received: 25091000473320
+2025-09-11 01:21:41,152 - INFO - Updating order 25091000473320
+2025-09-11 01:21:41,155 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-11 01:21:41,155 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-11 01:21:41,161 - INFO - Order data saved to orders.csv
+2025-09-11 01:21:41,161 - INFO - Order data saved to orders.csv
+2025-09-11 01:21:41,161 - INFO - Account 1 - B PENDING NewAck
+2025-09-11 01:21:41,161 - INFO - Account 1 - B PENDING NewAck

@@ -1,0 +1,136 @@
+"""
+WebSocket management for real-time data feeds
+"""
+import threading
+from typing import Callable, Dict, Any
+from logger import child2WSLogger, master1WSLogger, child3WSLogger, child4WSLogger, applicationLogger
+
+class WebSocketManager:
+    """Manages WebSocket connections for all accounts"""
+    
+    def __init__(self, account_manager, order_manager):
+        self.account_manager = account_manager
+        self.order_manager = order_manager
+        self.loggers = {
+            1: master1WSLogger,
+            2: child2WSLogger,
+            3: child3WSLogger,
+            4: child4WSLogger
+        }
+    
+    def setup_websocket_callbacks(self, account_num: int):
+        """Setup WebSocket callbacks for a specific account"""
+        
+        def order_update_callback(tick_data):
+            """Handle order updates"""
+            logger = self.loggers.get(account_num, applicationLogger)
+            logger.info(tick_data)
+            
+            # Process order update in a separate thread
+            thread = threading.Thread(target=self._process_order_update, args=(tick_data, account_num))
+            thread.start()
+        
+        def quote_update_callback(tick_data):
+            """Handle quote updates"""
+            print(f"Quote Received for Account {account_num}: {tick_data}")
+            # Add quote processing logic here if needed
+        
+        def socket_open_callback():
+            """Handle socket open"""
+            print(f"WebSocket is now open for Account {account_num}")
+        
+        return order_update_callback, quote_update_callback, socket_open_callback
+    
+    def _process_order_update(self, tick_data: Dict[str, Any], account_num: int):
+        """Process order update data"""
+        try:
+            # Handle order update
+            self.order_manager.handle_order_update(tick_data)
+            
+            # Process order status updates
+            self._process_order_status(tick_data, account_num)
+            
+        except Exception as e:
+            applicationLogger.error(f"Error processing order update for account {account_num}: {e}")
+    
+    def _process_order_status(self, tick_data: Dict[str, Any], account_num: int):
+        """Process order status and update UI accordingly"""
+        # This will be implemented when we integrate with the GUI
+        # For now, just log the status
+        status = tick_data.get('status')
+        report_type = tick_data.get('reporttype')
+        trantype = tick_data.get('trantype')
+        
+        if status and report_type and trantype:
+            applicationLogger.info(f"Account {account_num} - {trantype} {status} {report_type}")
+    
+    def connect_feed(self, account_num: int) -> bool:
+        """
+        Connect WebSocket feed for an account
+        
+        Args:
+            account_num: Account number
+            
+        Returns:
+            bool: True if successful
+        """
+        try:
+            api = self.account_manager.get_api(account_num)
+            if not api:
+                return False
+            
+            order_callback, quote_callback, open_callback = self.setup_websocket_callbacks(account_num)
+            
+            api.start_websocket(
+                order_update_callback=order_callback,
+                subscribe_callback=quote_callback,
+                socket_open_callback=open_callback
+            )
+            
+            return True
+            
+        except Exception as e:
+            applicationLogger.error(f"Error connecting WebSocket for account {account_num}: {e}")
+            return False
+    
+    def subscribe_to_symbol(self, api, exchange: str, token: str) -> bool:
+        """
+        Subscribe to a symbol for real-time updates
+        
+        Args:
+            api: API instance
+            exchange: Exchange name
+            token: Symbol token
+            
+        Returns:
+            bool: True if successful
+        """
+        try:
+            websocket_token = f'{exchange}|{token}'
+            api.subscribe(websocket_token)
+            applicationLogger.info(f"Subscribed to token: {websocket_token}")
+            return True
+        except Exception as e:
+            applicationLogger.error(f"Error subscribing to symbol: {e}")
+            return False
+    
+    def unsubscribe_from_symbol(self, api, exchange: str, token: str) -> bool:
+        """
+        Unsubscribe from a symbol
+        
+        Args:
+            api: API instance
+            exchange: Exchange name
+            token: Symbol token
+            
+        Returns:
+            bool: True if successful
+        """
+        try:
+            websocket_token = f'{exchange}|{token}'
+            api.unsubscribe(websocket_token)
+            applicationLogger.info(f"Unsubscribed from token: {websocket_token}")
+            return True
+        except Exception as e:
+            applicationLogger.error(f"Error unsubscribing from symbol: {e}")
+            return False
