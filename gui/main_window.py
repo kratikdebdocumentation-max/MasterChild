@@ -106,6 +106,7 @@ class MainWindow:
         self.create_order_buttons()
         # self.create_account_display()  # Hidden - will be part of website dashboard
         self.create_order_status_display()
+        self.create_bottom_control_panel()
     
     def create_style(self):
         """Create custom styles"""
@@ -338,32 +339,31 @@ class MainWindow:
         self.order_frame = tk.Frame(self.root)
         self.order_frame.pack(side=tk.TOP, pady=10)
         
-        # Cancel buttons
+        # Cancel Buy and Modify Buy (left side)
         self.cancel_buy_button = tk.Button(
             self.order_frame, text="Cancel Buy", 
             command=self.cancel_buy_orders, width=15, height=2
         )
         self.cancel_buy_button.grid(row=0, column=0, padx=5, pady=5)
         
-        self.cancel_exit_button = tk.Button(
-            self.order_frame, text="Cancel Exit", 
-            command=self.cancel_exit_orders, width=15, height=2
-        )
-        self.cancel_exit_button.grid(row=0, column=1, padx=5, pady=5)
-        
-        # Modify buy
         self.modify_buy_button = tk.Button(
             self.order_frame, text="Modify Buy", 
             command=self.modify_buy_orders, width=15, height=2
         )
-        self.modify_buy_button.grid(row=0, column=2, padx=5, pady=5)
+        self.modify_buy_button.grid(row=0, column=1, padx=5, pady=5)
         
         self.modify_buy_box = tk.Entry(
             self.order_frame, textvariable=self.modify_buy_value, width=10
         )
-        self.modify_buy_box.grid(row=0, column=3, padx=5, pady=5)
+        self.modify_buy_box.grid(row=0, column=2, padx=5, pady=5)
         
-        # Modify exit
+        # Cancel Exit and Modify Exit (right side)
+        self.cancel_exit_button = tk.Button(
+            self.order_frame, text="Cancel Exit", 
+            command=self.cancel_exit_orders, width=15, height=2
+        )
+        self.cancel_exit_button.grid(row=0, column=3, padx=5, pady=5)
+        
         self.modify_exit_button = tk.Button(
             self.order_frame, text="Modify Exit", 
             command=self.modify_exit_orders, width=15, height=2
@@ -374,6 +374,32 @@ class MainWindow:
             self.order_frame, textvariable=self.modify_exit_value, width=10
         )
         self.modify_exit_box.grid(row=0, column=5, padx=5, pady=5)
+    
+    def create_bottom_control_panel(self):
+        """Create bottom control panel with exit and logout buttons"""
+        self.bottom_frame = tk.Frame(self.root)
+        self.bottom_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=10)
+        
+        # Exit All Orders at Market Price
+        self.exit_all_button = tk.Button(
+            self.bottom_frame, text="Exit All Orders at Market Price", 
+            command=self.exit_all_orders_market, width=25, height=2
+        )
+        self.exit_all_button.grid(row=0, column=0, padx=5, pady=5)
+        
+        # Exit Order Master at Market Price
+        self.exit_master_button = tk.Button(
+            self.bottom_frame, text="Exit Order Master at Market Price", 
+            command=self.exit_master_orders_market, width=25, height=2
+        )
+        self.exit_master_button.grid(row=0, column=1, padx=5, pady=5)
+        
+        # Exit Order Child at Market Price
+        self.exit_child_button = tk.Button(
+            self.bottom_frame, text="Exit Order Child at Market Price", 
+            command=self.exit_child_orders_market, width=25, height=2
+        )
+        self.exit_child_button.grid(row=0, column=2, padx=5, pady=5)
     
     
     def initialize_master_account(self):
@@ -1253,6 +1279,181 @@ class MainWindow:
         except Exception as e:
             messagebox.showerror("Error", f"Error refreshing strikes: {e}")
             applicationLogger.error(f"Error in refresh_strikes: {e}")
+    
+    def exit_all_orders_market(self):
+        """Exit all orders at market price for both master and child accounts"""
+        try:
+            # Show confirmation popup
+            result = messagebox.askyesno(
+                "Confirm Exit All Orders", 
+                "Are you sure you want to exit all orders at market price?\n\nThis action cannot be undone.",
+                icon='warning'
+            )
+            
+            if not result:
+                applicationLogger.info("Exit all orders cancelled by user")
+                return
+            
+            applicationLogger.info("Exiting all orders at market price")
+            
+            # Get active accounts
+            active_accounts = [i for i in range(1, 3) if self.account_manager.accounts[i]['active']]
+            
+            if not active_accounts:
+                self.master_order_status.set("No Active Accounts")
+                self.child_order_status.set("No Active Accounts")
+                return
+            
+            # Place market exit orders for all active accounts
+            for account_num in active_accounts:
+                api = self.account_manager.accounts[account_num]['api']
+                if api:
+                    # Get current orders and exit them at market price
+                    orders = api.get_order_book()
+                    if orders and orders.get('stat') == 'Ok':
+                        for order in orders.get('data', []):
+                            if order.get('status') in ['PENDING', 'OPEN']:
+                                # Place market exit order
+                                exit_result = api.place_order(
+                                    buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
+                                    product_type=order.get('pcode', 'I'),
+                                    exchange=order.get('exch', ''),
+                                    tradingsymbol=order.get('tsym', ''),
+                                    quantity=int(order.get('qty', 0)),
+                                    discloseqty=0,
+                                    price_type='MKT',
+                                    price=0.0,
+                                    trigger_price=None,
+                                    retention='DAY',
+                                    amo='NO',
+                                    remarks='Market Exit'
+                                )
+                                
+                                if exit_result and exit_result.get('stat') == 'Ok':
+                                    applicationLogger.info(f"Market exit order placed for account {account_num}: {exit_result.get('norenordno')}")
+                                else:
+                                    applicationLogger.error(f"Failed to place market exit order for account {account_num}")
+            
+            # Update status
+            self.master_order_status.set("All Orders - Market Exit Placed")
+            self.child_order_status.set("All Orders - Market Exit Placed")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error in exit_all_orders_market: {e}")
+            self.master_order_status.set(f"Error: {str(e)[:30]}...")
+            self.child_order_status.set(f"Error: {str(e)[:30]}...")
+    
+    def exit_master_orders_market(self):
+        """Exit master account orders at market price"""
+        try:
+            # Show confirmation popup
+            result = messagebox.askyesno(
+                "Confirm Exit Master Orders", 
+                "Are you sure you want to exit Master orders at market price?\n\nThis action cannot be undone.",
+                icon='warning'
+            )
+            
+            if not result:
+                applicationLogger.info("Exit master orders cancelled by user")
+                return
+            
+            applicationLogger.info("Exiting master orders at market price")
+            
+            if not self.account_manager.accounts[1]['active']:
+                self.master_order_status.set("Master Not Logged In")
+                return
+            
+            api = self.account_manager.accounts[1]['api']
+            if api:
+                # Get current orders and exit them at market price
+                orders = api.get_order_book()
+                if orders and orders.get('stat') == 'Ok':
+                    for order in orders.get('data', []):
+                        if order.get('status') in ['PENDING', 'OPEN']:
+                            # Place market exit order
+                            exit_result = api.place_order(
+                                buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
+                                product_type=order.get('pcode', 'I'),
+                                exchange=order.get('exch', ''),
+                                tradingsymbol=order.get('tsym', ''),
+                                quantity=int(order.get('qty', 0)),
+                                discloseqty=0,
+                                price_type='MKT',
+                                price=0.0,
+                                trigger_price=None,
+                                retention='DAY',
+                                amo='NO',
+                                remarks='Master Market Exit'
+                            )
+                            
+                            if exit_result and exit_result.get('stat') == 'Ok':
+                                applicationLogger.info(f"Master market exit order placed: {exit_result.get('norenordno')}")
+                            else:
+                                applicationLogger.error("Failed to place master market exit order")
+                
+                self.master_order_status.set("Master Orders - Market Exit Placed")
+            else:
+                self.master_order_status.set("Master API Not Available")
+                
+        except Exception as e:
+            applicationLogger.error(f"Error in exit_master_orders_market: {e}")
+            self.master_order_status.set(f"Error: {str(e)[:30]}...")
+    
+    def exit_child_orders_market(self):
+        """Exit child account orders at market price"""
+        try:
+            # Show confirmation popup
+            result = messagebox.askyesno(
+                "Confirm Exit Child Orders", 
+                "Are you sure you want to exit Child orders at market price?\n\nThis action cannot be undone.",
+                icon='warning'
+            )
+            
+            if not result:
+                applicationLogger.info("Exit child orders cancelled by user")
+                return
+            
+            applicationLogger.info("Exiting child orders at market price")
+            
+            if not self.account_manager.accounts[2]['active']:
+                self.child_order_status.set("Child Not Logged In")
+                return
+            
+            api = self.account_manager.accounts[2]['api']
+            if api:
+                # Get current orders and exit them at market price
+                orders = api.get_order_book()
+                if orders and orders.get('stat') == 'Ok':
+                    for order in orders.get('data', []):
+                        if order.get('status') in ['PENDING', 'OPEN']:
+                            # Place market exit order
+                            exit_result = api.place_order(
+                                buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
+                                product_type=order.get('pcode', 'I'),
+                                exchange=order.get('exch', ''),
+                                tradingsymbol=order.get('tsym', ''),
+                                quantity=int(order.get('qty', 0)),
+                                discloseqty=0,
+                                price_type='MKT',
+                                price=0.0,
+                                trigger_price=None,
+                                retention='DAY',
+                                amo='NO',
+                                remarks='Child Market Exit'
+                            )
+                            
+                            if exit_result and exit_result.get('stat') == 'Ok':
+                                applicationLogger.info(f"Child market exit order placed: {exit_result.get('norenordno')}")
+                            else:
+                                applicationLogger.error("Failed to place child market exit order")
+                
+                self.child_order_status.set("Child Orders - Market Exit Placed")
+            else:
+                self.child_order_status.set("Child API Not Available")
+                
+        except Exception as e:
+            applicationLogger.error(f"Error in exit_child_orders_market: {e}")
+            self.child_order_status.set(f"Error: {str(e)[:30]}...")
     
     def run(self):
         """Run the application"""

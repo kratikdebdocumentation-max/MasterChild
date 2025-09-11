@@ -896,3 +896,40 @@ ENDING -
 2025-09-12 01:42:41,546 - INFO - System initialization completed successfully
 2025-09-12 01:42:41,898 - INFO - Generated fresh 2FA for account 1: 528820
 2025-09-12 01:42:42,625 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:45:03,542 - INFO - Downloading master files...
+2025-09-12 01:45:03,543 - INFO - Finding expiry dates...
+2025-09-12 01:45:03,673 - INFO - System initialization completed successfully
+2025-09-12 01:45:04,045 - INFO - Generated fresh 2FA for account 1: 193061
+2025-09-12 01:45:04,877 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:47:41,571 - INFO - Downloading master files...
+2025-09-12 01:47:41,573 - INFO - Finding expiry dates...
+2025-09-12 01:47:41,686 - INFO - System initialization completed successfully
+2025-09-12 01:47:42,161 - INFO - Generated fresh 2FA for account 1: 615049
+2025-09-12 01:47:43,058 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:48:27,765 - INFO - Downloading master files...
+2025-09-12 01:48:27,766 - INFO - Finding expiry dates...
+2025-09-12 01:48:27,876 - INFO - System initialization completed successfully
+2025-09-12 01:48:28,338 - INFO - Generated fresh 2FA for account 1: 128811
+2025-09-12 01:48:28,534 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:51:34,150 - INFO - Downloading master files...
+2025-09-12 01:51:34,152 - INFO - Finding expiry dates...
+2025-09-12 01:51:34,300 - INFO - System initialization completed successfully
+2025-09-12 01:51:34,723 - INFO - Generated fresh 2FA for account 1: 155761
+2025-09-12 01:51:35,621 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:52:17,630 - INFO - Downloading master files...
+2025-09-12 01:52:17,630 - INFO - Finding expiry dates...
+2025-09-12 01:52:17,731 - INFO - System initialization completed successfully
+2025-09-12 01:52:18,116 - INFO - Generated fresh 2FA for account 1: 285132
+2025-09-12 01:52:18,853 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:52:39,143 - INFO - Generated fresh 2FA for account 2: 367290
+2025-09-12 01:52:44,481 - INFO - Logging out child account
+2025-09-12 01:52:44,482 - ERROR - Error in logout_child: 'WebSocketManager' object has no attribute 'disconnect_feed'
+2025-09-12 01:55:36,119 - INFO - Downloading master files...
+2025-09-12 01:55:36,120 - INFO - Finding expiry dates...
+2025-09-12 01:55:36,283 - INFO - System initialization completed successfully
+2025-09-12 01:55:36,685 - INFO - Generated fresh 2FA for account 1: 705497
+2025-09-12 01:55:37,494 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:56:14,728 - INFO - Exit all orders cancelled by user
+2025-09-12 01:56:19,614 - INFO - Exiting master orders at market price
+2025-09-12 01:56:20,194 - ERROR - Error in exit_master_orders_market: 'list' object has no attribute 'get'
+2025-09-12 01:56:23,267 - INFO - Exiting child orders at market price

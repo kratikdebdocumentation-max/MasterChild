@@ -65,3 +65,9 @@
 2025-09-12 01:42:03,175 - INFO - {'t': 'om', 'norenordno': '25091100521037', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591881200CE', 'trantype': 'B', 'qty': '80', 'prc': '730.05', 'pcode': 'I', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
 2025-09-12 01:42:03,199 - INFO - {'t': 'om', 'norenordno': '25091100521037', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591881200CE', 'trantype': 'B', 'qty': '80', 'prc': '730.05', 'pcode': 'I', 'remarks': '', 'rejreason': 'RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]', 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
 2025-09-12 01:42:42,623 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 01:45:04,874 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 01:47:43,056 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 01:48:28,533 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 01:51:35,620 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 01:52:18,851 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 01:55:37,491 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
