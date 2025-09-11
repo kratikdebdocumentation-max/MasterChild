@@ -1586,10 +1586,10 @@ class MainWindow:
                 current_price = self.premium_price_value.get()
                 if current_price:
                     current_price_float = float(current_price)
-                    # Suggest SL price (e.g., 10% below current price for long positions)
-                    suggested_sl = round(current_price_float * 0.9, 2)
+                    # Suggest SL price (1% below current price for long positions)
+                    suggested_sl = round(current_price_float * 0.99, 2)
                     self.sl_price_value.set(str(suggested_sl))
-                    applicationLogger.info(f"SL price suggested: {suggested_sl}")
+                    applicationLogger.info(f"SL price suggested: {suggested_sl} (1% below LTP: {current_price_float})")
                 else:
                     messagebox.showinfo("SL Price", "Please fetch current price first to set SL")
         except ValueError:
@@ -1615,10 +1615,10 @@ class MainWindow:
                 current_price = self.premium_price_value.get()
                 if current_price:
                     current_price_float = float(current_price)
-                    # Suggest target price (e.g., 20% above current price for long positions)
-                    suggested_target = round(current_price_float * 1.2, 2)
+                    # Suggest target price (1% above current price for long positions)
+                    suggested_target = round(current_price_float * 1.01, 2)
                     self.target_price_value.set(str(suggested_target))
-                    applicationLogger.info(f"Target price suggested: {suggested_target}")
+                    applicationLogger.info(f"Target price suggested: {suggested_target} (1% above LTP: {current_price_float})")
                 else:
                     messagebox.showinfo("Target Price", "Please fetch current price first to set Target")
         except ValueError:
