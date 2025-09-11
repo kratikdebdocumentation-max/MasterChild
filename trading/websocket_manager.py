@@ -32,11 +32,36 @@ class WebSocketManager:
         
         def quote_update_callback(tick_data):
             """Handle quote updates"""
+            logger = self.loggers.get(account_num, applicationLogger)
+            
+            # Log the raw quote data
+            logger.info(f"[QUOTE] WebSocket Quote Response for Account {account_num}: {tick_data}")
+            logger.info(f"[QUOTE] Quote Data Type: {type(tick_data)}")
+            
+            if isinstance(tick_data, dict):
+                # Log specific quote fields for better debugging
+                logger.info(f"[QUOTE] Symbol (tsym): {tick_data.get('tsym', 'N/A')}")
+                logger.info(f"[QUOTE] Exchange (e): {tick_data.get('e', 'N/A')}")
+                logger.info(f"[QUOTE] Token (tk): {tick_data.get('tk', 'N/A')}")
+                logger.info(f"[QUOTE] Last Price (lp): {tick_data.get('lp', 'N/A')}")
+                logger.info(f"[QUOTE] Open Price (o): {tick_data.get('o', 'N/A')}")
+                logger.info(f"[QUOTE] High Price (h): {tick_data.get('h', 'N/A')}")
+                logger.info(f"[QUOTE] Low Price (l): {tick_data.get('l', 'N/A')}")
+                logger.info(f"[QUOTE] Close Price (c): {tick_data.get('c', 'N/A')}")
+                logger.info(f"[QUOTE] Volume (v): {tick_data.get('v', 'N/A')}")
+                logger.info(f"[QUOTE] Percentage Change (pc): {tick_data.get('pc', 'N/A')}")
+                logger.info(f"[QUOTE] Average Price (ap): {tick_data.get('ap', 'N/A')}")
+                logger.info(f"[QUOTE] Message Type (t): {tick_data.get('t', 'N/A')}")
+            else:
+                logger.warning(f"[QUOTE] Quote data is not a dictionary: {tick_data}")
+            
+            # Also print to console for immediate feedback
             print(f"Quote Received for Account {account_num}: {tick_data}")
-            # Add quote processing logic here if needed
         
         def socket_open_callback():
             """Handle socket open"""
+            logger = self.loggers.get(account_num, applicationLogger)
+            logger.info(f"[WS] WebSocket connection opened for Account {account_num}")
             print(f"WebSocket is now open for Account {account_num}")
         
         return order_update_callback, quote_update_callback, socket_open_callback
@@ -124,11 +149,31 @@ class WebSocketManager:
         """
         try:
             websocket_token = f'{exchange}|{token}'
-            api.subscribe(websocket_token)
-            applicationLogger.info(f"Subscribed to token: {websocket_token}")
-            return True
+            
+            # Log subscription attempt
+            applicationLogger.info(f"[SUBSCRIBE] Attempting to subscribe to: {websocket_token}")
+            applicationLogger.info(f"[SUBSCRIBE] Exchange: {exchange}, Token: {token}")
+            applicationLogger.info(f"[SUBSCRIBE] API Type: {type(api)}")
+            
+            # Perform subscription
+            result = api.subscribe(websocket_token)
+            
+            # Log subscription result
+            applicationLogger.info(f"[SUBSCRIBE] Subscription result: {result}")
+            applicationLogger.info(f"[SUBSCRIBE] Subscription result type: {type(result)}")
+            
+            if result:
+                applicationLogger.info(f"[SUBSCRIBE] Successfully subscribed to: {websocket_token}")
+                applicationLogger.info(f"[SUBSCRIBE] WebSocket will now send quote updates for this symbol")
+            else:
+                applicationLogger.warning(f"[SUBSCRIBE] Subscription returned False for: {websocket_token}")
+            
+            return bool(result)
+            
         except Exception as e:
-            applicationLogger.error(f"Error subscribing to symbol: {e}")
+            applicationLogger.error(f"[ERROR] Error subscribing to symbol {exchange}|{token}: {e}")
+            import traceback
+            applicationLogger.error(f"[ERROR] Traceback: {traceback.format_exc()}")
             return False
     
     def unsubscribe_from_symbol(self, api, exchange: str, token: str) -> bool:
@@ -145,11 +190,27 @@ class WebSocketManager:
         """
         try:
             websocket_token = f'{exchange}|{token}'
-            api.unsubscribe(websocket_token)
-            applicationLogger.info(f"Unsubscribed from token: {websocket_token}")
-            return True
+            
+            # Log unsubscription attempt
+            applicationLogger.info(f"[WS] Attempting to unsubscribe from: {websocket_token}")
+            
+            # Perform unsubscription
+            result = api.unsubscribe(websocket_token)
+            
+            # Log unsubscription result
+            applicationLogger.info(f"[WS] Unsubscription result: {result}")
+            
+            if result:
+                applicationLogger.info(f"[SUCCESS] Successfully unsubscribed from: {websocket_token}")
+            else:
+                applicationLogger.warning(f"[WARNING] Unsubscription returned False for: {websocket_token}")
+            
+            return bool(result)
+            
         except Exception as e:
-            applicationLogger.error(f"Error unsubscribing from symbol: {e}")
+            applicationLogger.error(f"[ERROR] Error unsubscribing from symbol {exchange}|{token}: {e}")
+            import traceback
+            applicationLogger.error(f"[ERROR] Traceback: {traceback.format_exc()}")
             return False
     
     def _get_order_status_button(self, account_num: int):
@@ -270,3 +331,67 @@ class WebSocketManager:
             applicationLogger.error(f"Error updating button: {e}")
             import traceback
             applicationLogger.error(f"Traceback: {traceback.format_exc()}")
+    
+    def subscribe_to_symbol(self, api, exchange: str, token: str):
+        """Subscribe to a specific symbol for live price updates"""
+        try:
+            # Format: subscribe([instruments])
+            # instruments format: "exchange|token"
+            instrument = f"{exchange}|{token}"
+            
+            applicationLogger.info(f"[WS] WebSocket Subscribe - Exchange: {exchange}, Token: {token}")
+            applicationLogger.info(f"[WS] WebSocket Subscribe - Instrument: {instrument}")
+            applicationLogger.info(f"[WS] WebSocket Subscribe - API: {api}")
+            applicationLogger.info(f"[WS] WebSocket Subscribe - API Type: {type(api)}")
+            
+            # Check if API has subscribe method
+            if hasattr(api, 'subscribe'):
+                applicationLogger.info(f"[SUCCESS] API has subscribe method")
+            else:
+                applicationLogger.error(f"[ERROR] API does not have subscribe method")
+                applicationLogger.info(f"[ERROR] API methods: {dir(api)}")
+                return False
+            
+            # Subscribe to touchline data
+            applicationLogger.info(f"[WS] Calling api.subscribe('{instrument}')")
+            success = api.subscribe(instrument)
+            
+            applicationLogger.info(f"[WS] Subscribe result: {success}")
+            applicationLogger.info(f"[WS] Subscribe result type: {type(success)}")
+            
+            if success:
+                applicationLogger.info(f"[SUCCESS] Subscribed to {instrument} for live price updates")
+                return True
+            else:
+                applicationLogger.error(f"[ERROR] Failed to subscribe to {instrument}")
+                return False
+                
+        except Exception as e:
+            applicationLogger.error(f"[ERROR] Error subscribing to symbol {exchange}|{token}: {e}")
+            import traceback
+            applicationLogger.error(f"[ERROR] Traceback: {traceback.format_exc()}")
+            return False
+    
+    def unsubscribe_from_symbol(self, api, exchange: str, token: str):
+        """Unsubscribe from a specific symbol"""
+        try:
+            # Format: unsubscribe(instrument)
+            instrument = f"{exchange}|{token}"
+            
+            applicationLogger.info(f"[WS] WebSocket Unsubscribe - Instrument: {instrument}")
+            success = api.unsubscribe(instrument)
+            
+            applicationLogger.info(f"[WS] Unsubscribe result: {success}")
+            
+            if success:
+                applicationLogger.info(f"[SUCCESS] Unsubscribed from {instrument}")
+                return True
+            else:
+                applicationLogger.error(f"[ERROR] Failed to unsubscribe from {instrument}")
+                return False
+                
+        except Exception as e:
+            applicationLogger.error(f"[ERROR] Error unsubscribing from symbol {exchange}|{token}: {e}")
+            import traceback
+            applicationLogger.error(f"[ERROR] Traceback: {traceback.format_exc()}")
+            return False

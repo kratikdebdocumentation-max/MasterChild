@@ -45,3 +45,29 @@
 2025-09-11 01:56:27,245 - INFO - {'t': 'om', 'norenordno': '25091000473347', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591181200CE', 'trantype': 'B', 'qty': '20', 'prc': '409.45', 'pcode': 'I', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
 2025-09-11 01:56:27,260 - INFO - {'t': 'om', 'norenordno': '25091000473347', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591181200CE', 'trantype': 'B', 'qty': '20', 'prc': '409.45', 'pcode': 'I', 'remarks': '', 'rejreason': 'RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]', 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
 2025-09-11 01:56:27,278 - INFO -  WS Master Data = {'t': 'om', 'norenordno': '25091000473347', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591181200CE', 'trantype': 'B', 'qty': '20', 'prc': '409.45', 'pcode': 'I', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-11 02:08:35,016 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 02:09:11,282 - INFO - {'t': 'om', 'norenordno': '25091000473351', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591181200CE', 'trantype': 'B', 'qty': '20', 'prc': '409.45', 'pcode': 'I', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-11 02:09:11,282 - INFO - {'t': 'om', 'norenordno': '25091000473351', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591181200CE', 'trantype': 'B', 'qty': '20', 'prc': '409.45', 'pcode': 'I', 'remarks': '', 'rejreason': 'RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]', 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-11 02:15:03,818 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 02:16:20,414 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 02:18:43,102 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 02:19:14,829 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 02:21:30,579 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 02:22:56,052 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 02:25:31,959 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 02:26:15,232 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 11:36:45,778 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 11:41:36,424 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 11:42:33,317 - INFO - {'t': 'om', 'norenordno': '25091100222988', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591181200CE', 'trantype': 'B', 'qty': '20', 'prc': '265.80', 'pcode': 'I', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-11 11:42:33,322 - INFO - {'t': 'om', 'norenordno': '25091100222988', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591181200CE', 'trantype': 'B', 'qty': '20', 'prc': '265.80', 'pcode': 'I', 'remarks': '', 'rejreason': 'RED:Block Type:NonSqroff Reason:T5 debit client not allowed for fresh orders[ I T5 I T5 ]', 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-11 11:49:07,273 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-11 11:53:24,793 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-11 11:54:17,848 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-11 11:58:25,370 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-11 11:58:59,706 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-11 12:27:32,818 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-11 13:11:03,214 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-11 13:16:30,269 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-11 13:16:30,494 - INFO - [WS] WebSocket connection opened for Account 1
+2025-09-11 13:17:02,040 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-11 13:17:02,247 - INFO - [WS] WebSocket connection opened for Account 1

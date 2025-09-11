@@ -18,8 +18,14 @@ class Config:
     MAX_RETRIES = 3
     
     # GUI settings
-    WINDOW_WIDTH = 1200
-    WINDOW_HEIGHT = 600
+    WINDOW_WIDTH = 1400
+    WINDOW_HEIGHT = 800
+    MIN_WINDOW_WIDTH = 1200
+    MIN_WINDOW_HEIGHT = 700
+    DEFAULT_THEME = "light"  # "dark" or "light"
+    ENABLE_ANIMATIONS = True
+    SHOW_STATUS_INDICATORS = True
+    ENABLE_SOUND_NOTIFICATIONS = False
     
     # Logging settings
     LOG_LEVEL = "INFO"

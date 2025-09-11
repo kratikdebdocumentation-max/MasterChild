@@ -6,6 +6,7 @@ import os
 from findexpiry import find_exp
 from downloadMasters_v0 import downloadFileMaster
 from gui.main_window import MainWindow
+from gui.splash_screen import SplashScreen
 from logger import applicationLogger
 
 def initialize_system():
@@ -29,6 +30,20 @@ def initialize_system():
 def main():
     """Main application entry point"""
     try:
+        # Show splash screen first
+        splash = SplashScreen(on_complete=start_main_app)
+        splash.run()
+        
+    except KeyboardInterrupt:
+        applicationLogger.info("Application interrupted by user")
+        sys.exit(0)
+    except Exception as e:
+        applicationLogger.error(f"Unexpected error: {e}")
+        sys.exit(1)
+
+def start_main_app():
+    """Start the main application after splash screen"""
+    try:
         # Initialize system
         if not initialize_system():
             print("Failed to initialize system. Please check logs for details.")
@@ -38,11 +53,8 @@ def main():
         app = MainWindow()
         app.run()
         
-    except KeyboardInterrupt:
-        applicationLogger.info("Application interrupted by user")
-        sys.exit(0)
     except Exception as e:
-        applicationLogger.error(f"Unexpected error: {e}")
+        applicationLogger.error(f"Error starting main application: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
