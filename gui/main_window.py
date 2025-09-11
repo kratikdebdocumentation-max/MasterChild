@@ -19,8 +19,12 @@ from logger import applicationLogger
 class MainWindow:
     """Main application window"""
     
-    def __init__(self):
-        self.root = tk.Tk()
+    def __init__(self, root=None):
+        if root is None:
+            self.root = tk.Tk()
+        else:
+            self.root = root
+
         self.root.title("Duplicator - Master Not Logged In")
         self.root.geometry("850x450")
         
@@ -35,6 +39,7 @@ class MainWindow:
         self.position_manager = PositionManager()
         self.symbol_manager = SymbolManager()
         self.expiry_manager = ExpiryManager()
+
         
         # Set up live price callback
         self.websocket_manager.set_live_price_callback(self.update_live_price)
@@ -64,6 +69,7 @@ class MainWindow:
         self.price1_value = tk.StringVar()
         self.modify_buy_value = tk.StringVar()
         self.modify_exit_value = tk.StringVar()
+
         self.sl_price_value = tk.StringVar()
         self.target_price_value = tk.StringVar()
         
@@ -101,6 +107,7 @@ class MainWindow:
         self.quantities = {
             1: '', 2: ''
         }
+
         
         # Current websocket subscription
         self.current_subscription = None
@@ -112,6 +119,7 @@ class MainWindow:
         self.create_selection_frame()
         self.create_trading_frame()
         self.create_order_buttons()
+
         # self.create_account_display()  # Hidden - will be part of website dashboard
         self.create_order_status_display()
         self.create_bottom_control_panel()
@@ -144,6 +152,7 @@ class MainWindow:
         )
         self.release_button.pack(side=tk.LEFT, padx=10)
         
+
         # Premium Price display
         tk.Label(self.login_frame, text="Premium Price:").pack(side=tk.LEFT, padx=5)
         self.premium_price_box = tk.Entry(
@@ -233,11 +242,13 @@ class MainWindow:
         # Exit button
         self.exit_button = ttk.Button(
             self.trading_frame, text="EXIT", 
+
             command=self.place_exit_orders, width=20, style="RedButton.TButton",
             state="disabled"
         )
         self.exit_button.pack(side=tk.LEFT, padx=10)
     
+
     def create_order_status_display(self):
         """Create order status display frame"""
         self.status_frame = tk.Frame(self.root)
@@ -365,6 +376,7 @@ class MainWindow:
         self.order_frame = tk.Frame(self.root)
         self.order_frame.pack(side=tk.TOP, pady=10)
         
+
         # Cancel Buy and Modify Buy (left side)
         self.cancel_buy_button = tk.Button(
             self.order_frame, text="Cancel Buy", 
@@ -376,11 +388,13 @@ class MainWindow:
             self.order_frame, text="Modify Buy", 
             command=self.modify_buy_orders, width=15, height=2
         )
+
         self.modify_buy_button.grid(row=0, column=1, padx=5, pady=5)
         
         self.modify_buy_box = tk.Entry(
             self.order_frame, textvariable=self.modify_buy_value, width=10
         )
+
         self.modify_buy_box.grid(row=0, column=2, padx=5, pady=5)
         
         # Cancel Exit and Modify Exit (right side)
@@ -393,6 +407,7 @@ class MainWindow:
         
         self.modify_exit_button = tk.Button(
             self.order_frame, text="Modify Exit", 
+
             command=self.modify_exit_orders, width=15, height=2,
             state="disabled"
         )
@@ -403,6 +418,7 @@ class MainWindow:
         )
         self.modify_exit_box.grid(row=0, column=5, padx=5, pady=5)
     
+
     def create_bottom_control_panel(self):
         """Create bottom control panel with exit and logout buttons"""
         self.bottom_frame = tk.Frame(self.root)
@@ -436,6 +452,7 @@ class MainWindow:
             success, client_name = self.account_manager.login_account(1)
             if success:
                 self.websocket_manager.connect_feed(1)
+
                 # Update window title with master account name
                 self.root.title(f"Duplicator - Master {client_name}")
                 self.master_account_name.set(client_name)
@@ -457,6 +474,7 @@ class MainWindow:
                 self.websocket_manager.connect_feed(account_num)
                 self.update_account_display(account_num, client_name)
                 self.enable_account_buttons(account_num)
+
                 
                 # Update window title if this is the master account
                 if account_num == 1:
@@ -483,6 +501,7 @@ class MainWindow:
         elif account_num == 2:
             self.child_value.set(client_name)
     
+
     def update_login_button_text(self, account_num: int, client_name: str):
         """Update login button text to show logged in status"""
         if account_num == 2:  # Child account
@@ -545,6 +564,7 @@ class MainWindow:
             if index == "SENSEX":
                 trading_symbol = self._generate_sensex_symbol(expiry, strike, option)
             else:
+
                 # Convert CE/PE to C/P for NIFTY and BANKNIFTY
                 if option == "CE":
                     option_type = "C"
@@ -558,6 +578,7 @@ class MainWindow:
             # Update all account displays
             self.master1_value.set(trading_symbol)
             self.child_value.set(trading_symbol)
+
             
             # Update quantity options based on lot size
             self.update_quantity_options(trading_symbol)
@@ -565,6 +586,7 @@ class MainWindow:
             return trading_symbol
         return ""
     
+
     def update_quantity_options(self, trading_symbol: str):
         """Update quantity dropdown based on lot size from master scrip file"""
         try:
@@ -653,6 +675,7 @@ class MainWindow:
         return last_friday
     
     def fetch_price(self):
+
         """Fetch current price for selected symbol and subscribe to websocket"""
         try:
             trading_symbol = self.concatenate_values()
@@ -670,6 +693,7 @@ class MainWindow:
             price = self.symbol_manager.get_latest_price(api, trading_symbol)
             if price:
                 self.price_value.set(price)
+
                 # Leave exit and modify boxes empty - they will be populated when buttons are pressed
                 self.premium_price_value.set(price)  # Set initial premium price
                 
@@ -681,6 +705,7 @@ class MainWindow:
         except Exception as e:
             messagebox.showerror("Error", f"Error fetching price: {e}")
     
+
     def subscribe_to_live_price(self, api, trading_symbol: str):
         """Subscribe to websocket for live price updates using master account (account 1) only"""
         try:
@@ -741,6 +766,7 @@ class MainWindow:
     def place_buy_orders(self):
         """Place buy orders across all active accounts"""
         try:
+
             # Check if buy button is disabled (orders already placed)
             if self.buy_button['state'] == 'disabled':
                 messagebox.showwarning("Warning", "Orders already placed! Use RELEASE button to enable new orders.")
@@ -758,6 +784,7 @@ class MainWindow:
             price = float(self.price_value.get())
             qty1 = int(self.qty1_var.get())
             
+
             # Set quantities for all accounts - use same quantity for both master and child
             # Ensure quantity is a multiple of lot size
             if trading_symbol:
@@ -790,8 +817,8 @@ class MainWindow:
                 # Fallback if trading symbol not available
                 self.quantities[1] = qty1
                 self.quantities[2] = qty1
-            
-            # Get active accounts
+                
+                # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
             applicationLogger.info(f"Active accounts: {active_accounts}")
             
@@ -817,6 +844,7 @@ class MainWindow:
                 if order_num:
                     self.order_numbers[active_accounts[i]] = order_num
             
+
             # Update order status displays based on active accounts
             if 1 in active_accounts:
                 self.master_order_status.set("Orders Placed - Waiting for Status")
@@ -839,6 +867,7 @@ class MainWindow:
             applicationLogger.info("Exit buttons enabled after buy orders placed")
             
         except Exception as e:
+
             applicationLogger.error(f"Error placing buy orders: {e}")
             # Update order status displays to show error
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -855,6 +884,7 @@ class MainWindow:
     def place_exit_orders(self):
         """Place exit orders across all active accounts"""
         try:
+
             # Check if exit button is disabled (orders already placed)
             if self.exit_button['state'] == 'disabled':
                 messagebox.showwarning("Warning", "Exit orders already placed! Use RELEASE button to enable new orders.")
@@ -867,6 +897,7 @@ class MainWindow:
             trading_symbol = self.concatenate_values()
             if not trading_symbol:
                 messagebox.showerror("Error", "Please select all required fields")
+
                 return
             
             # If exit price box is empty, populate with current LTP and return (don't place order yet)
@@ -878,11 +909,12 @@ class MainWindow:
                     return  # Stop here - user needs to press button again to place order
                 else:
                     messagebox.showerror("Error", "Please fetch current price first")
-                    return
+                return
             
             price = float(self.price1_value.get())
             qty1 = int(self.qty1_var.get())
             
+
             # Set quantities for all accounts - use same quantity for both master and child
             # Ensure quantity is a multiple of lot size
             if trading_symbol:
@@ -915,8 +947,8 @@ class MainWindow:
                 # Fallback if trading symbol not available
                 self.quantities[1] = qty1
                 self.quantities[2] = qty1
-            
-            # Get active accounts
+                
+                # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
             applicationLogger.info(f"Active accounts for exit: {active_accounts}")
             
@@ -942,6 +974,7 @@ class MainWindow:
                 if order_num:
                     self.exit_order_numbers[active_accounts[i]] = order_num
             
+
             # Update order status displays based on active accounts
             if 1 in active_accounts:
                 self.master_order_status.set("Exit Orders Placed - Waiting for Status")
@@ -958,6 +991,7 @@ class MainWindow:
             applicationLogger.info("Exit button disabled to prevent duplicate orders")
             
         except Exception as e:
+
             applicationLogger.error(f"Error placing exit orders: {e}")
             # Update order status displays to show error
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -980,6 +1014,7 @@ class MainWindow:
             active_flags = [True] * len(active_accounts)
             
             self.order_manager.cancel_orders(apis, order_numbers, active_flags)
+
             # Update status displays based on active accounts
             if 1 in active_accounts:
                 self.master_order_status.set("Buy Orders Cancelled")
@@ -992,6 +1027,7 @@ class MainWindow:
                 self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
+
             applicationLogger.error(f"Error cancelling buy orders: {e}")
             # Update order status displays to show error
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -1014,6 +1050,7 @@ class MainWindow:
             active_flags = [True] * len(active_accounts)
             
             self.order_manager.cancel_orders(apis, order_numbers, active_flags)
+
             # Update status displays based on active accounts
             if 1 in active_accounts:
                 self.master_order_status.set("Exit Orders Cancelled")
@@ -1026,6 +1063,7 @@ class MainWindow:
                 self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
+
             applicationLogger.error(f"Error cancelling exit orders: {e}")
             # Update order status displays to show error
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -1045,6 +1083,7 @@ class MainWindow:
             trading_symbol = self.concatenate_values()
             if not trading_symbol:
                 messagebox.showerror("Error", "Please select all required fields")
+
                 return
             
             # If modify buy box is empty, populate with current LTP and return (don't place order yet)
@@ -1056,11 +1095,12 @@ class MainWindow:
                     return  # Stop here - user needs to press button again to place order
                 else:
                     messagebox.showerror("Error", "Please fetch current price first")
-                    return
+                return
             
             price = float(self.modify_buy_value.get())
             qty1 = int(self.qty1_var.get())
             
+
             # Set quantities for all accounts - use same quantity for both master and child
             # Ensure quantity is a multiple of lot size
             if trading_symbol:
@@ -1093,8 +1133,8 @@ class MainWindow:
                 # Fallback if trading symbol not available
                 self.quantities[1] = qty1
                 self.quantities[2] = qty1
-            
-            # Get active accounts
+                
+                # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
             apis = [self.account_manager.get_api(i) for i in active_accounts]
             order_numbers = [self.order_numbers[i] for i in active_accounts]
@@ -1104,6 +1144,7 @@ class MainWindow:
             self.order_manager.modify_orders(
                 apis, order_numbers, quantities, trading_symbol, price, active_flags
             )
+
             # Update status displays based on active accounts
             if 1 in active_accounts:
                 self.master_order_status.set("Buy Orders Modified - Waiting for Status")
@@ -1116,6 +1157,7 @@ class MainWindow:
                 self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
+
             applicationLogger.error(f"Error modifying buy orders: {e}")
             # Update order status displays to show error
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -1135,6 +1177,7 @@ class MainWindow:
             trading_symbol = self.concatenate_values()
             if not trading_symbol:
                 messagebox.showerror("Error", "Please select all required fields")
+
                 return
             
             # If modify exit box is empty, populate with current LTP and return (don't place order yet)
@@ -1146,11 +1189,12 @@ class MainWindow:
                     return  # Stop here - user needs to press button again to place order
                 else:
                     messagebox.showerror("Error", "Please fetch current price first")
-                    return
+                return
             
             price = float(self.modify_exit_value.get())
             qty1 = int(self.qty1_var.get())
             
+
             # Set quantities for all accounts - use same quantity for both master and child
             # Ensure quantity is a multiple of lot size
             if trading_symbol:
@@ -1194,6 +1238,7 @@ class MainWindow:
             self.order_manager.modify_orders(
                 apis, order_numbers, quantities, trading_symbol, price, active_flags
             )
+
             # Update status displays based on active accounts
             if 1 in active_accounts:
                 self.master_order_status.set("Exit Orders Modified - Waiting for Status")
@@ -1206,6 +1251,7 @@ class MainWindow:
                 self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
+
             applicationLogger.error(f"Error modifying exit orders: {e}")
             # Update order status displays to show error
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -1290,6 +1336,7 @@ class MainWindow:
                 label.grid(row=row_idx, column=col_idx, padx=10, pady=5, sticky='w')
     
     def release_buttons(self):
+
         """Release button states - enable buy and exit buttons"""
         # Enable buy button
         self.buy_button.config(state='normal', text="BUY")
@@ -1335,6 +1382,7 @@ class MainWindow:
                 applicationLogger.info("Exit all orders cancelled by user")
                 return
             
+
             applicationLogger.info("Exiting all orders at market price")
             
             # Get active accounts
@@ -1345,6 +1393,7 @@ class MainWindow:
                 self.child_order_status.set("No Active Accounts")
                 return
             
+
             # Place market exit orders for all active accounts
             for account_num in active_accounts:
                 api = self.account_manager.accounts[account_num]['api']
@@ -1398,6 +1447,7 @@ class MainWindow:
                 applicationLogger.info("Exit master orders cancelled by user")
                 return
             
+
             applicationLogger.info("Exiting master orders at market price")
             
             if not self.account_manager.accounts[1]['active']:
@@ -1684,12 +1734,15 @@ class MainWindow:
                                 
                                 if exit_result and exit_result.get('stat') == 'Ok':
                                     applicationLogger.info(f"Market exit order placed for account {account_num}: {exit_result.get('norenordno')}")
-                                else:
+            else:
+
                                     applicationLogger.error(f"Failed to place market exit order for account {account_num}")
-            
+                
         except Exception as e:
+
             applicationLogger.error(f"Error in silent market exit: {e}")
     
     def run(self):
         """Run the application"""
         self.root.mainloop()
+
