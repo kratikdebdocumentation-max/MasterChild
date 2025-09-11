@@ -103,9 +103,9 @@ class MainWindow:
         self.create_login_buttons()
         self.create_selection_frame()
         self.create_trading_frame()
-        self.create_order_status_display()
-        # self.create_account_display()  # Hidden - will be part of website dashboard
         self.create_order_buttons()
+        # self.create_account_display()  # Hidden - will be part of website dashboard
+        self.create_order_status_display()
     
     def create_style(self):
         """Create custom styles"""
@@ -685,6 +685,11 @@ class MainWindow:
     def place_buy_orders(self):
         """Place buy orders across all active accounts"""
         try:
+            # Check if buy button is disabled (orders already placed)
+            if self.buy_button['state'] == 'disabled':
+                messagebox.showwarning("Warning", "Orders already placed! Use RELEASE button to enable new orders.")
+                return
+                
             if not self.qty1_var.get():
                 messagebox.showerror("Error", "Please select quantity")
                 return
@@ -697,16 +702,38 @@ class MainWindow:
             price = float(self.price_value.get())
             qty1 = int(self.qty1_var.get())
             
-            # Set quantities for all accounts
-            self.quantities[1] = qty1
-            if self.selected_index.get() == "NIFTY":
-                self.quantities[2] = 25
-            elif self.selected_index.get() == "BANKNIFTY":
-                self.quantities[2] = 15
-            elif self.selected_index.get() == "SENSEX":
-                self.quantities[2] = 20  # Default quantity for SENSEX
+            # Set quantities for all accounts - use same quantity for both master and child
+            # Ensure quantity is a multiple of lot size
+            if trading_symbol:
+                try:
+                    # Get lot size for the trading symbol
+                    token, lot_size = self.symbol_manager.get_token_and_lot_size(trading_symbol)
+                    if lot_size and qty1 % lot_size == 0:
+                        # Quantity is already a multiple of lot size, use as is
+                        self.quantities[1] = qty1
+                        self.quantities[2] = qty1
+                        applicationLogger.info(f"Using same quantity for both accounts: {qty1} (lot size: {lot_size})")
+                    else:
+                        # Adjust quantity to be a multiple of lot size
+                        if lot_size:
+                            adjusted_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
+                            self.quantities[1] = adjusted_qty
+                            self.quantities[2] = adjusted_qty
+                            applicationLogger.info(f"Adjusted quantity to lot size multiple: {adjusted_qty} (original: {qty1}, lot size: {lot_size})")
+                        else:
+                            # Fallback to original quantity if lot size not found
+                            self.quantities[1] = qty1
+                            self.quantities[2] = qty1
+                            applicationLogger.warning(f"Lot size not found, using original quantity: {qty1}")
+                except Exception as e:
+                    applicationLogger.error(f"Error getting lot size: {e}")
+                    # Fallback to original quantity
+                    self.quantities[1] = qty1
+                    self.quantities[2] = qty1
             else:
-                self.quantities[2] = 10  # Default quantity for other instruments
+                # Fallback if trading symbol not available
+                self.quantities[1] = qty1
+                self.quantities[2] = qty1
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -745,12 +772,32 @@ class MainWindow:
             else:
                 self.child_order_status.set("Child Not Logged In")
             
+            # Disable buy button to prevent duplicate orders
+            self.buy_button.config(state='disabled', text="ORDERS PLACED", bg='lightgray')
+            applicationLogger.info("Buy button disabled to prevent duplicate orders")
+            
         except Exception as e:
-            messagebox.showerror("Error", f"Error placing buy orders: {e}")
+            applicationLogger.error(f"Error placing buy orders: {e}")
+            # Update order status displays to show error
+            active_accounts = self.account_manager.get_all_active_accounts()
+            if 1 in active_accounts:
+                self.master_order_status.set(f"Error: {str(e)[:50]}...")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set(f"Error: {str(e)[:50]}...")
+            else:
+                self.child_order_status.set("Child Not Logged In")
     
     def place_exit_orders(self):
         """Place exit orders across all active accounts"""
         try:
+            # Check if exit button is disabled (orders already placed)
+            if self.exit_button['state'] == 'disabled':
+                messagebox.showwarning("Warning", "Exit orders already placed! Use RELEASE button to enable new orders.")
+                return
+                
             if not self.qty1_var.get():
                 messagebox.showerror("Error", "Please select quantity")
                 return
@@ -763,16 +810,38 @@ class MainWindow:
             price = float(self.price1_value.get())
             qty1 = int(self.qty1_var.get())
             
-            # Set quantities for all accounts
-            self.quantities[1] = qty1
-            if self.selected_index.get() == "NIFTY":
-                self.quantities[2] = 25
-            elif self.selected_index.get() == "BANKNIFTY":
-                self.quantities[2] = 15
-            elif self.selected_index.get() == "SENSEX":
-                self.quantities[2] = 20  # Default quantity for SENSEX
+            # Set quantities for all accounts - use same quantity for both master and child
+            # Ensure quantity is a multiple of lot size
+            if trading_symbol:
+                try:
+                    # Get lot size for the trading symbol
+                    token, lot_size = self.symbol_manager.get_token_and_lot_size(trading_symbol)
+                    if lot_size and qty1 % lot_size == 0:
+                        # Quantity is already a multiple of lot size, use as is
+                        self.quantities[1] = qty1
+                        self.quantities[2] = qty1
+                        applicationLogger.info(f"Using same quantity for both accounts: {qty1} (lot size: {lot_size})")
+                    else:
+                        # Adjust quantity to be a multiple of lot size
+                        if lot_size:
+                            adjusted_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
+                            self.quantities[1] = adjusted_qty
+                            self.quantities[2] = adjusted_qty
+                            applicationLogger.info(f"Adjusted quantity to lot size multiple: {adjusted_qty} (original: {qty1}, lot size: {lot_size})")
+                        else:
+                            # Fallback to original quantity if lot size not found
+                            self.quantities[1] = qty1
+                            self.quantities[2] = qty1
+                            applicationLogger.warning(f"Lot size not found, using original quantity: {qty1}")
+                except Exception as e:
+                    applicationLogger.error(f"Error getting lot size: {e}")
+                    # Fallback to original quantity
+                    self.quantities[1] = qty1
+                    self.quantities[2] = qty1
             else:
-                self.quantities[2] = 10  # Default quantity for other instruments
+                # Fallback if trading symbol not available
+                self.quantities[1] = qty1
+                self.quantities[2] = qty1
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -811,8 +880,23 @@ class MainWindow:
             else:
                 self.child_order_status.set("Child Not Logged In")
             
+            # Disable exit button to prevent duplicate orders
+            self.exit_button.config(state='disabled', text="EXIT ORDERS PLACED", bg='lightgray')
+            applicationLogger.info("Exit button disabled to prevent duplicate orders")
+            
         except Exception as e:
-            messagebox.showerror("Error", f"Error placing exit orders: {e}")
+            applicationLogger.error(f"Error placing exit orders: {e}")
+            # Update order status displays to show error
+            active_accounts = self.account_manager.get_all_active_accounts()
+            if 1 in active_accounts:
+                self.master_order_status.set(f"Error: {str(e)[:50]}...")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set(f"Error: {str(e)[:50]}...")
+            else:
+                self.child_order_status.set("Child Not Logged In")
     
     def cancel_buy_orders(self):
         """Cancel buy orders across all active accounts"""
@@ -835,7 +919,18 @@ class MainWindow:
                 self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Error cancelling buy orders: {e}")
+            applicationLogger.error(f"Error cancelling buy orders: {e}")
+            # Update order status displays to show error
+            active_accounts = self.account_manager.get_all_active_accounts()
+            if 1 in active_accounts:
+                self.master_order_status.set(f"Cancel Error: {str(e)[:40]}...")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set(f"Cancel Error: {str(e)[:40]}...")
+            else:
+                self.child_order_status.set("Child Not Logged In")
     
     def cancel_exit_orders(self):
         """Cancel exit orders across all active accounts"""
@@ -858,7 +953,18 @@ class MainWindow:
                 self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Error cancelling exit orders: {e}")
+            applicationLogger.error(f"Error cancelling exit orders: {e}")
+            # Update order status displays to show error
+            active_accounts = self.account_manager.get_all_active_accounts()
+            if 1 in active_accounts:
+                self.master_order_status.set(f"Cancel Error: {str(e)[:40]}...")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set(f"Cancel Error: {str(e)[:40]}...")
+            else:
+                self.child_order_status.set("Child Not Logged In")
     
     def modify_buy_orders(self):
         """Modify buy orders across all active accounts"""
@@ -871,16 +977,38 @@ class MainWindow:
             price = float(self.modify_buy_value.get())
             qty1 = int(self.qty1_var.get())
             
-            # Set quantities for all accounts
-            self.quantities[1] = qty1
-            if self.selected_index.get() == "NIFTY":
-                self.quantities[2] = 25
-            elif self.selected_index.get() == "BANKNIFTY":
-                self.quantities[2] = 15
-            elif self.selected_index.get() == "SENSEX":
-                self.quantities[2] = 20  # Default quantity for SENSEX
+            # Set quantities for all accounts - use same quantity for both master and child
+            # Ensure quantity is a multiple of lot size
+            if trading_symbol:
+                try:
+                    # Get lot size for the trading symbol
+                    token, lot_size = self.symbol_manager.get_token_and_lot_size(trading_symbol)
+                    if lot_size and qty1 % lot_size == 0:
+                        # Quantity is already a multiple of lot size, use as is
+                        self.quantities[1] = qty1
+                        self.quantities[2] = qty1
+                        applicationLogger.info(f"Using same quantity for both accounts: {qty1} (lot size: {lot_size})")
+                    else:
+                        # Adjust quantity to be a multiple of lot size
+                        if lot_size:
+                            adjusted_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
+                            self.quantities[1] = adjusted_qty
+                            self.quantities[2] = adjusted_qty
+                            applicationLogger.info(f"Adjusted quantity to lot size multiple: {adjusted_qty} (original: {qty1}, lot size: {lot_size})")
+                        else:
+                            # Fallback to original quantity if lot size not found
+                            self.quantities[1] = qty1
+                            self.quantities[2] = qty1
+                            applicationLogger.warning(f"Lot size not found, using original quantity: {qty1}")
+                except Exception as e:
+                    applicationLogger.error(f"Error getting lot size: {e}")
+                    # Fallback to original quantity
+                    self.quantities[1] = qty1
+                    self.quantities[2] = qty1
             else:
-                self.quantities[2] = 10  # Default quantity for other instruments
+                # Fallback if trading symbol not available
+                self.quantities[1] = qty1
+                self.quantities[2] = qty1
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -904,7 +1032,18 @@ class MainWindow:
                 self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Error modifying buy orders: {e}")
+            applicationLogger.error(f"Error modifying buy orders: {e}")
+            # Update order status displays to show error
+            active_accounts = self.account_manager.get_all_active_accounts()
+            if 1 in active_accounts:
+                self.master_order_status.set(f"Modify Error: {str(e)[:40]}...")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set(f"Modify Error: {str(e)[:40]}...")
+            else:
+                self.child_order_status.set("Child Not Logged In")
     
     def modify_exit_orders(self):
         """Modify exit orders across all active accounts"""
@@ -917,16 +1056,38 @@ class MainWindow:
             price = float(self.modify_exit_value.get())
             qty1 = int(self.qty1_var.get())
             
-            # Set quantities for all accounts
-            self.quantities[1] = qty1
-            if self.selected_index.get() == "NIFTY":
-                self.quantities[2] = 25
-            elif self.selected_index.get() == "BANKNIFTY":
-                self.quantities[2] = 15
-            elif self.selected_index.get() == "SENSEX":
-                self.quantities[2] = 20  # Default quantity for SENSEX
+            # Set quantities for all accounts - use same quantity for both master and child
+            # Ensure quantity is a multiple of lot size
+            if trading_symbol:
+                try:
+                    # Get lot size for the trading symbol
+                    token, lot_size = self.symbol_manager.get_token_and_lot_size(trading_symbol)
+                    if lot_size and qty1 % lot_size == 0:
+                        # Quantity is already a multiple of lot size, use as is
+                        self.quantities[1] = qty1
+                        self.quantities[2] = qty1
+                        applicationLogger.info(f"Using same quantity for both accounts: {qty1} (lot size: {lot_size})")
+                    else:
+                        # Adjust quantity to be a multiple of lot size
+                        if lot_size:
+                            adjusted_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
+                            self.quantities[1] = adjusted_qty
+                            self.quantities[2] = adjusted_qty
+                            applicationLogger.info(f"Adjusted quantity to lot size multiple: {adjusted_qty} (original: {qty1}, lot size: {lot_size})")
+                        else:
+                            # Fallback to original quantity if lot size not found
+                            self.quantities[1] = qty1
+                            self.quantities[2] = qty1
+                            applicationLogger.warning(f"Lot size not found, using original quantity: {qty1}")
+                except Exception as e:
+                    applicationLogger.error(f"Error getting lot size: {e}")
+                    # Fallback to original quantity
+                    self.quantities[1] = qty1
+                    self.quantities[2] = qty1
             else:
-                self.quantities[2] = 10  # Default quantity for other instruments
+                # Fallback if trading symbol not available
+                self.quantities[1] = qty1
+                self.quantities[2] = qty1
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -950,7 +1111,18 @@ class MainWindow:
                 self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Error modifying exit orders: {e}")
+            applicationLogger.error(f"Error modifying exit orders: {e}")
+            # Update order status displays to show error
+            active_accounts = self.account_manager.get_all_active_accounts()
+            if 1 in active_accounts:
+                self.master_order_status.set(f"Modify Error: {str(e)[:40]}...")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set(f"Modify Error: {str(e)[:40]}...")
+            else:
+                self.child_order_status.set("Child Not Logged In")
     
     def update_mtm(self, account_num: int):
         """Update MTM for an account"""
@@ -1023,9 +1195,26 @@ class MainWindow:
                 label.grid(row=row_idx, column=col_idx, padx=10, pady=5, sticky='w')
     
     def release_buttons(self):
-        """Release button states"""
-        self.buy_button.state(['!pressed', '!disabled'])
-        self.exit_button.state(['!pressed', '!disabled'])
+        """Release button states - enable buy and exit buttons"""
+        # Enable buy button
+        self.buy_button.config(state='normal', text="BUY", bg='SystemButtonFace')
+        
+        # Enable exit button
+        self.exit_button.config(state='normal', text="EXIT", bg='SystemButtonFace')
+        
+        # Reset order status displays
+        active_accounts = self.account_manager.get_all_active_accounts()
+        if 1 in active_accounts:
+            self.master_order_status.set("Master Ready - No Orders")
+        else:
+            self.master_order_status.set("Master Not Logged In")
+            
+        if 2 in active_accounts:
+            self.child_order_status.set("Child Ready - No Orders")
+        else:
+            self.child_order_status.set("Child Not Logged In")
+        
+        applicationLogger.info("Buttons released - ready for new orders")
     
     
     def refresh_strikes(self):

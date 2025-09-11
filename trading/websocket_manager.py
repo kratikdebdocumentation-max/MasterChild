@@ -38,11 +38,8 @@ class WebSocketManager:
                     reporttype = tick_data.get('reporttype', 'Unknown')
                     rejreason = tick_data.get('rejreason', '')
                     
-                    # Format status message
-                    if rejreason:
-                        status_message = f"{trantype} {status} - {rejreason}"
-                    else:
-                        status_message = f"{trantype} {status} {reporttype}"
+                    # Format status message - show only status without transaction type
+                    status_message = f"{status} {reporttype}"
                     
                     self.order_status_callback(account_num, status_message)
                 except Exception as e:
