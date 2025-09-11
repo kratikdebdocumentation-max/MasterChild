@@ -73,8 +73,7 @@ class AccountManager:
                 if account_num == 1:
                     master1WSLogger.info(f"Login Successful!, Welcome {client_name} - Master ACCOUNT")
                 else:
-                    child_logger = globals()[f'child{account_num}WSLogger']
-                    child_logger.info(f"Login Successful!, Welcome {client_name} - Child{account_num} ACCOUNT")
+                    childWSLogger.info(f"Login Successful!, Welcome {client_name} - Child{account_num} ACCOUNT")
                 
                 return True, client_name
             else:

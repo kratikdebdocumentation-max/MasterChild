@@ -15,6 +15,8 @@ class WebSocketManager:
             1: master1WSLogger,
             2: childWSLogger
         }
+        self.live_price_callback = None
+        self.order_status_callback = None
     
     def setup_websocket_callbacks(self, account_num: int):
         """Setup WebSocket callbacks for a specific account"""
@@ -27,17 +29,50 @@ class WebSocketManager:
             # Process order update in a separate thread
             thread = threading.Thread(target=self._process_order_update, args=(tick_data, account_num))
             thread.start()
+            
+            # Update order status display
+            if self.order_status_callback:
+                try:
+                    status = tick_data.get('status', 'Unknown')
+                    trantype = tick_data.get('trantype', 'Unknown')
+                    reporttype = tick_data.get('reporttype', 'Unknown')
+                    rejreason = tick_data.get('rejreason', '')
+                    
+                    # Format status message
+                    if rejreason:
+                        status_message = f"{trantype} {status} - {rejreason}"
+                    else:
+                        status_message = f"{trantype} {status} {reporttype}"
+                    
+                    self.order_status_callback(account_num, status_message)
+                except Exception as e:
+                    applicationLogger.error(f"Error updating order status: {e}")
         
         def quote_update_callback(tick_data):
             """Handle quote updates"""
             print(f"Quote Received for Account {account_num}: {tick_data}")
-            # Add quote processing logic here if needed
+            
+            # Handle live price updates
+            if 'lp' in tick_data and self.live_price_callback:
+                try:
+                    live_price = float(tick_data['lp'])
+                    self.live_price_callback(live_price)
+                except (ValueError, TypeError) as e:
+                    applicationLogger.error(f"Error parsing live price: {e}")
         
         def socket_open_callback():
             """Handle socket open"""
             print(f"WebSocket is now open for Account {account_num}")
         
         return order_update_callback, quote_update_callback, socket_open_callback
+    
+    def set_live_price_callback(self, callback: Callable[[float], None]):
+        """Set callback for live price updates"""
+        self.live_price_callback = callback
+    
+    def set_order_status_callback(self, callback: Callable[[int, str], None]):
+        """Set callback for order status updates"""
+        self.order_status_callback = callback
     
     def _process_order_update(self, tick_data: Dict[str, Any], account_num: int):
         """Process order update data"""

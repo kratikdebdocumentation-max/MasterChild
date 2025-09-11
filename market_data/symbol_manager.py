@@ -25,7 +25,12 @@ class SymbolManager:
                                   for file in nfo_files]
                 latest_nfo = sorted(files_with_dates, key=lambda x: x[1], reverse=True)[0][0]
                 self.latest_files['NFO'] = latest_nfo
-                self.symbol_data['NFO'] = pd.read_csv(latest_nfo)
+                try:
+                    self.symbol_data['NFO'] = pd.read_csv(latest_nfo, on_bad_lines='skip')
+                except Exception as e:
+                    applicationLogger.warning(f"Error loading NFO file: {e}")
+                    # Fallback: try without error handling
+                    self.symbol_data['NFO'] = pd.read_csv(latest_nfo)
             
             # Find latest BFO file
             bfo_files = glob.glob("data/BFO_symbols.txt_*.txt")
@@ -34,7 +39,12 @@ class SymbolManager:
                                   for file in bfo_files]
                 latest_bfo = sorted(files_with_dates, key=lambda x: x[1], reverse=True)[0][0]
                 self.latest_files['BFO'] = latest_bfo
-                self.symbol_data['BFO'] = pd.read_csv(latest_bfo)
+                try:
+                    self.symbol_data['BFO'] = pd.read_csv(latest_bfo, on_bad_lines='skip')
+                except Exception as e:
+                    applicationLogger.warning(f"Error loading BFO file: {e}")
+                    # Fallback: try without error handling
+                    self.symbol_data['BFO'] = pd.read_csv(latest_bfo)
                 
         except Exception as e:
             applicationLogger.error(f"Error loading symbol files: {e}")
@@ -100,6 +110,96 @@ class SymbolManager:
             import traceback
             applicationLogger.error(f"Traceback: {traceback.format_exc()}")
             return None
+    
+    def get_token_and_lot_size(self, trading_symbol: str) -> tuple[Optional[str], Optional[int]]:
+        """
+        Get token and lot size for a trading symbol
+        
+        Args:
+            trading_symbol: Trading symbol
+            
+        Returns:
+            tuple: (token, lot_size) or (None, None) if not found
+        """
+        try:
+            applicationLogger.info(f"Getting token and lot size for trading symbol: {trading_symbol}")
+            
+            # Check if it's a SENSEX symbol
+            if "SENSEX" in trading_symbol:
+                # For new format symbols, use them directly
+                if 'BFO' in self.symbol_data:
+                    row = self.symbol_data['BFO'][self.symbol_data['BFO']['TradingSymbol'] == trading_symbol]
+                    if not row.empty:
+                        token = str(row.iloc[0]['Token'])
+                        lot_size = int(row.iloc[0]['LotSize'])
+                        applicationLogger.info(f"Found token and lot size for {trading_symbol}: {token}, {lot_size}")
+                        return token, lot_size
+                    else:
+                        applicationLogger.error(f"No token found for {trading_symbol}")
+                        # Try to find similar symbols for debugging
+                        similar_symbols = self.symbol_data['BFO'][self.symbol_data['BFO']['TradingSymbol'].str.contains('SENSEX')]['TradingSymbol'].unique()
+                        applicationLogger.info(f"Available SENSEX symbols (first 10): {similar_symbols[:10]}")
+                        
+                        # Fallback to old conversion method for backward compatibility
+                        try:
+                            bfo_trading_symbol = self._convert_sensex_format(trading_symbol)
+                            applicationLogger.info(f"Trying converted SENSEX symbol: {trading_symbol} -> {bfo_trading_symbol}")
+                            
+                            row = self.symbol_data['BFO'][self.symbol_data['BFO']['TradingSymbol'] == bfo_trading_symbol]
+                            if not row.empty:
+                                token = str(row.iloc[0]['Token'])
+                                lot_size = int(row.iloc[0]['LotSize'])
+                                applicationLogger.info(f"Found token and lot size for converted symbol {bfo_trading_symbol}: {token}, {lot_size}")
+                                return token, lot_size
+                        except Exception as e:
+                            applicationLogger.error(f"Error in fallback conversion: {e}")
+            else:
+                # Check NFO symbols
+                if 'NFO' in self.symbol_data:
+                    row = self.symbol_data['NFO'][self.symbol_data['NFO']['TradingSymbol'] == trading_symbol]
+                    if not row.empty:
+                        token = str(row.iloc[0]['Token'])
+                        lot_size = int(row.iloc[0]['LotSize'])
+                        applicationLogger.info(f"Found NFO token and lot size for {trading_symbol}: {token}, {lot_size}")
+                        return token, lot_size
+                    else:
+                        applicationLogger.error(f"No token found for {trading_symbol}")
+                        # Let's check what symbols are available
+                        available_symbols = self.symbol_data['NFO']['TradingSymbol'].unique()
+                        applicationLogger.info(f"Available NFO symbols (first 10): {available_symbols[:10]}")
+            
+            return None, None
+            
+        except Exception as e:
+            applicationLogger.error(f"Error getting token and lot size for {trading_symbol}: {e}")
+            import traceback
+            applicationLogger.error(f"Traceback: {traceback.format_exc()}")
+            return None, None
+    
+    def get_quantity_options(self, lot_size: int, num_options: int = 10) -> list:
+        """
+        Generate quantity options as multiples of lot size
+        
+        Args:
+            lot_size: Lot size from master scrip file
+            num_options: Number of quantity options to generate
+            
+        Returns:
+            List of quantity options
+        """
+        try:
+            quantities = []
+            for i in range(1, num_options + 1):
+                quantity = lot_size * i
+                quantities.append(str(quantity))
+            
+            applicationLogger.info(f"Generated quantity options for lot size {lot_size}: {quantities}")
+            return quantities
+            
+        except Exception as e:
+            applicationLogger.error(f"Error generating quantity options: {e}")
+            # Fallback to default quantities
+            return [str(lot_size * i) for i in range(1, 11)]
     
     def _convert_sensex_format(self, input_str: str) -> str:
         """Convert SENSEX symbol format"""

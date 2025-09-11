@@ -24,8 +24,11 @@ class OrderManager:
         
         if os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0:
             try:
-                self.df_orders = pd.read_csv(self.file_path)
+                self.df_orders = pd.read_csv(self.file_path, on_bad_lines='skip')
             except pd.errors.EmptyDataError:
+                self.df_orders = pd.DataFrame(columns=columns)
+            except Exception as e:
+                applicationLogger.warning(f"Error loading orders CSV file: {e}")
                 self.df_orders = pd.DataFrame(columns=columns)
         else:
             self.df_orders = pd.DataFrame(columns=columns)

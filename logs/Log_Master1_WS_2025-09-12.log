@@ -1,0 +1,23 @@
+2025-09-12 00:03:04,297 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:19:34,206 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:23:32,699 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:25:30,471 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:26:39,426 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:27:18,624 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:27:25,226 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:29:09,731 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:29:49,729 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:33:59,538 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:47:32,682 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:48:52,830 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 00:49:17,736 - INFO - {'t': 'om', 'norenordno': '25091100520779', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'NFO', 'tsym': 'NIFTY16SEP25C24850', 'trantype': 'B', 'qty': '75', 'prc': '233.00', 'pcode': 'I', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-12 00:49:17,755 - INFO - {'t': 'om', 'norenordno': '25091100520779', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'NFO', 'tsym': 'NIFTY16SEP25C24850', 'trantype': 'B', 'qty': '75', 'prc': '233.00', 'pcode': 'I', 'remarks': '', 'rejreason': "RED:'MIS' Orders are disallowed after system square off", 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-12 01:03:41,844 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 01:04:08,830 - INFO - {'t': 'om', 'norenordno': '25091100520947', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591881200CE', 'trantype': 'B', 'qty': '60', 'prc': '730.05', 'pcode': 'I', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-12 01:04:08,931 - INFO - {'t': 'om', 'norenordno': '25091100520947', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591881200CE', 'trantype': 'B', 'qty': '60', 'prc': '730.05', 'pcode': 'I', 'remarks': '', 'rejreason': 'RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]', 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-12 01:04:17,677 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 01:04:32,377 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 01:04:33,881 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-12 01:04:50,423 - INFO - {'t': 'om', 'norenordno': '25091100520950', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591881200CE', 'trantype': 'B', 'qty': '60', 'prc': '730.05', 'pcode': 'I', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-12 01:04:50,425 - INFO - {'t': 'om', 'norenordno': '25091100520950', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591881200CE', 'trantype': 'B', 'qty': '60', 'prc': '730.05', 'pcode': 'I', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-12 01:04:50,443 - INFO - {'t': 'om', 'norenordno': '25091100520950', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591881200CE', 'trantype': 'B', 'qty': '60', 'prc': '730.05', 'pcode': 'I', 'remarks': '', 'rejreason': 'RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]', 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}

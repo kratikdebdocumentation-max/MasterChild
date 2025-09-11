@@ -1,0 +1,300 @@
+2025-09-12 00:03:03,780 - INFO - Downloading master files...
+2025-09-12 00:03:03,780 - INFO - Finding expiry dates...
+2025-09-12 00:03:03,899 - INFO - System initialization completed successfully
+2025-09-12 00:03:04,116 - INFO - Generated fresh 2FA for account 1: 026127
+2025-09-12 00:03:04,299 - INFO - Master account initialized successfully
+2025-09-12 00:03:08,083 - INFO - Fetched SENSEX price: 81548.73
+2025-09-12 00:03:08,083 - INFO - Updated strikes for SENSEX based on price 81548.73: [80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100, 82200]
+2025-09-12 00:03:17,018 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 00:03:17,040 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 00:19:33,631 - INFO - Downloading master files...
+2025-09-12 00:19:33,632 - INFO - Finding expiry dates...
+2025-09-12 00:19:33,728 - INFO - System initialization completed successfully
+2025-09-12 00:19:33,961 - INFO - Generated fresh 2FA for account 1: 969759
+2025-09-12 00:19:34,208 - INFO - Master account initialized successfully
+2025-09-12 00:19:39,594 - INFO - Fetched SENSEX price: 81548.73
+2025-09-12 00:19:39,595 - INFO - Updated strikes for SENSEX based on price 81548.73: [80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100, 82200]
+2025-09-12 00:19:46,473 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 00:19:46,479 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 00:19:46,655 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 00:19:46,660 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 00:19:46,661 - INFO - Subscribed to live price feed: BFO|862060
+2025-09-12 00:20:49,364 - INFO - Generated fresh 2FA for account 2: 030475
+2025-09-12 00:20:49,626 - ERROR - Login failed for account 2: 'child2WSLogger'
+2025-09-12 00:23:32,112 - INFO - Downloading master files...
+2025-09-12 00:23:32,113 - INFO - Finding expiry dates...
+2025-09-12 00:23:32,204 - INFO - System initialization completed successfully
+2025-09-12 00:23:32,453 - INFO - Generated fresh 2FA for account 1: 035312
+2025-09-12 00:23:32,703 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 00:25:29,900 - INFO - Downloading master files...
+2025-09-12 00:25:29,901 - INFO - Finding expiry dates...
+2025-09-12 00:25:29,985 - INFO - System initialization completed successfully
+2025-09-12 00:25:30,206 - INFO - Generated fresh 2FA for account 1: 103336
+2025-09-12 00:25:30,473 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 00:25:41,059 - INFO - Generated fresh 2FA for account 2: 865117
+2025-09-12 00:25:41,255 - ERROR - Login failed for account 2: 'child2WSLogger'
+2025-09-12 00:26:38,383 - INFO - Downloading master files...
+2025-09-12 00:26:38,384 - INFO - Finding expiry dates...
+2025-09-12 00:26:38,475 - INFO - System initialization completed successfully
+2025-09-12 00:26:38,761 - INFO - Generated fresh 2FA for account 1: 309929
+2025-09-12 00:26:39,429 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 00:27:17,564 - INFO - Downloading master files...
+2025-09-12 00:27:17,565 - INFO - Finding expiry dates...
+2025-09-12 00:27:17,649 - INFO - System initialization completed successfully
+2025-09-12 00:27:17,966 - INFO - Generated fresh 2FA for account 1: 658051
+2025-09-12 00:27:18,626 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 00:27:24,646 - INFO - Generated fresh 2FA for account 1: 658051
+2025-09-12 00:27:25,229 - INFO - Generated fresh 2FA for account 2: 194158
+2025-09-12 00:27:57,155 - INFO - Generated fresh 2FA for account 2: 951337
+2025-09-12 00:29:08,722 - INFO - Downloading master files...
+2025-09-12 00:29:08,722 - INFO - Finding expiry dates...
+2025-09-12 00:29:08,806 - INFO - System initialization completed successfully
+2025-09-12 00:29:09,066 - INFO - Generated fresh 2FA for account 1: 499589
+2025-09-12 00:29:09,736 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 00:29:49,225 - INFO - Downloading master files...
+2025-09-12 00:29:49,226 - INFO - Finding expiry dates...
+2025-09-12 00:29:49,311 - INFO - System initialization completed successfully
+2025-09-12 00:29:49,542 - INFO - Generated fresh 2FA for account 1: 807451
+2025-09-12 00:29:49,730 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 00:29:51,646 - INFO - Generated fresh 2FA for account 2: 756402
+2025-09-12 00:29:59,363 - INFO - Fetched SENSEX price: 81548.73
+2025-09-12 00:29:59,363 - INFO - Updated strikes for SENSEX based on price 81548.73: [80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100, 82200]
+2025-09-12 00:30:05,176 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 00:30:05,180 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 00:30:05,353 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 00:30:05,358 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 00:30:05,358 - INFO - Subscribed to live price feed: BFO|862060
+2025-09-12 00:33:07,114 - INFO - Fetched NIFTY price: 25005.5
+2025-09-12 00:33:07,116 - INFO - Updated strikes for NIFTY based on price 25005.5: [24650, 24700, 24750, 24800, 24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200, 25250, 25300, 25350]
+2025-09-12 00:33:12,625 - INFO - Fetched BANKNIFTY price: 54669.6
+2025-09-12 00:33:12,626 - INFO - Updated strikes for BANKNIFTY based on price 54669.6: [54000, 54100, 54200, 54300, 54400, 54500, 54600, 54700, 54800, 54900, 55000, 55100, 55200, 55300, 55400]
+2025-09-12 00:33:18,887 - INFO - Fetched SENSEX price: 81548.73
+2025-09-12 00:33:18,888 - INFO - Updated strikes for SENSEX based on price 81548.73: [80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100, 82200]
+2025-09-12 00:33:58,600 - INFO - Downloading master files...
+2025-09-12 00:33:58,601 - INFO - Finding expiry dates...
+2025-09-12 00:33:58,700 - INFO - System initialization completed successfully
+2025-09-12 00:33:58,965 - INFO - Generated fresh 2FA for account 1: 406083
+2025-09-12 00:33:59,539 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 00:34:05,585 - INFO - Fetched SENSEX price: 81548.73
+2025-09-12 00:34:05,586 - INFO - Updated strikes for SENSEX based on price 81548.73: [80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100, 82200]
+2025-09-12 00:34:07,328 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP91600PE
+2025-09-12 00:34:07,339 - INFO - Found token and lot size for SENSEX25SEP91600PE: 845009, 20
+2025-09-12 00:34:07,339 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 00:34:11,391 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 00:34:11,399 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 00:34:11,399 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 00:34:11,400 - INFO - Updated quantity options for SENSEX2591881200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 00:34:12,284 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 00:34:12,291 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 00:34:12,292 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 00:34:12,292 - INFO - Updated quantity options for SENSEX2591881200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 00:34:12,293 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 00:34:12,298 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 00:34:12,937 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 00:34:12,941 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 00:34:12,942 - INFO - Subscribed to live price feed: BFO|862060
+2025-09-12 00:37:47,490 - INFO - Fetched NIFTY price: 25005.5
+2025-09-12 00:37:47,491 - INFO - Updated strikes for NIFTY based on price 25005.5: [24650, 24700, 24750, 24800, 24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200, 25250, 25300, 25350]
+2025-09-12 00:37:51,681 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25CE24850
+2025-09-12 00:37:51,690 - ERROR - No token found for NIFTY16SEP25CE24850
+2025-09-12 00:37:51,725 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-12 00:37:51,727 - WARNING - Lot size not found for NIFTY16SEP25CE24850, using default quantities
+2025-09-12 00:37:51,727 - INFO - Getting token for trading symbol: NIFTY16SEP25CE24850
+2025-09-12 00:37:51,733 - ERROR - No token found for NIFTY16SEP25CE24850
+2025-09-12 00:37:51,744 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-12 00:47:31,620 - INFO - Downloading master files...
+2025-09-12 00:47:31,627 - INFO - Finding expiry dates...
+2025-09-12 00:47:31,726 - INFO - System initialization completed successfully
+2025-09-12 00:47:32,007 - INFO - Generated fresh 2FA for account 1: 541571
+2025-09-12 00:47:32,685 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 00:48:52,296 - INFO - Downloading master files...
+2025-09-12 00:48:52,297 - INFO - Finding expiry dates...
+2025-09-12 00:48:52,378 - INFO - System initialization completed successfully
+2025-09-12 00:48:52,593 - INFO - Generated fresh 2FA for account 1: 962933
+2025-09-12 00:48:52,832 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 00:48:58,514 - INFO - Generated fresh 2FA for account 2: 105001
+2025-09-12 00:49:02,203 - INFO - Fetched SENSEX price: 81548.73
+2025-09-12 00:49:02,204 - INFO - Updated strikes for SENSEX based on price 81548.73: [80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100, 82200]
+2025-09-12 00:49:04,456 - INFO - Fetched NIFTY price: 25005.5
+2025-09-12 00:49:04,457 - INFO - Updated strikes for NIFTY based on price 25005.5: [24650, 24700, 24750, 24800, 24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200, 25250, 25300, 25350]
+2025-09-12 00:49:10,341 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24850
+2025-09-12 00:49:10,347 - INFO - Found NFO token and lot size for NIFTY16SEP25C24850: 44640, 75
+2025-09-12 00:49:10,347 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 00:49:10,347 - INFO - Updated quantity options for NIFTY16SEP25C24850 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 00:49:11,674 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24850
+2025-09-12 00:49:11,682 - INFO - Found NFO token and lot size for NIFTY16SEP25C24850: 44640, 75
+2025-09-12 00:49:11,683 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 00:49:11,684 - INFO - Updated quantity options for NIFTY16SEP25C24850 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 00:49:11,684 - INFO - Getting token for trading symbol: NIFTY16SEP25C24850
+2025-09-12 00:49:11,692 - INFO - Found NFO token for NIFTY16SEP25C24850: 44640
+2025-09-12 00:49:11,875 - INFO - Getting token for trading symbol: NIFTY16SEP25C24850
+2025-09-12 00:49:11,883 - INFO - Found NFO token for NIFTY16SEP25C24850: 44640
+2025-09-12 00:49:11,884 - INFO - Subscribed to live price feed: NFO|44640
+2025-09-12 00:49:17,544 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24850
+2025-09-12 00:49:17,551 - INFO - Found NFO token and lot size for NIFTY16SEP25C24850: 44640, 75
+2025-09-12 00:49:17,552 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 00:49:17,553 - INFO - Updated quantity options for NIFTY16SEP25C24850 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 00:49:17,553 - INFO - Active accounts: [1, 2]
+2025-09-12 00:49:17,554 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-12 00:49:17,554 - INFO - Trading symbol: NIFTY16SEP25C24850, Price: 233.0
+2025-09-12 00:49:17,554 - INFO - Quantities: [75, 25]
+2025-09-12 00:49:17,556 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'NFO', 'tradingsymbol': 'NIFTY16SEP25C24850', 'quantity': 75, 'discloseqty': 0, 'price_type': 'LMT', 'price': 233.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 00:49:17,556 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'NFO', 'tradingsymbol': 'NIFTY16SEP25C24850', 'quantity': 25, 'discloseqty': 0, 'price_type': 'LMT', 'price': 233.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 00:49:17,735 - INFO - API response: {'request_time': '00:49:18 12-09-2025', 'stat': 'Ok', 'norenordno': '25091100520779'}
+2025-09-12 00:49:17,735 - INFO - API response type: <class 'dict'>
+2025-09-12 00:49:17,736 - INFO - Buy order placed successfully: {'request_time': '00:49:18 12-09-2025', 'stat': 'Ok', 'norenordno': '25091100520779'}
+2025-09-12 00:49:17,741 - INFO - New order received: 25091100520779
+2025-09-12 00:49:17,743 - INFO - API response: {'request_time': '00:49:18 12-09-2025', 'stat': 'Ok', 'norenordno': '25091100520780'}
+2025-09-12 00:49:17,759 - INFO - API response type: <class 'dict'>
+2025-09-12 00:49:17,761 - INFO - New order received: 25091100520780
+2025-09-12 00:49:17,762 - INFO - Updating order 25091100520779
+2025-09-12 00:49:17,762 - INFO - Buy order placed successfully: {'request_time': '00:49:18 12-09-2025', 'stat': 'Ok', 'norenordno': '25091100520780'}
+2025-09-12 00:49:17,767 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 00:49:17,822 - INFO - Order data saved to orders.csv
+2025-09-12 00:49:17,823 - INFO - Order data saved to orders.csv
+2025-09-12 00:49:17,823 - INFO - Account 2 - B REJECTED Rejected
+2025-09-12 00:49:17,823 - INFO - Account 1 - B PENDING NewAck
+2025-09-12 00:57:22,038 - INFO - Downloading master files...
+2025-09-12 00:57:22,039 - INFO - Finding expiry dates...
+2025-09-12 00:57:22,145 - INFO - System initialization completed successfully
+2025-09-12 00:57:22,304 - ERROR - Unexpected error: Error tokenizing data. C error: Expected 18 fields in line 5, saw 19
+
+2025-09-12 00:57:53,597 - INFO - Downloading master files...
+2025-09-12 00:57:53,597 - INFO - Finding expiry dates...
+2025-09-12 00:57:53,693 - INFO - System initialization completed successfully
+2025-09-12 00:57:53,790 - ERROR - Unexpected error: Error tokenizing data. C error: Expected 18 fields in line 5, saw 19
+
+2025-09-12 00:59:21,544 - INFO - Downloading master files...
+2025-09-12 00:59:21,545 - INFO - Finding expiry dates...
+2025-09-12 00:59:21,668 - INFO - System initialization completed successfully
+2025-09-12 00:59:21,772 - ERROR - Unexpected error: Error tokenizing data. C error: Expected 18 fields in line 5, saw 19
+
+2025-09-12 00:59:58,740 - INFO - Downloading master files...
+2025-09-12 00:59:58,740 - INFO - Finding expiry dates...
+2025-09-12 00:59:58,831 - INFO - System initialization completed successfully
+2025-09-12 00:59:58,913 - ERROR - Unexpected error: Error tokenizing data. C error: Expected 18 fields in line 5, saw 19
+
+2025-09-12 01:00:41,484 - INFO - Downloading master files...
+2025-09-12 01:00:41,485 - INFO - Finding expiry dates...
+2025-09-12 01:00:41,579 - INFO - System initialization completed successfully
+2025-09-12 01:00:41,681 - ERROR - Unexpected error: Error tokenizing data. C error: Expected 18 fields in line 5, saw 19
+
+2025-09-12 01:01:07,652 - INFO - Downloading master files...
+2025-09-12 01:01:07,653 - INFO - Finding expiry dates...
+2025-09-12 01:01:07,769 - INFO - System initialization completed successfully
+2025-09-12 01:01:07,890 - ERROR - Unexpected error: Error tokenizing data. C error: Expected 18 fields in line 5, saw 19
+
+2025-09-12 01:01:20,714 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 01:01:20,727 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 01:01:45,216 - INFO - Downloading master files...
+2025-09-12 01:01:45,216 - INFO - Finding expiry dates...
+2025-09-12 01:01:45,301 - INFO - System initialization completed successfully
+2025-09-12 01:01:45,408 - ERROR - Unexpected error: Error tokenizing data. C error: Expected 18 fields in line 5, saw 19
+
+2025-09-12 01:03:40,806 - INFO - Downloading master files...
+2025-09-12 01:03:40,807 - INFO - Finding expiry dates...
+2025-09-12 01:03:40,911 - INFO - System initialization completed successfully
+2025-09-12 01:03:41,165 - INFO - Generated fresh 2FA for account 1: 794936
+2025-09-12 01:03:41,846 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:03:52,186 - INFO - Generated fresh 2FA for account 2: 978455
+2025-09-12 01:03:55,549 - INFO - Fetched SENSEX price: 81548.73
+2025-09-12 01:03:55,549 - INFO - Updated strikes for SENSEX based on price 81548.73: [80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100, 82200]
+2025-09-12 01:04:00,038 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 01:04:00,045 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 01:04:00,045 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:00,046 - INFO - Updated quantity options for SENSEX2591881200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:01,180 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 01:04:01,185 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 01:04:01,187 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:01,189 - INFO - Updated quantity options for SENSEX2591881200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:01,190 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 01:04:01,196 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 01:04:01,753 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 01:04:01,758 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 01:04:01,759 - INFO - Subscribed to live price feed: BFO|862060
+2025-09-12 01:04:08,130 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 01:04:08,151 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 01:04:08,152 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:08,152 - INFO - Updated quantity options for SENSEX2591881200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:08,153 - INFO - Active accounts: [1, 2]
+2025-09-12 01:04:08,153 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-12 01:04:08,153 - INFO - Trading symbol: SENSEX2591881200CE, Price: 730.05
+2025-09-12 01:04:08,153 - INFO - Quantities: [60, '']
+2025-09-12 01:04:08,155 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591881200CE', 'quantity': 60, 'discloseqty': 0, 'price_type': 'LMT', 'price': 730.05, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 01:04:08,156 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591881200CE', 'quantity': '', 'discloseqty': 0, 'price_type': 'LMT', 'price': 730.05, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 01:04:08,830 - INFO - API response: {'request_time': '01:04:09 12-09-2025', 'stat': 'Ok', 'norenordno': '25091100520947'}
+2025-09-12 01:04:08,830 - INFO - API response type: <class 'dict'>
+2025-09-12 01:04:08,830 - INFO - New order received: 25091100520947
+2025-09-12 01:04:08,830 - INFO - Buy order placed successfully: {'request_time': '01:04:09 12-09-2025', 'stat': 'Ok', 'norenordno': '25091100520947'}
+2025-09-12 01:04:08,864 - INFO - Order data saved to orders.csv
+2025-09-12 01:04:08,865 - INFO - Account 1 - B PENDING NewAck
+2025-09-12 01:04:08,923 - INFO - API response: None
+2025-09-12 01:04:08,925 - INFO - API response type: <class 'NoneType'>
+2025-09-12 01:04:08,925 - ERROR - Order placement failed: None
+2025-09-12 01:04:08,927 - INFO - Master order status updated: B PENDING -  
+2025-09-12 01:04:08,934 - INFO - Updating order 25091100520947
+2025-09-12 01:04:08,942 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 01:04:08,943 - INFO - Master order status updated: B REJECTED - RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]
+2025-09-12 01:04:16,572 - INFO - Downloading master files...
+2025-09-12 01:04:16,572 - INFO - Finding expiry dates...
+2025-09-12 01:04:16,652 - INFO - System initialization completed successfully
+2025-09-12 01:04:17,060 - INFO - Generated fresh 2FA for account 1: 575657
+2025-09-12 01:04:17,680 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:04:31,375 - INFO - Downloading master files...
+2025-09-12 01:04:31,375 - INFO - Finding expiry dates...
+2025-09-12 01:04:31,470 - INFO - System initialization completed successfully
+2025-09-12 01:04:31,736 - INFO - Generated fresh 2FA for account 1: 389719
+2025-09-12 01:04:32,379 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:04:33,303 - INFO - Downloading master files...
+2025-09-12 01:04:33,303 - INFO - Finding expiry dates...
+2025-09-12 01:04:33,392 - INFO - System initialization completed successfully
+2025-09-12 01:04:33,696 - INFO - Generated fresh 2FA for account 1: 389719
+2025-09-12 01:04:33,885 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 01:04:35,774 - INFO - Generated fresh 2FA for account 2: 660236
+2025-09-12 01:04:38,537 - INFO - Fetched SENSEX price: 81548.73
+2025-09-12 01:04:38,537 - INFO - Updated strikes for SENSEX based on price 81548.73: [80800, 80900, 81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100, 82200]
+2025-09-12 01:04:43,158 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 01:04:43,158 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 01:04:43,158 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:43,158 - INFO - Updated quantity options for SENSEX2591881200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:44,178 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 01:04:44,178 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 01:04:44,178 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:44,178 - INFO - Updated quantity options for SENSEX2591881200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:44,178 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 01:04:44,178 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 01:04:44,421 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 01:04:44,424 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 01:04:44,424 - INFO - Subscribed to live price feed: BFO|862060
+2025-09-12 01:04:50,247 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 01:04:50,252 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 01:04:50,252 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:50,253 - INFO - Updated quantity options for SENSEX2591881200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 01:04:50,253 - INFO - Active accounts: [1, 2]
+2025-09-12 01:04:50,254 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-12 01:04:50,254 - INFO - Trading symbol: SENSEX2591881200CE, Price: 730.05
+2025-09-12 01:04:50,255 - INFO - Quantities: [60, '']
+2025-09-12 01:04:50,255 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591881200CE', 'quantity': 60, 'discloseqty': 0, 'price_type': 'LMT', 'price': 730.05, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 01:04:50,256 - INFO - Placing order with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591881200CE', 'quantity': '', 'discloseqty': 0, 'price_type': 'LMT', 'price': 730.05, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 01:04:50,422 - INFO - API response: None
+2025-09-12 01:04:50,425 - INFO - API response: {'request_time': '01:04:51 12-09-2025', 'stat': 'Ok', 'norenordno': '25091100520950'}
+2025-09-12 01:04:50,426 - INFO - New order received: 25091100520950
+2025-09-12 01:04:50,426 - INFO - API response type: <class 'NoneType'>
+2025-09-12 01:04:50,428 - INFO - API response type: <class 'dict'>
+2025-09-12 01:04:50,429 - INFO - New order received: 25091100520950
+2025-09-12 01:04:50,429 - ERROR - Order placement failed: None
+2025-09-12 01:04:50,430 - INFO - Buy order placed successfully: {'request_time': '01:04:51 12-09-2025', 'stat': 'Ok', 'norenordno': '25091100520950'}
+2025-09-12 01:04:50,439 - INFO - Master order status updated: B PENDING -  
+2025-09-12 01:04:50,447 - INFO - Order data saved to orders.csv
+2025-09-12 01:04:50,448 - INFO - Account 1 - B PENDING NewAck
+2025-09-12 01:04:50,449 - INFO - Application interrupted by user
+2025-09-12 01:04:50,450 - INFO - Updating order 25091100520950
+2025-09-12 01:04:50,450 - INFO - Master order status updated: B PENDING -  
+2025-09-12 01:04:50,452 - INFO - Master order status updated: B REJECTED - RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]
+2025-09-12 01:04:50,456 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
