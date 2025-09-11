@@ -19,11 +19,8 @@ from logger import applicationLogger
 class MainWindow:
     """Main application window"""
     
-    def __init__(self, root=None):
-        if root is None:
-            self.root = tk.Tk()
-        else:
-            self.root = root
+    def __init__(self):
+        self.root = tk.Tk()
 
         self.root.title("Duplicator - Master Not Logged In")
         self.root.geometry("850x450")
@@ -380,13 +377,15 @@ class MainWindow:
         # Cancel Buy and Modify Buy (left side)
         self.cancel_buy_button = tk.Button(
             self.order_frame, text="Cancel Buy", 
-            command=self.cancel_buy_orders, width=15, height=2
+            command=self.cancel_buy_orders, width=15, height=2,
+            state="disabled"
         )
         self.cancel_buy_button.grid(row=0, column=0, padx=5, pady=5)
         
         self.modify_buy_button = tk.Button(
             self.order_frame, text="Modify Buy", 
-            command=self.modify_buy_orders, width=15, height=2
+            command=self.modify_buy_orders, width=15, height=2,
+            state="disabled"
         )
 
         self.modify_buy_button.grid(row=0, column=1, padx=5, pady=5)
@@ -817,8 +816,8 @@ class MainWindow:
                 # Fallback if trading symbol not available
                 self.quantities[1] = qty1
                 self.quantities[2] = qty1
-                
-                # Get active accounts
+            
+            # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
             applicationLogger.info(f"Active accounts: {active_accounts}")
             
@@ -860,11 +859,14 @@ class MainWindow:
             self.buy_button.config(state='disabled', text=f"OrderPlaced@{price}")
             applicationLogger.info("Buy button disabled to prevent duplicate orders")
             
+            # Enable buy-related buttons for order management
+            self.cancel_buy_button.config(state='normal')
+            self.modify_buy_button.config(state='normal')
+            applicationLogger.info("Cancel Buy and Modify Buy buttons enabled after buy orders placed")
+            
             # Enable exit-related buttons since buy orders are now placed
             self.exit_button.config(state='normal')
-            self.cancel_exit_button.config(state='normal')
-            self.modify_exit_button.config(state='normal')
-            applicationLogger.info("Exit buttons enabled after buy orders placed")
+            applicationLogger.info("Exit button enabled after buy orders placed")
             
         except Exception as e:
 
@@ -947,8 +949,8 @@ class MainWindow:
                 # Fallback if trading symbol not available
                 self.quantities[1] = qty1
                 self.quantities[2] = qty1
-                
-                # Get active accounts
+            
+            # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
             applicationLogger.info(f"Active accounts for exit: {active_accounts}")
             
@@ -990,6 +992,11 @@ class MainWindow:
             self.exit_button.config(state='disabled', text=f"ExitOrderPlaced@{price}")
             applicationLogger.info("Exit button disabled to prevent duplicate orders")
             
+            # Enable exit-related buttons for order management
+            self.cancel_exit_button.config(state='normal')
+            self.modify_exit_button.config(state='normal')
+            applicationLogger.info("Cancel Exit and Modify Exit buttons enabled after exit orders placed")
+            
         except Exception as e:
 
             applicationLogger.error(f"Error placing exit orders: {e}")
@@ -1026,6 +1033,12 @@ class MainWindow:
             else:
                 self.child_order_status.set("Child Not Logged In")
             
+            # Re-enable buy button and disable buy-related management buttons
+            self.buy_button.config(state='normal', text="BUY")
+            self.cancel_buy_button.config(state='disabled')
+            self.modify_buy_button.config(state='disabled')
+            applicationLogger.info("Buy button re-enabled after cancelling buy orders")
+            
         except Exception as e:
 
             applicationLogger.error(f"Error cancelling buy orders: {e}")
@@ -1061,6 +1074,12 @@ class MainWindow:
                 self.child_order_status.set("Exit Orders Cancelled")
             else:
                 self.child_order_status.set("Child Not Logged In")
+            
+            # Re-enable exit button and disable exit-related management buttons
+            self.exit_button.config(state='normal', text="EXIT")
+            self.cancel_exit_button.config(state='disabled')
+            self.modify_exit_button.config(state='disabled')
+            applicationLogger.info("Exit button re-enabled after cancelling exit orders")
             
         except Exception as e:
 
@@ -1133,8 +1152,8 @@ class MainWindow:
                 # Fallback if trading symbol not available
                 self.quantities[1] = qty1
                 self.quantities[2] = qty1
-                
-                # Get active accounts
+            
+            # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
             apis = [self.account_manager.get_api(i) for i in active_accounts]
             order_numbers = [self.order_numbers[i] for i in active_accounts]
@@ -1340,6 +1359,10 @@ class MainWindow:
         """Release button states - enable buy and exit buttons"""
         # Enable buy button
         self.buy_button.config(state='normal', text="BUY")
+        
+        # Disable buy-related buttons until new buy orders are placed
+        self.cancel_buy_button.config(state='disabled')
+        self.modify_buy_button.config(state='disabled')
         
         # Disable exit-related buttons until new orders are placed
         self.exit_button.config(state='disabled', text="EXIT")
