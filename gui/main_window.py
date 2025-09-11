@@ -22,7 +22,7 @@ class MainWindow:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Duplicator - Master Not Logged In")
-        self.root.geometry("800x450")
+        self.root.geometry("850x450")
         
         # Master account holder name
         self.master_account_name = tk.StringVar()
@@ -75,6 +75,12 @@ class MainWindow:
         self.child_order_status = tk.StringVar()
         self.master_order_status.set("Master Not Logged In")
         self.child_order_status.set("Child Not Logged In")
+        
+        # SL and Target monitoring variables
+        self.sl_monitoring_active = False
+        self.target_monitoring_active = False
+        self.sl_price_level = None
+        self.target_price_level = None
         
         # Quantity variables
         self.qty1_var = tk.StringVar()
@@ -184,12 +190,6 @@ class MainWindow:
         self.option_dropdown.grid(row=0, column=7, padx=10)
         self.selected_option.trace_add('write', self.concatenate_values)
         
-        # Refresh strikes button
-        self.refresh_strikes_button = ttk.Button(
-            self.selection_frame, text="Refresh Strikes", 
-            command=self.refresh_strikes, width=15
-        )
-        self.refresh_strikes_button.grid(row=0, column=8, padx=10)
     
     def create_trading_frame(self):
         """Create trading controls frame"""
@@ -233,7 +233,8 @@ class MainWindow:
         # Exit button
         self.exit_button = ttk.Button(
             self.trading_frame, text="EXIT", 
-            command=self.place_exit_orders, width=20, style="RedButton.TButton"
+            command=self.place_exit_orders, width=20, style="RedButton.TButton",
+            state="disabled"
         )
         self.exit_button.pack(side=tk.LEFT, padx=10)
     
@@ -247,7 +248,7 @@ class MainWindow:
             self.status_frame, 
             text="Master Order Status:", 
             font=('Arial', 10, 'bold'),
-            fg="darkblue"
+            fg="darkgreen"
         )
         master_status_label.grid(row=0, column=0, padx=10, pady=5, sticky='w')
         
@@ -385,13 +386,15 @@ class MainWindow:
         # Cancel Exit and Modify Exit (right side)
         self.cancel_exit_button = tk.Button(
             self.order_frame, text="Cancel Exit", 
-            command=self.cancel_exit_orders, width=15, height=2
+            command=self.cancel_exit_orders, width=15, height=2,
+            state="disabled"
         )
         self.cancel_exit_button.grid(row=0, column=3, padx=5, pady=5)
         
         self.modify_exit_button = tk.Button(
             self.order_frame, text="Modify Exit", 
-            command=self.modify_exit_orders, width=15, height=2
+            command=self.modify_exit_orders, width=15, height=2,
+            state="disabled"
         )
         self.modify_exit_button.grid(row=0, column=4, padx=5, pady=5)
         
@@ -667,9 +670,7 @@ class MainWindow:
             price = self.symbol_manager.get_latest_price(api, trading_symbol)
             if price:
                 self.price_value.set(price)
-                self.price1_value.set(price)
-                self.modify_buy_value.set(price)
-                self.modify_exit_value.set(price)
+                # Leave exit and modify boxes empty - they will be populated when buttons are pressed
                 self.premium_price_value.set(price)  # Set initial premium price
                 
                 # Subscribe to websocket for live updates
@@ -713,11 +714,15 @@ class MainWindow:
             applicationLogger.error(f"Error subscribing to live price: {e}")
     
     def update_live_price(self, live_price: float):
-        """Update the premium price box with live price"""
+        """Update the premium price box with live price and check SL/Target breaches"""
         try:
             # Update the premium price box with live price
             self.premium_price_value.set(f"{live_price:.2f}")
             applicationLogger.debug(f"Updated live price: {live_price}")
+            
+            # Check for SL/Target breaches
+            self.check_sl_target_breach(live_price)
+            
         except Exception as e:
             applicationLogger.error(f"Error updating live price: {e}")
     
@@ -827,6 +832,12 @@ class MainWindow:
             self.buy_button.config(state='disabled', text=f"OrderPlaced@{price}")
             applicationLogger.info("Buy button disabled to prevent duplicate orders")
             
+            # Enable exit-related buttons since buy orders are now placed
+            self.exit_button.config(state='normal')
+            self.cancel_exit_button.config(state='normal')
+            self.modify_exit_button.config(state='normal')
+            applicationLogger.info("Exit buttons enabled after buy orders placed")
+            
         except Exception as e:
             applicationLogger.error(f"Error placing buy orders: {e}")
             # Update order status displays to show error
@@ -857,6 +868,17 @@ class MainWindow:
             if not trading_symbol:
                 messagebox.showerror("Error", "Please select all required fields")
                 return
+            
+            # If exit price box is empty, populate with current LTP and return (don't place order yet)
+            if not self.price1_value.get().strip():
+                current_ltp = self.premium_price_value.get()
+                if current_ltp:
+                    self.price1_value.set(current_ltp)
+                    applicationLogger.info(f"Exit price box populated with current LTP: {current_ltp}")
+                    return  # Stop here - user needs to press button again to place order
+                else:
+                    messagebox.showerror("Error", "Please fetch current price first")
+                    return
             
             price = float(self.price1_value.get())
             qty1 = int(self.qty1_var.get())
@@ -1025,6 +1047,17 @@ class MainWindow:
                 messagebox.showerror("Error", "Please select all required fields")
                 return
             
+            # If modify buy box is empty, populate with current LTP and return (don't place order yet)
+            if not self.modify_buy_value.get().strip():
+                current_ltp = self.premium_price_value.get()
+                if current_ltp:
+                    self.modify_buy_value.set(current_ltp)
+                    applicationLogger.info(f"Modify Buy box populated with current LTP: {current_ltp}")
+                    return  # Stop here - user needs to press button again to place order
+                else:
+                    messagebox.showerror("Error", "Please fetch current price first")
+                    return
+            
             price = float(self.modify_buy_value.get())
             qty1 = int(self.qty1_var.get())
             
@@ -1103,6 +1136,17 @@ class MainWindow:
             if not trading_symbol:
                 messagebox.showerror("Error", "Please select all required fields")
                 return
+            
+            # If modify exit box is empty, populate with current LTP and return (don't place order yet)
+            if not self.modify_exit_value.get().strip():
+                current_ltp = self.premium_price_value.get()
+                if current_ltp:
+                    self.modify_exit_value.set(current_ltp)
+                    applicationLogger.info(f"Modify Exit box populated with current LTP: {current_ltp}")
+                    return  # Stop here - user needs to press button again to place order
+                else:
+                    messagebox.showerror("Error", "Please fetch current price first")
+                    return
             
             price = float(self.modify_exit_value.get())
             qty1 = int(self.qty1_var.get())
@@ -1250,8 +1294,16 @@ class MainWindow:
         # Enable buy button
         self.buy_button.config(state='normal', text="BUY")
         
-        # Enable exit button
-        self.exit_button.config(state='normal', text="EXIT")
+        # Disable exit-related buttons until new orders are placed
+        self.exit_button.config(state='disabled', text="EXIT")
+        self.cancel_exit_button.config(state='disabled')
+        self.modify_exit_button.config(state='disabled')
+        
+        # Stop SL/Target monitoring
+        if self.sl_monitoring_active:
+            self.stop_sl_monitoring()
+        if self.target_monitoring_active:
+            self.stop_target_monitoring()
         
         # Reset order status displays
         active_accounts = self.account_manager.get_all_active_accounts()
@@ -1268,42 +1320,6 @@ class MainWindow:
         applicationLogger.info("Buttons released - ready for new orders")
     
     
-    def refresh_strikes(self):
-        """Manually refresh strike prices based on current index selection"""
-        try:
-            index = self.selected_index.get()
-            if not index:
-                messagebox.showwarning("Warning", "Please select an index first")
-                return
-            
-            if index not in ["NIFTY", "BANKNIFTY", "SENSEX"]:
-                messagebox.showwarning("Warning", "Invalid index selected")
-                return
-            
-            # Get master account API
-            api = self.account_manager.get_api(1)
-            if not api:
-                messagebox.showerror("Error", "Master account not available")
-                return
-            
-            # Fetch current index price
-            current_price = self.symbol_manager.get_index_price(api, index)
-            if current_price:
-                strikes = self.expiry_manager.get_strike_list(index, current_price)
-                self.strike_dropdown['values'] = strikes
-                
-                # Show current price to user
-                messagebox.showinfo(
-                    "Strikes Updated", 
-                    f"{index} Current Price: ₹{current_price:,.2f}\nStrikes updated around this price"
-                )
-                applicationLogger.info(f"Manually refreshed strikes for {index} at price {current_price}")
-            else:
-                messagebox.showerror("Error", f"Could not fetch current price for {index}")
-                
-        except Exception as e:
-            messagebox.showerror("Error", f"Error refreshing strikes: {e}")
-            applicationLogger.error(f"Error in refresh_strikes: {e}")
     
     def exit_all_orders_market(self):
         """Exit all orders at market price for both master and child accounts"""
@@ -1481,38 +1497,198 @@ class MainWindow:
             self.child_order_status.set(f"Error: {str(e)[:30]}...")
     
     def set_sl_price(self):
-        """Set Stop Loss price for current position"""
+        """Set Stop Loss price and start monitoring"""
         try:
-            # Get current price for reference
-            current_price = self.premium_price_value.get()
-            if current_price:
-                current_price_float = float(current_price)
-                # Suggest SL price (e.g., 10% below current price for long positions)
-                suggested_sl = round(current_price_float * 0.9, 2)
-                self.sl_price_value.set(str(suggested_sl))
-                applicationLogger.info(f"SL price set to: {suggested_sl}")
+            # Check if SL price is manually entered
+            sl_price_text = self.sl_price_value.get().strip()
+            
+            if sl_price_text:
+                # Use manually entered SL price and start monitoring
+                sl_price = float(sl_price_text)
+                self.start_sl_monitoring(sl_price)
+                applicationLogger.info(f"SL monitoring started at: {sl_price}")
+                messagebox.showinfo("SL Monitoring", f"SL monitoring started at {sl_price}")
             else:
-                messagebox.showinfo("SL Price", "Please fetch current price first to set SL")
+                # Auto-suggest SL price based on current price
+                current_price = self.premium_price_value.get()
+                if current_price:
+                    current_price_float = float(current_price)
+                    # Suggest SL price (e.g., 10% below current price for long positions)
+                    suggested_sl = round(current_price_float * 0.9, 2)
+                    self.sl_price_value.set(str(suggested_sl))
+                    applicationLogger.info(f"SL price suggested: {suggested_sl}")
+                else:
+                    messagebox.showinfo("SL Price", "Please fetch current price first to set SL")
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid SL price")
         except Exception as e:
             applicationLogger.error(f"Error setting SL price: {e}")
             messagebox.showerror("Error", f"Error setting SL price: {e}")
     
     def set_target_price(self):
-        """Set Target price for current position"""
+        """Set Target price and start monitoring"""
         try:
-            # Get current price for reference
-            current_price = self.premium_price_value.get()
-            if current_price:
-                current_price_float = float(current_price)
-                # Suggest target price (e.g., 20% above current price for long positions)
-                suggested_target = round(current_price_float * 1.2, 2)
-                self.target_price_value.set(str(suggested_target))
-                applicationLogger.info(f"Target price set to: {suggested_target}")
+            # Check if Target price is manually entered
+            target_price_text = self.target_price_value.get().strip()
+            
+            if target_price_text:
+                # Use manually entered Target price and start monitoring
+                target_price = float(target_price_text)
+                self.start_target_monitoring(target_price)
+                applicationLogger.info(f"Target monitoring started at: {target_price}")
+                messagebox.showinfo("Target Monitoring", f"Target monitoring started at {target_price}")
             else:
-                messagebox.showinfo("Target Price", "Please fetch current price first to set Target")
+                # Auto-suggest Target price based on current price
+                current_price = self.premium_price_value.get()
+                if current_price:
+                    current_price_float = float(current_price)
+                    # Suggest target price (e.g., 20% above current price for long positions)
+                    suggested_target = round(current_price_float * 1.2, 2)
+                    self.target_price_value.set(str(suggested_target))
+                    applicationLogger.info(f"Target price suggested: {suggested_target}")
+                else:
+                    messagebox.showinfo("Target Price", "Please fetch current price first to set Target")
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid Target price")
         except Exception as e:
             applicationLogger.error(f"Error setting target price: {e}")
             messagebox.showerror("Error", f"Error setting target price: {e}")
+    
+    def start_sl_monitoring(self, sl_price):
+        """Start monitoring Stop Loss price"""
+        self.sl_monitoring_active = True
+        self.sl_price_level = sl_price
+        self.sl_price_button.config(text="SL Active", bg="red", fg="white")
+        applicationLogger.info(f"SL monitoring activated at {sl_price}")
+    
+    def start_target_monitoring(self, target_price):
+        """Start monitoring Target price"""
+        self.target_monitoring_active = True
+        self.target_price_level = target_price
+        self.target_price_button.config(text="Target Active", bg="green", fg="white")
+        applicationLogger.info(f"Target monitoring activated at {target_price}")
+    
+    def stop_sl_monitoring(self):
+        """Stop SL monitoring"""
+        self.sl_monitoring_active = False
+        self.sl_price_level = None
+        self.sl_price_button.config(text="SL Price", bg="SystemButtonFace", fg="black")
+        applicationLogger.info("SL monitoring stopped")
+    
+    def stop_target_monitoring(self):
+        """Stop Target monitoring"""
+        self.target_monitoring_active = False
+        self.target_price_level = None
+        self.target_price_button.config(text="Target Price", bg="SystemButtonFace", fg="black")
+        applicationLogger.info("Target monitoring stopped")
+    
+    def check_sl_target_breach(self, current_price):
+        """Check if current price breaches SL or Target levels"""
+        try:
+            current_price_float = float(current_price)
+            
+            # Check SL breach (price falls below SL for long positions)
+            if (self.sl_monitoring_active and 
+                self.sl_price_level and 
+                current_price_float <= self.sl_price_level):
+                
+                applicationLogger.warning(f"SL BREACHED! Current: {current_price_float}, SL: {self.sl_price_level}")
+                self.execute_sl_exit(current_price_float)
+            
+            # Check Target breach (price rises above target for long positions)
+            if (self.target_monitoring_active and 
+                self.target_price_level and 
+                current_price_float >= self.target_price_level):
+                
+                applicationLogger.warning(f"TARGET REACHED! Current: {current_price_float}, Target: {self.target_price_level}")
+                self.execute_target_exit(current_price_float)
+                
+        except Exception as e:
+            applicationLogger.error(f"Error checking SL/Target breach: {e}")
+    
+    def execute_sl_exit(self, current_price):
+        """Execute market exit when SL is breached"""
+        try:
+            applicationLogger.info(f"Executing SL exit at market price. Current: {current_price}")
+            
+            # Stop SL monitoring
+            self.stop_sl_monitoring()
+            
+            # Update status
+            if self.account_manager.accounts[1]['active']:
+                self.master_order_status.set(f"SL TRIGGERED @ {current_price}")
+            if self.account_manager.accounts[2]['active']:
+                self.child_order_status.set(f"SL TRIGGERED @ {current_price}")
+            
+            # Execute market exit for all accounts - call the existing method
+            self.exit_all_orders_market_silent()
+            
+        except Exception as e:
+            applicationLogger.error(f"Error executing SL exit: {e}")
+    
+    def execute_target_exit(self, current_price):
+        """Execute market exit when Target is reached"""
+        try:
+            applicationLogger.info(f"Executing Target exit at market price. Current: {current_price}")
+            
+            # Stop target monitoring
+            self.stop_target_monitoring()
+            
+            # Update status
+            if self.account_manager.accounts[1]['active']:
+                self.master_order_status.set(f"TARGET HIT @ {current_price}")
+            if self.account_manager.accounts[2]['active']:
+                self.child_order_status.set(f"TARGET HIT @ {current_price}")
+            
+            # Execute market exit for all accounts - call the existing method
+            self.exit_all_orders_market_silent()
+            
+        except Exception as e:
+            applicationLogger.error(f"Error executing Target exit: {e}")
+    
+    def exit_all_orders_market_silent(self):
+        """Exit all orders at market price without confirmation popup"""
+        try:
+            applicationLogger.info("Executing silent market exit for SL/Target")
+            
+            # Get active accounts
+            active_accounts = [i for i in range(1, 3) if self.account_manager.accounts[i]['active']]
+            
+            if not active_accounts:
+                return
+            
+            # Place market exit orders for all active accounts
+            for account_num in active_accounts:
+                api = self.account_manager.accounts[account_num]['api']
+                if api:
+                    # Get current orders and exit them at market price
+                    orders = api.get_order_book()
+                    if orders and orders.get('stat') == 'Ok':
+                        for order in orders.get('data', []):
+                            if order.get('status') in ['PENDING', 'OPEN']:
+                                # Place market exit order
+                                exit_result = api.place_order(
+                                    buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
+                                    product_type=order.get('pcode', 'I'),
+                                    exchange=order.get('exch', ''),
+                                    tradingsymbol=order.get('tsym', ''),
+                                    quantity=int(order.get('qty', 0)),
+                                    discloseqty=0,
+                                    price_type='MKT',
+                                    price=0.0,
+                                    trigger_price=None,
+                                    retention='DAY',
+                                    amo='NO',
+                                    remarks='SL/Target Exit'
+                                )
+                                
+                                if exit_result and exit_result.get('stat') == 'Ok':
+                                    applicationLogger.info(f"Market exit order placed for account {account_num}: {exit_result.get('norenordno')}")
+                                else:
+                                    applicationLogger.error(f"Failed to place market exit order for account {account_num}")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error in silent market exit: {e}")
     
     def run(self):
         """Run the application"""
