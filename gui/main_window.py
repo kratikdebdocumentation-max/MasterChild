@@ -64,6 +64,8 @@ class MainWindow:
         self.price1_value = tk.StringVar()
         self.modify_buy_value = tk.StringVar()
         self.modify_exit_value = tk.StringVar()
+        self.sl_price_value = tk.StringVar()
+        self.target_price_value = tk.StringVar()
         
         # Premium price variable for live updates
         self.premium_price_value = tk.StringVar()
@@ -281,6 +283,29 @@ class MainWindow:
             bd=1
         )
         self.child_status_display.grid(row=1, column=1, padx=10, pady=5, sticky='w')
+        
+        # SL Price and Target Price controls (next to order status)
+        self.sl_price_button = tk.Button(
+            self.status_frame, text="SL Price", 
+            command=self.set_sl_price, width=10, height=1
+        )
+        self.sl_price_button.grid(row=0, column=2, padx=10, pady=5)
+        
+        self.sl_price_box = tk.Entry(
+            self.status_frame, textvariable=self.sl_price_value, width=10
+        )
+        self.sl_price_box.grid(row=0, column=3, padx=5, pady=5)
+        
+        self.target_price_button = tk.Button(
+            self.status_frame, text="Target Price", 
+            command=self.set_target_price, width=10, height=1
+        )
+        self.target_price_button.grid(row=1, column=2, padx=10, pady=5)
+        
+        self.target_price_box = tk.Entry(
+            self.status_frame, textvariable=self.target_price_value, width=10
+        )
+        self.target_price_box.grid(row=1, column=3, padx=5, pady=5)
     
     def create_account_display(self):
         """Create account display frame"""
@@ -798,8 +823,8 @@ class MainWindow:
             else:
                 self.child_order_status.set("Child Not Logged In")
             
-            # Disable buy button to prevent duplicate orders
-            self.buy_button.config(state='disabled', text="ORDERS PLACED", bg='lightgray')
+            # Disable buy button and update text with price
+            self.buy_button.config(state='disabled', text=f"OrderPlaced@{price}")
             applicationLogger.info("Buy button disabled to prevent duplicate orders")
             
         except Exception as e:
@@ -906,8 +931,8 @@ class MainWindow:
             else:
                 self.child_order_status.set("Child Not Logged In")
             
-            # Disable exit button to prevent duplicate orders
-            self.exit_button.config(state='disabled', text="EXIT ORDERS PLACED", bg='lightgray')
+            # Disable exit button and update text with price
+            self.exit_button.config(state='disabled', text=f"ExitOrderPlaced@{price}")
             applicationLogger.info("Exit button disabled to prevent duplicate orders")
             
         except Exception as e:
@@ -1223,10 +1248,10 @@ class MainWindow:
     def release_buttons(self):
         """Release button states - enable buy and exit buttons"""
         # Enable buy button
-        self.buy_button.config(state='normal', text="BUY", bg='SystemButtonFace')
+        self.buy_button.config(state='normal', text="BUY")
         
         # Enable exit button
-        self.exit_button.config(state='normal', text="EXIT", bg='SystemButtonFace')
+        self.exit_button.config(state='normal', text="EXIT")
         
         # Reset order status displays
         active_accounts = self.account_manager.get_all_active_accounts()
@@ -1454,6 +1479,40 @@ class MainWindow:
         except Exception as e:
             applicationLogger.error(f"Error in exit_child_orders_market: {e}")
             self.child_order_status.set(f"Error: {str(e)[:30]}...")
+    
+    def set_sl_price(self):
+        """Set Stop Loss price for current position"""
+        try:
+            # Get current price for reference
+            current_price = self.premium_price_value.get()
+            if current_price:
+                current_price_float = float(current_price)
+                # Suggest SL price (e.g., 10% below current price for long positions)
+                suggested_sl = round(current_price_float * 0.9, 2)
+                self.sl_price_value.set(str(suggested_sl))
+                applicationLogger.info(f"SL price set to: {suggested_sl}")
+            else:
+                messagebox.showinfo("SL Price", "Please fetch current price first to set SL")
+        except Exception as e:
+            applicationLogger.error(f"Error setting SL price: {e}")
+            messagebox.showerror("Error", f"Error setting SL price: {e}")
+    
+    def set_target_price(self):
+        """Set Target price for current position"""
+        try:
+            # Get current price for reference
+            current_price = self.premium_price_value.get()
+            if current_price:
+                current_price_float = float(current_price)
+                # Suggest target price (e.g., 20% above current price for long positions)
+                suggested_target = round(current_price_float * 1.2, 2)
+                self.target_price_value.set(str(suggested_target))
+                applicationLogger.info(f"Target price set to: {suggested_target}")
+            else:
+                messagebox.showinfo("Target Price", "Please fetch current price first to set Target")
+        except Exception as e:
+            applicationLogger.error(f"Error setting target price: {e}")
+            messagebox.showerror("Error", f"Error setting target price: {e}")
     
     def run(self):
         """Run the application"""
