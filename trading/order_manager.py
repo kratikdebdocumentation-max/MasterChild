@@ -190,6 +190,73 @@ class OrderManager:
         
         return order_numbers
     
+    def place_exit_orders(self, apis: List, quantities: List[int], 
+                         trading_symbol: str, price: float, 
+                         active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place exit orders across multiple accounts
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        order_numbers = [None] * len(apis)
+        lock = threading.Lock()
+        
+        def place_order(api, qty, index):
+            try:
+                # Determine correct exchange for options
+                if 'SENSEX' in trading_symbol:
+                    exchange = 'BFO'
+                else:
+                    exchange = 'NFO'
+                
+                order_place = api.place_order(
+                    buy_or_sell='S',
+                    product_type='I',
+                    exchange=exchange,
+                    tradingsymbol=trading_symbol,
+                    quantity=qty,
+                    discloseqty=0,
+                    price_type='LMT',  # Use LMT for limit orders, MKT for market orders
+                    price=price,
+                    trigger_price=None,
+                    retention=Config.RETENTION,
+                    amo='NO',
+                    remarks=None
+                )
+                
+                if order_place and 'norenordno' in order_place:
+                    norenordno = order_place.get('norenordno')
+                    with lock:
+                        order_numbers[index] = norenordno
+                    applicationLogger.info(f"Exit order placed successfully: {order_place}")
+                else:
+                    applicationLogger.error(f"Exit order placement failed: {order_place}")
+                    
+            except Exception as e:
+                applicationLogger.error(f"Error placing exit order: {e}")
+        
+        # Create and start threads for placing orders
+        threads = []
+        for i, (api, qty, is_active) in enumerate(zip(apis, quantities, active_accounts)):
+            if is_active:
+                thread = threading.Thread(target=place_order, args=(api, qty, i))
+                threads.append(thread)
+                thread.start()
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+        
+        return order_numbers
+    
     def cancel_orders(self, apis: List, order_numbers: List[str], 
                      active_accounts: List[bool]) -> None:
         """

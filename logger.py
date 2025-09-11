@@ -33,9 +33,7 @@ def setup_logger(name, level=logging.INFO):
     return logger
 
 # Setup loggers
-child2WSLogger = setup_logger('Log_Child2_WS', level=logging.INFO)
-child3WSLogger = setup_logger('Log_Child3_WS', level=logging.INFO)
-child4WSLogger = setup_logger('Log_Child4_WS', level=logging.INFO)
+childWSLogger = setup_logger('Log_Child_WS', level=logging.INFO)
 master1WSLogger = setup_logger('Log_Master1_WS', level=logging.INFO)
 applicationLogger = setup_logger('applicationLogger', level=logging.INFO)
 

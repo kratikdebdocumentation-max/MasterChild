@@ -6,7 +6,7 @@ from retrying import retry
 from api_helper import ShoonyaApiPy
 from config import Config
 from utils.telegram_notifications import send_sos_message
-from logger import child2WSLogger, master1WSLogger, child3WSLogger, child4WSLogger, applicationLogger
+from logger import childWSLogger, master1WSLogger, applicationLogger
 
 class AccountManager:
     """Manages multiple trading accounts"""
@@ -39,7 +39,7 @@ class AccountManager:
         Login to a specific account
         
         Args:
-            account_num: Account number (1-4)
+            account_num: Account number (1-2)
             
         Returns:
             tuple: (success, client_name)

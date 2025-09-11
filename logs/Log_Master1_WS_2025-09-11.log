@@ -19,3 +19,11 @@
 2025-09-11 01:21:41,132 - INFO - {'t': 'om', 'norenordno': '25091000473320', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591181200CE', 'trantype': 'B', 'qty': '20', 'prc': '409.45', 'pcode': 'I', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
 2025-09-11 01:21:41,132 - INFO - {'t': 'om', 'norenordno': '25091000473320', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591181200CE', 'trantype': 'B', 'qty': '20', 'prc': '409.45', 'pcode': 'I', 'remarks': '', 'rejreason': 'RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]', 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
 2025-09-11 01:21:41,132 - INFO - {'t': 'om', 'norenordno': '25091000473320', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX2591181200CE', 'trantype': 'B', 'qty': '20', 'prc': '409.45', 'pcode': 'I', 'remarks': '', 'rejreason': 'RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]', 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-11 21:21:18,025 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 23:40:15,642 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 23:44:23,320 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 23:46:24,165 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 23:49:37,201 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 23:53:23,744 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 23:55:48,850 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-11 23:57:43,527 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT

@@ -3,7 +3,7 @@ WebSocket management for real-time data feeds
 """
 import threading
 from typing import Callable, Dict, Any
-from logger import child2WSLogger, master1WSLogger, child3WSLogger, child4WSLogger, applicationLogger
+from logger import childWSLogger, master1WSLogger, applicationLogger
 
 class WebSocketManager:
     """Manages WebSocket connections for all accounts"""
@@ -13,9 +13,7 @@ class WebSocketManager:
         self.order_manager = order_manager
         self.loggers = {
             1: master1WSLogger,
-            2: child2WSLogger,
-            3: child3WSLogger,
-            4: child4WSLogger
+            2: childWSLogger
         }
     
     def setup_websocket_callbacks(self, account_num: int):

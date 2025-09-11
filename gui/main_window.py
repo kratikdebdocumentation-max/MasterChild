@@ -22,7 +22,7 @@ class MainWindow:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Shoonya Master-Child Trading System")
-        self.root.geometry("1200x600")
+        self.root.geometry("800x350")
         
         # Initialize managers
         self.account_manager = AccountManager()
@@ -53,28 +53,26 @@ class MainWindow:
         self.price_value = tk.StringVar()
         self.price1_value = tk.StringVar()
         self.modify_buy_value = tk.StringVar()
-        self.modify_sell_value = tk.StringVar()
+        self.modify_exit_value = tk.StringVar()
         
         # Quantity variables
         self.qty1_var = tk.StringVar()
         
         # Account display variables
         self.master1_value = tk.StringVar()
-        self.child2_value = tk.StringVar()
-        self.child3_value = tk.StringVar()
-        self.child4_value = tk.StringVar()
+        self.child_value = tk.StringVar()
         
         # Order numbers
         self.order_numbers = {
-            1: '', 2: '', 3: '', 4: ''
+            1: '', 2: ''
         }
-        self.sell_order_numbers = {
-            1: '', 2: '', 3: '', 4: ''
+        self.exit_order_numbers = {
+            1: '', 2: ''
         }
         
         # Quantities
         self.quantities = {
-            1: '', 2: '', 3: '', 4: ''
+            1: '', 2: ''
         }
     
     def create_widgets(self):
@@ -83,9 +81,8 @@ class MainWindow:
         self.create_login_buttons()
         self.create_selection_frame()
         self.create_trading_frame()
-        self.create_account_display()
+        # self.create_account_display()  # Hidden - will be part of website dashboard
         self.create_order_buttons()
-        self.create_modify_buttons()
     
     def create_style(self):
         """Create custom styles"""
@@ -101,25 +98,12 @@ class MainWindow:
         
         # Child account login buttons
         self.login_button2 = tk.Button(
-            self.login_frame, text="CHILD2", 
+            self.login_frame, text="Login Child Account", 
             command=lambda: self.login_account(2), 
             width=20, height=3
         )
         self.login_button2.pack(side=tk.LEFT, padx=10)
         
-        self.login_button3 = tk.Button(
-            self.login_frame, text="CHILD3", 
-            command=lambda: self.login_account(3), 
-            width=20, height=3
-        )
-        self.login_button3.pack(side=tk.LEFT, padx=10)
-        
-        self.login_button4 = tk.Button(
-            self.login_frame, text="CHILD4", 
-            command=lambda: self.login_account(4), 
-            width=20, height=3
-        )
-        self.login_button4.pack(side=tk.LEFT, padx=10)
         
         # Utility buttons
         self.release_button = ttk.Button(
@@ -212,18 +196,18 @@ class MainWindow:
         )
         self.buy_button.pack(side=tk.LEFT, padx=10)
         
-        # Sell price
+        # Exit price
         self.price1_box = tk.Entry(
             self.trading_frame, textvariable=self.price1_value, width=10
         )
         self.price1_box.pack(side=tk.LEFT, padx=5)
         
-        # Sell button
-        self.sell_button = ttk.Button(
-            self.trading_frame, text="SELL", 
-            command=self.place_sell_orders, width=20, style="RedButton.TButton"
+        # Exit button
+        self.exit_button = ttk.Button(
+            self.trading_frame, text="EXIT", 
+            command=self.place_exit_orders, width=20, style="RedButton.TButton"
         )
-        self.sell_button.pack(side=tk.LEFT, padx=10)
+        self.exit_button.pack(side=tk.LEFT, padx=10)
     
     def create_account_display(self):
         """Create account display frame"""
@@ -233,9 +217,7 @@ class MainWindow:
         # Account buttons and displays
         accounts = [
             (1, "MASTER1", self.master1_value),
-            (2, "CHILD2", self.child2_value),
-            (3, "CHILD3", self.child3_value),
-            (4, "CHILD4", self.child4_value)
+            (2, "CHILD", self.child_value)
         ]
         
         for i, (account_num, name, value_var) in enumerate(accounts):
@@ -291,40 +273,36 @@ class MainWindow:
         )
         self.cancel_buy_button.grid(row=0, column=0, padx=5, pady=5)
         
-        self.cancel_sell_button = tk.Button(
-            self.order_frame, text="Cancel Sell", 
-            command=self.cancel_sell_orders, width=15, height=2
+        self.cancel_exit_button = tk.Button(
+            self.order_frame, text="Cancel Exit", 
+            command=self.cancel_exit_orders, width=15, height=2
         )
-        self.cancel_sell_button.grid(row=0, column=1, padx=5, pady=5)
-    
-    def create_modify_buttons(self):
-        """Create modify order buttons"""
-        self.modify_frame = tk.Frame(self.root)
-        self.modify_frame.pack(side=tk.TOP, pady=10)
+        self.cancel_exit_button.grid(row=0, column=1, padx=5, pady=5)
         
         # Modify buy
         self.modify_buy_button = tk.Button(
-            self.modify_frame, text="Modify Buy", 
+            self.order_frame, text="Modify Buy", 
             command=self.modify_buy_orders, width=15, height=2
         )
-        self.modify_buy_button.grid(row=0, column=0, padx=5, pady=5)
+        self.modify_buy_button.grid(row=0, column=2, padx=5, pady=5)
         
         self.modify_buy_box = tk.Entry(
-            self.modify_frame, textvariable=self.modify_buy_value, width=10
+            self.order_frame, textvariable=self.modify_buy_value, width=10
         )
-        self.modify_buy_box.grid(row=0, column=1, padx=5, pady=5)
+        self.modify_buy_box.grid(row=0, column=3, padx=5, pady=5)
         
-        # Modify sell
-        self.modify_sell_button = tk.Button(
-            self.modify_frame, text="Modify Sell", 
-            command=self.modify_sell_orders, width=15, height=2
+        # Modify exit
+        self.modify_exit_button = tk.Button(
+            self.order_frame, text="Modify Exit", 
+            command=self.modify_exit_orders, width=15, height=2
         )
-        self.modify_sell_button.grid(row=1, column=0, padx=5, pady=5)
+        self.modify_exit_button.grid(row=0, column=4, padx=5, pady=5)
         
-        self.modify_sell_box = tk.Entry(
-            self.modify_frame, textvariable=self.modify_sell_value, width=10
+        self.modify_exit_box = tk.Entry(
+            self.order_frame, textvariable=self.modify_exit_value, width=10
         )
-        self.modify_sell_box.grid(row=1, column=1, padx=5, pady=5)
+        self.modify_exit_box.grid(row=0, column=5, padx=5, pady=5)
+    
     
     def initialize_master_account(self):
         """Initialize master account on startup"""
@@ -357,11 +335,7 @@ class MainWindow:
         if account_num == 1:
             self.master1_value.set(client_name)
         elif account_num == 2:
-            self.child2_value.set(client_name)
-        elif account_num == 3:
-            self.child3_value.set(client_name)
-        elif account_num == 4:
-            self.child4_value.set(client_name)
+            self.child_value.set(client_name)
     
     def enable_account_buttons(self, account_num: int):
         """Enable buttons for an account"""
@@ -423,9 +397,7 @@ class MainWindow:
             
             # Update all account displays
             self.master1_value.set(trading_symbol)
-            self.child2_value.set(trading_symbol)
-            self.child3_value.set(trading_symbol)
-            self.child4_value.set(trading_symbol)
+            self.child_value.set(trading_symbol)
             
             return trading_symbol
         return ""
@@ -510,7 +482,7 @@ class MainWindow:
                 self.price_value.set(price)
                 self.price1_value.set(price)
                 self.modify_buy_value.set(price)
-                self.modify_sell_value.set(price)
+                self.modify_exit_value.set(price)
             else:
                 messagebox.showerror("Error", "Could not fetch price")
                 
@@ -536,12 +508,8 @@ class MainWindow:
             self.quantities[1] = qty1
             if self.selected_index.get() == "NIFTY":
                 self.quantities[2] = 25
-                self.quantities[3] = 25
-                self.quantities[4] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
-                self.quantities[3] = 15
-                self.quantities[4] = 15
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -574,8 +542,8 @@ class MainWindow:
         except Exception as e:
             messagebox.showerror("Error", f"Error placing buy orders: {e}")
     
-    def place_sell_orders(self):
-        """Place sell orders across all active accounts"""
+    def place_exit_orders(self):
+        """Place exit orders across all active accounts"""
         try:
             if not self.qty1_var.get():
                 messagebox.showerror("Error", "Please select quantity")
@@ -593,16 +561,12 @@ class MainWindow:
             self.quantities[1] = qty1
             if self.selected_index.get() == "NIFTY":
                 self.quantities[2] = 25
-                self.quantities[3] = 25
-                self.quantities[4] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
-                self.quantities[3] = 15
-                self.quantities[4] = 15
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
-            applicationLogger.info(f"Active accounts for sell: {active_accounts}")
+            applicationLogger.info(f"Active accounts for exit: {active_accounts}")
             
             if not active_accounts:
                 messagebox.showerror("Error", "No active accounts found. Please login to accounts first.")
@@ -612,24 +576,24 @@ class MainWindow:
             quantities = [self.quantities[i] for i in active_accounts]
             active_flags = [True] * len(active_accounts)
             
-            applicationLogger.info(f"Placing sell orders for accounts: {active_accounts}")
+            applicationLogger.info(f"Placing exit orders for accounts: {active_accounts}")
             applicationLogger.info(f"Trading symbol: {trading_symbol}, Price: {price}")
             applicationLogger.info(f"Quantities: {quantities}")
             
             # Place orders
-            order_numbers = self.order_manager.place_sell_orders(
+            order_numbers = self.order_manager.place_exit_orders(
                 apis, quantities, trading_symbol, price, active_flags
             )
             
-            # Update sell order numbers
+            # Update exit order numbers
             for i, order_num in enumerate(order_numbers):
                 if order_num:
-                    self.sell_order_numbers[active_accounts[i]] = order_num
+                    self.exit_order_numbers[active_accounts[i]] = order_num
             
-            messagebox.showinfo("Success", "Sell orders placed successfully")
+            messagebox.showinfo("Success", "Exit orders placed successfully")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Error placing sell orders: {e}")
+            messagebox.showerror("Error", f"Error placing exit orders: {e}")
     
     def cancel_buy_orders(self):
         """Cancel buy orders across all active accounts"""
@@ -645,19 +609,19 @@ class MainWindow:
         except Exception as e:
             messagebox.showerror("Error", f"Error cancelling buy orders: {e}")
     
-    def cancel_sell_orders(self):
-        """Cancel sell orders across all active accounts"""
+    def cancel_exit_orders(self):
+        """Cancel exit orders across all active accounts"""
         try:
             active_accounts = self.account_manager.get_all_active_accounts()
             apis = [self.account_manager.get_api(i) for i in active_accounts]
-            order_numbers = [self.sell_order_numbers[i] for i in active_accounts]
+            order_numbers = [self.exit_order_numbers[i] for i in active_accounts]
             active_flags = [True] * len(active_accounts)
             
             self.order_manager.cancel_orders(apis, order_numbers, active_flags)
-            messagebox.showinfo("Success", "Sell orders cancelled")
+            messagebox.showinfo("Success", "Exit orders cancelled")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Error cancelling sell orders: {e}")
+            messagebox.showerror("Error", f"Error cancelling exit orders: {e}")
     
     def modify_buy_orders(self):
         """Modify buy orders across all active accounts"""
@@ -674,12 +638,8 @@ class MainWindow:
             self.quantities[1] = qty1
             if self.selected_index.get() == "NIFTY":
                 self.quantities[2] = 25
-                self.quantities[3] = 25
-                self.quantities[4] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
-                self.quantities[3] = 15
-                self.quantities[4] = 15
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -696,42 +656,38 @@ class MainWindow:
         except Exception as e:
             messagebox.showerror("Error", f"Error modifying buy orders: {e}")
     
-    def modify_sell_orders(self):
-        """Modify sell orders across all active accounts"""
+    def modify_exit_orders(self):
+        """Modify exit orders across all active accounts"""
         try:
             trading_symbol = self.concatenate_values()
             if not trading_symbol:
                 messagebox.showerror("Error", "Please select all required fields")
                 return
             
-            price = float(self.modify_sell_value.get())
+            price = float(self.modify_exit_value.get())
             qty1 = int(self.qty1_var.get())
             
             # Set quantities for all accounts
             self.quantities[1] = qty1
             if self.selected_index.get() == "NIFTY":
                 self.quantities[2] = 25
-                self.quantities[3] = 25
-                self.quantities[4] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
-                self.quantities[3] = 15
-                self.quantities[4] = 15
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
             apis = [self.account_manager.get_api(i) for i in active_accounts]
-            order_numbers = [self.sell_order_numbers[i] for i in active_accounts]
+            order_numbers = [self.exit_order_numbers[i] for i in active_accounts]
             quantities = [self.quantities[i] for i in active_accounts]
             active_flags = [True] * len(active_accounts)
             
             self.order_manager.modify_orders(
                 apis, order_numbers, quantities, trading_symbol, price, active_flags
             )
-            messagebox.showinfo("Success", "Sell orders modified")
+            messagebox.showinfo("Success", "Exit orders modified")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Error modifying sell orders: {e}")
+            messagebox.showerror("Error", f"Error modifying exit orders: {e}")
     
     def update_mtm(self, account_num: int):
         """Update MTM for an account"""
@@ -770,7 +726,7 @@ class MainWindow:
         """Create order details window"""
         details_window = tk.Toplevel(self.root)
         details_window.title("Order Details")
-        details_window.geometry("1200x400")
+        details_window.geometry("800x300")
         
         # Create scrollable frame
         canvas = tk.Canvas(details_window)
@@ -806,7 +762,7 @@ class MainWindow:
     def release_buttons(self):
         """Release button states"""
         self.buy_button.state(['!pressed', '!disabled'])
-        self.sell_button.state(['!pressed', '!disabled'])
+        self.exit_button.state(['!pressed', '!disabled'])
     
     def update_premium_price(self):
         """Update premium price (placeholder)"""
