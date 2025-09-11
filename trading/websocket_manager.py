@@ -49,16 +49,18 @@ class WebSocketManager:
                     applicationLogger.error(f"Error updating order status: {e}")
         
         def quote_update_callback(tick_data):
-            """Handle quote updates"""
+            """Handle quote updates - only for master account (account 1)"""
             print(f"Quote Received for Account {account_num}: {tick_data}")
             
-            # Handle live price updates
-            if 'lp' in tick_data and self.live_price_callback:
+            # Only handle live price updates for master account (account 1)
+            if account_num == 1 and 'lp' in tick_data and self.live_price_callback:
                 try:
                     live_price = float(tick_data['lp'])
                     self.live_price_callback(live_price)
                 except (ValueError, TypeError) as e:
                     applicationLogger.error(f"Error parsing live price: {e}")
+            elif account_num != 1:
+                applicationLogger.info(f"Quote update received for child account {account_num} - not processing live price")
         
         def socket_open_callback():
             """Handle socket open"""

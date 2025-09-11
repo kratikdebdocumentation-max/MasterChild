@@ -76,7 +76,8 @@ class OrderManager:
                     'remarks': None
                 }
                 
-                applicationLogger.info(f"Placing order with parameters: {order_params}")
+                applicationLogger.info(f"Placing order for account {index + 1} with parameters: {order_params}")
+                applicationLogger.info(f"API instance for account {index + 1}: {api is not None}")
                 
                 # Place order directly as per API documentation
                 order_place = api.place_order(
@@ -115,10 +116,13 @@ class OrderManager:
         # Create and start threads for placing orders
         threads = []
         for i, (api, qty, is_active) in enumerate(zip(apis, quantities, active_accounts)):
+            applicationLogger.info(f"Account {i + 1}: API={api is not None}, Qty={qty}, Active={is_active}")
             if is_active:
                 thread = threading.Thread(target=place_order, args=(api, qty, i))
                 threads.append(thread)
                 thread.start()
+            else:
+                applicationLogger.warning(f"Account {i + 1} is not active, skipping order placement")
         
         # Wait for all threads to complete
         for thread in threads:

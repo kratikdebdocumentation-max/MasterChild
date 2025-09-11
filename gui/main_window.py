@@ -22,7 +22,7 @@ class MainWindow:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Duplicator - Master Not Logged In")
-        self.root.geometry("800x350")
+        self.root.geometry("800x450")
         
         # Master account holder name
         self.master_account_name = tk.StringVar()
@@ -71,8 +71,8 @@ class MainWindow:
         # Order status variables
         self.master_order_status = tk.StringVar()
         self.child_order_status = tk.StringVar()
-        self.master_order_status.set("No Orders")
-        self.child_order_status.set("No Orders")
+        self.master_order_status.set("Master Not Logged In")
+        self.child_order_status.set("Child Not Logged In")
         
         # Quantity variables
         self.qty1_var = tk.StringVar()
@@ -387,6 +387,8 @@ class MainWindow:
                 self.master_account_name.set(client_name)
                 # Update button text to show logged in status
                 self.update_login_button_text(1, client_name)
+                # Update master order status to show it's ready
+                self.master_order_status.set("Master Ready - No Orders")
                 applicationLogger.info(f"Master account initialized successfully: {client_name}")
             else:
                 messagebox.showerror("Error", f"Failed to initialize master account: {client_name}")
@@ -409,6 +411,12 @@ class MainWindow:
                 
                 # Update button text to show logged in status
                 self.update_login_button_text(account_num, client_name)
+                
+                # Update order status to show account is ready
+                if account_num == 1:
+                    self.master_order_status.set("Master Ready - No Orders")
+                elif account_num == 2:
+                    self.child_order_status.set("Child Ready - No Orders")
             else:
                 messagebox.showerror("Error", f"Login failed: {client_name}")
         except Exception as e:
@@ -622,7 +630,7 @@ class MainWindow:
             messagebox.showerror("Error", f"Error fetching price: {e}")
     
     def subscribe_to_live_price(self, api, trading_symbol: str):
-        """Subscribe to websocket for live price updates"""
+        """Subscribe to websocket for live price updates using master account (account 1) only"""
         try:
             # Determine exchange
             if 'SENSEX' in trading_symbol:
@@ -644,11 +652,11 @@ class MainWindow:
                 except Exception as e:
                     applicationLogger.warning(f"Error unsubscribing from previous: {e}")
             
-            # Subscribe to new symbol
+            # Subscribe to new symbol using master account's WebSocket (account 1)
             websocket_token = f'{exchange}|{token}'
             api.subscribe(websocket_token)
             self.current_subscription = websocket_token
-            applicationLogger.info(f"Subscribed to live price feed: {websocket_token}")
+            applicationLogger.info(f"Subscribed to live price feed via master account: {websocket_token}")
             
         except Exception as e:
             applicationLogger.error(f"Error subscribing to live price: {e}")
@@ -695,6 +703,10 @@ class MainWindow:
                 self.quantities[2] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
+            elif self.selected_index.get() == "SENSEX":
+                self.quantities[2] = 20  # Default quantity for SENSEX
+            else:
+                self.quantities[2] = 10  # Default quantity for other instruments
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -722,9 +734,16 @@ class MainWindow:
                 if order_num:
                     self.order_numbers[active_accounts[i]] = order_num
             
-            # Reset order status displays
-            self.master_order_status.set("Orders Placed - Waiting for Status")
-            self.child_order_status.set("Orders Placed - Waiting for Status")
+            # Update order status displays based on active accounts
+            if 1 in active_accounts:
+                self.master_order_status.set("Orders Placed - Waiting for Status")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set("Orders Placed - Waiting for Status")
+            else:
+                self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
             messagebox.showerror("Error", f"Error placing buy orders: {e}")
@@ -750,6 +769,10 @@ class MainWindow:
                 self.quantities[2] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
+            elif self.selected_index.get() == "SENSEX":
+                self.quantities[2] = 20  # Default quantity for SENSEX
+            else:
+                self.quantities[2] = 10  # Default quantity for other instruments
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -777,9 +800,16 @@ class MainWindow:
                 if order_num:
                     self.exit_order_numbers[active_accounts[i]] = order_num
             
-            # Reset order status displays
-            self.master_order_status.set("Exit Orders Placed - Waiting for Status")
-            self.child_order_status.set("Exit Orders Placed - Waiting for Status")
+            # Update order status displays based on active accounts
+            if 1 in active_accounts:
+                self.master_order_status.set("Exit Orders Placed - Waiting for Status")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set("Exit Orders Placed - Waiting for Status")
+            else:
+                self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
             messagebox.showerror("Error", f"Error placing exit orders: {e}")
@@ -793,9 +823,16 @@ class MainWindow:
             active_flags = [True] * len(active_accounts)
             
             self.order_manager.cancel_orders(apis, order_numbers, active_flags)
-            # Update status displays
-            self.master_order_status.set("Buy Orders Cancelled")
-            self.child_order_status.set("Buy Orders Cancelled")
+            # Update status displays based on active accounts
+            if 1 in active_accounts:
+                self.master_order_status.set("Buy Orders Cancelled")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set("Buy Orders Cancelled")
+            else:
+                self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
             messagebox.showerror("Error", f"Error cancelling buy orders: {e}")
@@ -809,9 +846,16 @@ class MainWindow:
             active_flags = [True] * len(active_accounts)
             
             self.order_manager.cancel_orders(apis, order_numbers, active_flags)
-            # Update status displays
-            self.master_order_status.set("Exit Orders Cancelled")
-            self.child_order_status.set("Exit Orders Cancelled")
+            # Update status displays based on active accounts
+            if 1 in active_accounts:
+                self.master_order_status.set("Exit Orders Cancelled")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set("Exit Orders Cancelled")
+            else:
+                self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
             messagebox.showerror("Error", f"Error cancelling exit orders: {e}")
@@ -833,6 +877,10 @@ class MainWindow:
                 self.quantities[2] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
+            elif self.selected_index.get() == "SENSEX":
+                self.quantities[2] = 20  # Default quantity for SENSEX
+            else:
+                self.quantities[2] = 10  # Default quantity for other instruments
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -844,9 +892,16 @@ class MainWindow:
             self.order_manager.modify_orders(
                 apis, order_numbers, quantities, trading_symbol, price, active_flags
             )
-            # Update status displays
-            self.master_order_status.set("Buy Orders Modified - Waiting for Status")
-            self.child_order_status.set("Buy Orders Modified - Waiting for Status")
+            # Update status displays based on active accounts
+            if 1 in active_accounts:
+                self.master_order_status.set("Buy Orders Modified - Waiting for Status")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set("Buy Orders Modified - Waiting for Status")
+            else:
+                self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
             messagebox.showerror("Error", f"Error modifying buy orders: {e}")
@@ -868,6 +923,10 @@ class MainWindow:
                 self.quantities[2] = 25
             elif self.selected_index.get() == "BANKNIFTY":
                 self.quantities[2] = 15
+            elif self.selected_index.get() == "SENSEX":
+                self.quantities[2] = 20  # Default quantity for SENSEX
+            else:
+                self.quantities[2] = 10  # Default quantity for other instruments
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -879,9 +938,16 @@ class MainWindow:
             self.order_manager.modify_orders(
                 apis, order_numbers, quantities, trading_symbol, price, active_flags
             )
-            # Update status displays
-            self.master_order_status.set("Exit Orders Modified - Waiting for Status")
-            self.child_order_status.set("Exit Orders Modified - Waiting for Status")
+            # Update status displays based on active accounts
+            if 1 in active_accounts:
+                self.master_order_status.set("Exit Orders Modified - Waiting for Status")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+                
+            if 2 in active_accounts:
+                self.child_order_status.set("Exit Orders Modified - Waiting for Status")
+            else:
+                self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
             messagebox.showerror("Error", f"Error modifying exit orders: {e}")
