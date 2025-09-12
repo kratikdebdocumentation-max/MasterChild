@@ -1722,3 +1722,10 @@
 2025-09-12 13:14:14,675 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '6.00'
 2025-09-12 13:14:14,680 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
 2025-09-12 13:14:14,683 - INFO - Master order status updated: Order Rejected: RED:Margin Shortfall:INR 11.25 Available:INR 500.00 for C-FA42242 [SHOONYA]
+2025-09-12 13:15:11,546 - INFO - Order 25091200249591 cancelled successfully
+2025-09-12 13:15:11,552 - INFO - Updating order 25091200249591
+2025-09-12 13:15:11,552 - INFO - Order status debug - status: 'REJECTED', reporttype: 'CancelRejected', trantype: 'B', price: '6.00'
+2025-09-12 13:15:11,555 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 13:15:11,555 - INFO - Buy button re-enabled after cancelling buy orders
+2025-09-12 13:15:11,557 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-12 13:15:11,557 - INFO - Master order status updated: Order Rejected: SAF:order is not open to cancel
