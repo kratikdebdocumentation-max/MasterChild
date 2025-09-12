@@ -17,6 +17,8 @@ class WebSocketManager:
         }
         self.live_price_callback = None
         self.order_status_callback = None
+        self.buy_order_completed_callback = None
+        self.sell_order_completed_callback = None
     
     def setup_websocket_callbacks(self, account_num: int):
         """Setup WebSocket callbacks for a specific account"""
@@ -37,9 +39,59 @@ class WebSocketManager:
                     trantype = tick_data.get('trantype', 'Unknown')
                     reporttype = tick_data.get('reporttype', 'Unknown')
                     rejreason = tick_data.get('rejreason', '')
+                    price = tick_data.get('prc', '')
                     
-                    # Format status message - show only status without transaction type
-                    status_message = f"{status} {reporttype}"
+                    # Format status message with custom descriptions
+                    # Debug logging to see actual values
+                    applicationLogger.info(f"Order status debug - status: '{status}', reporttype: '{reporttype}', trantype: '{trantype}', price: '{price}'")
+                    
+                    if status.upper() == 'OPEN' and reporttype.lower() == 'new':
+                        if trantype.upper() == 'B':
+                            status_message = f"Buy Order Open @ {price}" if price else "Buy Order Open"
+                        elif trantype.upper() == 'S':
+                            status_message = f"Sell Order Open @ {price}" if price else "Sell Order Open"
+                        else:
+                            status_message = f"Order Open @ {price}" if price else "Order Open"
+                    elif status.upper() == 'OPEN' and reporttype.lower() == 'modify':
+                        status_message = "Order Modified"
+                    elif status.upper() == 'COMPLETE':
+                        # Format based on transaction type
+                        if trantype.upper() == 'B':
+                            status_message = f"Buy Order Complete @ {price}" if price else "Buy Order Complete"
+                        elif trantype.upper() == 'S':
+                            status_message = f"Sell Order Complete @ {price}" if price else "Sell Order Complete"
+                        else:
+                            status_message = f"Order Complete @ {price}" if price else "Order Complete"
+                        
+                        # Check if this is a buy order completion
+                        if trantype.upper() == 'B' and self.buy_order_completed_callback:
+                            try:
+                                symbol = tick_data.get('tsym', '')
+                                price_float = float(price) if price else 0.0
+                                self.buy_order_completed_callback(account_num, symbol, price_float)
+                            except (ValueError, TypeError) as e:
+                                applicationLogger.error(f"Error processing buy order completion: {e}")
+                        
+                        # Check if this is a sell order completion
+                        if trantype.upper() == 'S' and self.sell_order_completed_callback:
+                            try:
+                                symbol = tick_data.get('tsym', '')
+                                price_float = float(price) if price else 0.0
+                                self.sell_order_completed_callback(account_num, symbol, price_float)
+                            except (ValueError, TypeError) as e:
+                                applicationLogger.error(f"Error processing sell order completion: {e}")
+                    elif status.upper() == 'CANCELLED':
+                        status_message = "Order Cancelled"
+                    elif status.upper() == 'REJECTED':
+                        status_message = f"Order Rejected: {rejreason}" if rejreason else "Order Rejected"
+                    else:
+                        # Fallback to custom format instead of original
+                        if trantype.upper() == 'B':
+                            status_message = f"Buy Order {status} @ {price}" if price else f"Buy Order {status}"
+                        elif trantype.upper() == 'S':
+                            status_message = f"Sell Order {status} @ {price}" if price else f"Sell Order {status}"
+                        else:
+                            status_message = f"Order {status} @ {price}" if price else f"Order {status}"
                     
                     self.order_status_callback(account_num, status_message)
                 except Exception as e:
@@ -72,6 +124,14 @@ class WebSocketManager:
     def set_order_status_callback(self, callback: Callable[[int, str], None]):
         """Set callback for order status updates"""
         self.order_status_callback = callback
+    
+    def set_buy_order_completed_callback(self, callback: Callable[[int, str, float], None]):
+        """Set callback for when buy orders are completed"""
+        self.buy_order_completed_callback = callback
+    
+    def set_sell_order_completed_callback(self, callback: Callable[[int, str, float], None]):
+        """Set callback for when sell orders are completed"""
+        self.sell_order_completed_callback = callback
     
     def _process_order_update(self, tick_data: Dict[str, Any], account_num: int):
         """Process order update data"""

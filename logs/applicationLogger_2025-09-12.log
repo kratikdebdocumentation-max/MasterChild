@@ -2700,3 +2700,81 @@ ENDING -
 2025-09-12 04:04:16,386 - INFO - Master order status updated: REJECTED Rejected
 2025-09-12 04:04:19,988 - INFO - SL price suggested: 362.74 (1% below LTP: 366.4)
 2025-09-12 04:04:27,176 - INFO - Target price suggested: 370.06 (1% above LTP: 366.4)
+2025-09-12 09:56:47,462 - INFO - Downloading master files...
+2025-09-12 09:56:47,462 - INFO - Finding expiry dates...
+2025-09-12 09:56:47,580 - INFO - System initialization completed successfully
+2025-09-12 09:56:47,923 - INFO - Generated fresh 2FA for account 1: 875299
+2025-09-12 09:56:48,680 - INFO - Master account initialized successfully: KRATIK YADAV
+2025-09-12 09:58:04,782 - INFO - Fetched SENSEX price: 81718.03
+2025-09-12 09:58:04,782 - INFO - Updated strikes for SENSEX based on price 81718.03: [81000, 81100, 81200, 81300, 81400, 81500, 81600, 81700, 81800, 81900, 82000, 82100, 82200, 82300, 82400]
+2025-09-12 09:58:57,396 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 09:58:57,422 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 09:58:57,423 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 09:58:57,423 - INFO - Updated quantity options for SENSEX2591881200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 09:58:58,817 - INFO - Getting token and lot size for trading symbol: SENSEX2591881200CE
+2025-09-12 09:58:58,817 - INFO - Found token and lot size for SENSEX2591881200CE: 862060, 20
+2025-09-12 09:58:58,817 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 09:58:58,817 - INFO - Updated quantity options for SENSEX2591881200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 09:58:58,817 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 09:58:58,832 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 09:58:59,391 - INFO - Getting token for trading symbol: SENSEX2591881200CE
+2025-09-12 09:58:59,396 - INFO - Found token for SENSEX2591881200CE: 862060
+2025-09-12 09:58:59,397 - INFO - Subscribed to live price feed via master account: BFO|862060
+2025-09-12 09:59:53,591 - INFO - Getting token and lot size for trading symbol: SENSEX2591881700CE
+2025-09-12 09:59:53,602 - INFO - Found token and lot size for SENSEX2591881700CE: 862003, 20
+2025-09-12 09:59:53,602 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 09:59:53,602 - INFO - Updated quantity options for SENSEX2591881700CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 09:59:53,602 - INFO - Getting token for trading symbol: SENSEX2591881700CE
+2025-09-12 09:59:53,607 - INFO - Found token for SENSEX2591881700CE: 862003
+2025-09-12 09:59:54,171 - INFO - Getting token for trading symbol: SENSEX2591881700CE
+2025-09-12 09:59:54,177 - INFO - Found token for SENSEX2591881700CE: 862003
+2025-09-12 09:59:54,179 - INFO - Unsubscribed from previous: BFO|862060
+2025-09-12 09:59:54,180 - INFO - Subscribed to live price feed via master account: BFO|862003
+2025-09-12 10:00:10,986 - INFO - Getting token and lot size for trading symbol: SENSEX2591881700CE
+2025-09-12 10:00:10,991 - INFO - Found token and lot size for SENSEX2591881700CE: 862003, 20
+2025-09-12 10:00:10,991 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 10:00:10,992 - INFO - Updated quantity options for SENSEX2591881700CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-12 10:00:10,992 - INFO - Getting token and lot size for trading symbol: SENSEX2591881700CE
+2025-09-12 10:00:10,997 - INFO - Found token and lot size for SENSEX2591881700CE: 862003, 20
+2025-09-12 10:00:10,998 - INFO - Using same quantity for both accounts: 20 (lot size: 20)
+2025-09-12 10:00:10,999 - INFO - Active accounts: [1]
+2025-09-12 10:00:10,999 - INFO - Placing buy orders for accounts: [1]
+2025-09-12 10:00:11,000 - INFO - Trading symbol: SENSEX2591881700CE, Price: 419.15
+2025-09-12 10:00:11,000 - INFO - Quantities: [20]
+2025-09-12 10:00:11,002 - INFO - Account 1: API=True, Qty=20, Active=True
+2025-09-12 10:00:11,004 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591881700CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 419.15, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 10:00:11,004 - INFO - API instance for account 1: True
+2025-09-12 10:00:11,551 - INFO - API response: {'request_time': '10:00:13 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200094616'}
+2025-09-12 10:00:11,555 - INFO - API response type: <class 'dict'>
+2025-09-12 10:00:11,555 - INFO - Buy order placed successfully: {'request_time': '10:00:13 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200094616'}
+2025-09-12 10:00:11,558 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-12 10:00:11,558 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-12 10:00:11,558 - INFO - Exit button enabled after buy orders placed
+2025-09-12 10:00:11,564 - INFO - New order received: 25091200094616
+2025-09-12 10:00:11,590 - INFO - Master order status updated: PENDING NewAck
+2025-09-12 10:00:11,591 - INFO - Updating order 25091200094616
+2025-09-12 10:00:11,592 - INFO - Master order status updated: REJECTED Rejected
+2025-09-12 10:00:11,595 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 10:00:11,597 - INFO - Order data saved to orders.csv
+2025-09-12 10:00:11,599 - INFO - Account 1 - B PENDING NewAck
+2025-09-12 10:08:49,517 - INFO - Fetched NIFTY price: 25073.9
+2025-09-12 10:08:49,518 - INFO - Updated strikes for NIFTY based on price 25073.9: [24700, 24750, 24800, 24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200, 25250, 25300, 25350, 25400]
+2025-09-12 10:08:50,865 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C81700
+2025-09-12 10:08:50,865 - ERROR - No token found for NIFTY16SEP25C81700
+2025-09-12 10:08:50,897 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-12 10:08:50,897 - WARNING - Lot size not found for NIFTY16SEP25C81700, using default quantities
+2025-09-12 10:08:50,897 - INFO - Getting token for trading symbol: NIFTY16SEP25C81700
+2025-09-12 10:08:50,916 - ERROR - No token found for NIFTY16SEP25C81700
+2025-09-12 10:08:50,929 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-12 13:11:26,988 - INFO - Downloading master files...
+2025-09-12 13:11:26,990 - INFO - Finding expiry dates...
+2025-09-12 13:11:27,184 - INFO - System initialization completed successfully
+2025-09-12 13:11:27,644 - INFO - Generated fresh 2FA for account 1: 249312
+2025-09-12 13:11:27,881 - INFO - Master account initialized successfully: KRATIK YADAV
+2025-09-12 13:11:37,774 - INFO - Application interrupted by user

@@ -78,15 +78,22 @@ class Config:
             'credentials2.json'
         ]
         
+        # Get the directory where this config.py file is located
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        
         for i, filename in enumerate(credential_files, 1):
-            if os.path.exists(filename):
+            # Use absolute path to ensure we're looking in the right directory
+            file_path = os.path.join(current_dir, filename)
+            
+            if os.path.exists(file_path):
                 try:
-                    with open(filename, 'r') as file:
+                    with open(file_path, 'r') as file:
                         creds = json.load(file)
                         credentials[i] = creds
+                        print(f"Successfully loaded {filename}")
                 except Exception as e:
                     print(f"Error loading {filename}: {e}")
             else:
-                print(f"Warning: {filename} not found")
+                print(f"Warning: {filename} not found at {file_path}")
         
         return credentials
