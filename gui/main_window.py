@@ -553,6 +553,30 @@ class MainWindow:
             applicationLogger.error(f"Error checking active orders: {e}")
             return False
     
+    def _are_buy_orders_filled(self):
+        """Check if buy orders are filled/completed (not just placed)"""
+        try:
+            # Check if buy orders are completed by looking at order status
+            master_status = self.master_order_status.get()
+            child_status = self.child_order_status.get()
+            
+            # Check if any account shows "Buy Order Complete" status
+            if "Buy Order Complete" in master_status or "Buy Order Complete" in child_status:
+                return True
+            
+            # Also check if SL/Target monitoring is already active (indicates buy orders were filled)
+            if hasattr(self, 'sl_monitoring_active') and self.sl_monitoring_active:
+                return True
+                
+            if hasattr(self, 'target_monitoring_active') and self.target_monitoring_active:
+                return True
+            
+            return False
+            
+        except Exception as e:
+            applicationLogger.error(f"Error checking if buy orders are filled: {e}")
+            return False
+    
     def update_selections(self, *args):
         """Update selections based on index"""
         index = self.selected_index.get()
@@ -1030,6 +1054,79 @@ class MainWindow:
         except Exception as e:
             applicationLogger.error(f"Error resetting to buy order status: {e}")
     
+    def _handle_margin_shortfall(self):
+        """Handle margin shortfall scenario - show error and reset UI"""
+        try:
+            details = self.order_manager.margin_shortfall_details
+            if not details:
+                return
+            
+            failed_accounts = details['failed_accounts']
+            cancelled_orders = details['cancelled_orders']
+            
+            # Create error message
+            error_msg = "MARGIN SHORTFALL DETECTED!\n\n"
+            error_msg += "Order placement failed due to insufficient margin on one or more accounts.\n\n"
+            
+            if failed_accounts:
+                error_msg += "Failed Accounts:\n"
+                for account_index, error_reason in failed_accounts:
+                    account_name = self.get_account_name(account_index + 1)
+                    error_msg += f"• {account_name}: {error_reason}\n"
+            
+            if cancelled_orders:
+                error_msg += "\nCancelled Orders (due to margin shortfall):\n"
+                for account_index, order_num in cancelled_orders:
+                    account_name = self.get_account_name(account_index)
+                    error_msg += f"• {account_name}: Order {order_num}\n"
+            
+            error_msg += "\nAll orders have been cancelled. Please check your margin and try again."
+            
+            # Show error popup
+            messagebox.showerror("Margin Shortfall Error", error_msg)
+            
+            # Reset UI to initial state
+            self._reset_ui_after_margin_shortfall()
+            
+            # Reset margin shortfall flags
+            self.order_manager.margin_shortfall_occurred = False
+            self.order_manager.margin_shortfall_details = None
+            
+        except Exception as e:
+            applicationLogger.error(f"Error handling margin shortfall: {e}")
+            messagebox.showerror("Error", f"Error handling margin shortfall: {e}")
+    
+    def _reset_ui_after_margin_shortfall(self):
+        """Reset UI to initial state after margin shortfall"""
+        try:
+            # Re-enable buy button
+            self.buy_button.config(state='normal', text="BUY")
+            
+            # Disable all other buttons
+            self.cancel_buy_button.config(state='disabled')
+            self.modify_buy_button.config(state='disabled')
+            self.exit_button.config(state='disabled')
+            self.cancel_exit_button.config(state='disabled')
+            self.modify_exit_button.config(state='disabled')
+            
+            # Clear order numbers
+            self.order_numbers = {1: None, 2: None}
+            self.exit_order_numbers = {1: None, 2: None}
+            
+            # Reset order status displays
+            if self.account_manager.accounts[1]['active']:
+                self.master_order_status.set(self.get_ready_status_message(1))
+            if self.account_manager.accounts[2]['active']:
+                self.child_order_status.set(self.get_ready_status_message(2))
+            
+            # Reset SL and Target monitoring
+            self.reset_sl_target_monitoring()
+            
+            applicationLogger.info("UI reset after margin shortfall")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error resetting UI after margin shortfall: {e}")
+    
     def logout_child_account(self):
         """Logout child account (account 2)"""
         try:
@@ -1126,6 +1223,11 @@ class MainWindow:
             order_numbers = self.order_manager.place_buy_orders(
                 apis, quantities, trading_symbol, price, active_flags
             )
+            
+            # Check for margin shortfall and handle accordingly
+            if self.order_manager.margin_shortfall_occurred:
+                self._handle_margin_shortfall()
+                return
             
             # Update order numbers
             for i, order_num in enumerate(order_numbers):
@@ -1719,28 +1821,30 @@ class MainWindow:
                     # Get current orders and exit them at market price
                     orders = api.get_order_book()
                     if orders and orders.get('stat') == 'Ok':
-                        for order in orders.get('data', []):
-                            if order.get('status') in ['PENDING', 'OPEN']:
-                                # Place market exit order
-                                exit_result = api.place_order(
-                                    buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
-                                    product_type=order.get('pcode', 'I'),
-                                    exchange=order.get('exch', ''),
-                                    tradingsymbol=order.get('tsym', ''),
-                                    quantity=int(order.get('qty', 0)),
-                                    discloseqty=0,
-                                    price_type='MKT',
-                                    price=0.0,
-                                    trigger_price=None,
-                                    retention='DAY',
-                                    amo='NO',
-                                    remarks='Market Exit'
-                                )
-                                
-                                if exit_result and exit_result.get('stat') == 'Ok':
-                                    applicationLogger.info(f"Market exit order placed for account {account_num}: {exit_result.get('norenordno')}")
-                                else:
-                                    applicationLogger.error(f"Failed to place market exit order for account {account_num}")
+                        order_data = orders.get('data', [])
+                        if isinstance(order_data, list):
+                            for order in order_data:
+                                if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
+                                    # Place market exit order
+                                    exit_result = api.place_order(
+                                        buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
+                                        product_type=order.get('pcode', 'I'),
+                                        exchange=order.get('exch', ''),
+                                        tradingsymbol=order.get('tsym', ''),
+                                        quantity=int(order.get('qty', 0)),
+                                        discloseqty=0,
+                                        price_type='MKT',
+                                        price=0.0,
+                                        trigger_price=None,
+                                        retention='DAY',
+                                        amo='NO',
+                                        remarks='Market Exit'
+                                    )
+                                    
+                                    if exit_result and exit_result.get('stat') == 'Ok':
+                                        applicationLogger.info(f"Market exit order placed for account {account_num}: {exit_result.get('norenordno')}")
+                                    else:
+                                        applicationLogger.error(f"Failed to place market exit order for account {account_num}")
             
             # Update status
             self.master_order_status.set("All Orders - Market Exit Placed")
@@ -1777,28 +1881,30 @@ class MainWindow:
                 # Get current orders and exit them at market price
                 orders = api.get_order_book()
                 if orders and orders.get('stat') == 'Ok':
-                    for order in orders.get('data', []):
-                        if order.get('status') in ['PENDING', 'OPEN']:
-                            # Place market exit order
-                            exit_result = api.place_order(
-                                buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
-                                product_type=order.get('pcode', 'I'),
-                                exchange=order.get('exch', ''),
-                                tradingsymbol=order.get('tsym', ''),
-                                quantity=int(order.get('qty', 0)),
-                                discloseqty=0,
-                                price_type='MKT',
-                                price=0.0,
-                                trigger_price=None,
-                                retention='DAY',
-                                amo='NO',
-                                remarks='Master Market Exit'
-                            )
-                            
-                            if exit_result and exit_result.get('stat') == 'Ok':
-                                applicationLogger.info(f"Master market exit order placed: {exit_result.get('norenordno')}")
-                            else:
-                                applicationLogger.error("Failed to place master market exit order")
+                    order_data = orders.get('data', [])
+                    if isinstance(order_data, list):
+                        for order in order_data:
+                            if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
+                                # Place market exit order
+                                exit_result = api.place_order(
+                                    buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
+                                    product_type=order.get('pcode', 'I'),
+                                    exchange=order.get('exch', ''),
+                                    tradingsymbol=order.get('tsym', ''),
+                                    quantity=int(order.get('qty', 0)),
+                                    discloseqty=0,
+                                    price_type='MKT',
+                                    price=0.0,
+                                    trigger_price=None,
+                                    retention='DAY',
+                                    amo='NO',
+                                    remarks='Master Market Exit'
+                                )
+                                
+                                if exit_result and exit_result.get('stat') == 'Ok':
+                                    applicationLogger.info(f"Master market exit order placed: {exit_result.get('norenordno')}")
+                                else:
+                                    applicationLogger.error("Failed to place master market exit order")
                 
                 self.master_order_status.set("Master Orders - Market Exit Placed")
             else:
@@ -1833,28 +1939,30 @@ class MainWindow:
                 # Get current orders and exit them at market price
                 orders = api.get_order_book()
                 if orders and orders.get('stat') == 'Ok':
-                    for order in orders.get('data', []):
-                        if order.get('status') in ['PENDING', 'OPEN']:
-                            # Place market exit order
-                            exit_result = api.place_order(
-                                buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
-                                product_type=order.get('pcode', 'I'),
-                                exchange=order.get('exch', ''),
-                                tradingsymbol=order.get('tsym', ''),
-                                quantity=int(order.get('qty', 0)),
-                                discloseqty=0,
-                                price_type='MKT',
-                                price=0.0,
-                                trigger_price=None,
-                                retention='DAY',
-                                amo='NO',
-                                remarks='Child Market Exit'
-                            )
-                            
-                            if exit_result and exit_result.get('stat') == 'Ok':
-                                applicationLogger.info(f"Child market exit order placed: {exit_result.get('norenordno')}")
-                            else:
-                                applicationLogger.error("Failed to place child market exit order")
+                    order_data = orders.get('data', [])
+                    if isinstance(order_data, list):
+                        for order in order_data:
+                            if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
+                                # Place market exit order
+                                exit_result = api.place_order(
+                                    buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
+                                    product_type=order.get('pcode', 'I'),
+                                    exchange=order.get('exch', ''),
+                                    tradingsymbol=order.get('tsym', ''),
+                                    quantity=int(order.get('qty', 0)),
+                                    discloseqty=0,
+                                    price_type='MKT',
+                                    price=0.0,
+                                    trigger_price=None,
+                                    retention='DAY',
+                                    amo='NO',
+                                    remarks='Child Market Exit'
+                                )
+                                
+                                if exit_result and exit_result.get('stat') == 'Ok':
+                                    applicationLogger.info(f"Child market exit order placed: {exit_result.get('norenordno')}")
+                                else:
+                                    applicationLogger.error("Failed to place child market exit order")
                 
                 self.child_order_status.set("Child Orders - Market Exit Placed")
             else:
@@ -1865,16 +1973,24 @@ class MainWindow:
             self.child_order_status.set(f"Error: {str(e)[:30]}...")
     
     def set_sl_price(self):
-        """Set Stop Loss price (monitoring will start after buy order is filled)"""
+        """Set Stop Loss price and activate monitoring if buy order is active"""
         try:
             # Check if SL price is manually entered
             sl_price_text = self.sl_price_value.get().strip()
             
             if sl_price_text:
-                # Validate SL price but don't start monitoring yet
+                # Validate SL price
                 sl_price = float(sl_price_text)
-                self.sl_price_button.config(text=f"SL set @{sl_price}", bg="orange", fg="white")
-                applicationLogger.info(f"SL price set to: {sl_price} (monitoring will start after buy order is filled)")
+                
+                # Check if buy orders are filled/completed
+                if self._are_buy_orders_filled():
+                    # If buy orders are filled, immediately start SL monitoring
+                    self.start_sl_monitoring(sl_price)
+                    applicationLogger.info(f"SL price set and monitoring started: {sl_price} (buy orders are filled)")
+                else:
+                    # If buy orders not filled yet, just set the price (monitoring will start after buy order is filled)
+                    self.sl_price_button.config(text=f"SL set @{sl_price}", bg="orange", fg="white")
+                    applicationLogger.info(f"SL price set to: {sl_price} (monitoring will start after buy order is filled)")
             else:
                 # Auto-suggest SL price based on current price
                 current_price = self.premium_price_value.get()
@@ -1883,8 +1999,16 @@ class MainWindow:
                     # Suggest SL price (1% below current price for long positions)
                     suggested_sl = round(current_price_float * 0.99, 2)
                     self.sl_price_value.set(str(suggested_sl))
-                    self.sl_price_button.config(text=f"SL set @{suggested_sl}", bg="orange", fg="white")
-                    applicationLogger.info(f"SL price suggested: {suggested_sl} (1% below LTP: {current_price_float})")
+                    
+                    # Check if buy orders are filled/completed
+                    if self._are_buy_orders_filled():
+                        # If buy orders are filled, immediately start SL monitoring
+                        self.start_sl_monitoring(suggested_sl)
+                        applicationLogger.info(f"SL price suggested and monitoring started: {suggested_sl} (buy orders are filled)")
+                    else:
+                        # If buy orders not filled yet, just set the price
+                        self.sl_price_button.config(text=f"SL set @{suggested_sl}", bg="orange", fg="white")
+                        applicationLogger.info(f"SL price suggested: {suggested_sl} (1% below LTP: {current_price_float})")
                 else:
                     applicationLogger.warning("Please fetch current price first to set SL")
         except ValueError:
@@ -1894,16 +2018,24 @@ class MainWindow:
             messagebox.showerror("Error", f"Error setting SL price: {e}")
     
     def set_target_price(self):
-        """Set Target price (monitoring will start after buy order is filled)"""
+        """Set Target price and activate monitoring if buy order is active"""
         try:
             # Check if Target price is manually entered
             target_price_text = self.target_price_value.get().strip()
             
             if target_price_text:
-                # Validate Target price but don't start monitoring yet
+                # Validate Target price
                 target_price = float(target_price_text)
-                self.target_price_button.config(text=f"Target set @{target_price}", bg="orange", fg="white")
-                applicationLogger.info(f"Target price set to: {target_price} (monitoring will start after buy order is filled)")
+                
+                # Check if buy orders are filled/completed
+                if self._are_buy_orders_filled():
+                    # If buy orders are filled, immediately start Target monitoring
+                    self.start_target_monitoring(target_price)
+                    applicationLogger.info(f"Target price set and monitoring started: {target_price} (buy orders are filled)")
+                else:
+                    # If buy orders not filled yet, just set the price (monitoring will start after buy order is filled)
+                    self.target_price_button.config(text=f"Target set @{target_price}", bg="orange", fg="white")
+                    applicationLogger.info(f"Target price set to: {target_price} (monitoring will start after buy order is filled)")
             else:
                 # Auto-suggest Target price based on current price
                 current_price = self.premium_price_value.get()
@@ -1912,8 +2044,16 @@ class MainWindow:
                     # Suggest target price (1% above current price for long positions)
                     suggested_target = round(current_price_float * 1.01, 2)
                     self.target_price_value.set(str(suggested_target))
-                    self.target_price_button.config(text=f"Target set @{suggested_target}", bg="orange", fg="white")
-                    applicationLogger.info(f"Target price suggested: {suggested_target} (1% above LTP: {current_price_float})")
+                    
+                    # Check if buy orders are filled/completed
+                    if self._are_buy_orders_filled():
+                        # If buy orders are filled, immediately start Target monitoring
+                        self.start_target_monitoring(suggested_target)
+                        applicationLogger.info(f"Target price suggested and monitoring started: {suggested_target} (buy orders are filled)")
+                    else:
+                        # If buy orders not filled yet, just set the price
+                        self.target_price_button.config(text=f"Target set @{suggested_target}", bg="orange", fg="white")
+                        applicationLogger.info(f"Target price suggested: {suggested_target} (1% above LTP: {current_price_float})")
                 else:
                     applicationLogger.warning("Please fetch current price first to set Target")
         except ValueError:
@@ -2046,10 +2186,12 @@ class MainWindow:
                     # Get current orders and exit them at market price
                     orders = api.get_order_book()
                     if orders and orders.get('stat') == 'Ok':
-                        for order in orders.get('data', []):
-                            if order.get('status') in ['PENDING', 'OPEN']:
-                                # Place market exit order
-                                exit_result = api.place_order(
+                        order_data = orders.get('data', [])
+                        if isinstance(order_data, list):
+                            for order in order_data:
+                                if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
+                                    # Place market exit order
+                                    exit_result = api.place_order(
                                     buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
                                     product_type=order.get('pcode', 'I'),
                                     exchange=order.get('exch', ''),
@@ -2066,12 +2208,10 @@ class MainWindow:
                                 
                                 if exit_result and exit_result.get('stat') == 'Ok':
                                     applicationLogger.info(f"Market exit order placed for account {account_num}: {exit_result.get('norenordno')}")
-            else:
-
+                                else:
                                     applicationLogger.error(f"Failed to place market exit order for account {account_num}")
                 
         except Exception as e:
-
             applicationLogger.error(f"Error in silent market exit: {e}")
     
     def run(self):

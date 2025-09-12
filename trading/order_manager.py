@@ -14,6 +14,8 @@ class OrderManager:
     def __init__(self):
         self.order_data = {}
         self.file_path = "orders.csv"
+        self.margin_shortfall_occurred = False
+        self.margin_shortfall_details = None
         self._initialize_order_dataframe()
     
     def _initialize_order_dataframe(self):
@@ -107,6 +109,16 @@ class OrderManager:
                     applicationLogger.error(f"Order placement failed: {order_place}")
                     if order_place:
                         applicationLogger.error(f"Response keys: {order_place.keys() if hasattr(order_place, 'keys') else 'No keys'}")
+                        
+                        # Check for margin shortfall error
+                        error_msg = order_place.get('emsg', '')
+                        if 'margin' in error_msg.lower() or 'shortfall' in error_msg.lower():
+                            applicationLogger.error(f"Margin shortfall detected for account {index + 1}: {error_msg}")
+                            # Set a flag to indicate margin shortfall
+                            with lock:
+                                if not hasattr(place_order, 'margin_shortfall_detected'):
+                                    place_order.margin_shortfall_detected = []
+                                place_order.margin_shortfall_detected.append((index, error_msg))
                     
             except Exception as e:
                 applicationLogger.error(f"Error placing buy order: {e}")
@@ -127,6 +139,34 @@ class OrderManager:
         # Wait for all threads to complete
         for thread in threads:
             thread.join()
+        
+        # Check for margin shortfall and cancel other orders if needed
+        margin_shortfall_detected = getattr(place_order, 'margin_shortfall_detected', [])
+        if margin_shortfall_detected:
+            applicationLogger.warning(f"Margin shortfall detected in {len(margin_shortfall_detected)} account(s)")
+            
+            # Cancel all successful orders due to margin shortfall
+            cancelled_orders = []
+            for i, order_num in enumerate(order_numbers):
+                if order_num and i not in [failed_index for failed_index, _ in margin_shortfall_detected]:
+                    try:
+                        api = apis[i]
+                        if api:
+                            cancel_result = api.cancel_order(order_num)
+                            if cancel_result and cancel_result.get('stat') == 'Ok':
+                                cancelled_orders.append((i + 1, order_num))
+                                applicationLogger.info(f"Cancelled order {order_num} for account {i + 1} due to margin shortfall")
+                            else:
+                                applicationLogger.error(f"Failed to cancel order {order_num} for account {i + 1}: {cancel_result}")
+                    except Exception as e:
+                        applicationLogger.error(f"Error cancelling order for account {i + 1}: {e}")
+            
+            # Set a flag to indicate margin shortfall occurred
+            self.margin_shortfall_occurred = True
+            self.margin_shortfall_details = {
+                'failed_accounts': margin_shortfall_detected,
+                'cancelled_orders': cancelled_orders
+            }
         
         return order_numbers
     
