@@ -2129,9 +2129,9 @@ class MainWindow:
             applicationLogger.error(f"Error checking SL/Target breach: {e}")
     
     def execute_sl_exit(self, current_price):
-        """Execute market exit when SL is breached"""
+        """Execute limit exit when SL is breached"""
         try:
-            applicationLogger.info(f"Executing SL exit at market price. Current: {current_price}")
+            applicationLogger.info(f"Executing SL exit at limit price. Current: {current_price}")
             
             # Stop SL monitoring
             self.stop_sl_monitoring()
@@ -2142,16 +2142,17 @@ class MainWindow:
             if self.account_manager.accounts[2]['active']:
                 self.child_order_status.set(f"SL TRIGGERED @ {current_price}")
             
-            # Execute market exit for all accounts - call the existing method
-            self.exit_all_orders_market_silent()
+            # Set the exit price to current price and call regular exit function
+            self.price1_value.set(str(current_price))
+            self.place_exit_orders()
             
         except Exception as e:
             applicationLogger.error(f"Error executing SL exit: {e}")
     
     def execute_target_exit(self, current_price):
-        """Execute market exit when Target is reached"""
+        """Execute limit exit when Target is reached"""
         try:
-            applicationLogger.info(f"Executing Target exit at market price. Current: {current_price}")
+            applicationLogger.info(f"Executing Target exit at limit price. Current: {current_price}")
             
             # Stop target monitoring
             self.stop_target_monitoring()
@@ -2162,8 +2163,9 @@ class MainWindow:
             if self.account_manager.accounts[2]['active']:
                 self.child_order_status.set(f"TARGET HIT @ {current_price}")
             
-            # Execute market exit for all accounts - call the existing method
-            self.exit_all_orders_market_silent()
+            # Set the exit price to current price and call regular exit function
+            self.price1_value.set(str(current_price))
+            self.place_exit_orders()
             
         except Exception as e:
             applicationLogger.error(f"Error executing Target exit: {e}")
