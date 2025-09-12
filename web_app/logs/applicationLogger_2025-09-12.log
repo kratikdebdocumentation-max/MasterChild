@@ -3449,3 +3449,287 @@
 2025-09-12 15:10:32,042 - INFO - System initialization completed successfully
 2025-09-12 15:10:32,480 - INFO - Generated fresh 2FA for account 1: 919158
 2025-09-12 15:10:32,679 - INFO - Master account initialized successfully: KRATIK YADAV
+2025-09-12 15:18:29,007 - INFO - Downloading master files...
+2025-09-12 15:18:29,008 - INFO - Finding expiry dates...
+2025-09-12 15:18:29,145 - INFO - System initialization completed successfully
+2025-09-12 15:18:29,569 - INFO - Generated fresh 2FA for account 1: 091587
+2025-09-12 15:18:29,987 - INFO - PnL updated for account 1: -7.5
+2025-09-12 15:18:29,987 - INFO - Master account initialized successfully: KRATIK YADAV
+2025-09-12 15:18:34,054 - INFO - Generated fresh 2FA for account 2: 882206
+2025-09-12 15:18:34,414 - INFO - PnL updated for account 2: -7.5
+2025-09-12 15:18:37,328 - INFO - Cleared option and strike selections - no active orders
+2025-09-12 15:18:37,492 - INFO - Fetched NIFTY price: 25118.0
+2025-09-12 15:18:37,493 - INFO - Updated strikes for NIFTY based on price 25118.0: [24750, 24800, 24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200, 25250, 25300, 25350, 25400, 25450]
+2025-09-12 15:18:40,931 - ERROR - Error logging out child account: 'AccountManager' object has no attribute 'logout_account'
+2025-09-12 15:18:49,178 - INFO - Downloading master files...
+2025-09-12 15:18:49,178 - INFO - Finding expiry dates...
+2025-09-12 15:18:49,275 - INFO - System initialization completed successfully
+2025-09-12 15:18:49,626 - INFO - Generated fresh 2FA for account 1: 027291
+2025-09-12 15:18:50,265 - INFO - PnL updated for account 1: -7.5
+2025-09-12 15:18:50,266 - INFO - Master account initialized successfully: KRATIK YADAV
+2025-09-12 15:18:53,540 - INFO - Cleared option and strike selections - no active orders
+2025-09-12 15:18:53,709 - INFO - Fetched NIFTY price: 25116.55
+2025-09-12 15:18:53,709 - INFO - Updated strikes for NIFTY based on price 25116.55: [24750, 24800, 24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200, 25250, 25300, 25350, 25400, 25450]
+2025-09-12 15:18:55,927 - INFO - Fetched NIFTY price: 25117.05
+2025-09-12 15:18:55,928 - INFO - Index LTP for NIFTY: 25117.05
+2025-09-12 15:18:58,681 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25400
+2025-09-12 15:18:58,681 - INFO - Found NFO token and lot size for NIFTY16SEP25C25400: 44796, 75
+2025-09-12 15:18:58,681 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:18:58,696 - INFO - Updated quantity options for NIFTY16SEP25C25400 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:18:58,696 - INFO - Getting token for trading symbol: NIFTY16SEP25C25400
+2025-09-12 15:18:58,702 - INFO - Found NFO token for NIFTY16SEP25C25400: 44796
+2025-09-12 15:18:58,873 - INFO - Modify price fields cleared after auto-fetch
+2025-09-12 15:18:58,874 - INFO - Getting token for trading symbol: NIFTY16SEP25C25400
+2025-09-12 15:18:58,883 - INFO - Found NFO token for NIFTY16SEP25C25400: 44796
+2025-09-12 15:18:58,883 - INFO - Subscribed to live price feed via master account: NFO|44796
+2025-09-12 15:18:58,884 - INFO - Auto-subscribed to NIFTY16SEP25C25400 at price 7.25
+2025-09-12 15:19:15,708 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:19:15,725 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:19:15,725 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:19:15,725 - INFO - Updated quantity options for NIFTY16SEP25C25450 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:19:15,725 - INFO - Getting token for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:19:15,739 - INFO - Found NFO token for NIFTY16SEP25C25450: 44813
+2025-09-12 15:19:15,925 - INFO - Modify price fields cleared after auto-fetch
+2025-09-12 15:19:15,925 - INFO - Getting token for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:19:15,925 - INFO - Found NFO token for NIFTY16SEP25C25450: 44813
+2025-09-12 15:19:15,925 - INFO - Unsubscribed from previous: NFO|44796
+2025-09-12 15:19:15,925 - INFO - Subscribed to live price feed via master account: NFO|44813
+2025-09-12 15:19:15,925 - INFO - Auto-subscribed to NIFTY16SEP25C25450 at price 4.65
+2025-09-12 15:19:26,337 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:19:26,344 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:19:26,344 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:19:26,345 - INFO - Updated quantity options for NIFTY16SEP25C25450 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:19:26,345 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:19:26,355 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:19:26,355 - INFO - Using same quantity for both accounts: 75 (lot size: 75)
+2025-09-12 15:19:26,356 - INFO - Active accounts: [1]
+2025-09-12 15:19:26,357 - INFO - Placing buy orders for accounts: [1]
+2025-09-12 15:19:26,359 - INFO - Trading symbol: NIFTY16SEP25C25450, Price: 4.65
+2025-09-12 15:19:26,360 - INFO - Quantities: [75]
+2025-09-12 15:19:26,361 - INFO - Account 1: API=True, Qty=75, Active=True
+2025-09-12 15:19:26,364 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'NFO', 'tradingsymbol': 'NIFTY16SEP25C25450', 'quantity': 75, 'discloseqty': 0, 'price_type': 'LMT', 'price': 4.65, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 15:19:26,365 - INFO - API instance for account 1: True
+2025-09-12 15:19:26,532 - INFO - API response: {'request_time': '15:19:26 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200337343'}
+2025-09-12 15:19:26,533 - INFO - API response type: <class 'dict'>
+2025-09-12 15:19:26,534 - INFO - New order received: 25091200337343
+2025-09-12 15:19:26,535 - INFO - Buy order placed successfully: {'request_time': '15:19:26 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200337343'}
+2025-09-12 15:19:26,535 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '4.65'
+2025-09-12 15:19:26,545 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-12 15:19:26,547 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-12 15:19:26,547 - INFO - Order data saved to orders.csv
+2025-09-12 15:19:26,547 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-12 15:19:26,548 - INFO - Account 1 - B PENDING NewAck
+2025-09-12 15:19:26,549 - INFO - Master order status updated: Buy Order PENDING @ 4.65
+2025-09-12 15:19:26,553 - INFO - Updating order 25091200337343
+2025-09-12 15:19:26,554 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '4.65'
+2025-09-12 15:19:26,558 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:19:26,560 - INFO - Master order status updated: Order Rejected: RED:Margin Shortfall:INR 168.52 Available:INR 500.00 for C-FA42242 [SHOONYA]
+2025-09-12 15:19:26,734 - INFO - PnL updated for account 1: -7.5
+2025-09-12 15:19:26,735 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-12 15:20:06,544 - INFO - Downloading master files...
+2025-09-12 15:20:06,549 - INFO - Finding expiry dates...
+2025-09-12 15:20:06,660 - INFO - System initialization completed successfully
+2025-09-12 15:20:07,087 - INFO - Generated fresh 2FA for account 1: 034903
+2025-09-12 15:20:07,486 - INFO - PnL updated for account 1: -7.5
+2025-09-12 15:20:07,486 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-12 15:20:11,235 - INFO - Cleared option and strike selections - no active orders
+2025-09-12 15:20:11,404 - INFO - Fetched NIFTY price: 25113.3
+2025-09-12 15:20:11,406 - INFO - Updated strikes for NIFTY based on price 25113.3: [24750, 24800, 24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200, 25250, 25300, 25350, 25400, 25450]
+2025-09-12 15:20:13,483 - INFO - Fetched NIFTY price: 25113.55
+2025-09-12 15:20:13,484 - INFO - Index LTP for NIFTY: 25113.55
+2025-09-12 15:20:16,832 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:20:16,838 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:20:16,838 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:20:16,838 - INFO - Updated quantity options for NIFTY16SEP25C25450 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:20:16,839 - INFO - Getting token for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:20:16,846 - INFO - Found NFO token for NIFTY16SEP25C25450: 44813
+2025-09-12 15:20:17,032 - INFO - Modify price fields cleared after auto-fetch
+2025-09-12 15:20:17,032 - INFO - Getting token for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:20:17,036 - INFO - Found NFO token for NIFTY16SEP25C25450: 44813
+2025-09-12 15:20:17,037 - INFO - Subscribed to live price feed via master account: NFO|44813
+2025-09-12 15:20:17,037 - INFO - Auto-subscribed to NIFTY16SEP25C25450 at price 4.7
+2025-09-12 15:20:24,143 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:20:24,143 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:20:24,143 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:20:24,159 - INFO - Updated quantity options for NIFTY16SEP25C25450 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:20:24,159 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:20:24,168 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:20:24,169 - INFO - Using same quantity for both accounts: 75 (lot size: 75)
+2025-09-12 15:20:24,169 - INFO - Active accounts: [1]
+2025-09-12 15:20:24,169 - INFO - Placing buy orders for accounts: [1]
+2025-09-12 15:20:24,169 - INFO - Trading symbol: NIFTY16SEP25C25450, Price: 4.7
+2025-09-12 15:20:24,171 - INFO - Quantities: [75]
+2025-09-12 15:20:24,171 - INFO - Account 1: API=True, Qty=75, Active=True
+2025-09-12 15:20:24,171 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'NFO', 'tradingsymbol': 'NIFTY16SEP25C25450', 'quantity': 75, 'discloseqty': 0, 'price_type': 'LMT', 'price': 4.7, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 15:20:24,171 - INFO - API instance for account 1: True
+2025-09-12 15:20:24,353 - INFO - API response: {'request_time': '15:20:24 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200338284'}
+2025-09-12 15:20:24,353 - INFO - API response type: <class 'dict'>
+2025-09-12 15:20:24,353 - INFO - Buy order placed successfully: {'request_time': '15:20:24 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200338284'}
+2025-09-12 15:20:24,353 - INFO - New order received: 25091200338284
+2025-09-12 15:20:24,353 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '4.70'
+2025-09-12 15:20:24,365 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-12 15:20:24,366 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-12 15:20:24,367 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-12 15:20:24,369 - INFO - Master order status updated: Buy Order PENDING @ 4.70
+2025-09-12 15:20:24,372 - INFO - Order data saved to orders.csv
+2025-09-12 15:20:24,374 - INFO - Updating order 25091200338284
+2025-09-12 15:20:24,374 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '4.70'
+2025-09-12 15:20:24,375 - INFO - Account 1 - B PENDING NewAck
+2025-09-12 15:20:24,378 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:20:24,379 - INFO - Master order status updated: Buy Order PENDING @ 4.70
+2025-09-12 15:20:24,385 - INFO - Updating order 25091200338284
+2025-09-12 15:20:24,385 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '4.70'
+2025-09-12 15:20:24,388 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:20:24,389 - INFO - Master order status updated: Buy Order Open @ 4.70
+2025-09-12 15:20:24,552 - INFO - PnL updated for account 1: -7.5
+2025-09-12 15:20:24,552 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-12 15:20:29,857 - INFO - Updating order 25091200338284
+2025-09-12 15:20:29,857 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'B', price: '4.70'
+2025-09-12 15:20:29,862 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:20:29,864 - INFO - Buy order completed for account 1: NIFTY16SEP25C25450 @ 4.7
+2025-09-12 15:20:29,868 - INFO - Exit button enabled after buy order completion
+2025-09-12 15:20:30,053 - INFO - PnL updated for account 1: -7.5
+2025-09-12 15:20:30,053 - INFO - Master order status updated: Buy Order Complete @ 4.70
+2025-09-12 15:20:50,003 - INFO - Target monitoring activated at 4.75
+2025-09-12 15:20:50,005 - INFO - Target price suggested and monitoring started: 4.75 (buy orders are filled)
+2025-09-12 15:20:52,927 - WARNING - TARGET REACHED! Current: 4.75, Target: 4.75
+2025-09-12 15:20:52,927 - INFO - Executing Target exit at limit price. Current: 4.75
+2025-09-12 15:20:52,929 - INFO - Target monitoring stopped
+2025-09-12 15:20:52,933 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:20:52,940 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:20:52,941 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:20:52,942 - INFO - Updated quantity options for NIFTY16SEP25C25450 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:20:52,944 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:20:52,960 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:20:52,961 - INFO - Using same quantity for both accounts: 75 (lot size: 75)
+2025-09-12 15:20:52,962 - INFO - Active accounts for exit: [1]
+2025-09-12 15:20:52,963 - INFO - Placing exit orders for accounts: [1]
+2025-09-12 15:20:52,964 - INFO - Trading symbol: NIFTY16SEP25C25450, Price: 4.75
+2025-09-12 15:20:52,965 - INFO - Quantities: [75]
+2025-09-12 15:20:53,155 - INFO - Exit order placed successfully: {'request_time': '15:20:53 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200338615'}
+2025-09-12 15:20:53,158 - INFO - Exit button disabled to prevent duplicate orders
+2025-09-12 15:20:53,160 - INFO - Cancel Exit and Modify Exit buttons enabled after exit orders placed
+2025-09-12 15:20:53,164 - INFO - New order received: 25091200338615
+2025-09-12 15:20:53,164 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'S', price: '4.75'
+2025-09-12 15:20:53,174 - INFO - Master order status updated: Sell Order PENDING @ 4.75
+2025-09-12 15:20:53,179 - INFO - Order data saved to orders.csv
+2025-09-12 15:20:53,182 - INFO - Account 1 - S PENDING NewAck
+2025-09-12 15:20:53,183 - INFO - Updating order 25091200338615
+2025-09-12 15:20:53,183 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'S', price: '4.75'
+2025-09-12 15:20:53,189 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:20:53,194 - INFO - Master order status updated: Sell Order PENDING @ 4.75
+2025-09-12 15:20:53,199 - INFO - Updating order 25091200338615
+2025-09-12 15:20:53,199 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'S', price: '4.75'
+2025-09-12 15:20:53,202 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:20:53,204 - INFO - Master order status updated: Sell Order Open @ 4.75
+2025-09-12 15:20:53,209 - INFO - Updating order 25091200338615
+2025-09-12 15:20:53,210 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'S', price: '4.75'
+2025-09-12 15:20:53,216 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:20:53,216 - INFO - Sell order completed for account 1: NIFTY16SEP25C25450 @ 4.75
+2025-09-12 15:20:53,218 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-12 15:20:53,219 - INFO - SL and Target monitoring reset after sell order completion
+2025-09-12 15:20:53,375 - INFO - PnL updated for account 1: -3.75
+2025-09-12 15:20:53,377 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-12 15:20:53,386 - INFO - PnL updated for account 1: -3.75
+2025-09-12 15:20:53,387 - INFO - Master sell complete check: False (status: Sell Order Open @ 4.75)
+2025-09-12 15:20:53,387 - INFO - Master order status updated: Sell Order Complete @ 4.75
+2025-09-12 15:21:01,325 - INFO - Order 25091200338615 cancelled successfully
+2025-09-12 15:21:01,326 - INFO - Updating order 25091200338615
+2025-09-12 15:21:01,326 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'CancelRejected', trantype: 'S', price: '4.75'
+2025-09-12 15:21:01,327 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:21:01,327 - INFO - Sell order completed for account 1: NIFTY16SEP25C25450 @ 4.75
+2025-09-12 15:21:01,328 - INFO - Exit button re-enabled after cancelling exit orders
+2025-09-12 15:21:01,328 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-12 15:21:01,329 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-12 15:21:01,329 - INFO - SL and Target monitoring reset after sell order completion
+2025-09-12 15:21:01,505 - INFO - PnL updated for account 1: -3.75
+2025-09-12 15:21:01,506 - INFO - Master sell complete check: False (status: Exit Orders Cancelled)
+2025-09-12 15:21:01,506 - INFO - Master order status updated: Sell Order Complete @ 4.75
+2025-09-12 15:21:58,016 - INFO - Buttons released - ready for new orders
+2025-09-12 15:22:00,362 - INFO - Buttons released - ready for new orders
+2025-09-12 15:22:13,793 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:22:13,803 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:22:13,803 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:22:13,803 - INFO - Updated quantity options for NIFTY16SEP25C25450 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:22:13,804 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:22:13,818 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:22:13,818 - INFO - Using same quantity for both accounts: 75 (lot size: 75)
+2025-09-12 15:22:13,818 - INFO - Active accounts: [1]
+2025-09-12 15:22:13,820 - INFO - Placing buy orders for accounts: [1]
+2025-09-12 15:22:13,820 - INFO - Trading symbol: NIFTY16SEP25C25450, Price: 4.65
+2025-09-12 15:22:13,821 - INFO - Quantities: [75]
+2025-09-12 15:22:13,821 - INFO - Account 1: API=True, Qty=75, Active=True
+2025-09-12 15:22:13,822 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'NFO', 'tradingsymbol': 'NIFTY16SEP25C25450', 'quantity': 75, 'discloseqty': 0, 'price_type': 'LMT', 'price': 4.65, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 15:22:13,823 - INFO - API instance for account 1: True
+2025-09-12 15:22:14,030 - INFO - API response: {'request_time': '15:22:14 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200340462'}
+2025-09-12 15:22:14,032 - INFO - API response type: <class 'dict'>
+2025-09-12 15:22:14,033 - INFO - Buy order placed successfully: {'request_time': '15:22:14 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200340462'}
+2025-09-12 15:22:14,034 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-12 15:22:14,035 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-12 15:22:14,036 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-12 15:22:14,040 - INFO - New order received: 25091200340462
+2025-09-12 15:22:14,040 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '4.65'
+2025-09-12 15:22:14,047 - INFO - Master order status updated: Buy Order PENDING @ 4.65
+2025-09-12 15:22:14,048 - INFO - Order data saved to orders.csv
+2025-09-12 15:22:14,050 - INFO - Account 1 - B PENDING NewAck
+2025-09-12 15:22:14,051 - INFO - Updating order 25091200340462
+2025-09-12 15:22:14,052 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '4.65'
+2025-09-12 15:22:14,057 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:22:14,060 - INFO - Master order status updated: Order Rejected: RED:'MIS' Orders are disallowed after system square off
+2025-09-12 15:22:14,238 - INFO - PnL updated for account 1: -3.75
+2025-09-12 15:22:14,238 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-12 15:22:48,905 - INFO - Order 25091200340462 cancelled successfully
+2025-09-12 15:22:48,907 - INFO - Updating order 25091200340462
+2025-09-12 15:22:48,907 - INFO - Order status debug - status: 'REJECTED', reporttype: 'CancelRejected', trantype: 'B', price: '4.65'
+2025-09-12 15:22:48,909 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:22:48,910 - INFO - Buy button re-enabled after cancelling buy orders
+2025-09-12 15:22:48,911 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-12 15:22:48,912 - INFO - Master order status updated: Order Rejected: SAF:order is not open to cancel
+2025-09-12 15:22:52,763 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:22:52,763 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:22:52,763 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:22:52,763 - INFO - Updated quantity options for NIFTY16SEP25C25450 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:22:52,763 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:22:52,777 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:22:52,777 - INFO - Using same quantity for both accounts: 75 (lot size: 75)
+2025-09-12 15:22:52,778 - INFO - Active accounts: [1]
+2025-09-12 15:22:52,778 - INFO - Placing buy orders for accounts: [1]
+2025-09-12 15:22:52,778 - INFO - Trading symbol: NIFTY16SEP25C25450, Price: 4.65
+2025-09-12 15:22:52,778 - INFO - Quantities: [75]
+2025-09-12 15:22:52,778 - INFO - Account 1: API=True, Qty=75, Active=True
+2025-09-12 15:22:52,779 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'NFO', 'tradingsymbol': 'NIFTY16SEP25C25450', 'quantity': 75, 'discloseqty': 0, 'price_type': 'LMT', 'price': 4.65, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-12 15:22:52,779 - INFO - API instance for account 1: True
+2025-09-12 15:22:52,938 - INFO - API response: {'request_time': '15:22:53 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200340838'}
+2025-09-12 15:22:52,939 - INFO - API response type: <class 'dict'>
+2025-09-12 15:22:52,939 - INFO - New order received: 25091200340838
+2025-09-12 15:22:52,939 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '4.65'
+2025-09-12 15:22:52,940 - INFO - Buy order placed successfully: {'request_time': '15:22:53 12-09-2025', 'stat': 'Ok', 'norenordno': '25091200340838'}
+2025-09-12 15:22:52,945 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-12 15:22:52,945 - INFO - Order data saved to orders.csv
+2025-09-12 15:22:52,946 - INFO - Account 1 - B PENDING NewAck
+2025-09-12 15:22:52,946 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-12 15:22:52,946 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-12 15:22:52,947 - INFO - Master order status updated: Buy Order PENDING @ 4.65
+2025-09-12 15:22:52,948 - INFO - Updating order 25091200340838
+2025-09-12 15:22:52,949 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '4.65'
+2025-09-12 15:22:52,951 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:22:52,951 - INFO - Master order status updated: Order Rejected: RED:'MIS' Orders are disallowed after system square off
+2025-09-12 15:22:53,123 - INFO - PnL updated for account 1: -3.75
+2025-09-12 15:22:53,123 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-12 15:23:15,787 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:23:15,801 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:23:15,803 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:23:15,803 - INFO - Updated quantity options for NIFTY16SEP25C25450 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:23:15,803 - INFO - Modify Buy box populated with current LTP: 4.65
+2025-09-12 15:23:19,339 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:23:19,345 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:23:19,345 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:23:19,345 - INFO - Updated quantity options for NIFTY16SEP25C25450 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-12 15:23:19,346 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25450
+2025-09-12 15:23:19,355 - INFO - Found NFO token and lot size for NIFTY16SEP25C25450: 44813, 75
+2025-09-12 15:23:19,356 - INFO - Using same quantity for both accounts: 75 (lot size: 75)
+2025-09-12 15:23:19,615 - INFO - Order 25091200340838 modified successfully
+2025-09-12 15:23:19,617 - INFO - Updating order 25091200340838
+2025-09-12 15:23:19,617 - INFO - Order status debug - status: 'REJECTED', reporttype: 'ReplaceRejected', trantype: 'B', price: '4.65'
+2025-09-12 15:23:19,618 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-12 15:23:19,620 - INFO - Master order status updated: Order Rejected: SAF:order is not open to modify

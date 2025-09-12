@@ -20,6 +20,7 @@ class WebSocketManager:
         self.buy_order_completed_callback = None
         self.sell_order_completed_callback = None
         self.pnl_update_callback = None
+        self.order_state_callback = None
     
     def setup_websocket_callbacks(self, account_num: int):
         """Setup WebSocket callbacks for a specific account"""
@@ -138,6 +139,10 @@ class WebSocketManager:
         """Set callback for PnL updates"""
         self.pnl_update_callback = callback
     
+    def set_order_state_callback(self, callback: Callable[[int, str, str, str], None]):
+        """Set callback for order state updates"""
+        self.order_state_callback = callback
+    
     def _process_order_update(self, tick_data: Dict[str, Any], account_num: int):
         """Process order update data"""
         try:
@@ -153,6 +158,17 @@ class WebSocketManager:
                     self.pnl_update_callback(account_num)
                 except Exception as e:
                     applicationLogger.error(f"Error updating PnL for account {account_num}: {e}")
+            
+            # Update order state for cross-account coordination
+            if self.order_state_callback:
+                try:
+                    status = tick_data.get('status', '')
+                    reporttype = tick_data.get('reporttype', '')
+                    trantype = tick_data.get('trantype', '')
+                    if status and reporttype and trantype:
+                        self.order_state_callback(account_num, status, reporttype, trantype)
+                except Exception as e:
+                    applicationLogger.error(f"Error updating order state for account {account_num}: {e}")
             
         except Exception as e:
             applicationLogger.error(f"Error processing order update for account {account_num}: {e}")

@@ -49,6 +49,9 @@ class MainWindow:
         # Set PnL update callback
         self.websocket_manager.set_pnl_update_callback(self.update_pnl_on_trade)
         
+        # Set order state callback for cross-account coordination
+        self.websocket_manager.set_order_state_callback(self.update_order_state)
+        
         # GUI variables
         self.setup_variables()
         
@@ -99,6 +102,12 @@ class MainWindow:
         self.target_monitoring_active = False
         self.sl_price_level = None
         self.target_price_level = None
+        
+        # Cross-account coordination variables
+        self.master_order_state = None  # PENDING, OPEN, FILLED, REJECTED, CANCELLED
+        self.child_order_state = None
+        self.order_coordination_active = False
+        self.coordination_timer = None
         
         # Quantity variables
         self.qty1_var = tk.StringVar()
@@ -1277,6 +1286,11 @@ class MainWindow:
                 if order_num:
                     self.order_numbers[active_accounts[i]] = order_num
             
+            # Start cross-account coordination if both master and child are active
+            if 1 in active_accounts and 2 in active_accounts:
+                self.start_order_coordination()
+                applicationLogger.info("Cross-account coordination started for buy orders")
+            
 
             # Update order status displays based on active accounts
             if 1 in active_accounts:
@@ -2330,6 +2344,268 @@ class MainWindow:
                     applicationLogger.info(f"PnL updated for account {account_num}: {pnl_value}")
         except Exception as e:
             applicationLogger.error(f"Error updating PnL on trade: {e}")
+    
+    def update_order_state(self, account_num: int, status: str, reporttype: str, trantype: str):
+        """Update order state for cross-account coordination"""
+        try:
+            if account_num == 1:  # Master account
+                self.master_order_state = status.upper()
+            elif account_num == 2:  # Child account
+                self.child_order_state = status.upper()
+            
+            applicationLogger.info(f"Order state updated - Master: {self.master_order_state}, Child: {self.child_order_state}")
+            
+            # Trigger cross-account coordination if both orders are placed
+            if self.order_coordination_active:
+                self.check_cross_account_coordination()
+                
+        except Exception as e:
+            applicationLogger.error(f"Error updating order state: {e}")
+    
+    def start_order_coordination(self):
+        """Start cross-account coordination monitoring"""
+        try:
+            self.order_coordination_active = True
+            self.master_order_state = None
+            self.child_order_state = None
+            applicationLogger.info("Cross-account coordination started")
+        except Exception as e:
+            applicationLogger.error(f"Error starting order coordination: {e}")
+    
+    def stop_order_coordination(self):
+        """Stop cross-account coordination monitoring"""
+        try:
+            self.order_coordination_active = False
+            if self.coordination_timer:
+                self.root.after_cancel(self.coordination_timer)
+                self.coordination_timer = None
+            applicationLogger.info("Cross-account coordination stopped")
+        except Exception as e:
+            applicationLogger.error(f"Error stopping order coordination: {e}")
+    
+    def check_cross_account_coordination(self):
+        """Check and handle cross-account coordination scenarios"""
+        try:
+            if not self.order_coordination_active:
+                return
+            
+            master_state = self.master_order_state
+            child_state = self.child_order_state
+            
+            applicationLogger.info(f"Checking coordination - Master: {master_state}, Child: {child_state}")
+            
+            # Scenario 1: Master FILLED, Child PENDING/OPEN
+            if master_state == 'FILLED' and child_state in ['PENDING', 'OPEN']:
+                self.handle_master_filled_child_pending()
+            
+            # Scenario 2: Master FILLED, Child REJECTED
+            elif master_state == 'FILLED' and child_state == 'REJECTED':
+                self.handle_master_filled_child_rejected()
+            
+            # Scenario 3: Master REJECTED, Child FILLED
+            elif master_state == 'REJECTED' and child_state == 'FILLED':
+                self.handle_master_rejected_child_filled()
+            
+            # Scenario 4: Master REJECTED, Child PENDING
+            elif master_state == 'REJECTED' and child_state == 'PENDING':
+                self.handle_master_rejected_child_pending()
+            
+            # Scenario 5: Master PENDING, Child FILLED
+            elif master_state == 'PENDING' and child_state == 'FILLED':
+                self.handle_master_pending_child_filled()
+            
+            # Scenario 6: Master PENDING, Child REJECTED
+            elif master_state == 'PENDING' and child_state == 'REJECTED':
+                self.handle_master_pending_child_rejected()
+                
+        except Exception as e:
+            applicationLogger.error(f"Error in cross-account coordination: {e}")
+    
+    def handle_master_filled_child_pending(self):
+        """Master FILLED, Child PENDING/OPEN - Wait 2s then cancel child"""
+        try:
+            applicationLogger.info("Master FILLED, Child PENDING/OPEN - Starting 2s timeout")
+            
+            # Cancel child order after 2 seconds
+            self.coordination_timer = self.root.after(2000, self.cancel_child_order_and_block_exit)
+            
+        except Exception as e:
+            applicationLogger.error(f"Error handling master filled child pending: {e}")
+    
+    def handle_master_filled_child_rejected(self):
+        """Master FILLED, Child REJECTED - Skip child operations"""
+        try:
+            applicationLogger.info("Master FILLED, Child REJECTED - Blocking child operations")
+            # Child operations are already blocked since order was rejected
+            self.stop_order_coordination()
+            
+        except Exception as e:
+            applicationLogger.error(f"Error handling master filled child rejected: {e}")
+    
+    def handle_master_rejected_child_filled(self):
+        """Master REJECTED, Child FILLED - Exit child at market price immediately"""
+        try:
+            applicationLogger.info("Master REJECTED, Child FILLED - Exiting child at market price")
+            
+            # Show popup with master rejection reason
+            messagebox.showerror(
+                "Critical Error", 
+                "Master order was REJECTED but Child order was FILLED!\n\n"
+                "This creates an inconsistent position. Child will be exited at market price immediately."
+            )
+            
+            # Exit child at market price
+            self.exit_child_at_market_price()
+            self.stop_order_coordination()
+            
+        except Exception as e:
+            applicationLogger.error(f"Error handling master rejected child filled: {e}")
+    
+    def handle_master_rejected_child_pending(self):
+        """Master REJECTED, Child PENDING - Cancel child order immediately"""
+        try:
+            applicationLogger.info("Master REJECTED, Child PENDING - Cancelling child order")
+            
+            # Cancel child order immediately
+            self.cancel_child_order_immediately()
+            self.stop_order_coordination()
+            
+        except Exception as e:
+            applicationLogger.error(f"Error handling master rejected child pending: {e}")
+    
+    def handle_master_pending_child_filled(self):
+        """Master PENDING, Child FILLED - Cancel master and exit child"""
+        try:
+            applicationLogger.info("Master PENDING, Child FILLED - Cancelling master and exiting child")
+            
+            # Cancel master order
+            self.cancel_master_order_immediately()
+            
+            # Exit child at market price
+            self.exit_child_at_market_price()
+            self.stop_order_coordination()
+            
+        except Exception as e:
+            applicationLogger.error(f"Error handling master pending child filled: {e}")
+    
+    def handle_master_pending_child_rejected(self):
+        """Master PENDING, Child REJECTED - Show popup and continue with master only"""
+        try:
+            applicationLogger.info("Master PENDING, Child REJECTED - Showing popup and continuing with master")
+            
+            # Show popup error for child
+            messagebox.showerror(
+                "Child Order Rejected", 
+                "Child order was REJECTED but Master order is still PENDING.\n\n"
+                "Continuing with Master order only."
+            )
+            
+            # Continue with master only - no action needed as master is still pending
+            
+        except Exception as e:
+            applicationLogger.error(f"Error handling master pending child rejected: {e}")
+    
+    def cancel_child_order_and_block_exit(self):
+        """Cancel child order after timeout and block exit calls"""
+        try:
+            applicationLogger.info("Timeout reached - Cancelling child order and blocking exit calls")
+            
+            # Cancel child order
+            self.cancel_child_order_immediately()
+            
+            # Block exit calls for child account
+            self.block_child_exit_calls()
+            
+            self.stop_order_coordination()
+            
+        except Exception as e:
+            applicationLogger.error(f"Error cancelling child order after timeout: {e}")
+    
+    def cancel_child_order_immediately(self):
+        """Cancel child order immediately"""
+        try:
+            if self.account_manager.accounts[2]['active']:
+                api = self.account_manager.accounts[2]['api']
+                if api:
+                    # Get child's buy orders and cancel them
+                    orders = api.get_order_book()
+                    if orders and isinstance(orders, list):
+                        for order in orders:
+                            if (isinstance(order, dict) and 
+                                order.get('status') in ['PENDING', 'OPEN'] and 
+                                order.get('trantype') == 'B'):
+                                
+                                api.cancel_order(orderno=order.get('norenordno'))
+                                applicationLogger.info(f"Cancelled child buy order: {order.get('norenordno')}")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error cancelling child order: {e}")
+    
+    def cancel_master_order_immediately(self):
+        """Cancel master order immediately"""
+        try:
+            if self.account_manager.accounts[1]['active']:
+                api = self.account_manager.accounts[1]['api']
+                if api:
+                    # Get master's buy orders and cancel them
+                    orders = api.get_order_book()
+                    if orders and isinstance(orders, list):
+                        for order in orders:
+                            if (isinstance(order, dict) and 
+                                order.get('status') in ['PENDING', 'OPEN'] and 
+                                order.get('trantype') == 'B'):
+                                
+                                api.cancel_order(orderno=order.get('norenordno'))
+                                applicationLogger.info(f"Cancelled master buy order: {order.get('norenordno')}")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error cancelling master order: {e}")
+    
+    def exit_child_at_market_price(self):
+        """Exit child position at market price"""
+        try:
+            if self.account_manager.accounts[2]['active']:
+                api = self.account_manager.accounts[2]['api']
+                if api:
+                    # Get child's filled buy orders and exit them
+                    orders = api.get_order_book()
+                    if orders and isinstance(orders, list):
+                        for order in orders:
+                            if (isinstance(order, dict) and 
+                                order.get('status') == 'COMPLETE' and 
+                                order.get('trantype') == 'B'):
+                                
+                                # Place market sell order
+                                api.place_order(
+                                    buy_or_sell='S',
+                                    product_type=order.get('pcode', 'I'),
+                                    exchange=order.get('exch', ''),
+                                    tradingsymbol=order.get('tsym', ''),
+                                    quantity=int(order.get('qty', 0)),
+                                    discloseqty=0,
+                                    price_type='MKT',
+                                    price=0.0,
+                                    trigger_price=None,
+                                    retention='DAY',
+                                    amo='NO',
+                                    remarks='Emergency Exit - Master Rejected'
+                                )
+                                applicationLogger.info(f"Exited child position at market price")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error exiting child at market price: {e}")
+    
+    def block_child_exit_calls(self):
+        """Block exit calls for child account"""
+        try:
+            # Disable child exit button
+            if hasattr(self, 'exit_button'):
+                self.exit_button.config(state='disabled')
+            
+            applicationLogger.info("Child exit calls blocked")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error blocking child exit calls: {e}")
     
     def run(self):
         """Run the application"""
