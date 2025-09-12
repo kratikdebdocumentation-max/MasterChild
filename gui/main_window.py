@@ -46,6 +46,9 @@ class MainWindow:
         self.websocket_manager.set_buy_order_completed_callback(self.on_buy_order_completed)
         self.websocket_manager.set_sell_order_completed_callback(self.on_sell_order_completed)
         
+        # Set PnL update callback
+        self.websocket_manager.set_pnl_update_callback(self.update_pnl_on_trade)
+        
         # GUI variables
         self.setup_variables()
         
@@ -84,6 +87,12 @@ class MainWindow:
         self.child_order_status = tk.StringVar()
         self.master_order_status.set("Master Not Logged In")
         self.child_order_status.set("Child Not Logged In")
+        
+        # PnL variables
+        self.master_pnl_value = tk.StringVar()
+        self.child_pnl_value = tk.StringVar()
+        self.master_pnl_value.set("--")
+        self.child_pnl_value.set("--")
         
         # SL and Target monitoring variables
         self.sl_monitoring_active = False
@@ -135,7 +144,7 @@ class MainWindow:
         self.style.configure("RedButton.TButton", background="red")
     
     def create_login_buttons(self):
-        """Create login buttons frame"""
+        """Create login buttons frame with integrated PnL display"""
         self.login_frame = tk.Frame(self.root)
         self.login_frame.pack(side=tk.TOP, fill=tk.X, pady=10)
         
@@ -147,22 +156,40 @@ class MainWindow:
         )
         self.login_button2.pack(side=tk.LEFT, padx=10)
         
-        
-        # Utility buttons
+        # Utility buttons (reduced size)
         self.release_button = ttk.Button(
             self.login_frame, text="RELEASE", 
-            command=self.release_buttons, width=20
+            command=self.release_buttons, width=15
         )
-        self.release_button.pack(side=tk.LEFT, padx=10)
-        
+        self.release_button.pack(side=tk.LEFT, padx=5)
 
-        # Premium Price display
+        # Premium Price display (reduced size)
         tk.Label(self.login_frame, text="Premium Price:").pack(side=tk.LEFT, padx=5)
         self.premium_price_box = tk.Entry(
             self.login_frame, textvariable=self.premium_price_value, 
-            width=15, state='readonly', font=('Helvetica', 12, 'bold')
+            width=12, state='readonly', font=('Helvetica', 10, 'bold')
         )
         self.premium_price_box.pack(side=tk.LEFT, padx=5)
+        
+        # Compact PnL display
+        # Master PnL
+        tk.Label(self.login_frame, text="M PnL:", font=('Helvetica', 9, 'bold')).pack(side=tk.LEFT, padx=5)
+        self.master_pnl_box = tk.Entry(
+            self.login_frame, textvariable=self.master_pnl_value, 
+            width=8, state='readonly', font=('Helvetica', 9, 'bold'),
+            bg='lightblue'
+        )
+        self.master_pnl_box.pack(side=tk.LEFT, padx=2)
+        
+        # Child PnL
+        tk.Label(self.login_frame, text="C PnL:", font=('Helvetica', 9, 'bold')).pack(side=tk.LEFT, padx=5)
+        self.child_pnl_box = tk.Entry(
+            self.login_frame, textvariable=self.child_pnl_value, 
+            width=8, state='readonly', font=('Helvetica', 9, 'bold'),
+            bg='lightgreen'
+        )
+        self.child_pnl_box.pack(side=tk.LEFT, padx=2)
+    
     
     def create_selection_frame(self):
         """Create instrument selection frame"""
@@ -434,7 +461,7 @@ class MainWindow:
         # Exit All Orders at Market Price
         self.exit_all_button = tk.Button(
             self.bottom_frame, text="Exit All Orders at Market Price", 
-            command=self.exit_all_orders_market, width=25, height=2
+            command=self.exit_all_orders_market, width=25, height=2, state='disabled'
         )
         self.exit_all_button.grid(row=0, column=0, padx=5, pady=5)
         
@@ -474,6 +501,10 @@ class MainWindow:
                 self.update_login_button_text(1, client_name)
                 # Update master order status to show it's ready
                 self.master_order_status.set(self.get_ready_status_message(1))
+                
+                # Refresh PnL after master account initialization
+                self.update_pnl_on_trade(1)
+                
                 applicationLogger.info(f"Master account initialized successfully: {client_name}")
             else:
                 messagebox.showerror("Error", f"Failed to initialize master account: {client_name}")
@@ -503,6 +534,9 @@ class MainWindow:
                     self.master_order_status.set(self.get_ready_status_message(1))
                 elif account_num == 2:
                     self.child_order_status.set(self.get_ready_status_message(2))
+                
+                # Refresh PnL after successful login
+                self.update_pnl_on_trade(account_num)
             else:
                 messagebox.showerror("Error", f"Login failed: {client_name}")
         except Exception as e:
@@ -972,7 +1006,11 @@ class MainWindow:
             
             # Enable exit button when buy orders are completed
             self.exit_button.config(state='normal')
+            self.exit_all_button.config(state='normal')
             applicationLogger.info("Exit button enabled after buy order completion")
+            
+            # Update PnL after buy order completion
+            self.update_pnl_on_trade(account_num)
                     
         except Exception as e:
             applicationLogger.error(f"Error handling buy order completion: {e}")
@@ -985,6 +1023,9 @@ class MainWindow:
             # Reset SL and Target monitoring
             self.reset_sl_target_monitoring()
             applicationLogger.info("SL and Target monitoring reset after sell order completion")
+            
+            # Update PnL after sell order completion
+            self.update_pnl_on_trade(account_num)
             
             # Check if both master and child sell orders are complete
             self.check_and_reset_after_sell_complete()
@@ -1038,6 +1079,7 @@ class MainWindow:
             
             # Disable exit-related buttons
             self.exit_button.config(state='disabled')
+            self.exit_all_button.config(state='disabled')
             self.cancel_exit_button.config(state='disabled')
             self.modify_exit_button.config(state='disabled')
             
@@ -1106,6 +1148,7 @@ class MainWindow:
             self.cancel_buy_button.config(state='disabled')
             self.modify_buy_button.config(state='disabled')
             self.exit_button.config(state='disabled')
+            self.exit_all_button.config(state='disabled')
             self.cancel_exit_button.config(state='disabled')
             self.modify_exit_button.config(state='disabled')
             
@@ -1381,6 +1424,7 @@ class MainWindow:
             
             # Disable exit button and update text with price
             self.exit_button.config(state='disabled', text=f"ExitOrderPlaced@{price}")
+            self.exit_all_button.config(state='disabled')
             applicationLogger.info("Exit button disabled to prevent duplicate orders")
             
             # Enable exit-related buttons for order management
@@ -1471,6 +1515,7 @@ class MainWindow:
             
             # Re-enable exit button and disable exit-related management buttons
             self.exit_button.config(state='normal', text="EXIT")
+            self.exit_all_button.config(state='normal')
             self.cancel_exit_button.config(state='disabled')
             self.modify_exit_button.config(state='disabled')
             applicationLogger.info("Exit button re-enabled after cancelling exit orders")
@@ -1763,6 +1808,7 @@ class MainWindow:
         
         # Disable exit-related buttons until new orders are placed
         self.exit_button.config(state='disabled', text="EXIT")
+        self.exit_all_button.config(state='disabled')
         self.cancel_exit_button.config(state='disabled')
         self.modify_exit_button.config(state='disabled')
         
@@ -1791,6 +1837,11 @@ class MainWindow:
     def exit_all_orders_market(self):
         """Exit all orders at market price for both master and child accounts"""
         try:
+            # Check if exit button is disabled (no orders to exit)
+            if self.exit_button['state'] == 'disabled':
+                messagebox.showwarning("Warning", "No orders to exit! Place buy orders first.")
+                return
+            
             # Show confirmation popup
             result = messagebox.askyesno(
                 "Confirm Exit All Orders", 
@@ -1820,31 +1871,29 @@ class MainWindow:
                 if api:
                     # Get current orders and exit them at market price
                     orders = api.get_order_book()
-                    if orders and orders.get('stat') == 'Ok':
-                        order_data = orders.get('data', [])
-                        if isinstance(order_data, list):
-                            for order in order_data:
-                                if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
-                                    # Place market exit order
-                                    exit_result = api.place_order(
-                                        buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
-                                        product_type=order.get('pcode', 'I'),
-                                        exchange=order.get('exch', ''),
-                                        tradingsymbol=order.get('tsym', ''),
-                                        quantity=int(order.get('qty', 0)),
-                                        discloseqty=0,
-                                        price_type='MKT',
-                                        price=0.0,
-                                        trigger_price=None,
-                                        retention='DAY',
-                                        amo='NO',
-                                        remarks='Market Exit'
-                                    )
-                                    
-                                    if exit_result and exit_result.get('stat') == 'Ok':
-                                        applicationLogger.info(f"Market exit order placed for account {account_num}: {exit_result.get('norenordno')}")
-                                    else:
-                                        applicationLogger.error(f"Failed to place market exit order for account {account_num}")
+                    if orders and isinstance(orders, list):
+                        for order in orders:
+                            if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
+                                # Place market exit order
+                                exit_result = api.place_order(
+                                    buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
+                                    product_type=order.get('pcode', 'I'),
+                                    exchange=order.get('exch', ''),
+                                    tradingsymbol=order.get('tsym', ''),
+                                    quantity=int(order.get('qty', 0)),
+                                    discloseqty=0,
+                                    price_type='MKT',
+                                    price=0.0,
+                                    trigger_price=None,
+                                    retention='DAY',
+                                    amo='NO',
+                                    remarks='Market Exit'
+                                )
+                                
+                                if exit_result and exit_result.get('stat') == 'Ok':
+                                    applicationLogger.info(f"Market exit order placed for account {account_num}: {exit_result.get('norenordno')}")
+                                else:
+                                    applicationLogger.error(f"Failed to place market exit order for account {account_num}")
             
             # Update status
             self.master_order_status.set("All Orders - Market Exit Placed")
@@ -2215,6 +2264,72 @@ class MainWindow:
                 
         except Exception as e:
             applicationLogger.error(f"Error in silent market exit: {e}")
+    
+    def calculate_pnl(self, api):
+        """Calculate PnL for a given API account"""
+        try:
+            ret = api.get_positions()
+            if ret is None or not ret:
+                return 0.0
+            
+            mtm = 0
+            pnl = 0
+            for i in ret:
+                mtm += float(i.get('urmtom', 0))
+                pnl += float(i.get('rpnl', 0))
+            
+            day_m2m = mtm + pnl
+            return round(day_m2m, 2)
+            
+        except Exception as e:
+            applicationLogger.error(f"Error calculating PnL: {e}")
+            return 0.0
+    
+    def update_pnl_display(self, account_num, pnl_value):
+        """Update PnL display for specific account"""
+        try:
+            if account_num == 1:  # Master account
+                self.master_pnl_value.set(f"{pnl_value}")
+            elif account_num == 2:  # Child account
+                self.child_pnl_value.set(f"{pnl_value}")
+        except Exception as e:
+            applicationLogger.error(f"Error updating PnL display: {e}")
+    
+    def refresh_pnl(self):
+        """Refresh PnL for all active accounts"""
+        try:
+            applicationLogger.info("Refreshing PnL for all accounts")
+            
+            # Update Master PnL
+            if self.account_manager.accounts[1]['active']:
+                master_api = self.account_manager.accounts[1]['api']
+                if master_api:
+                    master_pnl = self.calculate_pnl(master_api)
+                    self.update_pnl_display(1, master_pnl)
+                    applicationLogger.info(f"Master PnL updated: {master_pnl}")
+            
+            # Update Child PnL
+            if self.account_manager.accounts[2]['active']:
+                child_api = self.account_manager.accounts[2]['api']
+                if child_api:
+                    child_pnl = self.calculate_pnl(child_api)
+                    self.update_pnl_display(2, child_pnl)
+                    applicationLogger.info(f"Child PnL updated: {child_pnl}")
+                    
+        except Exception as e:
+            applicationLogger.error(f"Error refreshing PnL: {e}")
+    
+    def update_pnl_on_trade(self, account_num):
+        """Update PnL when a trade is executed"""
+        try:
+            if self.account_manager.accounts[account_num]['active']:
+                api = self.account_manager.accounts[account_num]['api']
+                if api:
+                    pnl_value = self.calculate_pnl(api)
+                    self.update_pnl_display(account_num, pnl_value)
+                    applicationLogger.info(f"PnL updated for account {account_num}: {pnl_value}")
+        except Exception as e:
+            applicationLogger.error(f"Error updating PnL on trade: {e}")
     
     def run(self):
         """Run the application"""
