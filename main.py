@@ -6,6 +6,7 @@ import os
 from findexpiry import find_exp, clear_expiry_cache, force_expiry_recalculation, is_cache_valid
 from downloadMasters_v0 import downloadFileMaster
 from gui.main_window import MainWindow
+from gui.config_window import show_configuration_window
 from logger import applicationLogger
 
 def initialize_system():
@@ -66,8 +67,13 @@ def main():
             print("Failed to initialize system. Please check logs for details.")
             sys.exit(1)
         
-        # Create and run main window
-        app = MainWindow()
+        # Show configuration window first
+        applicationLogger.info("Showing configuration window...")
+        settings = show_configuration_window()
+        applicationLogger.info(f"Configuration completed with settings: {settings}")
+        
+        # Create and run main window with settings
+        app = MainWindow(settings)
         app.run()
         
     except KeyboardInterrupt:

@@ -19,8 +19,15 @@ from logger import applicationLogger
 class MainWindow:
     """Main application window"""
     
-    def __init__(self):
+    def __init__(self, settings: Dict[str, Any] = None):
         self.root = tk.Tk()
+        
+        # Load settings
+        self.settings = settings or {
+            'child_default_lots': 1,
+            'default_sl_points': 20,
+            'default_target_points': 30
+        }
 
         self.root.title("RefleK - Master Account Not Logged In")
         self.root.geometry("900x490")
@@ -125,6 +132,12 @@ class MainWindow:
         # Button state tracking for two-step confirmation
         self.sl_button_state = "ready"  # "ready", "showing_price", "confirmed"
         self.target_button_state = "ready"  # "ready", "showing_price", "confirmed"
+        
+        # Auto SL/Target system variables
+        # Initialize SL/Target differences from settings
+        self.sl_difference_from_buy = -self.settings.get('default_sl_points', 20)  # Default SL points from buy price
+        self.target_difference_from_buy = self.settings.get('default_target_points', 30)  # Default Target points from buy price
+        self.current_buy_order_open_value = None  # Track current buy order open value
         
         # Cross-account coordination variables
         self.master_order_state = None  # PENDING, OPEN, FILLED, REJECTED, CANCELLED
@@ -272,34 +285,34 @@ class MainWindow:
         self.index_dropdown.grid(row=0, column=1, padx=10)
         self.selected_index.trace_add('write', self.update_selections)
         
-        # Expiry dropdown
-        tk.Label(self.selection_frame, text="Expiry:").grid(row=0, column=2, padx=10)
+        # Index LTP display (next to Index dropdown)
+        tk.Label(self.selection_frame, text="Index LTP:").grid(row=0, column=2, padx=10)
+        self.index_ltp_label = tk.Label(
+            self.selection_frame, textvariable=self.index_ltp_value,
+            font=('Helvetica', 10, 'bold'), fg="blue", width=10
+        )
+        self.index_ltp_label.grid(row=0, column=3, padx=5)
+        
+        # Expiry dropdown (shifted right)
+        tk.Label(self.selection_frame, text="Expiry:").grid(row=0, column=4, padx=10)
         self.expiry_dropdown = ttk.Combobox(
             self.selection_frame, textvariable=self.expiry_value, 
             values=[], width=12
         )
-        self.expiry_dropdown.grid(row=0, column=3, padx=10)
+        self.expiry_dropdown.grid(row=0, column=5, padx=10)
         self.expiry_value.trace_add('write', self.on_expiry_selected)
         
-        # Option type (moved to left)
-        tk.Label(self.selection_frame, text="Option:").grid(row=0, column=4, padx=10)
+        # Option type
+        tk.Label(self.selection_frame, text="Option:").grid(row=0, column=6, padx=10)
         option_types = ["CE", "PE"]
         self.option_dropdown = ttk.Combobox(
             self.selection_frame, textvariable=self.selected_option, 
             values=option_types, width=5
         )
-        self.option_dropdown.grid(row=0, column=5, padx=10)
+        self.option_dropdown.grid(row=0, column=7, padx=10)
         self.selected_option.trace_add('write', self.on_option_selected)
         
-        # Index LTP display (next to Option)
-        tk.Label(self.selection_frame, text="Index LTP:").grid(row=0, column=6, padx=10)
-        self.index_ltp_label = tk.Label(
-            self.selection_frame, textvariable=self.index_ltp_value,
-            font=('Helvetica', 10, 'bold'), fg="blue", width=10
-        )
-        self.index_ltp_label.grid(row=0, column=7, padx=5)
-        
-        # Strike selection (moved to right)
+        # Strike selection
         tk.Label(self.selection_frame, text="Select Strike:").grid(row=0, column=8, padx=10)
         self.strike_dropdown = ttk.Combobox(
             self.selection_frame, textvariable=self.selected_strike, 
@@ -598,17 +611,17 @@ class MainWindow:
         )
         self.exit_all_button.grid(row=0, column=0, padx=5, pady=5)
         
-        # Exit Order Master at Market Price
+        # Exit Master Order at Market Price
         self.exit_master_button = tk.Button(
-            self.bottom_frame, text="Exit Order Master at Market Price", 
-            command=self.exit_master_orders_market, width=25, height=2
+            self.bottom_frame, text="Exit Master Order at Market Price", 
+            command=self.exit_master_orders_market, width=25, height=2, state='disabled'
         )
         self.exit_master_button.grid(row=0, column=1, padx=5, pady=5)
         
-        # Exit Order Child at Market Price
+        # Exit Child Order at Market Price
         self.exit_child_button = tk.Button(
-            self.bottom_frame, text="Exit Order Child at Market Price", 
-            command=self.exit_child_orders_market, width=25, height=2
+            self.bottom_frame, text="Exit Child Order at Market Price", 
+            command=self.exit_child_orders_market, width=25, height=2, state='disabled'
         )
         self.exit_child_button.grid(row=0, column=2, padx=5, pady=5)
         
@@ -797,6 +810,9 @@ class MainWindow:
                 self.selected_strike.set("")
                 self.index_ltp_value.set("--")
                 applicationLogger.info("Cleared option and strike selections - no active orders")
+            
+            # Fetch Index LTP immediately when Index is selected
+            self.fetch_index_ltp(index)
             
             # Fetch current index price and update strike list
             try:
@@ -1231,7 +1247,14 @@ class MainWindow:
             # Enable exit button when buy orders are completed
             self.exit_button.config(state='normal')
             self.exit_all_button.config(state='normal')
-            applicationLogger.info("Exit button enabled after buy order completion")
+            
+            # Enable individual exit buttons based on active accounts
+            if 1 in self.account_manager.get_all_active_accounts():
+                self.exit_master_button.config(state='normal')
+            if 2 in self.account_manager.get_all_active_accounts():
+                self.exit_child_button.config(state='normal')
+                
+            applicationLogger.info("Exit buttons enabled after buy order completion")
             
             # Update PnL after buy order completion
             self.update_pnl_on_trade(account_num)
@@ -1304,6 +1327,8 @@ class MainWindow:
             # Disable exit-related buttons
             self.exit_button.config(state='disabled')
             self.exit_all_button.config(state='disabled')
+            self.exit_master_button.config(state='disabled')
+            self.exit_child_button.config(state='disabled')
             self.cancel_exit_button.config(state='disabled')
             self.modify_exit_button.config(state='disabled')
             
@@ -1453,29 +1478,33 @@ class MainWindow:
             qty1 = int(self.qty1_var.get())
             
 
-            # Set quantities for all accounts - use same quantity for both master and child
-            # Ensure quantity is a multiple of lot size
+            # Set quantities for all accounts - master uses selected quantity, child uses configured lots
             if trading_symbol:
                 try:
                     # Get lot size for the trading symbol
                     token, lot_size = self.symbol_manager.get_token_and_lot_size(trading_symbol)
-                    if lot_size and qty1 % lot_size == 0:
-                        # Quantity is already a multiple of lot size, use as is
+                    
+                    if lot_size:
+                        # Master account: Use selected quantity (ensure it's multiple of lot size)
+                        if qty1 % lot_size == 0:
+                            master_qty = qty1
+                        else:
+                            master_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
+                        
+                        # Child account: Use configured lots * lot size
+                        child_lots = self.settings.get('child_default_lots', 1)
+                        child_qty = lot_size * child_lots
+                        
+                        self.quantities[1] = master_qty
+                        self.quantities[2] = child_qty
+                        
+                        applicationLogger.info(f"Master quantity: {master_qty} (selected: {qty1}, lot size: {lot_size})")
+                        applicationLogger.info(f"Child quantity: {child_qty} (lots: {child_lots}, lot size: {lot_size})")
+                    else:
+                        # Fallback to original quantity if lot size not found
                         self.quantities[1] = qty1
                         self.quantities[2] = qty1
-                        applicationLogger.info(f"Using same quantity for both accounts: {qty1} (lot size: {lot_size})")
-                    else:
-                        # Adjust quantity to be a multiple of lot size
-                        if lot_size:
-                            adjusted_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
-                            self.quantities[1] = adjusted_qty
-                            self.quantities[2] = adjusted_qty
-                            applicationLogger.info(f"Adjusted quantity to lot size multiple: {adjusted_qty} (original: {qty1}, lot size: {lot_size})")
-                        else:
-                            # Fallback to original quantity if lot size not found
-                            self.quantities[1] = qty1
-                            self.quantities[2] = qty1
-                            applicationLogger.warning(f"Lot size not found, using original quantity: {qty1}")
+                        applicationLogger.warning(f"Lot size not found, using original quantity for both accounts: {qty1}")
                 except Exception as e:
                     applicationLogger.error(f"Error getting lot size: {e}")
                     # Fallback to original quantity
@@ -1522,6 +1551,9 @@ class MainWindow:
             for i, order_num in enumerate(order_numbers):
                 if order_num:
                     self.order_numbers[active_accounts[i]] = order_num
+            
+            # Auto-set SL and Target based on buy order price
+            self.auto_set_sl_target_from_buy_price(price)
             
             # Start cross-account coordination if both master and child are active
             if 1 in active_accounts and 2 in active_accounts:
@@ -1608,6 +1640,18 @@ class MainWindow:
             price = float(self.price1_value.get())
             qty1 = int(self.qty1_var.get())
             
+            # Stop target and trailing monitoring when EXIT button is pressed
+            if self.target_monitoring_active:
+                self.stop_target_monitoring()
+                applicationLogger.info("Target monitoring stopped due to EXIT button press")
+            
+            if self.trailing_active:
+                self.stop_trailing_monitoring()
+                applicationLogger.info("Trailing monitoring stopped due to EXIT button press")
+            
+            # Log current position status for debugging
+            accounts_with_positions = self.get_accounts_with_open_positions()
+            applicationLogger.info(f"Position status before exit: {accounts_with_positions}")
 
             # Set quantities for all accounts - use same quantity for both master and child
             # Ensure quantity is a multiple of lot size
@@ -1642,18 +1686,18 @@ class MainWindow:
                 self.quantities[1] = qty1
                 self.quantities[2] = qty1
             
-            # Get active accounts
-            active_accounts = self.account_manager.get_all_active_accounts()
+            # Get accounts with open positions (position-based monitoring)
+            active_accounts = self.get_accounts_with_open_positions()
             
             # Remove child account if orders are blocked
             if self.child_orders_blocked and 2 in active_accounts:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from exit orders")
             
-            applicationLogger.info(f"Active accounts for exit: {active_accounts}")
+            applicationLogger.info(f"Accounts with open positions for exit: {active_accounts}")
             
             if not active_accounts:
-                messagebox.showerror("Error", "No active accounts found. Please login to accounts first.")
+                messagebox.showerror("Error", "No accounts with open positions found. All positions may already be closed.")
                 return
             
             apis = [self.account_manager.get_api(i) for i in active_accounts]
@@ -1794,6 +1838,13 @@ class MainWindow:
             # Re-enable exit button and disable exit-related management buttons
             self.exit_button.config(state='normal', text="EXIT")
             self.exit_all_button.config(state='normal')
+            
+            # Enable individual exit buttons based on active accounts
+            if 1 in self.account_manager.get_all_active_accounts():
+                self.exit_master_button.config(state='normal')
+            if 2 in self.account_manager.get_all_active_accounts():
+                self.exit_child_button.config(state='normal')
+                
             self.cancel_exit_button.config(state='disabled')
             self.modify_exit_button.config(state='disabled')
             applicationLogger.info("Exit button re-enabled after cancelling exit orders")
@@ -1961,6 +2012,9 @@ class MainWindow:
             self.order_manager.modify_orders(
                 apis, order_numbers, quantities, trading_symbol, price, active_flags
             )
+
+            # Auto-adjust SL and Target based on new buy order price
+            self.auto_set_sl_target_from_buy_price(price)
 
             # Update status displays based on active accounts
             if 1 in active_accounts:
@@ -2173,6 +2227,8 @@ class MainWindow:
         # Disable exit-related buttons until new orders are placed
         self.exit_button.config(state='disabled', text="EXIT")
         self.exit_all_button.config(state='disabled')
+        self.exit_master_button.config(state='disabled')
+        self.exit_child_button.config(state='disabled')
         self.cancel_exit_button.config(state='disabled')
         self.modify_exit_button.config(state='disabled')
         
@@ -2263,13 +2319,24 @@ class MainWindow:
             self.master_order_status.set("All Orders - Market Exit Placed")
             self.child_order_status.set("All Orders - Market Exit Placed")
             
+            # Stop monitoring since all positions will be closed
+            if self.sl_monitoring_active:
+                self.stop_sl_monitoring()
+                applicationLogger.info("SL monitoring stopped - all positions being closed")
+            if self.target_monitoring_active:
+                self.stop_target_monitoring()
+                applicationLogger.info("Target monitoring stopped - all positions being closed")
+            if self.trailing_active:
+                self.stop_trailing_monitoring()
+                applicationLogger.info("Trailing monitoring stopped - all positions being closed")
+            
         except Exception as e:
             applicationLogger.error(f"Error in exit_all_orders_market: {e}")
             self.master_order_status.set(f"Error: {str(e)[:30]}...")
             self.child_order_status.set(f"Error: {str(e)[:30]}...")
     
     def exit_master_orders_market(self):
-        """Exit master account orders at market price"""
+        """Exit master account orders at market price - modify existing sell orders or place new ones"""
         try:
             # Show confirmation popup
             result = messagebox.askyesno(
@@ -2291,35 +2358,81 @@ class MainWindow:
             
             api = self.account_manager.accounts[1]['api']
             if api:
-                # Get current orders and exit them at market price
+                # Get current orders
                 orders = api.get_order_book()
                 if orders and orders.get('stat') == 'Ok':
                     order_data = orders.get('data', [])
                     if isinstance(order_data, list):
+                        sell_orders_found = False
+                        buy_orders_found = False
+                        
                         for order in order_data:
                             if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
-                                # Place market exit order
-                                exit_result = api.place_order(
-                                    buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
-                                    product_type=order.get('pcode', 'I'),
-                                    exchange=order.get('exch', ''),
-                                    tradingsymbol=order.get('tsym', ''),
-                                    quantity=int(order.get('qty', 0)),
-                                    discloseqty=0,
-                                    price_type='MKT',
-                                    price=0.0,
-                                    trigger_price=None,
-                                    retention='DAY',
-                                    amo='NO',
-                                    remarks='Master Market Exit'
-                                )
-                                
-                                if exit_result and exit_result.get('stat') == 'Ok':
-                                    applicationLogger.info(f"Master market exit order placed: {exit_result.get('norenordno')}")
-                                else:
-                                    applicationLogger.error("Failed to place master market exit order")
-                
-                self.master_order_status.set("Master Orders - Market Exit Placed")
+                                if order.get('trantype') == 'S':  # Existing SELL order
+                                    sell_orders_found = True
+                                    # Modify existing sell order to market price
+                                    try:
+                                        modify_result = api.modify_order(
+                                            order_id=order.get('norenordno'),
+                                            price_type='MKT',
+                                            price=0.0,
+                                            quantity=int(order.get('qty', 0)),
+                                            product_type=order.get('pcode', 'I'),
+                                            exchange=order.get('exch', ''),
+                                            tradingsymbol=order.get('tsym', ''),
+                                            retention='DAY',
+                                            remarks='Master Market Exit - Modified'
+                                        )
+                                        
+                                        if modify_result and modify_result.get('stat') == 'Ok':
+                                            applicationLogger.info(f"Master sell order modified to market price: {order.get('norenordno')}")
+                                        else:
+                                            applicationLogger.error(f"Failed to modify master sell order: {modify_result}")
+                                            self.master_order_status.set("Error: Failed to modify sell order - please exit manually")
+                                            return
+                                    except Exception as e:
+                                        applicationLogger.error(f"Error modifying master sell order: {e}")
+                                        self.master_order_status.set(f"Error modifying sell order: {e}")
+                                        return
+                                        
+                                elif order.get('trantype') == 'B':  # BUY order - place new sell order
+                                    buy_orders_found = True
+                                    # Place new market sell order
+                                    exit_result = api.place_order(
+                                        buy_or_sell='S',
+                                        product_type=order.get('pcode', 'I'),
+                                        exchange=order.get('exch', ''),
+                                        tradingsymbol=order.get('tsym', ''),
+                                        quantity=int(order.get('qty', 0)),
+                                        discloseqty=0,
+                                        price_type='MKT',
+                                        price=0.0,
+                                        trigger_price=None,
+                                        retention='DAY',
+                                        amo='NO',
+                                        remarks='Master Market Exit - New Sell'
+                                    )
+                                    
+                                    if exit_result and exit_result.get('stat') == 'Ok':
+                                        applicationLogger.info(f"Master new market sell order placed: {exit_result.get('norenordno')}")
+                                    else:
+                                        applicationLogger.error("Failed to place master market sell order")
+                                        self.master_order_status.set("Error: Failed to place sell order - please exit manually")
+                                        return
+                        
+                        # Update status based on what was found
+                        if sell_orders_found and buy_orders_found:
+                            self.master_order_status.set("Master Orders - Modified Sell & Placed New Sell")
+                        elif sell_orders_found:
+                            self.master_order_status.set("Master Orders - Modified Existing Sell to Market")
+                        elif buy_orders_found:
+                            self.master_order_status.set("Master Orders - Placed New Market Sell")
+                        else:
+                            self.master_order_status.set("Master Orders - No Open Orders to Exit")
+                    else:
+                        self.master_order_status.set("Master Orders - No Orders Found")
+                else:
+                    self.master_order_status.set("Master Orders - Failed to Get Order Book")
             else:
                 self.master_order_status.set("Master API Not Available")
                 
@@ -2328,7 +2441,7 @@ class MainWindow:
             self.master_order_status.set(f"Error: {str(e)[:30]}...")
     
     def exit_child_orders_market(self):
-        """Exit child account orders at market price"""
+        """Exit child account orders at market price - modify existing sell orders or place new ones"""
         try:
             # Show confirmation popup
             result = messagebox.askyesno(
@@ -2349,35 +2462,81 @@ class MainWindow:
             
             api = self.account_manager.accounts[2]['api']
             if api:
-                # Get current orders and exit them at market price
+                # Get current orders
                 orders = api.get_order_book()
                 if orders and orders.get('stat') == 'Ok':
                     order_data = orders.get('data', [])
                     if isinstance(order_data, list):
+                        sell_orders_found = False
+                        buy_orders_found = False
+                        
                         for order in order_data:
                             if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
-                                # Place market exit order
-                                exit_result = api.place_order(
-                                    buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
-                                    product_type=order.get('pcode', 'I'),
-                                    exchange=order.get('exch', ''),
-                                    tradingsymbol=order.get('tsym', ''),
-                                    quantity=int(order.get('qty', 0)),
-                                    discloseqty=0,
-                                    price_type='MKT',
-                                    price=0.0,
-                                    trigger_price=None,
-                                    retention='DAY',
-                                    amo='NO',
-                                    remarks='Child Market Exit'
-                                )
-                                
-                                if exit_result and exit_result.get('stat') == 'Ok':
-                                    applicationLogger.info(f"Child market exit order placed: {exit_result.get('norenordno')}")
-                                else:
-                                    applicationLogger.error("Failed to place child market exit order")
-                
-                self.child_order_status.set("Child Orders - Market Exit Placed")
+                                if order.get('trantype') == 'S':  # Existing SELL order
+                                    sell_orders_found = True
+                                    # Modify existing sell order to market price
+                                    try:
+                                        modify_result = api.modify_order(
+                                            order_id=order.get('norenordno'),
+                                            price_type='MKT',
+                                            price=0.0,
+                                            quantity=int(order.get('qty', 0)),
+                                            product_type=order.get('pcode', 'I'),
+                                            exchange=order.get('exch', ''),
+                                            tradingsymbol=order.get('tsym', ''),
+                                            retention='DAY',
+                                            remarks='Child Market Exit - Modified'
+                                        )
+                                        
+                                        if modify_result and modify_result.get('stat') == 'Ok':
+                                            applicationLogger.info(f"Child sell order modified to market price: {order.get('norenordno')}")
+                                        else:
+                                            applicationLogger.error(f"Failed to modify child sell order: {modify_result}")
+                                            self.child_order_status.set("Error: Failed to modify sell order - please exit manually")
+                                            return
+                                    except Exception as e:
+                                        applicationLogger.error(f"Error modifying child sell order: {e}")
+                                        self.child_order_status.set(f"Error modifying sell order: {e}")
+                                        return
+                                        
+                                elif order.get('trantype') == 'B':  # BUY order - place new sell order
+                                    buy_orders_found = True
+                                    # Place new market sell order
+                                    exit_result = api.place_order(
+                                        buy_or_sell='S',
+                                        product_type=order.get('pcode', 'I'),
+                                        exchange=order.get('exch', ''),
+                                        tradingsymbol=order.get('tsym', ''),
+                                        quantity=int(order.get('qty', 0)),
+                                        discloseqty=0,
+                                        price_type='MKT',
+                                        price=0.0,
+                                        trigger_price=None,
+                                        retention='DAY',
+                                        amo='NO',
+                                        remarks='Child Market Exit - New Sell'
+                                    )
+                                    
+                                    if exit_result and exit_result.get('stat') == 'Ok':
+                                        applicationLogger.info(f"Child new market sell order placed: {exit_result.get('norenordno')}")
+                                    else:
+                                        applicationLogger.error("Failed to place child market sell order")
+                                        self.child_order_status.set("Error: Failed to place sell order - please exit manually")
+                                        return
+                        
+                        # Update status based on what was found
+                        if sell_orders_found and buy_orders_found:
+                            self.child_order_status.set("Child Orders - Modified Sell & Placed New Sell")
+                        elif sell_orders_found:
+                            self.child_order_status.set("Child Orders - Modified Existing Sell to Market")
+                        elif buy_orders_found:
+                            self.child_order_status.set("Child Orders - Placed New Market Sell")
+                        else:
+                            self.child_order_status.set("Child Orders - No Open Orders to Exit")
+                    else:
+                        self.child_order_status.set("Child Orders - No Orders Found")
+                else:
+                    self.child_order_status.set("Child Orders - Failed to Get Order Book")
             else:
                 self.child_order_status.set("Child API Not Available")
                 
@@ -2437,6 +2596,11 @@ class MainWindow:
                     self.sl_price_level = sl_price
                     self.sl_button_state = "confirmed"
                     
+                    # Update SL difference from current buy order open value
+                    if self.current_buy_order_open_value is not None:
+                        self.sl_difference_from_buy = sl_price - self.current_buy_order_open_value
+                        applicationLogger.info(f"SL difference updated: {self.sl_difference_from_buy} points from buy price")
+                    
                     # Check if buy orders are filled/completed
                     if self._are_buy_orders_filled():
                         # If buy orders are filled, immediately start SL monitoring
@@ -2444,18 +2608,24 @@ class MainWindow:
                         applicationLogger.info(f"SL price confirmed and monitoring started: {sl_price} (buy orders are filled)")
                     else:
                         # If buy orders not filled yet, just set the price (monitoring will start after buy order is filled)
-                        self.sl_price_button.config(text=f"SL set @{sl_price}", bg="orange", fg="white")
+                        self.sl_price_button.config(text=f"SL Set @{sl_price}", bg="orange", fg="white")
                         applicationLogger.info(f"SL price confirmed: {sl_price} (monitoring will start after buy order is filled)")
                 else:
                     applicationLogger.warning("Please enter a valid SL price")
                     
             elif self.sl_button_state == "confirmed":
-                # Third press: Reset to ready state
-                self.sl_button_state = "ready"
-                self.sl_price_button.config(text="SL Price", bg="SystemButtonFace", fg="black")
-                self.sl_price_value.set("")
-                self.sl_price_level = None
-                applicationLogger.info("SL price reset")
+                # Third press: Allow modification of confirmed SL price
+                current_sl = self.sl_price_value.get()
+                if current_sl:
+                    self.sl_price_value.set(current_sl)  # Keep current value for editing
+                    self.sl_button_state = "showing_price"
+                    self.sl_price_button.config(text="Confirm SL", bg="yellow", fg="black")
+                    applicationLogger.info(f"SL price ready for modification: {current_sl}")
+                else:
+                    # If no current value, go back to ready state
+                    self.sl_button_state = "ready"
+                    self.sl_price_button.config(text="SL Price", bg="SystemButtonFace", fg="black")
+                    applicationLogger.info("SL price reset to ready state")
                 
         except ValueError:
             messagebox.showerror("Error", "Please enter a valid SL price")
@@ -2494,6 +2664,11 @@ class MainWindow:
                     self.target_price_level = target_price
                     self.target_button_state = "confirmed"
                     
+                    # Update Target difference from current buy order open value
+                    if self.current_buy_order_open_value is not None:
+                        self.target_difference_from_buy = target_price - self.current_buy_order_open_value
+                        applicationLogger.info(f"Target difference updated: {self.target_difference_from_buy} points from buy price")
+                    
                     # Check if buy orders are filled/completed
                     if self._are_buy_orders_filled():
                         # If buy orders are filled, immediately start Target monitoring
@@ -2501,18 +2676,24 @@ class MainWindow:
                         applicationLogger.info(f"Target price confirmed and monitoring started: {target_price} (buy orders are filled)")
                     else:
                         # If buy orders not filled yet, just set the price (monitoring will start after buy order is filled)
-                        self.target_price_button.config(text=f"Target set @{target_price}", bg="orange", fg="white")
+                        self.target_price_button.config(text=f"Target Set @{target_price}", bg="orange", fg="white")
                         applicationLogger.info(f"Target price confirmed: {target_price} (monitoring will start after buy order is filled)")
                 else:
                     applicationLogger.warning("Please enter a valid Target price")
                     
             elif self.target_button_state == "confirmed":
-                # Third press: Reset to ready state
-                self.target_button_state = "ready"
-                self.target_price_button.config(text="Target Price", bg="SystemButtonFace", fg="black")
-                self.target_price_value.set("")
-                self.target_price_level = None
-                applicationLogger.info("Target price reset")
+                # Third press: Allow modification of confirmed Target price
+                current_target = self.target_price_value.get()
+                if current_target:
+                    self.target_price_value.set(current_target)  # Keep current value for editing
+                    self.target_button_state = "showing_price"
+                    self.target_price_button.config(text="Confirm Target", bg="yellow", fg="black")
+                    applicationLogger.info(f"Target price ready for modification: {current_target}")
+                else:
+                    # If no current value, go back to ready state
+                    self.target_button_state = "ready"
+                    self.target_price_button.config(text="Target Price", bg="SystemButtonFace", fg="black")
+                    applicationLogger.info("Target price reset to ready state")
                 
         except ValueError:
             messagebox.showerror("Error", "Please enter a valid Target price")
@@ -2660,6 +2841,71 @@ class MainWindow:
         self.target_price_button.config(text="Target Price", bg="SystemButtonFace", fg="black")
         applicationLogger.info("Target monitoring stopped")
     
+    def stop_trailing_monitoring(self):
+        """Stop Trailing monitoring"""
+        self.trailing_active = False
+        self.trailing_start_price = None
+        self.trailing_high_price = None
+        self.trailing_stop_price = None
+        # Clear trail status display
+        if hasattr(self, 'trail_status_text'):
+            self.trail_status_text.set("Trailing Inactive")
+        applicationLogger.info("Trailing monitoring stopped")
+    
+    def get_accounts_with_open_positions(self):
+        """Get list of accounts that have open positions (filled buy orders without filled sell orders)"""
+        try:
+            accounts_with_positions = []
+            
+            for account_num in [1, 2]:  # Master and Child accounts
+                if not self.account_manager.accounts[account_num]['active']:
+                    continue  # Skip inactive accounts
+                
+                api = self.account_manager.accounts[account_num]['api']
+                if not api:
+                    continue
+                
+                # Get order book for this account
+                orders = api.get_order_book()
+                if not orders or orders.get('stat') != 'Ok':
+                    continue
+                
+                order_data = orders.get('data', [])
+                if not isinstance(order_data, list):
+                    continue
+                
+                # Check for filled buy and sell orders
+                has_filled_buy = False
+                has_filled_sell = False
+                
+                for order in order_data:
+                    if not isinstance(order, dict):
+                        continue
+                    
+                    status = order.get('status', '')
+                    trantype = order.get('trantype', '')
+                    
+                    if status.upper() == 'COMPLETE':
+                        if trantype.upper() == 'B':
+                            has_filled_buy = True
+                        elif trantype.upper() == 'S':
+                            has_filled_sell = True
+                
+                # Account has open position if it has filled buy but no filled sell
+                if has_filled_buy and not has_filled_sell:
+                    accounts_with_positions.append(account_num)
+                    applicationLogger.debug(f"Account {account_num} has open position")
+                else:
+                    applicationLogger.debug(f"Account {account_num} position status - Buy: {has_filled_buy}, Sell: {has_filled_sell}")
+            
+            applicationLogger.info(f"Accounts with open positions: {accounts_with_positions}")
+            return accounts_with_positions
+            
+        except Exception as e:
+            applicationLogger.error(f"Error checking accounts with open positions: {e}")
+            # Fallback to active accounts if there's an error
+            return self.account_manager.get_all_active_accounts()
+    
     def reset_sl_target_monitoring(self):
         """Reset SL and Target monitoring - clear fields and deactivate"""
         # Stop monitoring
@@ -2672,7 +2918,68 @@ class MainWindow:
         self.sl_price_value.set("")
         self.target_price_value.set("")
         
+        # Reset differences to default values
+        # Reset to configured default values
+        self.sl_difference_from_buy = -self.settings.get('default_sl_points', 20)
+        self.target_difference_from_buy = self.settings.get('default_target_points', 30)
+        self.current_buy_order_open_value = None
+        
         applicationLogger.info("SL and Target monitoring reset and fields cleared")
+    
+    def auto_set_sl_target_from_buy_price(self, buy_open_value):
+        """Automatically set SL and Target based on buy order open value"""
+        try:
+            if buy_open_value is None:
+                return
+                
+            # Update current buy order open value
+            self.current_buy_order_open_value = buy_open_value
+            
+            # Calculate SL and Target based on stored differences
+            sl_price = buy_open_value + self.sl_difference_from_buy
+            target_price = buy_open_value + self.target_difference_from_buy
+            
+            # Set SL price
+            self.sl_price_value.set(str(sl_price))
+            self.sl_price_level = sl_price
+            self.sl_button_state = "confirmed"
+            self.sl_price_button.config(text=f"SL Set @{sl_price}", bg="orange", fg="white")
+            
+            # Set Target price
+            self.target_price_value.set(str(target_price))
+            self.target_price_level = target_price
+            self.target_button_state = "confirmed"
+            self.target_price_button.config(text=f"Target Set @{target_price}", bg="orange", fg="white")
+            
+            # Start monitoring if buy orders are filled
+            if self._are_buy_orders_filled():
+                self.start_sl_monitoring(sl_price)
+                self.start_target_monitoring(target_price)
+                applicationLogger.info(f"Auto SL/Target set and monitoring started - SL: {sl_price}, Target: {target_price} (Buy Open: {buy_open_value})")
+            else:
+                applicationLogger.info(f"Auto SL/Target set - SL: {sl_price}, Target: {target_price} (Buy Open: {buy_open_value})")
+                
+        except Exception as e:
+            applicationLogger.error(f"Error in auto_set_sl_target_from_buy_price: {e}")
+    
+    def update_sl_target_differences(self, buy_open_value):
+        """Update SL and Target differences when user manually sets them"""
+        try:
+            if buy_open_value is None:
+                return
+                
+            # Update SL difference if SL is set
+            if self.sl_price_level is not None:
+                self.sl_difference_from_buy = self.sl_price_level - buy_open_value
+                applicationLogger.info(f"SL difference updated: {self.sl_difference_from_buy} points from buy price")
+            
+            # Update Target difference if Target is set
+            if self.target_price_level is not None:
+                self.target_difference_from_buy = self.target_price_level - buy_open_value
+                applicationLogger.info(f"Target difference updated: {self.target_difference_from_buy} points from buy price")
+                
+        except Exception as e:
+            applicationLogger.error(f"Error updating SL/Target differences: {e}")
     
     def check_sl_target_breach(self, current_price):
         """Check if current price breaches SL or Target levels"""
@@ -2812,6 +3119,12 @@ class MainWindow:
             # Clear trailing stop display
             self.trailing_stop_display_label.config(text="")
             
+            # Stop monitoring since position is being closed
+            if self.target_monitoring_active:
+                self.stop_target_monitoring()
+            if self.trailing_active:
+                self.stop_trailing_monitoring()
+            
             # Set the exit price to current price and call regular exit function
             self.price1_value.set(str(current_price))
             self.place_exit_orders()
@@ -2857,6 +3170,12 @@ class MainWindow:
             if self.account_manager.accounts[2]['active']:
                 self.child_order_status.set(f"SL TRIGGERED @ {current_price}")
             
+            # Stop monitoring since position is being closed
+            if self.target_monitoring_active:
+                self.stop_target_monitoring()
+            if self.trailing_active:
+                self.stop_trailing_monitoring()
+            
             # Set the exit price to current price and call regular exit function
             self.price1_value.set(str(current_price))
             self.place_exit_orders()
@@ -2877,6 +3196,12 @@ class MainWindow:
                 self.master_order_status.set(f"TARGET HIT @ {current_price}")
             if self.account_manager.accounts[2]['active']:
                 self.child_order_status.set(f"TARGET HIT @ {current_price}")
+            
+            # Stop monitoring since position is being closed
+            if self.target_monitoring_active:
+                self.stop_target_monitoring()
+            if self.trailing_active:
+                self.stop_trailing_monitoring()
             
             # Set the exit price to current price and call regular exit function
             self.price1_value.set(str(current_price))
