@@ -1,0 +1,626 @@
+2025-09-13 15:36:19,863 - INFO - Downloading master files...
+2025-09-13 15:36:19,864 - INFO - Finding expiry dates...
+2025-09-13 15:36:19,992 - INFO - System initialization completed successfully
+2025-09-13 15:36:21,061 - INFO - Generated fresh 2FA for account 1: 697893
+2025-09-13 15:36:22,104 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:36:22,104 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:41:03,983 - INFO - Downloading master files...
+2025-09-13 15:41:03,983 - INFO - Finding expiry dates...
+2025-09-13 15:41:04,090 - INFO - System initialization completed successfully
+2025-09-13 15:41:04,342 - INFO - Generated fresh 2FA for account 1: 619204
+2025-09-13 15:41:05,554 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:41:05,554 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:41:32,248 - WARNING - Please enter a point trail value
+2025-09-13 15:41:34,619 - WARNING - Please enter a percent trail value
+2025-09-13 15:41:47,277 - INFO - Percent trail set to: 2.0%
+2025-09-13 15:41:50,308 - INFO - Point trail set to: 345.0
+2025-09-13 15:43:46,139 - INFO - Downloading master files...
+2025-09-13 15:43:46,139 - INFO - Finding expiry dates...
+2025-09-13 15:43:46,238 - INFO - System initialization completed successfully
+2025-09-13 15:43:46,487 - INFO - Generated fresh 2FA for account 1: 641140
+2025-09-13 15:43:47,680 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:43:47,680 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:44:50,625 - INFO - Application interrupted by user
+2025-09-13 15:44:57,034 - INFO - Downloading master files...
+2025-09-13 15:44:57,034 - INFO - Finding expiry dates...
+2025-09-13 15:44:57,133 - INFO - System initialization completed successfully
+2025-09-13 15:44:57,370 - INFO - Generated fresh 2FA for account 1: 291136
+2025-09-13 15:44:58,512 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:44:58,512 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:45:53,632 - INFO - Downloading master files...
+2025-09-13 15:45:53,634 - INFO - Finding expiry dates...
+2025-09-13 15:45:53,759 - INFO - System initialization completed successfully
+2025-09-13 15:45:54,054 - INFO - Generated fresh 2FA for account 1: 581574
+2025-09-13 15:45:55,163 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:45:55,164 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:46:56,836 - INFO - Application interrupted by user
+2025-09-13 15:47:00,080 - INFO - Downloading master files...
+2025-09-13 15:47:00,080 - INFO - Finding expiry dates...
+2025-09-13 15:47:00,173 - INFO - System initialization completed successfully
+2025-09-13 15:47:00,439 - INFO - Generated fresh 2FA for account 1: 200586
+2025-09-13 15:47:01,557 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:47:01,557 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:47:22,287 - INFO - Application interrupted by user
+2025-09-13 15:47:25,702 - INFO - Downloading master files...
+2025-09-13 15:47:25,702 - INFO - Finding expiry dates...
+2025-09-13 15:47:25,815 - INFO - System initialization completed successfully
+2025-09-13 15:47:26,066 - INFO - Generated fresh 2FA for account 1: 200586
+2025-09-13 15:47:27,117 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:47:27,117 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:49:37,667 - INFO - Downloading master files...
+2025-09-13 15:49:37,669 - INFO - Finding expiry dates...
+2025-09-13 15:49:37,765 - INFO - System initialization completed successfully
+2025-09-13 15:49:38,035 - INFO - Generated fresh 2FA for account 1: 702869
+2025-09-13 15:49:39,131 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:49:39,131 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:50:35,428 - INFO - Application interrupted by user
+2025-09-13 15:50:39,017 - INFO - Downloading master files...
+2025-09-13 15:50:39,017 - INFO - Finding expiry dates...
+2025-09-13 15:50:39,122 - INFO - System initialization completed successfully
+2025-09-13 15:50:39,368 - INFO - Generated fresh 2FA for account 1: 607747
+2025-09-13 15:50:40,616 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:50:40,616 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:52:12,789 - INFO - Application interrupted by user
+2025-09-13 15:52:16,909 - INFO - Downloading master files...
+2025-09-13 15:52:16,909 - INFO - Finding expiry dates...
+2025-09-13 15:52:17,003 - INFO - System initialization completed successfully
+2025-09-13 15:52:17,276 - INFO - Generated fresh 2FA for account 1: 147022
+2025-09-13 15:52:18,603 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:52:18,603 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:53:16,152 - INFO - Application interrupted by user
+2025-09-13 15:55:30,444 - INFO - Downloading master files...
+2025-09-13 15:55:30,445 - INFO - Finding expiry dates...
+2025-09-13 15:55:30,533 - INFO - System initialization completed successfully
+2025-09-13 15:55:30,778 - INFO - Generated fresh 2FA for account 1: 478793
+2025-09-13 15:55:31,864 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:55:31,864 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:56:02,622 - INFO - Downloading master files...
+2025-09-13 15:56:02,622 - INFO - Finding expiry dates...
+2025-09-13 15:56:02,739 - INFO - System initialization completed successfully
+2025-09-13 15:56:02,992 - INFO - Generated fresh 2FA for account 1: 010826
+2025-09-13 15:56:04,046 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:56:04,046 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 15:56:58,601 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 15:56:59,211 - INFO - Fetched SENSEX price: 80703.16
+2025-09-13 15:56:59,211 - INFO - Updated strikes for SENSEX based on price 80703.16: [80000, 80100, 80200, 80300, 80400, 80500, 80600, 80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400]
+2025-09-13 15:57:02,309 - INFO - Fetched SENSEX price: 80703.16
+2025-09-13 15:57:02,310 - INFO - Index LTP for SENSEX: 80703.16
+2025-09-13 15:57:13,099 - INFO - Getting token and lot size for trading symbol: SENSEX2591880200CE
+2025-09-13 15:57:13,109 - INFO - Found token and lot size for SENSEX2591880200CE: 862277, 20
+2025-09-13 15:57:13,109 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-13 15:57:13,109 - INFO - Updated quantity options for SENSEX2591880200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-13 15:57:13,109 - INFO - Getting token for trading symbol: SENSEX2591880200CE
+2025-09-13 15:57:13,116 - INFO - Found token for SENSEX2591880200CE: 862277
+2025-09-13 15:57:13,665 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 15:57:13,665 - INFO - Getting token for trading symbol: SENSEX2591880200CE
+2025-09-13 15:57:13,669 - INFO - Found token for SENSEX2591880200CE: 862277
+2025-09-13 15:57:13,669 - INFO - Subscribed to live price feed via master account: BFO|862277
+2025-09-13 15:57:13,669 - INFO - Auto-subscribed to SENSEX2591880200CE at price 1800.05
+2025-09-13 15:57:18,682 - INFO - Getting token and lot size for trading symbol: SENSEX2591881400CE
+2025-09-13 15:57:18,689 - INFO - Found token and lot size for SENSEX2591881400CE: 862095, 20
+2025-09-13 15:57:18,689 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-13 15:57:18,689 - INFO - Updated quantity options for SENSEX2591881400CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-13 15:57:18,689 - INFO - Getting token for trading symbol: SENSEX2591881400CE
+2025-09-13 15:57:18,694 - INFO - Found token for SENSEX2591881400CE: 862095
+2025-09-13 15:57:19,219 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 15:57:19,219 - INFO - Getting token for trading symbol: SENSEX2591881400CE
+2025-09-13 15:57:19,219 - INFO - Found token for SENSEX2591881400CE: 862095
+2025-09-13 15:57:19,219 - INFO - Unsubscribed from previous: BFO|862277
+2025-09-13 15:57:19,219 - INFO - Subscribed to live price feed via master account: BFO|862095
+2025-09-13 15:57:19,219 - INFO - Auto-subscribed to SENSEX2591881400CE at price 739.8
+2025-09-13 15:57:28,095 - INFO - Getting token and lot size for trading symbol: SENSEX2591881400CE
+2025-09-13 15:57:28,101 - INFO - Found token and lot size for SENSEX2591881400CE: 862095, 20
+2025-09-13 15:57:28,101 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-13 15:57:28,101 - INFO - Updated quantity options for SENSEX2591881400CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-13 15:57:28,101 - INFO - Getting token for trading symbol: SENSEX2591881400CE
+2025-09-13 15:57:28,108 - INFO - Found token for SENSEX2591881400CE: 862095
+2025-09-13 15:57:28,617 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 15:57:28,617 - INFO - Getting token for trading symbol: SENSEX2591881400CE
+2025-09-13 15:57:28,622 - INFO - Found token for SENSEX2591881400CE: 862095
+2025-09-13 15:57:28,622 - INFO - Unsubscribed from previous: BFO|862095
+2025-09-13 15:57:28,622 - INFO - Subscribed to live price feed via master account: BFO|862095
+2025-09-13 15:57:28,624 - INFO - Auto-subscribed to SENSEX2591881400CE at price 739.8
+2025-09-13 15:59:09,116 - INFO - Generated fresh 2FA for account 2: 517565
+2025-09-13 15:59:10,433 - INFO - PnL updated for account 2: 0.0
+2025-09-13 15:59:22,657 - INFO - Getting token and lot size for trading symbol: SENSEX2591881400CE
+2025-09-13 15:59:22,657 - INFO - Found token and lot size for SENSEX2591881400CE: 862095, 20
+2025-09-13 15:59:22,657 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-13 15:59:22,657 - INFO - Updated quantity options for SENSEX2591881400CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-13 15:59:22,669 - INFO - Getting token and lot size for trading symbol: SENSEX2591881400CE
+2025-09-13 15:59:22,673 - INFO - Found token and lot size for SENSEX2591881400CE: 862095, 20
+2025-09-13 15:59:22,673 - INFO - Using same quantity for both accounts: 20 (lot size: 20)
+2025-09-13 15:59:22,675 - INFO - Active accounts: [1, 2]
+2025-09-13 15:59:22,675 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-13 15:59:22,679 - INFO - Trading symbol: SENSEX2591881400CE, Price: 739.8
+2025-09-13 15:59:22,682 - INFO - Quantities: [20, 20]
+2025-09-13 15:59:22,683 - INFO - Account 1: API=True, Qty=20, Active=True
+2025-09-13 15:59:22,686 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591881400CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 739.8, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-13 15:59:22,686 - INFO - Account 2: API=True, Qty=20, Active=True
+2025-09-13 15:59:22,689 - INFO - API instance for account 1: True
+2025-09-13 15:59:22,690 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591881400CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 739.8, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-13 15:59:22,694 - INFO - API instance for account 2: True
+2025-09-13 15:59:23,495 - INFO - API response: {'request_time': '15:59:23 13-09-2025', 'stat': 'Ok', 'norenordno': '25091300003000'}
+2025-09-13 15:59:23,495 - INFO - API response type: <class 'dict'>
+2025-09-13 15:59:23,495 - INFO - Buy order placed successfully: {'request_time': '15:59:23 13-09-2025', 'stat': 'Ok', 'norenordno': '25091300003000'}
+2025-09-13 15:59:23,515 - INFO - New order received: 25091300003000
+2025-09-13 15:59:23,515 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '739.80'
+2025-09-13 15:59:23,520 - INFO - API response: {'request_time': '15:59:23 13-09-2025', 'stat': 'Ok', 'norenordno': '25091300003001'}
+2025-09-13 15:59:23,526 - INFO - New order received: 25091300003001
+2025-09-13 15:59:23,537 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '739.80'
+2025-09-13 15:59:23,546 - INFO - API response type: <class 'dict'>
+2025-09-13 15:59:23,550 - INFO - Buy order placed successfully: {'request_time': '15:59:23 13-09-2025', 'stat': 'Ok', 'norenordno': '25091300003001'}
+2025-09-13 15:59:23,552 - INFO - Cross-account coordination started
+2025-09-13 15:59:23,553 - INFO - Cross-account coordination started for buy orders
+2025-09-13 15:59:23,557 - INFO - Order data saved to orders.csv
+2025-09-13 15:59:23,558 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-13 15:59:23,562 - INFO - Order data saved to orders.csv
+2025-09-13 15:59:23,563 - INFO - Account 2 - B PENDING NewAck
+2025-09-13 15:59:23,565 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-13 15:59:23,565 - INFO - Account 1 - B PENDING NewAck
+2025-09-13 15:59:23,567 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-13 15:59:23,568 - INFO - Master order status updated: Buy Order PENDING @ 739.80
+2025-09-13 15:59:23,568 - INFO - Child order status updated: Buy Order PENDING @ 739.80
+2025-09-13 15:59:23,574 - INFO - Updating order 25091300003000
+2025-09-13 15:59:23,575 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '739.80'
+2025-09-13 15:59:23,578 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-13 15:59:23,579 - INFO - Updating order 25091300003001
+2025-09-13 15:59:23,579 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '739.80'
+2025-09-13 15:59:23,585 - INFO - Master order status updated: Order Rejected: RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]
+2025-09-13 15:59:23,588 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-13 15:59:23,588 - INFO - Child order status updated: Order Rejected: RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]
+2025-09-13 15:59:24,387 - INFO - PnL updated for account 1: 0.0
+2025-09-13 15:59:24,387 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-13 15:59:24,387 - INFO - Checking coordination - Master: PENDING, Child: None
+2025-09-13 15:59:24,425 - INFO - PnL updated for account 2: 0.0
+2025-09-13 15:59:24,425 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-13 15:59:24,428 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-13 16:00:05,553 - INFO - Order 25091300003001 cancelled successfully
+2025-09-13 16:00:05,553 - INFO - Updating order 25091300003001
+2025-09-13 16:00:05,555 - INFO - Order status debug - status: 'REJECTED', reporttype: 'CancelRejected', trantype: 'B', price: '739.80'
+2025-09-13 16:00:05,556 - INFO - Order 25091300003000 cancelled successfully
+2025-09-13 16:00:05,558 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-13 16:00:05,560 - INFO - Updating order 25091300003000
+2025-09-13 16:00:05,560 - INFO - Order status debug - status: 'REJECTED', reporttype: 'CancelRejected', trantype: 'B', price: '739.80'
+2025-09-13 16:00:05,562 - INFO - Buy button re-enabled after cancelling buy orders
+2025-09-13 16:00:05,564 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-13 16:00:05,565 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-13 16:00:05,567 - INFO - Child order status updated: Order Rejected: SAF:order is not open to cancel
+2025-09-13 16:00:05,567 - INFO - Master order status updated: Order Rejected: SAF:order is not open to cancel
+2025-09-13 16:00:12,047 - INFO - SL price suggested: 732.4 (1% below LTP: 739.8)
+2025-09-13 16:00:15,866 - INFO - Target price suggested: 747.2 (1% above LTP: 739.8)
+2025-09-13 16:01:15,369 - INFO - Getting token and lot size for trading symbol: SENSEX2591881400CE
+2025-09-13 16:01:15,369 - INFO - Found token and lot size for SENSEX2591881400CE: 862095, 20
+2025-09-13 16:01:15,369 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-13 16:01:15,369 - INFO - Updated quantity options for SENSEX2591881400CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-13 16:01:15,369 - INFO - Getting token and lot size for trading symbol: SENSEX2591881400CE
+2025-09-13 16:01:15,384 - INFO - Found token and lot size for SENSEX2591881400CE: 862095, 20
+2025-09-13 16:01:15,384 - INFO - Using same quantity for both accounts: 20 (lot size: 20)
+2025-09-13 16:01:15,384 - INFO - Active accounts: [1, 2]
+2025-09-13 16:01:15,387 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-13 16:01:15,387 - INFO - Trading symbol: SENSEX2591881400CE, Price: 739.8
+2025-09-13 16:01:15,387 - INFO - Quantities: [20, 20]
+2025-09-13 16:01:15,387 - INFO - Account 1: API=True, Qty=20, Active=True
+2025-09-13 16:01:15,389 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591881400CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 739.8, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-13 16:01:15,389 - INFO - Account 2: API=True, Qty=20, Active=True
+2025-09-13 16:01:15,389 - INFO - API instance for account 1: True
+2025-09-13 16:01:15,389 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591881400CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 739.8, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-13 16:01:15,394 - INFO - API instance for account 2: True
+2025-09-13 16:01:16,237 - INFO - API response: {'request_time': '16:01:16 13-09-2025', 'stat': 'Ok', 'norenordno': '25091300003004'}
+2025-09-13 16:01:16,241 - INFO - API response type: <class 'dict'>
+2025-09-13 16:01:16,241 - INFO - New order received: 25091300003004
+2025-09-13 16:01:16,241 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '739.80'
+2025-09-13 16:01:16,242 - INFO - Buy order placed successfully: {'request_time': '16:01:16 13-09-2025', 'stat': 'Ok', 'norenordno': '25091300003004'}
+2025-09-13 16:01:16,249 - INFO - Order data saved to orders.csv
+2025-09-13 16:01:16,249 - INFO - Account 1 - B PENDING NewAck
+2025-09-13 16:01:16,257 - INFO - API response: {'request_time': '16:01:16 13-09-2025', 'stat': 'Ok', 'norenordno': '25091300003005'}
+2025-09-13 16:01:16,259 - INFO - New order received: 25091300003005
+2025-09-13 16:01:16,260 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '739.80'
+2025-09-13 16:01:16,260 - INFO - API response type: <class 'dict'>
+2025-09-13 16:01:16,266 - INFO - Order data saved to orders.csv
+2025-09-13 16:01:16,266 - INFO - Buy order placed successfully: {'request_time': '16:01:16 13-09-2025', 'stat': 'Ok', 'norenordno': '25091300003005'}
+2025-09-13 16:01:16,266 - INFO - Account 2 - B PENDING NewAck
+2025-09-13 16:01:16,268 - INFO - Cross-account coordination started
+2025-09-13 16:01:16,268 - INFO - Cross-account coordination started for buy orders
+2025-09-13 16:01:16,268 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-13 16:01:16,274 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-13 16:01:16,278 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-13 16:01:16,280 - INFO - Master order status updated: Buy Order PENDING @ 739.80
+2025-09-13 16:01:16,281 - INFO - Child order status updated: Buy Order PENDING @ 739.80
+2025-09-13 16:01:16,285 - INFO - Updating order 25091300003004
+2025-09-13 16:01:16,285 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '739.80'
+2025-09-13 16:01:16,285 - INFO - Updating order 25091300003005
+2025-09-13 16:01:16,288 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-13 16:01:16,288 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '739.80'
+2025-09-13 16:01:16,290 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-13 16:01:16,290 - INFO - Master order status updated: Order Rejected: RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]
+2025-09-13 16:01:16,298 - INFO - Child order status updated: Order Rejected: RED:Block Type:NonSqroff Reason:MIS Intra-Day Orders are not allowed in BSE_FO[ FINV BFO I ]
+2025-09-13 16:01:17,075 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:01:17,075 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-13 16:01:17,075 - INFO - Checking coordination - Master: PENDING, Child: None
+2025-09-13 16:01:17,075 - INFO - PnL updated for account 2: 0.0
+2025-09-13 16:01:17,075 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-13 16:01:17,075 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-13 16:07:07,302 - INFO - Point trail set to: 5.0
+2025-09-13 16:09:56,131 - INFO - Percent trail set to: 5.0%
+2025-09-13 16:16:22,518 - INFO - Downloading master files...
+2025-09-13 16:16:22,518 - INFO - Finding expiry dates...
+2025-09-13 16:16:22,655 - INFO - System initialization completed successfully
+2025-09-13 16:16:23,014 - INFO - Generated fresh 2FA for account 1: 451791
+2025-09-13 16:16:24,377 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:16:24,377 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:20:06,590 - INFO - Downloading master files...
+2025-09-13 16:20:06,590 - INFO - Finding expiry dates...
+2025-09-13 16:20:06,710 - INFO - System initialization completed successfully
+2025-09-13 16:20:07,037 - INFO - Generated fresh 2FA for account 1: 817365
+2025-09-13 16:20:15,230 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:20:15,230 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:23:07,035 - INFO - Downloading master files...
+2025-09-13 16:23:07,051 - INFO - Finding expiry dates...
+2025-09-13 16:23:07,173 - INFO - System initialization completed successfully
+2025-09-13 16:23:07,544 - INFO - Generated fresh 2FA for account 1: 485021
+2025-09-13 16:23:08,940 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:23:08,940 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:23:26,368 - INFO - Trailing enabled - Point trail: 5.0
+2025-09-13 16:24:56,614 - INFO - Downloading master files...
+2025-09-13 16:24:56,614 - INFO - Finding expiry dates...
+2025-09-13 16:24:56,730 - INFO - System initialization completed successfully
+2025-09-13 16:24:57,038 - INFO - Generated fresh 2FA for account 1: 613786
+2025-09-13 16:24:58,442 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:24:58,442 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:25:19,195 - WARNING - Please fetch current price first to set Target
+2025-09-13 16:25:29,531 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 16:25:30,340 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:25:30,340 - INFO - Updated strikes for NIFTY based on price 24584.85: [24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950]
+2025-09-13 16:25:32,993 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:25:32,993 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 16:25:38,045 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:25:38,045 - INFO - Found NFO token and lot size for NIFTY16SEP25C24950: 44662, 75
+2025-09-13 16:25:38,045 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:25:38,045 - INFO - Updated quantity options for NIFTY16SEP25C24950 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:25:38,045 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:25:38,060 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 16:25:39,697 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 16:25:39,698 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:25:39,698 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 16:25:39,698 - INFO - Subscribed to live price feed via master account: NFO|44662
+2025-09-13 16:25:39,698 - INFO - Auto-subscribed to NIFTY16SEP25C24950 at price 170.0
+2025-09-13 16:25:49,232 - INFO - SL price suggested: 168.3 (1% below LTP: 170.0)
+2025-09-13 16:25:50,798 - INFO - Target price suggested: 171.7 (1% above LTP: 170.0)
+2025-09-13 16:28:24,087 - INFO - Downloading master files...
+2025-09-13 16:28:24,087 - INFO - Finding expiry dates...
+2025-09-13 16:28:24,232 - INFO - System initialization completed successfully
+2025-09-13 16:28:24,542 - INFO - Generated fresh 2FA for account 1: 718278
+2025-09-13 16:28:25,912 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:28:25,912 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:28:30,024 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 16:28:30,655 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:28:30,655 - INFO - Updated strikes for NIFTY based on price 24584.85: [24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950]
+2025-09-13 16:28:32,932 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:28:32,932 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 16:28:38,170 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:28:38,179 - INFO - Found NFO token and lot size for NIFTY16SEP25C24950: 44662, 75
+2025-09-13 16:28:38,179 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:28:38,179 - INFO - Updated quantity options for NIFTY16SEP25C24950 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:28:38,181 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:28:38,181 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 16:28:38,822 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 16:28:38,822 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:28:38,832 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 16:28:38,832 - INFO - Subscribed to live price feed via master account: NFO|44662
+2025-09-13 16:28:38,832 - INFO - Auto-subscribed to NIFTY16SEP25C24950 at price 170.0
+2025-09-13 16:28:45,283 - INFO - SL price suggested: 168.3 (1% below LTP: 170.0)
+2025-09-13 16:28:46,471 - INFO - Target price suggested: 171.7 (1% above LTP: 170.0)
+2025-09-13 16:30:28,777 - INFO - Downloading master files...
+2025-09-13 16:30:28,777 - INFO - Finding expiry dates...
+2025-09-13 16:30:28,894 - INFO - System initialization completed successfully
+2025-09-13 16:30:29,252 - INFO - Generated fresh 2FA for account 1: 162819
+2025-09-13 16:30:30,791 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:30:30,791 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:30:35,958 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 16:30:36,629 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:30:36,629 - INFO - Updated strikes for NIFTY based on price 24584.85: [24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950]
+2025-09-13 16:30:39,265 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:30:39,265 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 16:30:42,709 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:30:42,710 - INFO - Found NFO token and lot size for NIFTY16SEP25C24950: 44662, 75
+2025-09-13 16:30:42,710 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:30:42,710 - INFO - Updated quantity options for NIFTY16SEP25C24950 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:30:42,710 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:30:42,719 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 16:30:43,425 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 16:30:43,425 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:30:43,435 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 16:30:43,435 - INFO - Subscribed to live price feed via master account: NFO|44662
+2025-09-13 16:30:43,435 - INFO - Auto-subscribed to NIFTY16SEP25C24950 at price 170.0
+2025-09-13 16:30:51,419 - INFO - SL price suggested: 168.3 (1% below LTP: 170.0)
+2025-09-13 16:30:56,113 - INFO - Target price suggested: 171.7 (1% above LTP: 170.0)
+2025-09-13 16:31:06,415 - INFO - Trailing configured - Point trail: 5.0 (Ready for target activation)
+2025-09-13 16:31:09,282 - INFO - Trailing disabled
+2025-09-13 16:33:21,103 - INFO - Downloading master files...
+2025-09-13 16:33:21,103 - INFO - Finding expiry dates...
+2025-09-13 16:33:21,255 - INFO - System initialization completed successfully
+2025-09-13 16:33:21,685 - INFO - Generated fresh 2FA for account 1: 107127
+2025-09-13 16:33:23,309 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:33:23,309 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:33:49,261 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 16:33:49,916 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:33:49,916 - INFO - Updated strikes for NIFTY based on price 24584.85: [24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950]
+2025-09-13 16:33:52,318 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:33:52,318 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 16:33:55,913 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:33:55,922 - INFO - Found NFO token and lot size for NIFTY16SEP25C24950: 44662, 75
+2025-09-13 16:33:55,922 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:33:55,922 - INFO - Updated quantity options for NIFTY16SEP25C24950 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:33:55,924 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:33:55,929 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 16:33:56,587 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 16:33:56,587 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:33:56,591 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 16:33:56,591 - INFO - Subscribed to live price feed via master account: NFO|44662
+2025-09-13 16:33:56,591 - INFO - Auto-subscribed to NIFTY16SEP25C24950 at price 170.0
+2025-09-13 16:34:05,686 - INFO - SL price suggested: 168.3 (1% below LTP: 170.0)
+2025-09-13 16:34:16,061 - INFO - Target price suggested: 171.7 (1% above LTP: 170.0)
+2025-09-13 16:34:42,724 - INFO - Trailing configured - Point trail: 5.0 (Ready for target activation)
+2025-09-13 16:35:11,690 - INFO - SL price set to: 160.0 (monitoring will start after buy order is filled)
+2025-09-13 16:35:16,692 - INFO - Target price set to: 175.0 (monitoring will start after buy order is filled)
+2025-09-13 16:37:57,249 - INFO - Downloading master files...
+2025-09-13 16:37:57,249 - INFO - Finding expiry dates...
+2025-09-13 16:37:57,390 - INFO - System initialization completed successfully
+2025-09-13 16:37:57,777 - INFO - Generated fresh 2FA for account 1: 026717
+2025-09-13 16:37:59,311 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:37:59,313 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:38:16,155 - INFO - Downloading master files...
+2025-09-13 16:38:16,158 - INFO - Finding expiry dates...
+2025-09-13 16:38:16,260 - INFO - System initialization completed successfully
+2025-09-13 16:38:16,605 - INFO - Generated fresh 2FA for account 1: 565661
+2025-09-13 16:38:18,046 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:38:18,046 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:39:22,691 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 16:39:23,415 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:39:23,418 - INFO - Updated strikes for NIFTY based on price 24584.85: [24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950]
+2025-09-13 16:39:25,802 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:39:25,802 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 16:39:33,208 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:39:33,224 - INFO - Found NFO token and lot size for NIFTY16SEP25C24950: 44662, 75
+2025-09-13 16:39:33,224 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:39:33,226 - INFO - Updated quantity options for NIFTY16SEP25C24950 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:39:33,226 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:39:33,232 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 16:39:33,849 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 16:39:33,851 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 16:39:33,856 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 16:39:33,856 - INFO - Subscribed to live price feed via master account: NFO|44662
+2025-09-13 16:39:33,856 - INFO - Auto-subscribed to NIFTY16SEP25C24950 at price 170.0
+2025-09-13 16:39:39,809 - INFO - SL price suggested: 168.3 (1% below LTP: 170.0)
+2025-09-13 16:39:41,423 - INFO - Target price suggested: 171.7 (1% above LTP: 170.0)
+2025-09-13 16:40:02,716 - INFO - Trailing configured - Point trail: 1.0 (Ready for target activation)
+2025-09-13 16:41:37,440 - INFO - Trailing disabled
+2025-09-13 16:41:50,501 - INFO - Trailing configured - Percent trail: 0.5 (Ready for target activation)
+2025-09-13 16:43:39,116 - INFO - Downloading master files...
+2025-09-13 16:43:39,121 - INFO - Finding expiry dates...
+2025-09-13 16:43:39,256 - INFO - System initialization completed successfully
+2025-09-13 16:43:39,657 - INFO - Generated fresh 2FA for account 1: 456688
+2025-09-13 16:43:41,186 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:43:41,187 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:43:52,880 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 16:43:53,573 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:43:53,573 - INFO - Updated strikes for NIFTY based on price 24584.85: [24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950]
+2025-09-13 16:43:56,018 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 16:43:56,020 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 16:43:58,601 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24250
+2025-09-13 16:43:58,609 - INFO - Found NFO token and lot size for NIFTY16SEP25C24250: 44542, 75
+2025-09-13 16:43:58,610 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:43:58,610 - INFO - Updated quantity options for NIFTY16SEP25C24250 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 16:43:58,610 - INFO - Getting token for trading symbol: NIFTY16SEP25C24250
+2025-09-13 16:43:58,619 - INFO - Found NFO token for NIFTY16SEP25C24250: 44542
+2025-09-13 16:43:59,365 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 16:43:59,365 - INFO - Getting token for trading symbol: NIFTY16SEP25C24250
+2025-09-13 16:43:59,373 - INFO - Found NFO token for NIFTY16SEP25C24250: 44542
+2025-09-13 16:43:59,381 - INFO - Subscribed to live price feed via master account: NFO|44542
+2025-09-13 16:43:59,381 - INFO - Auto-subscribed to NIFTY16SEP25C24250 at price 895.5
+2025-09-13 16:44:03,314 - INFO - SL price suggested: 886.54 (1% below LTP: 895.5)
+2025-09-13 16:44:04,060 - INFO - Target price suggested: 904.46 (1% above LTP: 895.5)
+2025-09-13 16:44:16,811 - INFO - Trailing configured - Percent trail: 0.5 (Ready for target activation)
+2025-09-13 16:45:25,716 - INFO - Application interrupted by user
+2025-09-13 16:45:29,429 - INFO - Downloading master files...
+2025-09-13 16:45:29,429 - INFO - Finding expiry dates...
+2025-09-13 16:45:29,570 - INFO - System initialization completed successfully
+2025-09-13 16:45:29,918 - INFO - Generated fresh 2FA for account 1: 158877
+2025-09-13 16:45:31,372 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:45:31,374 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 16:46:02,534 - INFO - Downloading master files...
+2025-09-13 16:46:02,540 - INFO - Finding expiry dates...
+2025-09-13 16:46:02,669 - INFO - System initialization completed successfully
+2025-09-13 16:46:02,985 - INFO - Generated fresh 2FA for account 1: 813691
+2025-09-13 16:46:04,361 - INFO - PnL updated for account 1: 0.0
+2025-09-13 16:46:04,361 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 18:09:08,984 - INFO - Downloading master files...
+2025-09-13 18:09:08,992 - INFO - Finding expiry dates...
+2025-09-13 18:09:09,115 - INFO - System initialization completed successfully
+2025-09-13 18:09:09,444 - INFO - Generated fresh 2FA for account 1: 122159
+2025-09-13 18:09:10,845 - INFO - PnL updated for account 1: 0.0
+2025-09-13 18:09:10,845 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 18:09:14,191 - INFO - Generated fresh 2FA for account 2: 949229
+2025-09-13 18:09:15,546 - INFO - PnL updated for account 2: 0.0
+2025-09-13 18:09:16,893 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 18:09:17,576 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 18:09:17,576 - INFO - Updated strikes for NIFTY based on price 24584.85: [24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950]
+2025-09-13 18:09:20,984 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 18:09:20,987 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 18:09:28,142 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24950
+2025-09-13 18:09:28,153 - INFO - Found NFO token and lot size for NIFTY16SEP25C24950: 44662, 75
+2025-09-13 18:09:28,154 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 18:09:28,154 - INFO - Updated quantity options for NIFTY16SEP25C24950 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 18:09:28,154 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 18:09:28,156 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 18:09:28,840 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 18:09:28,840 - INFO - Getting token for trading symbol: NIFTY16SEP25C24950
+2025-09-13 18:09:28,847 - INFO - Found NFO token for NIFTY16SEP25C24950: 44662
+2025-09-13 18:09:28,847 - INFO - Subscribed to live price feed via master account: NFO|44662
+2025-09-13 18:09:28,847 - INFO - Auto-subscribed to NIFTY16SEP25C24950 at price 170.0
+2025-09-13 18:09:46,972 - INFO - SL price suggested: 168.3 (1% below LTP: 170.0)
+2025-09-13 18:09:50,269 - INFO - Target price suggested: 171.7 (1% above LTP: 170.0)
+2025-09-13 18:10:01,395 - INFO - Trailing configured - Percent trail: 0.5 (Ready for target activation)
+2025-09-13 18:13:54,119 - INFO - Downloading master files...
+2025-09-13 18:13:54,119 - INFO - Finding expiry dates...
+2025-09-13 18:13:54,232 - INFO - System initialization completed successfully
+2025-09-13 18:13:54,516 - INFO - Generated fresh 2FA for account 1: 714064
+2025-09-13 18:13:55,886 - INFO - PnL updated for account 1: 0.0
+2025-09-13 18:13:55,886 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 23:29:20,778 - INFO - Downloading master files...
+2025-09-13 23:29:20,778 - INFO - Finding expiry dates...
+2025-09-13 23:29:20,927 - INFO - System initialization completed successfully
+2025-09-13 23:29:21,975 - INFO - Generated fresh 2FA for account 1: 792532
+2025-09-13 23:29:23,586 - INFO - PnL updated for account 1: 0.0
+2025-09-13 23:29:23,586 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 23:29:27,221 - INFO - Generated fresh 2FA for account 2: 798859
+2025-09-13 23:29:28,253 - INFO - Child account logged in - Order blocking reset
+2025-09-13 23:29:29,196 - INFO - PnL updated for account 2: 0.0
+2025-09-13 23:29:42,819 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 23:29:43,484 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 23:29:43,486 - INFO - Updated strikes for NIFTY based on price 24584.85: [24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950]
+2025-09-13 23:29:47,752 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 23:29:47,752 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 23:29:50,538 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24500
+2025-09-13 23:29:50,548 - INFO - Found NFO token and lot size for NIFTY16SEP25C24500: 44580, 75
+2025-09-13 23:29:50,548 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 23:29:50,551 - INFO - Updated quantity options for NIFTY16SEP25C24500 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 23:29:50,551 - INFO - Getting token for trading symbol: NIFTY16SEP25C24500
+2025-09-13 23:29:50,558 - INFO - Found NFO token for NIFTY16SEP25C24500: 44580
+2025-09-13 23:29:51,244 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 23:29:51,244 - INFO - Getting token for trading symbol: NIFTY16SEP25C24500
+2025-09-13 23:29:51,265 - INFO - Found NFO token for NIFTY16SEP25C24500: 44580
+2025-09-13 23:29:51,265 - INFO - Subscribed to live price feed via master account: NFO|44580
+2025-09-13 23:29:51,270 - INFO - Auto-subscribed to NIFTY16SEP25C24500 at price 645.0
+2025-09-13 23:31:10,317 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C24600
+2025-09-13 23:31:10,318 - INFO - Found NFO token and lot size for NIFTY16SEP25C24600: 44588, 75
+2025-09-13 23:31:10,318 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 23:31:10,318 - INFO - Updated quantity options for NIFTY16SEP25C24600 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 23:31:10,318 - INFO - Getting token for trading symbol: NIFTY16SEP25C24600
+2025-09-13 23:31:10,329 - INFO - Found NFO token for NIFTY16SEP25C24600: 44588
+2025-09-13 23:31:11,064 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 23:31:11,064 - INFO - Getting token for trading symbol: NIFTY16SEP25C24600
+2025-09-13 23:31:11,064 - INFO - Found NFO token for NIFTY16SEP25C24600: 44588
+2025-09-13 23:31:11,064 - INFO - Unsubscribed from previous: NFO|44580
+2025-09-13 23:31:11,064 - INFO - Subscribed to live price feed via master account: NFO|44588
+2025-09-13 23:31:11,076 - INFO - Auto-subscribed to NIFTY16SEP25C24600 at price 494.0
+2025-09-13 23:31:28,896 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 23:31:29,551 - INFO - Fetched SENSEX price: 80684.68
+2025-09-13 23:31:29,551 - INFO - Updated strikes for SENSEX based on price 80684.68: [80000, 80100, 80200, 80300, 80400, 80500, 80600, 80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400]
+2025-09-13 23:31:32,472 - INFO - Fetched SENSEX price: 80684.68
+2025-09-13 23:31:32,472 - INFO - Index LTP for SENSEX: 80684.68
+2025-09-13 23:42:56,176 - INFO - Downloading master files...
+2025-09-13 23:42:56,179 - INFO - Finding expiry dates...
+2025-09-13 23:42:56,320 - INFO - System initialization completed successfully
+2025-09-13 23:42:56,727 - INFO - Generated fresh 2FA for account 1: 299361
+2025-09-13 23:42:58,438 - INFO - PnL updated for account 1: 0.0
+2025-09-13 23:42:58,438 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 23:43:11,072 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 23:43:11,872 - INFO - Fetched SENSEX price: 80684.68
+2025-09-13 23:43:11,873 - INFO - Updated strikes for SENSEX based on price 80684.68 and option None: [80000, 80100, 80200, 80300, 80400, 80500, 80600, 80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400]
+2025-09-13 23:43:14,596 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 23:43:15,350 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 23:43:15,360 - INFO - Updated strikes for NIFTY based on price 24584.85 and option None: [24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950]
+2025-09-13 23:43:18,122 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 23:43:18,122 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 23:43:18,946 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 23:43:18,946 - INFO - Updated strikes for NIFTY CE based on price 24584.85: [24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200]
+2025-09-13 23:43:22,725 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25200
+2025-09-13 23:43:22,733 - INFO - Found NFO token and lot size for NIFTY16SEP25C25200: 44730, 75
+2025-09-13 23:43:22,737 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 23:43:22,737 - INFO - Updated quantity options for NIFTY16SEP25C25200 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 23:43:22,737 - INFO - Getting token for trading symbol: NIFTY16SEP25C25200
+2025-09-13 23:43:22,737 - INFO - Found NFO token for NIFTY16SEP25C25200: 44730
+2025-09-13 23:43:23,434 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 23:43:23,434 - INFO - Getting token for trading symbol: NIFTY16SEP25C25200
+2025-09-13 23:43:23,440 - INFO - Found NFO token for NIFTY16SEP25C25200: 44730
+2025-09-13 23:43:23,440 - INFO - Subscribed to live price feed via master account: NFO|44730
+2025-09-13 23:43:23,440 - INFO - Auto-subscribed to NIFTY16SEP25C25200 at price 45.0
+2025-09-13 23:43:39,670 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 23:43:39,670 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 23:43:40,352 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 23:43:40,352 - INFO - Updated strikes for NIFTY PE based on price 24584.85: [24000, 24050, 24100, 24150, 24200, 24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700]
+2025-09-13 23:43:40,352 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25P25200
+2025-09-13 23:43:40,352 - INFO - Found NFO token and lot size for NIFTY16SEP25P25200: 44741, 75
+2025-09-13 23:43:40,352 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 23:43:40,352 - INFO - Updated quantity options for NIFTY16SEP25P25200 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 23:44:58,306 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25P24700
+2025-09-13 23:44:58,314 - INFO - Found NFO token and lot size for NIFTY16SEP25P24700: 44631, 75
+2025-09-13 23:44:58,314 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 23:44:58,314 - INFO - Updated quantity options for NIFTY16SEP25P24700 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-13 23:44:58,319 - INFO - Getting token for trading symbol: NIFTY16SEP25P24700
+2025-09-13 23:44:58,327 - INFO - Found NFO token for NIFTY16SEP25P24700: 44631
+2025-09-13 23:44:59,100 - INFO - Modify price fields cleared after auto-fetch
+2025-09-13 23:44:59,100 - INFO - Getting token for trading symbol: NIFTY16SEP25P24700
+2025-09-13 23:44:59,106 - INFO - Found NFO token for NIFTY16SEP25P24700: 44631
+2025-09-13 23:44:59,106 - INFO - Unsubscribed from previous: NFO|44730
+2025-09-13 23:44:59,106 - INFO - Subscribed to live price feed via master account: NFO|44631
+2025-09-13 23:44:59,106 - INFO - Auto-subscribed to NIFTY16SEP25P24700 at price 8.0
+2025-09-13 23:45:17,697 - INFO - Downloading master files...
+2025-09-13 23:45:17,699 - INFO - Finding expiry dates...
+2025-09-13 23:45:17,832 - INFO - System initialization completed successfully
+2025-09-13 23:45:18,222 - INFO - Generated fresh 2FA for account 1: 050563
+2025-09-13 23:45:19,772 - INFO - PnL updated for account 1: 0.0
+2025-09-13 23:45:19,772 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 23:48:03,892 - INFO - Downloading master files...
+2025-09-13 23:48:03,892 - INFO - Finding expiry dates...
+2025-09-13 23:48:04,042 - INFO - System initialization completed successfully
+2025-09-13 23:48:04,492 - INFO - Generated fresh 2FA for account 1: 770310
+2025-09-13 23:48:06,223 - INFO - PnL updated for account 1: 0.0
+2025-09-13 23:48:06,225 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 23:48:15,070 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 23:48:15,819 - INFO - Fetched SENSEX price: 80684.68
+2025-09-13 23:48:15,820 - INFO - Updated strikes for SENSEX based on price 80684.68 and option None: [80000, 80100, 80200, 80300, 80400, 80500, 80600, 80700, 80800, 80900, 81000, 81100, 81200, 81300, 81400]
+2025-09-13 23:48:22,299 - INFO - Cleared option and strike selections - no active orders
+2025-09-13 23:48:23,086 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 23:48:23,089 - INFO - Updated strikes for NIFTY based on price 24584.85 and option None: [24250, 24300, 24350, 24400, 24450, 24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950]
+2025-09-13 23:48:26,689 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 23:48:26,689 - INFO - Index LTP for NIFTY: 24584.85
+2025-09-13 23:48:27,321 - INFO - Fetched NIFTY price: 24584.85
+2025-09-13 23:48:27,321 - INFO - Updated strikes for NIFTY CE based on price 24584.85: [24500, 24550, 24600, 24650, 24700, 24750, 24800, 24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200]
+2025-09-13 23:49:18,070 - INFO - Generated fresh 2FA for account 2: 845373
+2025-09-13 23:49:18,843 - INFO - Child account logged in - Order blocking reset
+2025-09-13 23:49:19,568 - INFO - PnL updated for account 2: 0.0
+2025-09-13 23:49:47,972 - INFO - Downloading master files...
+2025-09-13 23:49:47,974 - INFO - Finding expiry dates...
+2025-09-13 23:49:48,165 - INFO - System initialization completed successfully
+2025-09-13 23:49:48,610 - INFO - Generated fresh 2FA for account 1: 098164
+2025-09-13 23:49:50,242 - INFO - PnL updated for account 1: 0.0
+2025-09-13 23:49:50,242 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 23:49:55,680 - INFO - Generated fresh 2FA for account 2: 945154
+2025-09-13 23:49:56,463 - INFO - Child account logged in - Order blocking reset
+2025-09-13 23:49:57,179 - INFO - PnL updated for account 2: 0.0
+2025-09-13 23:50:44,128 - INFO - Downloading master files...
+2025-09-13 23:50:44,136 - INFO - Finding expiry dates...
+2025-09-13 23:50:44,273 - INFO - System initialization completed successfully
+2025-09-13 23:50:44,719 - INFO - Generated fresh 2FA for account 1: 356314
+2025-09-13 23:50:46,192 - INFO - PnL updated for account 1: 0.0
+2025-09-13 23:50:46,192 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 23:50:48,967 - INFO - Generated fresh 2FA for account 2: 194163
+2025-09-13 23:50:49,663 - INFO - Child account logged in - Order blocking reset
+2025-09-13 23:50:50,435 - INFO - PnL updated for account 2: 0.0
+2025-09-13 23:56:02,675 - INFO - Application interrupted by user
+2025-09-13 23:56:07,397 - INFO - Downloading master files...
+2025-09-13 23:56:07,402 - INFO - Finding expiry dates...
+2025-09-13 23:56:07,532 - INFO - System initialization completed successfully
+2025-09-13 23:56:08,085 - INFO - Generated fresh 2FA for account 1: 777025
+2025-09-13 23:56:09,715 - INFO - PnL updated for account 1: 0.0
+2025-09-13 23:56:09,715 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 23:56:53,866 - INFO - Generated fresh 2FA for account 2: 175647
+2025-09-13 23:56:54,618 - INFO - Child account logged in - Order blocking reset
+2025-09-13 23:56:55,348 - INFO - PnL updated for account 2: 0.0
+2025-09-13 23:57:04,805 - ERROR - Error logging out child account: 'AccountManager' object has no attribute 'logout_account'
+2025-09-13 23:57:15,816 - INFO - Downloading master files...
+2025-09-13 23:57:15,818 - INFO - Finding expiry dates...
+2025-09-13 23:57:15,981 - INFO - System initialization completed successfully
+2025-09-13 23:57:16,464 - INFO - Generated fresh 2FA for account 1: 094021
+2025-09-13 23:57:18,209 - INFO - PnL updated for account 1: 0.0
+2025-09-13 23:57:18,210 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-13 23:59:26,704 - INFO - Application interrupted by user
+2025-09-13 23:59:31,346 - INFO - Downloading master files...
+2025-09-13 23:59:31,348 - INFO - Finding expiry dates...
+2025-09-13 23:59:31,509 - INFO - System initialization completed successfully
+2025-09-13 23:59:32,063 - INFO - Generated fresh 2FA for account 1: 949738
+2025-09-13 23:59:33,699 - INFO - PnL updated for account 1: 0.0
+2025-09-13 23:59:33,699 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-14 00:01:20,798 - INFO - Application interrupted by user

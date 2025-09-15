@@ -101,3 +101,63 @@ class AccountManager:
     def get_all_active_accounts(self) -> list:
         """Get list of all active account numbers"""
         return [num for num, account in self.accounts.items() if account.get('active', False)]
+    
+    def logout_account(self, account_num: int) -> tuple[bool, str]:
+        """
+        Block account from sending orders while keeping it active for PnL
+        
+        Args:
+            account_num: Account number to block
+            
+        Returns:
+            tuple: (success, message)
+        """
+        if account_num not in self.accounts:
+            return False, "Account not found"
+        
+        try:
+            # Mark account as blocked instead of logging out
+            self.accounts[account_num]['blocked'] = True
+            self.accounts[account_num]['active'] = False  # Block from sending orders
+            
+            client_name = self.accounts[account_num].get('client_name', f'Account {account_num}')
+            applicationLogger.info(f"Account {account_num} ({client_name}) blocked from sending orders - PnL monitoring continues")
+            
+            return True, f"Account {client_name} blocked from sending orders. PnL monitoring continues."
+            
+        except Exception as e:
+            error_msg = f"Error blocking account {account_num}: {e}"
+            applicationLogger.error(error_msg)
+            return False, error_msg
+    
+    def is_account_blocked(self, account_num: int) -> bool:
+        """Check if account is blocked from sending orders"""
+        return self.accounts.get(account_num, {}).get('blocked', False)
+    
+    def unblock_account(self, account_num: int) -> tuple[bool, str]:
+        """
+        Unblock account to allow sending orders again
+        
+        Args:
+            account_num: Account number to unblock
+            
+        Returns:
+            tuple: (success, message)
+        """
+        if account_num not in self.accounts:
+            return False, "Account not found"
+        
+        try:
+            # Unblock account
+            self.accounts[account_num]['blocked'] = False
+            self.accounts[account_num]['active'] = True
+            
+            client_name = self.accounts[account_num].get('client_name', f'Account {account_num}')
+            applicationLogger.info(f"Account {account_num} ({client_name}) unblocked - Orders allowed again")
+            
+            return True, f"Account {client_name} unblocked. Orders allowed again."
+            
+        except Exception as e:
+            error_msg = f"Error unblocking account {account_num}: {e}"
+            applicationLogger.error(error_msg)
+            return False, error_msg

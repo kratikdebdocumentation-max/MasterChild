@@ -11,6 +11,7 @@ class ExpiryManager:
     
     def __init__(self):
         self.expiry_dates = {}
+        self.expiry_lists = {}  # Store lists of expiry dates for each instrument
         self._load_expiry_dates()
     
     def _load_expiry_dates(self):
@@ -55,13 +56,41 @@ class ExpiryManager:
         """
         return self.expiry_dates.get(instrument, "")
     
-    def get_strike_list(self, instrument: str, current_price: float) -> list:
+    def get_expiry_list(self, instrument: str) -> list:
         """
-        Get strike price list for an instrument
+        Get list of available expiry dates for an instrument (current + next)
+        
+        Args:
+            instrument: Instrument name (NIFTY, BANKNIFTY, SENSEX)
+            
+        Returns:
+            List of formatted expiry dates
+        """
+        try:
+            # For now, return current + next expiry (we'll enhance this later)
+            current_expiry = self.expiry_dates.get(instrument, "")
+            if not current_expiry:
+                return []
+            
+            # Calculate next expiry (add 7 days for weekly options)
+            current_date = datetime.strptime(current_expiry, '%d%b%y')
+            next_date = current_date + timedelta(days=7)
+            next_expiry = next_date.strftime('%d%b%y').upper()
+            
+            return [current_expiry, next_expiry]
+            
+        except Exception as e:
+            applicationLogger.error(f"Error generating expiry list for {instrument}: {e}")
+            return [self.expiry_dates.get(instrument, "")]
+    
+    def get_strike_list(self, instrument: str, current_price: float, option_type: str = None) -> list:
+        """
+        Get strike price list for an instrument based on option type
         
         Args:
             instrument: Instrument name
             current_price: Current price
+            option_type: Option type (CE/PE) - if None, uses balanced distribution
             
         Returns:
             List of strike prices around the current price
@@ -71,21 +100,45 @@ class ExpiryManager:
                 # NIFTY strikes with 50 point intervals
                 # Round to nearest 50
                 base_strike = round(current_price / 50) * 50
-                strikes = [base_strike + (50 * i) for i in range(-7, 8)]
+                if option_type == "CE":
+                    # CE: More strikes above current price (2 below, 12 above)
+                    strikes = [base_strike + (50 * i) for i in range(-2, 13)]
+                elif option_type == "PE":
+                    # PE: More strikes below current price (12 below, 2 above)
+                    strikes = [base_strike + (50 * i) for i in range(-12, 3)]
+                else:
+                    # Default: Balanced distribution (7 below, 7 above)
+                    strikes = [base_strike + (50 * i) for i in range(-7, 8)]
                 return sorted(strikes)
                 
             elif instrument == "BANKNIFTY":
                 # BANKNIFTY strikes with 100 point intervals
                 # Round to nearest 100
                 base_strike = round(current_price / 100) * 100
-                strikes = [base_strike + (100 * i) for i in range(-7, 8)]
+                if option_type == "CE":
+                    # CE: More strikes above current price (2 below, 12 above)
+                    strikes = [base_strike + (100 * i) for i in range(-2, 13)]
+                elif option_type == "PE":
+                    # PE: More strikes below current price (12 below, 2 above)
+                    strikes = [base_strike + (100 * i) for i in range(-12, 3)]
+                else:
+                    # Default: Balanced distribution (7 below, 7 above)
+                    strikes = [base_strike + (100 * i) for i in range(-7, 8)]
                 return sorted(strikes)
                 
             elif instrument == "SENSEX":
                 # SENSEX strikes with 100 point intervals
                 # Round to nearest 100 (like the example: 81425.15 -> 81400)
                 base_strike = round(current_price / 100) * 100
-                strikes = [base_strike + (100 * i) for i in range(-7, 8)]
+                if option_type == "CE":
+                    # CE: More strikes above current price (2 below, 12 above)
+                    strikes = [base_strike + (100 * i) for i in range(-2, 13)]
+                elif option_type == "PE":
+                    # PE: More strikes below current price (12 below, 2 above)
+                    strikes = [base_strike + (100 * i) for i in range(-12, 3)]
+                else:
+                    # Default: Balanced distribution (7 below, 7 above)
+                    strikes = [base_strike + (100 * i) for i in range(-7, 8)]
                 return sorted(strikes)
             else:
                 return []

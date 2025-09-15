@@ -56,16 +56,18 @@ class OrderManager:
         
         def place_order(api, qty, index):
             try:
-                # Determine correct exchange for options
+                # Determine correct exchange and product type for options
                 if 'SENSEX' in trading_symbol:
                     exchange = 'BFO'
+                    product_type = 'M'  # Use 'M' for Sensex
                 else:
                     exchange = 'NFO'
+                    product_type = 'I'  # Use 'I' for NIFTY/BANKNIFTY
                 
                 # Log all parameters being sent to API
                 order_params = {
                     'buy_or_sell': 'B',
-                    'product_type': 'I',
+                    'product_type': product_type,
                     'exchange': exchange,
                     'tradingsymbol': trading_symbol,
                     'quantity': qty,
@@ -191,15 +193,17 @@ class OrderManager:
         
         def place_order(api, qty, index):
             try:
-                # Determine correct exchange for options
+                # Determine correct exchange and product type for options
                 if 'SENSEX' in trading_symbol:
                     exchange = 'BFO'
+                    product_type = 'M'  # Use 'M' for Sensex
                 else:
                     exchange = 'NFO'
+                    product_type = 'I'  # Use 'I' for NIFTY/BANKNIFTY
                 
                 order_place = api.place_order(
                     buy_or_sell='S',
-                    product_type='I',
+                    product_type=product_type,
                     exchange=exchange,
                     tradingsymbol=trading_symbol,
                     quantity=qty,
@@ -258,15 +262,17 @@ class OrderManager:
         
         def place_order(api, qty, index):
             try:
-                # Determine correct exchange for options
+                # Determine correct exchange and product type for options
                 if 'SENSEX' in trading_symbol:
                     exchange = 'BFO'
+                    product_type = 'M'  # Use 'M' for Sensex
                 else:
                     exchange = 'NFO'
+                    product_type = 'I'  # Use 'I' for NIFTY/BANKNIFTY
                 
                 order_place = api.place_order(
                     buy_or_sell='S',
-                    product_type='I',
+                    product_type=product_type,
                     exchange=exchange,
                     tradingsymbol=trading_symbol,
                     quantity=qty,

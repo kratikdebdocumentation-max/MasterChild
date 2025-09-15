@@ -24,7 +24,7 @@ def downloadFileMaster():
         print(f'Downloading {zip_file}')
         url = root + zip_file
         try:
-            r = requests.get(url, allow_redirects=True)
+            r = requests.get(url, allow_redirects=True, timeout=30)  # 30 second timeout
             r.raise_for_status()  # Raise exception if response code is not 200
             with open(zip_file, 'wb') as f:
                 f.write(r.content)
