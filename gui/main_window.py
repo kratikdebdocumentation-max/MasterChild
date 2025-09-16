@@ -46,6 +46,26 @@ class MainWindow:
         self.position_manager = PositionManager()
         self.symbol_manager = SymbolManager()
         self.expiry_manager = ExpiryManager()
+        
+        # Position tracking for local PnL calculation
+        self.position_data = {
+            1: {  # Master account
+                'buy_price': None,
+                'qty': None,
+                'active': False,
+                'verified_pnl': None,
+                'needs_verification': False,
+                'symbol': None
+            },
+            2: {  # Child account
+                'buy_price': None,
+                'qty': None,
+                'active': False,
+                'verified_pnl': None,
+                'needs_verification': False,
+                'symbol': None
+            }
+        }
 
         
         # Set up live price callback
@@ -70,6 +90,22 @@ class MainWindow:
         
         # Initialize with master account
         self.initialize_master_account()
+        
+        # Initialize UI states after GUI is created
+        self.root.after(100, self.initialize_ui_states)
+    
+    def initialize_ui_states(self):
+        """Initialize UI states after GUI is fully created"""
+        try:
+            # Initialize Verify PnL button state
+            self.update_verify_pnl_button_state()
+            
+            # Initialize price input state
+            self.update_price_input_state()
+            
+            applicationLogger.info("UI states initialized successfully")
+        except Exception as e:
+            applicationLogger.error(f"Error initializing UI states: {e}")
     
     def setup_variables(self):
         """Setup Tkinter variables"""
@@ -84,6 +120,9 @@ class MainWindow:
         self.price1_value = tk.StringVar()
         self.modify_buy_value = tk.StringVar()
         self.modify_exit_value = tk.StringVar()
+        
+        # Store original buy price for modify functionality
+        self.original_buy_price = None
 
         self.sl_price_value = tk.StringVar()
         self.target_price_value = tk.StringVar()
@@ -221,6 +260,15 @@ class MainWindow:
                            borderwidth=3)
         self.style.map("LoginError.TButton",
                       background=[('active', 'lightcoral')])
+        
+        # Verify PnL button style
+        self.style.configure("VerifyButton.TButton",
+                           background="orange",
+                           relief="solid",
+                           borderwidth=2,
+                           font=("Arial", 9, "bold"))
+        self.style.map("VerifyButton.TButton",
+                      background=[('active', 'darkorange')])
     
     def create_login_buttons(self):
         """Create login buttons frame with integrated PnL display"""
@@ -268,6 +316,15 @@ class MainWindow:
             bg='lightgreen'
         )
         self.child_pnl_box.pack(side=tk.LEFT, padx=2)
+        
+        # Verify PnL button
+        self.verify_pnl_button = ttk.Button(
+            self.login_frame, text="Verify PnL", 
+            command=self.verify_pnl_from_broker,
+            width=12, style="VerifyButton.TButton",
+            state='normal'  # Initially enabled
+        )
+        self.verify_pnl_button.pack(side=tk.LEFT, padx=10)
     
     
     def create_selection_frame(self):
@@ -427,27 +484,29 @@ class MainWindow:
         self.cancel_child_buy_button.grid(row=2, column=1, padx=10, pady=5)
         
         # SL Price and Target Price controls (next to order status)
+        # SL Price box first, then button
+        self.sl_price_box = tk.Entry(
+            self.status_frame, textvariable=self.sl_price_value, width=10
+        )
+        self.sl_price_box.grid(row=0, column=2, padx=5, pady=5)
+        
         self.sl_price_button = tk.Button(
             self.status_frame, text="SL Price", 
             command=self.set_sl_price, width=20, height=1
         )
-        self.sl_price_button.grid(row=0, column=2, padx=10, pady=5)
+        self.sl_price_button.grid(row=0, column=3, padx=10, pady=5)
         
-        self.sl_price_box = tk.Entry(
-            self.status_frame, textvariable=self.sl_price_value, width=10
+        # Target Price box first, then button
+        self.target_price_box = tk.Entry(
+            self.status_frame, textvariable=self.target_price_value, width=10
         )
-        self.sl_price_box.grid(row=0, column=3, padx=5, pady=5)
+        self.target_price_box.grid(row=1, column=2, padx=5, pady=5)
         
         self.target_price_button = tk.Button(
             self.status_frame, text="Target Price", 
             command=self.set_target_price, width=20, height=1
         )
-        self.target_price_button.grid(row=1, column=2, padx=10, pady=5)
-        
-        self.target_price_box = tk.Entry(
-            self.status_frame, textvariable=self.target_price_value, width=10
-        )
-        self.target_price_box.grid(row=1, column=3, padx=5, pady=5)
+        self.target_price_button.grid(row=1, column=3, padx=10, pady=5)
         
         # Trailing Stop Loss controls (compact design)
         # Trail Type dropdown
@@ -563,19 +622,18 @@ class MainWindow:
         )
         self.cancel_buy_button.grid(row=0, column=0, padx=5, pady=5)
         
+        # Modify Buy box first, then button
+        self.modify_buy_box = tk.Entry(
+            self.order_frame, textvariable=self.modify_buy_value, width=10
+        )
+        self.modify_buy_box.grid(row=0, column=1, padx=5, pady=5)
+        
         self.modify_buy_button = tk.Button(
             self.order_frame, text="Modify Buy", 
             command=self.modify_buy_orders, width=15, height=2,
             state="disabled"
         )
-
-        self.modify_buy_button.grid(row=0, column=1, padx=5, pady=5)
-        
-        self.modify_buy_box = tk.Entry(
-            self.order_frame, textvariable=self.modify_buy_value, width=10
-        )
-
-        self.modify_buy_box.grid(row=0, column=2, padx=5, pady=5)
+        self.modify_buy_button.grid(row=0, column=2, padx=5, pady=5)
         
         # Cancel Exit and Modify Exit (right side)
         self.cancel_exit_button = tk.Button(
@@ -585,18 +643,18 @@ class MainWindow:
         )
         self.cancel_exit_button.grid(row=0, column=3, padx=5, pady=5)
         
-        self.modify_exit_button = tk.Button(
-            self.order_frame, text="Modify Exit", 
-
-            command=self.modify_exit_orders, width=15, height=2,
-            state="disabled"
-        )
-        self.modify_exit_button.grid(row=0, column=4, padx=5, pady=5)
-        
+        # Modify Exit box first, then button
         self.modify_exit_box = tk.Entry(
             self.order_frame, textvariable=self.modify_exit_value, width=10
         )
-        self.modify_exit_box.grid(row=0, column=5, padx=5, pady=5)
+        self.modify_exit_box.grid(row=0, column=4, padx=5, pady=5)
+        
+        self.modify_exit_button = tk.Button(
+            self.order_frame, text="Modify Exit", 
+            command=self.modify_exit_orders, width=15, height=2,
+            state="disabled"
+        )
+        self.modify_exit_button.grid(row=0, column=5, padx=5, pady=5)
     
 
     def create_bottom_control_panel(self):
@@ -904,17 +962,37 @@ class MainWindow:
         index = self.selected_index.get()
         
         if option in ["CE", "PE"] and index:
-            # Fetch Index LTP when CE or PE is selected
-            self.fetch_index_ltp(index)
+            # Fetch Index LTP and get the price for strike calculation
+            current_price = self.fetch_index_ltp_and_get_price(index)
             
-            # Update strikes based on new option type
-            self.update_strikes_for_option(index, option)
+            # Update strikes based on new option type with the fetched price
+            self.update_strikes_for_option_with_price(index, option, current_price)
         
         # Also call the original concatenate_values method
         self.concatenate_values()
     
+    def update_strikes_for_option_with_price(self, index: str, option: str, current_price: float = None):
+        """Update strikes when option type changes, using provided price"""
+        try:
+            if current_price:
+                strikes = self.expiry_manager.get_strike_list(index, current_price, option)
+                self.strike_dropdown['values'] = strikes
+                applicationLogger.info(f"Updated strikes for {index} {option} based on price {current_price}: {strikes}")
+            else:
+                # Fallback to default strikes if no price provided
+                applicationLogger.warning(f"No price provided for {index}, using default strikes")
+                default_prices = {"NIFTY": 24000, "BANKNIFTY": 52000, "SENSEX": 81000}
+                strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option)
+                self.strike_dropdown['values'] = strikes
+        except Exception as e:
+            applicationLogger.error(f"Error updating strikes for {index} {option}: {e}")
+            # Fallback to default strikes on error
+            default_prices = {"NIFTY": 24000, "BANKNIFTY": 52000, "SENSEX": 81000}
+            strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option)
+            self.strike_dropdown['values'] = strikes
+
     def update_strikes_for_option(self, index: str, option: str):
-        """Update strikes when option type changes"""
+        """Update strikes when option type changes (legacy method for backward compatibility)"""
         try:
             # Get current index price
             api = self.account_manager.get_api(1)
@@ -979,6 +1057,31 @@ class MainWindow:
         except Exception as e:
             self.index_ltp_value.set("Error")
             applicationLogger.error(f"Error fetching Index LTP for {index}: {e}")
+
+    def fetch_index_ltp_and_get_price(self, index):
+        """Fetch and display Index LTP, return the price for further use"""
+        try:
+            # Get master account API
+            api = self.account_manager.get_api(1)
+            if not api:
+                self.index_ltp_value.set("No API")
+                return None
+            
+            # Get Index LTP
+            ltp = self.symbol_manager.get_index_price(api, index)
+            if ltp:
+                self.index_ltp_value.set(f"{ltp:.2f}")
+                applicationLogger.info(f"Index LTP for {index}: {ltp}")
+                return ltp
+            else:
+                self.index_ltp_value.set("N/A")
+                applicationLogger.warning(f"Could not fetch Index LTP for {index}")
+                return None
+                
+        except Exception as e:
+            self.index_ltp_value.set("Error")
+            applicationLogger.error(f"Error fetching Index LTP for {index}: {e}")
+            return None
     
     def concatenate_values(self, *args):
         """Concatenate selected values to create trading symbol"""
@@ -1210,6 +1313,9 @@ class MainWindow:
             self.premium_price_value.set(f"{live_price:.2f}")
             applicationLogger.debug(f"Updated live price: {live_price}")
             
+            # Calculate local PnL for active positions
+            self.calculate_local_pnl(live_price)
+            
             # Check for SL/Target breaches
             self.check_sl_target_breach(live_price)
             
@@ -1218,6 +1324,109 @@ class MainWindow:
             
         except Exception as e:
             applicationLogger.error(f"Error updating live price: {e}")
+    
+    def calculate_local_pnl(self, live_price: float):
+        """Calculate local PnL for active positions based on live price"""
+        try:
+            for account_num in [1, 2]:  # Master and child accounts
+                position = self.position_data[account_num]
+                
+                # Only calculate if position is active
+                if position['active'] and position['buy_price'] is not None and position['qty'] is not None:
+                    buy_price = position['buy_price']
+                    qty = position['qty']
+                    
+                    # Calculate unrealized PnL
+                    unrealized_pnl = (live_price - buy_price) * qty
+                    
+                    # Update PnL display
+                    self.update_pnl_display(account_num, unrealized_pnl)
+                    
+                    # Mark as needing verification
+                    position['needs_verification'] = True
+                    
+                    applicationLogger.debug(f"Local PnL calculated for account {account_num}: {unrealized_pnl:.2f} (Price: {live_price:.2f}, Buy: {buy_price:.2f}, Qty: {qty})")
+                    
+        except Exception as e:
+            applicationLogger.error(f"Error calculating local PnL: {e}")
+    
+    def verify_pnl_from_broker(self):
+        """Verify PnL by fetching actual data from broker"""
+        try:
+            applicationLogger.info("Verifying PnL from broker...")
+            
+            for account_num in [1, 2]:  # Master and child accounts
+                position = self.position_data[account_num]
+                
+                # Only verify if account is active and has positions
+                if (self.account_manager.accounts[account_num]['active'] or 
+                    self.account_manager.accounts[account_num].get('blocked', False)):
+                    
+                    api = self.account_manager.accounts[account_num]['api']
+                    if api:
+                        # Get actual PnL from broker
+                        broker_pnl = self.calculate_pnl(api)
+                        
+                        # Update position data
+                        position['verified_pnl'] = broker_pnl
+                        position['needs_verification'] = False
+                        
+                        # Update display
+                        self.update_pnl_display(account_num, broker_pnl)
+                        
+                        status = "blocked" if self.account_manager.accounts[account_num].get('blocked', False) else "active"
+                        applicationLogger.info(f"Verified PnL for account {account_num} ({status}): {broker_pnl}")
+            
+            # Log verification complete (no popup)
+            applicationLogger.info("PnL verification completed successfully")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error verifying PnL from broker: {e}")
+    
+    def update_verify_pnl_button_state(self):
+        """Update Verify PnL button state based on active positions"""
+        try:
+            # Check if any account has an active position
+            has_active_position = any(
+                self.position_data[account_num]['active'] 
+                for account_num in [1, 2]
+            )
+            
+            # Disable button if any position is active, enable otherwise
+            if has_active_position:
+                self.verify_pnl_button.config(state='disabled')
+                applicationLogger.debug("Verify PnL button disabled - active position detected")
+            else:
+                self.verify_pnl_button.config(state='normal')
+                applicationLogger.debug("Verify PnL button enabled - no active positions")
+                
+        except Exception as e:
+            applicationLogger.error(f"Error updating Verify PnL button state: {e}")
+    
+    def update_price_input_state(self):
+        """Update price input box state based on active positions"""
+        try:
+            # Check if price_box exists
+            if not hasattr(self, 'price_box'):
+                applicationLogger.error("Price box not found - GUI may not be fully initialized")
+                return
+            
+            # Check if any account has an active position
+            has_active_position = any(
+                self.position_data[account_num]['active'] 
+                for account_num in [1, 2]
+            )
+            
+            # Disable price input if any position is active, enable otherwise
+            if has_active_position:
+                self.price_box.config(state='disabled', bg='lightgray')
+                applicationLogger.info("Price input box disabled - active position detected")
+            else:
+                self.price_box.config(state='normal', bg='white')
+                applicationLogger.info("Price input box enabled - no active positions")
+                
+        except Exception as e:
+            applicationLogger.error(f"Error updating price input state: {e}")
     
     def get_account_name(self, account_num: int) -> str:
         """Get the account holder name for a specific account"""
@@ -1289,6 +1498,24 @@ class MainWindow:
                 
             applicationLogger.info("Exit buttons enabled after buy order completion")
             
+            # Track position data for local PnL calculation
+            if account_num in self.position_data:
+                # Get quantity from the order that was placed
+                qty = self.quantities.get(account_num, 0)
+                self.position_data[account_num]['buy_price'] = price
+                self.position_data[account_num]['qty'] = qty
+                self.position_data[account_num]['active'] = True
+                self.position_data[account_num]['symbol'] = symbol
+                self.position_data[account_num]['needs_verification'] = False
+                
+                applicationLogger.info(f"Position tracked for account {account_num}: {symbol} @ {price}, Qty: {qty}")
+            
+            # Update Verify PnL button state
+            self.update_verify_pnl_button_state()
+            
+            # Update price input state
+            self.update_price_input_state()
+            
             # Update PnL after buy order completion
             self.update_pnl_on_trade(account_num)
                     
@@ -1303,6 +1530,22 @@ class MainWindow:
             # Reset SL and Target monitoring
             self.reset_sl_target_monitoring()
             applicationLogger.info("SL and Target monitoring reset after sell order completion")
+            
+            # Clear position data for local PnL calculation
+            if account_num in self.position_data:
+                self.position_data[account_num]['active'] = False
+                self.position_data[account_num]['buy_price'] = None
+                self.position_data[account_num]['qty'] = None
+                self.position_data[account_num]['symbol'] = None
+                self.position_data[account_num]['needs_verification'] = False
+                
+                applicationLogger.info(f"Position cleared for account {account_num} after sell completion")
+            
+            # Update Verify PnL button state
+            self.update_verify_pnl_button_state()
+            
+            # Update price input state
+            self.update_price_input_state()
             
             # Update PnL after sell order completion
             self.update_pnl_on_trade(account_num)
@@ -1510,6 +1753,10 @@ class MainWindow:
             price = float(self.price_value.get())
             qty1 = int(self.qty1_var.get())
             
+            # Store original buy price for modify functionality
+            self.original_buy_price = price
+            applicationLogger.info(f"Original buy price stored: {price}")
+            
 
             # Set quantities for all accounts - master uses selected quantity, child uses configured lots
             if trading_symbol:
@@ -1608,6 +1855,10 @@ class MainWindow:
             # Disable buy button and update text with price
             self.buy_button.config(state='disabled', text=f"OrderPlaced@{price}")
             applicationLogger.info("Buy button disabled to prevent duplicate orders")
+            
+            # Gray out the price box to prevent price changes after order placement
+            self.price_box.config(state='disabled', bg='lightgray')
+            applicationLogger.info("Price box grayed out after order placement")
             
             # Enable buy-related buttons for order management
             self.cancel_buy_button.config(state='normal')
@@ -1825,7 +2076,14 @@ class MainWindow:
             self.modify_buy_button.config(state='disabled')
             self.cancel_master_buy_button.config(state='disabled')
             self.cancel_child_buy_button.config(state='disabled')
-            applicationLogger.info("Buy button re-enabled after cancelling buy orders")
+            
+            # Re-enable price box for new orders
+            self.price_box.config(state='normal', bg='white')
+            
+            # Clear original buy price and modify box
+            self.original_buy_price = None
+            self.modify_buy_value.set("")
+            applicationLogger.info("Buy button and price box re-enabled after cancelling buy orders")
             
             # Reset SL and Target monitoring
             self.reset_sl_target_monitoring()
@@ -1931,7 +2189,13 @@ class MainWindow:
             self.buy_button.config(state='normal', text="BUY")
             self.cancel_master_buy_button.config(state='disabled')
             
-            applicationLogger.info("Master buy order cancelled successfully")
+            # Re-enable price box for new orders
+            self.price_box.config(state='normal', bg='white')
+            
+            # Clear original buy price and modify box
+            self.original_buy_price = None
+            self.modify_buy_value.set("")
+            applicationLogger.info("Master buy order cancelled successfully, price box re-enabled")
             
         except Exception as e:
             applicationLogger.error(f"Error cancelling master buy order: {e}")
@@ -1969,12 +2233,19 @@ class MainWindow:
             self.buy_button.config(state='normal', text="BUY")
             self.cancel_child_buy_button.config(state='disabled')
             
-            applicationLogger.info("Child buy order cancelled successfully")
+            # Re-enable price box for new orders
+            self.price_box.config(state='normal', bg='white')
+            
+            # Clear original buy price and modify box
+            self.original_buy_price = None
+            self.modify_buy_value.set("")
+            applicationLogger.info("Child buy order cancelled successfully, price box re-enabled")
             
         except Exception as e:
             applicationLogger.error(f"Error cancelling child buy order: {e}")
             self.child_order_status.set(f"Cancel Error: {str(e)[:40]}...")
             self.cancel_child_buy_button.config(text=f"Error: {str(e)[:20]}...")
+    
     
     def modify_buy_orders(self):
         """Modify buy orders across all active accounts"""
@@ -1982,21 +2253,28 @@ class MainWindow:
             trading_symbol = self.concatenate_values()
             if not trading_symbol:
                 messagebox.showerror("Error", "Please select all required fields")
-
                 return
             
-            # If modify buy box is empty, populate with current LTP and return (don't place order yet)
+            # Check if we have an original buy price
+            if self.original_buy_price is None:
+                messagebox.showerror("Error", "No original buy price found. Please place buy orders first.")
+                return
+            
+            # Check if modify buy box has a value
             if not self.modify_buy_value.get().strip():
-                current_ltp = self.premium_price_value.get()
-                if current_ltp:
-                    self.modify_buy_value.set(current_ltp)
-                    applicationLogger.info(f"Modify Buy box populated with current LTP: {current_ltp}")
-                    return  # Stop here - user needs to press button again to place order
-                else:
-                    messagebox.showerror("Error", "Please fetch current price first")
+                messagebox.showerror("Error", "Please enter a price in the modify buy box")
                 return
             
-            price = float(self.modify_buy_value.get())
+            # Validate the price
+            try:
+                price = float(self.modify_buy_value.get())
+                if price <= 0:
+                    messagebox.showerror("Error", "Price must be greater than 0")
+                    return
+            except ValueError:
+                messagebox.showerror("Error", "Please enter a valid price")
+                return
+            
             qty1 = int(self.qty1_var.get())
             
 
@@ -2057,6 +2335,14 @@ class MainWindow:
 
             # Auto-adjust SL and Target based on new buy order price
             self.auto_set_sl_target_from_buy_price(price)
+            
+            # Update the stored original buy price to the new price
+            self.original_buy_price = price
+            applicationLogger.info(f"Original buy price updated to: {price}")
+            
+            # Clear modify box after successful modification
+            self.modify_buy_value.set("")
+            applicationLogger.info("Modify Buy box cleared after successful modification")
 
             # Update status displays based on active accounts
             if 1 in active_accounts:
@@ -2263,6 +2549,14 @@ class MainWindow:
         """Release button states - enable buy and exit buttons"""
         # Enable buy button
         self.buy_button.config(state='normal', text="BUY")
+        
+        # Re-enable price box for new orders
+        self.price_box.config(state='normal', bg='white')
+        
+        # Clear original buy price and modify box
+        self.original_buy_price = None
+        self.modify_buy_value.set("")
+        applicationLogger.info("Price box re-enabled for new orders")
         
         # Disable buy-related buttons until new buy orders are placed
         self.cancel_buy_button.config(state='disabled')
