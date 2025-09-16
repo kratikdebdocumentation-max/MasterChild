@@ -1,0 +1,1201 @@
+2025-09-16 14:24:53,856 - INFO - Starting master file download in background...
+2025-09-16 14:24:53,856 - INFO - Finding expiry dates (with caching)...
+2025-09-16 14:24:54,063 - INFO - System initialization completed (downloads in background)
+2025-09-16 14:24:54,063 - INFO - Showing configuration window...
+2025-09-16 14:24:54,248 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 30.0}
+2025-09-16 14:27:12,342 - INFO - Starting master file download in background...
+2025-09-16 14:27:12,344 - INFO - Finding expiry dates (with caching)...
+2025-09-16 14:27:12,519 - INFO - System initialization completed (downloads in background)
+2025-09-16 14:27:12,519 - INFO - Showing configuration window...
+2025-09-16 14:27:12,648 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 30.0}
+2025-09-16 14:27:15,804 - INFO - Configuration skipped - using last saved values
+2025-09-16 14:27:16,090 - INFO - Configuration completed with settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 30.0}
+2025-09-16 14:27:16,644 - INFO - Generated fresh 2FA for account 1: 517863
+2025-09-16 14:27:18,475 - INFO - PnL updated for account 1 (active): 0.0
+2025-09-16 14:27:18,475 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-16 14:29:26,341 - INFO - Starting master file download in background...
+2025-09-16 14:29:26,341 - INFO - Finding expiry dates (with caching)...
+2025-09-16 14:29:26,506 - INFO - System initialization completed (downloads in background)
+2025-09-16 14:29:26,506 - INFO - Showing configuration window...
+2025-09-16 14:29:26,646 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 30.0}
+2025-09-16 14:29:38,249 - INFO - Configuration skipped - using last saved values
+2025-09-16 14:29:38,517 - INFO - Configuration completed with settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 30.0}
+2025-09-16 14:29:39,277 - INFO - Generated fresh 2FA for account 1: 414845
+2025-09-16 14:29:41,589 - INFO - PnL updated for account 1 (active): 0.0
+2025-09-16 14:29:41,589 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-16 14:29:51,214 - INFO - Generated fresh 2FA for account 2: 269345
+2025-09-16 14:29:52,446 - INFO - Child account logged in - Order blocking reset
+2025-09-16 14:29:53,186 - INFO - PnL updated for account 2 (active): 0.0
+2025-09-16 14:29:59,866 - INFO - Cleared option and strike selections - no active orders
+2025-09-16 14:30:00,829 - INFO - Fetched NIFTY price: 25199.65
+2025-09-16 14:30:00,834 - INFO - Index LTP for NIFTY: 25199.65
+2025-09-16 14:30:01,713 - INFO - Fetched NIFTY price: 25199.15
+2025-09-16 14:30:01,713 - INFO - Updated strikes for NIFTY based on price 25199.15 and option None: [24850, 24900, 24950, 25000, 25050, 25100, 25150, 25200, 25250, 25300, 25350, 25400, 25450, 25500, 25550]
+2025-09-16 14:30:05,613 - INFO - Fetched NIFTY price: 25199.1
+2025-09-16 14:30:05,613 - INFO - Index LTP for NIFTY: 25199.1
+2025-09-16 14:30:06,495 - INFO - Fetched NIFTY price: 25198.45
+2025-09-16 14:30:06,495 - INFO - Updated strikes for NIFTY CE based on price 25198.45: [25100, 25150, 25200, 25250, 25300, 25350, 25400, 25450, 25500, 25550, 25600, 25650, 25700, 25750, 25800]
+2025-09-16 14:30:11,350 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25500
+2025-09-16 14:30:11,379 - INFO - Found NFO token and lot size for NIFTY16SEP25C25500: 44828, 75
+2025-09-16 14:30:11,379 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-16 14:30:11,379 - INFO - Updated quantity options for NIFTY16SEP25C25500 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-16 14:30:11,379 - INFO - Getting token for trading symbol: NIFTY16SEP25C25500
+2025-09-16 14:30:11,395 - INFO - Found NFO token for NIFTY16SEP25C25500: 44828
+2025-09-16 14:30:12,181 - INFO - Modify price fields cleared after auto-fetch
+2025-09-16 14:30:12,181 - INFO - Getting token for trading symbol: NIFTY16SEP25C25500
+2025-09-16 14:30:12,193 - INFO - Found NFO token for NIFTY16SEP25C25500: 44828
+2025-09-16 14:30:12,199 - INFO - Subscribed to live price feed via master account: NFO|44828
+2025-09-16 14:30:12,199 - INFO - Auto-subscribed to NIFTY16SEP25C25500 at price 0.3
+2025-09-16 14:30:15,538 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25200
+2025-09-16 14:30:15,546 - INFO - Found NFO token and lot size for NIFTY16SEP25C25200: 44730, 75
+2025-09-16 14:30:15,546 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-16 14:30:15,546 - INFO - Updated quantity options for NIFTY16SEP25C25200 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-16 14:30:15,546 - INFO - Getting token for trading symbol: NIFTY16SEP25C25200
+2025-09-16 14:30:15,553 - INFO - Found NFO token for NIFTY16SEP25C25200: 44730
+2025-09-16 14:30:16,272 - INFO - Modify price fields cleared after auto-fetch
+2025-09-16 14:30:16,272 - INFO - Getting token for trading symbol: NIFTY16SEP25C25200
+2025-09-16 14:30:16,278 - INFO - Found NFO token for NIFTY16SEP25C25200: 44730
+2025-09-16 14:30:16,285 - INFO - Unsubscribed from previous: NFO|44828
+2025-09-16 14:30:16,285 - INFO - Subscribed to live price feed via master account: NFO|44730
+2025-09-16 14:30:16,287 - INFO - Auto-subscribed to NIFTY16SEP25C25200 at price 16.6
+2025-09-16 14:30:27,248 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25200
+2025-09-16 14:30:27,257 - INFO - Found NFO token and lot size for NIFTY16SEP25C25200: 44730, 75
+2025-09-16 14:30:27,257 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-16 14:30:27,257 - INFO - Updated quantity options for NIFTY16SEP25C25200 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-16 14:30:27,257 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25200
+2025-09-16 14:30:27,271 - INFO - Found NFO token and lot size for NIFTY16SEP25C25200: 44730, 75
+2025-09-16 14:30:27,274 - INFO - Master quantity: 300 (selected: 300, lot size: 75)
+2025-09-16 14:30:27,274 - INFO - Child quantity: 75 (lots: 1, lot size: 75)
+2025-09-16 14:30:27,274 - INFO - Active accounts: [1, 2]
+2025-09-16 14:30:27,274 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-16 14:30:27,274 - INFO - Trading symbol: NIFTY16SEP25C25200, Price: 10.0
+2025-09-16 14:30:27,274 - INFO - Quantities: [300, 75]
+2025-09-16 14:30:27,274 - INFO - Account 1: API=True, Qty=300, Active=True
+2025-09-16 14:30:27,278 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'NFO', 'tradingsymbol': 'NIFTY16SEP25C25200', 'quantity': 300, 'discloseqty': 0, 'price_type': 'LMT', 'price': 10.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-16 14:30:27,278 - INFO - Account 2: API=True, Qty=75, Active=True
+2025-09-16 14:30:27,280 - INFO - API instance for account 1: True
+2025-09-16 14:30:27,282 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'I', 'exchange': 'NFO', 'tradingsymbol': 'NIFTY16SEP25C25200', 'quantity': 75, 'discloseqty': 0, 'price_type': 'LMT', 'price': 10.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-16 14:30:27,282 - INFO - API instance for account 2: True
+2025-09-16 14:30:28,156 - INFO - API response: {'request_time': '14:30:28 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600460495'}
+2025-09-16 14:30:28,160 - INFO - API response type: <class 'dict'>
+2025-09-16 14:30:28,179 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '10.00'
+2025-09-16 14:30:28,179 - INFO - New order received: 25091600460495
+2025-09-16 14:30:28,181 - INFO - Buy order placed successfully: {'request_time': '14:30:28 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600460495'}
+2025-09-16 14:30:28,186 - INFO - API response: {'request_time': '14:30:28 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600460498'}
+2025-09-16 14:30:28,200 - INFO - API response type: <class 'dict'>
+2025-09-16 14:30:28,200 - INFO - Buy order placed successfully: {'request_time': '14:30:28 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600460498'}
+2025-09-16 14:30:28,204 - INFO - Auto SL/Target set - SL: -10.0, Target: 40.0 (Buy Open: 10.0)
+2025-09-16 14:30:28,208 - INFO - Cross-account coordination started
+2025-09-16 14:30:28,208 - INFO - Cross-account coordination started for buy orders
+2025-09-16 14:30:28,220 - INFO - Order data saved to orders.csv
+2025-09-16 14:30:28,220 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-16 14:30:28,220 - INFO - Account 2 - B PENDING NewAck
+2025-09-16 14:30:28,226 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-16 14:30:28,230 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-16 14:30:28,230 - INFO - Child order status updated: Buy Order PENDING @ 10.00
+2025-09-16 14:30:28,239 - INFO - Updating order 25091600460495
+2025-09-16 14:30:28,239 - INFO - New order received: 25091600460498
+2025-09-16 14:30:28,239 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '10.00'
+2025-09-16 14:30:28,243 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:28,243 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '10.00'
+2025-09-16 14:30:28,258 - INFO - Master order status updated: Buy Order PENDING @ 10.00
+2025-09-16 14:30:28,261 - INFO - Order data saved to orders.csv
+2025-09-16 14:30:28,261 - INFO - Child order status updated: Buy Order PENDING @ 10.00
+2025-09-16 14:30:28,261 - INFO - Account 1 - B PENDING NewAck
+2025-09-16 14:30:28,266 - INFO - Updating order 25091600460498
+2025-09-16 14:30:28,266 - INFO - Updating order 25091600460495
+2025-09-16 14:30:28,266 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '10.00'
+2025-09-16 14:30:28,266 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '10.00'
+2025-09-16 14:30:28,268 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:28,268 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:28,268 - INFO - Master order status updated: Buy Order PENDING @ 10.00
+2025-09-16 14:30:28,268 - INFO - Child order status updated: Buy Order Open @ 10.00
+2025-09-16 14:30:28,276 - INFO - Updating order 25091600460498
+2025-09-16 14:30:28,276 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '10.00'
+2025-09-16 14:30:28,276 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:28,276 - INFO - Master order status updated: Buy Order Open @ 10.00
+2025-09-16 14:30:29,126 - INFO - PnL updated for account 2 (active): 0.0
+2025-09-16 14:30:29,131 - INFO - Order state updated - Master: None, Child: PENDING
+2025-09-16 14:30:29,131 - INFO - Checking coordination - Master: None, Child: PENDING
+2025-09-16 14:30:29,156 - INFO - PnL updated for account 1 (active): 0.0
+2025-09-16 14:30:29,156 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 14:30:29,156 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 14:30:30,134 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25200
+2025-09-16 14:30:30,142 - INFO - Found NFO token and lot size for NIFTY16SEP25C25200: 44730, 75
+2025-09-16 14:30:30,142 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-16 14:30:30,142 - INFO - Updated quantity options for NIFTY16SEP25C25200 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-16 14:30:30,142 - INFO - Modify Buy box populated with current LTP: 16.45
+2025-09-16 14:30:34,581 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25200
+2025-09-16 14:30:34,590 - INFO - Found NFO token and lot size for NIFTY16SEP25C25200: 44730, 75
+2025-09-16 14:30:34,590 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-16 14:30:34,593 - INFO - Updated quantity options for NIFTY16SEP25C25200 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-16 14:30:34,593 - INFO - Getting token and lot size for trading symbol: NIFTY16SEP25C25200
+2025-09-16 14:30:34,600 - INFO - Found NFO token and lot size for NIFTY16SEP25C25200: 44730, 75
+2025-09-16 14:30:34,600 - INFO - Using same quantity for both accounts: 300 (lot size: 75)
+2025-09-16 14:30:34,600 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:30:34,600 - INFO - Modifying order 25091600460498 for account 1 with quantity 300 and price 9.0
+2025-09-16 14:30:34,606 - INFO - Modifying order 25091600460495 for account 2 with quantity 300 and price 9.0
+2025-09-16 14:30:35,500 - INFO - Order 25091600460495 modified successfully
+2025-09-16 14:30:35,505 - INFO - Order 25091600460498 modified successfully
+2025-09-16 14:30:35,508 - INFO - Updating order 25091600460495
+2025-09-16 14:30:35,508 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '9.00'
+2025-09-16 14:30:35,512 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:35,512 - INFO - Auto SL/Target set - SL: -11.0, Target: 39.0 (Buy Open: 9.0)
+2025-09-16 14:30:35,518 - INFO - Child order status updated: Buy Order PENDING @ 9.00
+2025-09-16 14:30:35,522 - INFO - Updating order 25091600460495
+2025-09-16 14:30:35,522 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '9.00'
+2025-09-16 14:30:35,526 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:35,533 - INFO - Child order status updated: Buy Order PENDING @ 9.00
+2025-09-16 14:30:35,540 - INFO - Updating order 25091600460495
+2025-09-16 14:30:35,542 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '9.00'
+2025-09-16 14:30:35,542 - INFO - Updating order 25091600460498
+2025-09-16 14:30:35,548 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:35,548 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '9.00'
+2025-09-16 14:30:35,556 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:35,556 - INFO - Child order status updated: Buy Order OPEN @ 9.00
+2025-09-16 14:30:35,560 - INFO - Master order status updated: Buy Order PENDING @ 9.00
+2025-09-16 14:30:35,565 - INFO - Updating order 25091600460498
+2025-09-16 14:30:35,565 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '9.00'
+2025-09-16 14:30:35,570 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:35,574 - INFO - Master order status updated: Buy Order PENDING @ 9.00
+2025-09-16 14:30:35,579 - INFO - Updating order 25091600460498
+2025-09-16 14:30:35,580 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '9.00'
+2025-09-16 14:30:35,583 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:35,585 - INFO - Master order status updated: Buy Order OPEN @ 9.00
+2025-09-16 14:30:40,850 - INFO - Order 25091600460498 cancelled successfully
+2025-09-16 14:30:40,857 - INFO - Order 25091600460495 cancelled successfully
+2025-09-16 14:30:40,858 - INFO - Updating order 25091600460495
+2025-09-16 14:30:40,858 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '9.00'
+2025-09-16 14:30:40,864 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:40,864 - INFO - Buy button re-enabled after cancelling buy orders
+2025-09-16 14:30:40,866 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-16 14:30:40,868 - INFO - Child order status updated: Buy Order PENDING @ 9.00
+2025-09-16 14:30:40,873 - INFO - Updating order 25091600460498
+2025-09-16 14:30:40,873 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '9.00'
+2025-09-16 14:30:40,873 - INFO - Updating order 25091600460495
+2025-09-16 14:30:40,875 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '9.00'
+2025-09-16 14:30:40,877 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:40,880 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:40,890 - INFO - Master order status updated: Buy Order PENDING @ 9.00
+2025-09-16 14:30:40,890 - INFO - Child order status updated: Buy Order CANCELED @ 9.00
+2025-09-16 14:30:40,894 - INFO - Updating order 25091600460498
+2025-09-16 14:30:40,897 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '9.00'
+2025-09-16 14:30:40,900 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:30:40,900 - INFO - Master order status updated: Buy Order CANCELED @ 9.00
+2025-09-16 14:30:55,476 - INFO - Fetched SENSEX price: 82244.49
+2025-09-16 14:30:55,476 - INFO - Updated strikes for SENSEX CE based on price 82244.49: [82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400]
+2025-09-16 14:30:55,483 - INFO - Getting token and lot size for trading symbol: SENSEX2591825200CE
+2025-09-16 14:30:55,487 - ERROR - No token found for SENSEX2591825200CE
+2025-09-16 14:30:55,525 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-16 14:30:55,529 - ERROR - Error in fallback conversion: time data '918' does not match format '%b'
+2025-09-16 14:30:55,529 - WARNING - Lot size not found for SENSEX2591825200CE, using default quantities
+2025-09-16 14:30:56,298 - INFO - Fetched SENSEX price: 82247.58
+2025-09-16 14:30:56,299 - INFO - Index LTP for SENSEX: 82247.58
+2025-09-16 14:30:56,983 - INFO - Fetched SENSEX price: 82246.99
+2025-09-16 14:30:56,983 - INFO - Updated strikes for SENSEX based on price 82246.99 and option CE: [82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400]
+2025-09-16 14:31:02,754 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:31:02,760 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:31:02,762 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:31:02,762 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:31:02,764 - INFO - Getting token for trading symbol: SENSEX2591882200CE
+2025-09-16 14:31:02,769 - INFO - Found token for SENSEX2591882200CE: 862374
+2025-09-16 14:31:03,503 - INFO - Modify price fields cleared after auto-fetch
+2025-09-16 14:31:03,503 - INFO - Getting token for trading symbol: SENSEX2591882200CE
+2025-09-16 14:31:03,507 - INFO - Found token for SENSEX2591882200CE: 862374
+2025-09-16 14:31:03,509 - INFO - Unsubscribed from previous: NFO|44730
+2025-09-16 14:31:03,509 - INFO - Subscribed to live price feed via master account: BFO|862374
+2025-09-16 14:31:03,509 - INFO - Auto-subscribed to SENSEX2591882200CE at price 300.6
+2025-09-16 14:37:52,664 - INFO - Starting master file download in background...
+2025-09-16 14:37:52,668 - INFO - Finding expiry dates (with caching)...
+2025-09-16 14:37:52,853 - INFO - System initialization completed (downloads in background)
+2025-09-16 14:37:52,857 - INFO - Showing configuration window...
+2025-09-16 14:37:53,119 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 30.0}
+2025-09-16 14:37:58,371 - INFO - Configuration skipped - using last saved values
+2025-09-16 14:37:58,614 - INFO - Configuration completed with settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 30.0}
+2025-09-16 14:37:59,439 - INFO - Generated fresh 2FA for account 1: 436983
+2025-09-16 14:38:01,423 - INFO - PnL updated for account 1 (active): 0.0
+2025-09-16 14:38:01,423 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-16 14:38:04,412 - INFO - Generated fresh 2FA for account 2: 363653
+2025-09-16 14:38:05,186 - INFO - Child account logged in - Order blocking reset
+2025-09-16 14:38:05,962 - INFO - PnL updated for account 2 (active): 0.0
+2025-09-16 14:38:08,183 - INFO - Cleared option and strike selections - no active orders
+2025-09-16 14:38:09,025 - INFO - Fetched SENSEX price: 82263.52
+2025-09-16 14:38:09,025 - INFO - Index LTP for SENSEX: 82263.52
+2025-09-16 14:38:09,743 - INFO - Fetched SENSEX price: 82263.26
+2025-09-16 14:38:09,749 - INFO - Updated strikes for SENSEX based on price 82263.26 and option None: [81600, 81700, 81800, 81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000]
+2025-09-16 14:38:13,162 - INFO - Fetched SENSEX price: 82264.85
+2025-09-16 14:38:13,162 - INFO - Index LTP for SENSEX: 82264.85
+2025-09-16 14:38:13,855 - INFO - Fetched SENSEX price: 82264.12
+2025-09-16 14:38:13,855 - INFO - Updated strikes for SENSEX CE based on price 82264.12: [82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500]
+2025-09-16 14:38:16,862 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:38:16,875 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:38:16,875 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:38:16,875 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:38:16,875 - INFO - Getting token for trading symbol: SENSEX2591882200CE
+2025-09-16 14:38:16,882 - INFO - Found token for SENSEX2591882200CE: 862374
+2025-09-16 14:38:17,690 - INFO - Modify price fields cleared after auto-fetch
+2025-09-16 14:38:17,690 - INFO - Getting token for trading symbol: SENSEX2591882200CE
+2025-09-16 14:38:17,694 - INFO - Found token for SENSEX2591882200CE: 862374
+2025-09-16 14:38:17,696 - INFO - Subscribed to live price feed via master account: BFO|862374
+2025-09-16 14:38:17,698 - INFO - Auto-subscribed to SENSEX2591882200CE at price 313.55
+2025-09-16 14:38:24,417 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:38:24,420 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:38:24,420 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:38:24,425 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:38:24,425 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:38:24,430 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:38:24,430 - INFO - Master quantity: 100 (selected: 100, lot size: 20)
+2025-09-16 14:38:24,430 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:38:24,432 - INFO - Active accounts: [1, 2]
+2025-09-16 14:38:24,432 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-16 14:38:24,432 - INFO - Trading symbol: SENSEX2591882200CE, Price: 250.0
+2025-09-16 14:38:24,434 - INFO - Quantities: [100, 20]
+2025-09-16 14:38:24,434 - INFO - Account 1: API=True, Qty=100, Active=True
+2025-09-16 14:38:24,434 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591882200CE', 'quantity': 100, 'discloseqty': 0, 'price_type': 'LMT', 'price': 250.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-16 14:38:24,436 - INFO - Account 2: API=True, Qty=20, Active=True
+2025-09-16 14:38:24,436 - INFO - API instance for account 1: True
+2025-09-16 14:38:24,438 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591882200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 250.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-16 14:38:24,439 - INFO - API instance for account 2: True
+2025-09-16 14:38:25,397 - INFO - API response: {'request_time': '14:38:25 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600471478'}
+2025-09-16 14:38:25,408 - INFO - API response: {'request_time': '14:38:25 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600471479'}
+2025-09-16 14:38:25,408 - INFO - API response type: <class 'dict'>
+2025-09-16 14:38:25,425 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '250.00'
+2025-09-16 14:38:25,425 - INFO - New order received: 25091600471478
+2025-09-16 14:38:25,427 - INFO - API response type: <class 'dict'>
+2025-09-16 14:38:25,427 - INFO - Buy order placed successfully: {'request_time': '14:38:25 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600471478'}
+2025-09-16 14:38:25,451 - INFO - Buy order placed successfully: {'request_time': '14:38:25 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600471479'}
+2025-09-16 14:38:25,451 - INFO - Auto SL/Target set - SL: 230.0, Target: 280.0 (Buy Open: 250.0)
+2025-09-16 14:38:25,451 - INFO - Cross-account coordination started
+2025-09-16 14:38:25,457 - INFO - Cross-account coordination started for buy orders
+2025-09-16 14:38:25,457 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-16 14:38:25,466 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-16 14:38:25,469 - INFO - Order data saved to orders.csv
+2025-09-16 14:38:25,469 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-16 14:38:25,469 - INFO - Account 2 - B PENDING NewAck
+2025-09-16 14:38:25,469 - INFO - Child order status updated: Buy Order PENDING @ 250.00
+2025-09-16 14:38:25,477 - INFO - Updating order 25091600471478
+2025-09-16 14:38:25,477 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '250.00'
+2025-09-16 14:38:25,477 - INFO - New order received: 25091600471479
+2025-09-16 14:38:25,482 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:38:25,482 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '250.00'
+2025-09-16 14:38:25,492 - INFO - Child order status updated: Buy Order PENDING @ 250.00
+2025-09-16 14:38:25,492 - INFO - Master order status updated: Buy Order PENDING @ 250.00
+2025-09-16 14:38:25,497 - INFO - Order data saved to orders.csv
+2025-09-16 14:38:25,501 - INFO - Updating order 25091600471478
+2025-09-16 14:38:25,501 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '250.00'
+2025-09-16 14:38:25,501 - INFO - Account 1 - B PENDING NewAck
+2025-09-16 14:38:25,505 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:38:25,505 - INFO - Child order status updated: Buy Order Open @ 250.00
+2025-09-16 14:38:25,505 - INFO - Updating order 25091600471479
+2025-09-16 14:38:25,507 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '250.00'
+2025-09-16 14:38:25,509 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:38:25,511 - INFO - Master order status updated: Buy Order PENDING @ 250.00
+2025-09-16 14:38:25,513 - INFO - Updating order 25091600471479
+2025-09-16 14:38:25,513 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '250.00'
+2025-09-16 14:38:25,513 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:38:25,513 - INFO - Master order status updated: Buy Order Open @ 250.00
+2025-09-16 14:38:26,413 - INFO - PnL updated for account 2 (active): 0.0
+2025-09-16 14:38:26,413 - INFO - Order state updated - Master: None, Child: PENDING
+2025-09-16 14:38:26,413 - INFO - Checking coordination - Master: None, Child: PENDING
+2025-09-16 14:38:26,449 - INFO - PnL updated for account 1 (active): 0.0
+2025-09-16 14:38:26,449 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 14:38:26,449 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 14:39:31,118 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:39:31,132 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:39:31,132 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:39:31,134 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:39:31,134 - INFO - Modify Buy box populated with current LTP: 342.35
+2025-09-16 14:39:37,601 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:39:37,607 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:39:37,607 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:39:37,607 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:39:37,607 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:39:37,618 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:39:37,618 - INFO - Master quantity: 100 (selected: 100, lot size: 20)
+2025-09-16 14:39:37,618 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:39:37,618 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:39:37,620 - INFO - Modifying order 25091600471479 for account 1 with quantity 100 and price 303.0
+2025-09-16 14:39:37,620 - INFO - Modifying order 25091600471478 for account 2 with quantity 20 and price 303.0
+2025-09-16 14:39:38,555 - INFO - Order 25091600471478 modified successfully
+2025-09-16 14:39:38,555 - INFO - Updating order 25091600471478
+2025-09-16 14:39:38,555 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '303.00'
+2025-09-16 14:39:38,562 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:39:38,578 - INFO - Order 25091600471479 modified successfully
+2025-09-16 14:39:38,578 - INFO - Auto SL/Target set - SL: 283.0, Target: 333.0 (Buy Open: 303.0)
+2025-09-16 14:39:38,578 - INFO - Child order status updated: Buy Order PENDING @ 303.00
+2025-09-16 14:39:38,585 - INFO - Updating order 25091600471478
+2025-09-16 14:39:38,586 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '303.00'
+2025-09-16 14:39:38,586 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:39:38,586 - INFO - Child order status updated: Buy Order PENDING @ 303.00
+2025-09-16 14:39:38,596 - INFO - Updating order 25091600471479
+2025-09-16 14:39:38,599 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '303.00'
+2025-09-16 14:39:38,599 - INFO - Updating order 25091600471478
+2025-09-16 14:39:38,602 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '303.00'
+2025-09-16 14:39:38,607 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:39:38,611 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:39:38,611 - INFO - Master order status updated: Buy Order PENDING @ 303.00
+2025-09-16 14:39:38,616 - INFO - Child order status updated: Buy Order OPEN @ 303.00
+2025-09-16 14:39:38,619 - INFO - Updating order 25091600471479
+2025-09-16 14:39:38,619 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '303.00'
+2025-09-16 14:39:38,626 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:39:38,628 - INFO - Master order status updated: Buy Order PENDING @ 303.00
+2025-09-16 14:39:38,632 - INFO - Updating order 25091600471479
+2025-09-16 14:39:38,632 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '303.00'
+2025-09-16 14:39:38,640 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:39:38,640 - INFO - Master order status updated: Buy Order OPEN @ 303.00
+2025-09-16 14:42:26,309 - INFO - Order 25091600471478 cancelled successfully
+2025-09-16 14:42:26,311 - INFO - Updating order 25091600471478
+2025-09-16 14:42:26,311 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '303.00'
+2025-09-16 14:42:26,315 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:42:26,363 - INFO - Order 25091600471479 cancelled successfully
+2025-09-16 14:42:26,363 - INFO - Buy button re-enabled after cancelling buy orders
+2025-09-16 14:42:26,363 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-16 14:42:26,363 - INFO - Child order status updated: Buy Order PENDING @ 303.00
+2025-09-16 14:42:26,370 - INFO - Updating order 25091600471478
+2025-09-16 14:42:26,370 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '303.00'
+2025-09-16 14:42:26,372 - INFO - Updating order 25091600471479
+2025-09-16 14:42:26,374 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:42:26,374 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '303.00'
+2025-09-16 14:42:26,377 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:42:26,379 - INFO - Child order status updated: Buy Order CANCELED @ 303.00
+2025-09-16 14:42:26,380 - INFO - Master order status updated: Buy Order PENDING @ 303.00
+2025-09-16 14:42:26,383 - INFO - Updating order 25091600471479
+2025-09-16 14:42:26,383 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '303.00'
+2025-09-16 14:42:26,383 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:42:26,383 - INFO - Master order status updated: Buy Order CANCELED @ 303.00
+2025-09-16 14:42:58,018 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:42:58,027 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:42:58,027 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:42:58,027 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:42:58,027 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:42:58,037 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:42:58,037 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:42:58,037 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:42:58,037 - INFO - Active accounts: [1, 2]
+2025-09-16 14:42:58,037 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-16 14:42:58,037 - INFO - Trading symbol: SENSEX2591882200CE, Price: 322.0
+2025-09-16 14:42:58,037 - INFO - Quantities: [20, 20]
+2025-09-16 14:42:58,037 - INFO - Account 1: API=True, Qty=20, Active=True
+2025-09-16 14:42:58,037 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591882200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 322.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-16 14:42:58,037 - INFO - Account 2: API=True, Qty=20, Active=True
+2025-09-16 14:42:58,043 - INFO - API instance for account 1: True
+2025-09-16 14:42:58,043 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591882200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 322.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-16 14:42:58,043 - INFO - API instance for account 2: True
+2025-09-16 14:42:58,956 - INFO - API response: {'request_time': '14:42:59 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600483170'}
+2025-09-16 14:42:58,956 - INFO - API response type: <class 'dict'>
+2025-09-16 14:42:58,961 - INFO - Buy order placed successfully: {'request_time': '14:42:59 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600483170'}
+2025-09-16 14:42:58,997 - INFO - API response: {'request_time': '14:42:59 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600483173'}
+2025-09-16 14:42:58,997 - INFO - API response type: <class 'dict'>
+2025-09-16 14:42:58,997 - INFO - New order received: 25091600483173
+2025-09-16 14:42:58,997 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '322.00'
+2025-09-16 14:42:58,997 - INFO - Buy order placed successfully: {'request_time': '14:42:59 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600483173'}
+2025-09-16 14:42:59,006 - INFO - Order data saved to orders.csv
+2025-09-16 14:42:59,012 - INFO - Account 2 - B PENDING NewAck
+2025-09-16 14:42:59,012 - INFO - Auto SL/Target set - SL: 302.0, Target: 352.0 (Buy Open: 322.0)
+2025-09-16 14:42:59,014 - INFO - Cross-account coordination started
+2025-09-16 14:42:59,017 - INFO - Cross-account coordination started for buy orders
+2025-09-16 14:42:59,020 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-16 14:42:59,020 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-16 14:42:59,020 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-16 14:42:59,020 - INFO - Child order status updated: Buy Order PENDING @ 322.00
+2025-09-16 14:42:59,028 - INFO - Updating order 25091600483173
+2025-09-16 14:42:59,028 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '322.00'
+2025-09-16 14:42:59,028 - INFO - New order received: 25091600483170
+2025-09-16 14:42:59,028 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:42:59,028 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '322.00'
+2025-09-16 14:42:59,052 - INFO - Child order status updated: Buy Order PENDING @ 322.00
+2025-09-16 14:42:59,052 - INFO - Order data saved to orders.csv
+2025-09-16 14:42:59,052 - INFO - Master order status updated: Buy Order PENDING @ 322.00
+2025-09-16 14:42:59,053 - INFO - Account 1 - B PENDING NewAck
+2025-09-16 14:42:59,055 - INFO - Updating order 25091600483173
+2025-09-16 14:42:59,055 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '322.00'
+2025-09-16 14:42:59,062 - INFO - Updating order 25091600483170
+2025-09-16 14:42:59,062 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '322.00'
+2025-09-16 14:42:59,062 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:42:59,070 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:42:59,070 - INFO - Child order status updated: Buy Order Open @ 322.00
+2025-09-16 14:42:59,089 - INFO - Master order status updated: Buy Order PENDING @ 322.00
+2025-09-16 14:42:59,094 - INFO - Updating order 25091600483170
+2025-09-16 14:42:59,094 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '322.00'
+2025-09-16 14:42:59,094 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:42:59,094 - INFO - Master order status updated: Buy Order Open @ 322.00
+2025-09-16 14:42:59,900 - INFO - PnL updated for account 2 (active): 0.0
+2025-09-16 14:42:59,901 - INFO - Order state updated - Master: None, Child: PENDING
+2025-09-16 14:42:59,901 - INFO - Checking coordination - Master: None, Child: PENDING
+2025-09-16 14:42:59,934 - INFO - PnL updated for account 1 (active): 0.0
+2025-09-16 14:42:59,936 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 14:42:59,936 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 14:43:16,767 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:16,772 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:16,776 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:16,776 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:16,779 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:16,779 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:16,779 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:43:16,779 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:43:16,779 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:43:16,779 - INFO - Modifying order 25091600483170 for account 1 with quantity 20 and price 30373907.0
+2025-09-16 14:43:16,779 - INFO - Modifying order 25091600483173 for account 2 with quantity 20 and price 30373907.0
+2025-09-16 14:43:17,708 - INFO - Order 25091600483170 modified successfully
+2025-09-16 14:43:17,708 - INFO - Order 25091600483173 modified successfully
+2025-09-16 14:43:17,713 - INFO - Updating order 25091600483173
+2025-09-16 14:43:17,713 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '30373907.00'
+2025-09-16 14:43:17,717 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:17,717 - INFO - Auto SL/Target set - SL: 30373887.0, Target: 30373937.0 (Buy Open: 30373907.0)
+2025-09-16 14:43:17,717 - INFO - Child order status updated: Buy Order PENDING @ 30373907.00
+2025-09-16 14:43:17,725 - INFO - Updating order 25091600483170
+2025-09-16 14:43:17,725 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '30373907.00'
+2025-09-16 14:43:17,725 - INFO - Updating order 25091600483173
+2025-09-16 14:43:17,725 - INFO - Order status debug - status: 'OPEN', reporttype: 'ReplaceRejected', trantype: 'B', price: '322.00'
+2025-09-16 14:43:17,725 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:17,732 - INFO - Master order status updated: Buy Order PENDING @ 30373907.00
+2025-09-16 14:43:17,734 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:17,736 - INFO - Child order status updated: Buy Order OPEN @ 322.00
+2025-09-16 14:43:17,741 - INFO - Updating order 25091600483170
+2025-09-16 14:43:17,741 - INFO - Order status debug - status: 'OPEN', reporttype: 'ReplaceRejected', trantype: 'B', price: '322.00'
+2025-09-16 14:43:17,743 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:17,754 - INFO - Master order status updated: Buy Order OPEN @ 322.00
+2025-09-16 14:43:18,292 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:18,302 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:18,304 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:18,304 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:18,306 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:18,311 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:18,313 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:43:18,314 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:43:18,314 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:43:18,314 - INFO - Modifying order 25091600483170 for account 1 with quantity 20 and price 30373907.0
+2025-09-16 14:43:18,317 - INFO - Modifying order 25091600483173 for account 2 with quantity 20 and price 30373907.0
+2025-09-16 14:43:19,243 - INFO - Order 25091600483170 modified successfully
+2025-09-16 14:43:19,245 - INFO - Updating order 25091600483170
+2025-09-16 14:43:19,246 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '30373907.00'
+2025-09-16 14:43:19,246 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:19,272 - INFO - Order 25091600483173 modified successfully
+2025-09-16 14:43:19,277 - INFO - Auto SL/Target set - SL: 30373887.0, Target: 30373937.0 (Buy Open: 30373907.0)
+2025-09-16 14:43:19,277 - INFO - Updating order 25091600483173
+2025-09-16 14:43:19,277 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '30373907.00'
+2025-09-16 14:43:19,284 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:19,284 - INFO - Master order status updated: Buy Order PENDING @ 30373907.00
+2025-09-16 14:43:19,286 - INFO - Child order status updated: Buy Order PENDING @ 30373907.00
+2025-09-16 14:43:19,290 - INFO - Updating order 25091600483170
+2025-09-16 14:43:19,290 - INFO - Order status debug - status: 'OPEN', reporttype: 'ReplaceRejected', trantype: 'B', price: '322.00'
+2025-09-16 14:43:19,290 - INFO - Updating order 25091600483173
+2025-09-16 14:43:19,290 - INFO - Order status debug - status: 'OPEN', reporttype: 'ReplaceRejected', trantype: 'B', price: '322.00'
+2025-09-16 14:43:19,294 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:19,299 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:19,299 - INFO - Master order status updated: Buy Order OPEN @ 322.00
+2025-09-16 14:43:19,301 - INFO - Child order status updated: Buy Order OPEN @ 322.00
+2025-09-16 14:43:23,851 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:23,854 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:23,854 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:23,854 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:23,854 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:23,865 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:23,865 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:43:23,865 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:43:23,865 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:43:23,870 - INFO - Modifying order 25091600483170 for account 1 with quantity 20 and price 30373907.0
+2025-09-16 14:43:23,872 - INFO - Modifying order 25091600483173 for account 2 with quantity 20 and price 30373907.0
+2025-09-16 14:43:24,841 - INFO - Order 25091600483170 modified successfully
+2025-09-16 14:43:24,854 - INFO - Order 25091600483173 modified successfully
+2025-09-16 14:43:24,855 - INFO - Updating order 25091600483173
+2025-09-16 14:43:24,856 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '30373907.00'
+2025-09-16 14:43:24,857 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:24,859 - INFO - Auto SL/Target set - SL: 30373887.0, Target: 30373937.0 (Buy Open: 30373907.0)
+2025-09-16 14:43:24,860 - INFO - Child order status updated: Buy Order PENDING @ 30373907.00
+2025-09-16 14:43:24,862 - INFO - Updating order 25091600483170
+2025-09-16 14:43:24,862 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '30373907.00'
+2025-09-16 14:43:24,862 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:24,868 - INFO - Updating order 25091600483173
+2025-09-16 14:43:24,868 - INFO - Order status debug - status: 'OPEN', reporttype: 'ReplaceRejected', trantype: 'B', price: '322.00'
+2025-09-16 14:43:24,868 - INFO - Master order status updated: Buy Order PENDING @ 30373907.00
+2025-09-16 14:43:24,870 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:24,871 - INFO - Child order status updated: Buy Order OPEN @ 322.00
+2025-09-16 14:43:24,874 - INFO - Updating order 25091600483170
+2025-09-16 14:43:24,874 - INFO - Order status debug - status: 'OPEN', reporttype: 'ReplaceRejected', trantype: 'B', price: '322.00'
+2025-09-16 14:43:24,875 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:24,875 - INFO - Master order status updated: Buy Order OPEN @ 322.00
+2025-09-16 14:43:35,172 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:35,179 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:35,181 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:35,181 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:35,183 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:35,185 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:35,185 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:43:35,185 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:43:35,185 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:43:35,191 - INFO - Modifying order 25091600483170 for account 1 with quantity 20 and price 312.0
+2025-09-16 14:43:35,193 - INFO - Modifying order 25091600483173 for account 2 with quantity 20 and price 312.0
+2025-09-16 14:43:36,104 - INFO - Order 25091600483170 modified successfully
+2025-09-16 14:43:36,113 - INFO - Order 25091600483173 modified successfully
+2025-09-16 14:43:36,115 - INFO - Updating order 25091600483173
+2025-09-16 14:43:36,115 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '312.00'
+2025-09-16 14:43:36,116 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:36,116 - INFO - Auto SL/Target set - SL: 292.0, Target: 342.0 (Buy Open: 312.0)
+2025-09-16 14:43:36,123 - INFO - Child order status updated: Buy Order PENDING @ 312.00
+2025-09-16 14:43:36,125 - INFO - Updating order 25091600483173
+2025-09-16 14:43:36,127 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '312.00'
+2025-09-16 14:43:36,131 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:36,131 - INFO - Updating order 25091600483170
+2025-09-16 14:43:36,131 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '312.00'
+2025-09-16 14:43:36,131 - INFO - Child order status updated: Buy Order PENDING @ 312.00
+2025-09-16 14:43:36,138 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:36,140 - INFO - Master order status updated: Buy Order PENDING @ 312.00
+2025-09-16 14:43:36,140 - INFO - Updating order 25091600483173
+2025-09-16 14:43:36,140 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '312.00'
+2025-09-16 14:43:36,146 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:36,148 - INFO - Child order status updated: Buy Order OPEN @ 312.00
+2025-09-16 14:43:36,148 - INFO - Updating order 25091600483170
+2025-09-16 14:43:36,148 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '312.00'
+2025-09-16 14:43:36,148 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:36,153 - INFO - Master order status updated: Buy Order PENDING @ 312.00
+2025-09-16 14:43:36,157 - INFO - Updating order 25091600483170
+2025-09-16 14:43:36,158 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '312.00'
+2025-09-16 14:43:36,160 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:36,164 - INFO - Master order status updated: Buy Order OPEN @ 312.00
+2025-09-16 14:43:49,260 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:49,265 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:49,265 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:49,265 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:49,265 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:49,273 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:49,273 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:43:49,273 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:43:49,273 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:43:49,275 - INFO - Modifying order 25091600483170 for account 1 with quantity 20 and price 312.0
+2025-09-16 14:43:49,275 - INFO - Modifying order 25091600483173 for account 2 with quantity 20 and price 312.0
+2025-09-16 14:43:50,129 - INFO - Order 25091600483170 modified successfully
+2025-09-16 14:43:50,153 - INFO - Order 25091600483173 modified successfully
+2025-09-16 14:43:50,155 - INFO - Updating order 25091600483173
+2025-09-16 14:43:50,155 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '312.00'
+2025-09-16 14:43:50,157 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:50,161 - INFO - Auto SL/Target set - SL: 292.0, Target: 342.0 (Buy Open: 312.0)
+2025-09-16 14:43:50,163 - INFO - Child order status updated: Buy Order PENDING @ 312.00
+2025-09-16 14:43:50,163 - INFO - Updating order 25091600483173
+2025-09-16 14:43:50,163 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '312.00'
+2025-09-16 14:43:50,169 - INFO - Updating order 25091600483170
+2025-09-16 14:43:50,169 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '312.00'
+2025-09-16 14:43:50,169 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:50,175 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:50,182 - INFO - Child order status updated: Buy Order PENDING @ 312.00
+2025-09-16 14:43:50,182 - INFO - Master order status updated: Buy Order PENDING @ 312.00
+2025-09-16 14:43:50,189 - INFO - Updating order 25091600483173
+2025-09-16 14:43:50,189 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '312.00'
+2025-09-16 14:43:50,191 - INFO - Updating order 25091600483170
+2025-09-16 14:43:50,194 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:50,194 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '312.00'
+2025-09-16 14:43:50,194 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:50,203 - INFO - Child order status updated: Buy Order OPEN @ 312.00
+2025-09-16 14:43:50,212 - INFO - Master order status updated: Buy Order PENDING @ 312.00
+2025-09-16 14:43:50,214 - INFO - Updating order 25091600483170
+2025-09-16 14:43:50,214 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '312.00'
+2025-09-16 14:43:50,222 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:50,224 - INFO - Master order status updated: Buy Order OPEN @ 312.00
+2025-09-16 14:43:55,755 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:55,757 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:55,757 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:55,759 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:43:55,759 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:43:55,764 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:43:55,764 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:43:55,769 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:43:55,769 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:43:55,769 - INFO - Modifying order 25091600483170 for account 1 with quantity 20 and price 328.0
+2025-09-16 14:43:55,771 - INFO - Modifying order 25091600483173 for account 2 with quantity 20 and price 328.0
+2025-09-16 14:43:56,689 - INFO - Order 25091600483173 modified successfully
+2025-09-16 14:43:56,696 - INFO - Order 25091600483170 modified successfully
+2025-09-16 14:43:56,696 - INFO - Updating order 25091600483173
+2025-09-16 14:43:56,696 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '328.00'
+2025-09-16 14:43:56,699 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:56,699 - INFO - Auto SL/Target set - SL: 308.0, Target: 358.0 (Buy Open: 328.0)
+2025-09-16 14:43:56,702 - INFO - Child order status updated: Buy Order PENDING @ 328.00
+2025-09-16 14:43:56,704 - INFO - Updating order 25091600483170
+2025-09-16 14:43:56,704 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '328.00'
+2025-09-16 14:43:56,704 - INFO - Updating order 25091600483173
+2025-09-16 14:43:56,704 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '328.00'
+2025-09-16 14:43:56,708 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:56,710 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:56,710 - INFO - Master order status updated: Buy Order PENDING @ 328.00
+2025-09-16 14:43:56,712 - INFO - Child order status updated: Buy Order PENDING @ 328.00
+2025-09-16 14:43:56,712 - INFO - Updating order 25091600483170
+2025-09-16 14:43:56,712 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '328.00'
+2025-09-16 14:43:56,717 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '328.00'
+2025-09-16 14:43:56,717 - INFO - Updating order 25091600483173
+2025-09-16 14:43:56,719 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:56,721 - INFO - Master order status updated: Buy Order PENDING @ 328.00
+2025-09-16 14:43:56,721 - INFO - Child order status updated: Buy Order OPEN @ 328.00
+2025-09-16 14:43:56,723 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:56,723 - INFO - Updating order 25091600483170
+2025-09-16 14:43:56,723 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '328.00'
+2025-09-16 14:43:56,727 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:43:56,727 - INFO - Master order status updated: Buy Order OPEN @ 328.00
+2025-09-16 14:44:08,006 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:44:08,009 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:44:08,009 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:44:08,009 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:44:08,017 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:44:08,026 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:44:08,026 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:44:08,028 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:44:08,028 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:44:08,030 - INFO - Modifying order 25091600483170 for account 1 with quantity 20 and price 328.0
+2025-09-16 14:44:08,031 - INFO - Modifying order 25091600483173 for account 2 with quantity 20 and price 328.0
+2025-09-16 14:44:08,975 - INFO - Order 25091600483170 modified successfully
+2025-09-16 14:44:08,998 - INFO - Order 25091600483173 modified successfully
+2025-09-16 14:44:08,998 - INFO - Auto SL/Target set - SL: 308.0, Target: 358.0 (Buy Open: 328.0)
+2025-09-16 14:44:08,998 - INFO - Updating order 25091600483173
+2025-09-16 14:44:08,998 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '328.00'
+2025-09-16 14:44:09,003 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:44:09,006 - INFO - Child order status updated: Buy Order PENDING @ 328.00
+2025-09-16 14:44:09,008 - INFO - Updating order 25091600483173
+2025-09-16 14:44:09,008 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '328.00'
+2025-09-16 14:44:09,015 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:44:09,015 - INFO - Updating order 25091600483170
+2025-09-16 14:44:09,018 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '328.00'
+2025-09-16 14:44:09,023 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:44:09,023 - INFO - Child order status updated: Buy Order PENDING @ 328.00
+2025-09-16 14:44:09,026 - INFO - Master order status updated: Buy Order PENDING @ 328.00
+2025-09-16 14:44:09,031 - INFO - Updating order 25091600483173
+2025-09-16 14:44:09,031 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '328.00'
+2025-09-16 14:44:09,031 - INFO - Updating order 25091600483170
+2025-09-16 14:44:09,031 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '328.00'
+2025-09-16 14:44:09,031 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:44:09,040 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:44:09,040 - INFO - Child order status updated: Buy Order OPEN @ 328.00
+2025-09-16 14:44:09,050 - INFO - Master order status updated: Buy Order PENDING @ 328.00
+2025-09-16 14:44:09,050 - INFO - Updating order 25091600483170
+2025-09-16 14:44:09,050 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '328.00'
+2025-09-16 14:44:09,057 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:44:09,057 - INFO - Master order status updated: Buy Order OPEN @ 328.00
+2025-09-16 14:44:14,879 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:44:14,884 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:44:14,884 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:44:14,884 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:44:14,884 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:44:14,889 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:44:14,890 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:44:14,890 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:44:14,890 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:44:14,890 - INFO - Modifying order 25091600483170 for account 1 with quantity 20 and price 326.0
+2025-09-16 14:44:14,890 - INFO - Modifying order 25091600483173 for account 2 with quantity 20 and price 326.0
+2025-09-16 14:44:15,035 - INFO - Updating order 25091600483170
+2025-09-16 14:44:15,035 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'B', price: '328.00'
+2025-09-16 14:44:15,035 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:44:15,039 - INFO - Buy order completed for account 1: SENSEX2591882200CE @ 328.0
+2025-09-16 14:44:15,040 - INFO - Updating order 25091600483173
+2025-09-16 14:44:15,040 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'B', price: '328.00'
+2025-09-16 14:44:15,042 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:44:15,042 - INFO - Buy order completed for account 2: SENSEX2591882200CE @ 328.0
+2025-09-16 14:44:15,789 - INFO - Order 25091600483170 modified successfully
+2025-09-16 14:44:15,839 - INFO - Order 25091600483173 modified successfully
+2025-09-16 14:44:15,839 - INFO - Auto SL/Target set - SL: 306.0, Target: 356.0 (Buy Open: 326.0)
+2025-09-16 14:44:15,839 - INFO - SL monitoring activated at 306.0
+2025-09-16 14:44:15,844 - INFO - SL monitoring started at: 306.0
+2025-09-16 14:44:15,849 - INFO - SL monitoring activated at 306.0
+2025-09-16 14:44:15,849 - INFO - Target monitoring activated at 356.0
+2025-09-16 14:44:15,849 - INFO - SL monitoring started at: 306.0
+2025-09-16 14:44:15,849 - INFO - Target monitoring started at: 356.0
+2025-09-16 14:44:15,852 - INFO - Target monitoring activated at 356.0
+2025-09-16 14:44:15,852 - INFO - Target monitoring started at: 356.0
+2025-09-16 14:44:15,852 - INFO - Exit buttons enabled after buy order completion
+2025-09-16 14:44:15,852 - INFO - Exit buttons enabled after buy order completion
+2025-09-16 14:44:16,822 - INFO - PnL updated for account 2 (active): 12.0
+2025-09-16 14:44:16,822 - INFO - PnL updated for account 1 (active): 12.0
+2025-09-16 14:44:16,825 - INFO - Child order status updated: Buy Order Complete @ 328.00
+2025-09-16 14:44:16,827 - INFO - Master order status updated: Buy Order Complete @ 328.00
+2025-09-16 14:44:16,833 - INFO - Updating order 25091600483173
+2025-09-16 14:44:16,833 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'ReplaceRejected', trantype: 'B', price: '328.00'
+2025-09-16 14:44:16,833 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:44:16,833 - INFO - Buy order completed for account 2: SENSEX2591882200CE @ 328.0
+2025-09-16 14:44:16,843 - INFO - Updating order 25091600483170
+2025-09-16 14:44:16,843 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'ReplaceRejected', trantype: 'B', price: '328.00'
+2025-09-16 14:44:16,847 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:44:16,847 - INFO - SL monitoring activated at 306.0
+2025-09-16 14:44:16,849 - INFO - Buy order completed for account 1: SENSEX2591882200CE @ 328.0
+2025-09-16 14:44:16,849 - INFO - SL monitoring started at: 306.0
+2025-09-16 14:44:16,849 - INFO - SL monitoring activated at 306.0
+2025-09-16 14:44:16,849 - INFO - Target monitoring activated at 356.0
+2025-09-16 14:44:16,849 - INFO - SL monitoring started at: 306.0
+2025-09-16 14:44:16,854 - INFO - Target monitoring started at: 356.0
+2025-09-16 14:44:16,857 - INFO - Target monitoring activated at 356.0
+2025-09-16 14:44:16,857 - INFO - Target monitoring started at: 356.0
+2025-09-16 14:44:16,866 - INFO - Exit buttons enabled after buy order completion
+2025-09-16 14:44:16,869 - INFO - Exit buttons enabled after buy order completion
+2025-09-16 14:44:17,800 - INFO - PnL updated for account 1 (active): -1.0
+2025-09-16 14:44:17,809 - INFO - Master order status updated: Buy Order Complete @ 328.00
+2025-09-16 14:44:17,815 - INFO - PnL updated for account 2 (active): -1.0
+2025-09-16 14:44:17,815 - INFO - Child order status updated: Buy Order Complete @ 328.00
+2025-09-16 14:44:54,489 - INFO - SL price ready for modification: 318
+2025-09-16 14:44:57,176 - INFO - SL difference updated: -8.0 points from buy price
+2025-09-16 14:44:57,179 - INFO - SL monitoring activated at 318.0
+2025-09-16 14:44:57,179 - INFO - SL price confirmed and monitoring started: 318.0 (buy orders are filled)
+2025-09-16 14:45:08,467 - INFO - Target price ready for modification: 335
+2025-09-16 14:45:09,913 - INFO - Target difference updated: 9.0 points from buy price
+2025-09-16 14:45:09,913 - INFO - Target monitoring activated at 335.0
+2025-09-16 14:45:09,913 - INFO - Target price confirmed and monitoring started: 335.0 (buy orders are filled)
+2025-09-16 14:47:29,270 - INFO - SL price ready for modification: 319
+2025-09-16 14:47:30,159 - INFO - SL difference updated: -7.0 points from buy price
+2025-09-16 14:47:30,159 - INFO - SL monitoring activated at 319.0
+2025-09-16 14:47:30,168 - INFO - SL price confirmed and monitoring started: 319.0 (buy orders are filled)
+2025-09-16 14:49:10,235 - WARNING - TARGET REACHED! Current: 335.85, Target: 335.0
+2025-09-16 14:49:10,237 - INFO - Executing Target exit at limit price. Current: 335.85
+2025-09-16 14:49:10,237 - INFO - Target monitoring stopped
+2025-09-16 14:49:10,250 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:49:10,250 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:49:10,250 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:49:10,250 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:49:11,005 - ERROR - Error checking accounts with open positions: 'list' object has no attribute 'get'
+2025-09-16 14:49:11,005 - INFO - Position status before exit: [1, 2]
+2025-09-16 14:49:11,005 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:49:11,005 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:49:11,005 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:49:11,013 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:49:11,725 - ERROR - Error checking accounts with open positions: 'list' object has no attribute 'get'
+2025-09-16 14:49:11,725 - INFO - Accounts with open positions for exit: [1, 2]
+2025-09-16 14:49:11,729 - INFO - Placing exit orders for accounts: [1, 2]
+2025-09-16 14:49:11,729 - INFO - Trading symbol: SENSEX2591882200CE, Price: 335.85
+2025-09-16 14:49:11,729 - INFO - Quantities: [20, 20]
+2025-09-16 14:49:12,551 - INFO - Exit order placed successfully: {'request_time': '14:49:12 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600493727'}
+2025-09-16 14:49:12,585 - INFO - Exit order placed successfully: {'request_time': '14:49:12 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600493728'}
+2025-09-16 14:49:12,585 - INFO - New order received: 25091600493728
+2025-09-16 14:49:12,585 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'S', price: '335.85'
+2025-09-16 14:49:12,605 - INFO - Order data saved to orders.csv
+2025-09-16 14:49:12,606 - INFO - Child order status updated: Sell Order PENDING @ 335.85
+2025-09-16 14:49:12,606 - INFO - Account 2 - S PENDING NewAck
+2025-09-16 14:49:12,609 - INFO - Exit button disabled to prevent duplicate orders
+2025-09-16 14:49:12,609 - INFO - Updating order 25091600493728
+2025-09-16 14:49:12,609 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'S', price: '335.85'
+2025-09-16 14:49:12,616 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:49:12,616 - INFO - Cancel Exit and Modify Exit buttons enabled after exit orders placed
+2025-09-16 14:49:12,616 - INFO - Child order status updated: Sell Order PENDING @ 335.85
+2025-09-16 14:49:12,626 - INFO - Updating order 25091600493728
+2025-09-16 14:49:12,626 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'S', price: '335.85'
+2025-09-16 14:49:12,633 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:49:12,633 - INFO - Child order status updated: Sell Order Open @ 335.85
+2025-09-16 14:49:12,641 - INFO - New order received: 25091600493727
+2025-09-16 14:49:12,641 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'S', price: '335.85'
+2025-09-16 14:49:12,649 - INFO - Master order status updated: Sell Order PENDING @ 335.85
+2025-09-16 14:49:12,649 - INFO - Order data saved to orders.csv
+2025-09-16 14:49:12,657 - INFO - Account 1 - S PENDING NewAck
+2025-09-16 14:49:12,659 - INFO - Updating order 25091600493727
+2025-09-16 14:49:12,659 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'S', price: '335.85'
+2025-09-16 14:49:12,662 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:49:12,667 - INFO - Master order status updated: Sell Order PENDING @ 335.85
+2025-09-16 14:49:12,667 - INFO - Updating order 25091600493727
+2025-09-16 14:49:12,667 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'S', price: '335.85'
+2025-09-16 14:49:12,674 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:49:12,674 - INFO - Master order status updated: Sell Order Open @ 335.85
+2025-09-16 14:49:13,608 - INFO - PnL updated for account 2 (active): 111.0
+2025-09-16 14:49:13,608 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 14:49:13,608 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 14:49:13,656 - INFO - PnL updated for account 1 (active): 111.0
+2025-09-16 14:49:13,658 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 14:49:13,658 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 14:49:19,995 - INFO - Updating order 25091600493727
+2025-09-16 14:49:19,995 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'S', price: '335.85'
+2025-09-16 14:49:20,000 - INFO - Updating order 25091600493728
+2025-09-16 14:49:20,000 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'S', price: '335.85'
+2025-09-16 14:49:20,001 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:49:20,001 - INFO - Sell order completed for account 1: SENSEX2591882200CE @ 335.85
+2025-09-16 14:49:20,007 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:49:20,007 - INFO - Sell order completed for account 2: SENSEX2591882200CE @ 335.85
+2025-09-16 14:49:20,010 - INFO - SL monitoring stopped
+2025-09-16 14:49:20,012 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-16 14:49:20,012 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-16 14:49:20,013 - INFO - SL and Target monitoring reset after sell order completion
+2025-09-16 14:49:20,013 - INFO - SL and Target monitoring reset after sell order completion
+2025-09-16 14:49:20,946 - INFO - PnL updated for account 1 (active): 157.0
+2025-09-16 14:49:20,946 - INFO - Master sell complete check: False (status: Sell Order Open @ 335.85)
+2025-09-16 14:49:20,946 - INFO - Child sell complete check: False (status: Sell Order Open @ 335.85)
+2025-09-16 14:49:20,946 - INFO - Master order status updated: Sell Order Complete @ 335.85
+2025-09-16 14:49:20,974 - INFO - PnL updated for account 2 (active): 157.0
+2025-09-16 14:49:20,974 - INFO - Master sell complete check: True (status: Sell Order Complete @ 335.85)
+2025-09-16 14:49:20,974 - INFO - Child sell complete check: False (status: Sell Order Open @ 335.85)
+2025-09-16 14:49:20,974 - INFO - Child order status updated: Sell Order Complete @ 335.85
+2025-09-16 14:50:20,199 - INFO - Buttons released - ready for new orders
+2025-09-16 14:50:30,805 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:50:30,805 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:50:30,805 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:50:30,805 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:50:30,814 - INFO - Getting token for trading symbol: SENSEX2591882200CE
+2025-09-16 14:50:30,814 - INFO - Found token for SENSEX2591882200CE: 862374
+2025-09-16 14:50:31,603 - INFO - Modify price fields cleared after auto-fetch
+2025-09-16 14:50:31,603 - INFO - Getting token for trading symbol: SENSEX2591882200CE
+2025-09-16 14:50:31,611 - INFO - Found token for SENSEX2591882200CE: 862374
+2025-09-16 14:50:31,611 - INFO - Unsubscribed from previous: BFO|862374
+2025-09-16 14:50:31,611 - INFO - Subscribed to live price feed via master account: BFO|862374
+2025-09-16 14:50:31,611 - INFO - Auto-subscribed to SENSEX2591882200CE at price 323.55
+2025-09-16 14:50:45,653 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:50:45,661 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:50:45,661 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:50:45,661 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:50:45,661 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:50:45,673 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:50:45,673 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:50:45,673 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:50:45,673 - INFO - Active accounts: [1, 2]
+2025-09-16 14:50:45,673 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-16 14:50:45,678 - INFO - Trading symbol: SENSEX2591882200CE, Price: 322.0
+2025-09-16 14:50:45,678 - INFO - Quantities: [20, 20]
+2025-09-16 14:50:45,678 - INFO - Account 1: API=True, Qty=20, Active=True
+2025-09-16 14:50:45,680 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591882200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 322.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-16 14:50:45,680 - INFO - Account 2: API=True, Qty=20, Active=True
+2025-09-16 14:50:45,680 - INFO - API instance for account 1: True
+2025-09-16 14:50:45,680 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591882200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 322.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-16 14:50:45,686 - INFO - API instance for account 2: True
+2025-09-16 14:50:46,559 - INFO - API response: {'request_time': '14:50:46 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600496862'}
+2025-09-16 14:50:46,559 - INFO - API response type: <class 'dict'>
+2025-09-16 14:50:46,563 - INFO - API response: {'request_time': '14:50:46 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600496863'}
+2025-09-16 14:50:46,563 - INFO - Buy order placed successfully: {'request_time': '14:50:46 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600496862'}
+2025-09-16 14:50:46,567 - INFO - New order received: 25091600496863
+2025-09-16 14:50:46,567 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '322.00'
+2025-09-16 14:50:46,579 - INFO - API response type: <class 'dict'>
+2025-09-16 14:50:46,582 - INFO - Buy order placed successfully: {'request_time': '14:50:46 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600496863'}
+2025-09-16 14:50:46,589 - INFO - Order data saved to orders.csv
+2025-09-16 14:50:46,589 - INFO - Auto SL/Target set - SL: 302.0, Target: 352.0 (Buy Open: 322.0)
+2025-09-16 14:50:46,589 - INFO - Account 2 - B PENDING NewAck
+2025-09-16 14:50:46,596 - INFO - Cross-account coordination started
+2025-09-16 14:50:46,596 - INFO - Cross-account coordination started for buy orders
+2025-09-16 14:50:46,596 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-16 14:50:46,596 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-16 14:50:46,596 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-16 14:50:46,596 - INFO - Child order status updated: Buy Order PENDING @ 322.00
+2025-09-16 14:50:46,596 - INFO - New order received: 25091600496862
+2025-09-16 14:50:46,596 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '322.00'
+2025-09-16 14:50:46,605 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '322.00'
+2025-09-16 14:50:46,605 - INFO - Updating order 25091600496863
+2025-09-16 14:50:46,621 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:50:46,621 - INFO - Master order status updated: Buy Order PENDING @ 322.00
+2025-09-16 14:50:46,621 - INFO - Order data saved to orders.csv
+2025-09-16 14:50:46,621 - INFO - Child order status updated: Buy Order PENDING @ 322.00
+2025-09-16 14:50:46,625 - INFO - Updating order 25091600496862
+2025-09-16 14:50:46,625 - INFO - Account 1 - B PENDING NewAck
+2025-09-16 14:50:46,625 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '322.00'
+2025-09-16 14:50:46,633 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:50:46,634 - INFO - Updating order 25091600496863
+2025-09-16 14:50:46,634 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '322.00'
+2025-09-16 14:50:46,637 - INFO - Master order status updated: Buy Order PENDING @ 322.00
+2025-09-16 14:50:46,640 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:50:46,642 - INFO - Child order status updated: Buy Order Open @ 322.00
+2025-09-16 14:50:46,645 - INFO - Updating order 25091600496862
+2025-09-16 14:50:46,645 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '322.00'
+2025-09-16 14:50:46,650 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:50:46,652 - INFO - Master order status updated: Buy Order Open @ 322.00
+2025-09-16 14:50:47,453 - INFO - PnL updated for account 2 (active): 157.0
+2025-09-16 14:50:47,453 - INFO - Order state updated - Master: None, Child: PENDING
+2025-09-16 14:50:47,459 - INFO - Checking coordination - Master: None, Child: PENDING
+2025-09-16 14:50:47,509 - INFO - PnL updated for account 1 (active): 157.0
+2025-09-16 14:50:47,509 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 14:50:47,513 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 14:51:07,534 - INFO - SL price ready for modification: 319
+2025-09-16 14:51:08,801 - INFO - SL difference updated: -3.0 points from buy price
+2025-09-16 14:51:08,801 - INFO - SL price confirmed: 319.0 (monitoring will start after buy order is filled)
+2025-09-16 14:51:19,317 - INFO - Target price ready for modification: 333
+2025-09-16 14:51:20,957 - INFO - SL price ready for modification: 319
+2025-09-16 14:51:22,007 - INFO - Updating order 25091600496863
+2025-09-16 14:51:22,007 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'B', price: '322.00'
+2025-09-16 14:51:22,008 - INFO - Updating order 25091600496862
+2025-09-16 14:51:22,008 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'B', price: '322.00'
+2025-09-16 14:51:22,018 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:51:22,018 - INFO - Buy order completed for account 2: SENSEX2591882200CE @ 322.0
+2025-09-16 14:51:22,022 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:51:22,022 - INFO - Buy order completed for account 1: SENSEX2591882200CE @ 322.0
+2025-09-16 14:51:22,024 - INFO - SL monitoring activated at 319.0
+2025-09-16 14:51:22,024 - INFO - SL monitoring started at: 319.0
+2025-09-16 14:51:22,024 - INFO - SL monitoring activated at 319.0
+2025-09-16 14:51:22,024 - INFO - Target monitoring activated at 333.0
+2025-09-16 14:51:22,024 - INFO - SL monitoring started at: 319.0
+2025-09-16 14:51:22,024 - INFO - Target monitoring started at: 333.0
+2025-09-16 14:51:22,024 - INFO - Target monitoring activated at 333.0
+2025-09-16 14:51:22,024 - INFO - Target monitoring started at: 333.0
+2025-09-16 14:51:22,024 - INFO - Exit buttons enabled after buy order completion
+2025-09-16 14:51:22,024 - INFO - Exit buttons enabled after buy order completion
+2025-09-16 14:51:23,160 - INFO - PnL updated for account 2 (active): 146.0
+2025-09-16 14:51:23,160 - INFO - PnL updated for account 1 (active): 146.0
+2025-09-16 14:51:23,187 - INFO - Child order status updated: Buy Order Complete @ 322.00
+2025-09-16 14:51:23,192 - INFO - Master order status updated: Buy Order Complete @ 322.00
+2025-09-16 14:52:54,582 - WARNING - TARGET REACHED! Current: 333.0, Target: 333.0
+2025-09-16 14:52:54,582 - INFO - Executing Target exit at limit price. Current: 333.0
+2025-09-16 14:52:54,582 - INFO - Target monitoring stopped
+2025-09-16 14:52:54,590 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:52:54,598 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:52:54,598 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:52:54,602 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:52:55,386 - ERROR - Error checking accounts with open positions: 'list' object has no attribute 'get'
+2025-09-16 14:52:55,386 - INFO - Position status before exit: [1, 2]
+2025-09-16 14:52:55,386 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:52:55,386 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:52:55,386 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:52:55,386 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:52:56,189 - ERROR - Error checking accounts with open positions: 'list' object has no attribute 'get'
+2025-09-16 14:52:56,197 - INFO - Accounts with open positions for exit: [1, 2]
+2025-09-16 14:52:56,199 - INFO - Placing exit orders for accounts: [1, 2]
+2025-09-16 14:52:56,209 - INFO - Trading symbol: SENSEX2591882200CE, Price: 333.0
+2025-09-16 14:52:56,216 - INFO - Quantities: [20, 20]
+2025-09-16 14:52:57,149 - INFO - Exit order placed successfully: {'request_time': '14:52:57 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600501067'}
+2025-09-16 14:52:57,151 - INFO - Exit order placed successfully: {'request_time': '14:52:57 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600501068'}
+2025-09-16 14:52:57,157 - INFO - New order received: 25091600501068
+2025-09-16 14:52:57,157 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'S', price: '333.00'
+2025-09-16 14:52:57,168 - INFO - Child order status updated: Sell Order PENDING @ 333.00
+2025-09-16 14:52:57,174 - INFO - Exit button disabled to prevent duplicate orders
+2025-09-16 14:52:57,174 - INFO - Order data saved to orders.csv
+2025-09-16 14:52:57,180 - INFO - Updating order 25091600501068
+2025-09-16 14:52:57,180 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'S', price: '333.00'
+2025-09-16 14:52:57,180 - INFO - Account 2 - S PENDING NewAck
+2025-09-16 14:52:57,180 - INFO - Cancel Exit and Modify Exit buttons enabled after exit orders placed
+2025-09-16 14:52:57,184 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:52:57,184 - INFO - Child order status updated: Sell Order PENDING @ 333.00
+2025-09-16 14:52:57,193 - INFO - Updating order 25091600501068
+2025-09-16 14:52:57,193 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'S', price: '333.00'
+2025-09-16 14:52:57,195 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:52:57,197 - INFO - Child order status updated: Sell Order Open @ 333.00
+2025-09-16 14:52:57,201 - INFO - New order received: 25091600501067
+2025-09-16 14:52:57,201 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'S', price: '333.00'
+2025-09-16 14:52:57,207 - INFO - Master order status updated: Sell Order PENDING @ 333.00
+2025-09-16 14:52:57,207 - INFO - Order data saved to orders.csv
+2025-09-16 14:52:57,207 - INFO - Account 1 - S PENDING NewAck
+2025-09-16 14:52:57,207 - INFO - Updating order 25091600501067
+2025-09-16 14:52:57,215 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'S', price: '333.00'
+2025-09-16 14:52:57,215 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:52:57,215 - INFO - Master order status updated: Sell Order PENDING @ 333.00
+2025-09-16 14:52:57,223 - INFO - Updating order 25091600501067
+2025-09-16 14:52:57,223 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'S', price: '333.00'
+2025-09-16 14:52:57,223 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:52:57,223 - INFO - Master order status updated: Sell Order Open @ 333.00
+2025-09-16 14:52:58,005 - INFO - Updating order 25091600501067
+2025-09-16 14:52:58,005 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'S', price: '333.00'
+2025-09-16 14:52:58,005 - INFO - Updating order 25091600501068
+2025-09-16 14:52:58,005 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'S', price: '333.00'
+2025-09-16 14:52:58,008 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:52:58,008 - INFO - Sell order completed for account 1: SENSEX2591882200CE @ 333.0
+2025-09-16 14:52:58,010 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:52:58,010 - INFO - Sell order completed for account 2: SENSEX2591882200CE @ 333.0
+2025-09-16 14:52:58,014 - INFO - SL monitoring stopped
+2025-09-16 14:52:58,014 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-16 14:52:58,014 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-16 14:52:58,015 - INFO - SL and Target monitoring reset after sell order completion
+2025-09-16 14:52:58,016 - INFO - SL and Target monitoring reset after sell order completion
+2025-09-16 14:52:58,109 - INFO - PnL updated for account 2 (active): 377.0
+2025-09-16 14:52:58,109 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 14:52:58,111 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 14:52:58,172 - INFO - PnL updated for account 1 (active): 377.0
+2025-09-16 14:52:58,172 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 14:52:58,172 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 14:52:58,992 - INFO - PnL updated for account 2 (active): 377.0
+2025-09-16 14:52:58,992 - INFO - Master sell complete check: False (status: Sell Order Open @ 333.00)
+2025-09-16 14:52:58,994 - INFO - Child sell complete check: False (status: Sell Order Open @ 333.00)
+2025-09-16 14:52:58,994 - INFO - Child order status updated: Sell Order Complete @ 333.00
+2025-09-16 14:52:59,006 - INFO - PnL updated for account 1 (active): 377.0
+2025-09-16 14:52:59,008 - INFO - Master sell complete check: False (status: Sell Order Open @ 333.00)
+2025-09-16 14:52:59,008 - INFO - Child sell complete check: True (status: Sell Order Complete @ 333.00)
+2025-09-16 14:52:59,010 - INFO - Master order status updated: Sell Order Complete @ 333.00
+2025-09-16 14:54:02,869 - INFO - Buttons released - ready for new orders
+2025-09-16 14:54:13,223 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:54:13,231 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:54:13,231 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:54:13,233 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:54:13,233 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:54:13,242 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:54:13,242 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:54:13,244 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:54:13,246 - INFO - Active accounts: [1, 2]
+2025-09-16 14:54:13,246 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-16 14:54:13,246 - INFO - Trading symbol: SENSEX2591882200CE, Price: 330.0
+2025-09-16 14:54:13,248 - INFO - Quantities: [20, 20]
+2025-09-16 14:54:13,248 - INFO - Account 1: API=True, Qty=20, Active=True
+2025-09-16 14:54:13,250 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591882200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 330.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-16 14:54:13,250 - INFO - Account 2: API=True, Qty=20, Active=True
+2025-09-16 14:54:13,250 - INFO - API instance for account 1: True
+2025-09-16 14:54:13,252 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591882200CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 330.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-16 14:54:13,254 - INFO - API instance for account 2: True
+2025-09-16 14:54:14,205 - INFO - API response: {'request_time': '14:54:14 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600503415'}
+2025-09-16 14:54:14,205 - INFO - API response type: <class 'dict'>
+2025-09-16 14:54:14,205 - INFO - Buy order placed successfully: {'request_time': '14:54:14 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600503415'}
+2025-09-16 14:54:14,236 - INFO - API response: {'request_time': '14:54:14 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600503417'}
+2025-09-16 14:54:14,236 - INFO - API response type: <class 'dict'>
+2025-09-16 14:54:14,236 - INFO - Buy order placed successfully: {'request_time': '14:54:14 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600503417'}
+2025-09-16 14:54:14,241 - INFO - New order received: 25091600503417
+2025-09-16 14:54:14,241 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '330.00'
+2025-09-16 14:54:14,249 - INFO - Auto SL/Target set - SL: 310.0, Target: 360.0 (Buy Open: 330.0)
+2025-09-16 14:54:14,249 - INFO - Cross-account coordination started
+2025-09-16 14:54:14,249 - INFO - Cross-account coordination started for buy orders
+2025-09-16 14:54:14,256 - INFO - Order data saved to orders.csv
+2025-09-16 14:54:14,257 - INFO - Account 2 - B PENDING NewAck
+2025-09-16 14:54:14,257 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-16 14:54:14,267 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-16 14:54:14,267 - INFO - Exit button kept disabled until buy orders are completed
+2025-09-16 14:54:14,267 - INFO - Child order status updated: Buy Order PENDING @ 330.00
+2025-09-16 14:54:14,274 - INFO - New order received: 25091600503415
+2025-09-16 14:54:14,274 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '330.00'
+2025-09-16 14:54:14,274 - INFO - Updating order 25091600503417
+2025-09-16 14:54:14,274 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '330.00'
+2025-09-16 14:54:14,290 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:54:14,292 - INFO - Master order status updated: Buy Order PENDING @ 330.00
+2025-09-16 14:54:14,298 - INFO - Order data saved to orders.csv
+2025-09-16 14:54:14,300 - INFO - Account 1 - B PENDING NewAck
+2025-09-16 14:54:14,305 - INFO - Updating order 25091600503415
+2025-09-16 14:54:14,306 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '330.00'
+2025-09-16 14:54:14,306 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:54:14,363 - INFO - Master order status updated: Buy Order PENDING @ 330.00
+2025-09-16 14:54:14,363 - INFO - Child order status updated: Buy Order PENDING @ 330.00
+2025-09-16 14:54:14,372 - INFO - Updating order 25091600503415
+2025-09-16 14:54:14,372 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '330.00'
+2025-09-16 14:54:14,372 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:54:14,372 - INFO - Updating order 25091600503417
+2025-09-16 14:54:14,372 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '330.00'
+2025-09-16 14:54:14,379 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:54:14,379 - INFO - Master order status updated: Buy Order Open @ 330.00
+2025-09-16 14:54:14,381 - INFO - Child order status updated: Buy Order Open @ 330.00
+2025-09-16 14:54:15,205 - INFO - PnL updated for account 2 (active): 377.0
+2025-09-16 14:54:15,205 - INFO - Order state updated - Master: None, Child: PENDING
+2025-09-16 14:54:15,205 - INFO - Checking coordination - Master: None, Child: PENDING
+2025-09-16 14:54:15,301 - INFO - PnL updated for account 1 (active): 377.0
+2025-09-16 14:54:15,304 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 14:54:15,304 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 14:54:46,614 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:54:46,617 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:54:46,617 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:54:46,617 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:54:46,617 - INFO - Modify Buy box populated with current LTP: 338.15
+2025-09-16 14:54:52,208 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:54:52,208 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:54:52,208 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:54:52,208 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 14:54:52,208 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 14:54:52,218 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 14:54:52,218 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 14:54:52,218 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 14:54:52,218 - INFO - Active accounts for modify buy orders: [1, 2]
+2025-09-16 14:54:52,218 - INFO - Modifying order 25091600503415 for account 1 with quantity 20 and price 336.0
+2025-09-16 14:54:52,218 - INFO - Modifying order 25091600503417 for account 2 with quantity 20 and price 336.0
+2025-09-16 14:54:53,179 - INFO - Order 25091600503415 modified successfully
+2025-09-16 14:54:53,204 - INFO - Order 25091600503417 modified successfully
+2025-09-16 14:54:53,204 - INFO - Updating order 25091600503417
+2025-09-16 14:54:53,204 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '336.00'
+2025-09-16 14:54:53,209 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:54:53,211 - INFO - Auto SL/Target set - SL: 316.0, Target: 366.0 (Buy Open: 336.0)
+2025-09-16 14:54:53,212 - INFO - Child order status updated: Buy Order PENDING @ 336.00
+2025-09-16 14:54:53,212 - INFO - Updating order 25091600503417
+2025-09-16 14:54:53,216 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:54:53,216 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '336.00'
+2025-09-16 14:54:53,216 - INFO - Updating order 25091600503415
+2025-09-16 14:54:53,216 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '336.00'
+2025-09-16 14:54:53,219 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:54:53,219 - INFO - Child order status updated: Buy Order PENDING @ 336.00
+2025-09-16 14:54:53,219 - INFO - Master order status updated: Buy Order PENDING @ 336.00
+2025-09-16 14:54:53,220 - INFO - Updating order 25091600503417
+2025-09-16 14:54:53,220 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '336.00'
+2025-09-16 14:54:53,220 - INFO - Updating order 25091600503415
+2025-09-16 14:54:53,220 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:54:53,220 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '336.00'
+2025-09-16 14:54:53,220 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:54:53,220 - INFO - Child order status updated: Buy Order OPEN @ 336.00
+2025-09-16 14:54:53,229 - INFO - Master order status updated: Buy Order PENDING @ 336.00
+2025-09-16 14:54:53,232 - INFO - Updating order 25091600503415
+2025-09-16 14:54:53,232 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '336.00'
+2025-09-16 14:54:53,232 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:54:53,232 - INFO - Master order status updated: Buy Order OPEN @ 336.00
+2025-09-16 14:54:58,454 - INFO - SL price ready for modification: 333
+2025-09-16 14:55:00,785 - INFO - SL difference updated: -3.0 points from buy price
+2025-09-16 14:55:00,789 - INFO - SL price confirmed: 333.0 (monitoring will start after buy order is filled)
+2025-09-16 14:55:21,013 - INFO - Updating order 25091600503415
+2025-09-16 14:55:21,013 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'B', price: '336.00'
+2025-09-16 14:55:21,013 - INFO - Updating order 25091600503417
+2025-09-16 14:55:21,013 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'B', price: '336.00'
+2025-09-16 14:55:21,015 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:55:21,015 - INFO - Buy order completed for account 1: SENSEX2591882200CE @ 336.0
+2025-09-16 14:55:21,020 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 14:55:21,020 - INFO - Buy order completed for account 2: SENSEX2591882200CE @ 336.0
+2025-09-16 14:55:21,029 - INFO - SL monitoring activated at 333.0
+2025-09-16 14:55:21,029 - INFO - SL monitoring activated at 333.0
+2025-09-16 14:55:21,031 - INFO - SL monitoring started at: 333.0
+2025-09-16 14:55:21,032 - INFO - SL monitoring started at: 333.0
+2025-09-16 14:55:21,032 - INFO - Target monitoring activated at 366.0
+2025-09-16 14:55:21,032 - INFO - Target monitoring activated at 366.0
+2025-09-16 14:55:21,032 - INFO - Target monitoring started at: 366.0
+2025-09-16 14:55:21,032 - INFO - Target monitoring started at: 366.0
+2025-09-16 14:55:21,040 - INFO - Exit buttons enabled after buy order completion
+2025-09-16 14:55:21,049 - INFO - Exit buttons enabled after buy order completion
+2025-09-16 14:55:22,055 - INFO - PnL updated for account 1 (active): 388.0
+2025-09-16 14:55:22,055 - INFO - PnL updated for account 2 (active): 388.0
+2025-09-16 14:55:22,059 - INFO - Master order status updated: Buy Order Complete @ 336.00
+2025-09-16 14:55:22,060 - INFO - Child order status updated: Buy Order Complete @ 336.00
+2025-09-16 14:56:02,572 - INFO - Target price ready for modification: 355
+2025-09-16 14:56:03,611 - INFO - Target difference updated: 19.0 points from buy price
+2025-09-16 14:56:03,611 - INFO - Target monitoring activated at 355.0
+2025-09-16 14:56:03,611 - INFO - Target price confirmed and monitoring started: 355.0 (buy orders are filled)
+2025-09-16 14:56:36,407 - INFO - SL price ready for modification: 322
+2025-09-16 14:56:40,017 - INFO - SL difference updated: -14.0 points from buy price
+2025-09-16 14:56:40,017 - INFO - SL monitoring activated at 322.0
+2025-09-16 14:56:40,019 - INFO - SL price confirmed and monitoring started: 322.0 (buy orders are filled)
+2025-09-16 15:02:55,717 - WARNING - TARGET REACHED! Current: 355.85, Target: 355.0
+2025-09-16 15:02:55,719 - INFO - Executing Target exit at limit price. Current: 355.85
+2025-09-16 15:02:55,721 - INFO - Target monitoring stopped
+2025-09-16 15:02:55,726 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 15:02:55,737 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 15:02:55,737 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 15:02:55,737 - INFO - Updated quantity options for SENSEX2591882200CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-16 15:02:56,523 - ERROR - Error checking accounts with open positions: 'list' object has no attribute 'get'
+2025-09-16 15:02:56,523 - INFO - Position status before exit: [1, 2]
+2025-09-16 15:02:56,523 - INFO - Getting token and lot size for trading symbol: SENSEX2591882200CE
+2025-09-16 15:02:56,531 - INFO - Found token and lot size for SENSEX2591882200CE: 862374, 20
+2025-09-16 15:02:56,531 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-16 15:02:56,531 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-16 15:02:57,286 - ERROR - Error checking accounts with open positions: 'list' object has no attribute 'get'
+2025-09-16 15:02:57,286 - INFO - Accounts with open positions for exit: [1, 2]
+2025-09-16 15:02:57,286 - INFO - Placing exit orders for accounts: [1, 2]
+2025-09-16 15:02:57,286 - INFO - Trading symbol: SENSEX2591882200CE, Price: 355.85
+2025-09-16 15:02:57,286 - INFO - Quantities: [20, 20]
+2025-09-16 15:02:58,151 - INFO - Exit order placed successfully: {'request_time': '15:02:58 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600520444'}
+2025-09-16 15:02:58,163 - INFO - Exit order placed successfully: {'request_time': '15:02:58 16-09-2025', 'stat': 'Ok', 'norenordno': '25091600520446'}
+2025-09-16 15:02:58,171 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'S', price: '355.85'
+2025-09-16 15:02:58,171 - INFO - New order received: 25091600520446
+2025-09-16 15:02:58,179 - INFO - Child order status updated: Sell Order PENDING @ 355.85
+2025-09-16 15:02:58,188 - INFO - Updating order 25091600520446
+2025-09-16 15:02:58,188 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'S', price: '355.85'
+2025-09-16 15:02:58,188 - INFO - Order data saved to orders.csv
+2025-09-16 15:02:58,190 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 15:02:58,193 - INFO - Exit button disabled to prevent duplicate orders
+2025-09-16 15:02:58,193 - INFO - Child order status updated: Sell Order PENDING @ 355.85
+2025-09-16 15:02:58,193 - INFO - Account 2 - S PENDING NewAck
+2025-09-16 15:02:58,200 - INFO - Updating order 25091600520446
+2025-09-16 15:02:58,202 - INFO - Cancel Exit and Modify Exit buttons enabled after exit orders placed
+2025-09-16 15:02:58,203 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'S', price: '355.85'
+2025-09-16 15:02:58,204 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-16 15:02:58,210 - INFO - Sell order completed for account 2: SENSEX2591882200CE @ 355.85
+2025-09-16 15:02:58,212 - INFO - SL monitoring stopped
+2025-09-16 15:02:58,218 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-16 15:02:58,221 - INFO - SL and Target monitoring reset after sell order completion
+2025-09-16 15:02:58,229 - INFO - New order received: 25091600520444
+2025-09-16 15:02:58,229 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'S', price: '355.85'
+2025-09-16 15:02:58,238 - INFO - Master order status updated: Sell Order PENDING @ 355.85
+2025-09-16 15:02:58,241 - INFO - Updating order 25091600520444
+2025-09-16 15:02:58,245 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'S', price: '355.85'
+2025-09-16 15:02:58,247 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 15:02:58,248 - INFO - Order data saved to orders.csv
+2025-09-16 15:02:58,249 - INFO - Master order status updated: Sell Order PENDING @ 355.85
+2025-09-16 15:02:58,249 - INFO - Account 1 - S PENDING NewAck
+2025-09-16 15:02:58,252 - INFO - Updating order 25091600520444
+2025-09-16 15:02:58,252 - INFO - Order status debug - status: 'COMPLETE', reporttype: 'Fill', trantype: 'S', price: '355.85'
+2025-09-16 15:02:58,254 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-16 15:02:58,254 - INFO - Sell order completed for account 1: SENSEX2591882200CE @ 355.85
+2025-09-16 15:02:58,254 - INFO - SL and Target monitoring reset and fields cleared
+2025-09-16 15:02:58,258 - INFO - SL and Target monitoring reset after sell order completion
+2025-09-16 15:02:59,446 - INFO - PnL updated for account 2 (active): 775.0
+2025-09-16 15:02:59,446 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 15:02:59,446 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 15:02:59,472 - INFO - PnL updated for account 2 (active): 775.0
+2025-09-16 15:02:59,474 - INFO - Master sell complete check: False (status: Sell Order PENDING @ 355.85)
+2025-09-16 15:02:59,474 - INFO - Child sell complete check: False (status: Sell Order PENDING @ 355.85)
+2025-09-16 15:02:59,475 - INFO - Child order status updated: Sell Order Complete @ 355.85
+2025-09-16 15:02:59,487 - INFO - PnL updated for account 1 (active): 775.0
+2025-09-16 15:02:59,487 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-16 15:02:59,487 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-16 15:02:59,509 - INFO - PnL updated for account 1 (active): 775.0
+2025-09-16 15:02:59,511 - INFO - Master sell complete check: False (status: Sell Order PENDING @ 355.85)
+2025-09-16 15:02:59,511 - INFO - Child sell complete check: True (status: Sell Order Complete @ 355.85)
+2025-09-16 15:02:59,512 - INFO - Master order status updated: Sell Order Complete @ 355.85
+2025-09-16 15:10:43,410 - INFO - Application interrupted by user

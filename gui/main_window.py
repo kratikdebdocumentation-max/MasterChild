@@ -687,6 +687,9 @@ class MainWindow:
                 if account_num == 1:
                     self.root.title(f"RefleK - Master Account {client_name} Logged in")
                     self.master_account_name.set(client_name)
+                    
+                    # Automatically login child account after master account login
+                    self.auto_login_child_account()
                 
                 # Update button text to show logged in status
                 self.update_login_button_text(account_num, client_name)
@@ -716,6 +719,36 @@ class MainWindow:
         elif account_num == 2:
             self.child_value.set(client_name)
     
+
+    def auto_login_child_account(self):
+        """Automatically login child account after master account login"""
+        try:
+            # Check if child account exists and is not already active
+            if 2 in self.account_manager.accounts and not self.account_manager.is_account_active(2):
+                applicationLogger.info("Attempting automatic child account login...")
+                success, client_name = self.account_manager.login_account(2)
+                if success:
+                    # Set up websocket feed for child account
+                    self.websocket_manager.connect_feed(2)
+                    self.update_account_display(2, client_name)
+                    self.enable_account_buttons(2)
+                    
+                    # Update button text to show logged in status
+                    self.update_login_button_text(2, client_name)
+                    
+                    # Update order status to show account is ready
+                    self.child_order_status.set(self.get_ready_status_message(2))
+                    
+                    # Refresh PnL after successful login
+                    self.update_pnl_on_trade(2)
+                    
+                    applicationLogger.info(f"Child account automatically logged in: {client_name}")
+                else:
+                    applicationLogger.warning(f"Automatic child account login failed: {client_name}")
+            else:
+                applicationLogger.info("Child account already active or not available")
+        except Exception as e:
+            applicationLogger.error(f"Error in automatic child account login: {e}")
 
     def update_login_button_text(self, account_num: int, client_name: str):
         """Update login button text to show logged in status"""
@@ -1653,29 +1686,33 @@ class MainWindow:
             accounts_with_positions = self.get_accounts_with_open_positions()
             applicationLogger.info(f"Position status before exit: {accounts_with_positions}")
 
-            # Set quantities for all accounts - use same quantity for both master and child
-            # Ensure quantity is a multiple of lot size
+            # Set quantities for all accounts - master uses selected quantity, child uses configured lots
             if trading_symbol:
                 try:
                     # Get lot size for the trading symbol
                     token, lot_size = self.symbol_manager.get_token_and_lot_size(trading_symbol)
-                    if lot_size and qty1 % lot_size == 0:
-                        # Quantity is already a multiple of lot size, use as is
+                    
+                    if lot_size:
+                        # Master account: Use selected quantity (ensure it's multiple of lot size)
+                        if qty1 % lot_size == 0:
+                            master_qty = qty1
+                        else:
+                            master_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
+                        
+                        # Child account: Use configured lots * lot size
+                        child_lots = self.settings.get('child_default_lots', 1)
+                        child_qty = lot_size * child_lots
+                        
+                        self.quantities[1] = master_qty
+                        self.quantities[2] = child_qty
+                        
+                        applicationLogger.info(f"Master quantity: {master_qty} (selected: {qty1}, lot size: {lot_size})")
+                        applicationLogger.info(f"Child quantity: {child_qty} (lots: {child_lots}, lot size: {lot_size})")
+                    else:
+                        # Fallback to original quantity if lot size not found
                         self.quantities[1] = qty1
                         self.quantities[2] = qty1
-                        applicationLogger.info(f"Using same quantity for both accounts: {qty1} (lot size: {lot_size})")
-                    else:
-                        # Adjust quantity to be a multiple of lot size
-                        if lot_size:
-                            adjusted_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
-                            self.quantities[1] = adjusted_qty
-                            self.quantities[2] = adjusted_qty
-                            applicationLogger.info(f"Adjusted quantity to lot size multiple: {adjusted_qty} (original: {qty1}, lot size: {lot_size})")
-                        else:
-                            # Fallback to original quantity if lot size not found
-                            self.quantities[1] = qty1
-                            self.quantities[2] = qty1
-                            applicationLogger.warning(f"Lot size not found, using original quantity: {qty1}")
+                        applicationLogger.warning(f"Lot size not found, using original quantity for both accounts: {qty1}")
                 except Exception as e:
                     applicationLogger.error(f"Error getting lot size: {e}")
                     # Fallback to original quantity
@@ -1963,29 +2000,33 @@ class MainWindow:
             qty1 = int(self.qty1_var.get())
             
 
-            # Set quantities for all accounts - use same quantity for both master and child
-            # Ensure quantity is a multiple of lot size
+            # Set quantities for all accounts - master uses selected quantity, child uses configured lots
             if trading_symbol:
                 try:
                     # Get lot size for the trading symbol
                     token, lot_size = self.symbol_manager.get_token_and_lot_size(trading_symbol)
-                    if lot_size and qty1 % lot_size == 0:
-                        # Quantity is already a multiple of lot size, use as is
+                    
+                    if lot_size:
+                        # Master account: Use selected quantity (ensure it's multiple of lot size)
+                        if qty1 % lot_size == 0:
+                            master_qty = qty1
+                        else:
+                            master_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
+                        
+                        # Child account: Use configured lots * lot size
+                        child_lots = self.settings.get('child_default_lots', 1)
+                        child_qty = lot_size * child_lots
+                        
+                        self.quantities[1] = master_qty
+                        self.quantities[2] = child_qty
+                        
+                        applicationLogger.info(f"Master quantity: {master_qty} (selected: {qty1}, lot size: {lot_size})")
+                        applicationLogger.info(f"Child quantity: {child_qty} (lots: {child_lots}, lot size: {lot_size})")
+                    else:
+                        # Fallback to original quantity if lot size not found
                         self.quantities[1] = qty1
                         self.quantities[2] = qty1
-                        applicationLogger.info(f"Using same quantity for both accounts: {qty1} (lot size: {lot_size})")
-                    else:
-                        # Adjust quantity to be a multiple of lot size
-                        if lot_size:
-                            adjusted_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
-                            self.quantities[1] = adjusted_qty
-                            self.quantities[2] = adjusted_qty
-                            applicationLogger.info(f"Adjusted quantity to lot size multiple: {adjusted_qty} (original: {qty1}, lot size: {lot_size})")
-                        else:
-                            # Fallback to original quantity if lot size not found
-                            self.quantities[1] = qty1
-                            self.quantities[2] = qty1
-                            applicationLogger.warning(f"Lot size not found, using original quantity: {qty1}")
+                        applicationLogger.warning(f"Lot size not found, using original quantity for both accounts: {qty1}")
                 except Exception as e:
                     applicationLogger.error(f"Error getting lot size: {e}")
                     # Fallback to original quantity
@@ -1998,6 +2039,7 @@ class MainWindow:
             
             # Get active accounts
             active_accounts = self.account_manager.get_all_active_accounts()
+            applicationLogger.info(f"Active accounts for modify buy orders: {active_accounts}")
             
             # Remove child account if orders are blocked
             if self.child_orders_blocked and 2 in active_accounts:
@@ -2066,29 +2108,33 @@ class MainWindow:
             qty1 = int(self.qty1_var.get())
             
 
-            # Set quantities for all accounts - use same quantity for both master and child
-            # Ensure quantity is a multiple of lot size
+            # Set quantities for all accounts - master uses selected quantity, child uses configured lots
             if trading_symbol:
                 try:
                     # Get lot size for the trading symbol
                     token, lot_size = self.symbol_manager.get_token_and_lot_size(trading_symbol)
-                    if lot_size and qty1 % lot_size == 0:
-                        # Quantity is already a multiple of lot size, use as is
+                    
+                    if lot_size:
+                        # Master account: Use selected quantity (ensure it's multiple of lot size)
+                        if qty1 % lot_size == 0:
+                            master_qty = qty1
+                        else:
+                            master_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
+                        
+                        # Child account: Use configured lots * lot size
+                        child_lots = self.settings.get('child_default_lots', 1)
+                        child_qty = lot_size * child_lots
+                        
+                        self.quantities[1] = master_qty
+                        self.quantities[2] = child_qty
+                        
+                        applicationLogger.info(f"Master quantity: {master_qty} (selected: {qty1}, lot size: {lot_size})")
+                        applicationLogger.info(f"Child quantity: {child_qty} (lots: {child_lots}, lot size: {lot_size})")
+                    else:
+                        # Fallback to original quantity if lot size not found
                         self.quantities[1] = qty1
                         self.quantities[2] = qty1
-                        applicationLogger.info(f"Using same quantity for both accounts: {qty1} (lot size: {lot_size})")
-                    else:
-                        # Adjust quantity to be a multiple of lot size
-                        if lot_size:
-                            adjusted_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
-                            self.quantities[1] = adjusted_qty
-                            self.quantities[2] = adjusted_qty
-                            applicationLogger.info(f"Adjusted quantity to lot size multiple: {adjusted_qty} (original: {qty1}, lot size: {lot_size})")
-                        else:
-                            # Fallback to original quantity if lot size not found
-                            self.quantities[1] = qty1
-                            self.quantities[2] = qty1
-                            applicationLogger.warning(f"Lot size not found, using original quantity: {qty1}")
+                        applicationLogger.warning(f"Lot size not found, using original quantity for both accounts: {qty1}")
                 except Exception as e:
                     applicationLogger.error(f"Error getting lot size: {e}")
                     # Fallback to original quantity

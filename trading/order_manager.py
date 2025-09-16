@@ -374,9 +374,12 @@ class OrderManager:
         threads = []
         for i, (api, order_no, qty, is_active) in enumerate(zip(apis, order_numbers, quantities, active_accounts)):
             if is_active and order_no:
+                applicationLogger.info(f"Modifying order {order_no} for account {i+1} with quantity {qty} and price {price}")
                 thread = threading.Thread(target=modify_order, args=(api, order_no, qty))
                 threads.append(thread)
                 thread.start()
+            else:
+                applicationLogger.warning(f"Skipping order modification for account {i+1}: active={is_active}, order_no={order_no}")
         
         for thread in threads:
             thread.join()
