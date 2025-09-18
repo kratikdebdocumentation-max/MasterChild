@@ -1891,8 +1891,12 @@ class MainWindow:
             else:
                 self.child_order_status.set("Child Not Logged In")
     
-    def place_exit_orders(self):
-        """Place exit orders across all active accounts"""
+    def place_exit_orders(self, order_type='LMT'):
+        """Place exit orders across all active accounts
+        
+        Args:
+            order_type: 'LMT' for limit orders, 'MKT' for market orders
+        """
         try:
 
             # Check if exit button is disabled (orders already placed)
@@ -1998,7 +2002,7 @@ class MainWindow:
             
             # Place orders
             order_numbers = self.order_manager.place_exit_orders(
-                apis, quantities, trading_symbol, price, active_flags
+                apis, quantities, trading_symbol, price, active_flags, order_type
             )
             
             # Update exit order numbers
@@ -3516,9 +3520,9 @@ class MainWindow:
             if self.trailing_active:
                 self.stop_trailing_monitoring()
             
-            # Set the exit price to current price and call regular exit function
+            # Set the exit price to current price and call exit function with Market Order
             self.price1_value.set(str(current_price))
-            self.place_exit_orders()
+            self.place_exit_orders(order_type='MKT')
             
         except Exception as e:
             applicationLogger.error(f"Error executing SL exit: {e}")

@@ -243,7 +243,7 @@ class OrderManager:
     
     def place_exit_orders(self, apis: List, quantities: List[int], 
                          trading_symbol: str, price: float, 
-                         active_accounts: List[bool]) -> List[Optional[str]]:
+                         active_accounts: List[bool], order_type: str = 'LMT') -> List[Optional[str]]:
         """
         Place exit orders across multiple accounts
         
@@ -253,6 +253,7 @@ class OrderManager:
             trading_symbol: Trading symbol
             price: Order price
             active_accounts: List of active account flags
+            order_type: 'LMT' for limit orders, 'MKT' for market orders
             
         Returns:
             List of order numbers
@@ -270,6 +271,9 @@ class OrderManager:
                     exchange = 'NFO'
                     product_type = 'I'  # Use 'I' for NIFTY/BANKNIFTY
                 
+                # Set price based on order type
+                order_price = price if order_type == 'LMT' else 0.0
+                
                 order_place = api.place_order(
                     buy_or_sell='S',
                     product_type=product_type,
@@ -277,8 +281,8 @@ class OrderManager:
                     tradingsymbol=trading_symbol,
                     quantity=qty,
                     discloseqty=0,
-                    price_type='LMT',  # Use LMT for limit orders, MKT for market orders
-                    price=price,
+                    price_type=order_type,  # Use LMT for limit orders, MKT for market orders
+                    price=order_price,
                     trigger_price=None,
                     retention=Config.RETENTION,
                     amo='NO',
