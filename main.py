@@ -67,10 +67,9 @@ def main():
             print("Failed to initialize system. Please check logs for details.")
             sys.exit(1)
         
-        # Show configuration window first
-        applicationLogger.info("Showing configuration window...")
-        settings = show_configuration_window()
-        applicationLogger.info(f"Configuration completed with settings: {settings}")
+        # Load settings from file instead of showing configuration window
+        settings = load_settings_from_file()
+        applicationLogger.info(f"Loaded settings: {settings}")
         
         # Create and run main window with settings
         app = MainWindow(settings)
@@ -82,6 +81,37 @@ def main():
     except Exception as e:
         applicationLogger.error(f"Unexpected error: {e}")
         sys.exit(1)
+
+def load_settings_from_file():
+    """Load settings from configuration file"""
+    import json
+    import os
+    
+    settings_file = "config/settings.json"
+    
+    try:
+        if os.path.exists(settings_file):
+            with open(settings_file, 'r') as f:
+                settings = json.load(f)
+                applicationLogger.info(f"Loaded settings from {settings_file}: {settings}")
+                return settings
+        else:
+            # Use default values if no settings file exists
+            default_settings = {
+                'child_default_lots': 1,
+                'default_sl_points': 20,
+                'default_target_points': 30
+            }
+            applicationLogger.info(f"Using default settings: {default_settings}")
+            return default_settings
+    except Exception as e:
+        applicationLogger.error(f"Error loading settings: {e}")
+        # Return default settings on error
+        return {
+            'child_default_lots': 1,
+            'default_sl_points': 20,
+            'default_target_points': 30
+        }
 
 if __name__ == "__main__":
     main()

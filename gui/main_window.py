@@ -11,6 +11,7 @@ from trading.account_manager import AccountManager
 from trading.order_manager import OrderManager
 from trading.websocket_manager import WebSocketManager
 from trading.position_manager import PositionManager
+from trading.account_state_manager import AccountStateManager
 from market_data.symbol_manager import SymbolManager
 from market_data.expiry_manager import ExpiryManager
 from utils.telegram_notifications import send_sos_message
@@ -43,6 +44,13 @@ class MainWindow:
         self.account_manager = AccountManager()
         self.order_manager = OrderManager()
         self.websocket_manager = WebSocketManager(self.account_manager, self.order_manager)
+        self.state_manager = AccountStateManager()
+        
+        # Ensure Master account is always active
+        self.state_manager.ensure_master_always_active()
+        
+        # Log current account states after initialization
+        applicationLogger.info("Account states initialized - CSV reset on startup")
         
         # Set up price feed callback for dynamic order management
         self.order_manager.dynamic_order_manager.set_price_feed_callback(self.get_current_price)
@@ -87,6 +95,12 @@ class MainWindow:
         
         # Set order rejection callback for buy order rejections
         self.websocket_manager.set_order_rejection_callback(self.handle_buy_order_rejection)
+        
+        # Clean up old master files first
+        self.cleanup_old_master_files()
+        
+        # Calculate and store expiry dates for all indices
+        self.calculate_and_store_expiry_dates()
         
         # GUI variables
         self.setup_variables()
@@ -303,6 +317,13 @@ class MainWindow:
             width=30, style="LoginButton.TButton"
         )
         self.login_button2.pack(side=tk.LEFT, padx=10)
+        
+        # Configuration button
+        self.config_button = ttk.Button(
+            self.login_frame, text="⚙️ Config", 
+            command=self.open_configuration, width=12
+        )
+        self.config_button.pack(side=tk.LEFT, padx=5)
         
         # Utility buttons (reduced size)
         self.release_button = ttk.Button(
@@ -763,6 +784,9 @@ class MainWindow:
             # Normal login process
             success, client_name = self.account_manager.login_account(account_num)
             if success:
+                # Update state manager
+                self.state_manager.update_account_status(account_num, 'active', 'Account logged in successfully')
+                
                 self.websocket_manager.connect_feed(account_num)
                 self.update_account_display(account_num, client_name)
                 self.enable_account_buttons(account_num)
@@ -853,6 +877,30 @@ class MainWindow:
         """Reset login button to normal state"""
         self.login_button2.config(text="Login Child Account")
         self.login_button2.config(state='normal', style="LoginButton.TButton")
+    
+    def open_configuration(self):
+        """Open configuration window"""
+        try:
+            from gui.config_window import show_configuration_window
+            
+            # Show configuration window with current settings
+            new_settings = show_configuration_window(self.settings)
+            
+            # Update current settings if they were changed
+            if new_settings:
+                self.settings.update(new_settings)
+                applicationLogger.info(f"Configuration updated: {self.settings}")
+                
+                # Show a message that settings were updated
+                from tkinter import messagebox
+                messagebox.showinfo("Configuration Updated", 
+                                  "Settings have been updated successfully!\n\n"
+                                  "The changes will take effect immediately.")
+                
+        except Exception as e:
+            applicationLogger.error(f"Error opening configuration window: {e}")
+            from tkinter import messagebox
+            messagebox.showerror("Error", f"Failed to open configuration window: {e}")
     
     def enable_account_buttons(self, account_num: int):
         """Enable buttons for an account"""
@@ -1237,6 +1285,253 @@ class MainWindow:
         last_friday = last_date - timedelta(days=days_back)
         
         return last_friday
+    
+    def calculate_and_store_expiry_dates(self):
+        """Calculate and store expiry dates for all indices in CSV with date"""
+        try:
+            import os
+            import csv
+            from datetime import datetime
+            
+            # Check if we already calculated today
+            csv_file = os.path.join('data', 'expiry_dates.csv')
+            today = datetime.now().strftime('%Y-%m-%d')
+            
+            if os.path.exists(csv_file):
+                # Check if file was created today
+                file_time = datetime.fromtimestamp(os.path.getmtime(csv_file))
+                if file_time.strftime('%Y-%m-%d') == today:
+                    applicationLogger.info("Expiry dates already calculated today, loading from CSV")
+                    self.load_expiry_dates_from_csv()
+                    return
+            
+            applicationLogger.info("Calculating expiry dates for all indices...")
+            
+            # Calculate expiry dates for each index
+            expiry_data = {}
+            indices = ["SENSEX", "NIFTY", "BANKNIFTY"]
+            
+            for index in indices:
+                try:
+                    current_expiry, next_expiry = self._calculate_expiry_for_index(index)
+                    expiry_data[index] = {
+                        'current': current_expiry,
+                        'next': next_expiry
+                    }
+                    applicationLogger.info(f"{index} - Current: {current_expiry.strftime('%d-%b-%Y')}, Next: {next_expiry.strftime('%d-%b-%Y')}")
+                except Exception as e:
+                    applicationLogger.error(f"Error calculating expiry for {index}: {e}")
+                    continue
+            
+            # Store in CSV
+            self._save_expiry_dates_to_csv(expiry_data)
+            
+            # Load the data
+            self.load_expiry_dates_from_csv()
+            
+        except Exception as e:
+            applicationLogger.error(f"Error calculating and storing expiry dates: {e}")
+    
+    def _calculate_expiry_for_index(self, index: str):
+        """Calculate current and next expiry for a specific index"""
+        import os
+        from datetime import datetime
+        
+        # For SENSEX, use the enhanced calculation from findexpiry.py
+        if index == "SENSEX":
+            from findexpiry import get_sensex_expiry_dates
+            sensex_dates = get_sensex_expiry_dates()
+            
+            if not sensex_dates or len(sensex_dates) < 2:
+                raise ValueError(f"Not enough SENSEX expiry dates found. Found: {len(sensex_dates) if sensex_dates else 0}, Required: 2")
+            
+            # Convert string dates to datetime objects
+            current_date = datetime.strptime(sensex_dates[0][0], '%d-%b-%Y')
+            next_date = datetime.strptime(sensex_dates[1][0], '%d-%b-%Y')
+            
+            return current_date, next_date
+        
+        # For other indices, use the original method
+        master_file_path = self._get_master_file_path(index)
+        
+        if not master_file_path or not os.path.exists(master_file_path):
+            raise FileNotFoundError(f"Master file not found for {index}: {master_file_path}")
+        
+        # Parse the master file for expiry dates
+        expiry_dates = self._parse_master_file_for_expiry_dates(master_file_path, index)
+        
+        if not expiry_dates:
+            raise ValueError(f"No expiry dates found for {index}")
+        
+        # Sort in increasing order
+        expiry_dates.sort()
+        
+        # Take the first two expiry dates
+        if len(expiry_dates) < 2:
+            raise ValueError(f"Not enough expiry dates for {index}. Found: {len(expiry_dates)}, Required: 2")
+        
+        return expiry_dates[0], expiry_dates[1]
+    
+    def _get_master_file_path(self, index: str) -> str:
+        """Get the appropriate master file path based on index"""
+        import os
+        
+        data_dir = "data"
+        
+        if index == "SENSEX":
+            # Use the latest BFO file
+            bfo_files = [f for f in os.listdir(data_dir) if f.startswith("BFO_symbols.txt_") and f.endswith(".txt")]
+            if bfo_files:
+                latest_bfo = sorted(bfo_files)[-1]
+                return os.path.join(data_dir, latest_bfo)
+        elif index in ["NIFTY", "BANKNIFTY"]:
+            # Use the latest NFO file
+            nfo_files = [f for f in os.listdir(data_dir) if f.startswith("NFO_symbols.txt_") and f.endswith(".txt")]
+            if nfo_files:
+                latest_nfo = sorted(nfo_files)[-1]
+                return os.path.join(data_dir, latest_nfo)
+        
+        return None
+    
+    def _parse_master_file_for_expiry_dates(self, file_path: str, index: str) -> list:
+        """Parse master file and extract unique expiry dates for the selected index"""
+        from datetime import datetime
+        expiry_dates = set()
+        
+        try:
+            with open(file_path, 'r', encoding='utf-8') as file:
+                for line_num, line in enumerate(file):
+                    line = line.strip()
+                    if line and not line.startswith('Exchange'):  # Skip header
+                        fields = line.split(',')
+                        if len(fields) >= 6:
+                            symbol = fields[4]  # Trading symbol
+                            expiry_str = fields[5]  # Expiry date
+                            
+                            # Filter by index type
+                            if index == "SENSEX" and 'SENSEX' in symbol:
+                                try:
+                                    expiry_date = datetime.strptime(expiry_str, '%d-%b-%Y')
+                                    expiry_dates.add(expiry_date)
+                                except ValueError:
+                                    continue
+                            elif index in ["NIFTY", "BANKNIFTY"] and index in symbol:
+                                try:
+                                    expiry_date = datetime.strptime(expiry_str, '%d-%b-%Y')
+                                    expiry_dates.add(expiry_date)
+                                except ValueError:
+                                    continue
+            
+            return list(expiry_dates)
+            
+        except Exception as e:
+            applicationLogger.error(f"Error parsing master file {file_path}: {e}")
+            return []
+    
+    def _save_expiry_dates_to_csv(self, expiry_data: dict):
+        """Save expiry dates to CSV file"""
+        import os
+        import csv
+        from datetime import datetime
+        
+        csv_file = os.path.join('data', 'expiry_dates.csv')
+        
+        try:
+            with open(csv_file, 'w', newline='', encoding='utf-8') as file:
+                writer = csv.writer(file)
+                writer.writerow(['Index', 'Current_Expiry', 'Next_Expiry', 'Calculated_Date'])
+                
+                for index, data in expiry_data.items():
+                    writer.writerow([
+                        index,
+                        data['current'].strftime('%d-%b-%Y'),
+                        data['next'].strftime('%d-%b-%Y'),
+                        datetime.now().strftime('%Y-%m-%d')
+                    ])
+            
+            applicationLogger.info(f"Expiry dates saved to {csv_file}")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error saving expiry dates to CSV: {e}")
+    
+    def load_expiry_dates_from_csv(self):
+        """Load expiry dates from CSV file"""
+        import os
+        import csv
+        from datetime import datetime
+        
+        csv_file = os.path.join('data', 'expiry_dates.csv')
+        
+        if not os.path.exists(csv_file):
+            applicationLogger.warning("Expiry CSV file not found")
+            return
+        
+        try:
+            with open(csv_file, 'r', encoding='utf-8') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    index = row['Index']
+                    current_str = row['Current_Expiry']
+                    next_str = row['Next_Expiry']
+                    
+                    # Parse dates
+                    current_date = datetime.strptime(current_str, '%d-%b-%Y')
+                    next_date = datetime.strptime(next_str, '%d-%b-%Y')
+                    
+                    # Store in instance variables for the default index (SENSEX)
+                    if index == 'SENSEX':
+                        self.current_expiry = current_date
+                        self.next_expiry = next_date
+                        applicationLogger.info(f"SENSEX - Current expiry: {current_date.strftime('%d-%b-%Y')}")
+                        applicationLogger.info(f"SENSEX - Next expiry: {next_date.strftime('%d-%b-%Y')}")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error loading expiry dates from CSV: {e}")
+    
+    def cleanup_old_master_files(self):
+        """Clean up old master files, keep only the latest 3 days"""
+        try:
+            import os
+            import glob
+            from datetime import datetime, timedelta
+            
+            data_dir = "data"
+            cutoff_date = datetime.now() - timedelta(days=3)
+            
+            # File patterns to clean up
+            patterns = [
+                "BFO_symbols.txt_*.txt",
+                "NFO_symbols.txt_*.txt", 
+                "NSE_symbols.txt_*.txt",
+                "MCX_symbols.txt_*.txt"
+            ]
+            
+            cleaned_files = 0
+            
+            for pattern in patterns:
+                files = glob.glob(os.path.join(data_dir, pattern))
+                
+                for file_path in files:
+                    try:
+                        # Extract date from filename
+                        filename = os.path.basename(file_path)
+                        date_str = filename.split('_')[-1].replace('.txt', '')
+                        file_date = datetime.strptime(date_str, '%Y-%m-%d')
+                        
+                        # Delete if older than 3 days
+                        if file_date < cutoff_date:
+                            os.remove(file_path)
+                            cleaned_files += 1
+                            applicationLogger.info(f"Deleted old master file: {filename}")
+                            
+                    except (ValueError, IndexError) as e:
+                        # Skip files that don't match expected format
+                        continue
+            
+            applicationLogger.info(f"Cleanup completed: {cleaned_files} old master files deleted")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error cleaning up old master files: {e}")
     
     def auto_fetch_and_subscribe(self, trading_symbol):
         """Automatically fetch current price for selected symbol and subscribe to websocket"""
@@ -1960,24 +2255,13 @@ class MainWindow:
                 self.quantities[1] = qty1
                 self.quantities[2] = qty1
             
-            # Get active accounts
-            active_accounts = self.account_manager.get_all_active_accounts()
+            # Get active accounts from state manager
+            active_accounts = self.state_manager.get_active_accounts()
             
-            # Remove child account if orders are blocked
+            # Remove child account if orders are blocked (legacy check)
             if self.child_orders_blocked and 2 in active_accounts:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from buy orders")
-            
-            # Remove accounts that are blocked (rejection or general blocking)
-            if (self.master_account_rejected_blocked or self.master_account_blocked) and 1 in active_accounts:
-                block_reason = "rejection" if self.master_account_rejected_blocked else "general blocking"
-                active_accounts.remove(1)
-                applicationLogger.warning(f"Master account is blocked due to {block_reason} - excluding from buy orders")
-            
-            if (self.child_account_rejected_blocked or self.child_account_blocked) and 2 in active_accounts:
-                block_reason = "rejection" if self.child_account_rejected_blocked else "general blocking"
-                active_accounts.remove(2)
-                applicationLogger.warning(f"Child account is blocked due to {block_reason} - excluding from buy orders")
             
             applicationLogger.info(f"Active accounts: {active_accounts}")
             
@@ -2173,23 +2457,18 @@ class MainWindow:
                 self.quantities[2] = qty1
             
             # Get accounts with open positions (position-based monitoring)
-            active_accounts = self.get_accounts_with_open_positions()
+            accounts_with_positions = self.get_accounts_with_open_positions()
             
-            # Remove child account if orders are blocked
+            # Filter by state manager - only accounts that can place exit orders
+            active_accounts = []
+            for account_id in accounts_with_positions:
+                if self.state_manager.can_exit_orders(account_id):
+                    active_accounts.append(account_id)
+            
+            # Remove child account if orders are blocked (legacy check)
             if self.child_orders_blocked and 2 in active_accounts:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from exit orders")
-            
-            # Remove accounts that are blocked (rejection or general blocking)
-            if (self.master_account_rejected_blocked or self.master_account_blocked) and 1 in active_accounts:
-                block_reason = "rejection" if self.master_account_rejected_blocked else "general blocking"
-                active_accounts.remove(1)
-                applicationLogger.warning(f"Master account is blocked due to {block_reason} - excluding from exit orders")
-            
-            if (self.child_account_rejected_blocked or self.child_account_blocked) and 2 in active_accounts:
-                block_reason = "rejection" if self.child_account_rejected_blocked else "general blocking"
-                active_accounts.remove(2)
-                applicationLogger.warning(f"Child account is blocked due to {block_reason} - excluding from exit orders")
             
             applicationLogger.info(f"Accounts with open positions for exit: {active_accounts}")
             
@@ -2464,8 +2743,14 @@ class MainWindow:
         try:
             applicationLogger.warning(f"Buy order rejected for account {account_num} - Symbol: {symbol}, Reason: {rejection_reason}")
             
-            # Block the account completely
-            self.block_account_on_rejection(account_num, rejection_reason)
+            # Update state manager
+            self.state_manager.update_account_status(account_num, 'inactive', f"Buy order rejected: {rejection_reason}")
+            
+            # Update order status display to show blocked status
+            if account_num == 1:
+                self.master_order_status.set("Blocked till Reset")
+            elif account_num == 2:
+                self.child_order_status.set("Blocked till Reset")
             
             # Disable all trading buttons for this account
             self.disable_trading_buttons_for_account(account_num)
@@ -2591,9 +2876,10 @@ class MainWindow:
     def cancel_buy_orders(self):
         """Cancel buy orders across all active accounts"""
         try:
-            active_accounts = self.account_manager.get_all_active_accounts()
+            # Get accounts that can place orders (not blocked/inactive)
+            active_accounts = self.state_manager.get_active_accounts()
             
-            # Remove child account if orders are blocked
+            # Remove child account if orders are blocked (legacy check)
             if self.child_orders_blocked and 2 in active_accounts:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from cancel buy orders")
@@ -2604,6 +2890,12 @@ class MainWindow:
             order_numbers = []
             
             for i in active_accounts:
+                # Check if account is inactive (blocked due to rejection)
+                if self.state_manager.is_account_inactive(i):
+                    account_name = "Master" if i == 1 else "Child"
+                    applicationLogger.warning(f"{account_name} account is inactive - skipping cancel")
+                    continue
+                    
                 if i in self.order_numbers and self.order_numbers[i]:
                     valid_accounts.append(i)
                     apis.append(self.account_manager.get_api(i))
@@ -2623,12 +2915,22 @@ class MainWindow:
             if 1 in valid_accounts:
                 self.master_order_status.set("Buy Orders Cancelled")
             else:
-                self.master_order_status.set("Master Not Logged In")
+                # Check actual account state instead of just valid accounts
+                master_status = self.state_manager.get_account_status(1)
+                if master_status and master_status['status'] == 'inactive':
+                    self.master_order_status.set("Blocked till Reset")
+                else:
+                    self.master_order_status.set("Master Not Logged In")
                 
             if 2 in valid_accounts:
                 self.child_order_status.set("Buy Orders Cancelled")
             else:
-                self.child_order_status.set("Child Not Logged In")
+                # Check actual account state instead of just valid accounts
+                child_status = self.state_manager.get_account_status(2)
+                if child_status and child_status['status'] == 'inactive':
+                    self.child_order_status.set("Blocked till Reset")
+                else:
+                    self.child_order_status.set("Child Not Logged In")
             
             # Re-enable buy button and disable buy-related management buttons
             self.buy_button.config(state='normal', text="BUY")
@@ -2652,16 +2954,26 @@ class MainWindow:
 
             applicationLogger.error(f"Error cancelling buy orders: {e}")
             # Update order status displays to show error
-            active_accounts = self.account_manager.get_all_active_accounts()
+            active_accounts = self.state_manager.get_active_accounts()
             if 1 in active_accounts:
                 self.master_order_status.set(f"Cancel Error: {str(e)[:40]}...")
             else:
-                self.master_order_status.set("Master Not Logged In")
+                # Check actual account state instead of just active status
+                master_status = self.state_manager.get_account_status(1)
+                if master_status and master_status['status'] == 'inactive':
+                    self.master_order_status.set("Blocked till Reset")
+                else:
+                    self.master_order_status.set("Master Not Logged In")
                 
             if 2 in active_accounts:
                 self.child_order_status.set(f"Cancel Error: {str(e)[:40]}...")
             else:
-                self.child_order_status.set("Child Not Logged In")
+                # Check actual account state instead of just active status
+                child_status = self.state_manager.get_account_status(2)
+                if child_status and child_status['status'] == 'inactive':
+                    self.child_order_status.set("Blocked till Reset")
+                else:
+                    self.child_order_status.set("Child Not Logged In")
     
     def cancel_exit_orders(self):
         """Cancel exit orders across all active accounts"""
@@ -2754,6 +3066,9 @@ class MainWindow:
             # Cancel the master order
             self.order_manager.cancel_orders([master_api], [master_order_number], [True])
             
+            # Update state manager
+            self.state_manager.update_account_status(1, 'inactive', 'Master buy order cancelled by user')
+            
             # Update master order status
             # Block Master account from further operations
             self.block_master_account("Master buy order cancelled")
@@ -2798,6 +3113,9 @@ class MainWindow:
             
             # Cancel the child order
             self.order_manager.cancel_orders([child_api], [child_order_number], [True])
+            
+            # Update state manager
+            self.state_manager.update_account_status(2, 'inactive', 'Child buy order cancelled by user')
             
             # Block Child account from further operations
             self.block_child_account("Child buy order cancelled")
@@ -2893,11 +3211,11 @@ class MainWindow:
                 self.quantities[1] = qty1
                 self.quantities[2] = qty1
             
-            # Get active accounts
-            active_accounts = self.account_manager.get_all_active_accounts()
+            # Get accounts that can modify orders from state manager
+            active_accounts = self.state_manager.get_accounts_for_modify()
             applicationLogger.info(f"Active accounts for modify buy orders: {active_accounts}")
             
-            # Remove child account if orders are blocked
+            # Remove child account if orders are blocked (legacy check)
             if self.child_orders_blocked and 2 in active_accounts:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from modify buy orders")
@@ -2909,15 +3227,8 @@ class MainWindow:
             quantities = []
             
             for i in active_accounts:
-                # Check if this specific account is blocked (rejection or general blocking)
-                if i == 1 and (self.master_account_rejected_blocked or self.master_account_blocked):
-                    block_reason = "rejection" if self.master_account_rejected_blocked else "general blocking"
-                    applicationLogger.warning(f"Master account is blocked due to {block_reason} - skipping modify")
-                    continue
-                elif i == 2 and (self.child_account_rejected_blocked or self.child_account_blocked):
-                    block_reason = "rejection" if self.child_account_rejected_blocked else "general blocking"
-                    applicationLogger.warning(f"Child account is blocked due to {block_reason} - skipping modify")
-                    continue
+                # State manager already filtered for accounts that can modify orders
+                # No need for additional blocking checks
                 
                 if i in self.order_numbers and self.order_numbers[i]:
                     # Check order state for each account
@@ -2984,27 +3295,47 @@ class MainWindow:
             if 1 in active_accounts:
                 self.master_order_status.set("Buy Orders Modified - Waiting for Status")
             else:
-                self.master_order_status.set("Master Not Logged In")
+                # Check actual account state instead of just active status
+                master_status = self.state_manager.get_account_status(1)
+                if master_status and master_status['status'] == 'inactive':
+                    self.master_order_status.set("Blocked till Reset")
+                else:
+                    self.master_order_status.set("Master Not Logged In")
                 
             if 2 in active_accounts:
                 self.child_order_status.set("Buy Orders Modified - Waiting for Status")
             else:
-                self.child_order_status.set("Child Not Logged In")
+                # Check actual account state instead of just active status
+                child_status = self.state_manager.get_account_status(2)
+                if child_status and child_status['status'] == 'inactive':
+                    self.child_order_status.set("Blocked till Reset")
+                else:
+                    self.child_order_status.set("Child Not Logged In")
             
         except Exception as e:
 
             applicationLogger.error(f"Error modifying buy orders: {e}")
             # Update order status displays to show error
-            active_accounts = self.account_manager.get_all_active_accounts()
+            active_accounts = self.state_manager.get_active_accounts()
             if 1 in active_accounts:
                 self.master_order_status.set(f"Modify Error: {str(e)[:40]}...")
             else:
-                self.master_order_status.set("Master Not Logged In")
+                # Check actual account state instead of just active status
+                master_status = self.state_manager.get_account_status(1)
+                if master_status and master_status['status'] == 'inactive':
+                    self.master_order_status.set("Blocked till Reset")
+                else:
+                    self.master_order_status.set("Master Not Logged In")
                 
             if 2 in active_accounts:
                 self.child_order_status.set(f"Modify Error: {str(e)[:40]}...")
             else:
-                self.child_order_status.set("Child Not Logged In")
+                # Check actual account state instead of just active status
+                child_status = self.state_manager.get_account_status(2)
+                if child_status and child_status['status'] == 'inactive':
+                    self.child_order_status.set("Blocked till Reset")
+                else:
+                    self.child_order_status.set("Child Not Logged In")
     
     def modify_exit_orders(self):
         """Modify exit orders across all active accounts"""
@@ -3069,24 +3400,13 @@ class MainWindow:
                 self.quantities[1] = qty1
                 self.quantities[2] = qty1
             
-            # Get active accounts
-            active_accounts = self.account_manager.get_all_active_accounts()
+            # Get accounts that can modify orders from state manager
+            active_accounts = self.state_manager.get_accounts_for_modify()
             
-            # Remove child account if orders are blocked
+            # Remove child account if orders are blocked (legacy check)
             if self.child_orders_blocked and 2 in active_accounts:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from modify exit orders")
-            
-            # Remove accounts that are blocked (rejection or general blocking)
-            if (self.master_account_rejected_blocked or self.master_account_blocked) and 1 in active_accounts:
-                block_reason = "rejection" if self.master_account_rejected_blocked else "general blocking"
-                active_accounts.remove(1)
-                applicationLogger.warning(f"Master account is blocked due to {block_reason} - excluding from modify exit orders")
-            
-            if (self.child_account_rejected_blocked or self.child_account_blocked) and 2 in active_accounts:
-                block_reason = "rejection" if self.child_account_rejected_blocked else "general blocking"
-                active_accounts.remove(2)
-                applicationLogger.warning(f"Child account is blocked due to {block_reason} - excluding from modify exit orders")
             
             # Only include accounts that have valid exit order numbers AND are in modifiable state
             valid_accounts = []
@@ -3243,21 +3563,15 @@ class MainWindow:
     
     def release_buttons(self):
         """Release button states - enable buy and sell order buttons"""
-        # Unblock Master account if it was blocked
-        if self.master_account_blocked:
-            self.unblock_master_account()
+        # Reset all accounts to active state using state manager (resets CSV file)
+        self.state_manager.reset_all_accounts()
+        applicationLogger.info("All account states reset - CSV file cleared and recreated")
         
-        # Unblock Master account if it was blocked due to rejection
-        if self.master_account_rejected_blocked:
-            self.unblock_account_on_release(1)
-        
-        # Unblock Child account if it was blocked
-        if self.child_account_blocked:
-            self.unblock_child_account()
-        
-        # Unblock Child account if it was blocked due to rejection
-        if self.child_account_rejected_blocked:
-            self.unblock_account_on_release(2)
+        # Also reset legacy blocking flags for backward compatibility
+        self.master_account_blocked = False
+        self.master_account_rejected_blocked = False
+        self.child_account_blocked = False
+        self.child_account_rejected_blocked = False
         
         # Enable buy button
         self.buy_button.config(state='normal', text="BUY")
