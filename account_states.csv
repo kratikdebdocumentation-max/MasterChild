@@ -1,3 +1,3 @@
-account_id,account_name,status,reason,order_number,last_updated
-1,Master,active,Master account always logged in,,2025-09-19T20:46:33.003910
-2,Child,inactive,Not logged in,,2025-09-19T20:46:33.003910
+account_id,account_name,login_status,order_status,quantity,reason,order_number,last_updated
+1,Master,logged_in,blocked,0,Master buy order cancelled by user,,2025-09-19T21:55:46.124073
+2,Child,logged_in,blocked,0,Buy order rejected: SAF:order is not open to cancel,,2025-09-19T21:55:32.492357

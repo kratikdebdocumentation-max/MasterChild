@@ -773,6 +773,11 @@ class MainWindow:
                 if success:
                     self.child_orders_blocked = False
                     client_name = self.account_manager.accounts[2].get('client_name', 'Child Account')
+                    
+                    # Update state manager with new separated status
+                    self.state_manager.update_login_status(2, 'logged_in', 'Child account unblocked and logged in')
+                    self.state_manager.update_order_status(2, 'ready', 'Child account ready for orders')
+                    
                     self.login_button2.config(text=f"{client_name} Logged in")
                     self.login_button2.config(state='disabled', style="LoginSuccess.TButton")
                     self.child_order_status.set(f"{client_name} - Ready for Orders")
@@ -785,8 +790,9 @@ class MainWindow:
             # Normal login process
             success, client_name = self.account_manager.login_account(account_num)
             if success:
-                # Update state manager
-                self.state_manager.update_account_status(account_num, 'active', 'Account logged in successfully')
+                # Update state manager with new separated status
+                self.state_manager.update_login_status(account_num, 'logged_in', 'Account logged in successfully')
+                self.state_manager.update_order_status(account_num, 'ready', 'Account ready for orders')
                 
                 self.websocket_manager.connect_feed(account_num)
                 self.update_account_display(account_num, client_name)
@@ -838,6 +844,10 @@ class MainWindow:
                 applicationLogger.info("Attempting automatic child account login...")
                 success, client_name = self.account_manager.login_account(2)
                 if success:
+                    # Update state manager with new separated status
+                    self.state_manager.update_login_status(2, 'logged_in', 'Child account auto-logged in')
+                    self.state_manager.update_order_status(2, 'ready', 'Child account ready for orders')
+                    
                     # Set up websocket feed for child account
                     self.websocket_manager.connect_feed(2)
                     self.update_account_display(2, client_name)
@@ -1872,6 +1882,34 @@ class MainWindow:
         except Exception as e:
             applicationLogger.error(f"Error updating order status for account {account_num}: {e}")
     
+    def _update_account_status_displays(self):
+        """Update account status displays based on current state manager status"""
+        try:
+            # Update Master account status
+            master_status = self.state_manager.get_account_status(1)
+            if master_status:
+                if master_status['status'] == 'active':
+                    self.master_order_status.set("Master Account Ready")
+                else:
+                    self.master_order_status.set("Master Not Logged In")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+            
+            # Update Child account status
+            child_status = self.state_manager.get_account_status(2)
+            if child_status:
+                if child_status['status'] == 'active':
+                    self.child_order_status.set("Child Account Ready")
+                else:
+                    self.child_order_status.set("Child Not Logged In")
+            else:
+                self.child_order_status.set("Child Not Logged In")
+                
+            applicationLogger.info("Account status displays updated after release")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error updating account status displays: {e}")
+    
     def on_buy_order_completed(self, account_num: int, symbol: str, price: float):
         """Handle buy order completion - start SL/Target monitoring if configured"""
         try:
@@ -2793,8 +2831,9 @@ class MainWindow:
         try:
             applicationLogger.warning(f"Buy order rejected for account {account_num} - Symbol: {symbol}, Reason: {rejection_reason}")
             
-            # Update state manager
-            self.state_manager.update_account_status(account_num, 'inactive', f"Buy order rejected: {rejection_reason}")
+            # Update state manager with new separated status
+            self.state_manager.update_order_status(account_num, 'blocked', f"Buy order rejected: {rejection_reason}")
+            # Note: No quantity change needed for rejection (order was never filled)
             
             # Update order status display to show blocked status
             if account_num == 1:
@@ -3116,8 +3155,9 @@ class MainWindow:
             # Cancel the master order
             self.order_manager.cancel_orders([master_api], [master_order_number], [True])
             
-            # Update state manager
-            self.state_manager.update_account_status(1, 'inactive', 'Master buy order cancelled by user')
+            # Update state manager with new separated status
+            self.state_manager.update_order_status(1, 'blocked', 'Master buy order cancelled by user')
+            # Note: No quantity change needed for cancellation (order was never filled)
             
             # Update master order status
             # Block Master account from further operations
@@ -3164,8 +3204,9 @@ class MainWindow:
             # Cancel the child order
             self.order_manager.cancel_orders([child_api], [child_order_number], [True])
             
-            # Update state manager
-            self.state_manager.update_account_status(2, 'inactive', 'Child buy order cancelled by user')
+            # Update state manager with new separated status
+            self.state_manager.update_order_status(2, 'blocked', 'Child buy order cancelled by user')
+            # Note: No quantity change needed for cancellation (order was never filled)
             
             # Block Child account from further operations
             self.block_child_account("Child buy order cancelled")
@@ -3613,15 +3654,18 @@ class MainWindow:
     
     def release_buttons(self):
         """Release button states - enable buy and sell order buttons"""
-        # Reset all accounts to active state using state manager (resets CSV file)
-        self.state_manager.reset_all_accounts()
-        applicationLogger.info("All account states reset - CSV file cleared and recreated")
+        # Reset only trading blocks while preserving actual login status
+        self.state_manager.reset_trading_blocks(self.account_manager)
+        applicationLogger.info("Trading blocks reset while preserving login status")
         
         # Also reset legacy blocking flags for backward compatibility
         self.master_account_blocked = False
         self.master_account_rejected_blocked = False
         self.child_account_blocked = False
         self.child_account_rejected_blocked = False
+        
+        # Update UI status displays based on actual account states
+        self._update_account_status_displays()
         
         # Enable buy button
         self.buy_button.config(state='normal', text="BUY")

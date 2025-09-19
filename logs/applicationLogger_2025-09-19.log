@@ -5931,3 +5931,1100 @@ AttributeError: 'ShoonyaApiPy' object has no attribute '_NorenApi__username'
 2025-09-19 20:47:06,498 - INFO - Unsubscribed from previous: NFO|47763
 2025-09-19 20:47:06,498 - INFO - Subscribed to live price feed via master account: NFO|55001
 2025-09-19 20:47:06,499 - INFO - Auto-subscribed to BANKNIFTY30SEP25C55600 at price 376.0
+2025-09-19 20:47:44,638 - INFO - Starting master file download in background...
+2025-09-19 20:47:44,639 - INFO - Finding expiry dates (with caching)...
+2025-09-19 20:47:44,816 - INFO - System initialization completed (downloads in background)
+2025-09-19 20:47:44,816 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:47:44,816 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:47:44,923 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 20:47:44,927 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 20:47:45,111 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 20:47:45,112 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 20:47:45,114 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 20:47:45,116 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 20:47:45,182 - INFO - Generated fresh 2FA for account 1: 843736
+2025-09-19 20:47:46,198 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 20:47:46,198 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 20:47:46,300 - INFO - Price input box enabled - no active positions
+2025-09-19 20:47:46,300 - INFO - UI states initialized successfully
+2025-09-19 20:47:50,155 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 20:47:50,155 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:47:50,617 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:47:50,617 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:47:50,617 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:47:51,081 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:47:51,097 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 20:47:53,331 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:47:53,805 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:47:53,805 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:47:53,805 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 20:47:56,010 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP82700CE
+2025-09-19 20:47:56,010 - INFO - Found token and lot size for SENSEX25SEP82700CE: 841870, 20
+2025-09-19 20:47:56,010 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:47:56,010 - INFO - Updated quantity options for SENSEX25SEP82700CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:47:56,010 - INFO - Getting token for trading symbol: SENSEX25SEP82700CE
+2025-09-19 20:47:56,026 - INFO - Found token for SENSEX25SEP82700CE: 841870
+2025-09-19 20:47:56,767 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 20:47:56,767 - INFO - Getting token for trading symbol: SENSEX25SEP82700CE
+2025-09-19 20:47:56,776 - INFO - Found token for SENSEX25SEP82700CE: 841870
+2025-09-19 20:47:56,776 - INFO - Subscribed to live price feed via master account: BFO|841870
+2025-09-19 20:47:56,776 - INFO - Auto-subscribed to SENSEX25SEP82700CE at price 392.85
+2025-09-19 20:50:41,687 - INFO - Starting master file download in background...
+2025-09-19 20:50:41,688 - INFO - Finding expiry dates (with caching)...
+2025-09-19 20:50:41,869 - INFO - System initialization completed (downloads in background)
+2025-09-19 20:50:41,871 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:50:41,871 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:50:42,005 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 20:50:42,010 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 20:50:42,190 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 20:50:42,190 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 20:50:42,193 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 20:50:42,193 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 20:50:42,220 - INFO - Generated fresh 2FA for account 1: 632959
+2025-09-19 20:50:43,286 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 20:50:43,286 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 20:50:43,408 - INFO - Price input box enabled - no active positions
+2025-09-19 20:50:43,408 - INFO - UI states initialized successfully
+2025-09-19 20:50:50,847 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 20:50:50,847 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:50:51,386 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:50:51,388 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:50:51,389 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:50:51,914 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:50:51,914 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 20:50:54,189 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:50:54,723 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:50:54,724 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:50:54,725 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 20:50:57,029 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP82500CE
+2025-09-19 20:50:57,029 - INFO - Found token and lot size for SENSEX25SEP82500CE: 841835, 20
+2025-09-19 20:50:57,044 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:50:57,044 - INFO - Updated quantity options for SENSEX25SEP82500CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:50:57,044 - INFO - Getting token for trading symbol: SENSEX25SEP82500CE
+2025-09-19 20:50:57,051 - INFO - Found token for SENSEX25SEP82500CE: 841835
+2025-09-19 20:50:57,585 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 20:50:57,585 - INFO - Getting token for trading symbol: SENSEX25SEP82500CE
+2025-09-19 20:50:57,594 - INFO - Found token for SENSEX25SEP82500CE: 841835
+2025-09-19 20:50:57,595 - INFO - Subscribed to live price feed via master account: BFO|841835
+2025-09-19 20:50:57,596 - INFO - Auto-subscribed to SENSEX25SEP82500CE at price 522.0
+2025-09-19 20:51:05,460 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP82500CE
+2025-09-19 20:51:05,476 - INFO - Found token and lot size for SENSEX25SEP82500CE: 841835, 20
+2025-09-19 20:51:05,476 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:51:05,476 - INFO - Updated quantity options for SENSEX25SEP82500CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:51:05,476 - INFO - Original buy price stored: 500.0
+2025-09-19 20:51:05,476 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP82500CE
+2025-09-19 20:51:05,486 - INFO - Found token and lot size for SENSEX25SEP82500CE: 841835, 20
+2025-09-19 20:51:05,486 - INFO - Master quantity: 80 (selected: 80, lot size: 20)
+2025-09-19 20:51:05,487 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-19 20:51:05,487 - INFO - Active accounts: [1]
+2025-09-19 20:51:05,488 - INFO - Placing buy orders for accounts: [1]
+2025-09-19 20:51:05,488 - INFO - Trading symbol: SENSEX25SEP82500CE, Price: 500.0
+2025-09-19 20:51:05,489 - INFO - Quantities: [80]
+2025-09-19 20:51:05,489 - INFO - Account 1: API=True, Qty=80, Active=True
+2025-09-19 20:51:05,491 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP82500CE', 'quantity': 80, 'discloseqty': 0, 'price_type': 'LMT', 'price': 500.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-19 20:51:05,491 - INFO - API instance for account 1: True
+2025-09-19 20:51:05,991 - INFO - API response: {'request_time': '20:51:07 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900663194'}
+2025-09-19 20:51:05,991 - INFO - API response type: <class 'dict'>
+2025-09-19 20:51:05,991 - INFO - New order received: 25091900663194
+2025-09-19 20:51:05,991 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '500.00'
+2025-09-19 20:51:05,991 - INFO - Buy order placed successfully: {'request_time': '20:51:07 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900663194'}
+2025-09-19 20:51:06,024 - INFO - Order data saved to orders.csv
+2025-09-19 20:51:06,025 - INFO - Account 1 - B PENDING NewAck
+2025-09-19 20:51:06,025 - INFO - Auto SL/Target set - SL: 480.0, Target: 540.0 (Buy Open: 500.0)
+2025-09-19 20:51:06,028 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-19 20:51:06,031 - INFO - Price box grayed out after order placement
+2025-09-19 20:51:06,032 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-19 20:51:06,033 - INFO - Sell Order button kept disabled until buy orders are completed
+2025-09-19 20:51:06,033 - INFO - Master order status updated: Buy Order PENDING @ 500.00
+2025-09-19 20:51:06,036 - INFO - Updating order 25091900663194
+2025-09-19 20:51:06,037 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '500.00'
+2025-09-19 20:51:06,046 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-19 20:51:06,047 - WARNING - Buy order rejected for account 1 - Symbol: SENSEX25SEP82500CE, Reason: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 39,660.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 20:51:06,059 - INFO - Updated Master (ID: 1) status to 'inactive': Buy order rejected: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 39,660.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 20:51:06,061 - ERROR - Error disabling trading buttons for account 1: 'MainWindow' object has no attribute 'login_button1'
+2025-09-19 20:51:06,061 - INFO - Master account blocked due to buy order rejection - no further orders allowed
+2025-09-19 20:51:06,063 - INFO - Master order status updated: Order Rejected: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 39,660.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 20:51:06,547 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 20:51:06,547 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-19 20:51:06,547 - INFO - Modify Buy button enabled - orders are in modifiable state
+2025-09-19 20:51:06,547 - INFO - Modify Exit button disabled - no exit orders in modifiable state
+2025-09-19 20:53:33,547 - INFO - Application interrupted by user
+2025-09-19 20:53:37,302 - INFO - Starting master file download in background...
+2025-09-19 20:53:37,303 - INFO - Finding expiry dates (with caching)...
+2025-09-19 20:53:37,519 - INFO - System initialization completed (downloads in background)
+2025-09-19 20:53:37,519 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:53:37,519 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:53:37,667 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 20:53:37,671 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 20:53:37,853 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 20:53:37,857 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 20:53:37,858 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 20:53:37,863 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 20:53:37,932 - INFO - Generated fresh 2FA for account 1: 847939
+2025-09-19 20:53:39,057 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 20:53:39,057 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 20:53:39,171 - INFO - Price input box enabled - no active positions
+2025-09-19 20:53:39,171 - INFO - UI states initialized successfully
+2025-09-19 20:53:42,095 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 20:53:42,095 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:53:42,576 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:53:42,576 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:53:42,576 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:53:43,073 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:53:43,073 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 20:53:45,213 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:53:45,706 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:53:45,708 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:53:45,709 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 20:53:47,654 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP83800CE
+2025-09-19 20:53:47,659 - INFO - Found token and lot size for SENSEX25SEP83800CE: 841548, 20
+2025-09-19 20:53:47,659 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:53:47,659 - INFO - Updated quantity options for SENSEX25SEP83800CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:53:47,659 - INFO - Getting token for trading symbol: SENSEX25SEP83800CE
+2025-09-19 20:53:47,668 - INFO - Found token for SENSEX25SEP83800CE: 841548
+2025-09-19 20:53:48,195 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 20:53:48,195 - INFO - Getting token for trading symbol: SENSEX25SEP83800CE
+2025-09-19 20:53:48,209 - INFO - Found token for SENSEX25SEP83800CE: 841548
+2025-09-19 20:53:48,209 - INFO - Subscribed to live price feed via master account: BFO|841548
+2025-09-19 20:53:48,210 - INFO - Auto-subscribed to SENSEX25SEP83800CE at price 61.6
+2025-09-19 20:53:51,537 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP82400CE
+2025-09-19 20:53:51,537 - INFO - Found token and lot size for SENSEX25SEP82400CE: 841678, 20
+2025-09-19 20:53:51,537 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:53:51,551 - INFO - Updated quantity options for SENSEX25SEP82400CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:53:51,551 - INFO - Getting token for trading symbol: SENSEX25SEP82400CE
+2025-09-19 20:53:51,558 - INFO - Found token for SENSEX25SEP82400CE: 841678
+2025-09-19 20:53:52,045 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 20:53:52,046 - INFO - Getting token for trading symbol: SENSEX25SEP82400CE
+2025-09-19 20:53:52,050 - INFO - Found token for SENSEX25SEP82400CE: 841678
+2025-09-19 20:53:52,051 - INFO - Unsubscribed from previous: BFO|841548
+2025-09-19 20:53:52,051 - INFO - Subscribed to live price feed via master account: BFO|841678
+2025-09-19 20:53:52,052 - INFO - Auto-subscribed to SENSEX25SEP82400CE at price 593.55
+2025-09-19 20:53:58,847 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP8CE
+2025-09-19 20:53:58,847 - ERROR - No token found for SENSEX25SEP8CE
+2025-09-19 20:53:58,868 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 20:53:58,868 - ERROR - Error in fallback conversion: invalid literal for int() with base 10: '8C'
+2025-09-19 20:53:58,868 - WARNING - Lot size not found for SENSEX25SEP8CE, using default quantities
+2025-09-19 20:53:58,868 - INFO - Getting token for trading symbol: SENSEX25SEP8CE
+2025-09-19 20:53:58,873 - ERROR - No token found for SENSEX25SEP8CE
+2025-09-19 20:53:58,903 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 20:53:58,903 - ERROR - Error in fallback conversion: invalid literal for int() with base 10: '8C'
+2025-09-19 20:53:58,904 - WARNING - Could not fetch price for SENSEX25SEP8CE
+2025-09-19 20:53:59,018 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP84CE
+2025-09-19 20:53:59,032 - ERROR - No token found for SENSEX25SEP84CE
+2025-09-19 20:53:59,052 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 20:53:59,053 - INFO - Trying converted SENSEX symbol: SENSEX25SEP84CE -> SENSEX84925CE
+2025-09-19 20:53:59,055 - WARNING - Lot size not found for SENSEX25SEP84CE, using default quantities
+2025-09-19 20:53:59,056 - INFO - Getting token for trading symbol: SENSEX25SEP84CE
+2025-09-19 20:53:59,058 - ERROR - No token found for SENSEX25SEP84CE
+2025-09-19 20:53:59,076 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 20:53:59,077 - INFO - Trying converted SENSEX symbol: SENSEX25SEP84CE -> SENSEX84925CE
+2025-09-19 20:53:59,079 - WARNING - Could not fetch price for SENSEX25SEP84CE
+2025-09-19 20:53:59,161 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP840CE
+2025-09-19 20:53:59,166 - ERROR - No token found for SENSEX25SEP840CE
+2025-09-19 20:53:59,188 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 20:53:59,188 - INFO - Trying converted SENSEX symbol: SENSEX25SEP840CE -> SENSEX849250CE
+2025-09-19 20:53:59,191 - WARNING - Lot size not found for SENSEX25SEP840CE, using default quantities
+2025-09-19 20:53:59,193 - INFO - Getting token for trading symbol: SENSEX25SEP840CE
+2025-09-19 20:53:59,194 - ERROR - No token found for SENSEX25SEP840CE
+2025-09-19 20:53:59,206 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 20:53:59,206 - INFO - Trying converted SENSEX symbol: SENSEX25SEP840CE -> SENSEX849250CE
+2025-09-19 20:53:59,206 - WARNING - Could not fetch price for SENSEX25SEP840CE
+2025-09-19 20:53:59,359 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP8400CE
+2025-09-19 20:53:59,359 - ERROR - No token found for SENSEX25SEP8400CE
+2025-09-19 20:53:59,394 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 20:53:59,396 - INFO - Trying converted SENSEX symbol: SENSEX25SEP8400CE -> SENSEX8492500CE
+2025-09-19 20:53:59,400 - WARNING - Lot size not found for SENSEX25SEP8400CE, using default quantities
+2025-09-19 20:53:59,401 - INFO - Getting token for trading symbol: SENSEX25SEP8400CE
+2025-09-19 20:53:59,406 - ERROR - No token found for SENSEX25SEP8400CE
+2025-09-19 20:53:59,426 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 20:53:59,426 - INFO - Trying converted SENSEX symbol: SENSEX25SEP8400CE -> SENSEX8492500CE
+2025-09-19 20:53:59,426 - WARNING - Could not fetch price for SENSEX25SEP8400CE
+2025-09-19 20:53:59,778 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP84000CE
+2025-09-19 20:53:59,797 - INFO - Found token and lot size for SENSEX25SEP84000CE: 1146970, 20
+2025-09-19 20:53:59,797 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:53:59,797 - INFO - Updated quantity options for SENSEX25SEP84000CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:53:59,797 - INFO - Getting token for trading symbol: SENSEX25SEP84000CE
+2025-09-19 20:53:59,807 - INFO - Found token for SENSEX25SEP84000CE: 1146970
+2025-09-19 20:54:00,317 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 20:54:00,317 - INFO - Getting token for trading symbol: SENSEX25SEP84000CE
+2025-09-19 20:54:00,331 - INFO - Found token for SENSEX25SEP84000CE: 1146970
+2025-09-19 20:54:00,331 - INFO - Unsubscribed from previous: BFO|841678
+2025-09-19 20:54:00,332 - INFO - Subscribed to live price feed via master account: BFO|1146970
+2025-09-19 20:54:00,332 - INFO - Auto-subscribed to SENSEX25SEP84000CE at price 44.5
+2025-09-19 20:54:13,156 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP8000CE
+2025-09-19 20:54:13,160 - ERROR - No token found for SENSEX25SEP8000CE
+2025-09-19 20:54:13,193 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 20:54:13,194 - INFO - Trying converted SENSEX symbol: SENSEX25SEP8000CE -> SENSEX8092500CE
+2025-09-19 20:54:13,201 - WARNING - Lot size not found for SENSEX25SEP8000CE, using default quantities
+2025-09-19 20:54:13,201 - INFO - Getting token for trading symbol: SENSEX25SEP8000CE
+2025-09-19 20:54:13,207 - ERROR - No token found for SENSEX25SEP8000CE
+2025-09-19 20:54:13,224 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 20:54:13,224 - INFO - Trying converted SENSEX symbol: SENSEX25SEP8000CE -> SENSEX8092500CE
+2025-09-19 20:54:13,234 - WARNING - Could not fetch price for SENSEX25SEP8000CE
+2025-09-19 20:54:13,401 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85000CE
+2025-09-19 20:54:13,401 - INFO - Found token and lot size for SENSEX25SEP85000CE: 843499, 20
+2025-09-19 20:54:13,401 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:54:13,401 - INFO - Updated quantity options for SENSEX25SEP85000CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:54:13,401 - INFO - Getting token for trading symbol: SENSEX25SEP85000CE
+2025-09-19 20:54:13,417 - INFO - Found token for SENSEX25SEP85000CE: 843499
+2025-09-19 20:54:13,901 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 20:54:13,901 - INFO - Getting token for trading symbol: SENSEX25SEP85000CE
+2025-09-19 20:54:13,901 - INFO - Found token for SENSEX25SEP85000CE: 843499
+2025-09-19 20:54:13,901 - INFO - Unsubscribed from previous: BFO|1146970
+2025-09-19 20:54:13,901 - INFO - Subscribed to live price feed via master account: BFO|843499
+2025-09-19 20:54:13,901 - INFO - Auto-subscribed to SENSEX25SEP85000CE at price 11.1
+2025-09-19 20:54:24,132 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85000CE
+2025-09-19 20:54:24,137 - INFO - Found token and lot size for SENSEX25SEP85000CE: 843499, 20
+2025-09-19 20:54:24,138 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:54:24,139 - INFO - Updated quantity options for SENSEX25SEP85000CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:54:24,140 - INFO - Original buy price stored: 11.1
+2025-09-19 20:54:24,140 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85000CE
+2025-09-19 20:54:24,145 - INFO - Found token and lot size for SENSEX25SEP85000CE: 843499, 20
+2025-09-19 20:54:24,145 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-19 20:54:24,145 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-19 20:54:24,145 - INFO - Active accounts: [1]
+2025-09-19 20:54:24,145 - INFO - Placing buy orders for accounts: [1]
+2025-09-19 20:54:24,145 - INFO - Trading symbol: SENSEX25SEP85000CE, Price: 11.1
+2025-09-19 20:54:24,149 - INFO - Quantities: [20]
+2025-09-19 20:54:24,149 - INFO - Account 1: API=True, Qty=20, Active=True
+2025-09-19 20:54:24,151 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP85000CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 11.1, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-19 20:54:24,151 - INFO - API instance for account 1: True
+2025-09-19 20:54:24,675 - INFO - API response: {'request_time': '20:54:26 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900663353'}
+2025-09-19 20:54:24,676 - INFO - New order received: 25091900663353
+2025-09-19 20:54:24,676 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '11.10'
+2025-09-19 20:54:24,676 - INFO - API response type: <class 'dict'>
+2025-09-19 20:54:24,680 - INFO - Buy order placed successfully: {'request_time': '20:54:26 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900663353'}
+2025-09-19 20:54:24,682 - INFO - Order data saved to orders.csv
+2025-09-19 20:54:24,683 - INFO - Account 1 - B PENDING NewAck
+2025-09-19 20:54:24,685 - INFO - Auto SL/Target set - SL: -8.9, Target: 51.1 (Buy Open: 11.1)
+2025-09-19 20:54:24,686 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-19 20:54:24,687 - INFO - Price box grayed out after order placement
+2025-09-19 20:54:24,687 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-19 20:54:24,688 - INFO - Sell Order button kept disabled until buy orders are completed
+2025-09-19 20:54:24,688 - INFO - Master order status updated: Buy Order PENDING @ 11.10
+2025-09-19 20:54:24,689 - INFO - Updating order 25091900663353
+2025-09-19 20:54:24,689 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '11.10'
+2025-09-19 20:54:24,691 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-19 20:54:24,692 - INFO - Master order status updated: Buy Order PENDING @ 11.10
+2025-09-19 20:54:24,693 - INFO - Updating order 25091900663353
+2025-09-19 20:54:24,693 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '11.10'
+2025-09-19 20:54:24,694 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-19 20:54:24,694 - WARNING - Buy order rejected for account 1 - Symbol: SENSEX25SEP85000CE, Reason: SAF:Yel is down
+2025-09-19 20:54:24,697 - INFO - Updated Master (ID: 1) status to 'inactive': Buy order rejected: SAF:Yel is down
+2025-09-19 20:54:24,697 - ERROR - Error disabling trading buttons for account 1: 'MainWindow' object has no attribute 'login_button1'
+2025-09-19 20:54:24,698 - INFO - Master account blocked due to buy order rejection - no further orders allowed
+2025-09-19 20:54:24,698 - INFO - Master order status updated: Order Rejected: SAF:Yel is down
+2025-09-19 20:54:25,447 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 20:54:25,447 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-19 20:54:25,447 - INFO - Modify Buy button enabled - orders are in modifiable state
+2025-09-19 20:54:25,447 - INFO - Modify Exit button disabled - no exit orders in modifiable state
+2025-09-19 20:55:42,364 - INFO - Generated fresh 2FA for account 2: 360866
+2025-09-19 20:55:42,930 - INFO - Updated Child (ID: 2) status to 'active': Account logged in successfully
+2025-09-19 20:55:42,935 - INFO - Child account logged in - Order blocking reset
+2025-09-19 20:55:43,425 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 20:58:28,229 - INFO - All accounts reset to default states
+2025-09-19 20:58:28,229 - INFO - All account states reset - CSV file cleared and recreated
+2025-09-19 20:58:28,230 - INFO - BUY button and Price box re-enabled for new orders
+2025-09-19 20:58:28,232 - INFO - Buttons released - ready for new orders
+2025-09-19 20:59:05,727 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85000CE
+2025-09-19 20:59:05,736 - INFO - Found token and lot size for SENSEX25SEP85000CE: 843499, 20
+2025-09-19 20:59:05,736 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:59:05,736 - INFO - Updated quantity options for SENSEX25SEP85000CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:59:05,736 - INFO - Original buy price stored: 11.1
+2025-09-19 20:59:05,736 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85000CE
+2025-09-19 20:59:05,745 - INFO - Found token and lot size for SENSEX25SEP85000CE: 843499, 20
+2025-09-19 20:59:05,745 - INFO - Master quantity: 100 (selected: 100, lot size: 20)
+2025-09-19 20:59:05,748 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-19 20:59:05,749 - INFO - Active accounts: [1]
+2025-09-19 20:59:05,749 - INFO - Placing buy orders for accounts: [1]
+2025-09-19 20:59:05,750 - INFO - Trading symbol: SENSEX25SEP85000CE, Price: 11.1
+2025-09-19 20:59:05,751 - INFO - Quantities: [100]
+2025-09-19 20:59:05,752 - INFO - Account 1: API=True, Qty=100, Active=True
+2025-09-19 20:59:05,753 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP85000CE', 'quantity': 100, 'discloseqty': 0, 'price_type': 'LMT', 'price': 11.1, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-19 20:59:05,755 - INFO - API instance for account 1: True
+2025-09-19 20:59:06,298 - INFO - API response: {'request_time': '20:59:07 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900663588'}
+2025-09-19 20:59:06,299 - INFO - API response type: <class 'dict'>
+2025-09-19 20:59:06,300 - INFO - Buy order placed successfully: {'request_time': '20:59:07 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900663588'}
+2025-09-19 20:59:06,301 - INFO - New order received: 25091900663588
+2025-09-19 20:59:06,301 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '11.10'
+2025-09-19 20:59:06,308 - INFO - Auto SL/Target set - SL: -8.9, Target: 51.1 (Buy Open: 11.1)
+2025-09-19 20:59:06,315 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-19 20:59:06,317 - INFO - Order data saved to orders.csv
+2025-09-19 20:59:06,317 - INFO - Price box grayed out after order placement
+2025-09-19 20:59:06,317 - INFO - Account 1 - B PENDING NewAck
+2025-09-19 20:59:06,317 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-19 20:59:06,323 - INFO - Sell Order button kept disabled until buy orders are completed
+2025-09-19 20:59:06,325 - INFO - Master order status updated: Buy Order PENDING @ 11.10
+2025-09-19 20:59:06,330 - INFO - Updating order 25091900663588
+2025-09-19 20:59:06,330 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '11.10'
+2025-09-19 20:59:06,332 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-19 20:59:06,333 - WARNING - Buy order rejected for account 1 - Symbol: SENSEX25SEP85000CE, Reason: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 770.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 20:59:06,344 - INFO - Updated Master (ID: 1) status to 'inactive': Buy order rejected: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 770.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 20:59:06,346 - ERROR - Error disabling trading buttons for account 1: 'MainWindow' object has no attribute 'login_button1'
+2025-09-19 20:59:06,346 - INFO - Master account blocked due to buy order rejection - no further orders allowed
+2025-09-19 20:59:06,347 - INFO - Master order status updated: Order Rejected: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 770.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 20:59:06,978 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 20:59:06,978 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-19 20:59:06,978 - INFO - Modify Buy button enabled - orders are in modifiable state
+2025-09-19 20:59:06,978 - INFO - Modify Exit button disabled - no exit orders in modifiable state
+2025-09-19 20:59:53,049 - INFO - All accounts reset to default states
+2025-09-19 20:59:53,049 - INFO - All account states reset - CSV file cleared and recreated
+2025-09-19 20:59:53,049 - INFO - BUY button and Price box re-enabled for new orders
+2025-09-19 20:59:53,049 - INFO - Buttons released - ready for new orders
+2025-09-19 21:00:10,633 - INFO - Starting master file download in background...
+2025-09-19 21:00:10,633 - INFO - Finding expiry dates (with caching)...
+2025-09-19 21:00:10,816 - INFO - System initialization completed (downloads in background)
+2025-09-19 21:00:10,817 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:00:10,817 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:00:10,951 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 21:00:10,955 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 21:00:11,138 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 21:00:11,139 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 21:00:11,140 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 21:00:11,141 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 21:00:11,200 - INFO - Generated fresh 2FA for account 1: 869442
+2025-09-19 21:00:12,413 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:00:12,418 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 21:00:12,514 - INFO - Price input box enabled - no active positions
+2025-09-19 21:00:12,514 - INFO - UI states initialized successfully
+2025-09-19 21:00:23,357 - INFO - Generated fresh 2FA for account 2: 996914
+2025-09-19 21:00:23,921 - INFO - Updated Child (ID: 2) status to 'active': Account logged in successfully
+2025-09-19 21:00:23,921 - INFO - Child account logged in - Order blocking reset
+2025-09-19 21:00:24,575 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 21:00:26,738 - INFO - All accounts reset to default states
+2025-09-19 21:00:26,738 - INFO - All account states reset - CSV file cleared and recreated
+2025-09-19 21:00:26,738 - INFO - BUY button and Price box re-enabled for new orders
+2025-09-19 21:00:26,738 - INFO - Buttons released - ready for new orders
+2025-09-19 21:03:48,795 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 21:03:48,808 - INFO - Updated Master (ID: 1) status to 'active': Master account reset after trading block
+2025-09-19 21:03:48,809 - INFO - Master account reset to active (was logged in)
+2025-09-19 21:03:48,814 - INFO - Updated Child (ID: 2) status to 'inactive': Child not logged in
+2025-09-19 21:03:48,814 - INFO - Child account set to inactive (not logged in)
+2025-09-19 21:03:48,815 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:03:53,867 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 21:03:53,874 - INFO - Updated Child (ID: 2) status to 'active': Child account logged in for testing
+2025-09-19 21:03:53,886 - INFO - Updated Master (ID: 1) status to 'active': Master account reset after trading block
+2025-09-19 21:03:53,886 - INFO - Master account reset to active (was logged in)
+2025-09-19 21:03:53,892 - INFO - Updated Child (ID: 2) status to 'inactive': Child not logged in
+2025-09-19 21:03:53,893 - INFO - Child account set to inactive (not logged in)
+2025-09-19 21:03:53,893 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:04:15,613 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 21:04:15,628 - INFO - Login status check - Master: True, Child: False
+2025-09-19 21:04:15,631 - INFO - Updated Master (ID: 1) status to 'active': Master account reset after trading block
+2025-09-19 21:04:15,631 - INFO - Master account reset to active (was logged in)
+2025-09-19 21:04:15,634 - INFO - Updated Child (ID: 2) status to 'inactive': Child not logged in
+2025-09-19 21:04:15,634 - INFO - Child account set to inactive (not logged in)
+2025-09-19 21:04:15,635 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:04:51,682 - INFO - Starting master file download in background...
+2025-09-19 21:04:51,684 - INFO - Finding expiry dates (with caching)...
+2025-09-19 21:04:51,851 - INFO - System initialization completed (downloads in background)
+2025-09-19 21:04:51,851 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:04:51,851 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:04:51,987 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 21:04:51,993 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 21:04:52,203 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 21:04:52,204 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 21:04:52,204 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 21:04:52,205 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 21:04:52,258 - INFO - Generated fresh 2FA for account 1: 032802
+2025-09-19 21:04:53,307 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:04:53,307 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 21:04:53,432 - INFO - Price input box enabled - no active positions
+2025-09-19 21:04:53,432 - INFO - UI states initialized successfully
+2025-09-19 21:04:56,943 - INFO - Generated fresh 2FA for account 2: 548515
+2025-09-19 21:04:57,461 - INFO - Updated Child (ID: 2) status to 'active': Account logged in successfully
+2025-09-19 21:04:57,462 - INFO - Child account logged in - Order blocking reset
+2025-09-19 21:04:58,028 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 21:05:02,753 - INFO - Login status check - Master: True, Child: False
+2025-09-19 21:05:02,753 - INFO - Updated Master (ID: 1) status to 'active': Master account reset after trading block
+2025-09-19 21:05:02,753 - INFO - Master account reset to active (was logged in)
+2025-09-19 21:05:02,770 - INFO - Updated Child (ID: 2) status to 'inactive': Child not logged in
+2025-09-19 21:05:02,771 - INFO - Child account set to inactive (not logged in)
+2025-09-19 21:05:02,772 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:05:02,773 - INFO - Trading blocks reset while preserving login status
+2025-09-19 21:05:02,774 - INFO - Account status displays updated after release
+2025-09-19 21:05:02,776 - INFO - BUY button and Price box re-enabled for new orders
+2025-09-19 21:05:02,777 - INFO - Buttons released - ready for new orders
+2025-09-19 21:05:36,643 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 21:05:49,698 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:05:49,703 - INFO - Login status check - Master: True, Child: False
+2025-09-19 21:05:49,714 - INFO - Updated Master (ID: 1) status to 'active': Master account reset after trading block
+2025-09-19 21:05:49,714 - INFO - Master account reset to active (was logged in)
+2025-09-19 21:05:49,725 - INFO - Updated Child (ID: 2) status to 'inactive': Child not logged in
+2025-09-19 21:05:49,725 - INFO - Child account set to inactive (not logged in)
+2025-09-19 21:05:49,726 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:05:55,670 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:05:55,670 - INFO - Updated Child (ID: 2) status to 'active': Child account logged in for testing
+2025-09-19 21:05:55,682 - INFO - Login status check - Master: True, Child: False
+2025-09-19 21:05:55,689 - INFO - Updated Master (ID: 1) status to 'active': Master account reset after trading block
+2025-09-19 21:05:55,689 - INFO - Master account reset to active (was logged in)
+2025-09-19 21:05:55,692 - INFO - Updated Child (ID: 2) status to 'inactive': Child not logged in
+2025-09-19 21:05:55,692 - INFO - Child account set to inactive (not logged in)
+2025-09-19 21:05:55,692 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:06:28,923 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:06:28,926 - INFO - Login status check - Master: True, Child: False
+2025-09-19 21:06:28,932 - INFO - Updated Master (ID: 1) status to 'active': Master account reset after trading block
+2025-09-19 21:06:28,933 - INFO - Master account reset to active (was logged in)
+2025-09-19 21:06:28,940 - INFO - Updated Child (ID: 2) status to 'inactive': Child not logged in
+2025-09-19 21:06:28,940 - INFO - Child account set to inactive (not logged in)
+2025-09-19 21:06:28,940 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:06:35,653 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:06:35,661 - INFO - Login status check - Master: True, Child: True
+2025-09-19 21:06:35,664 - INFO - Updated Master (ID: 1) status to 'active': Master account reset after trading block
+2025-09-19 21:06:35,665 - INFO - Master account reset to active (was logged in)
+2025-09-19 21:06:35,667 - INFO - Updated Child (ID: 2) status to 'active': Child account reset after trading block
+2025-09-19 21:06:35,667 - INFO - Child account reset to active (was logged in)
+2025-09-19 21:06:35,668 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:06:55,311 - INFO - Starting master file download in background...
+2025-09-19 21:06:55,311 - INFO - Finding expiry dates (with caching)...
+2025-09-19 21:06:55,501 - INFO - System initialization completed (downloads in background)
+2025-09-19 21:06:55,501 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:06:55,501 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:06:55,625 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:06:55,626 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 21:06:55,781 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 21:06:55,782 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 21:06:55,782 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 21:06:55,782 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 21:06:55,835 - INFO - Generated fresh 2FA for account 1: 553060
+2025-09-19 21:06:57,059 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:06:57,059 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 21:06:57,180 - INFO - Price input box enabled - no active positions
+2025-09-19 21:06:57,180 - INFO - UI states initialized successfully
+2025-09-19 21:07:01,140 - INFO - Generated fresh 2FA for account 2: 743626
+2025-09-19 21:07:01,660 - INFO - Updated Child (ID: 2) status to 'active': Account logged in successfully
+2025-09-19 21:07:01,673 - INFO - Child account logged in - Order blocking reset
+2025-09-19 21:07:02,170 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 21:07:07,621 - INFO - Login status check - Master: True, Child: True
+2025-09-19 21:07:07,621 - INFO - Updated Master (ID: 1) status to 'active': Master account reset after trading block
+2025-09-19 21:07:07,621 - INFO - Master account reset to active (was logged in)
+2025-09-19 21:07:07,642 - INFO - Updated Child (ID: 2) status to 'active': Child account reset after trading block
+2025-09-19 21:07:07,643 - INFO - Child account reset to active (was logged in)
+2025-09-19 21:07:07,643 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:07:07,644 - INFO - Trading blocks reset while preserving login status
+2025-09-19 21:07:07,645 - INFO - Account status displays updated after release
+2025-09-19 21:07:07,645 - INFO - BUY button and Price box re-enabled for new orders
+2025-09-19 21:07:07,647 - INFO - Buttons released - ready for new orders
+2025-09-19 21:07:22,745 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 21:07:22,745 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:07:23,301 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 21:07:23,301 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 21:07:23,301 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:07:23,797 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 21:07:23,797 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 21:07:26,206 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:07:26,686 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 21:07:26,686 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 21:07:26,686 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 21:07:29,207 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP82800CE
+2025-09-19 21:07:29,207 - INFO - Found token and lot size for SENSEX25SEP82800CE: 841738, 20
+2025-09-19 21:07:29,207 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:07:29,207 - INFO - Updated quantity options for SENSEX25SEP82800CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:07:29,207 - INFO - Getting token for trading symbol: SENSEX25SEP82800CE
+2025-09-19 21:07:29,207 - INFO - Found token for SENSEX25SEP82800CE: 841738
+2025-09-19 21:07:29,707 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 21:07:29,707 - INFO - Getting token for trading symbol: SENSEX25SEP82800CE
+2025-09-19 21:07:29,723 - INFO - Found token for SENSEX25SEP82800CE: 841738
+2025-09-19 21:07:29,723 - INFO - Subscribed to live price feed via master account: BFO|841738
+2025-09-19 21:07:29,723 - INFO - Auto-subscribed to SENSEX25SEP82800CE at price 340.15
+2025-09-19 21:07:39,185 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP8CE
+2025-09-19 21:07:39,189 - ERROR - No token found for SENSEX25SEP8CE
+2025-09-19 21:07:39,213 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 21:07:39,214 - ERROR - Error in fallback conversion: invalid literal for int() with base 10: '8C'
+2025-09-19 21:07:39,214 - WARNING - Lot size not found for SENSEX25SEP8CE, using default quantities
+2025-09-19 21:07:39,214 - INFO - Getting token for trading symbol: SENSEX25SEP8CE
+2025-09-19 21:07:39,220 - ERROR - No token found for SENSEX25SEP8CE
+2025-09-19 21:07:39,237 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 21:07:39,237 - ERROR - Error in fallback conversion: invalid literal for int() with base 10: '8C'
+2025-09-19 21:07:39,237 - WARNING - Could not fetch price for SENSEX25SEP8CE
+2025-09-19 21:07:39,237 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85CE
+2025-09-19 21:07:39,247 - ERROR - No token found for SENSEX25SEP85CE
+2025-09-19 21:07:39,258 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 21:07:39,258 - INFO - Trying converted SENSEX symbol: SENSEX25SEP85CE -> SENSEX85925CE
+2025-09-19 21:07:39,258 - WARNING - Lot size not found for SENSEX25SEP85CE, using default quantities
+2025-09-19 21:07:39,258 - INFO - Getting token for trading symbol: SENSEX25SEP85CE
+2025-09-19 21:07:39,258 - ERROR - No token found for SENSEX25SEP85CE
+2025-09-19 21:07:39,276 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 21:07:39,276 - INFO - Trying converted SENSEX symbol: SENSEX25SEP85CE -> SENSEX85925CE
+2025-09-19 21:07:39,284 - WARNING - Could not fetch price for SENSEX25SEP85CE
+2025-09-19 21:07:39,691 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP850CE
+2025-09-19 21:07:39,710 - ERROR - No token found for SENSEX25SEP850CE
+2025-09-19 21:07:39,732 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 21:07:39,733 - INFO - Trying converted SENSEX symbol: SENSEX25SEP850CE -> SENSEX859250CE
+2025-09-19 21:07:39,737 - WARNING - Lot size not found for SENSEX25SEP850CE, using default quantities
+2025-09-19 21:07:39,737 - INFO - Getting token for trading symbol: SENSEX25SEP850CE
+2025-09-19 21:07:39,739 - ERROR - No token found for SENSEX25SEP850CE
+2025-09-19 21:07:39,753 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 21:07:39,753 - INFO - Trying converted SENSEX symbol: SENSEX25SEP850CE -> SENSEX859250CE
+2025-09-19 21:07:39,764 - WARNING - Could not fetch price for SENSEX25SEP850CE
+2025-09-19 21:07:39,971 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP8500CE
+2025-09-19 21:07:39,971 - ERROR - No token found for SENSEX25SEP8500CE
+2025-09-19 21:07:39,998 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 21:07:39,998 - INFO - Trying converted SENSEX symbol: SENSEX25SEP8500CE -> SENSEX8592500CE
+2025-09-19 21:07:40,002 - WARNING - Lot size not found for SENSEX25SEP8500CE, using default quantities
+2025-09-19 21:07:40,002 - INFO - Getting token for trading symbol: SENSEX25SEP8500CE
+2025-09-19 21:07:40,012 - ERROR - No token found for SENSEX25SEP8500CE
+2025-09-19 21:07:40,033 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 21:07:40,033 - INFO - Trying converted SENSEX symbol: SENSEX25SEP8500CE -> SENSEX8592500CE
+2025-09-19 21:07:40,037 - WARNING - Could not fetch price for SENSEX25SEP8500CE
+2025-09-19 21:07:40,131 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85000CE
+2025-09-19 21:07:40,131 - INFO - Found token and lot size for SENSEX25SEP85000CE: 843499, 20
+2025-09-19 21:07:40,131 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:07:40,131 - INFO - Updated quantity options for SENSEX25SEP85000CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:07:40,131 - INFO - Getting token for trading symbol: SENSEX25SEP85000CE
+2025-09-19 21:07:40,147 - INFO - Found token for SENSEX25SEP85000CE: 843499
+2025-09-19 21:07:40,650 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 21:07:40,650 - INFO - Getting token for trading symbol: SENSEX25SEP85000CE
+2025-09-19 21:07:40,650 - INFO - Found token for SENSEX25SEP85000CE: 843499
+2025-09-19 21:07:40,650 - INFO - Unsubscribed from previous: BFO|841738
+2025-09-19 21:07:40,650 - INFO - Subscribed to live price feed via master account: BFO|843499
+2025-09-19 21:07:40,658 - INFO - Auto-subscribed to SENSEX25SEP85000CE at price 11.1
+2025-09-19 21:07:52,082 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85000CE
+2025-09-19 21:07:52,087 - INFO - Found token and lot size for SENSEX25SEP85000CE: 843499, 20
+2025-09-19 21:07:52,088 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:07:52,089 - INFO - Updated quantity options for SENSEX25SEP85000CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:07:52,090 - INFO - Original buy price stored: 11.1
+2025-09-19 21:07:52,090 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85000CE
+2025-09-19 21:07:52,097 - INFO - Found token and lot size for SENSEX25SEP85000CE: 843499, 20
+2025-09-19 21:07:52,098 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-19 21:07:52,099 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-19 21:07:52,099 - INFO - Active accounts: [1, 2]
+2025-09-19 21:07:52,100 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-19 21:07:52,101 - INFO - Trading symbol: SENSEX25SEP85000CE, Price: 11.1
+2025-09-19 21:07:52,101 - INFO - Quantities: [20, 20]
+2025-09-19 21:07:52,102 - INFO - Account 1: API=True, Qty=20, Active=True
+2025-09-19 21:07:52,103 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP85000CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 11.1, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-19 21:07:52,104 - INFO - Account 2: API=True, Qty=20, Active=True
+2025-09-19 21:07:52,105 - INFO - API instance for account 1: True
+2025-09-19 21:07:52,108 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP85000CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 11.1, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-19 21:07:52,111 - INFO - API instance for account 2: True
+2025-09-19 21:07:52,673 - INFO - API response: {'request_time': '21:07:54 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900664256'}
+2025-09-19 21:07:52,673 - INFO - API response type: <class 'dict'>
+2025-09-19 21:07:52,673 - INFO - Buy order placed successfully: {'request_time': '21:07:54 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900664256'}
+2025-09-19 21:07:52,673 - INFO - New order received: 25091900664256
+2025-09-19 21:07:52,673 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '11.10'
+2025-09-19 21:07:52,697 - INFO - Order data saved to orders.csv
+2025-09-19 21:07:52,699 - INFO - Account 1 - B PENDING NewAck
+2025-09-19 21:07:52,712 - INFO - API response: {'request_time': '21:07:54 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900664258'}
+2025-09-19 21:07:52,713 - INFO - API response type: <class 'dict'>
+2025-09-19 21:07:52,714 - INFO - New order received: 25091900664258
+2025-09-19 21:07:52,714 - INFO - Buy order placed successfully: {'request_time': '21:07:54 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900664258'}
+2025-09-19 21:07:52,714 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '11.10'
+2025-09-19 21:07:52,729 - INFO - Order data saved to orders.csv
+2025-09-19 21:07:52,729 - INFO - Auto SL/Target set - SL: -8.9, Target: 51.1 (Buy Open: 11.1)
+2025-09-19 21:07:52,730 - INFO - Account 2 - B PENDING NewAck
+2025-09-19 21:07:52,731 - INFO - Cross-account coordination started
+2025-09-19 21:07:52,733 - INFO - Cross-account coordination started for buy orders
+2025-09-19 21:07:52,735 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-19 21:07:52,736 - INFO - Price box grayed out after order placement
+2025-09-19 21:07:52,737 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-19 21:07:52,738 - INFO - Sell Order button kept disabled until buy orders are completed
+2025-09-19 21:07:52,738 - INFO - Master order status updated: Buy Order PENDING @ 11.10
+2025-09-19 21:07:52,740 - INFO - Child order status updated: Buy Order PENDING @ 11.10
+2025-09-19 21:07:52,746 - INFO - Updating order 25091900664256
+2025-09-19 21:07:52,746 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '11.10'
+2025-09-19 21:07:52,747 - INFO - Updating order 25091900664258
+2025-09-19 21:07:52,747 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '11.10'
+2025-09-19 21:07:52,749 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:07:52,750 - INFO - Master order status updated: Buy Order PENDING @ 11.10
+2025-09-19 21:07:52,752 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:07:52,754 - INFO - Child order status updated: Buy Order PENDING @ 11.10
+2025-09-19 21:07:52,756 - INFO - Updating order 25091900664256
+2025-09-19 21:07:52,757 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '11.10'
+2025-09-19 21:07:52,758 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:07:52,759 - WARNING - Buy order rejected for account 1 - Symbol: SENSEX25SEP85000CE, Reason: SAF:Yel is down
+2025-09-19 21:07:52,766 - INFO - Updating order 25091900664258
+2025-09-19 21:07:52,767 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '11.10'
+2025-09-19 21:07:52,768 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:07:52,769 - WARNING - Buy order rejected for account 2 - Symbol: SENSEX25SEP85000CE, Reason: SAF:Yel is down
+2025-09-19 21:07:52,769 - INFO - Updated Master (ID: 1) status to 'inactive': Buy order rejected: SAF:Yel is down
+2025-09-19 21:07:52,776 - ERROR - Error disabling trading buttons for account 1: 'MainWindow' object has no attribute 'login_button1'
+2025-09-19 21:07:52,776 - INFO - Updated Child (ID: 2) status to 'inactive': Buy order rejected: SAF:Yel is down
+2025-09-19 21:07:52,777 - INFO - Master account blocked due to buy order rejection - no further orders allowed
+2025-09-19 21:07:52,777 - INFO - Master order status updated: Order Rejected: SAF:Yel is down
+2025-09-19 21:07:52,777 - INFO - Child account trading buttons disabled due to order rejection
+2025-09-19 21:07:52,778 - INFO - Child account blocked due to buy order rejection - no further orders allowed
+2025-09-19 21:07:52,779 - INFO - Child order status updated: Order Rejected: SAF:Yel is down
+2025-09-19 21:07:53,431 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:07:53,431 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-19 21:07:53,431 - INFO - Modify Buy button enabled - orders are in modifiable state
+2025-09-19 21:07:53,433 - INFO - Modify Exit button disabled - no exit orders in modifiable state
+2025-09-19 21:07:53,433 - INFO - Checking coordination - Master: PENDING, Child: None
+2025-09-19 21:07:53,480 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 21:07:53,481 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-19 21:07:53,482 - INFO - Modify Buy button enabled - orders are in modifiable state
+2025-09-19 21:07:53,483 - INFO - Modify Exit button disabled - no exit orders in modifiable state
+2025-09-19 21:07:53,484 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-19 21:08:04,238 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85000CE
+2025-09-19 21:08:04,238 - INFO - Found token and lot size for SENSEX25SEP85000CE: 843499, 20
+2025-09-19 21:08:04,238 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:08:04,238 - INFO - Updated quantity options for SENSEX25SEP85000CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:08:04,238 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP85000CE
+2025-09-19 21:08:04,253 - INFO - Found token and lot size for SENSEX25SEP85000CE: 843499, 20
+2025-09-19 21:08:04,254 - INFO - Master quantity: 20 (selected: 20, lot size: 20)
+2025-09-19 21:08:04,254 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-19 21:08:04,254 - INFO - Active accounts for modify buy orders: []
+2025-09-19 21:11:48,779 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:11:48,786 - INFO - Updated Master (ID: 1) status to 'active': Master account always logged in
+2025-09-19 21:11:48,786 - INFO - Master account set to always active state
+2025-09-19 21:13:52,708 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:19:20,862 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:19:20,881 - ERROR - Error updating cache: 'login_status'
+2025-09-19 21:19:20,887 - ERROR - Error updating cache: 'login_status'
+2025-09-19 21:19:20,894 - ERROR - Error updating account 1 order status: 1
+2025-09-19 21:19:20,894 - INFO - Master account set to always active state
+2025-09-19 21:19:20,896 - INFO - Login status check - Master: True, Child: False
+2025-09-19 21:19:20,901 - INFO - Updated Master (ID: 1) login status to 'logged_in': Master account logged in
+2025-09-19 21:19:20,903 - INFO - Updated Master (ID: 1) order status to 'ready': Master account reset after trading block
+2025-09-19 21:19:20,910 - INFO - Master account reset to ready (was logged in)
+2025-09-19 21:19:20,912 - INFO - Updated Child (ID: 2) login status to 'not_logged_in': Child not logged in
+2025-09-19 21:19:20,916 - INFO - Updated Child (ID: 2) order status to 'ready': Child account reset after trading block
+2025-09-19 21:19:20,916 - INFO - Child account set to not logged in but order status ready
+2025-09-19 21:19:20,916 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:19:40,336 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:19:40,336 - ERROR - Error ensuring master account is active: 'status'
+2025-09-19 21:19:54,010 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:21:43,395 - INFO - Application interrupted by user
+2025-09-19 21:21:51,103 - INFO - Starting master file download in background...
+2025-09-19 21:21:51,103 - INFO - Finding expiry dates (with caching)...
+2025-09-19 21:21:51,383 - INFO - System initialization completed (downloads in background)
+2025-09-19 21:21:51,389 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:21:51,389 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:21:51,590 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:21:51,597 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 21:21:51,862 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 21:21:51,862 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 21:21:51,865 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 21:21:51,865 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 21:21:52,094 - INFO - Generated fresh 2FA for account 1: 824088
+2025-09-19 21:21:53,461 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:21:53,463 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 21:21:53,564 - INFO - Price input box enabled - no active positions
+2025-09-19 21:21:53,564 - INFO - UI states initialized successfully
+2025-09-19 21:22:24,345 - INFO - Generated fresh 2FA for account 2: 615452
+2025-09-19 21:22:25,034 - INFO - Updated Child (ID: 2) order status to 'ready': Account logged in successfully
+2025-09-19 21:22:25,036 - INFO - Child account logged in - Order blocking reset
+2025-09-19 21:22:25,696 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 21:24:02,472 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:24:02,478 - INFO - Updated Child (ID: 2) login status to 'logged_in': Account logged in successfully
+2025-09-19 21:24:02,487 - INFO - Updated Child (ID: 2) order status to 'ready': Account ready for orders
+2025-09-19 21:24:10,848 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:24:10,848 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 21:24:11,055 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 21:24:11,063 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 21:24:11,063 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 21:24:11,063 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 21:24:11,112 - INFO - Generated fresh 2FA for account 1: 124396
+2025-09-19 21:24:12,495 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:24:12,495 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 21:24:51,501 - INFO - Login status check - Master: True, Child: True
+2025-09-19 21:24:51,512 - INFO - Updated Master (ID: 1) login status to 'logged_in': Master account logged in
+2025-09-19 21:24:51,521 - INFO - Updated Master (ID: 1) order status to 'ready': Master account reset after trading block
+2025-09-19 21:24:51,522 - INFO - Master account reset to ready (was logged in)
+2025-09-19 21:24:51,532 - INFO - Updated Child (ID: 2) login status to 'logged_in': Child account logged in
+2025-09-19 21:24:51,543 - INFO - Updated Child (ID: 2) order status to 'ready': Child account reset after trading block
+2025-09-19 21:24:51,544 - INFO - Child account reset to ready (was logged in)
+2025-09-19 21:24:51,544 - INFO - Trading blocks reset while preserving actual login status
+2025-09-19 21:24:51,545 - INFO - Trading blocks reset while preserving login status
+2025-09-19 21:24:51,545 - ERROR - Error updating account status displays: 'status'
+2025-09-19 21:24:51,549 - INFO - BUY button and Price box re-enabled for new orders
+2025-09-19 21:24:51,553 - INFO - Buttons released - ready for new orders
+2025-09-19 21:24:59,660 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 21:24:59,660 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:25:00,310 - WARNING - No quotes received for SENSEX from BSE
+2025-09-19 21:25:00,310 - WARNING - Could not fetch Index LTP for SENSEX
+2025-09-19 21:25:00,310 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:25:00,956 - WARNING - No quotes received for SENSEX from BSE
+2025-09-19 21:25:00,956 - WARNING - Could not fetch price for SENSEX, using default strikes
+2025-09-19 21:25:14,880 - INFO - Starting master file download in background...
+2025-09-19 21:25:14,880 - INFO - Finding expiry dates (with caching)...
+2025-09-19 21:25:15,152 - INFO - System initialization completed (downloads in background)
+2025-09-19 21:25:15,153 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:25:15,153 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:25:15,302 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:25:15,304 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 21:25:15,536 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 21:25:15,536 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 21:25:15,538 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 21:25:15,538 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 21:25:15,590 - INFO - Generated fresh 2FA for account 1: 573628
+2025-09-19 21:25:16,930 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:25:16,932 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 21:25:17,085 - INFO - Price input box enabled - no active positions
+2025-09-19 21:25:17,085 - INFO - UI states initialized successfully
+2025-09-19 21:25:40,572 - INFO - Generated fresh 2FA for account 2: 505342
+2025-09-19 21:25:41,179 - INFO - Updated Child (ID: 2) login status to 'logged_in': Account logged in successfully
+2025-09-19 21:25:41,184 - INFO - Updated Child (ID: 2) order status to 'ready': Account ready for orders
+2025-09-19 21:25:41,189 - INFO - Child account logged in - Order blocking reset
+2025-09-19 21:25:41,837 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 21:25:54,382 - INFO - Starting master file download in background...
+2025-09-19 21:25:54,398 - INFO - Finding expiry dates (with caching)...
+2025-09-19 21:25:54,653 - INFO - System initialization completed (downloads in background)
+2025-09-19 21:25:54,653 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:25:54,654 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:25:54,809 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:25:54,809 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 21:25:55,062 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 21:25:55,062 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 21:25:55,062 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 21:25:55,062 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 21:25:55,123 - INFO - Generated fresh 2FA for account 1: 158214
+2025-09-19 21:25:56,397 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:25:56,397 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 21:25:56,514 - INFO - Price input box enabled - no active positions
+2025-09-19 21:25:56,514 - INFO - UI states initialized successfully
+2025-09-19 21:27:21,885 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:27:21,902 - INFO - Updated Child (ID: 2) login status to 'logged_in': Account logged in successfully
+2025-09-19 21:27:21,908 - INFO - Updated Child (ID: 2) order status to 'ready': Account ready for orders
+2025-09-19 21:27:49,089 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:27:49,106 - INFO - Updated Child (ID: 2) login status to 'logged_in': Account logged in successfully
+2025-09-19 21:27:49,106 - INFO - Updated Child (ID: 2) order status to 'ready': Account ready for orders
+2025-09-19 21:28:58,239 - INFO - Starting master file download in background...
+2025-09-19 21:28:58,239 - INFO - Finding expiry dates (with caching)...
+2025-09-19 21:28:58,508 - INFO - System initialization completed (downloads in background)
+2025-09-19 21:28:58,510 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:28:58,510 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:28:58,660 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:28:58,662 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 21:28:58,887 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 21:28:58,893 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 21:28:58,895 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 21:28:58,895 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 21:28:58,980 - INFO - Generated fresh 2FA for account 1: 615445
+2025-09-19 21:29:00,488 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:29:00,488 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 21:29:00,756 - INFO - Price input box enabled - no active positions
+2025-09-19 21:29:00,756 - INFO - UI states initialized successfully
+2025-09-19 21:29:08,293 - INFO - Generated fresh 2FA for account 2: 654606
+2025-09-19 21:29:08,875 - INFO - Updated Child (ID: 2) login status to 'logged_in': Account logged in successfully
+2025-09-19 21:29:08,877 - INFO - Updated Child (ID: 2) order status to 'ready': Account ready for orders
+2025-09-19 21:29:08,881 - INFO - Child account logged in - Order blocking reset
+2025-09-19 21:29:09,496 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 21:29:13,629 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 21:29:13,629 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:29:14,268 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 21:29:14,276 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 21:29:14,276 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:29:14,856 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 21:29:14,858 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 21:29:17,225 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:29:17,854 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 21:29:17,855 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 21:29:17,855 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 21:29:20,229 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP83300CE
+2025-09-19 21:29:20,242 - INFO - Found token and lot size for SENSEX25SEP83300CE: 841599, 20
+2025-09-19 21:29:20,244 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:29:20,244 - INFO - Updated quantity options for SENSEX25SEP83300CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:29:20,246 - INFO - Getting token for trading symbol: SENSEX25SEP83300CE
+2025-09-19 21:29:20,246 - INFO - Found token for SENSEX25SEP83300CE: 841599
+2025-09-19 21:29:20,897 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 21:29:20,919 - INFO - Getting token for trading symbol: SENSEX25SEP83300CE
+2025-09-19 21:29:20,927 - INFO - Found token for SENSEX25SEP83300CE: 841599
+2025-09-19 21:29:20,929 - INFO - Subscribed to live price feed via master account: BFO|841599
+2025-09-19 21:29:20,929 - INFO - Auto-subscribed to SENSEX25SEP83300CE at price 147.2
+2025-09-19 21:29:25,939 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP83300CE
+2025-09-19 21:29:25,954 - INFO - Found token and lot size for SENSEX25SEP83300CE: 841599, 20
+2025-09-19 21:29:25,954 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:29:25,954 - INFO - Updated quantity options for SENSEX25SEP83300CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:29:25,959 - INFO - Original buy price stored: 147.2
+2025-09-19 21:29:25,959 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP83300CE
+2025-09-19 21:29:25,962 - INFO - Found token and lot size for SENSEX25SEP83300CE: 841599, 20
+2025-09-19 21:29:25,962 - INFO - Master quantity: 60 (selected: 60, lot size: 20)
+2025-09-19 21:29:25,965 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-19 21:29:25,966 - INFO - Active accounts: [1, 2]
+2025-09-19 21:29:25,966 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-19 21:29:25,966 - INFO - Trading symbol: SENSEX25SEP83300CE, Price: 147.2
+2025-09-19 21:29:25,966 - INFO - Quantities: [60, 20]
+2025-09-19 21:29:25,966 - INFO - Account 1: API=True, Qty=60, Active=True
+2025-09-19 21:29:25,966 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP83300CE', 'quantity': 60, 'discloseqty': 0, 'price_type': 'LMT', 'price': 147.2, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-19 21:29:25,966 - INFO - Account 2: API=True, Qty=20, Active=True
+2025-09-19 21:29:25,966 - INFO - API instance for account 1: True
+2025-09-19 21:29:25,970 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP83300CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 147.2, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-19 21:29:25,973 - INFO - API instance for account 2: True
+2025-09-19 21:29:26,734 - INFO - API response: {'request_time': '21:29:28 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900666236'}
+2025-09-19 21:29:26,734 - INFO - New order received: 25091900666235
+2025-09-19 21:29:26,734 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '147.20'
+2025-09-19 21:29:26,734 - INFO - New order received: 25091900666236
+2025-09-19 21:29:26,734 - INFO - API response type: <class 'dict'>
+2025-09-19 21:29:26,738 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '147.20'
+2025-09-19 21:29:26,759 - INFO - Order data saved to orders.csv
+2025-09-19 21:29:26,762 - INFO - Buy order placed successfully: {'request_time': '21:29:28 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900666236'}
+2025-09-19 21:29:26,763 - INFO - Order data saved to orders.csv
+2025-09-19 21:29:26,765 - INFO - Account 2 - B PENDING NewAck
+2025-09-19 21:29:26,765 - INFO - Account 1 - B PENDING NewAck
+2025-09-19 21:29:26,787 - INFO - API response: {'request_time': '21:29:28 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900666235'}
+2025-09-19 21:29:26,787 - INFO - API response type: <class 'dict'>
+2025-09-19 21:29:26,787 - INFO - Buy order placed successfully: {'request_time': '21:29:28 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900666235'}
+2025-09-19 21:29:26,791 - INFO - Auto SL/Target set - SL: 127.19999999999999, Target: 187.2 (Buy Open: 147.2)
+2025-09-19 21:29:26,791 - INFO - Cross-account coordination started
+2025-09-19 21:29:26,791 - INFO - Cross-account coordination started for buy orders
+2025-09-19 21:29:26,792 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-19 21:29:26,793 - INFO - Price box grayed out after order placement
+2025-09-19 21:29:26,795 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-19 21:29:26,795 - INFO - Sell Order button kept disabled until buy orders are completed
+2025-09-19 21:29:26,795 - INFO - Child order status updated: Buy Order PENDING @ 147.20
+2025-09-19 21:29:26,797 - INFO - Master order status updated: Buy Order PENDING @ 147.20
+2025-09-19 21:29:26,802 - INFO - Updating order 25091900666235
+2025-09-19 21:29:26,804 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '147.20'
+2025-09-19 21:29:26,806 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:29:26,808 - INFO - Child order status updated: Buy Order PENDING @ 147.20
+2025-09-19 21:29:26,808 - INFO - Updating order 25091900666236
+2025-09-19 21:29:26,808 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '147.20'
+2025-09-19 21:29:26,810 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:29:26,811 - WARNING - Buy order rejected for account 1 - Symbol: SENSEX25SEP83300CE, Reason: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 8,492.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 21:29:26,813 - INFO - Updating order 25091900666235
+2025-09-19 21:29:26,813 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '147.20'
+2025-09-19 21:29:26,820 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:29:26,821 - INFO - Updated Master (ID: 1) order status to 'blocked': Buy order rejected: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 8,492.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 21:29:26,834 - WARNING - Buy order rejected for account 2 - Symbol: SENSEX25SEP83300CE, Reason: SAF:Yel is down
+2025-09-19 21:29:26,838 - ERROR - Error disabling trading buttons for account 1: 'MainWindow' object has no attribute 'login_button1'
+2025-09-19 21:29:26,844 - INFO - Updated Child (ID: 2) order status to 'blocked': Buy order rejected: SAF:Yel is down
+2025-09-19 21:29:26,867 - INFO - Master account blocked due to buy order rejection - no further orders allowed
+2025-09-19 21:29:26,871 - INFO - Child account trading buttons disabled due to order rejection
+2025-09-19 21:29:26,871 - INFO - Master order status updated: Order Rejected: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 8,492.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 21:29:26,873 - INFO - Child account blocked due to buy order rejection - no further orders allowed
+2025-09-19 21:29:26,886 - INFO - Child order status updated: Order Rejected: SAF:Yel is down
+2025-09-19 21:29:27,595 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:29:27,595 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-19 21:29:27,605 - INFO - Modify Buy button enabled - orders are in modifiable state
+2025-09-19 21:29:27,606 - INFO - Modify Exit button disabled - no exit orders in modifiable state
+2025-09-19 21:29:27,606 - INFO - Checking coordination - Master: PENDING, Child: None
+2025-09-19 21:29:27,615 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 21:29:27,615 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-19 21:29:27,615 - INFO - Modify Buy button enabled - orders are in modifiable state
+2025-09-19 21:29:27,617 - INFO - Modify Exit button disabled - no exit orders in modifiable state
+2025-09-19 21:29:27,617 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-19 21:33:55,411 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:33:55,417 - INFO - Updated Master (ID: 1) quantity to 50: Buy order filled: 50 lots
+2025-09-19 21:33:55,425 - INFO - Updated Child (ID: 2) quantity to -25: Sell order filled: 25 lots
+2025-09-19 21:33:55,430 - INFO - Updated Master (ID: 1) quantity to 30: Partial exit: 20 lots
+2025-09-19 21:34:27,722 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:34:27,738 - INFO - Updated Master (ID: 1) quantity to 100: Initial long position
+2025-09-19 21:34:27,745 - INFO - Updated Child (ID: 2) quantity to -50: Initial short position
+2025-09-19 21:35:44,867 - INFO - Starting master file download in background...
+2025-09-19 21:35:44,867 - INFO - Finding expiry dates (with caching)...
+2025-09-19 21:35:45,123 - INFO - System initialization completed (downloads in background)
+2025-09-19 21:35:45,123 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:35:45,123 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:35:45,314 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:35:45,314 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 21:35:45,530 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 21:35:45,532 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 21:35:45,532 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 21:35:45,534 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 21:35:45,613 - INFO - Generated fresh 2FA for account 1: 258115
+2025-09-19 21:35:47,053 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:35:47,053 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 21:35:47,204 - INFO - Price input box enabled - no active positions
+2025-09-19 21:35:47,206 - INFO - UI states initialized successfully
+2025-09-19 21:35:48,931 - INFO - Generated fresh 2FA for account 2: 800883
+2025-09-19 21:35:49,555 - INFO - Updated Child (ID: 2) login status to 'logged_in': Account logged in successfully
+2025-09-19 21:35:49,558 - INFO - Updated Child (ID: 2) order status to 'ready': Account ready for orders
+2025-09-19 21:35:49,560 - INFO - Child account logged in - Order blocking reset
+2025-09-19 21:35:50,274 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 21:35:55,444 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 21:35:55,450 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:35:56,013 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 21:35:56,013 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 21:35:56,013 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:35:56,595 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 21:35:56,595 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 21:35:58,895 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 21:35:59,522 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 21:35:59,524 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 21:35:59,524 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 21:36:02,060 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP83000CE
+2025-09-19 21:36:02,066 - INFO - Found token and lot size for SENSEX25SEP83000CE: 1146739, 20
+2025-09-19 21:36:02,066 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:36:02,066 - INFO - Updated quantity options for SENSEX25SEP83000CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:36:02,066 - INFO - Getting token for trading symbol: SENSEX25SEP83000CE
+2025-09-19 21:36:02,072 - INFO - Found token for SENSEX25SEP83000CE: 1146739
+2025-09-19 21:36:02,678 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 21:36:02,678 - INFO - Getting token for trading symbol: SENSEX25SEP83000CE
+2025-09-19 21:36:02,682 - INFO - Found token for SENSEX25SEP83000CE: 1146739
+2025-09-19 21:36:02,682 - INFO - Subscribed to live price feed via master account: BFO|1146739
+2025-09-19 21:36:02,682 - INFO - Auto-subscribed to SENSEX25SEP83000CE at price 248.95
+2025-09-19 21:36:18,057 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP83000CE
+2025-09-19 21:36:18,072 - INFO - Found token and lot size for SENSEX25SEP83000CE: 1146739, 20
+2025-09-19 21:36:18,072 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:36:18,072 - INFO - Updated quantity options for SENSEX25SEP83000CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 21:36:18,073 - INFO - Original buy price stored: 248.95
+2025-09-19 21:36:18,073 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP83000CE
+2025-09-19 21:36:18,074 - INFO - Found token and lot size for SENSEX25SEP83000CE: 1146739, 20
+2025-09-19 21:36:18,074 - INFO - Master quantity: 100 (selected: 100, lot size: 20)
+2025-09-19 21:36:18,074 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-19 21:36:18,079 - INFO - Active accounts: [1, 2]
+2025-09-19 21:36:18,079 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-19 21:36:18,079 - INFO - Trading symbol: SENSEX25SEP83000CE, Price: 248.95
+2025-09-19 21:36:18,080 - INFO - Quantities: [100, 20]
+2025-09-19 21:36:18,080 - INFO - Account 1: API=True, Qty=100, Active=True
+2025-09-19 21:36:18,080 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP83000CE', 'quantity': 100, 'discloseqty': 0, 'price_type': 'LMT', 'price': 248.95, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-19 21:36:18,080 - INFO - Account 2: API=True, Qty=20, Active=True
+2025-09-19 21:36:18,082 - INFO - API instance for account 1: True
+2025-09-19 21:36:18,082 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP83000CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 248.95, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-19 21:36:18,082 - INFO - API instance for account 2: True
+2025-09-19 21:36:18,862 - INFO - API response: {'request_time': '21:36:20 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900666478'}
+2025-09-19 21:36:18,864 - INFO - New order received: 25091900666478
+2025-09-19 21:36:18,864 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '248.95'
+2025-09-19 21:36:18,864 - INFO - API response type: <class 'dict'>
+2025-09-19 21:36:18,874 - INFO - API response: {'request_time': '21:36:20 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900666479'}
+2025-09-19 21:36:18,879 - INFO - Buy order placed successfully: {'request_time': '21:36:20 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900666478'}
+2025-09-19 21:36:18,880 - INFO - New order received: 25091900666479
+2025-09-19 21:36:18,881 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '248.95'
+2025-09-19 21:36:18,881 - INFO - Order data saved to orders.csv
+2025-09-19 21:36:18,883 - INFO - API response type: <class 'dict'>
+2025-09-19 21:36:18,899 - INFO - Order data saved to orders.csv
+2025-09-19 21:36:18,902 - INFO - Account 2 - B PENDING NewAck
+2025-09-19 21:36:18,903 - INFO - Buy order placed successfully: {'request_time': '21:36:20 19-09-2025', 'stat': 'Ok', 'norenordno': '25091900666479'}
+2025-09-19 21:36:18,906 - INFO - Account 1 - B PENDING NewAck
+2025-09-19 21:36:18,912 - INFO - Auto SL/Target set - SL: 228.95, Target: 288.95 (Buy Open: 248.95)
+2025-09-19 21:36:18,918 - INFO - Cross-account coordination started
+2025-09-19 21:36:18,918 - INFO - Cross-account coordination started for buy orders
+2025-09-19 21:36:18,919 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-19 21:36:18,920 - INFO - Price box grayed out after order placement
+2025-09-19 21:36:18,920 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-19 21:36:18,923 - INFO - Sell Order button kept disabled until buy orders are completed
+2025-09-19 21:36:18,925 - INFO - Child order status updated: Buy Order PENDING @ 248.95
+2025-09-19 21:36:18,925 - INFO - Master order status updated: Buy Order PENDING @ 248.95
+2025-09-19 21:36:18,930 - INFO - Updating order 25091900666478
+2025-09-19 21:36:18,930 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '248.95'
+2025-09-19 21:36:18,932 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:36:18,934 - INFO - Updating order 25091900666479
+2025-09-19 21:36:18,934 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '248.95'
+2025-09-19 21:36:18,934 - INFO - Child order status updated: Buy Order PENDING @ 248.95
+2025-09-19 21:36:18,936 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:36:18,936 - WARNING - Buy order rejected for account 1 - Symbol: SENSEX25SEP83000CE, Reason: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 24,555.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 21:36:18,938 - INFO - Updating order 25091900666478
+2025-09-19 21:36:18,940 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '248.95'
+2025-09-19 21:36:18,943 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:36:18,945 - INFO - Updated Master (ID: 1) order status to 'blocked': Buy order rejected: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 24,555.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 21:36:18,946 - WARNING - Buy order rejected for account 2 - Symbol: SENSEX25SEP83000CE, Reason: SAF:Yel is down
+2025-09-19 21:36:18,947 - ERROR - Error disabling trading buttons for account 1: 'MainWindow' object has no attribute 'login_button1'
+2025-09-19 21:36:18,950 - INFO - Master account blocked due to buy order rejection - no further orders allowed
+2025-09-19 21:36:18,952 - INFO - Master order status updated: Order Rejected: RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 24,555.41 Available:INR 339.59 for C-FA32246 [SHOONYA]
+2025-09-19 21:36:18,953 - INFO - Updated Child (ID: 2) order status to 'blocked': Buy order rejected: SAF:Yel is down
+2025-09-19 21:36:18,966 - INFO - Child account trading buttons disabled due to order rejection
+2025-09-19 21:36:18,966 - INFO - Child account blocked due to buy order rejection - no further orders allowed
+2025-09-19 21:36:18,969 - INFO - Child order status updated: Order Rejected: SAF:Yel is down
+2025-09-19 21:36:19,759 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:36:19,759 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-19 21:36:19,759 - INFO - Modify Buy button enabled - orders are in modifiable state
+2025-09-19 21:36:19,759 - INFO - Modify Exit button disabled - no exit orders in modifiable state
+2025-09-19 21:36:19,759 - INFO - Checking coordination - Master: PENDING, Child: None
+2025-09-19 21:36:19,776 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 21:36:19,776 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-19 21:36:19,777 - INFO - Modify Buy button enabled - orders are in modifiable state
+2025-09-19 21:36:19,778 - INFO - Modify Exit button disabled - no exit orders in modifiable state
+2025-09-19 21:36:19,778 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-19 21:41:00,854 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:41:00,863 - INFO - Updated Master (ID: 1) order status to 'blocked': Master buy order cancelled by user
+2025-09-19 21:43:44,105 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:43:44,108 - INFO - Updated Child (ID: 2) order status to 'blocked': Child buy order cancelled by user
+2025-09-19 21:54:20,790 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:54:20,798 - INFO - Updated Master (ID: 1) login status to 'logged_in': Test: logged_in
+2025-09-19 21:54:20,812 - INFO - Updated Master (ID: 1) order status to 'ready': Test: ready
+2025-09-19 21:54:20,816 - INFO - Updated Master (ID: 1) login status to 'logged_in': Test: logged_in
+2025-09-19 21:54:20,819 - INFO - Updated Master (ID: 1) order status to 'blocked': Test: blocked
+2025-09-19 21:54:20,826 - INFO - Updated Master (ID: 1) login status to 'not_logged_in': Test: not_logged_in
+2025-09-19 21:54:20,828 - INFO - Updated Master (ID: 1) order status to 'ready': Test: ready
+2025-09-19 21:54:20,828 - INFO - Updated Child (ID: 2) login status to 'logged_in': Test: logged_in
+2025-09-19 21:54:20,836 - INFO - Updated Child (ID: 2) order status to 'ready': Test: ready
+2025-09-19 21:54:20,840 - INFO - Updated Child (ID: 2) login status to 'logged_in': Test: logged_in
+2025-09-19 21:54:20,846 - INFO - Updated Child (ID: 2) order status to 'blocked': Test: blocked
+2025-09-19 21:54:20,850 - INFO - Updated Child (ID: 2) login status to 'not_logged_in': Test: not_logged_in
+2025-09-19 21:54:20,853 - INFO - Updated Child (ID: 2) order status to 'ready': Test: ready
+2025-09-19 21:55:32,478 - INFO - Order 25091900666478 cancelled successfully
+2025-09-19 21:55:32,483 - INFO - Updating order 25091900666478
+2025-09-19 21:55:32,483 - INFO - Order status debug - status: 'REJECTED', reporttype: 'CancelRejected', trantype: 'B', price: '248.95'
+2025-09-19 21:55:32,488 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:55:32,488 - WARNING - Buy order rejected for account 2 - Symbol: SENSEX25SEP83000CE, Reason: SAF:order is not open to cancel
+2025-09-19 21:55:32,490 - INFO - Updated Child (ID: 2) order status to 'blocked': Child buy order cancelled by user
+2025-09-19 21:55:32,496 - WARNING - Child account blocked: Child buy order cancelled
+2025-09-19 21:55:32,497 - INFO - Updated Child (ID: 2) order status to 'blocked': Buy order rejected: SAF:order is not open to cancel
+2025-09-19 21:55:32,499 - INFO - Child buy order cancelled successfully, price box re-enabled
+2025-09-19 21:55:32,500 - INFO - Child account trading buttons disabled due to order rejection
+2025-09-19 21:55:32,503 - INFO - Child account blocked due to buy order rejection - no further orders allowed
+2025-09-19 21:55:32,511 - INFO - Child order status updated: Order Rejected: SAF:order is not open to cancel
+2025-09-19 21:55:45,869 - INFO - Updating order 25091900666479
+2025-09-19 21:55:45,869 - INFO - Order status debug - status: 'REJECTED', reporttype: 'CancelRejected', trantype: 'B', price: '248.95'
+2025-09-19 21:55:45,869 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-19 21:55:45,869 - WARNING - Buy order rejected for account 1 - Symbol: SENSEX25SEP83000CE, Reason: SAF:order is not open to cancel
+2025-09-19 21:55:45,875 - INFO - Updated Master (ID: 1) order status to 'blocked': Buy order rejected: SAF:order is not open to cancel
+2025-09-19 21:55:46,118 - INFO - Order 25091900666479 cancelled successfully
+2025-09-19 21:55:46,128 - INFO - Updated Master (ID: 1) order status to 'blocked': Master buy order cancelled by user
+2025-09-19 21:55:46,131 - WARNING - Master account blocked: Master buy order cancelled
+2025-09-19 21:55:46,132 - INFO - Master buy order cancelled successfully, price box re-enabled
+2025-09-19 21:55:46,133 - ERROR - Error disabling trading buttons for account 1: 'MainWindow' object has no attribute 'login_button1'
+2025-09-19 21:55:46,133 - INFO - Master account blocked due to buy order rejection - no further orders allowed
+2025-09-19 21:55:46,133 - INFO - Master order status updated: Order Rejected: SAF:order is not open to cancel
+2025-09-19 21:57:08,089 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:59:33,962 - INFO - Starting master file download in background...
+2025-09-19 21:59:33,962 - INFO - Finding expiry dates (with caching)...
+2025-09-19 21:59:34,399 - INFO - System initialization completed (downloads in background)
+2025-09-19 21:59:34,399 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:59:34,399 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 21:59:34,595 - INFO - Loaded account states from account_states.csv
+2025-09-19 21:59:34,595 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 21:59:34,794 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 21:59:34,794 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 21:59:34,794 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 21:59:34,794 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 21:59:34,969 - INFO - Generated fresh 2FA for account 1: 059392
+2025-09-19 21:59:36,282 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-19 21:59:36,282 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-19 21:59:36,436 - INFO - Price input box enabled - no active positions
+2025-09-19 21:59:36,436 - INFO - UI states initialized successfully
