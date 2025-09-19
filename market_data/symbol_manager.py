@@ -62,8 +62,8 @@ class SymbolManager:
         try:
             applicationLogger.info(f"Getting token for trading symbol: {trading_symbol}")
             
-            # Check if it's a SENSEX symbol
-            if "SENSEX" in trading_symbol:
+            # Check if it's a SENSEX symbol (but not SX50)
+            if "SENSEX" in trading_symbol and not trading_symbol.startswith("SENSEX50"):
                 # For new format symbols, use them directly
                 if 'BFO' in self.symbol_data:
                     row = self.symbol_data['BFO'][self.symbol_data['BFO']['TradingSymbol'] == trading_symbol]
@@ -73,8 +73,11 @@ class SymbolManager:
                         return token
                     else:
                         applicationLogger.error(f"No token found for {trading_symbol}")
-                        # Try to find similar symbols for debugging
-                        similar_symbols = self.symbol_data['BFO'][self.symbol_data['BFO']['TradingSymbol'].str.contains('SENSEX')]['TradingSymbol'].unique()
+                        # Try to find similar symbols for debugging (excluding SX50)
+                        similar_symbols = self.symbol_data['BFO'][
+                            (self.symbol_data['BFO']['TradingSymbol'].str.contains('SENSEX')) & 
+                            (~self.symbol_data['BFO']['TradingSymbol'].str.startswith('SENSEX50'))
+                        ]['TradingSymbol'].unique()
                         applicationLogger.info(f"Available SENSEX symbols (first 10): {similar_symbols[:10]}")
                         
                         # Fallback to old conversion method for backward compatibility

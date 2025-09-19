@@ -318,12 +318,6 @@ class MainWindow:
         )
         self.login_button2.pack(side=tk.LEFT, padx=10)
         
-        # Configuration button
-        self.config_button = ttk.Button(
-            self.login_frame, text="⚙️ Config", 
-            command=self.open_configuration, width=12
-        )
-        self.config_button.pack(side=tk.LEFT, padx=5)
         
         # Utility buttons (reduced size)
         self.release_button = ttk.Button(
@@ -737,6 +731,13 @@ class MainWindow:
             command=self.logout_child_account, width=25, height=2
         )
         self.child_logout_button.grid(row=0, column=3, padx=5, pady=5)
+        
+        # Configuration button
+        self.config_button = tk.Button(
+            self.bottom_frame, text="⚙️ Config", 
+            command=self.open_configuration, width=12, height=2
+        )
+        self.config_button.grid(row=0, column=4, padx=5, pady=5)
     
     
     def initialize_master_account(self):
@@ -1230,6 +1231,12 @@ class MainWindow:
         """
         Generate SENSEX symbol based on expiry type
         
+        Format Rules:
+        - Monthly expiry (last Thursday): SENSEX + YEAR + MONTH(3-letter) + STRIKE + OPTION
+          Example: SENSEX25SEP91600PE
+        - Weekly expiry: SENSEX + YEAR + MONTH(single char) + DAY + STRIKE + OPTION  
+          Example: SENSEX2591890200PE
+        
         Args:
             expiry: Expiry date in format like "11SEP25" or "25SEP25"
             strike: Strike price as string
@@ -1251,16 +1258,17 @@ class MainWindow:
                 year_full = 2000 + int(year)
                 day_num = int(day)
                 
-                # Check if it's the last Friday of the month (monthly expiry)
-                last_day = calendar.monthrange(year_full, month_num)[1]
-                last_friday = self._get_last_friday(year_full, month_num)
+                # Check if it's the last Thursday of the month (monthly expiry)
+                last_thursday = self._get_last_thursday(year_full, month_num)
                 
-                if day_num == last_friday.day:
-                    # Monthly expiry format: SENSEX25SEP87200CE
+                if day_num == last_thursday.day:
+                    # Monthly expiry format: SENSEX25SEP91600PE
                     return f"SENSEX{year}{month}{strike}{option}"
                 else:
-                    # Daily expiry format: SENSEX2591187200CE
-                    return f"SENSEX{year}{month_num:d}{day_num:02d}{strike}{option}"
+                    # Weekly expiry format: SENSEX2591890200PE
+                    # Month encoding: 9=Sep, O=Oct, N=Nov, D=Dec
+                    month_code = self._get_month_code(month_num)
+                    return f"SENSEX{year}{month_code}{day_num:02d}{strike}{option}"
             else:
                 # Fallback to original format
                 return f"SENSEX{expiry}{strike}{option}"
@@ -1285,6 +1293,48 @@ class MainWindow:
         last_friday = last_date - timedelta(days=days_back)
         
         return last_friday
+    
+    def _get_last_thursday(self, year: int, month: int) -> datetime:
+        """Get the last Thursday of the month"""
+        from datetime import timedelta
+        
+        # Get the last day of the month
+        last_day = calendar.monthrange(year, month)[1]
+        last_date = datetime(year, month, last_day)
+        
+        # Find the last Thursday
+        days_back = (last_date.weekday() - 3) % 7
+        if days_back == 0 and last_date.weekday() != 3:
+            days_back = 7
+        last_thursday = last_date - timedelta(days=days_back)
+        
+        return last_thursday
+    
+    def _get_month_code(self, month_num: int) -> str:
+        """
+        Get month code for SENSEX weekly expiry symbols
+        
+        Args:
+            month_num: Month number (1-12)
+            
+        Returns:
+            Single character month code: 9=Sep, O=Oct, N=Nov, D=Dec
+        """
+        month_codes = {
+            1: '1',   # Jan
+            2: '2',   # Feb  
+            3: '3',   # Mar
+            4: '4',   # Apr
+            5: '5',   # May
+            6: '6',   # Jun
+            7: '7',   # Jul
+            8: '8',   # Aug
+            9: '9',   # Sep
+            10: 'O',  # Oct
+            11: 'N',  # Nov
+            12: 'D'   # Dec
+        }
+        return month_codes.get(month_num, str(month_num))
     
     def calculate_and_store_expiry_dates(self):
         """Calculate and store expiry dates for all indices in CSV with date"""
@@ -1409,7 +1459,7 @@ class MainWindow:
                             expiry_str = fields[5]  # Expiry date
                             
                             # Filter by index type
-                            if index == "SENSEX" and 'SENSEX' in symbol:
+                            if index == "SENSEX" and 'SENSEX' in symbol and not symbol.startswith('SENSEX50'):
                                 try:
                                     expiry_date = datetime.strptime(expiry_str, '%d-%b-%Y')
                                     expiry_dates.add(expiry_date)

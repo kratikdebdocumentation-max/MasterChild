@@ -207,3 +207,8 @@
 2025-09-19 15:21:03,933 - INFO - {'t': 'om', 'norenordno': '25091900628282', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP83000CE', 'trantype': 'S', 'qty': '20', 'prc': '252.40', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'COMPLETE', 'reporttype': 'Fill', 'flqty': '20', 'flprc': '252.40', 'flid': '6946790', 'fltm': '19-09-2025 15:21:04', 'prctyp': 'LMT', 'ret': 'EOS', 'exchordid': '1758275183969305837', 'fillshares': '20', 'dscqty': '0', 'avgprc': '252.40', 'exch_tm': '19-09-2025 15:21:04'}
 2025-09-19 15:49:58,692 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
 2025-09-19 16:26:07,391 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-19 17:37:34,147 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-19 17:38:03,328 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-19 17:41:09,853 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-19 20:16:56,573 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-19 20:36:57,360 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT

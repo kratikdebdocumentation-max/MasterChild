@@ -320,8 +320,8 @@ def get_sensex_expiry_dates(bfo_file_path=None):
             for line in file:
                 parts = line.strip().split(',')
                 if len(parts) >= 6:
-                    # Check if it's a SENSEX option (BSXOPT or SX50OPT)
-                    if 'SENSEX' in parts[4]:  # TradingSymbol column
+                    # Check if it's a SENSEX option (BSXOPT only, exclude SX50OPT)
+                    if 'SENSEX' in parts[4] and not parts[4].startswith('SENSEX50'):  # TradingSymbol column
                         expiry_date = parts[5]  # Expiry column
                         expiry_counts[expiry_date] += 1
         

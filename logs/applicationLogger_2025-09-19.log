@@ -5449,3 +5449,485 @@ AttributeError: 'ShoonyaApiPy' object has no attribute '_NorenApi__username'
 2025-09-19 17:33:17,929 - INFO - Showing configuration window with values - Child: 1, SL: 20.0, Target: 40.0
 2025-09-19 17:33:20,630 - INFO - Configuration skipped - using last saved values
 2025-09-19 17:33:20,671 - INFO - Configuration updated: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:37:26,065 - INFO - Starting master file download in background...
+2025-09-19 17:37:26,067 - INFO - Finding expiry dates (with caching)...
+2025-09-19 17:37:26,334 - INFO - System initialization completed (downloads in background)
+2025-09-19 17:37:26,334 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:37:26,334 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:37:27,126 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 17:37:27,132 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 17:37:27,353 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 17:37:27,353 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 17:37:27,364 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 17:37:27,364 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 17:37:27,700 - INFO - Generated fresh 2FA for account 1: 762835
+2025-09-19 17:37:29,143 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 17:37:29,143 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 17:37:29,245 - INFO - Price input box enabled - no active positions
+2025-09-19 17:37:29,245 - INFO - UI states initialized successfully
+2025-09-19 17:37:33,528 - INFO - Generated fresh 2FA for account 2: 139381
+2025-09-19 17:37:34,169 - INFO - Updated Child (ID: 2) status to 'active': Account logged in successfully
+2025-09-19 17:37:34,174 - INFO - Child account logged in - Order blocking reset
+2025-09-19 17:37:34,730 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 17:37:36,672 - INFO - Using current settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:37:36,719 - INFO - Configuration window values set - Child: 1, SL: 20.0, Target: 40.0
+2025-09-19 17:37:36,740 - INFO - Showing configuration window with values - Child: 1, SL: 20.0, Target: 40.0
+2025-09-19 17:37:45,160 - INFO - Configuration skipped - using last saved values
+2025-09-19 17:37:45,185 - INFO - Configuration updated: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:37:49,748 - INFO - Using current settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:37:49,804 - INFO - Configuration window values set - Child: 1, SL: 20.0, Target: 40.0
+2025-09-19 17:37:49,829 - INFO - Showing configuration window with values - Child: 1, SL: 20.0, Target: 40.0
+2025-09-19 17:37:55,193 - INFO - Settings saved to config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:37:55,197 - INFO - Configuration saved and restarting: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:37:59,083 - INFO - Starting master file download in background...
+2025-09-19 17:37:59,086 - INFO - Finding expiry dates (with caching)...
+2025-09-19 17:37:59,355 - INFO - System initialization completed (downloads in background)
+2025-09-19 17:37:59,356 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:37:59,358 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:37:59,512 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 17:37:59,519 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 17:37:59,729 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 17:37:59,729 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 17:37:59,737 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 17:37:59,738 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 17:37:59,809 - INFO - Generated fresh 2FA for account 1: 149573
+2025-09-19 17:38:01,109 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 17:38:01,109 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 17:38:01,238 - INFO - Price input box enabled - no active positions
+2025-09-19 17:38:01,238 - INFO - UI states initialized successfully
+2025-09-19 17:38:02,746 - INFO - Generated fresh 2FA for account 2: 104782
+2025-09-19 17:38:03,341 - INFO - Updated Child (ID: 2) status to 'active': Account logged in successfully
+2025-09-19 17:38:03,346 - INFO - Child account logged in - Order blocking reset
+2025-09-19 17:38:04,012 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 17:38:14,790 - INFO - Using current settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:38:14,837 - INFO - Configuration window values set - Child: 1, SL: 20.0, Target: 40.0
+2025-09-19 17:38:14,847 - INFO - Showing configuration window with values - Child: 1, SL: 20.0, Target: 40.0
+2025-09-19 17:38:15,732 - INFO - Settings saved to config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:38:15,732 - INFO - Configuration saved and restarting: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:38:18,638 - INFO - Starting master file download in background...
+2025-09-19 17:38:18,638 - INFO - Finding expiry dates (with caching)...
+2025-09-19 17:38:18,892 - INFO - System initialization completed (downloads in background)
+2025-09-19 17:38:18,892 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:38:18,892 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:38:19,059 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 17:38:19,065 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 17:38:19,280 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 17:38:19,284 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 17:38:19,284 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 17:38:19,286 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 17:38:19,327 - INFO - Generated fresh 2FA for account 1: 481711
+2025-09-19 17:38:20,574 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 17:38:20,574 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 17:38:20,675 - INFO - Price input box enabled - no active positions
+2025-09-19 17:38:20,675 - INFO - UI states initialized successfully
+2025-09-19 17:39:24,422 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:39:24,599 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 17:39:24,604 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 17:39:24,848 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 17:39:24,848 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 17:39:24,848 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 17:39:24,848 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 17:39:25,089 - INFO - Generated fresh 2FA for account 1: 729662
+2025-09-19 17:39:26,456 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 17:39:26,456 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 17:39:26,587 - INFO - Price input box enabled - no active positions
+2025-09-19 17:39:26,587 - INFO - UI states initialized successfully
+2025-09-19 17:39:38,993 - INFO - Starting master file download in background...
+2025-09-19 17:39:38,993 - INFO - Finding expiry dates (with caching)...
+2025-09-19 17:39:39,243 - INFO - System initialization completed (downloads in background)
+2025-09-19 17:39:39,244 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:39:39,244 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:39:39,392 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 17:39:39,397 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 17:39:39,592 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 17:39:39,592 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 17:39:39,592 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 17:39:39,592 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 17:39:39,627 - INFO - Generated fresh 2FA for account 1: 064515
+2025-09-19 17:39:40,918 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 17:39:40,921 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 17:39:41,023 - INFO - Price input box enabled - no active positions
+2025-09-19 17:39:41,026 - INFO - UI states initialized successfully
+2025-09-19 17:40:24,382 - INFO - Starting master file download in background...
+2025-09-19 17:40:24,384 - INFO - Finding expiry dates (with caching)...
+2025-09-19 17:40:24,630 - INFO - System initialization completed (downloads in background)
+2025-09-19 17:40:24,630 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:40:24,630 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 17:40:24,780 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 17:40:24,785 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 17:40:25,013 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 17:40:25,013 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 17:40:25,013 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 17:40:25,013 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 17:40:25,041 - INFO - Generated fresh 2FA for account 1: 176955
+2025-09-19 17:40:26,340 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 17:40:26,340 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 17:40:26,438 - INFO - Price input box enabled - no active positions
+2025-09-19 17:40:26,438 - INFO - UI states initialized successfully
+2025-09-19 17:41:09,285 - INFO - Generated fresh 2FA for account 2: 317007
+2025-09-19 17:41:09,857 - INFO - Updated Child (ID: 2) status to 'active': Account logged in successfully
+2025-09-19 17:41:09,857 - INFO - Child account logged in - Order blocking reset
+2025-09-19 17:41:10,470 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 17:41:13,476 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 17:41:13,476 - INFO - Fetching BANKNIFTY price from NSE with token 26009
+2025-09-19 17:41:14,122 - INFO - Successfully fetched BANKNIFTY price: 55458.85
+2025-09-19 17:41:14,122 - INFO - Index LTP for BANKNIFTY: 55458.85
+2025-09-19 17:41:14,122 - INFO - Fetching BANKNIFTY price from NSE with token 26009
+2025-09-19 17:41:14,781 - INFO - Successfully fetched BANKNIFTY price: 55458.85
+2025-09-19 17:41:14,781 - INFO - Updated strikes for BANKNIFTY based on price 55458.85 and option None: [54800, 54900, 55000, 55100, 55200, 55300, 55400, 55500, 55600, 55700, 55800, 55900, 56000, 56100, 56200]
+2025-09-19 17:41:20,549 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 17:41:20,549 - INFO - Fetching NIFTY price from NSE with token 26000
+2025-09-19 17:41:21,183 - INFO - Successfully fetched NIFTY price: 25327.05
+2025-09-19 17:41:21,185 - INFO - Index LTP for NIFTY: 25327.05
+2025-09-19 17:41:21,185 - INFO - Fetching NIFTY price from NSE with token 26000
+2025-09-19 17:41:21,763 - INFO - Successfully fetched NIFTY price: 25327.05
+2025-09-19 17:41:21,763 - INFO - Updated strikes for NIFTY based on price 25327.05 and option None: [25000, 25050, 25100, 25150, 25200, 25250, 25300, 25350, 25400, 25450, 25500, 25550, 25600, 25650, 25700]
+2025-09-19 17:41:35,922 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 17:41:35,923 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 17:41:36,613 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 17:41:36,613 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 17:41:36,613 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 17:41:37,197 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 17:41:37,197 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 17:41:39,842 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 17:41:40,450 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 17:41:40,450 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 17:41:40,450 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 17:41:43,257 - INFO - Getting token and lot size for trading symbol: SENSEX2592582500CE
+2025-09-19 17:41:43,288 - ERROR - No token found for SENSEX2592582500CE
+2025-09-19 17:41:43,309 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 17:41:43,310 - ERROR - Error in fallback conversion: time data '925' does not match format '%b'
+2025-09-19 17:41:43,310 - WARNING - Lot size not found for SENSEX2592582500CE, using default quantities
+2025-09-19 17:41:43,312 - INFO - Getting token for trading symbol: SENSEX2592582500CE
+2025-09-19 17:41:43,318 - ERROR - No token found for SENSEX2592582500CE
+2025-09-19 17:41:43,344 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 17:41:43,412 - ERROR - Error in fallback conversion: time data '925' does not match format '%b'
+2025-09-19 17:41:43,412 - WARNING - Could not fetch price for SENSEX2592582500CE
+2025-09-19 20:02:43,760 - INFO - Starting master file download in background...
+2025-09-19 20:02:43,760 - INFO - Finding expiry dates (with caching)...
+2025-09-19 20:02:43,993 - INFO - System initialization completed (downloads in background)
+2025-09-19 20:02:44,008 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:02:44,008 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:02:45,155 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 20:02:45,160 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 20:02:45,404 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 20:02:45,404 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 20:02:45,418 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 20:02:45,424 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 20:02:45,687 - INFO - Generated fresh 2FA for account 1: 695532
+2025-09-19 20:02:46,710 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 20:02:46,710 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 20:02:46,816 - INFO - Price input box enabled - no active positions
+2025-09-19 20:02:46,817 - INFO - UI states initialized successfully
+2025-09-19 20:04:23,184 - INFO - Starting master file download in background...
+2025-09-19 20:04:23,184 - INFO - Finding expiry dates (with caching)...
+2025-09-19 20:04:23,366 - INFO - System initialization completed (downloads in background)
+2025-09-19 20:04:23,366 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:04:23,367 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:04:23,476 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 20:04:23,479 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 20:04:23,704 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 20:04:23,704 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 20:04:23,704 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 20:04:23,704 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 20:04:23,767 - INFO - Generated fresh 2FA for account 1: 276518
+2025-09-19 20:04:25,137 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 20:04:25,137 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 20:04:25,242 - INFO - Price input box enabled - no active positions
+2025-09-19 20:04:25,242 - INFO - UI states initialized successfully
+2025-09-19 20:16:52,507 - INFO - Starting master file download in background...
+2025-09-19 20:16:52,508 - INFO - Finding expiry dates (with caching)...
+2025-09-19 20:16:52,685 - INFO - System initialization completed (downloads in background)
+2025-09-19 20:16:52,685 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:16:52,685 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:16:52,796 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 20:16:52,800 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 20:16:52,974 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 20:16:52,974 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 20:16:52,975 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 20:16:52,976 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 20:16:53,020 - INFO - Generated fresh 2FA for account 1: 048472
+2025-09-19 20:16:54,468 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 20:16:54,468 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 20:16:54,570 - INFO - Price input box enabled - no active positions
+2025-09-19 20:16:54,570 - INFO - UI states initialized successfully
+2025-09-19 20:16:56,093 - INFO - Generated fresh 2FA for account 2: 907024
+2025-09-19 20:16:56,573 - INFO - Updated Child (ID: 2) status to 'active': Account logged in successfully
+2025-09-19 20:16:56,589 - INFO - Child account logged in - Order blocking reset
+2025-09-19 20:16:57,451 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 20:17:00,628 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 20:17:00,628 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:17:01,170 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:17:01,170 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:17:01,170 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:17:01,723 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:17:01,723 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 20:17:06,221 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:17:06,767 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:17:06,767 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:17:06,767 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 20:17:07,106 - INFO - Verifying PnL from broker...
+2025-09-19 20:17:07,598 - INFO - Verified PnL for account 1 (active): -366.0
+2025-09-19 20:17:08,060 - INFO - Verified PnL for account 2 (active): -437.75
+2025-09-19 20:17:08,060 - INFO - PnL verification completed successfully
+2025-09-19 20:17:09,886 - INFO - Verifying PnL from broker...
+2025-09-19 20:17:10,368 - INFO - Verified PnL for account 1 (active): -366.0
+2025-09-19 20:17:10,831 - INFO - Verified PnL for account 2 (active): -437.75
+2025-09-19 20:17:10,831 - INFO - PnL verification completed successfully
+2025-09-19 20:17:12,365 - INFO - Verifying PnL from broker...
+2025-09-19 20:17:12,869 - INFO - Verified PnL for account 1 (active): -366.0
+2025-09-19 20:17:13,625 - INFO - Verified PnL for account 2 (active): -437.75
+2025-09-19 20:17:13,625 - INFO - PnL verification completed successfully
+2025-09-19 20:17:13,629 - INFO - Verifying PnL from broker...
+2025-09-19 20:17:14,300 - INFO - Verified PnL for account 1 (active): -366.0
+2025-09-19 20:17:14,894 - INFO - Verified PnL for account 2 (active): -437.75
+2025-09-19 20:17:14,894 - INFO - PnL verification completed successfully
+2025-09-19 20:17:15,457 - INFO - Verifying PnL from broker...
+2025-09-19 20:17:15,957 - INFO - Verified PnL for account 1 (active): -366.0
+2025-09-19 20:17:16,454 - INFO - Verified PnL for account 2 (active): -437.75
+2025-09-19 20:17:16,454 - INFO - PnL verification completed successfully
+2025-09-19 20:17:17,375 - INFO - Verifying PnL from broker...
+2025-09-19 20:17:17,858 - INFO - Verified PnL for account 1 (active): -366.0
+2025-09-19 20:17:18,327 - INFO - Verified PnL for account 2 (active): -437.75
+2025-09-19 20:17:18,327 - INFO - PnL verification completed successfully
+2025-09-19 20:17:19,783 - INFO - Verifying PnL from broker...
+2025-09-19 20:17:20,732 - INFO - Verified PnL for account 1 (active): -366.0
+2025-09-19 20:17:21,397 - INFO - Verified PnL for account 2 (active): -437.75
+2025-09-19 20:17:21,397 - INFO - PnL verification completed successfully
+2025-09-19 20:17:27,220 - INFO - Getting token and lot size for trading symbol: SENSEX2592582500CE
+2025-09-19 20:17:27,220 - ERROR - No token found for SENSEX2592582500CE
+2025-09-19 20:17:27,227 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 20:17:27,227 - ERROR - Error in fallback conversion: time data '925' does not match format '%b'
+2025-09-19 20:17:27,227 - WARNING - Lot size not found for SENSEX2592582500CE, using default quantities
+2025-09-19 20:17:27,227 - INFO - Getting token for trading symbol: SENSEX2592582500CE
+2025-09-19 20:17:27,240 - ERROR - No token found for SENSEX2592582500CE
+2025-09-19 20:17:27,256 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 20:17:27,256 - ERROR - Error in fallback conversion: time data '925' does not match format '%b'
+2025-09-19 20:17:27,256 - WARNING - Could not fetch price for SENSEX2592582500CE
+2025-09-19 20:36:53,292 - INFO - Starting master file download in background...
+2025-09-19 20:36:53,292 - INFO - Finding expiry dates (with caching)...
+2025-09-19 20:36:53,485 - INFO - System initialization completed (downloads in background)
+2025-09-19 20:36:53,485 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:36:53,485 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:36:53,597 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 20:36:53,600 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 20:36:53,768 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 20:36:53,769 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 20:36:53,771 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 20:36:53,772 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 20:36:53,834 - INFO - Generated fresh 2FA for account 1: 126880
+2025-09-19 20:36:54,873 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 20:36:54,873 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 20:36:54,973 - INFO - Price input box enabled - no active positions
+2025-09-19 20:36:54,973 - INFO - UI states initialized successfully
+2025-09-19 20:36:56,871 - INFO - Generated fresh 2FA for account 2: 533373
+2025-09-19 20:36:57,364 - INFO - Updated Child (ID: 2) status to 'active': Account logged in successfully
+2025-09-19 20:36:57,366 - INFO - Child account logged in - Order blocking reset
+2025-09-19 20:36:57,853 - INFO - PnL calculated for account 2 (active): -437.75
+2025-09-19 20:37:00,209 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 20:37:00,209 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:37:00,675 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:37:00,675 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:37:00,675 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:37:01,158 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:37:01,158 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 20:37:03,991 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:37:04,439 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:37:04,448 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:37:04,448 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 20:37:07,006 - INFO - Getting token and lot size for trading symbol: SENSEX2592582800CE
+2025-09-19 20:37:07,006 - ERROR - No token found for SENSEX2592582800CE
+2025-09-19 20:37:07,020 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 20:37:07,020 - ERROR - Error in fallback conversion: time data '925' does not match format '%b'
+2025-09-19 20:37:07,020 - WARNING - Lot size not found for SENSEX2592582800CE, using default quantities
+2025-09-19 20:37:07,020 - INFO - Getting token for trading symbol: SENSEX2592582800CE
+2025-09-19 20:37:07,034 - ERROR - No token found for SENSEX2592582800CE
+2025-09-19 20:37:07,048 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 20:37:07,048 - ERROR - Error in fallback conversion: time data '925' does not match format '%b'
+2025-09-19 20:37:07,048 - WARNING - Could not fetch price for SENSEX2592582800CE
+2025-09-19 20:39:52,996 - INFO - Getting token for trading symbol: SENSEX25SEP91600PE
+2025-09-19 20:39:52,999 - INFO - Found token for SENSEX25SEP91600PE: 845009
+2025-09-19 20:39:53,001 - INFO - Getting token for trading symbol: SENSEX2591890200PE
+2025-09-19 20:39:53,003 - ERROR - No token found for SENSEX2591890200PE
+2025-09-19 20:39:53,022 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 20:39:53,023 - ERROR - Error in fallback conversion: time data '918' does not match format '%b'
+2025-09-19 20:39:53,023 - INFO - Getting token for trading symbol: SENSEX5025SEP27600PE
+2025-09-19 20:39:53,029 - ERROR - No token found for SENSEX5025SEP27600PE
+2025-09-19 20:39:53,040 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-19 20:39:53,042 - INFO - Getting token for trading symbol: SENSEX5025SEP27800PE
+2025-09-19 20:39:53,047 - ERROR - No token found for SENSEX5025SEP27800PE
+2025-09-19 20:39:53,056 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-19 20:40:36,711 - INFO - Starting master file download in background...
+2025-09-19 20:40:36,711 - INFO - Finding expiry dates (with caching)...
+2025-09-19 20:40:36,880 - INFO - System initialization completed (downloads in background)
+2025-09-19 20:40:36,880 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:40:36,880 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:40:36,991 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 20:40:36,996 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 20:40:37,165 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 20:40:37,166 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 20:40:37,167 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 20:40:37,167 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 20:40:37,220 - INFO - Generated fresh 2FA for account 1: 085155
+2025-09-19 20:40:38,298 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 20:40:38,314 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 20:40:38,423 - INFO - Price input box enabled - no active positions
+2025-09-19 20:40:38,423 - INFO - UI states initialized successfully
+2025-09-19 20:40:46,839 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 20:40:46,839 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:40:47,628 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:40:47,628 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:40:47,630 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:40:48,100 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:40:48,100 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 20:40:50,854 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:40:51,318 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:40:51,318 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:40:51,318 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 20:40:53,318 - INFO - Getting token and lot size for trading symbol: SENSEX2592582800CE
+2025-09-19 20:40:53,333 - ERROR - No token found for SENSEX2592582800CE
+2025-09-19 20:40:53,342 - INFO - Available SENSEX symbols (first 10): ['SENSEX5025SEP27800PE' 'SENSEX5025SEP27750PE' 'SENSEX5025SEP27700PE'
+ 'SENSEX5025SEP27650PE' 'SENSEX5025SEP27600PE' 'SENSEX5025SEP27550PE'
+ 'SENSEX5025SEP27500PE' 'SENSEX5025SEP27450PE' 'SENSEX5025SEP27400PE'
+ 'SENSEX5025SEP27350PE']
+2025-09-19 20:40:53,342 - ERROR - Error in fallback conversion: time data '925' does not match format '%b'
+2025-09-19 20:40:53,342 - WARNING - Lot size not found for SENSEX2592582800CE, using default quantities
+2025-09-19 20:40:53,342 - INFO - Getting token for trading symbol: SENSEX2592582800CE
+2025-09-19 20:40:53,347 - ERROR - No token found for SENSEX2592582800CE
+2025-09-19 20:40:53,363 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-19 20:40:53,363 - ERROR - Error in fallback conversion: time data '925' does not match format '%b'
+2025-09-19 20:40:53,363 - WARNING - Could not fetch price for SENSEX2592582800CE
+2025-09-19 20:46:32,669 - INFO - Starting master file download in background...
+2025-09-19 20:46:32,670 - INFO - Finding expiry dates (with caching)...
+2025-09-19 20:46:32,847 - INFO - System initialization completed (downloads in background)
+2025-09-19 20:46:32,847 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:46:32,847 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-19 20:46:33,003 - INFO - Resetting account states on startup: account_states.csv
+2025-09-19 20:46:33,009 - INFO - Account states initialized - CSV reset on startup
+2025-09-19 20:46:33,173 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-19 20:46:33,174 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-19 20:46:33,174 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-19 20:46:33,175 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-19 20:46:33,366 - INFO - Generated fresh 2FA for account 1: 923207
+2025-09-19 20:46:34,465 - INFO - PnL calculated for account 1 (active): -366.0
+2025-09-19 20:46:34,466 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-19 20:46:34,566 - INFO - Price input box enabled - no active positions
+2025-09-19 20:46:34,566 - INFO - UI states initialized successfully
+2025-09-19 20:46:38,080 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 20:46:38,080 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:46:38,581 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:46:38,581 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:46:38,581 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:46:39,056 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:46:39,056 - INFO - Updated strikes for SENSEX based on price 82626.23 and option None: [81900, 82000, 82100, 82200, 82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300]
+2025-09-19 20:46:42,542 - INFO - Fetching SENSEX price from BSE with token 1
+2025-09-19 20:46:43,033 - INFO - Successfully fetched SENSEX price: 82626.23
+2025-09-19 20:46:43,033 - INFO - Index LTP for SENSEX: 82626.23
+2025-09-19 20:46:43,033 - INFO - Updated strikes for SENSEX CE based on price 82626.23: [82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800]
+2025-09-19 20:46:44,377 - INFO - Getting token and lot size for trading symbol: SENSEX25SEP82700CE
+2025-09-19 20:46:44,384 - INFO - Found token and lot size for SENSEX25SEP82700CE: 841870, 20
+2025-09-19 20:46:44,384 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:46:44,384 - INFO - Updated quantity options for SENSEX25SEP82700CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-19 20:46:44,384 - INFO - Getting token for trading symbol: SENSEX25SEP82700CE
+2025-09-19 20:46:44,390 - INFO - Found token for SENSEX25SEP82700CE: 841870
+2025-09-19 20:46:44,887 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 20:46:44,890 - INFO - Getting token for trading symbol: SENSEX25SEP82700CE
+2025-09-19 20:46:44,892 - INFO - Found token for SENSEX25SEP82700CE: 841870
+2025-09-19 20:46:44,894 - INFO - Subscribed to live price feed via master account: BFO|841870
+2025-09-19 20:46:44,894 - INFO - Auto-subscribed to SENSEX25SEP82700CE at price 392.85
+2025-09-19 20:46:49,299 - INFO - Fetching NIFTY price from NSE with token 26000
+2025-09-19 20:46:50,042 - INFO - Successfully fetched NIFTY price: 25327.05
+2025-09-19 20:46:50,044 - INFO - Updated strikes for NIFTY CE based on price 25327.05: [25250, 25300, 25350, 25400, 25450, 25500, 25550, 25600, 25650, 25700, 25750, 25800, 25850, 25900, 25950]
+2025-09-19 20:46:50,044 - INFO - Getting token and lot size for trading symbol: NIFTY23SEP25C82700
+2025-09-19 20:46:50,044 - ERROR - No token found for NIFTY23SEP25C82700
+2025-09-19 20:46:50,066 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-19 20:46:50,069 - WARNING - Lot size not found for NIFTY23SEP25C82700, using default quantities
+2025-09-19 20:46:50,072 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 20:46:50,073 - INFO - Fetching NIFTY price from NSE with token 26000
+2025-09-19 20:46:50,755 - INFO - Successfully fetched NIFTY price: 25327.05
+2025-09-19 20:46:50,756 - INFO - Index LTP for NIFTY: 25327.05
+2025-09-19 20:46:50,756 - INFO - Fetching NIFTY price from NSE with token 26000
+2025-09-19 20:46:51,412 - INFO - Successfully fetched NIFTY price: 25327.05
+2025-09-19 20:46:51,412 - INFO - Updated strikes for NIFTY based on price 25327.05 and option None: [25000, 25050, 25100, 25150, 25200, 25250, 25300, 25350, 25400, 25450, 25500, 25550, 25600, 25650, 25700]
+2025-09-19 20:46:53,860 - INFO - Fetching NIFTY price from NSE with token 26000
+2025-09-19 20:46:54,342 - INFO - Successfully fetched NIFTY price: 25327.05
+2025-09-19 20:46:54,342 - INFO - Index LTP for NIFTY: 25327.05
+2025-09-19 20:46:54,358 - INFO - Updated strikes for NIFTY CE based on price 25327.05: [25250, 25300, 25350, 25400, 25450, 25500, 25550, 25600, 25650, 25700, 25750, 25800, 25850, 25900, 25950]
+2025-09-19 20:46:56,174 - INFO - Getting token and lot size for trading symbol: NIFTY23SEP25C25350
+2025-09-19 20:46:56,178 - INFO - Found NFO token and lot size for NIFTY23SEP25C25350: 47763, 75
+2025-09-19 20:46:56,178 - INFO - Generated quantity options for lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-19 20:46:56,178 - INFO - Updated quantity options for NIFTY23SEP25C25350 with lot size 75: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-19 20:46:56,178 - INFO - Getting token for trading symbol: NIFTY23SEP25C25350
+2025-09-19 20:46:56,192 - INFO - Found NFO token for NIFTY23SEP25C25350: 47763
+2025-09-19 20:46:56,762 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 20:46:56,764 - INFO - Getting token for trading symbol: NIFTY23SEP25C25350
+2025-09-19 20:46:56,767 - INFO - Found NFO token for NIFTY23SEP25C25350: 47763
+2025-09-19 20:46:56,767 - INFO - Unsubscribed from previous: BFO|841870
+2025-09-19 20:46:56,767 - INFO - Subscribed to live price feed via master account: NFO|47763
+2025-09-19 20:46:56,767 - INFO - Auto-subscribed to NIFTY23SEP25C25350 at price 81.0
+2025-09-19 20:46:59,981 - INFO - Fetching BANKNIFTY price from NSE with token 26009
+2025-09-19 20:47:00,475 - INFO - Successfully fetched BANKNIFTY price: 55458.85
+2025-09-19 20:47:00,475 - INFO - Updated strikes for BANKNIFTY CE based on price 55458.85: [55300, 55400, 55500, 55600, 55700, 55800, 55900, 56000, 56100, 56200, 56300, 56400, 56500, 56600, 56700]
+2025-09-19 20:47:00,478 - INFO - Getting token and lot size for trading symbol: BANKNIFTY30SEP25C25350
+2025-09-19 20:47:00,478 - ERROR - No token found for BANKNIFTY30SEP25C25350
+2025-09-19 20:47:00,495 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-19 20:47:00,495 - WARNING - Lot size not found for BANKNIFTY30SEP25C25350, using default quantities
+2025-09-19 20:47:00,495 - INFO - Cleared option and strike selections - no active orders
+2025-09-19 20:47:00,495 - INFO - Fetching BANKNIFTY price from NSE with token 26009
+2025-09-19 20:47:00,962 - INFO - Successfully fetched BANKNIFTY price: 55458.85
+2025-09-19 20:47:00,962 - INFO - Index LTP for BANKNIFTY: 55458.85
+2025-09-19 20:47:00,962 - INFO - Fetching BANKNIFTY price from NSE with token 26009
+2025-09-19 20:47:01,443 - INFO - Successfully fetched BANKNIFTY price: 55458.85
+2025-09-19 20:47:01,443 - INFO - Updated strikes for BANKNIFTY based on price 55458.85 and option None: [54800, 54900, 55000, 55100, 55200, 55300, 55400, 55500, 55600, 55700, 55800, 55900, 56000, 56100, 56200]
+2025-09-19 20:47:03,669 - INFO - Fetching BANKNIFTY price from NSE with token 26009
+2025-09-19 20:47:04,151 - INFO - Successfully fetched BANKNIFTY price: 55458.85
+2025-09-19 20:47:04,151 - INFO - Index LTP for BANKNIFTY: 55458.85
+2025-09-19 20:47:04,151 - INFO - Updated strikes for BANKNIFTY CE based on price 55458.85: [55300, 55400, 55500, 55600, 55700, 55800, 55900, 56000, 56100, 56200, 56300, 56400, 56500, 56600, 56700]
+2025-09-19 20:47:05,901 - INFO - Getting token and lot size for trading symbol: BANKNIFTY30SEP25C55600
+2025-09-19 20:47:05,912 - INFO - Found NFO token and lot size for BANKNIFTY30SEP25C55600: 55001, 35
+2025-09-19 20:47:05,912 - INFO - Generated quantity options for lot size 35: ['35', '70', '105', '140', '175', '210', '245', '280', '315', '350']
+2025-09-19 20:47:05,912 - INFO - Updated quantity options for BANKNIFTY30SEP25C55600 with lot size 35: ['35', '70', '105', '140', '175', '210', '245', '280', '315', '350']
+2025-09-19 20:47:05,912 - INFO - Getting token for trading symbol: BANKNIFTY30SEP25C55600
+2025-09-19 20:47:05,920 - INFO - Found NFO token for BANKNIFTY30SEP25C55600: 55001
+2025-09-19 20:47:06,485 - INFO - Modify price fields cleared after auto-fetch
+2025-09-19 20:47:06,485 - INFO - Getting token for trading symbol: BANKNIFTY30SEP25C55600
+2025-09-19 20:47:06,494 - INFO - Found NFO token for BANKNIFTY30SEP25C55600: 55001
+2025-09-19 20:47:06,498 - INFO - Unsubscribed from previous: NFO|47763
+2025-09-19 20:47:06,498 - INFO - Subscribed to live price feed via master account: NFO|55001
+2025-09-19 20:47:06,499 - INFO - Auto-subscribed to BANKNIFTY30SEP25C55600 at price 376.0
