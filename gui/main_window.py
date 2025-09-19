@@ -29,7 +29,7 @@ class MainWindow:
             'default_target_points': 30
         }
 
-        self.root.title("RefleK - Master Account Not Logged In")
+        self.root.title("***Kratik's Soft*** - Master Account Not Logged In")
         self.root.geometry("900x490")
         
         # Center the window on screen
@@ -43,6 +43,9 @@ class MainWindow:
         self.account_manager = AccountManager()
         self.order_manager = OrderManager()
         self.websocket_manager = WebSocketManager(self.account_manager, self.order_manager)
+        
+        # Set up price feed callback for dynamic order management
+        self.order_manager.dynamic_order_manager.set_price_feed_callback(self.get_current_price)
         self.position_manager = PositionManager()
         self.symbol_manager = SymbolManager()
         self.expiry_manager = ExpiryManager()
@@ -82,6 +85,9 @@ class MainWindow:
         # Set order state callback for cross-account coordination
         self.websocket_manager.set_order_state_callback(self.update_order_state)
         
+        # Set order rejection callback for buy order rejections
+        self.websocket_manager.set_order_rejection_callback(self.handle_buy_order_rejection)
+        
         # GUI variables
         self.setup_variables()
         
@@ -97,7 +103,7 @@ class MainWindow:
     def initialize_ui_states(self):
         """Initialize UI states after GUI is fully created"""
         try:
-            # Initialize Verify PnL button state
+            # Initialize Show PnL button state
             self.update_verify_pnl_button_state()
             
             # Initialize price input state
@@ -159,8 +165,8 @@ class MainWindow:
         # PnL variables
         self.master_pnl_value = tk.StringVar()
         self.child_pnl_value = tk.StringVar()
-        self.master_pnl_value.set("--")
-        self.child_pnl_value.set("--")
+        self.master_pnl_value.set("")  # Hidden by default
+        self.child_pnl_value.set("")   # Hidden by default
         
         # SL and Target monitoring variables
         self.sl_monitoring_active = False
@@ -181,6 +187,21 @@ class MainWindow:
         # Cross-account coordination variables
         self.master_order_state = None  # PENDING, OPEN, FILLED, REJECTED, CANCELLED
         self.child_order_state = None
+        
+        # Master account state management
+        self.master_account_blocked = False
+        self.master_block_reason = ""
+        
+        # Child account state management
+        self.child_account_blocked = False
+        self.child_block_reason = ""
+        
+        # Account blocking due to order rejection
+        self.master_account_rejected_blocked = False
+        self.child_account_rejected_blocked = False
+        
+        # Price feed management for dynamic orders
+        self.last_known_prices = {}  # Store last known price for each symbol
         self.order_coordination_active = False
         self.coordination_timer = None
         
@@ -261,7 +282,7 @@ class MainWindow:
         self.style.map("LoginError.TButton",
                       background=[('active', 'lightcoral')])
         
-        # Verify PnL button style
+        # Show PnL button style
         self.style.configure("VerifyButton.TButton",
                            background="orange",
                            relief="solid",
@@ -298,9 +319,10 @@ class MainWindow:
         )
         self.premium_price_box.pack(side=tk.LEFT, padx=5)
         
-        # Compact PnL display
+        # Compact PnL display (hidden by default)
         # Master PnL
-        tk.Label(self.login_frame, text="M PnL:", font=('Helvetica', 9, 'bold')).pack(side=tk.LEFT, padx=5)
+        self.master_pnl_label = tk.Label(self.login_frame, text="M PnL:", font=('Helvetica', 9, 'bold'))
+        self.master_pnl_label.pack(side=tk.LEFT, padx=5)
         self.master_pnl_box = tk.Entry(
             self.login_frame, textvariable=self.master_pnl_value, 
             width=8, state='readonly', font=('Helvetica', 9, 'bold'),
@@ -309,7 +331,8 @@ class MainWindow:
         self.master_pnl_box.pack(side=tk.LEFT, padx=2)
         
         # Child PnL
-        tk.Label(self.login_frame, text="C PnL:", font=('Helvetica', 9, 'bold')).pack(side=tk.LEFT, padx=5)
+        self.child_pnl_label = tk.Label(self.login_frame, text="C PnL:", font=('Helvetica', 9, 'bold'))
+        self.child_pnl_label.pack(side=tk.LEFT, padx=5)
         self.child_pnl_box = tk.Entry(
             self.login_frame, textvariable=self.child_pnl_value, 
             width=8, state='readonly', font=('Helvetica', 9, 'bold'),
@@ -317,9 +340,13 @@ class MainWindow:
         )
         self.child_pnl_box.pack(side=tk.LEFT, padx=2)
         
-        # Verify PnL button
+        # Initially clear PnL display (but keep widgets visible)
+        self.master_pnl_value.set("")
+        self.child_pnl_value.set("")
+        
+        # Show PnL button
         self.verify_pnl_button = ttk.Button(
-            self.login_frame, text="Verify PnL", 
+            self.login_frame, text="Show PnL", 
             command=self.verify_pnl_from_broker,
             width=12, style="VerifyButton.TButton",
             state='normal'  # Initially enabled
@@ -411,9 +438,9 @@ class MainWindow:
         )
         self.price1_box.pack(side=tk.LEFT, padx=5)
         
-        # Exit button
+        # Sell Order button
         self.exit_button = ttk.Button(
-            self.trading_frame, text="EXIT", 
+            self.trading_frame, text="SELL Order", 
 
             command=self.place_exit_orders, width=20, style="RedButton.TButton",
             state="disabled"
@@ -699,7 +726,7 @@ class MainWindow:
                 self.websocket_manager.connect_feed(1)
 
                 # Update window title with master account name
-                self.root.title(f"RefleK - Master Account {client_name} Logged in")
+                self.root.title(f"***Kratik's Soft*** - Master Account {client_name} Logged in")
                 self.master_account_name.set(client_name)
                 # Update button text to show logged in status
                 self.update_login_button_text(1, client_name)
@@ -743,7 +770,7 @@ class MainWindow:
                 
                 # Update window title if this is the master account
                 if account_num == 1:
-                    self.root.title(f"RefleK - Master Account {client_name} Logged in")
+                    self.root.title(f"***Kratik's Soft*** - Master Account {client_name} Logged in")
                     self.master_account_name.set(client_name)
                     
                     # Automatically login child account after master account login
@@ -1061,10 +1088,17 @@ class MainWindow:
     def fetch_index_ltp_and_get_price(self, index):
         """Fetch and display Index LTP, return the price for further use"""
         try:
+            # Check if master account is logged in
+            if not self.account_manager.is_account_active(1):
+                self.index_ltp_value.set("Master Not Logged In")
+                applicationLogger.warning(f"Cannot fetch Index LTP for {index}: Master account not logged in")
+                return None
+            
             # Get master account API
             api = self.account_manager.get_api(1)
             if not api:
                 self.index_ltp_value.set("No API")
+                applicationLogger.warning(f"Cannot fetch Index LTP for {index}: API not available")
                 return None
             
             # Get Index LTP
@@ -1339,8 +1373,7 @@ class MainWindow:
                     # Calculate unrealized PnL
                     unrealized_pnl = (live_price - buy_price) * qty
                     
-                    # Update PnL display
-                    self.update_pnl_display(account_num, unrealized_pnl)
+                    # PnL display removed - only shown when Show PnL is pressed
                     
                     # Mark as needing verification
                     position['needs_verification'] = True
@@ -1351,10 +1384,14 @@ class MainWindow:
             applicationLogger.error(f"Error calculating local PnL: {e}")
     
     def verify_pnl_from_broker(self):
-        """Verify PnL by fetching actual data from broker"""
+        """Verify PnL by fetching actual data from broker and show for 1 second"""
         try:
             applicationLogger.info("Verifying PnL from broker...")
             
+            # Show PnL display
+            self.show_pnl_display()
+            
+            pnl_found = False
             for account_num in [1, 2]:  # Master and child accounts
                 position = self.position_data[account_num]
                 
@@ -1371,20 +1408,32 @@ class MainWindow:
                         position['verified_pnl'] = broker_pnl
                         position['needs_verification'] = False
                         
-                        # Update display
+                        # Update PnL display
                         self.update_pnl_display(account_num, broker_pnl)
+                        pnl_found = True
                         
                         status = "blocked" if self.account_manager.accounts[account_num].get('blocked', False) else "active"
                         applicationLogger.info(f"Verified PnL for account {account_num} ({status}): {broker_pnl}")
             
-            # Log verification complete (no popup)
+            if not pnl_found:
+                applicationLogger.warning("No active accounts found for PnL verification")
+                # Set empty values to show that button was pressed
+                self.master_pnl_value.set("No Data")
+                self.child_pnl_value.set("No Data")
+            
+            # Log verification complete
             applicationLogger.info("PnL verification completed successfully")
+            
+            # Schedule hiding PnL display after 1 second
+            self.root.after(1000, self.hide_pnl_display)
             
         except Exception as e:
             applicationLogger.error(f"Error verifying PnL from broker: {e}")
+            # Hide PnL display even if there's an error
+            self.root.after(1000, self.hide_pnl_display)
     
     def update_verify_pnl_button_state(self):
-        """Update Verify PnL button state based on active positions"""
+        """Update Show PnL button state based on active positions"""
         try:
             # Check if any account has an active position
             has_active_position = any(
@@ -1395,13 +1444,30 @@ class MainWindow:
             # Disable button if any position is active, enable otherwise
             if has_active_position:
                 self.verify_pnl_button.config(state='disabled')
-                applicationLogger.debug("Verify PnL button disabled - active position detected")
+                applicationLogger.debug("Show PnL button disabled - active position detected")
             else:
                 self.verify_pnl_button.config(state='normal')
-                applicationLogger.debug("Verify PnL button enabled - no active positions")
+                applicationLogger.debug("Show PnL button enabled - no active positions")
                 
         except Exception as e:
-            applicationLogger.error(f"Error updating Verify PnL button state: {e}")
+            applicationLogger.error(f"Error updating Show PnL button state: {e}")
+    
+    def hide_pnl_display(self):
+        """Clear PnL display values"""
+        try:
+            self.master_pnl_value.set("")
+            self.child_pnl_value.set("")
+            applicationLogger.debug("PnL display values cleared")
+        except Exception as e:
+            applicationLogger.error(f"Error clearing PnL display: {e}")
+    
+    def show_pnl_display(self):
+        """Show PnL display (widgets are always visible, just ensure values are set)"""
+        try:
+            # Widgets are always visible, this method just ensures they're ready
+            applicationLogger.debug("PnL display ready to show values")
+        except Exception as e:
+            applicationLogger.error(f"Error preparing PnL display: {e}")
     
     def update_price_input_state(self):
         """Update price input box state based on active positions"""
@@ -1496,7 +1562,7 @@ class MainWindow:
             if 2 in self.account_manager.get_all_active_accounts():
                 self.exit_child_button.config(state='normal')
                 
-            applicationLogger.info("Exit buttons enabled after buy order completion")
+            applicationLogger.info("Sell Order buttons enabled after buy order completion")
             
             # Track position data for local PnL calculation
             if account_num in self.position_data:
@@ -1510,7 +1576,7 @@ class MainWindow:
                 
                 applicationLogger.info(f"Position tracked for account {account_num}: {symbol} @ {price}, Qty: {qty}")
             
-            # Update Verify PnL button state
+            # Update Show PnL button state
             self.update_verify_pnl_button_state()
             
             # Update price input state
@@ -1541,7 +1607,7 @@ class MainWindow:
                 
                 applicationLogger.info(f"Position cleared for account {account_num} after sell completion")
             
-            # Update Verify PnL button state
+            # Update Show PnL button state
             self.update_verify_pnl_button_state()
             
             # Update price input state
@@ -1549,6 +1615,18 @@ class MainWindow:
             
             # Update PnL after sell order completion
             self.update_pnl_on_trade(account_num)
+            
+            # Block accounts when lifecycle completes
+            if account_num == 1:  # Master account
+                self.block_master_account("Master lifecycle completed")
+                # If Child was already blocked, keep it blocked until Release button
+                if self.is_child_account_blocked():
+                    applicationLogger.info("Child account remains blocked until Release button is pressed")
+            elif account_num == 2:  # Child account
+                self.block_child_account("Child lifecycle completed")
+                # If Master was already blocked, keep it blocked until Release button
+                if self.is_master_account_blocked():
+                    applicationLogger.info("Master account remains blocked until Release button is pressed")
             
             # Check if both master and child sell orders are complete
             self.check_and_reset_after_sell_complete()
@@ -1589,7 +1667,7 @@ class MainWindow:
             applicationLogger.error(f"Error checking sell order completion: {e}")
     
     def reset_to_buy_order_status(self):
-        """Reset UI to buy order status after sell orders are complete"""
+        """Reset UI after sell orders are complete - keep BUY button disabled until Release is pressed"""
         try:
             # Reset order status displays
             if self.account_manager.accounts[1]['active']:
@@ -1597,8 +1675,11 @@ class MainWindow:
             if self.account_manager.accounts[2]['active']:
                 self.child_order_status.set(self.get_ready_status_message(2))
             
-            # Re-enable buy button
-            self.buy_button.config(state='normal', text="BUY")
+            # Keep buy button disabled - user must press Release button to enable
+            self.buy_button.config(state='disabled', text="Press RELEASE to Enable")
+            
+            # Keep price box disabled - user must press Release button to enable
+            self.price_box.config(state='disabled', bg='lightgray')
             
             # Disable exit-related buttons
             self.exit_button.config(state='disabled')
@@ -1618,7 +1699,7 @@ class MainWindow:
             self.order_numbers = {1: None, 2: None}
             self.exit_order_numbers = {1: None, 2: None}
             
-            applicationLogger.info("UI reset to buy order status after sell completion")
+            applicationLogger.info("UI reset after sell completion - BUY button and Price Box disabled until Release is pressed")
             
         except Exception as e:
             applicationLogger.error(f"Error resetting to buy order status: {e}")
@@ -1665,8 +1746,74 @@ class MainWindow:
             applicationLogger.error(f"Error handling margin shortfall: {e}")
             messagebox.showerror("Error", f"Error handling margin shortfall: {e}")
     
-    def _reset_ui_after_margin_shortfall(self):
-        """Reset UI to initial state after margin shortfall"""
+    def _handle_buy_order_failure(self, failed_accounts, successful_orders, all_active_accounts):
+        """Handle buy order failure - cancel entire lifecycle"""
+        try:
+            applicationLogger.error(f"Handling buy order failure for accounts: {failed_accounts}")
+            
+            # Cancel all successful orders to maintain consistency
+            if successful_orders:
+                applicationLogger.info(f"Cancelling successful orders: {successful_orders}")
+                self._cancel_successful_orders(successful_orders)
+            
+            # Block all accounts that were supposed to be active
+            for account_num in all_active_accounts:
+                if account_num == 1:
+                    self.block_master_account("Buy order placement failed")
+                elif account_num == 2:
+                    self.block_child_account("Buy order placement failed")
+            
+            # Create error message
+            error_msg = "BUY ORDER PLACEMENT FAILED!\n\n"
+            error_msg += "One or more accounts failed to place buy orders.\n\n"
+            
+            if failed_accounts:
+                error_msg += "Failed Accounts:\n"
+                for account_num in failed_accounts:
+                    account_name = self.get_account_name(account_num)
+                    error_msg += f"• {account_name}\n"
+            
+            if successful_orders:
+                error_msg += "\nSuccessfully Placed Orders (now cancelled):\n"
+                for account_num, order_num in successful_orders:
+                    account_name = self.get_account_name(account_num)
+                    error_msg += f"• {account_name}: Order {order_num}\n"
+            
+            error_msg += "\nAll orders have been cancelled to maintain consistency.\n"
+            error_msg += "Please check your accounts and try again."
+            
+            # Show error popup
+            messagebox.showerror("Buy Order Failure", error_msg)
+            
+            # Reset UI to initial state
+            self._reset_ui_after_order_failure()
+            
+        except Exception as e:
+            applicationLogger.error(f"Error handling buy order failure: {e}")
+            messagebox.showerror("Error", f"Error handling buy order failure: {e}")
+    
+    def _cancel_successful_orders(self, successful_orders):
+        """Cancel all successful orders to maintain consistency"""
+        try:
+            for account_num, order_num in successful_orders:
+                if order_num:
+                    api = self.account_manager.get_api(account_num)
+                    if api:
+                        # Cancel the order
+                        cancel_result = api.cancel_order(order_num)
+                        if cancel_result and cancel_result.get('stat') == 'Ok':
+                            applicationLogger.info(f"Successfully cancelled order {order_num} for account {account_num}")
+                        else:
+                            applicationLogger.error(f"Failed to cancel order {order_num} for account {account_num}")
+                            
+                        # Clear the order number
+                        self.order_numbers[account_num] = None
+                        
+        except Exception as e:
+            applicationLogger.error(f"Error cancelling successful orders: {e}")
+    
+    def _reset_ui_after_order_failure(self):
+        """Reset UI to initial state after order failure"""
         try:
             # Re-enable buy button
             self.buy_button.config(state='normal', text="BUY")
@@ -1694,10 +1841,17 @@ class MainWindow:
             # Reset SL and Target monitoring
             self.reset_sl_target_monitoring()
             
-            applicationLogger.info("UI reset after margin shortfall")
+            # Re-enable price box
+            self.price_box.config(state='normal', bg='white')
+            
+            # Clear original buy price and modify box
+            self.original_buy_price = None
+            self.modify_buy_value.set("")
+            
+            applicationLogger.info("UI reset after buy order failure")
             
         except Exception as e:
-            applicationLogger.error(f"Error resetting UI after margin shortfall: {e}")
+            applicationLogger.error(f"Error resetting UI after order failure: {e}")
     
     def logout_child_account(self):
         """Block child account from sending orders while keeping PnL active"""
@@ -1735,6 +1889,17 @@ class MainWindow:
     def place_buy_orders(self):
         """Place buy orders across all active accounts"""
         try:
+            # Check if Master account is blocked
+            if self.is_master_account_blocked():
+                applicationLogger.warning(f"Master account is blocked: {self.master_block_reason}")
+                return
+            
+            # Check if Child account is blocked
+            if self.is_child_account_blocked():
+                applicationLogger.warning(f"Child account is blocked: {self.child_block_reason}")
+                return
+            
+            # No global rejection blocking check - we'll handle individual account blocking in the order logic
 
             # Check if buy button is disabled (orders already placed)
             if self.buy_button['state'] == 'disabled':
@@ -1803,6 +1968,17 @@ class MainWindow:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from buy orders")
             
+            # Remove accounts that are blocked (rejection or general blocking)
+            if (self.master_account_rejected_blocked or self.master_account_blocked) and 1 in active_accounts:
+                block_reason = "rejection" if self.master_account_rejected_blocked else "general blocking"
+                active_accounts.remove(1)
+                applicationLogger.warning(f"Master account is blocked due to {block_reason} - excluding from buy orders")
+            
+            if (self.child_account_rejected_blocked or self.child_account_blocked) and 2 in active_accounts:
+                block_reason = "rejection" if self.child_account_rejected_blocked else "general blocking"
+                active_accounts.remove(2)
+                applicationLogger.warning(f"Child account is blocked due to {block_reason} - excluding from buy orders")
+            
             applicationLogger.info(f"Active accounts: {active_accounts}")
             
             if not active_accounts:
@@ -1817,7 +1993,7 @@ class MainWindow:
             applicationLogger.info(f"Trading symbol: {trading_symbol}, Price: {price}")
             applicationLogger.info(f"Quantities: {quantities}")
             
-            # Place orders
+            # Place regular buy orders (limit orders)
             order_numbers = self.order_manager.place_buy_orders(
                 apis, quantities, trading_symbol, price, active_flags
             )
@@ -1827,7 +2003,23 @@ class MainWindow:
                 self._handle_margin_shortfall()
                 return
             
-            # Update order numbers
+            # Check for any order placement failures and handle accordingly
+            failed_orders = []
+            successful_orders = []
+            
+            for i, order_num in enumerate(order_numbers):
+                if order_num:
+                    successful_orders.append((active_accounts[i], order_num))
+                else:
+                    failed_orders.append(active_accounts[i])
+            
+            # If any orders failed, cancel entire lifecycle
+            if failed_orders:
+                applicationLogger.error(f"Order placement failed for accounts: {failed_orders}")
+                self._handle_buy_order_failure(failed_orders, successful_orders, active_accounts)
+                return
+            
+            # Update order numbers for successful orders
             for i, order_num in enumerate(order_numbers):
                 if order_num:
                     self.order_numbers[active_accounts[i]] = order_num
@@ -1862,7 +2054,8 @@ class MainWindow:
             
             # Enable buy-related buttons for order management
             self.cancel_buy_button.config(state='normal')
-            self.modify_buy_button.config(state='normal')
+            # Don't enable modify button yet - wait for order state confirmation
+            self.modify_buy_button.config(state='disabled')
             
             # Enable individual cancel buttons based on active accounts
             if 1 in active_accounts:
@@ -1874,7 +2067,7 @@ class MainWindow:
             
             # Keep exit button disabled until buy orders are completed
             self.exit_button.config(state='disabled')
-            applicationLogger.info("Exit button kept disabled until buy orders are completed")
+            applicationLogger.info("Sell Order button kept disabled until buy orders are completed")
             
         except Exception as e:
 
@@ -1898,6 +2091,7 @@ class MainWindow:
             order_type: 'LMT' for limit orders, 'MKT' for market orders
         """
         try:
+            # No global rejection blocking check - we'll handle individual account blocking in the order logic
 
             # Check if exit button is disabled (orders already placed)
             if self.exit_button['state'] == 'disabled':
@@ -1928,14 +2122,14 @@ class MainWindow:
             price = float(self.price1_value.get())
             qty1 = int(self.qty1_var.get())
             
-            # Stop target and trailing monitoring when EXIT button is pressed
+            # Stop target and trailing monitoring when SELL Order button is pressed
             if self.target_monitoring_active:
                 self.stop_target_monitoring()
-                applicationLogger.info("Target monitoring stopped due to EXIT button press")
+                applicationLogger.info("Target monitoring stopped due to SELL Order button press")
             
             if self.trailing_active:
                 self.stop_trailing_monitoring()
-                applicationLogger.info("Trailing monitoring stopped due to EXIT button press")
+                applicationLogger.info("Trailing monitoring stopped due to SELL Order button press")
             
             # Log current position status for debugging
             accounts_with_positions = self.get_accounts_with_open_positions()
@@ -1986,6 +2180,17 @@ class MainWindow:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from exit orders")
             
+            # Remove accounts that are blocked (rejection or general blocking)
+            if (self.master_account_rejected_blocked or self.master_account_blocked) and 1 in active_accounts:
+                block_reason = "rejection" if self.master_account_rejected_blocked else "general blocking"
+                active_accounts.remove(1)
+                applicationLogger.warning(f"Master account is blocked due to {block_reason} - excluding from exit orders")
+            
+            if (self.child_account_rejected_blocked or self.child_account_blocked) and 2 in active_accounts:
+                block_reason = "rejection" if self.child_account_rejected_blocked else "general blocking"
+                active_accounts.remove(2)
+                applicationLogger.warning(f"Child account is blocked due to {block_reason} - excluding from exit orders")
+            
             applicationLogger.info(f"Accounts with open positions for exit: {active_accounts}")
             
             if not active_accounts:
@@ -2023,9 +2228,9 @@ class MainWindow:
                 self.child_order_status.set("Child Not Logged In")
             
             # Disable exit button and update text with price
-            self.exit_button.config(state='disabled', text=f"ExitOrderPlaced@{price}")
+            self.exit_button.config(state='disabled', text=f"SellOrderPlaced@{price}")
             self.exit_all_button.config(state='disabled')
-            applicationLogger.info("Exit button disabled to prevent duplicate orders")
+            applicationLogger.info("Sell Order button disabled to prevent duplicate orders")
             
             # Enable exit-related buttons for order management
             self.cancel_exit_button.config(state='normal')
@@ -2047,6 +2252,342 @@ class MainWindow:
             else:
                 self.child_order_status.set("Child Not Logged In")
     
+    def place_dynamic_stop_loss_orders(self, price):
+        """Place dynamic stop loss orders (sell) with price adjustment"""
+        try:
+            # Get active accounts
+            active_accounts = []
+            apis = []
+            quantities = []
+            active_flags = []
+            
+            for i in range(1, 3):  # Master and Child accounts
+                if self.account_manager.accounts[i]['active']:
+                    # Check if account is blocked
+                    if (i == 1 and self.is_master_account_blocked()) or (i == 2 and self.is_child_account_blocked()):
+                        applicationLogger.warning(f"Account {i} is blocked, skipping dynamic stop loss order")
+                        active_flags.append(False)
+                        continue
+                    
+                    active_accounts.append(i)
+                    apis.append(self.account_manager.accounts[i]['api'])
+                    quantities.append(self.account_manager.accounts[i]['quantity'])
+                    active_flags.append(True)
+                else:
+                    active_flags.append(False)
+            
+            if not active_accounts:
+                applicationLogger.warning("No active accounts for dynamic stop loss orders")
+                return
+            
+            # Get trading symbol
+            trading_symbol = self.trading_symbol_var.get()
+            
+            applicationLogger.info(f"Placing dynamic stop loss orders for accounts: {active_accounts}")
+            applicationLogger.info(f"Trading symbol: {trading_symbol}, Price: {price}")
+            applicationLogger.info(f"Quantities: {quantities}")
+            
+            # Place dynamic stop loss orders
+            order_numbers = self.order_manager.place_dynamic_stop_loss_orders(
+                apis, quantities, trading_symbol, price, active_flags
+            )
+            
+            # Update order numbers
+            for i, order_num in enumerate(order_numbers):
+                if order_num and i < len(active_accounts):
+                    account_index = active_accounts[i] - 1  # Convert to 0-based index
+                    self.order_numbers[account_index] = order_num
+            
+            applicationLogger.info("Dynamic stop loss orders placed successfully")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error placing dynamic stop loss orders: {e}")
+            # Update order status displays to show error
+            if self.account_manager.accounts[1]['active']:
+                self.master_order_status.set("Error placing stop loss orders")
+            if self.account_manager.accounts[2]['active']:
+                self.child_order_status.set("Error placing stop loss orders")
+    
+    def place_dynamic_target_orders(self, price):
+        """Place dynamic target orders (sell) with price adjustment"""
+        try:
+            # Get active accounts
+            active_accounts = []
+            apis = []
+            quantities = []
+            active_flags = []
+            
+            for i in range(1, 3):  # Master and Child accounts
+                if self.account_manager.accounts[i]['active']:
+                    # Check if account is blocked
+                    if (i == 1 and self.is_master_account_blocked()) or (i == 2 and self.is_child_account_blocked()):
+                        applicationLogger.warning(f"Account {i} is blocked, skipping dynamic target order")
+                        active_flags.append(False)
+                        continue
+                    
+                    active_accounts.append(i)
+                    apis.append(self.account_manager.accounts[i]['api'])
+                    quantities.append(self.account_manager.accounts[i]['quantity'])
+                    active_flags.append(True)
+                else:
+                    active_flags.append(False)
+            
+            if not active_accounts:
+                applicationLogger.warning("No active accounts for dynamic target orders")
+                return
+            
+            # Get trading symbol
+            trading_symbol = self.trading_symbol_var.get()
+            
+            applicationLogger.info(f"Placing dynamic target orders for accounts: {active_accounts}")
+            applicationLogger.info(f"Trading symbol: {trading_symbol}, Price: {price}")
+            applicationLogger.info(f"Quantities: {quantities}")
+            
+            # Place dynamic target orders
+            order_numbers = self.order_manager.place_dynamic_target_orders(
+                apis, quantities, trading_symbol, price, active_flags
+            )
+            
+            # Update order numbers
+            for i, order_num in enumerate(order_numbers):
+                if order_num and i < len(active_accounts):
+                    account_index = active_accounts[i] - 1  # Convert to 0-based index
+                    self.order_numbers[account_index] = order_num
+            
+            applicationLogger.info("Dynamic target orders placed successfully")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error placing dynamic target orders: {e}")
+            # Update order status displays to show error
+            if self.account_manager.accounts[1]['active']:
+                self.master_order_status.set("Error placing target orders")
+            if self.account_manager.accounts[2]['active']:
+                self.child_order_status.set("Error placing target orders")
+    
+    def get_current_price(self, symbol: str) -> Optional[float]:
+        """
+        Get current price for a symbol (used by dynamic order management)
+        Uses last known price if current price is not available
+        
+        Args:
+            symbol: Trading symbol
+            
+        Returns:
+            float: Current price, None if not available
+        """
+        try:
+            # First try to get current price from the premium price display
+            current_price_str = self.premium_price_value.get()
+            if current_price_str:
+                price = float(current_price_str)
+                # Update last known price
+                self.last_known_prices[symbol] = price
+                return price
+            
+            # If current price is not available, use last known price
+            if symbol in self.last_known_prices:
+                applicationLogger.debug(f"Using last known price for {symbol}: {self.last_known_prices[symbol]}")
+                return self.last_known_prices[symbol]
+            
+            applicationLogger.warning(f"No price available for {symbol} (current or last known)")
+            return None
+            
+        except Exception as e:
+            applicationLogger.error(f"Error getting current price for {symbol}: {e}")
+            return None
+    
+    def block_master_account(self, reason: str):
+        """
+        Block Master account from all operations
+        
+        Args:
+            reason: Reason for blocking (e.g., "Order cancelled", "Lifecycle completed")
+        """
+        self.master_account_blocked = True
+        self.master_block_reason = reason
+        applicationLogger.warning(f"Master account blocked: {reason}")
+        
+        # Update Master order status to show blocked state
+        self.master_order_status.set(f"Master Blocked: {reason}")
+    
+    def unblock_master_account(self):
+        """Unblock Master account (called by Release button)"""
+        self.master_account_blocked = False
+        self.master_block_reason = ""
+        applicationLogger.info("Master account unblocked via Release button")
+        
+        # Reset Master order status
+        if self.account_manager.accounts[1]['active']:
+            self.master_order_status.set("Master Account Ready")
+        else:
+            self.master_order_status.set("Master Not Logged In")
+    
+    def is_master_account_blocked(self) -> bool:
+        """Check if Master account is blocked"""
+        return self.master_account_blocked or self.master_account_rejected_blocked
+    
+    def is_child_account_blocked(self) -> bool:
+        """Check if Child account is blocked"""
+        return self.child_account_blocked or self.child_account_rejected_blocked
+    
+    def is_any_account_rejected_blocked(self) -> bool:
+        """Check if any account is blocked due to order rejection"""
+        return self.master_account_rejected_blocked or self.child_account_rejected_blocked
+    
+    def get_blocked_accounts_info(self) -> str:
+        """Get information about blocked accounts"""
+        blocked_info = []
+        if self.master_account_rejected_blocked:
+            blocked_info.append(f"Master: {self.master_block_reason}")
+        if self.child_account_rejected_blocked:
+            blocked_info.append(f"Child: {self.child_block_reason}")
+        return "; ".join(blocked_info) if blocked_info else "No accounts blocked"
+    
+    def update_window_title(self):
+        """Update window title based on account status"""
+        try:
+            if self.is_any_account_rejected_blocked():
+                blocked_info = self.get_blocked_accounts_info()
+                self.root.title(f"***Kratik's Soft*** - ACCOUNTS BLOCKED: {blocked_info}")
+            else:
+                # Get master account name
+                master_name = self.account_manager.accounts[1].get('client_name', 'Not Logged In')
+                if master_name != 'Not Logged In':
+                    self.root.title(f"***Kratik's Soft*** - Master Account {master_name} Logged in")
+                else:
+                    self.root.title("***Kratik's Soft*** - Master Account Not Logged In")
+        except Exception as e:
+            applicationLogger.error(f"Error updating window title: {e}")
+    
+    def handle_buy_order_rejection(self, account_num: int, symbol: str, rejection_reason: str):
+        """Handle buy order rejection - block account silently"""
+        try:
+            applicationLogger.warning(f"Buy order rejected for account {account_num} - Symbol: {symbol}, Reason: {rejection_reason}")
+            
+            # Block the account completely
+            self.block_account_on_rejection(account_num, rejection_reason)
+            
+            # Disable all trading buttons for this account
+            self.disable_trading_buttons_for_account(account_num)
+            
+            # No popup - just log the blocking
+            account_name = "Master" if account_num == 1 else "Child"
+            applicationLogger.info(f"{account_name} account blocked due to buy order rejection - no further orders allowed")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error handling buy order rejection for account {account_num}: {e}")
+
+    def block_account_on_rejection(self, account_num: int, reason: str):
+        """Block account when order is rejected"""
+        try:
+            if account_num == 1:  # Master account
+                self.master_account_rejected_blocked = True
+                self.master_block_reason = f"Order Rejected: {reason}"
+                applicationLogger.warning(f"Master account blocked due to order rejection: {reason}")
+                self.master_order_status.set(f"BLOCKED - {reason}")
+            elif account_num == 2:  # Child account
+                self.child_account_rejected_blocked = True
+                self.child_block_reason = f"Order Rejected: {reason}"
+                applicationLogger.warning(f"Child account blocked due to order rejection: {reason}")
+                self.child_order_status.set(f"BLOCKED - {reason}")
+            
+            # Update window title to show blocked status
+            self.update_window_title()
+        except Exception as e:
+            applicationLogger.error(f"Error blocking account {account_num} on rejection: {e}")
+    
+    def disable_trading_buttons_for_account(self, account_num: int):
+        """Disable all trading buttons for a specific account"""
+        try:
+            if account_num == 1:  # Master account
+                # Disable master account specific buttons
+                self.login_button1.config(state='disabled', text="Master - BLOCKED")
+                applicationLogger.info("Master account trading buttons disabled due to order rejection")
+            elif account_num == 2:  # Child account
+                # Disable child account specific buttons
+                self.login_button2.config(state='disabled', text="Child - BLOCKED")
+                applicationLogger.info("Child account trading buttons disabled due to order rejection")
+            
+            # Disable main trading buttons if any account is blocked
+            if self.is_any_account_rejected_blocked():
+                self.buy_button.config(state='disabled', text="BLOCKED - Order Rejected")
+                self.exit_button.config(state='disabled', text="BLOCKED - Order Rejected")
+                self.cancel_buy_button.config(state='disabled')
+                self.cancel_exit_button.config(state='disabled')
+                self.modify_buy_button.config(state='disabled')
+                self.modify_exit_button.config(state='disabled')
+                applicationLogger.info("Main trading buttons disabled due to account rejection")
+                
+        except Exception as e:
+            applicationLogger.error(f"Error disabling trading buttons for account {account_num}: {e}")
+
+    def unblock_account_on_release(self, account_num: int):
+        """Unblock account when release button is pressed"""
+        try:
+            if account_num == 1:  # Master account
+                self.master_account_rejected_blocked = False
+                self.master_block_reason = ""
+                applicationLogger.info("Master account unblocked via Release button")
+                # Update status based on account state
+                if self.account_manager.accounts[1]['active']:
+                    self.master_order_status.set("Master Account Ready")
+                    # Re-enable master account buttons
+                    self.login_button1.config(state='normal', text="Master - Ready")
+                else:
+                    self.master_order_status.set("Master Not Logged In")
+            elif account_num == 2:  # Child account
+                self.child_account_rejected_blocked = False
+                self.child_block_reason = ""
+                applicationLogger.info("Child account unblocked via Release button")
+                # Update status based on account state
+                if self.account_manager.accounts[2]['active']:
+                    self.child_order_status.set("Child Account Ready")
+                    # Re-enable child account buttons
+                    self.login_button2.config(state='normal', text="Child - Ready")
+                else:
+                    self.child_order_status.set("Child Not Logged In")
+            
+            # Re-enable main trading buttons if no accounts are blocked
+            if not self.is_any_account_rejected_blocked():
+                self.buy_button.config(state='normal', text="BUY")
+                self.exit_button.config(state='normal', text="EXIT")
+                applicationLogger.info("Main trading buttons re-enabled after account unblock")
+            
+            # Update window title after unblocking
+            self.update_window_title()
+        except Exception as e:
+            applicationLogger.error(f"Error unblocking account {account_num} on release: {e}")
+    
+    def block_child_account(self, reason: str):
+        """
+        Block Child account from all operations
+        
+        Args:
+            reason: Reason for blocking (e.g., "Order cancelled", "Lifecycle completed")
+        """
+        self.child_account_blocked = True
+        self.child_block_reason = reason
+        applicationLogger.warning(f"Child account blocked: {reason}")
+        
+        # Update Child order status to show blocked state
+        self.child_order_status.set(f"Child Blocked: {reason}")
+    
+    def unblock_child_account(self):
+        """Unblock Child account (called by Release button)"""
+        self.child_account_blocked = False
+        self.child_block_reason = ""
+        applicationLogger.info("Child account unblocked via Release button")
+        
+        # Reset Child order status
+        if self.account_manager.accounts[2]['active']:
+            self.child_order_status.set("Child Account Ready")
+        else:
+            self.child_order_status.set("Child Not Logged In")
+    
+    def is_child_account_blocked(self) -> bool:
+        """Check if Child account is blocked"""
+        return self.child_account_blocked
+    
     def cancel_buy_orders(self):
         """Cancel buy orders across all active accounts"""
         try:
@@ -2057,19 +2598,34 @@ class MainWindow:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from cancel buy orders")
             
-            apis = [self.account_manager.get_api(i) for i in active_accounts]
-            order_numbers = [self.order_numbers[i] for i in active_accounts]
-            active_flags = [True] * len(active_accounts)
+            # Only include accounts that have valid order numbers
+            valid_accounts = []
+            apis = []
+            order_numbers = []
+            
+            for i in active_accounts:
+                if i in self.order_numbers and self.order_numbers[i]:
+                    valid_accounts.append(i)
+                    apis.append(self.account_manager.get_api(i))
+                    order_numbers.append(self.order_numbers[i])
+                else:
+                    applicationLogger.warning(f"Account {i} has no valid order number, skipping cancel")
+            
+            if not valid_accounts:
+                messagebox.showerror("Error", "No valid orders found to cancel")
+                return
+            
+            active_flags = [True] * len(valid_accounts)
             
             self.order_manager.cancel_orders(apis, order_numbers, active_flags)
 
-            # Update status displays based on active accounts
-            if 1 in active_accounts:
+            # Update status displays based on valid accounts that were cancelled
+            if 1 in valid_accounts:
                 self.master_order_status.set("Buy Orders Cancelled")
             else:
                 self.master_order_status.set("Master Not Logged In")
                 
-            if 2 in active_accounts:
+            if 2 in valid_accounts:
                 self.child_order_status.set("Buy Orders Cancelled")
             else:
                 self.child_order_status.set("Child Not Logged In")
@@ -2117,25 +2673,40 @@ class MainWindow:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from cancel exit orders")
             
-            apis = [self.account_manager.get_api(i) for i in active_accounts]
-            order_numbers = [self.exit_order_numbers[i] for i in active_accounts]
-            active_flags = [True] * len(active_accounts)
+            # Only include accounts that have valid exit order numbers
+            valid_accounts = []
+            apis = []
+            order_numbers = []
+            
+            for i in active_accounts:
+                if i in self.exit_order_numbers and self.exit_order_numbers[i]:
+                    valid_accounts.append(i)
+                    apis.append(self.account_manager.get_api(i))
+                    order_numbers.append(self.exit_order_numbers[i])
+                else:
+                    applicationLogger.warning(f"Account {i} has no valid exit order number, skipping cancel")
+            
+            if not valid_accounts:
+                messagebox.showerror("Error", "No valid exit orders found to cancel")
+                return
+            
+            active_flags = [True] * len(valid_accounts)
             
             self.order_manager.cancel_orders(apis, order_numbers, active_flags)
 
-            # Update status displays based on active accounts
-            if 1 in active_accounts:
+            # Update status displays based on valid accounts that were cancelled
+            if 1 in valid_accounts:
                 self.master_order_status.set("Exit Orders Cancelled")
             else:
                 self.master_order_status.set("Master Not Logged In")
                 
-            if 2 in active_accounts:
+            if 2 in valid_accounts:
                 self.child_order_status.set("Exit Orders Cancelled")
             else:
                 self.child_order_status.set("Child Not Logged In")
             
             # Re-enable exit button and disable exit-related management buttons
-            self.exit_button.config(state='normal', text="EXIT")
+            self.exit_button.config(state='normal', text="SELL Order")
             self.exit_all_button.config(state='normal')
             
             # Enable individual exit buttons based on active accounts
@@ -2146,7 +2717,7 @@ class MainWindow:
                 
             self.cancel_exit_button.config(state='disabled')
             self.modify_exit_button.config(state='disabled')
-            applicationLogger.info("Exit button re-enabled after cancelling exit orders")
+            applicationLogger.info("Sell Order button re-enabled after cancelling exit orders")
             
             # Reset SL and Target monitoring
             self.reset_sl_target_monitoring()
@@ -2184,17 +2755,18 @@ class MainWindow:
             self.order_manager.cancel_orders([master_api], [master_order_number], [True])
             
             # Update master order status
-            self.master_order_status.set("Master Buy Order Cancelled")
+            # Block Master account from further operations
+            self.block_master_account("Master buy order cancelled")
             
             # Update button text to show cancellation
             self.cancel_master_buy_button.config(text="Master Buy Cancelled")
             
-            # Re-enable buy button and disable buy-related management buttons
-            self.buy_button.config(state='normal', text="BUY")
+            # Keep buy button disabled until Release button is pressed
+            self.buy_button.config(state='disabled', text="Press RELEASE to Enable")
             self.cancel_master_buy_button.config(state='disabled')
             
-            # Re-enable price box for new orders
-            self.price_box.config(state='normal', bg='white')
+            # Keep price box disabled until Release button is pressed
+            self.price_box.config(state='disabled', bg='lightgray')
             
             # Clear original buy price and modify box
             self.original_buy_price = None
@@ -2227,14 +2799,14 @@ class MainWindow:
             # Cancel the child order
             self.order_manager.cancel_orders([child_api], [child_order_number], [True])
             
-            # Update child order status
-            self.child_order_status.set("Child Buy Order Cancelled")
+            # Block Child account from further operations
+            self.block_child_account("Child buy order cancelled")
             
             # Update button text to show cancellation
             self.cancel_child_buy_button.config(text="Child Buy Cancelled")
             
-            # Re-enable buy button and disable buy-related management buttons
-            self.buy_button.config(state='normal', text="BUY")
+            # Keep buy button disabled until Release button is pressed
+            self.buy_button.config(state='disabled', text="Press RELEASE to Enable")
             self.cancel_child_buy_button.config(state='disabled')
             
             # Re-enable price box for new orders
@@ -2254,6 +2826,8 @@ class MainWindow:
     def modify_buy_orders(self):
         """Modify buy orders across all active accounts"""
         try:
+            # No global blocking check - we'll handle individual account blocking in the order logic
+            
             trading_symbol = self.concatenate_values()
             if not trading_symbol:
                 messagebox.showerror("Error", "Please select all required fields")
@@ -2328,10 +2902,68 @@ class MainWindow:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from modify buy orders")
             
-            apis = [self.account_manager.get_api(i) for i in active_accounts]
-            order_numbers = [self.order_numbers[i] for i in active_accounts]
-            quantities = [self.quantities[i] for i in active_accounts]
-            active_flags = [True] * len(active_accounts)
+            # Only include accounts that have valid order numbers AND are in modifiable state
+            valid_accounts = []
+            apis = []
+            order_numbers = []
+            quantities = []
+            
+            for i in active_accounts:
+                # Check if this specific account is blocked (rejection or general blocking)
+                if i == 1 and (self.master_account_rejected_blocked or self.master_account_blocked):
+                    block_reason = "rejection" if self.master_account_rejected_blocked else "general blocking"
+                    applicationLogger.warning(f"Master account is blocked due to {block_reason} - skipping modify")
+                    continue
+                elif i == 2 and (self.child_account_rejected_blocked or self.child_account_blocked):
+                    block_reason = "rejection" if self.child_account_rejected_blocked else "general blocking"
+                    applicationLogger.warning(f"Child account is blocked due to {block_reason} - skipping modify")
+                    continue
+                
+                if i in self.order_numbers and self.order_numbers[i]:
+                    # Check order state for each account
+                    if i == 1:  # Master account
+                        order_state = self.master_order_state
+                    elif i == 2:  # Child account
+                        order_state = self.child_order_state
+                    else:
+                        order_state = None
+                    
+                    # Only allow modification if order is in PENDING or OPEN state
+                    if order_state in ['PENDING', 'OPEN']:
+                        valid_accounts.append(i)
+                        apis.append(self.account_manager.get_api(i))
+                        order_numbers.append(self.order_numbers[i])
+                        quantities.append(self.quantities[i])
+                        applicationLogger.info(f"Account {i} order is in {order_state} state - allowing modification")
+                    else:
+                        applicationLogger.warning(f"Account {i} order is in {order_state} state - cannot modify (must be PENDING or OPEN)")
+                else:
+                    applicationLogger.warning(f"Account {i} has no valid order number, skipping modify")
+            
+            if not valid_accounts:
+                # Check if any orders exist but are in wrong state
+                rejected_orders = []
+                for i in active_accounts:
+                    if i in self.order_numbers and self.order_numbers[i]:
+                        if i == 1:
+                            order_state = self.master_order_state
+                        elif i == 2:
+                            order_state = self.child_order_state
+                        else:
+                            order_state = None
+                        
+                        if order_state in ['REJECTED', 'CANCELLED', 'FILLED']:
+                            rejected_orders.append(f"Account {i} ({order_state})")
+                
+                if rejected_orders:
+                    error_msg = f"Cannot modify orders - some orders are not in modifiable state:\n{', '.join(rejected_orders)}\n\nOnly PENDING or OPEN orders can be modified."
+                    messagebox.showerror("Modify Order Error", error_msg)
+                    applicationLogger.error(f"Modify order blocked: {error_msg}")
+                else:
+                    messagebox.showerror("Error", "No valid orders found to modify")
+                return
+            
+            active_flags = [True] * len(valid_accounts)
             
             self.order_manager.modify_orders(
                 apis, order_numbers, quantities, trading_symbol, price, active_flags
@@ -2377,6 +3009,8 @@ class MainWindow:
     def modify_exit_orders(self):
         """Modify exit orders across all active accounts"""
         try:
+            # No global blocking check - we'll handle individual account blocking in the order logic
+            
             trading_symbol = self.concatenate_values()
             if not trading_symbol:
                 messagebox.showerror("Error", "Please select all required fields")
@@ -2443,22 +3077,81 @@ class MainWindow:
                 active_accounts.remove(2)
                 applicationLogger.warning("Child account orders are blocked - excluding from modify exit orders")
             
-            apis = [self.account_manager.get_api(i) for i in active_accounts]
-            order_numbers = [self.exit_order_numbers[i] for i in active_accounts]
-            quantities = [self.quantities[i] for i in active_accounts]
-            active_flags = [True] * len(active_accounts)
+            # Remove accounts that are blocked (rejection or general blocking)
+            if (self.master_account_rejected_blocked or self.master_account_blocked) and 1 in active_accounts:
+                block_reason = "rejection" if self.master_account_rejected_blocked else "general blocking"
+                active_accounts.remove(1)
+                applicationLogger.warning(f"Master account is blocked due to {block_reason} - excluding from modify exit orders")
+            
+            if (self.child_account_rejected_blocked or self.child_account_blocked) and 2 in active_accounts:
+                block_reason = "rejection" if self.child_account_rejected_blocked else "general blocking"
+                active_accounts.remove(2)
+                applicationLogger.warning(f"Child account is blocked due to {block_reason} - excluding from modify exit orders")
+            
+            # Only include accounts that have valid exit order numbers AND are in modifiable state
+            valid_accounts = []
+            apis = []
+            order_numbers = []
+            quantities = []
+            
+            for i in active_accounts:
+                if i in self.exit_order_numbers and self.exit_order_numbers[i]:
+                    # Check order state for each account
+                    if i == 1:  # Master account
+                        order_state = self.master_order_state
+                    elif i == 2:  # Child account
+                        order_state = self.child_order_state
+                    else:
+                        order_state = None
+                    
+                    # Only allow modification if order is in PENDING or OPEN state
+                    if order_state in ['PENDING', 'OPEN']:
+                        valid_accounts.append(i)
+                        apis.append(self.account_manager.get_api(i))
+                        order_numbers.append(self.exit_order_numbers[i])
+                        quantities.append(self.quantities[i])
+                        applicationLogger.info(f"Account {i} exit order is in {order_state} state - allowing modification")
+                    else:
+                        applicationLogger.warning(f"Account {i} exit order is in {order_state} state - cannot modify (must be PENDING or OPEN)")
+                else:
+                    applicationLogger.warning(f"Account {i} has no valid exit order number, skipping modify")
+            
+            if not valid_accounts:
+                # Check if any orders exist but are in wrong state
+                rejected_orders = []
+                for i in active_accounts:
+                    if i in self.exit_order_numbers and self.exit_order_numbers[i]:
+                        if i == 1:
+                            order_state = self.master_order_state
+                        elif i == 2:
+                            order_state = self.child_order_state
+                        else:
+                            order_state = None
+                        
+                        if order_state in ['REJECTED', 'CANCELLED', 'FILLED']:
+                            rejected_orders.append(f"Account {i} ({order_state})")
+                
+                if rejected_orders:
+                    error_msg = f"Cannot modify exit orders - some orders are not in modifiable state:\n{', '.join(rejected_orders)}\n\nOnly PENDING or OPEN orders can be modified."
+                    messagebox.showerror("Modify Exit Order Error", error_msg)
+                    applicationLogger.error(f"Modify exit order blocked: {error_msg}")
+                else:
+                    messagebox.showerror("Error", "No valid exit orders found to modify")
+                return
+            
+            active_flags = [True] * len(valid_accounts)
             
             self.order_manager.modify_orders(
                 apis, order_numbers, quantities, trading_symbol, price, active_flags
             )
 
-            # Update status displays based on active accounts
-            if 1 in active_accounts:
+            # Update status displays based on valid accounts that were modified
+            if 1 in valid_accounts:
                 self.master_order_status.set("Exit Orders Modified - Waiting for Status")
             else:
                 self.master_order_status.set("Master Not Logged In")
                 
-            if 2 in active_accounts:
+            if 2 in valid_accounts:
                 self.child_order_status.set("Exit Orders Modified - Waiting for Status")
             else:
                 self.child_order_status.set("Child Not Logged In")
@@ -2549,8 +3242,23 @@ class MainWindow:
                 label.grid(row=row_idx, column=col_idx, padx=10, pady=5, sticky='w')
     
     def release_buttons(self):
-
-        """Release button states - enable buy and exit buttons"""
+        """Release button states - enable buy and sell order buttons"""
+        # Unblock Master account if it was blocked
+        if self.master_account_blocked:
+            self.unblock_master_account()
+        
+        # Unblock Master account if it was blocked due to rejection
+        if self.master_account_rejected_blocked:
+            self.unblock_account_on_release(1)
+        
+        # Unblock Child account if it was blocked
+        if self.child_account_blocked:
+            self.unblock_child_account()
+        
+        # Unblock Child account if it was blocked due to rejection
+        if self.child_account_rejected_blocked:
+            self.unblock_account_on_release(2)
+        
         # Enable buy button
         self.buy_button.config(state='normal', text="BUY")
         
@@ -2560,7 +3268,7 @@ class MainWindow:
         # Clear original buy price and modify box
         self.original_buy_price = None
         self.modify_buy_value.set("")
-        applicationLogger.info("Price box re-enabled for new orders")
+        applicationLogger.info("BUY button and Price box re-enabled for new orders")
         
         # Disable buy-related buttons until new buy orders are placed
         self.cancel_buy_button.config(state='disabled')
@@ -2569,7 +3277,7 @@ class MainWindow:
         self.cancel_child_buy_button.config(state='disabled')
         
         # Disable exit-related buttons until new orders are placed
-        self.exit_button.config(state='disabled', text="EXIT")
+        self.exit_button.config(state='disabled', text="SELL Order")
         self.exit_all_button.config(state='disabled')
         self.exit_master_button.config(state='disabled')
         self.exit_child_button.config(state='disabled')
@@ -2596,14 +3304,54 @@ class MainWindow:
         
         applicationLogger.info("Buttons released - ready for new orders")
     
-    
+    def safe_get_order_book(self, api):
+        """Safely get order book handling both API response formats
+        
+        Args:
+            api: API instance
+            
+        Returns:
+            List of orders or empty list if error
+        """
+        try:
+            orders = api.get_order_book()
+            
+            # Handle dictionary response format (preferred)
+            if isinstance(orders, dict) and orders.get('stat') == 'Ok':
+                order_data = orders.get('data', [])
+                if isinstance(order_data, list):
+                    applicationLogger.info(f"Retrieved {len(order_data)} orders from order book (dict format)")
+                    return order_data
+                else:
+                    applicationLogger.warning(f"Order book data is not a list: {type(order_data)}")
+                    return []
+            
+            # Handle list response format (fallback)
+            elif isinstance(orders, list):
+                applicationLogger.info(f"Retrieved {len(orders)} orders from order book (list format)")
+                return orders
+                
+            # Handle error response
+            elif isinstance(orders, dict) and orders.get('stat') != 'Ok':
+                error_msg = orders.get('emsg', 'Unknown error')
+                applicationLogger.error(f"Order book API error: {error_msg}")
+                return []
+                
+            # Handle unexpected response
+            else:
+                applicationLogger.error(f"Unexpected order book response format: {type(orders)} - {orders}")
+                return []
+                
+        except Exception as e:
+            applicationLogger.error(f"Error getting order book: {e}")
+            return []
     
     def exit_all_orders_market(self):
         """Exit all orders at market price for both master and child accounts"""
         try:
             # Check if exit button is disabled (no orders to exit)
             if self.exit_button['state'] == 'disabled':
-                messagebox.showwarning("Warning", "No orders to exit! Place buy orders first.")
+                messagebox.showwarning("Warning", "No orders to sell! Place buy orders first.")
                 return
             
             # Show confirmation popup
@@ -2630,12 +3378,13 @@ class MainWindow:
             
 
             # Place market exit orders for all active accounts
+            orders_processed = 0
             for account_num in active_accounts:
                 api = self.account_manager.accounts[account_num]['api']
                 if api:
-                    # Get current orders and exit them at market price
-                    orders = api.get_order_book()
-                    if orders and isinstance(orders, list):
+                    # Get current orders using safe method
+                    orders = self.safe_get_order_book(api)
+                    if orders:
                         for order in orders:
                             if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
                                 # Place market exit order
@@ -2656,12 +3405,24 @@ class MainWindow:
                                 
                                 if exit_result and exit_result.get('stat') == 'Ok':
                                     applicationLogger.info(f"Market exit order placed for account {account_num}: {exit_result.get('norenordno')}")
+                                    orders_processed += 1
                                 else:
-                                    applicationLogger.error(f"Failed to place market exit order for account {account_num}")
+                                    applicationLogger.error(f"Failed to place market exit order for account {account_num}: {exit_result}")
+                    else:
+                        applicationLogger.warning(f"No orders found for account {account_num}")
+            
+            if orders_processed == 0:
+                applicationLogger.warning("No orders were processed for exit")
             
             # Update status
             self.master_order_status.set("All Orders - Market Exit Placed")
             self.child_order_status.set("All Orders - Market Exit Placed")
+            
+            # Block both accounts after exiting all orders at market price
+            if orders_processed > 0:
+                self.block_master_account("All orders exited at market price")
+                self.block_child_account("All orders exited at market price")
+                applicationLogger.info("Both accounts blocked after market exit - lifecycle completed")
             
             # Stop monitoring since all positions will be closed
             if self.sl_monitoring_active:
@@ -2702,67 +3463,65 @@ class MainWindow:
             
             api = self.account_manager.accounts[1]['api']
             if api:
-                # Get current orders
-                orders = api.get_order_book()
-                if orders and orders.get('stat') == 'Ok':
-                    order_data = orders.get('data', [])
-                    if isinstance(order_data, list):
-                        sell_orders_found = False
-                        buy_orders_found = False
-                        
-                        for order in order_data:
-                            if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
-                                if order.get('trantype') == 'S':  # Existing SELL order
-                                    sell_orders_found = True
-                                    # Modify existing sell order to market price
-                                    try:
-                                        modify_result = api.modify_order(
-                                            order_id=order.get('norenordno'),
-                                            price_type='MKT',
-                                            price=0.0,
-                                            quantity=int(order.get('qty', 0)),
-                                            product_type=order.get('pcode', 'I'),
-                                            exchange=order.get('exch', ''),
-                                            tradingsymbol=order.get('tsym', ''),
-                                            retention='DAY',
-                                            remarks='Master Market Exit - Modified'
-                                        )
-                                        
-                                        if modify_result and modify_result.get('stat') == 'Ok':
-                                            applicationLogger.info(f"Master sell order modified to market price: {order.get('norenordno')}")
-                                        else:
-                                            applicationLogger.error(f"Failed to modify master sell order: {modify_result}")
-                                            self.master_order_status.set("Error: Failed to modify sell order - please exit manually")
-                                            return
-                                    except Exception as e:
-                                        applicationLogger.error(f"Error modifying master sell order: {e}")
-                                        self.master_order_status.set(f"Error modifying sell order: {e}")
-                                        return
-                                        
-                                elif order.get('trantype') == 'B':  # BUY order - place new sell order
-                                    buy_orders_found = True
-                                    # Place new market sell order
-                                    exit_result = api.place_order(
-                                        buy_or_sell='S',
+                # Get current orders using safe method
+                orders = self.safe_get_order_book(api)
+                if orders:
+                    sell_orders_found = False
+                    buy_orders_found = False
+                    
+                    for order in orders:
+                        if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
+                            if order.get('trantype') == 'S':  # Existing SELL order
+                                sell_orders_found = True
+                                # Modify existing sell order to market price
+                                try:
+                                    modify_result = api.modify_order(
+                                        order_id=order.get('norenordno'),
+                                        price_type='MKT',
+                                        price=0.0,
+                                        quantity=int(order.get('qty', 0)),
                                         product_type=order.get('pcode', 'I'),
                                         exchange=order.get('exch', ''),
                                         tradingsymbol=order.get('tsym', ''),
-                                        quantity=int(order.get('qty', 0)),
-                                        discloseqty=0,
-                                        price_type='MKT',
-                                        price=0.0,
-                                        trigger_price=None,
                                         retention='DAY',
-                                        amo='NO',
-                                        remarks='Master Market Exit - New Sell'
+                                        remarks='Master Market Exit - Modified'
                                     )
                                     
-                                    if exit_result and exit_result.get('stat') == 'Ok':
-                                        applicationLogger.info(f"Master new market sell order placed: {exit_result.get('norenordno')}")
+                                    if modify_result and modify_result.get('stat') == 'Ok':
+                                        applicationLogger.info(f"Master sell order modified to market price: {order.get('norenordno')}")
                                     else:
-                                        applicationLogger.error("Failed to place master market sell order")
-                                        self.master_order_status.set("Error: Failed to place sell order - please exit manually")
+                                        applicationLogger.error(f"Failed to modify master sell order: {modify_result}")
+                                        self.master_order_status.set("Error: Failed to modify sell order - please exit manually")
                                         return
+                                except Exception as e:
+                                    applicationLogger.error(f"Error modifying master sell order: {e}")
+                                    self.master_order_status.set(f"Error modifying sell order: {e}")
+                                    return
+                                    
+                            elif order.get('trantype') == 'B':  # BUY order - place new sell order
+                                buy_orders_found = True
+                                # Place new market sell order
+                                exit_result = api.place_order(
+                                    buy_or_sell='S',
+                                    product_type=order.get('pcode', 'I'),
+                                    exchange=order.get('exch', ''),
+                                    tradingsymbol=order.get('tsym', ''),
+                                    quantity=int(order.get('qty', 0)),
+                                    discloseqty=0,
+                                    price_type='MKT',
+                                    price=0.0,
+                                    trigger_price=None,
+                                    retention='DAY',
+                                    amo='NO',
+                                    remarks='Master Market Exit - New Sell'
+                                )
+                                
+                                if exit_result and exit_result.get('stat') == 'Ok':
+                                    applicationLogger.info(f"Master new market sell order placed: {exit_result.get('norenordno')}")
+                                else:
+                                    applicationLogger.error("Failed to place master market sell order")
+                                    self.master_order_status.set("Error: Failed to place sell order - please exit manually")
+                                    return
                         
                         # Update status based on what was found
                         if sell_orders_found and buy_orders_found:
@@ -2771,12 +3530,15 @@ class MainWindow:
                             self.master_order_status.set("Master Orders - Modified Existing Sell to Market")
                         elif buy_orders_found:
                             self.master_order_status.set("Master Orders - Placed New Market Sell")
-                        else:
-                            self.master_order_status.set("Master Orders - No Open Orders to Exit")
+                        
+                        # Block Master account after exiting at market price
+                        if sell_orders_found or buy_orders_found:
+                            self.block_master_account("Master exited at market price")
+                            applicationLogger.info("Master account blocked after market exit - lifecycle completed")
                     else:
-                        self.master_order_status.set("Master Orders - No Orders Found")
+                        self.master_order_status.set("Master Orders - No Open Orders to Exit")
                 else:
-                    self.master_order_status.set("Master Orders - Failed to Get Order Book")
+                    self.master_order_status.set("Master Orders - No Orders Found")
             else:
                 self.master_order_status.set("Master API Not Available")
                 
@@ -2806,67 +3568,65 @@ class MainWindow:
             
             api = self.account_manager.accounts[2]['api']
             if api:
-                # Get current orders
-                orders = api.get_order_book()
-                if orders and orders.get('stat') == 'Ok':
-                    order_data = orders.get('data', [])
-                    if isinstance(order_data, list):
-                        sell_orders_found = False
-                        buy_orders_found = False
-                        
-                        for order in order_data:
-                            if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
-                                if order.get('trantype') == 'S':  # Existing SELL order
-                                    sell_orders_found = True
-                                    # Modify existing sell order to market price
-                                    try:
-                                        modify_result = api.modify_order(
-                                            order_id=order.get('norenordno'),
-                                            price_type='MKT',
-                                            price=0.0,
-                                            quantity=int(order.get('qty', 0)),
-                                            product_type=order.get('pcode', 'I'),
-                                            exchange=order.get('exch', ''),
-                                            tradingsymbol=order.get('tsym', ''),
-                                            retention='DAY',
-                                            remarks='Child Market Exit - Modified'
-                                        )
-                                        
-                                        if modify_result and modify_result.get('stat') == 'Ok':
-                                            applicationLogger.info(f"Child sell order modified to market price: {order.get('norenordno')}")
-                                        else:
-                                            applicationLogger.error(f"Failed to modify child sell order: {modify_result}")
-                                            self.child_order_status.set("Error: Failed to modify sell order - please exit manually")
-                                            return
-                                    except Exception as e:
-                                        applicationLogger.error(f"Error modifying child sell order: {e}")
-                                        self.child_order_status.set(f"Error modifying sell order: {e}")
-                                        return
-                                        
-                                elif order.get('trantype') == 'B':  # BUY order - place new sell order
-                                    buy_orders_found = True
-                                    # Place new market sell order
-                                    exit_result = api.place_order(
-                                        buy_or_sell='S',
+                # Get current orders using safe method
+                orders = self.safe_get_order_book(api)
+                if orders:
+                    sell_orders_found = False
+                    buy_orders_found = False
+                    
+                    for order in orders:
+                        if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
+                            if order.get('trantype') == 'S':  # Existing SELL order
+                                sell_orders_found = True
+                                # Modify existing sell order to market price
+                                try:
+                                    modify_result = api.modify_order(
+                                        order_id=order.get('norenordno'),
+                                        price_type='MKT',
+                                        price=0.0,
+                                        quantity=int(order.get('qty', 0)),
                                         product_type=order.get('pcode', 'I'),
                                         exchange=order.get('exch', ''),
                                         tradingsymbol=order.get('tsym', ''),
-                                        quantity=int(order.get('qty', 0)),
-                                        discloseqty=0,
-                                        price_type='MKT',
-                                        price=0.0,
-                                        trigger_price=None,
                                         retention='DAY',
-                                        amo='NO',
-                                        remarks='Child Market Exit - New Sell'
+                                        remarks='Child Market Exit - Modified'
                                     )
                                     
-                                    if exit_result and exit_result.get('stat') == 'Ok':
-                                        applicationLogger.info(f"Child new market sell order placed: {exit_result.get('norenordno')}")
+                                    if modify_result and modify_result.get('stat') == 'Ok':
+                                        applicationLogger.info(f"Child sell order modified to market price: {order.get('norenordno')}")
                                     else:
-                                        applicationLogger.error("Failed to place child market sell order")
-                                        self.child_order_status.set("Error: Failed to place sell order - please exit manually")
+                                        applicationLogger.error(f"Failed to modify child sell order: {modify_result}")
+                                        self.child_order_status.set("Error: Failed to modify sell order - please exit manually")
                                         return
+                                except Exception as e:
+                                    applicationLogger.error(f"Error modifying child sell order: {e}")
+                                    self.child_order_status.set(f"Error modifying sell order: {e}")
+                                    return
+                                    
+                            elif order.get('trantype') == 'B':  # BUY order - place new sell order
+                                buy_orders_found = True
+                                # Place new market sell order
+                                exit_result = api.place_order(
+                                    buy_or_sell='S',
+                                    product_type=order.get('pcode', 'I'),
+                                    exchange=order.get('exch', ''),
+                                    tradingsymbol=order.get('tsym', ''),
+                                    quantity=int(order.get('qty', 0)),
+                                    discloseqty=0,
+                                    price_type='MKT',
+                                    price=0.0,
+                                    trigger_price=None,
+                                    retention='DAY',
+                                    amo='NO',
+                                    remarks='Child Market Exit - New Sell'
+                                )
+                                
+                                if exit_result and exit_result.get('stat') == 'Ok':
+                                    applicationLogger.info(f"Child new market sell order placed: {exit_result.get('norenordno')}")
+                                else:
+                                    applicationLogger.error("Failed to place child market sell order")
+                                    self.child_order_status.set("Error: Failed to place sell order - please exit manually")
+                                    return
                         
                         # Update status based on what was found
                         if sell_orders_found and buy_orders_found:
@@ -2875,12 +3635,15 @@ class MainWindow:
                             self.child_order_status.set("Child Orders - Modified Existing Sell to Market")
                         elif buy_orders_found:
                             self.child_order_status.set("Child Orders - Placed New Market Sell")
-                        else:
-                            self.child_order_status.set("Child Orders - No Open Orders to Exit")
+                        
+                        # Block Child account after exiting at market price
+                        if sell_orders_found or buy_orders_found:
+                            self.block_child_account("Child exited at market price")
+                            applicationLogger.info("Child account blocked after market exit - waiting for Master lifecycle to complete")
                     else:
-                        self.child_order_status.set("Child Orders - No Orders Found")
+                        self.child_order_status.set("Child Orders - No Open Orders to Exit")
                 else:
-                    self.child_order_status.set("Child Orders - Failed to Get Order Book")
+                    self.child_order_status.set("Child Orders - No Orders Found")
             else:
                 self.child_order_status.set("Child API Not Available")
                 
@@ -3520,9 +4283,9 @@ class MainWindow:
             if self.trailing_active:
                 self.stop_trailing_monitoring()
             
-            # Set the exit price to current price and call exit function with Market Order
+            # Set the exit price to current price and call dynamic exit function
             self.price1_value.set(str(current_price))
-            self.place_exit_orders(order_type='MKT')
+            self.place_dynamic_stop_loss_orders(current_price)
             
         except Exception as e:
             applicationLogger.error(f"Error executing SL exit: {e}")
@@ -3547,9 +4310,9 @@ class MainWindow:
             if self.trailing_active:
                 self.stop_trailing_monitoring()
             
-            # Set the exit price to current price and call regular exit function
+            # Set the exit price to current price and call dynamic exit function
             self.price1_value.set(str(current_price))
-            self.place_exit_orders()
+            self.place_dynamic_target_orders(current_price)
             
         except Exception as e:
             applicationLogger.error(f"Error executing Target exit: {e}")
@@ -3570,14 +4333,12 @@ class MainWindow:
                 api = self.account_manager.accounts[account_num]['api']
                 if api:
                     # Get current orders and exit them at market price
-                    orders = api.get_order_book()
-                    if orders and orders.get('stat') == 'Ok':
-                        order_data = orders.get('data', [])
-                        if isinstance(order_data, list):
-                            for order in order_data:
-                                if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
-                                    # Place market exit order
-                                    exit_result = api.place_order(
+                    orders = self.safe_get_order_book(api)
+                    if orders:
+                        for order in orders:
+                            if isinstance(order, dict) and order.get('status') in ['PENDING', 'OPEN']:
+                                # Place market exit order
+                                exit_result = api.place_order(
                                     buy_or_sell='S' if order.get('trantype') == 'B' else 'B',
                                     product_type=order.get('pcode', 'I'),
                                     exchange=order.get('exch', ''),
@@ -3631,29 +4392,12 @@ class MainWindow:
             applicationLogger.error(f"Error updating PnL display: {e}")
     
     def refresh_pnl(self):
-        """Refresh PnL for all active and blocked accounts"""
+        """Refresh PnL for all active and blocked accounts - DISABLED (only shown on Show PnL)"""
         try:
-            applicationLogger.info("Refreshing PnL for all accounts")
-            
-            # Update Master PnL (if active)
-            if self.account_manager.accounts[1]['active']:
-                master_api = self.account_manager.accounts[1]['api']
-                if master_api:
-                    master_pnl = self.calculate_pnl(master_api)
-                    self.update_pnl_display(1, master_pnl)
-                    applicationLogger.info(f"Master PnL updated: {master_pnl}")
-            
-            # Update Child PnL (if active or blocked - PnL should work for both)
-            if self.account_manager.accounts[2]['active'] or self.account_manager.accounts[2].get('blocked', False):
-                child_api = self.account_manager.accounts[2]['api']
-                if child_api:
-                    child_pnl = self.calculate_pnl(child_api)
-                    self.update_pnl_display(2, child_pnl)
-                    status = "blocked" if self.account_manager.accounts[2].get('blocked', False) else "active"
-                    applicationLogger.info(f"Child PnL updated ({status}): {child_pnl}")
-                    
+            applicationLogger.info("PnL refresh disabled - use Show PnL button to see PnL")
+            # PnL display is now only shown when Show PnL button is pressed
         except Exception as e:
-            applicationLogger.error(f"Error refreshing PnL: {e}")
+            applicationLogger.error(f"Error in refresh_pnl: {e}")
     
     def update_pnl_on_trade(self, account_num):
         """Update PnL when a trade is executed"""
@@ -3664,9 +4408,9 @@ class MainWindow:
                 api = self.account_manager.accounts[account_num]['api']
                 if api:
                     pnl_value = self.calculate_pnl(api)
-                    self.update_pnl_display(account_num, pnl_value)
+                    # PnL display removed - only shown when Show PnL is pressed
                     status = "blocked" if self.account_manager.accounts[account_num].get('blocked', False) else "active"
-                    applicationLogger.info(f"PnL updated for account {account_num} ({status}): {pnl_value}")
+                    applicationLogger.info(f"PnL calculated for account {account_num} ({status}): {pnl_value}")
         except Exception as e:
             applicationLogger.error(f"Error updating PnL on trade: {e}")
     
@@ -3680,12 +4424,65 @@ class MainWindow:
             
             applicationLogger.info(f"Order state updated - Master: {self.master_order_state}, Child: {self.child_order_state}")
             
+            # Check for REJECTED status and block account
+            if status.upper() == 'REJECTED':
+                # Extract rejection reason from reporttype or use default
+                rejection_reason = reporttype if reporttype else "Order Rejected"
+                self.block_account_on_rejection(account_num, rejection_reason)
+                
+                # Show popup to inform user about the blocking
+                if account_num == 1:
+                    messagebox.showerror(
+                        "Master Order Rejected", 
+                        f"Master order was REJECTED: {rejection_reason}\n\n"
+                        "Master account is now BLOCKED from all operations.\n"
+                        "Use the RELEASE button to unblock the account."
+                    )
+                elif account_num == 2:
+                    messagebox.showerror(
+                        "Child Order Rejected", 
+                        f"Child order was REJECTED: {rejection_reason}\n\n"
+                        "Child account is now BLOCKED from all operations.\n"
+                        "Use the RELEASE button to unblock the account."
+                    )
+            
+            # Update modify button state based on order states
+            self.update_modify_button_state()
+            
             # Trigger cross-account coordination if both orders are placed
             if self.order_coordination_active:
                 self.check_cross_account_coordination()
                 
         except Exception as e:
             applicationLogger.error(f"Error updating order state: {e}")
+    
+    def update_modify_button_state(self):
+        """Update modify button state based on current order states"""
+        try:
+            # Check if any orders are in modifiable state
+            master_modifiable = self.master_order_state in ['PENDING', 'OPEN']
+            child_modifiable = self.child_order_state in ['PENDING', 'OPEN']
+            
+            # Enable modify buy button only if at least one order is modifiable
+            if master_modifiable or child_modifiable:
+                self.modify_buy_button.config(state='normal')
+                applicationLogger.info("Modify Buy button enabled - orders are in modifiable state")
+            else:
+                self.modify_buy_button.config(state='disabled')
+                applicationLogger.info("Modify Buy button disabled - no orders in modifiable state")
+            
+            # For exit orders, we need to check if there are any exit orders to modify
+            # This is a simplified check - in a more complex system, we'd track exit order states separately
+            has_exit_orders = any(self.exit_order_numbers.values())
+            if has_exit_orders and (master_modifiable or child_modifiable):
+                self.modify_exit_button.config(state='normal')
+                applicationLogger.info("Modify Exit button enabled - exit orders are in modifiable state")
+            else:
+                self.modify_exit_button.config(state='disabled')
+                applicationLogger.info("Modify Exit button disabled - no exit orders in modifiable state")
+                
+        except Exception as e:
+            applicationLogger.error(f"Error updating modify button state: {e}")
     
     def start_order_coordination(self):
         """Start cross-account coordination monitoring"""

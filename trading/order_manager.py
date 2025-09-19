@@ -7,6 +7,7 @@ import os
 from typing import List, Dict, Any, Optional
 from config import Config
 from logger import applicationLogger
+from .dynamic_order_manager import DynamicOrderManager
 
 class OrderManager:
     """Manages order operations and tracking"""
@@ -16,6 +17,7 @@ class OrderManager:
         self.file_path = "orders.csv"
         self.margin_shortfall_occurred = False
         self.margin_shortfall_details = None
+        self.dynamic_order_manager = DynamicOrderManager()
         self._initialize_order_dataframe()
     
     def _initialize_order_dataframe(self):
@@ -426,3 +428,155 @@ class OrderManager:
         except Exception as e:
             applicationLogger.error(f"Error fetching order book: {e}")
             return []
+    
+    def place_dynamic_buy_orders(self, apis: List, quantities: List[int], 
+                                trading_symbol: str, price: float, 
+                                active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place buy orders (NO dynamic management - just regular limit orders)
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        # Place regular buy orders (no dynamic management)
+        order_numbers = self.place_buy_orders(apis, quantities, trading_symbol, price, active_accounts)
+        
+        applicationLogger.info("Buy orders placed as regular limit orders - no dynamic management")
+        
+        return order_numbers
+    
+    def place_dynamic_target_orders(self, apis: List, quantities: List[int], 
+                                  trading_symbol: str, price: float, 
+                                  active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place target orders (sell) with dynamic price adjustment
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        # First place the initial sell orders
+        order_numbers = self.place_sell_orders(apis, quantities, trading_symbol, price, active_accounts)
+        
+        # Start dynamic management for each successful order
+        for i, (api, order_no, is_active) in enumerate(zip(apis, order_numbers, active_accounts)):
+            if is_active and order_no and api:
+                # Determine exchange
+                exchange = 'BFO' if 'SENSEX' in trading_symbol else 'NFO'
+                
+                # Start dynamic management in background thread
+                thread = threading.Thread(
+                    target=self.dynamic_order_manager.execute_dynamic_target_order,
+                    args=(api, order_no, price, quantities[i], trading_symbol, exchange)
+                )
+                thread.daemon = True
+                thread.start()
+                applicationLogger.info(f"Started dynamic management for target order {order_no}")
+        
+        return order_numbers
+    
+    def place_dynamic_stop_loss_orders(self, apis: List, quantities: List[int], 
+                                     trading_symbol: str, price: float, 
+                                     active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place stop loss orders (sell) with dynamic price adjustment
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        # First place the initial sell orders
+        order_numbers = self.place_sell_orders(apis, quantities, trading_symbol, price, active_accounts)
+        
+        # Start dynamic management for each successful order
+        for i, (api, order_no, is_active) in enumerate(zip(apis, order_numbers, active_accounts)):
+            if is_active and order_no and api:
+                # Determine exchange
+                exchange = 'BFO' if 'SENSEX' in trading_symbol else 'NFO'
+                
+                # Start dynamic management in background thread
+                thread = threading.Thread(
+                    target=self.dynamic_order_manager.execute_dynamic_stop_loss_order,
+                    args=(api, order_no, price, quantities[i], trading_symbol, exchange)
+                )
+                thread.daemon = True
+                thread.start()
+                applicationLogger.info(f"Started dynamic management for stop loss order {order_no}")
+        
+        return order_numbers
+    
+    def place_dynamic_trailing_target_orders(self, apis: List, quantities: List[int], 
+                                           trading_symbol: str, price: float, 
+                                           active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place trailing target orders (sell) with dynamic price adjustment
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        # First place the initial sell orders
+        order_numbers = self.place_sell_orders(apis, quantities, trading_symbol, price, active_accounts)
+        
+        # Start dynamic management for each successful order
+        for i, (api, order_no, is_active) in enumerate(zip(apis, order_numbers, active_accounts)):
+            if is_active and order_no and api:
+                # Determine exchange
+                exchange = 'BFO' if 'SENSEX' in trading_symbol else 'NFO'
+                
+                # Start dynamic management in background thread
+                thread = threading.Thread(
+                    target=self.dynamic_order_manager.execute_dynamic_trailing_target_order,
+                    args=(api, order_no, price, quantities[i], trading_symbol, exchange)
+                )
+                thread.daemon = True
+                thread.start()
+                applicationLogger.info(f"Started dynamic management for trailing target order {order_no}")
+        
+        return order_numbers
+    
+    def stop_dynamic_management(self, order_id: str) -> bool:
+        """
+        Stop dynamic management for a specific order
+        
+        Args:
+            order_id: Order ID to stop managing
+            
+        Returns:
+            bool: True if order was found and stopped
+        """
+        return self.dynamic_order_manager.stop_order_management(order_id)
+    
+    def get_active_dynamic_orders(self) -> Dict[str, Dict[str, Any]]:
+        """
+        Get currently active dynamic orders
+        
+        Returns:
+            Dict of active orders
+        """
+        return self.dynamic_order_manager.get_active_orders()

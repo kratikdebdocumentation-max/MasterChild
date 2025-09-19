@@ -314,15 +314,21 @@ class SymbolManager:
                 return None
             
             index_info = index_tokens[index_name]
+            applicationLogger.info(f"Fetching {index_name} price from {index_info['exchange']} with token {index_info['token']}")
             
             # Get quotes for the index
             quotes = self.get_quotes(api, index_info['exchange'], index_info['token'])
             if quotes:
                 price = float(quotes.get('lp', 0))
-                applicationLogger.info(f"Fetched {index_name} price: {price}")
-                return price
-            
-            return None
+                if price > 0:
+                    applicationLogger.info(f"Successfully fetched {index_name} price: {price}")
+                    return price
+                else:
+                    applicationLogger.warning(f"Invalid price received for {index_name}: {price}")
+                    return None
+            else:
+                applicationLogger.warning(f"No quotes received for {index_name} from {index_info['exchange']}")
+                return None
             
         except Exception as e:
             applicationLogger.error(f"Error getting index price for {index_name}: {e}")

@@ -1203,3 +1203,219 @@
 2025-09-18 15:22:06,876 - INFO - Checking coordination - Master: PENDING, Child: PENDING
 2025-09-18 15:23:33,727 - INFO - Price box re-enabled for new orders
 2025-09-18 15:23:33,730 - INFO - Buttons released - ready for new orders
+2025-09-18 20:44:14,134 - INFO - Generated fresh 2FA for account 1: 984714
+2025-09-18 20:44:15,645 - INFO - PnL updated for account 1 (active): 724.0
+2025-09-18 20:44:15,645 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-18 20:44:15,646 - INFO - Retrieved 1 orders from order book (dict format)
+2025-09-18 20:44:15,647 - ERROR - Order book API error: Error message
+2025-09-18 20:44:15,648 - INFO - Retrieved 1 orders from order book (list format)
+2025-09-18 20:44:15,648 - ERROR - Unexpected order book response format: <class 'NoneType'> - None
+2025-09-18 20:44:15,649 - ERROR - Unexpected order book response format: <class 'str'> - unexpected_format
+2025-09-18 20:45:44,702 - INFO - Starting master file download in background...
+2025-09-18 20:45:44,702 - INFO - Finding expiry dates (with caching)...
+2025-09-18 20:45:44,813 - INFO - System initialization completed (downloads in background)
+2025-09-18 20:45:44,813 - INFO - Showing configuration window...
+2025-09-18 20:45:44,923 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-18 20:45:47,463 - INFO - Configuration skipped - using last saved values
+2025-09-18 20:45:47,565 - INFO - Configuration completed with settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-18 20:45:48,049 - INFO - Generated fresh 2FA for account 1: 024416
+2025-09-18 20:45:49,290 - INFO - PnL updated for account 1 (active): 724.0
+2025-09-18 20:45:49,290 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-18 20:45:49,398 - INFO - Price input box enabled - no active positions
+2025-09-18 20:45:49,398 - INFO - UI states initialized successfully
+2025-09-18 20:48:00,304 - INFO - Starting master file download in background...
+2025-09-18 20:48:00,306 - INFO - Finding expiry dates (with caching)...
+2025-09-18 20:48:00,463 - INFO - System initialization completed (downloads in background)
+2025-09-18 20:48:00,463 - INFO - Showing configuration window...
+2025-09-18 20:48:00,606 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-18 20:48:03,049 - INFO - Configuration skipped - using last saved values
+2025-09-18 20:48:03,134 - INFO - Configuration completed with settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-18 20:48:03,677 - INFO - Generated fresh 2FA for account 1: 830818
+2025-09-18 20:48:05,211 - INFO - PnL updated for account 1 (active): 724.0
+2025-09-18 20:48:05,211 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-18 20:48:05,344 - INFO - Price input box enabled - no active positions
+2025-09-18 20:48:05,345 - INFO - UI states initialized successfully
+2025-09-18 21:00:03,876 - INFO - Starting master file download in background...
+2025-09-18 21:00:03,878 - INFO - Finding expiry dates (with caching)...
+2025-09-18 21:00:03,963 - INFO - System initialization completed (downloads in background)
+2025-09-18 21:00:03,963 - INFO - Showing configuration window...
+2025-09-18 21:00:04,046 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-18 21:00:06,594 - INFO - Configuration skipped - using last saved values
+2025-09-18 21:00:06,662 - INFO - Configuration completed with settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-18 21:00:07,076 - INFO - Generated fresh 2FA for account 1: 829684
+2025-09-18 21:00:08,290 - INFO - PnL calculated for account 1 (active): 724.0
+2025-09-18 21:00:08,290 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-18 21:00:08,402 - INFO - Price input box enabled - no active positions
+2025-09-18 21:00:08,403 - INFO - UI states initialized successfully
+2025-09-18 21:00:16,975 - INFO - Verifying PnL from broker...
+2025-09-18 21:00:17,478 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:00:17,478 - INFO - PnL verification completed successfully
+2025-09-18 21:00:22,697 - INFO - Verifying PnL from broker...
+2025-09-18 21:00:23,209 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:00:23,209 - INFO - PnL verification completed successfully
+2025-09-18 21:00:25,664 - INFO - Verifying PnL from broker...
+2025-09-18 21:00:26,195 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:00:26,195 - INFO - PnL verification completed successfully
+2025-09-18 21:00:27,759 - INFO - Verifying PnL from broker...
+2025-09-18 21:00:28,561 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:00:28,561 - INFO - PnL verification completed successfully
+2025-09-18 21:00:34,458 - INFO - Generated fresh 2FA for account 2: 266452
+2025-09-18 21:00:35,025 - INFO - Child account logged in - Order blocking reset
+2025-09-18 21:00:35,533 - INFO - PnL calculated for account 2 (active): -80.0
+2025-09-18 21:00:37,014 - INFO - Verifying PnL from broker...
+2025-09-18 21:00:37,595 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:00:38,086 - INFO - Verified PnL for account 2 (active): -80.0
+2025-09-18 21:00:38,086 - INFO - PnL verification completed successfully
+2025-09-18 21:05:11,737 - INFO - Verifying PnL from broker...
+2025-09-18 21:05:12,291 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:05:12,765 - INFO - Verified PnL for account 2 (active): -80.0
+2025-09-18 21:05:12,765 - INFO - PnL verification completed successfully
+2025-09-18 21:05:18,688 - INFO - Starting master file download in background...
+2025-09-18 21:05:18,690 - INFO - Finding expiry dates (with caching)...
+2025-09-18 21:05:18,770 - INFO - System initialization completed (downloads in background)
+2025-09-18 21:05:18,779 - INFO - Showing configuration window...
+2025-09-18 21:05:18,868 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-18 21:05:20,618 - INFO - Configuration skipped - using last saved values
+2025-09-18 21:05:20,677 - INFO - Configuration completed with settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-18 21:05:21,042 - INFO - Generated fresh 2FA for account 1: 291037
+2025-09-18 21:05:22,181 - INFO - PnL calculated for account 1 (active): 724.0
+2025-09-18 21:05:22,181 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-18 21:05:22,330 - INFO - Price input box enabled - no active positions
+2025-09-18 21:05:22,330 - INFO - UI states initialized successfully
+2025-09-18 21:05:28,541 - INFO - Verifying PnL from broker...
+2025-09-18 21:05:29,008 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:05:29,008 - INFO - PnL verification completed successfully
+2025-09-18 21:05:30,475 - INFO - Verifying PnL from broker...
+2025-09-18 21:05:30,958 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:05:30,958 - INFO - PnL verification completed successfully
+2025-09-18 21:05:33,147 - INFO - Generated fresh 2FA for account 2: 738029
+2025-09-18 21:05:33,620 - INFO - Child account logged in - Order blocking reset
+2025-09-18 21:05:34,088 - INFO - PnL calculated for account 2 (active): -80.0
+2025-09-18 21:05:35,231 - INFO - Verifying PnL from broker...
+2025-09-18 21:05:35,711 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:05:36,181 - INFO - Verified PnL for account 2 (active): -80.0
+2025-09-18 21:05:36,181 - INFO - PnL verification completed successfully
+2025-09-18 21:05:41,508 - INFO - Verifying PnL from broker...
+2025-09-18 21:05:41,981 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:05:42,477 - INFO - Verified PnL for account 2 (active): -80.0
+2025-09-18 21:05:42,481 - INFO - PnL verification completed successfully
+2025-09-18 21:05:46,493 - INFO - Verifying PnL from broker...
+2025-09-18 21:05:46,978 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:05:47,461 - INFO - Verified PnL for account 2 (active): -80.0
+2025-09-18 21:05:47,461 - INFO - PnL verification completed successfully
+2025-09-18 21:05:57,540 - INFO - Verifying PnL from broker...
+2025-09-18 21:05:58,021 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:05:58,557 - INFO - Verified PnL for account 2 (active): -80.0
+2025-09-18 21:05:58,558 - INFO - PnL verification completed successfully
+2025-09-18 21:06:02,630 - INFO - Cleared option and strike selections - no active orders
+2025-09-18 21:06:03,087 - INFO - Fetched SENSEX price: 83013.96
+2025-09-18 21:06:03,087 - INFO - Index LTP for SENSEX: 83013.96
+2025-09-18 21:06:03,584 - INFO - Fetched SENSEX price: 83013.96
+2025-09-18 21:06:03,584 - INFO - Updated strikes for SENSEX based on price 83013.96 and option None: [82300, 82400, 82500, 82600, 82700, 82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700]
+2025-09-18 21:06:07,102 - INFO - Fetched SENSEX price: 83013.96
+2025-09-18 21:06:07,102 - INFO - Index LTP for SENSEX: 83013.96
+2025-09-18 21:06:07,102 - INFO - Updated strikes for SENSEX CE based on price 83013.96: [82800, 82900, 83000, 83100, 83200, 83300, 83400, 83500, 83600, 83700, 83800, 83900, 84000, 84100, 84200]
+2025-09-18 21:06:09,800 - INFO - Getting token and lot size for trading symbol: SENSEX2591882900CE
+2025-09-18 21:06:09,818 - INFO - Found token and lot size for SENSEX2591882900CE: 862339, 20
+2025-09-18 21:06:09,819 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-18 21:06:09,819 - INFO - Updated quantity options for SENSEX2591882900CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-18 21:06:09,819 - INFO - Getting token for trading symbol: SENSEX2591882900CE
+2025-09-18 21:06:09,822 - INFO - Found token for SENSEX2591882900CE: 862339
+2025-09-18 21:06:10,291 - INFO - Modify price fields cleared after auto-fetch
+2025-09-18 21:06:10,291 - INFO - Getting token for trading symbol: SENSEX2591882900CE
+2025-09-18 21:06:10,293 - INFO - Found token for SENSEX2591882900CE: 862339
+2025-09-18 21:06:10,293 - INFO - Subscribed to live price feed via master account: BFO|862339
+2025-09-18 21:06:10,293 - INFO - Auto-subscribed to SENSEX2591882900CE at price 113.6
+2025-09-18 21:06:18,638 - INFO - Verifying PnL from broker...
+2025-09-18 21:06:19,122 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:06:19,585 - INFO - Verified PnL for account 2 (active): -80.0
+2025-09-18 21:06:19,585 - INFO - PnL verification completed successfully
+2025-09-18 21:07:56,673 - INFO - Verifying PnL from broker...
+2025-09-18 21:07:57,196 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:07:57,666 - INFO - Verified PnL for account 2 (active): -80.0
+2025-09-18 21:07:57,666 - INFO - PnL verification completed successfully
+2025-09-18 21:08:31,989 - INFO - Getting token and lot size for trading symbol: SENSEX2591882900CE
+2025-09-18 21:08:31,992 - INFO - Found token and lot size for SENSEX2591882900CE: 862339, 20
+2025-09-18 21:08:31,992 - INFO - Generated quantity options for lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-18 21:08:31,993 - INFO - Updated quantity options for SENSEX2591882900CE with lot size 20: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-18 21:08:31,993 - INFO - Original buy price stored: 113.6
+2025-09-18 21:08:31,993 - INFO - Getting token and lot size for trading symbol: SENSEX2591882900CE
+2025-09-18 21:08:31,995 - INFO - Found token and lot size for SENSEX2591882900CE: 862339, 20
+2025-09-18 21:08:31,995 - INFO - Master quantity: 40 (selected: 40, lot size: 20)
+2025-09-18 21:08:31,995 - INFO - Child quantity: 20 (lots: 1, lot size: 20)
+2025-09-18 21:08:31,996 - INFO - Active accounts: [1, 2]
+2025-09-18 21:08:31,996 - INFO - Placing buy orders for accounts: [1, 2]
+2025-09-18 21:08:31,996 - INFO - Trading symbol: SENSEX2591882900CE, Price: 113.6
+2025-09-18 21:08:31,996 - INFO - Quantities: [40, 20]
+2025-09-18 21:08:31,996 - INFO - Account 1: API=True, Qty=40, Active=True
+2025-09-18 21:08:31,997 - INFO - Placing order for account 1 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591882900CE', 'quantity': 40, 'discloseqty': 0, 'price_type': 'LMT', 'price': 113.6, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-18 21:08:31,997 - INFO - Account 2: API=True, Qty=20, Active=True
+2025-09-18 21:08:31,997 - INFO - API instance for account 1: True
+2025-09-18 21:08:31,997 - INFO - Placing order for account 2 with parameters: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX2591882900CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 113.6, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-18 21:08:31,998 - INFO - API instance for account 2: True
+2025-09-18 21:08:32,613 - INFO - API response: {'request_time': '21:08:32 18-09-2025', 'stat': 'Ok', 'norenordno': '25091800706475'}
+2025-09-18 21:08:32,613 - INFO - API response type: <class 'dict'>
+2025-09-18 21:08:32,613 - INFO - Buy order placed successfully: {'request_time': '21:08:32 18-09-2025', 'stat': 'Ok', 'norenordno': '25091800706475'}
+2025-09-18 21:08:32,613 - INFO - New order received: 25091800706475
+2025-09-18 21:08:32,613 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '113.60'
+2025-09-18 21:08:32,640 - INFO - API response: {'request_time': '21:08:32 18-09-2025', 'stat': 'Ok', 'norenordno': '25091800706476'}
+2025-09-18 21:08:32,641 - INFO - API response type: <class 'dict'>
+2025-09-18 21:08:32,641 - INFO - Order data saved to orders.csv
+2025-09-18 21:08:32,642 - INFO - Buy order placed successfully: {'request_time': '21:08:32 18-09-2025', 'stat': 'Ok', 'norenordno': '25091800706476'}
+2025-09-18 21:08:32,643 - INFO - New order received: 25091800706476
+2025-09-18 21:08:32,643 - INFO - Account 1 - B PENDING NewAck
+2025-09-18 21:08:32,643 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '113.60'
+2025-09-18 21:08:32,650 - INFO - Auto SL/Target set - SL: 93.6, Target: 153.6 (Buy Open: 113.6)
+2025-09-18 21:08:32,650 - INFO - Cross-account coordination started
+2025-09-18 21:08:32,650 - INFO - Order data saved to orders.csv
+2025-09-18 21:08:32,653 - INFO - Cross-account coordination started for buy orders
+2025-09-18 21:08:32,653 - INFO - Account 2 - B PENDING NewAck
+2025-09-18 21:08:32,654 - INFO - Buy button disabled to prevent duplicate orders
+2025-09-18 21:08:32,655 - INFO - Price box grayed out after order placement
+2025-09-18 21:08:32,655 - INFO - Cancel Buy and Modify Buy buttons enabled after buy orders placed
+2025-09-18 21:08:32,656 - INFO - Sell Order button kept disabled until buy orders are completed
+2025-09-18 21:08:32,656 - INFO - Master order status updated: Buy Order PENDING @ 113.60
+2025-09-18 21:08:32,656 - INFO - Child order status updated: Buy Order PENDING @ 113.60
+2025-09-18 21:08:32,657 - INFO - Updating order 25091800706475
+2025-09-18 21:08:32,658 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '113.60'
+2025-09-18 21:08:32,659 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-18 21:08:32,660 - INFO - Master order status updated: Buy Order PENDING @ 113.60
+2025-09-18 21:08:32,661 - INFO - Updating order 25091800706476
+2025-09-18 21:08:32,661 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '113.60'
+2025-09-18 21:08:32,663 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-18 21:08:32,664 - INFO - Child order status updated: Buy Order PENDING @ 113.60
+2025-09-18 21:08:32,666 - INFO - Updating order 25091800706475
+2025-09-18 21:08:32,666 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '113.60'
+2025-09-18 21:08:32,666 - ERROR - Error processing order update for account 1: Must have equal len keys and value when setting with an iterable
+2025-09-18 21:08:32,666 - INFO - Master order status updated: Order Rejected: SAF:Yel is down
+2025-09-18 21:08:32,670 - INFO - Updating order 25091800706476
+2025-09-18 21:08:32,670 - INFO - Order status debug - status: 'REJECTED', reporttype: 'Rejected', trantype: 'B', price: '113.60'
+2025-09-18 21:08:32,671 - ERROR - Error processing order update for account 2: Must have equal len keys and value when setting with an iterable
+2025-09-18 21:08:32,672 - INFO - Child order status updated: Order Rejected: SAF:Yel is down
+2025-09-18 21:08:33,233 - INFO - PnL calculated for account 1 (active): 724.0
+2025-09-18 21:08:33,233 - INFO - Order state updated - Master: PENDING, Child: None
+2025-09-18 21:08:33,233 - INFO - Checking coordination - Master: PENDING, Child: None
+2025-09-18 21:08:33,274 - INFO - PnL calculated for account 2 (active): -80.0
+2025-09-18 21:08:33,275 - INFO - Order state updated - Master: PENDING, Child: PENDING
+2025-09-18 21:08:33,275 - INFO - Checking coordination - Master: PENDING, Child: PENDING
+2025-09-18 21:13:21,589 - INFO - Starting master file download in background...
+2025-09-18 21:13:21,590 - INFO - Finding expiry dates (with caching)...
+2025-09-18 21:13:21,685 - INFO - System initialization completed (downloads in background)
+2025-09-18 21:13:21,685 - INFO - Showing configuration window...
+2025-09-18 21:13:21,774 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-18 21:13:24,372 - INFO - Configuration skipped - using last saved values
+2025-09-18 21:13:24,454 - INFO - Configuration completed with settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-18 21:13:24,914 - INFO - Generated fresh 2FA for account 1: 922482
+2025-09-18 21:13:26,112 - INFO - PnL calculated for account 1 (active): 724.0
+2025-09-18 21:13:26,112 - INFO - Master account initialized successfully: MAYANK  CHOURASIA
+2025-09-18 21:13:26,225 - INFO - Price input box enabled - no active positions
+2025-09-18 21:13:26,226 - INFO - UI states initialized successfully
+2025-09-18 21:13:43,216 - INFO - Verifying PnL from broker...
+2025-09-18 21:13:43,758 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:13:43,758 - INFO - PnL verification completed successfully
+2025-09-18 21:13:46,477 - INFO - Verifying PnL from broker...
+2025-09-18 21:13:46,946 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:13:46,946 - INFO - PnL verification completed successfully
+2025-09-18 21:13:48,889 - INFO - Verifying PnL from broker...
+2025-09-18 21:13:49,353 - INFO - Verified PnL for account 1 (active): 724.0
+2025-09-18 21:13:49,353 - INFO - PnL verification completed successfully

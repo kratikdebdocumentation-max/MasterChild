@@ -21,6 +21,7 @@ class WebSocketManager:
         self.sell_order_completed_callback = None
         self.pnl_update_callback = None
         self.order_state_callback = None
+        self.order_rejection_callback = None
     
     def setup_websocket_callbacks(self, account_num: int):
         """Setup WebSocket callbacks for a specific account"""
@@ -86,6 +87,15 @@ class WebSocketManager:
                         status_message = "Order Cancelled"
                     elif status.upper() == 'REJECTED':
                         status_message = f"Order Rejected: {rejreason}" if rejreason else "Order Rejected"
+                        
+                        # Handle order rejection - specifically check for buy order rejections
+                        if self.order_rejection_callback and trantype.upper() == 'B':
+                            try:
+                                symbol = tick_data.get('tsym', '')
+                                rejection_reason = rejreason if rejreason else "Unknown reason"
+                                self.order_rejection_callback(account_num, symbol, rejection_reason)
+                            except Exception as e:
+                                applicationLogger.error(f"Error processing buy order rejection: {e}")
                     else:
                         # Fallback to custom format instead of original
                         if trantype.upper() == 'B':
@@ -142,6 +152,10 @@ class WebSocketManager:
     def set_order_state_callback(self, callback: Callable[[int, str, str, str], None]):
         """Set callback for order state updates"""
         self.order_state_callback = callback
+    
+    def set_order_rejection_callback(self, callback: Callable[[int, str, str], None]):
+        """Set callback for order rejection updates"""
+        self.order_rejection_callback = callback
     
     def _process_order_update(self, tick_data: Dict[str, Any], account_num: int):
         """Process order update data"""
