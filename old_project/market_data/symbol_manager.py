@@ -179,6 +179,49 @@ class SymbolManager:
             applicationLogger.error(f"Traceback: {traceback.format_exc()}")
             return None, None
     
+    def get_lot_size_for_index(self, index: str) -> Optional[int]:
+        """
+        Get lot size for an index from master scrip file
+        
+        Args:
+            index: Index name (NIFTY, BANKNIFTY, SENSEX)
+            
+        Returns:
+            Lot size or None if not found
+        """
+        try:
+            applicationLogger.info(f"Getting lot size for index: {index}")
+            
+            if index == "SENSEX":
+                # Check BFO symbols for SENSEX
+                if 'BFO' in self.symbol_data:
+                    # Look for SENSEX option symbols
+                    sensex_symbols = self.symbol_data['BFO'][
+                        self.symbol_data['BFO']['Symbol'].str.contains('SX50OPT', na=False)
+                    ]
+                    if not sensex_symbols.empty:
+                        lot_size = int(sensex_symbols.iloc[0]['LotSize'])
+                        applicationLogger.info(f"Found SENSEX lot size from BFO: {lot_size}")
+                        return lot_size
+            else:
+                # Check NFO symbols for NIFTY and BANKNIFTY
+                if 'NFO' in self.symbol_data:
+                    # Look for index option symbols
+                    index_symbols = self.symbol_data['NFO'][
+                        self.symbol_data['NFO']['Symbol'] == index
+                    ]
+                    if not index_symbols.empty:
+                        lot_size = int(index_symbols.iloc[0]['LotSize'])
+                        applicationLogger.info(f"Found {index} lot size from NFO: {lot_size}")
+                        return lot_size
+            
+            applicationLogger.warning(f"Lot size not found for index: {index}")
+            return None
+            
+        except Exception as e:
+            applicationLogger.error(f"Error getting lot size for index {index}: {e}")
+            return None
+
     def get_quantity_options(self, lot_size: int, num_options: int = 10) -> list:
         """
         Generate quantity options as multiples of lot size

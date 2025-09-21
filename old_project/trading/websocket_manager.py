@@ -8,9 +8,10 @@ from logger import childWSLogger, master1WSLogger, applicationLogger
 class WebSocketManager:
     """Manages WebSocket connections for all accounts"""
     
-    def __init__(self, account_manager, order_manager):
+    def __init__(self, account_manager, order_manager, simple_order_manager=None):
         self.account_manager = account_manager
         self.order_manager = order_manager
+        self.simple_order_manager = simple_order_manager
         self.loggers = {
             1: master1WSLogger,
             2: childWSLogger
@@ -160,8 +161,17 @@ class WebSocketManager:
     def _process_order_update(self, tick_data: Dict[str, Any], account_num: int):
         """Process order update data"""
         try:
-            # Handle order update
-            self.order_manager.handle_order_update(tick_data)
+            # Handle order update using simple order manager if available
+            if self.simple_order_manager:
+                order_id = tick_data.get('norenordno', '')
+                status = tick_data.get('status', '')
+                rejreason = tick_data.get('rejreason', '')
+                
+                if order_id and status:
+                    self.simple_order_manager.update_order_status(account_num, order_id, status, rejreason)
+            else:
+                # Fallback to original order manager
+                self.order_manager.handle_order_update(tick_data)
             
             # Process order status updates
             self._process_order_status(tick_data, account_num)

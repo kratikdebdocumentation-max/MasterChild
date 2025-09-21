@@ -5,7 +5,7 @@ import pyotp
 from retrying import retry
 from api_helper import ShoonyaApiPy
 from config import Config
-# Telegram functionality removed
+from utils.telegram_notifications import send_sos_message
 from logger import childWSLogger, master1WSLogger, applicationLogger
 
 class AccountManager:

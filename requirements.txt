@@ -1,5 +1,21 @@
+# Master-Child Trading GUI - Fresh Start
+# Requirements for trading system
+
+# GUI Framework
+tkinter  # Built-in with Python
+
+# Trading API and dependencies
 requests
 websocket_client
-./dist/NorenRestApiPy-0.0.22-py2.py3-none-any.whl
 pandas
 pyyaml
+pyotp
+retrying
+
+# Local API package
+./dist/NorenRestApiPy-0.0.22-py2.py3-none-any.whl
+
+# Logging (built-in)
+# datetime (built-in)
+# os (built-in)
+# sys (built-in)

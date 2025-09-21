@@ -12,8 +12,8 @@ def _convert_string_to_binary(value: str, field_type: str) -> int:
     """Convert string state values to binary (0/1) format"""
     if field_type == 'login_status':
         return 1 if value in ['logged_in', 'active'] else 0
-    elif field_type == 'can_order':
-        return 1 if value in ['ready', 'active', 'can_order'] else 0
+    elif field_type == 'order_status':
+        return 1 if value in ['ready', 'active'] else 0
     else:
         return int(value) if str(value).isdigit() else 0
 
@@ -21,8 +21,8 @@ def _convert_binary_to_string(value: int, field_type: str) -> str:
     """Convert binary (0/1) values back to string for display purposes"""
     if field_type == 'login_status':
         return 'logged_in' if value == 1 else 'not_logged_in'
-    elif field_type == 'can_order':
-        return 'can_order' if value == 1 else 'cannot_order'
+    elif field_type == 'order_status':
+        return 'ready' if value == 1 else 'blocked'
     else:
         return str(value)
 
@@ -75,8 +75,10 @@ class AccountStateManager:
             'account_id': [1, 2],
             'account_name': ['Master', 'Child'],
             'login_status': [1, 0],  # 1 = logged_in, 0 = not_logged_in
-            'can_order': [1, 0],  # 1 = can order, 0 = cannot order
+            'order_status': [1, 1],  # 1 = ready, 0 = blocked
+            'quantity': [0, 0],  # Current position quantity
             'reason': ['Master account always logged in', 'Not logged in'],
+            'order_number': [None, None],
             'last_updated': [datetime.now().isoformat(), datetime.now().isoformat()]
         }
         
@@ -89,14 +91,14 @@ class AccountStateManager:
             if self.df_states is None or self.df_states.empty:
                 return False
             
-            # Check if login_status or can_order contain string values
+            # Check if login_status or order_status contain string values
             for _, row in self.df_states.iterrows():
                 login_status = str(row['login_status'])
-                can_order = str(row['can_order'])
+                order_status = str(row['order_status'])
                 
                 # If any value is not 0 or 1, migration is needed
                 if (login_status not in ['0', '1'] or 
-                    can_order not in ['0', '1']):
+                    order_status not in ['0', '1']):
                     return True
             
             return False
@@ -109,19 +111,19 @@ class AccountStateManager:
         try:
             applicationLogger.info("Starting migration from string to binary format...")
             
-            # Convert login_status and can_order to binary
+            # Convert login_status and order_status to binary
             for idx, row in self.df_states.iterrows():
                 # Convert login_status
                 old_login = str(row['login_status'])
                 new_login = _convert_string_to_binary(old_login, 'login_status')
                 self.df_states.at[idx, 'login_status'] = new_login
                 
-                # Convert can_order
-                old_can_order = str(row['can_order'])
-                new_can_order = _convert_string_to_binary(old_can_order, 'can_order')
-                self.df_states.at[idx, 'can_order'] = new_can_order
+                # Convert order_status
+                old_order = str(row['order_status'])
+                new_order = _convert_string_to_binary(old_order, 'order_status')
+                self.df_states.at[idx, 'order_status'] = new_order
                 
-                applicationLogger.info(f"Account {row['account_id']}: {old_login}->{new_login}, {old_can_order}->{new_can_order}")
+                applicationLogger.info(f"Account {row['account_id']}: {old_login}->{new_login}, {old_order}->{new_order}")
             
             # Save the migrated data
             self._save_to_csv()
@@ -140,8 +142,10 @@ class AccountStateManager:
                 self.cache[account_id] = {
                     'account_name': row['account_name'],
                     'login_status': row['login_status'],
-                    'can_order': row['can_order'],
+                    'order_status': row['order_status'],
+                    'quantity': int(row['order_qty']) if pd.notna(row['order_qty']) else 0,
                     'reason': row['reason'],
+                    'order_number': row['order_id'] if pd.notna(row['order_id']) else '',
                     'last_updated': row['last_updated']
                 }
         except Exception as e:
@@ -162,20 +166,20 @@ class AccountStateManager:
     def update_account_status(self, account_id: int, status: str, reason: str, 
                             order_number: Optional[str] = None) -> bool:
         """
-        Update account status (legacy method - now updates can_order)
+        Update account status (legacy method - now updates order_status)
         
         Args:
             account_id: Account ID (1 for Master, 2 for Child)
-            status: New status (active, inactive) - maps to can_order
+            status: New status (active, inactive) - maps to order_status
             reason: Reason for the status change
             order_number: Order number that caused the status change (optional)
-            
+        
         Returns:
             bool: True if update successful, False otherwise
         """
-        # Map legacy status to can_order (1 = can order, 0 = cannot order)
-        can_order = 1 if status == 'active' else 0
-        return self.update_can_order(account_id, can_order, reason)
+        # Map legacy status to order_status (1 = ready, 0 = blocked)
+        order_status = 1 if status == 'active' else 0
+        return self.update_order_status(account_id, order_status, reason, order_number)
     
     def update_login_status(self, account_id: int, login_status, reason: str) -> bool:
         """
@@ -202,10 +206,10 @@ class AccountStateManager:
                 self.df_states.loc[mask, 'reason'] = reason
                 self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
                 
-                # Reset can_order to 1 when account logs in successfully
+                # Reset order status to 'ready' (1) when account logs in successfully
                 if login_status == 1:
-                    self.df_states.loc[mask, 'can_order'] = 1
-                    applicationLogger.info(f"Account {account_id} can_order reset to 1 on successful login")
+                    self.df_states.loc[mask, 'order_status'] = 1
+                    applicationLogger.info(f"Account {account_id} order status reset to 'ready' on successful login")
             else:
                 applicationLogger.error(f"Account {account_id} not found in states")
                 return False
@@ -225,15 +229,17 @@ class AccountStateManager:
             applicationLogger.error(f"Error updating account {account_id} login status: {e}")
             return False
     
-    def update_can_order(self, account_id: int, can_order, reason: str) -> bool:
+    def update_order_status(self, account_id: int, order_status, reason: str, 
+                           order_number: Optional[str] = None) -> bool:
         """
-        Update account can_order status
+        Update account order status
         
         Args:
             account_id: Account ID (1 for Master, 2 for Child)
-            can_order: New can_order status (1 = can order, 0 = cannot order)
+            order_status: New order status (1 = ready, 0 = blocked)
             reason: Reason for the status change
-            
+            order_number: Order number that caused the status change (optional)
+        
         Returns:
             bool: True if update successful, False otherwise
         """
@@ -246,9 +252,16 @@ class AccountStateManager:
             # Update DataFrame
             mask = self.df_states['account_id'] == account_id
             if mask.any():
-                self.df_states.loc[mask, 'can_order'] = can_order
+                self.df_states.loc[mask, 'order_status'] = order_status
                 self.df_states.loc[mask, 'reason'] = reason
                 self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
+                
+                if order_number:
+                    # Handle case where order_number might be a list
+                    if isinstance(order_number, list):
+                        order_number = order_number[0] if order_number else None
+                    if order_number:
+                        self.df_states.loc[mask, 'order_number'] = order_number
             else:
                 applicationLogger.error(f"Account {account_id} not found in states")
                 return False
@@ -260,12 +273,12 @@ class AccountStateManager:
             self._save_to_csv()
             
             account_name = self.cache[account_id]['account_name']
-            applicationLogger.info(f"Updated {account_name} (ID: {account_id}) can_order to '{can_order}': {reason}")
+            applicationLogger.info(f"Updated {account_name} (ID: {account_id}) order status to '{order_status}': {reason}")
             
             return True
             
         except Exception as e:
-            applicationLogger.error(f"Error updating account {account_id} can_order: {e}")
+            applicationLogger.error(f"Error updating account {account_id} order status: {e}")
             return False
     
     def update_quantity(self, account_id: int, quantity: int, reason: str) -> bool:

@@ -9,6 +9,7 @@ import calendar
 # from config import Config  # Not currently used
 from trading.account_manager import AccountManager
 from trading.order_manager import OrderManager
+from trading.simple_order_manager import SimpleOrderManager
 from trading.websocket_manager import WebSocketManager
 from trading.position_manager import PositionManager
 from trading.account_state_manager import AccountStateManager
@@ -21,8 +22,8 @@ from logger import applicationLogger
 class MainWindow:
     """Main application window"""
     
-    def __init__(self, settings: Dict[str, Any] = None):
-        self.root = tk.Tk()
+    def __init__(self, root, settings: Dict[str, Any] = None):
+        self.root = root
         
         # Load settings
         self.settings = settings or {
@@ -44,7 +45,8 @@ class MainWindow:
         # Initialize managers
         self.account_manager = AccountManager()
         self.order_manager = OrderManager()
-        self.websocket_manager = WebSocketManager(self.account_manager, self.order_manager)
+        self.simple_order_manager = SimpleOrderManager()
+        self.websocket_manager = WebSocketManager(self.account_manager, self.order_manager, self.simple_order_manager)
         self.state_manager = AccountStateManager()
         
         # Ensure Master account is always active
@@ -1044,8 +1046,8 @@ class MainWindow:
                 
                 # Generate strikes using the price (cached or fresh)
                 if current_price > 0:
-                    # Get current option type for strike generation
-                    option_type = self.selected_option.get() if self.selected_option.get() in ["CE", "PE"] else None
+                    # Get current option type from UI
+                    option_type = self.selected_option.get()
                     strikes = self.expiry_manager.get_strike_list(index, current_price, option_type)
                     self.strike_dropdown['values'] = strikes
                     applicationLogger.info(f"Updated strikes for {index} based on price {current_price} and option {option_type}: {strikes}")
@@ -1285,21 +1287,26 @@ class MainWindow:
     def update_quantity_options_for_index(self, index: str):
         """Update quantity dropdown based on index when no complete symbol is available"""
         try:
-            if index == "SENSEX":
-                # For SENSEX, use lot size 20 to generate proper quantities
-                quantities = self.symbol_manager.get_quantity_options(20)
+            # Try to get lot size from master file first
+            lot_size = self.symbol_manager.get_lot_size_for_index(index)
+            
+            if lot_size:
+                # Generate quantity options based on actual lot size from master file
+                quantities = self.symbol_manager.get_quantity_options(lot_size)
                 self.qty_dropdown['values'] = quantities
-                applicationLogger.info(f"Updated quantity options for {index} with lot size 20: {quantities}")
+                applicationLogger.info(f"Updated quantity options for {index} with lot size {lot_size} from master file: {quantities}")
             else:
-                # For other indices, use the default method
+                # Fallback to hardcoded default method if lot size not found
                 quantities = self.expiry_manager.get_quantity_list(index)
                 self.qty_dropdown['values'] = quantities
-                applicationLogger.info(f"Updated quantity options for {index} using default method: {quantities}")
+                applicationLogger.warning(f"Lot size not found for {index} in master file, using hardcoded default method: {quantities}")
+                
         except Exception as e:
             applicationLogger.error(f"Error updating quantity options for {index}: {e}")
-            # Final fallback
+            # Final fallback to hardcoded method
             quantities = self.expiry_manager.get_quantity_list(index)
             self.qty_dropdown['values'] = quantities
+            applicationLogger.warning(f"Using hardcoded fallback for {index}: {quantities}")
     
     def _generate_sensex_symbol(self, expiry: str, strike: str, option: str) -> str:
         """
@@ -1644,7 +1651,7 @@ class MainWindow:
                 applicationLogger.info("Index prices are current, no refresh needed")
         except Exception as e:
             applicationLogger.error(f"Error refreshing index prices at startup: {e}")
-
+    
     def cleanup_old_master_files(self):
         """Clean up old master files, keep only the latest 3 days"""
         try:
@@ -1990,13 +1997,13 @@ class MainWindow:
                     self.master_order_status.set("Master Account Ready")
                     # Update master login button text
                     client_name = self.account_manager.accounts[1].get('client_name', 'Master Account')
-                    self.login_button1.config(text=f"{client_name} Logged in", state='disabled', style="LoginSuccess.TButton")
+                    # Master account logged in - no button to update
                 else:
                     self.master_order_status.set("Master Not Logged In")
-                    self.login_button1.config(text="Login Master Account", state='normal', style="LoginButton.TButton")
+                    # Master account not logged in - no button to update
             else:
                 self.master_order_status.set("Master Not Logged In")
-                self.login_button1.config(text="Login Master Account", state='normal', style="LoginButton.TButton")
+                # Master account not logged in - no button to update
             
             # Update Child account status
             child_status = self.state_manager.get_account_status(2)
@@ -2393,22 +2400,8 @@ class MainWindow:
             messagebox.showerror("Error", f"Error blocking child account: {e}")
     
     def place_buy_orders(self):
-        """Place buy orders across all active accounts"""
+        """Place buy orders independently for each active account - NO COORDINATION"""
         try:
-            # Check if Master account is blocked
-            if self.is_master_account_blocked():
-                applicationLogger.warning(f"Master account is blocked: {self.master_block_reason}")
-                messagebox.showwarning("Account Blocked", f"Master account is blocked: {self.master_block_reason}\n\nPlease resolve the issue before placing new orders.")
-                return
-            
-            # Check if Child account is blocked
-            if self.is_child_account_blocked():
-                applicationLogger.warning(f"Child account is blocked: {self.child_block_reason}")
-                messagebox.showwarning("Account Blocked", f"Child account is blocked: {self.child_block_reason}\n\nPlease resolve the issue before placing new orders.")
-                return
-            
-            # No global rejection blocking check - we'll handle individual account blocking in the order logic
-
             # Check if buy button is disabled (orders already placed)
             if self.buy_button['state'] == 'disabled':
                 messagebox.showwarning("Warning", "Orders already placed! Use RELEASE button to enable new orders.")
@@ -2430,116 +2423,75 @@ class MainWindow:
             self.original_buy_price = price
             applicationLogger.info(f"Original buy price stored: {price}")
             
-
-            # Set quantities for all accounts - master uses selected quantity, child uses configured lots
-            if trading_symbol:
-                try:
-                    # Get lot size for the trading symbol
-                    token, lot_size = self.symbol_manager.get_token_and_lot_size(trading_symbol)
-                    
-                    if lot_size:
-                        # Master account: Use selected quantity (ensure it's multiple of lot size)
-                        if qty1 % lot_size == 0:
-                            master_qty = qty1
-                        else:
-                            master_qty = ((qty1 + lot_size - 1) // lot_size) * lot_size
-                        
-                        # Child account: Use configured lots * lot size
-                        child_lots = self.settings.get('child_default_lots', 1)
-                        child_qty = lot_size * child_lots
-                        
-                        self.quantities[1] = master_qty
-                        self.quantities[2] = child_qty
-                        
-                        applicationLogger.info(f"Master quantity: {master_qty} (selected: {qty1}, lot size: {lot_size})")
-                        applicationLogger.info(f"Child quantity: {child_qty} (lots: {child_lots}, lot size: {lot_size})")
-                    else:
-                        # Fallback to original quantity if lot size not found
-                        self.quantities[1] = qty1
-                        self.quantities[2] = qty1
-                        applicationLogger.warning(f"Lot size not found, using original quantity for both accounts: {qty1}")
-                except Exception as e:
-                    applicationLogger.error(f"Error getting lot size: {e}")
-                    # Fallback to original quantity
-                    self.quantities[1] = qty1
-                    self.quantities[2] = qty1
-            else:
-                # Fallback if trading symbol not available
-                self.quantities[1] = qty1
-                self.quantities[2] = qty1
-            
             # Get active accounts from state manager
             active_accounts = self.state_manager.get_active_accounts()
-            
-            # Remove child account if orders are blocked (legacy check)
-            if self.child_orders_blocked and 2 in active_accounts:
-                active_accounts.remove(2)
-                applicationLogger.warning("Child account orders are blocked - excluding from buy orders")
-            
             applicationLogger.info(f"Active accounts: {active_accounts}")
             
             if not active_accounts:
                 messagebox.showerror("Error", "No active accounts found. Please login to accounts first.")
                 return
             
-            apis = [self.account_manager.get_api(i) for i in active_accounts]
-            quantities = [self.quantities[i] for i in active_accounts]
-            active_flags = [True] * len(active_accounts)
-            
-            applicationLogger.info(f"Placing buy orders for accounts: {active_accounts}")
-            applicationLogger.info(f"Trading symbol: {trading_symbol}, Price: {price}")
-            applicationLogger.info(f"Quantities: {quantities}")
-            
-            # Place regular buy orders (limit orders)
-            order_numbers = self.order_manager.place_buy_orders(
-                apis, quantities, trading_symbol, price, active_flags
-            )
-            
-            # Check for margin shortfall and handle accordingly
-            if self.order_manager.margin_shortfall_occurred:
-                self._handle_margin_shortfall()
-                return
-            
-            # Check for any order placement failures and handle accordingly
-            failed_orders = []
-            successful_orders = []
-            
-            for i, order_num in enumerate(order_numbers):
-                if order_num:
-                    successful_orders.append((active_accounts[i], order_num))
+            # Place orders independently for each account - NO COORDINATION
+            for account_id in active_accounts:
+                # Check if account is blocked
+                if self.simple_order_manager.is_account_blocked(account_id):
+                    applicationLogger.warning(f"Account {account_id} is blocked, skipping order placement")
+                    # Show warning for blocked account
+                    if account_id == 1:
+                        self.master_order_status.set("Master Account Blocked")
+                    else:
+                        self.child_order_status.set("Child Account Blocked")
+                    continue
+                
+                # Get API for this account
+                api = self.account_manager.get_api(account_id)
+                if not api:
+                    applicationLogger.warning(f"No API available for account {account_id}")
+                    if account_id == 1:
+                        self.master_order_status.set("Master API Not Available")
+                    else:
+                        self.child_order_status.set("Child API Not Available")
+                    continue
+                
+                # Calculate quantity for this account
+                try:
+                    token, lot_size = self.symbol_manager.get_token_and_lot_size(trading_symbol)
+                    if lot_size:
+                        if account_id == 1:  # Master account
+                            if qty1 % lot_size == 0:
+                                quantity = qty1
+                            else:
+                                quantity = ((qty1 + lot_size - 1) // lot_size) * lot_size
+                        else:  # Child account
+                            child_lots = self.settings.get('child_default_lots', 1)
+                            quantity = lot_size * child_lots
+                    else:
+                        quantity = qty1
+                except Exception as e:
+                    applicationLogger.error(f"Error getting lot size for account {account_id}: {e}")
+                    quantity = qty1
+                
+                # Place order for this account
+                order_id = self.simple_order_manager.place_order(
+                    account_id, api, trading_symbol, quantity, price, 'B'
+                )
+                
+                if order_id:
+                    applicationLogger.info(f"Order placed successfully for account {account_id}: {order_id}")
+                    # Update status for this account only
+                    if account_id == 1:
+                        self.master_order_status.set("Buy Order PENDING @ " + str(price))
+                    else:
+                        self.child_order_status.set("Buy Order PENDING @ " + str(price))
                 else:
-                    failed_orders.append(active_accounts[i])
-            
-            # If any orders failed, cancel entire lifecycle
-            if failed_orders:
-                applicationLogger.error(f"Order placement failed for accounts: {failed_orders}")
-                self._handle_buy_order_failure(failed_orders, successful_orders, active_accounts)
-                return
-            
-            # Update order numbers for successful orders
-            for i, order_num in enumerate(order_numbers):
-                if order_num:
-                    self.order_numbers[active_accounts[i]] = order_num
+                    applicationLogger.error(f"Order placement failed for account {account_id}")
+                    if account_id == 1:
+                        self.master_order_status.set("Master Order Failed")
+                    else:
+                        self.child_order_status.set("Child Order Failed")
             
             # Auto-set SL and Target based on buy order price
             self.auto_set_sl_target_from_buy_price(price)
-            
-            # Start cross-account coordination if both master and child are active
-            if 1 in active_accounts and 2 in active_accounts:
-                self.start_order_coordination()
-                applicationLogger.info("Cross-account coordination started for buy orders")
-            
-
-            # Update order status displays based on active accounts
-            if 1 in active_accounts:
-                self.master_order_status.set("Orders Placed - Waiting for Status")
-            else:
-                self.master_order_status.set("Master Not Logged In")
-                
-            if 2 in active_accounts:
-                self.child_order_status.set("Orders Placed - Waiting for Status")
-            else:
-                self.child_order_status.set("Child Not Logged In")
             
             # Disable buy button and update text with price
             self.buy_button.config(state='disabled', text=f"OrderPlaced@{price}")
@@ -2551,10 +2503,9 @@ class MainWindow:
             
             # Enable buy-related buttons for order management
             self.cancel_buy_button.config(state='normal')
-            # Don't enable modify button yet - wait for order state confirmation
-            self.modify_buy_button.config(state='disabled')
+            self.modify_buy_button.config(state='normal')
             
-            # Enable individual cancel buttons based on active accounts
+            # Enable individual cancel buttons based on successful orders
             if 1 in active_accounts:
                 self.cancel_master_buy_button.config(state='normal', text="Cancel Master Buy Order")
             if 2 in active_accounts:
@@ -2567,7 +2518,6 @@ class MainWindow:
             applicationLogger.info("Sell Order button kept disabled until buy orders are completed")
             
         except Exception as e:
-
             applicationLogger.error(f"Error placing buy orders: {e}")
             # Update order status displays to show error
             active_accounts = self.account_manager.get_all_active_accounts()
@@ -2916,41 +2866,55 @@ class MainWindow:
     
     def is_master_account_blocked(self) -> bool:
         """Check if Master account is blocked"""
-        return self.master_account_blocked or self.master_account_rejected_blocked
+        return self.simple_order_manager.is_account_blocked(1)
     
     def is_child_account_blocked(self) -> bool:
         """Check if Child account is blocked"""
-        return self.child_account_blocked or self.child_account_rejected_blocked
+        return self.simple_order_manager.is_account_blocked(2)
     
     def is_any_account_rejected_blocked(self) -> bool:
         """Check if any account is blocked due to order rejection"""
-        return self.master_account_rejected_blocked or self.child_account_rejected_blocked
+        master_info = self.simple_order_manager.get_account_order_info(1)
+        child_info = self.simple_order_manager.get_account_order_info(2)
+        return master_info.get('rejected_blocked', False) or child_info.get('rejected_blocked', False)
     
     def get_blocked_accounts_info(self) -> str:
         """Get information about blocked accounts"""
         blocked_info = []
-        if self.master_account_rejected_blocked:
-            blocked_info.append(f"Master: {self.master_block_reason}")
-        if self.child_account_rejected_blocked:
-            blocked_info.append(f"Child: {self.child_block_reason}")
+        master_info = self.simple_order_manager.get_account_order_info(1)
+        child_info = self.simple_order_manager.get_account_order_info(2)
+        
+        if master_info.get('rejected_blocked'):
+            blocked_info.append("Master: Order Rejected")
+        if child_info.get('rejected_blocked'):
+            blocked_info.append("Child: Order Rejected")
         return "; ".join(blocked_info) if blocked_info else "No accounts blocked"
     
     def reset_rejection_blocks(self):
         """Reset rejection blocks - allow user to acknowledge rejections and try again"""
         try:
-            if self.master_account_rejected_blocked or self.child_account_rejected_blocked:
+            # Check if any accounts are blocked due to rejection
+            master_info = self.simple_order_manager.get_account_order_info(1)
+            child_info = self.simple_order_manager.get_account_order_info(2)
+            
+            if master_info.get('rejected_blocked') or child_info.get('rejected_blocked'):
                 # Show confirmation dialog
-                blocked_info = self.get_blocked_accounts_info()
+                blocked_accounts = []
+                if master_info.get('rejected_blocked'):
+                    blocked_accounts.append("Master Account")
+                if child_info.get('rejected_blocked'):
+                    blocked_accounts.append("Child Account")
+                
+                blocked_info = "\n".join(blocked_accounts)
                 result = messagebox.askyesno(
                     "Reset Rejection Blocks", 
                     f"The following accounts are blocked due to order rejections:\n\n{blocked_info}\n\nDo you want to reset these blocks and allow new orders?\n\nNote: Make sure the rejection issues are resolved before proceeding."
                 )
                 
                 if result:
-                    # Reset rejection blocks
-                    if self.master_account_rejected_blocked:
-                        self.master_account_rejected_blocked = False
-                        self.master_block_reason = ""
+                    # Reset rejection blocks using simple order manager
+                    if master_info.get('rejected_blocked'):
+                        self.simple_order_manager.unblock_account(1, unblock_rejection=True)
                         applicationLogger.info("Master account rejection block reset by user")
                         # Update status
                         if self.account_manager.accounts[1]['active']:
@@ -2958,9 +2922,8 @@ class MainWindow:
                         else:
                             self.master_order_status.set("Master Not Logged In")
                     
-                    if self.child_account_rejected_blocked:
-                        self.child_account_rejected_blocked = False
-                        self.child_block_reason = ""
+                    if child_info.get('rejected_blocked'):
+                        self.simple_order_manager.unblock_account(2, unblock_rejection=True)
                         applicationLogger.info("Child account rejection block reset by user")
                         # Update status
                         if self.account_manager.accounts[2]['active']:
@@ -3047,7 +3010,7 @@ class MainWindow:
         try:
             if account_num == 1:  # Master account
                 # Disable master account specific buttons
-                self.login_button1.config(state='disabled', text="Master - BLOCKED")
+                # Master account blocked - no button to update
                 applicationLogger.info("Master account trading buttons disabled due to order rejection")
             elif account_num == 2:  # Child account
                 # For child account, only disable the button but preserve the logged-in text
@@ -3086,7 +3049,7 @@ class MainWindow:
                 if self.account_manager.accounts[1]['active']:
                     self.master_order_status.set("Master Account Ready")
                     # Re-enable master account buttons
-                    self.login_button1.config(state='normal', text="Master - Ready")
+                    # Master account ready - no button to update
                 else:
                     self.master_order_status.set("Master Not Logged In")
             elif account_num == 2:  # Child account
@@ -3321,30 +3284,33 @@ class MainWindow:
                 self.cancel_master_buy_button.config(text="Master Not Logged In")
                 return
             
-            if 1 not in self.order_numbers or not self.order_numbers[1]:
+            # Get order info from simple order manager
+            order_info = self.simple_order_manager.get_account_order_info(1)
+            if not order_info.get('order_id'):
                 self.cancel_master_buy_button.config(text="No Master Order Found")
                 return
             
             master_api = self.account_manager.get_api(1)
-            master_order_number = self.order_numbers[1]
+            master_order_id = order_info['order_id']
             
-            # Cancel the master order
-            self.order_manager.cancel_orders([master_api], [master_order_number], [True])
+            # Cancel the master order using simple order manager
+            success = self.simple_order_manager.cancel_order(1, master_api, master_order_id)
             
-            # Update state manager with new separated status
-            self.state_manager.update_order_status(1, 0, 'Master buy order cancelled by user')
-            # Note: No quantity change needed for cancellation (order was never filled)
-            
-            # Update master order status
-            # Block Master account from further operations
-            self.block_master_account("Master buy order cancelled")
-            
-            # Update button text to show cancellation
-            self.cancel_master_buy_button.config(text="Master Buy Cancelled")
-            
-            # Keep buy button disabled until Release button is pressed
-            self.buy_button.config(state='disabled', text="Press RELEASE to Enable")
-            self.cancel_master_buy_button.config(state='disabled')
+            if success:
+                # Update master order status
+                self.master_order_status.set("Master buy order cancelled by user")
+                
+                # Update button text to show cancellation
+                self.cancel_master_buy_button.config(text="Master Buy Cancelled")
+                
+                # Keep buy button disabled until Release button is pressed
+                self.buy_button.config(state='disabled', text="Press RELEASE to Enable")
+                self.cancel_master_buy_button.config(state='disabled')
+                
+                applicationLogger.info("Master buy order cancelled successfully, price box re-enabled")
+            else:
+                self.cancel_master_buy_button.config(text="Cancel Failed")
+                applicationLogger.error("Failed to cancel master buy order")
             
             # Keep price box disabled until Release button is pressed
             self.price_box.config(state='disabled', bg='lightgray')
@@ -3362,33 +3328,33 @@ class MainWindow:
     def cancel_child_buy_order(self):
         """Cancel buy order for child account only"""
         try:
-            if not self.account_manager.is_account_active(2) and not self.account_manager.accounts[2].get('blocked', False):
+            if not self.account_manager.is_account_active(2):
                 self.cancel_child_buy_button.config(text="Child Not Logged In")
                 return
             
-            if self.child_orders_blocked:
-                self.cancel_child_buy_button.config(text="Child Orders Blocked")
-                return
-            
-            if 2 not in self.order_numbers or not self.order_numbers[2]:
+            # Get order info from simple order manager
+            order_info = self.simple_order_manager.get_account_order_info(2)
+            if not order_info.get('order_id'):
                 self.cancel_child_buy_button.config(text="No Child Order Found")
                 return
             
             child_api = self.account_manager.get_api(2)
-            child_order_number = self.order_numbers[2]
+            child_order_id = order_info['order_id']
             
-            # Cancel the child order
-            self.order_manager.cancel_orders([child_api], [child_order_number], [True])
+            # Cancel the child order using simple order manager
+            success = self.simple_order_manager.cancel_order(2, child_api, child_order_id)
             
-            # Update state manager with new separated status
-            self.state_manager.update_order_status(2, 0, 'Child buy order cancelled by user')
-            # Note: No quantity change needed for cancellation (order was never filled)
-            
-            # Block Child account from further operations
-            self.block_child_account("Child buy order cancelled")
-            
-            # Update button text to show cancellation
-            self.cancel_child_buy_button.config(text="Child Buy Cancelled")
+            if success:
+                # Update child order status
+                self.child_order_status.set("Child buy order cancelled by user")
+                
+                # Update button text to show cancellation
+                self.cancel_child_buy_button.config(text="Child Buy Cancelled")
+                
+                applicationLogger.info("Child buy order cancelled successfully")
+            else:
+                self.cancel_child_buy_button.config(text="Cancel Failed")
+                applicationLogger.error("Failed to cancel child buy order")
             
             # Keep buy button disabled until Release button is pressed
             self.buy_button.config(state='disabled', text="Press RELEASE to Enable")
@@ -3834,30 +3800,22 @@ class MainWindow:
         self.state_manager.reset_trading_blocks(self.account_manager)
         applicationLogger.info("Trading blocks reset while preserving login status")
         
-        # Also unblock accounts in the account manager
+        # Unblock accounts using simple order manager
         try:
-            # Unblock master account if it exists
-            if 1 in self.account_manager.accounts:
-                success, message = self.account_manager.unblock_account(1)
-                if success:
-                    applicationLogger.info(f"Master account unblocked: {message}")
-                else:
-                    applicationLogger.warning(f"Failed to unblock master account: {message}")
+            # Unblock master account (trading blocks only, not rejection blocks)
+            self.simple_order_manager.unblock_account(1, unblock_rejection=False)
+            applicationLogger.info("Master account trading blocks reset")
             
-            # Unblock child account if it exists
-            if 2 in self.account_manager.accounts:
-                success, message = self.account_manager.unblock_account(2)
-                if success:
-                    applicationLogger.info(f"Child account unblocked: {message}")
-                else:
-                    applicationLogger.warning(f"Failed to unblock child account: {message}")
+            # Unblock child account (trading blocks only, not rejection blocks)
+            self.simple_order_manager.unblock_account(2, unblock_rejection=False)
+            applicationLogger.info("Child account trading blocks reset")
         except Exception as e:
             applicationLogger.error(f"Error unblocking accounts: {e}")
         
-        # Reset trading blocks (for successful completion) but NOT rejection blocks
-        self.master_account_blocked = False
-        self.child_account_blocked = False
-        # DO NOT reset rejection blocks - these should only be reset by explicit user action
+        # Clear order information for both accounts
+        self.simple_order_manager.clear_order_info(1)
+        self.simple_order_manager.clear_order_info(2)
+        applicationLogger.info("Order information cleared for both accounts")
         
         # Debug logging to understand the current state
         child_status = self.state_manager.get_account_status(2)

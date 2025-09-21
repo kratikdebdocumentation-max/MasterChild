@@ -47,7 +47,9 @@ class Config:
         'BANKNIFTY': {'token': '26009', 'exchange': 'NSE', 'name': 'NIFTY BANK'}
     }
     
-    # Telegram functionality removed
+    # Telegram settings
+    TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"  # Replace with actual bot token
+    TELEGRAM_SOS_CHAT_ID = "YOUR_CHAT_ID_HERE"  # Replace with actual chat ID
     
     @classmethod
     def get_strike_interval(cls, instrument: str) -> int:

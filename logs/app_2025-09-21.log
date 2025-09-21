@@ -1,3 +1,6 @@
+2025-09-21 21:39:17,036 - INFO - Starting Master-Child Trading GUI
+2025-09-21 22:06:08,242 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 22:07:25,553 - INFO - Login account 2 clicked - Function not implemented yet
 2025-09-21 22:30:12,840 - INFO - Loaded account states from account_state.csv
 2025-09-21 22:30:12,843 - ERROR - Error checking migration need: 'order_status'
 2025-09-21 22:30:12,843 - ERROR - Error updating cache: 'order_status'
@@ -5,29 +8,11 @@
 2025-09-21 22:30:12,867 - ERROR - Error updating cache: 'order_qty'
 2025-09-21 22:30:12,875 - ERROR - Error updating account 1 login status: 1
 2025-09-21 22:30:12,880 - INFO - Master account set to always logged in state
+2025-09-21 22:30:13,212 - INFO - Attempting auto-login for master account...
+2025-09-21 22:30:13,212 - INFO - Starting Master-Child Trading GUI - Original UI Layout
 2025-09-21 22:30:13,212 - INFO - Generated fresh 2FA for account 1: 421608
-2025-09-21 22:30:30,364 - INFO - Loaded account states from account_state.csv
-2025-09-21 22:30:30,364 - INFO - Migrating account states from string to binary format...
-2025-09-21 22:30:30,364 - INFO - Starting migration from string to binary format...
-2025-09-21 22:30:30,364 - INFO - Account 1: 1->0, 1.0->0
-2025-09-21 22:30:30,364 - INFO - Account 2: 0->0, nan->0
-2025-09-21 22:30:30,372 - INFO - Migration completed successfully - states converted to binary format
-2025-09-21 22:30:30,372 - ERROR - Error updating cache: 'order_qty'
-2025-09-21 22:30:30,380 - INFO - Account 1 order status reset to 'ready' on successful login
-2025-09-21 22:30:30,383 - ERROR - Error updating cache: 'order_qty'
-2025-09-21 22:30:30,383 - ERROR - Error updating account 1 login status: 1
-2025-09-21 22:30:30,383 - INFO - Master account set to always logged in state
-2025-09-21 22:30:57,991 - INFO - Loaded account states from account_state.csv
-2025-09-21 22:30:58,003 - INFO - Migrating account states from string to binary format...
-2025-09-21 22:30:58,003 - INFO - Starting migration from string to binary format...
-2025-09-21 22:30:58,003 - INFO - Account 1: 1->0, 1.0->0
-2025-09-21 22:30:58,003 - INFO - Account 2: 0->0, 0.0->0
-2025-09-21 22:30:58,014 - INFO - Migration completed successfully - states converted to binary format
-2025-09-21 22:30:58,014 - ERROR - Error updating cache: 'order_qty'
-2025-09-21 22:30:58,014 - INFO - Account 1 order status reset to 'ready' on successful login
-2025-09-21 22:30:58,014 - ERROR - Error updating cache: 'order_qty'
-2025-09-21 22:30:58,019 - ERROR - Error updating account 1 login status: 1
-2025-09-21 22:30:58,019 - INFO - Master account set to always logged in state
+2025-09-21 22:30:14,110 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 22:30:14,110 - ERROR - Error during master auto-login: 'AccountStateManager' object has no attribute 'update_account_state'
 2025-09-21 22:31:01,978 - INFO - Loaded account states from account_state.csv
 2025-09-21 22:31:01,978 - INFO - Migrating account states from string to binary format...
 2025-09-21 22:31:01,978 - INFO - Starting migration from string to binary format...
@@ -39,12 +24,16 @@
 2025-09-21 22:31:01,993 - ERROR - Error updating cache: 'order_qty'
 2025-09-21 22:31:01,997 - ERROR - Error updating account 1 login status: 1
 2025-09-21 22:31:01,997 - INFO - Master account set to always logged in state
+2025-09-21 22:31:02,245 - INFO - Attempting auto-login for master account...
+2025-09-21 22:31:02,248 - INFO - Starting Master-Child Trading GUI - Original UI Layout
 2025-09-21 22:31:02,248 - INFO - Generated fresh 2FA for account 1: 285881
+2025-09-21 22:31:10,126 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
 2025-09-21 22:31:10,138 - INFO - Account 1 order status reset to 'ready' on successful login
 2025-09-21 22:31:10,141 - ERROR - Error updating cache: 'order_qty'
 2025-09-21 22:31:10,142 - ERROR - Error updating account 1 login status: 1
 2025-09-21 22:31:10,142 - ERROR - Error updating cache: 'order_qty'
 2025-09-21 22:31:10,148 - ERROR - Error updating account 1 order status: 1
+2025-09-21 22:31:10,148 - INFO - Master account auto-login successful: ROOPAL SONI
 2025-09-21 22:37:31,780 - INFO - Loaded account states from account_state.csv
 2025-09-21 22:37:31,782 - INFO - Migrating account states from string to binary format...
 2025-09-21 22:37:31,784 - INFO - Starting migration from string to binary format...
@@ -56,20 +45,30 @@
 2025-09-21 22:37:31,794 - ERROR - Error updating cache: 'order_qty'
 2025-09-21 22:37:31,796 - ERROR - Error updating account 1 login status: 1
 2025-09-21 22:37:31,799 - INFO - Master account set to always logged in state
+2025-09-21 22:37:32,021 - INFO - Attempting auto-login for master account...
+2025-09-21 22:37:32,025 - INFO - Starting Master-Child Trading GUI - Original UI Layout
 2025-09-21 22:37:32,025 - INFO - Generated fresh 2FA for account 1: 825240
+2025-09-21 22:37:32,835 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
 2025-09-21 22:37:32,840 - INFO - Account 1 order status reset to 'ready' on successful login
 2025-09-21 22:37:32,840 - ERROR - Error updating cache: 'order_qty'
 2025-09-21 22:37:32,852 - ERROR - Error updating account 1 login status: 1
 2025-09-21 22:37:32,858 - ERROR - Error updating cache: 'order_qty'
 2025-09-21 22:37:32,863 - ERROR - Error updating account 1 order status: 1
+2025-09-21 22:37:32,865 - INFO - Master account auto-login successful: ROOPAL SONI
 2025-09-21 22:51:45,867 - ERROR - Error initializing account states: Error tokenizing data. C error: Expected 6 fields in line 3, saw 7
 
+2025-09-21 22:51:45,938 - INFO - Attempting auto-login for master account...
+2025-09-21 22:51:45,938 - INFO - Starting Master-Child Trading GUI - Original UI Layout
 2025-09-21 22:51:45,938 - INFO - Generated fresh 2FA for account 1: 740244
+2025-09-21 22:51:46,736 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
 2025-09-21 22:51:46,746 - INFO - Account 1 can_order reset to 1 on successful login
 2025-09-21 22:51:46,750 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
 2025-09-21 22:51:46,759 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
-2025-09-21 22:51:49,712 - INFO - Loaded account states from account_state.csv
+2025-09-21 22:51:46,765 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 22:51:58,483 - INFO - Attempting login for child account 2...
 2025-09-21 22:51:58,483 - INFO - Generated fresh 2FA for account 2: 657272
+2025-09-21 22:51:59,133 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
 2025-09-21 22:51:59,133 - INFO - Account 2 can_order reset to 1 on successful login
 2025-09-21 22:51:59,141 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
 2025-09-21 22:51:59,157 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-21 22:51:59,157 - INFO - Child account login successful: KRATIK YADAV
