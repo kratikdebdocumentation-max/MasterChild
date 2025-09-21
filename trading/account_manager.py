@@ -148,9 +148,9 @@ class AccountManager:
             return False, "Account not found"
         
         try:
-            # Unblock account
+            # Unblock account (remove blocked flag but don't change active status)
             self.accounts[account_num]['blocked'] = False
-            self.accounts[account_num]['active'] = True
+            # Don't set active = True here - active status should be based on actual login status
             
             client_name = self.accounts[account_num].get('client_name', f'Account {account_num}')
             applicationLogger.info(f"Account {account_num} ({client_name}) unblocked - Orders allowed again")

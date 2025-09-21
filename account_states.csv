@@ -1,3 +1,3 @@
 account_id,account_name,login_status,order_status,quantity,reason,order_number,last_updated
-1,Master,logged_in,ready,0,Account unblocked on startup,,2025-09-21T10:43:06.739187
-2,Child,logged_in,blocked,0,Child account logged out - orders blocked,,2025-09-21T10:46:53.076601
+1,Master,1,0,0,Buy order rejected: SAF:order is not open to cancel,,2025-09-21T15:27:51.411631
+2,Child,1,0,0,Buy order rejected: SAF:Yel is down,,2025-09-21T15:27:43.160085

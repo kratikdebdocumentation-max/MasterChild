@@ -14,6 +14,7 @@ from trading.position_manager import PositionManager
 from trading.account_state_manager import AccountStateManager
 from market_data.symbol_manager import SymbolManager
 from market_data.expiry_manager import ExpiryManager
+from market_data.index_price_manager import IndexPriceManager
 from utils.telegram_notifications import send_sos_message
 from logger import applicationLogger
 
@@ -58,6 +59,10 @@ class MainWindow:
         self.position_manager = PositionManager()
         self.symbol_manager = SymbolManager()
         self.expiry_manager = ExpiryManager()
+        self.index_price_manager = IndexPriceManager()
+        
+        # Refresh index prices at startup if needed
+        self._refresh_index_prices_if_needed()
         
         # Position tracking for local PnL calculation
         self.position_data = {
@@ -326,6 +331,13 @@ class MainWindow:
             command=self.release_buttons, width=12
         )
         self.release_button.pack(side=tk.LEFT, padx=5)
+        
+        # Reset rejection blocks button
+        self.reset_rejection_button = ttk.Button(
+            self.login_frame, text="RESET BLOCKS", 
+            command=self.reset_rejection_blocks, width=12
+        )
+        self.reset_rejection_button.pack(side=tk.LEFT, padx=5)
 
         # Premium Price display (reduced size)
         tk.Label(self.login_frame, text="Premium Price:").pack(side=tk.LEFT, padx=5)
@@ -776,8 +788,8 @@ class MainWindow:
                     client_name = self.account_manager.accounts[2].get('client_name', 'Child Account')
                     
                     # Update state manager with new separated status
-                    self.state_manager.update_login_status(2, 'logged_in', 'Child account unblocked and logged in')
-                    self.state_manager.update_order_status(2, 'ready', 'Child account ready for orders')
+                    self.state_manager.update_login_status(2, 1, 'Child account unblocked and logged in')
+                    self.state_manager.update_order_status(2, 1, 'Child account ready for orders')
                     
                     self.login_button2.config(text=f"{client_name} Logged in")
                     self.login_button2.config(state='disabled', style="LoginSuccess.TButton")
@@ -792,8 +804,8 @@ class MainWindow:
             success, client_name = self.account_manager.login_account(account_num)
             if success:
                 # Update state manager with new separated status
-                self.state_manager.update_login_status(account_num, 'logged_in', 'Account logged in successfully')
-                self.state_manager.update_order_status(account_num, 'ready', 'Account ready for orders')
+                self.state_manager.update_login_status(account_num, 1, 'Account logged in successfully')
+                self.state_manager.update_order_status(account_num, 1, 'Account ready for orders')
                 
                 self.websocket_manager.connect_feed(account_num)
                 self.update_account_display(account_num, client_name)
@@ -846,8 +858,8 @@ class MainWindow:
                 success, client_name = self.account_manager.login_account(2)
                 if success:
                     # Update state manager with new separated status
-                    self.state_manager.update_login_status(2, 'logged_in', 'Child account auto-logged in')
-                    self.state_manager.update_order_status(2, 'ready', 'Child account ready for orders')
+                    self.state_manager.update_login_status(2, 1, 'Child account auto-logged in')
+                    self.state_manager.update_order_status(2, 1, 'Child account ready for orders')
                     
                     # Set up websocket feed for child account
                     self.websocket_manager.connect_feed(2)
@@ -1000,38 +1012,50 @@ class MainWindow:
             # Fetch Index LTP immediately when Index is selected
             self.fetch_index_ltp(index)
             
-            # Fetch current index price and update strike list
+            # Get current index price and update strike list
             try:
-                api = self.account_manager.get_api(1)  # Use master account API
-                if api:
-                    current_price = self.symbol_manager.get_index_price(api, index)
-                    if current_price:
-                        # Get current option type for strike generation
-                        option_type = self.selected_option.get() if self.selected_option.get() in ["CE", "PE"] else None
-                        strikes = self.expiry_manager.get_strike_list(index, current_price, option_type)
-                        self.strike_dropdown['values'] = strikes
-                        applicationLogger.info(f"Updated strikes for {index} based on price {current_price} and option {option_type}: {strikes}")
+                # Step 1: Try to get cached price first
+                current_price = self.index_price_manager.get_index_price(index)
+                
+                # Step 2: If no cached price or price is 0, fetch from API
+                if current_price == 0.0 or self.index_price_manager.should_refresh_prices():
+                    applicationLogger.info(f"No cached price for {index}, fetching from API...")
+                    api = self.account_manager.get_api(1)  # Use master account API
+                    if api:
+                        current_price = self.symbol_manager.get_index_price(api, index)
+                        if current_price:
+                            # Update cached price
+                            self.index_price_manager.update_index_price(index, current_price)
+                            applicationLogger.info(f"Fetched and cached {index} price: {current_price}")
+                        else:
+                            # Price fetch failed - show error popup
+                            applicationLogger.error(f"Could not fetch price for {index}")
+                            messagebox.showerror("Price Fetch Error", f"Could not fetch current price for {index}. Please ensure:\n1. Master account is logged in\n2. Internet connection is stable\n3. Market is open\n\nPlease try again after checking these conditions.")
+                            self.strike_dropdown['values'] = []
+                            return
                     else:
-                        # Fallback to default strikes if price fetch fails
-                        applicationLogger.warning(f"Could not fetch price for {index}, using default strikes")
-                        default_prices = {"NIFTY": 24000, "BANKNIFTY": 52000, "SENSEX": 81000}
-                        option_type = self.selected_option.get() if self.selected_option.get() in ["CE", "PE"] else None
-                        strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option_type)
-                        self.strike_dropdown['values'] = strikes
+                        # No API available - show error popup
+                        applicationLogger.error("Master account API not available")
+                        messagebox.showerror("API Error", "Master account API is not available. Please:\n1. Login to Master account first\n2. Check your internet connection\n3. Restart the application if needed")
+                        self.strike_dropdown['values'] = []
+                        return
                 else:
-                    # Fallback if no API available
-                    applicationLogger.warning("Master account API not available, using default strikes")
-                    default_prices = {"NIFTY": 24000, "BANKNIFTY": 52000, "SENSEX": 81000}
+                    applicationLogger.info(f"Using cached {index} price: {current_price}")
+                
+                # Generate strikes using the price (cached or fresh)
+                if current_price > 0:
+                    # Get current option type for strike generation
                     option_type = self.selected_option.get() if self.selected_option.get() in ["CE", "PE"] else None
-                    strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option_type)
+                    strikes = self.expiry_manager.get_strike_list(index, current_price, option_type)
                     self.strike_dropdown['values'] = strikes
+                    applicationLogger.info(f"Updated strikes for {index} based on price {current_price} and option {option_type}: {strikes}")
+                else:
+                    self.strike_dropdown['values'] = []
             except Exception as e:
                 applicationLogger.error(f"Error updating strikes for {index}: {e}")
-                # Fallback to default strikes on error
-                default_prices = {"NIFTY": 24000, "BANKNIFTY": 52000, "SENSEX": 81000}
-                option_type = self.selected_option.get() if self.selected_option.get() in ["CE", "PE"] else None
-                strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option_type)
-                self.strike_dropdown['values'] = strikes
+                # Show error popup instead of using default prices
+                messagebox.showerror("Strike Update Error", f"Error updating strikes for {index}: {str(e)[:100]}...\n\nPlease check your connection and try again.")
+                self.strike_dropdown['values'] = []
             
             # Update quantity dropdown based on index
             self.update_quantity_options_for_index(index)
@@ -1073,47 +1097,60 @@ class MainWindow:
                 self.strike_dropdown['values'] = strikes
                 applicationLogger.info(f"Updated strikes for {index} {option} based on price {current_price}: {strikes}")
             else:
-                # Fallback to default strikes if no price provided
-                applicationLogger.warning(f"No price provided for {index}, using default strikes")
-                default_prices = {"NIFTY": 24000, "BANKNIFTY": 52000, "SENSEX": 81000}
-                strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option)
-                self.strike_dropdown['values'] = strikes
+                # No price provided - show error popup
+                applicationLogger.error(f"No price provided for {index}")
+                messagebox.showerror("Price Error", f"No current price available for {index}. Please:\n1. Ensure market is open\n2. Check your internet connection\n3. Try refreshing the price")
+                self.strike_dropdown['values'] = []
         except Exception as e:
             applicationLogger.error(f"Error updating strikes for {index} {option}: {e}")
-            # Fallback to default strikes on error
-            default_prices = {"NIFTY": 24000, "BANKNIFTY": 52000, "SENSEX": 81000}
-            strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option)
-            self.strike_dropdown['values'] = strikes
+            # Show error popup instead of using default prices
+            messagebox.showerror("Strike Update Error", f"Error updating strikes for {index} {option}: {str(e)[:100]}...\n\nPlease check your connection and try again.")
+            self.strike_dropdown['values'] = []
 
     def update_strikes_for_option(self, index: str, option: str):
-        """Update strikes when option type changes (legacy method for backward compatibility)"""
+        """Update strikes when option type changes using cached prices"""
         try:
-            # Get current index price
-            api = self.account_manager.get_api(1)
-            if api:
-                current_price = self.symbol_manager.get_index_price(api, index)
-                if current_price:
-                    strikes = self.expiry_manager.get_strike_list(index, current_price, option)
-                    self.strike_dropdown['values'] = strikes
-                    applicationLogger.info(f"Updated strikes for {index} {option} based on price {current_price}: {strikes}")
+            # Step 1: Try to get cached price first
+            current_price = self.index_price_manager.get_index_price(index)
+            
+            # Step 2: If no cached price, fetch from API
+            if current_price == 0.0:
+                applicationLogger.info(f"No cached price for {index}, fetching from API...")
+                api = self.account_manager.get_api(1)
+                if api:
+                    current_price = self.symbol_manager.get_index_price(api, index)
+                    if current_price:
+                        # Update cached price
+                        self.index_price_manager.update_index_price(index, current_price)
+                        applicationLogger.info(f"Fetched and cached {index} price: {current_price}")
+                    else:
+                        # Price fetch failed - show error popup
+                        applicationLogger.error(f"Could not fetch price for {index}")
+                        messagebox.showerror("Price Fetch Error", f"Could not fetch current price for {index}. Please ensure:\n1. Master account is logged in\n2. Internet connection is stable\n3. Market is open\n\nPlease try again after checking these conditions.")
+                        self.strike_dropdown['values'] = []
+                        return
                 else:
-                    # Fallback to default strikes if price fetch fails
-                    applicationLogger.warning(f"Could not fetch price for {index}, using default strikes")
-                    default_prices = {"NIFTY": 24000, "BANKNIFTY": 52000, "SENSEX": 81000}
-                    strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option)
-                    self.strike_dropdown['values'] = strikes
+                    # No API available - show error popup
+                    applicationLogger.error("Master account API not available")
+                    messagebox.showerror("API Error", "Master account API is not available. Please:\n1. Login to Master account first\n2. Check your internet connection\n3. Restart the application if needed")
+                    self.strike_dropdown['values'] = []
+                    return
             else:
-                # Fallback if no API available
-                applicationLogger.warning("Master account API not available, using default strikes")
-                default_prices = {"NIFTY": 24000, "BANKNIFTY": 52000, "SENSEX": 81000}
-                strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option)
+                applicationLogger.info(f"Using cached {index} price: {current_price}")
+            
+            # Generate strikes using the price (cached or fresh)
+            if current_price > 0:
+                strikes = self.expiry_manager.get_strike_list(index, current_price, option)
                 self.strike_dropdown['values'] = strikes
+                applicationLogger.info(f"Updated strikes for {index} {option} based on price {current_price}: {strikes}")
+            else:
+                self.strike_dropdown['values'] = []
+                
         except Exception as e:
             applicationLogger.error(f"Error updating strikes for {index} {option}: {e}")
-            # Fallback to default strikes on error
-            default_prices = {"NIFTY": 24000, "BANKNIFTY": 52000, "SENSEX": 81000}
-            strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option)
-            self.strike_dropdown['values'] = strikes
+            # Show error popup instead of using default prices
+            messagebox.showerror("Strike Update Error", f"Error updating strikes for {index} {option}: {str(e)[:100]}...\n\nPlease check your connection and try again.")
+            self.strike_dropdown['values'] = []
     
     def on_strike_selected(self, *args):
         """Handle strike selection - automatically subscribe and fetch price"""
@@ -1575,6 +1612,39 @@ class MainWindow:
         except Exception as e:
             applicationLogger.error(f"Error loading expiry dates from CSV: {e}")
     
+    def _refresh_index_prices_if_needed(self):
+        """Refresh index prices at startup if they need to be updated"""
+        try:
+            if self.index_price_manager.should_refresh_prices():
+                applicationLogger.info("Index prices need refresh, fetching from API...")
+                api = self.account_manager.get_api(1)
+                if api:
+                    # Fetch prices for all indices
+                    prices = {}
+                    for index in ['NIFTY', 'BANKNIFTY', 'SENSEX']:
+                        try:
+                            price = self.symbol_manager.get_index_price(api, index)
+                            if price and price > 0:
+                                prices[index] = price
+                                applicationLogger.info(f"Fetched {index} price: {price}")
+                            else:
+                                applicationLogger.warning(f"Could not fetch price for {index}")
+                        except Exception as e:
+                            applicationLogger.error(f"Error fetching {index} price: {e}")
+                    
+                    # Update all prices at once
+                    if prices:
+                        self.index_price_manager.update_all_prices(prices)
+                        applicationLogger.info("✅ Refreshed all index prices at startup")
+                    else:
+                        applicationLogger.warning("No index prices could be fetched at startup")
+                else:
+                    applicationLogger.warning("No API available for index price refresh at startup")
+            else:
+                applicationLogger.info("Index prices are current, no refresh needed")
+        except Exception as e:
+            applicationLogger.error(f"Error refreshing index prices at startup: {e}")
+
     def cleanup_old_master_files(self):
         """Clean up old master files, keep only the latest 3 days"""
         try:
@@ -1915,24 +1985,46 @@ class MainWindow:
             # Update Master account status
             master_status = self.state_manager.get_account_status(1)
             if master_status:
-                if master_status['status'] == 'active':
+                # Check if master is logged in and order status is ready
+                if master_status.get('login_status') == 1 and master_status.get('order_status') == 1:
                     self.master_order_status.set("Master Account Ready")
+                    # Update master login button text
+                    client_name = self.account_manager.accounts[1].get('client_name', 'Master Account')
+                    self.login_button1.config(text=f"{client_name} Logged in", state='disabled', style="LoginSuccess.TButton")
                 else:
                     self.master_order_status.set("Master Not Logged In")
+                    self.login_button1.config(text="Login Master Account", state='normal', style="LoginButton.TButton")
             else:
                 self.master_order_status.set("Master Not Logged In")
+                self.login_button1.config(text="Login Master Account", state='normal', style="LoginButton.TButton")
             
             # Update Child account status
             child_status = self.state_manager.get_account_status(2)
+            applicationLogger.info(f"Child status in _update_account_status_displays: {child_status}")
             if child_status:
-                if child_status['status'] == 'active':
-                    self.child_order_status.set("Child Account Ready")
+                login_status = child_status.get('login_status')
+                order_status = child_status.get('order_status')
+                applicationLogger.info(f"Child login_status: {login_status}, order_status: {order_status}")
+                
+                # Check if child is logged in
+                if login_status == 1:
+                    # Child is logged in - always show logged in status regardless of order status
+                    self.child_order_status.set("Child Account Ready" if order_status == 1 else "Child Account - Orders Blocked")
+                    # Update child login button text - always show logged in when actually logged in
+                    client_name = self.account_manager.accounts[2].get('client_name', 'Child Account')
+                    self.login_button2.config(text=f"{client_name} Logged in", state='disabled', style="LoginSuccess.TButton")
+                    applicationLogger.info(f"Child button updated to: {client_name} Logged in (preserving logged-in state)")
                 else:
+                    # Child is not logged in
                     self.child_order_status.set("Child Not Logged In")
+                    self.login_button2.config(text="Login Child Account", state='normal', style="LoginButton.TButton")
+                    applicationLogger.info("Child button updated to: Login Child Account")
             else:
                 self.child_order_status.set("Child Not Logged In")
+                self.login_button2.config(text="Login Child Account", state='normal', style="LoginButton.TButton")
+                applicationLogger.info("Child status is None, button updated to: Login Child Account")
                 
-            applicationLogger.info("Account status displays updated after release")
+            applicationLogger.info("Account status displays and login buttons updated after release")
             
         except Exception as e:
             applicationLogger.error(f"Error updating account status displays: {e}")
@@ -2271,7 +2363,7 @@ class MainWindow:
                 success, message = self.account_manager.logout_account(2)
                 if success:
                     # Update state manager to reflect blocked status
-                    self.state_manager.update_order_status(2, 'blocked', 'Child account logged out - orders blocked')
+                    self.state_manager.update_order_status(2, 0, 'Child account logged out - orders blocked')
                     
                     # Block child account from sending any orders
                     self.child_orders_blocked = True
@@ -2279,8 +2371,9 @@ class MainWindow:
                     # Update UI to show blocked status
                     client_name = self.account_manager.accounts[2].get('client_name', 'Child Account')
                     self.child_order_status.set(f"{client_name} - Orders Blocked (PnL Active)")
-                    self.login_button2.config(text=f"{client_name} - Orders Blocked")
-                    self.login_button2.config(state='disabled', style="LoginError.TButton")
+                    # Preserve the logged-in state for the button text
+                    self.login_button2.config(text=f"{client_name} Logged in")
+                    self.login_button2.config(state='disabled', style="LoginSuccess.TButton")
                     
                     # Disable any active trailing for child account
                     if self.trailing_active:
@@ -2305,11 +2398,13 @@ class MainWindow:
             # Check if Master account is blocked
             if self.is_master_account_blocked():
                 applicationLogger.warning(f"Master account is blocked: {self.master_block_reason}")
+                messagebox.showwarning("Account Blocked", f"Master account is blocked: {self.master_block_reason}\n\nPlease resolve the issue before placing new orders.")
                 return
             
             # Check if Child account is blocked
             if self.is_child_account_blocked():
                 applicationLogger.warning(f"Child account is blocked: {self.child_block_reason}")
+                messagebox.showwarning("Account Blocked", f"Child account is blocked: {self.child_block_reason}\n\nPlease resolve the issue before placing new orders.")
                 return
             
             # No global rejection blocking check - we'll handle individual account blocking in the order logic
@@ -2840,6 +2935,53 @@ class MainWindow:
             blocked_info.append(f"Child: {self.child_block_reason}")
         return "; ".join(blocked_info) if blocked_info else "No accounts blocked"
     
+    def reset_rejection_blocks(self):
+        """Reset rejection blocks - allow user to acknowledge rejections and try again"""
+        try:
+            if self.master_account_rejected_blocked or self.child_account_rejected_blocked:
+                # Show confirmation dialog
+                blocked_info = self.get_blocked_accounts_info()
+                result = messagebox.askyesno(
+                    "Reset Rejection Blocks", 
+                    f"The following accounts are blocked due to order rejections:\n\n{blocked_info}\n\nDo you want to reset these blocks and allow new orders?\n\nNote: Make sure the rejection issues are resolved before proceeding."
+                )
+                
+                if result:
+                    # Reset rejection blocks
+                    if self.master_account_rejected_blocked:
+                        self.master_account_rejected_blocked = False
+                        self.master_block_reason = ""
+                        applicationLogger.info("Master account rejection block reset by user")
+                        # Update status
+                        if self.account_manager.accounts[1]['active']:
+                            self.master_order_status.set("Master Account Ready")
+                        else:
+                            self.master_order_status.set("Master Not Logged In")
+                    
+                    if self.child_account_rejected_blocked:
+                        self.child_account_rejected_blocked = False
+                        self.child_block_reason = ""
+                        applicationLogger.info("Child account rejection block reset by user")
+                        # Update status
+                        if self.account_manager.accounts[2]['active']:
+                            self.child_order_status.set("Child Account Ready")
+                        else:
+                            self.child_order_status.set("Child Not Logged In")
+                    
+                    # Update window title
+                    self.update_window_title()
+                    
+                    messagebox.showinfo("Success", "Rejection blocks have been reset. You can now place new orders.")
+                    applicationLogger.info("All rejection blocks reset by user")
+                else:
+                    applicationLogger.info("User cancelled rejection block reset")
+            else:
+                messagebox.showinfo("Info", "No accounts are currently blocked due to rejections.")
+                
+        except Exception as e:
+            applicationLogger.error(f"Error resetting rejection blocks: {e}")
+            messagebox.showerror("Error", f"Error resetting rejection blocks: {e}")
+    
     def update_window_title(self):
         """Update window title based on account status"""
         try:
@@ -2862,7 +3004,7 @@ class MainWindow:
             applicationLogger.warning(f"Buy order rejected for account {account_num} - Symbol: {symbol}, Reason: {rejection_reason}")
             
             # Update state manager with new separated status
-            self.state_manager.update_order_status(account_num, 'blocked', f"Buy order rejected: {rejection_reason}")
+            self.state_manager.update_order_status(account_num, 0, f"Buy order rejected: {rejection_reason}")
             # Note: No quantity change needed for rejection (order was never filled)
             
             # Update order status display to show blocked status
@@ -2908,9 +3050,17 @@ class MainWindow:
                 self.login_button1.config(state='disabled', text="Master - BLOCKED")
                 applicationLogger.info("Master account trading buttons disabled due to order rejection")
             elif account_num == 2:  # Child account
-                # Disable child account specific buttons
-                self.login_button2.config(state='disabled', text="Child - BLOCKED")
-                applicationLogger.info("Child account trading buttons disabled due to order rejection")
+                # For child account, only disable the button but preserve the logged-in text
+                # Check if child is actually logged in
+                if self.account_manager.accounts[2].get('active', False):
+                    # Keep the logged-in text but disable the button
+                    client_name = self.account_manager.accounts[2].get('client_name', 'Child Account')
+                    self.login_button2.config(state='disabled', text=f"{client_name} Logged in")
+                    applicationLogger.info("Child account trading buttons disabled due to order rejection (preserving logged-in state)")
+                else:
+                    # Only show blocked if not logged in
+                    self.login_button2.config(state='disabled', text="Child - BLOCKED")
+                    applicationLogger.info("Child account trading buttons disabled due to order rejection")
             
             # Disable main trading buttons if any account is blocked
             if self.is_any_account_rejected_blocked():
@@ -2987,10 +3137,6 @@ class MainWindow:
             self.child_order_status.set("Child Account Ready")
         else:
             self.child_order_status.set("Child Not Logged In")
-    
-    def is_child_account_blocked(self) -> bool:
-        """Check if Child account is blocked"""
-        return self.child_account_blocked
     
     def cancel_buy_orders(self):
         """Cancel buy orders across all active accounts"""
@@ -3186,7 +3332,7 @@ class MainWindow:
             self.order_manager.cancel_orders([master_api], [master_order_number], [True])
             
             # Update state manager with new separated status
-            self.state_manager.update_order_status(1, 'blocked', 'Master buy order cancelled by user')
+            self.state_manager.update_order_status(1, 0, 'Master buy order cancelled by user')
             # Note: No quantity change needed for cancellation (order was never filled)
             
             # Update master order status
@@ -3235,7 +3381,7 @@ class MainWindow:
             self.order_manager.cancel_orders([child_api], [child_order_number], [True])
             
             # Update state manager with new separated status
-            self.state_manager.update_order_status(2, 'blocked', 'Child buy order cancelled by user')
+            self.state_manager.update_order_status(2, 0, 'Child buy order cancelled by user')
             # Note: No quantity change needed for cancellation (order was never filled)
             
             # Block Child account from further operations
@@ -3688,11 +3834,36 @@ class MainWindow:
         self.state_manager.reset_trading_blocks(self.account_manager)
         applicationLogger.info("Trading blocks reset while preserving login status")
         
-        # Also reset legacy blocking flags for backward compatibility
+        # Also unblock accounts in the account manager
+        try:
+            # Unblock master account if it exists
+            if 1 in self.account_manager.accounts:
+                success, message = self.account_manager.unblock_account(1)
+                if success:
+                    applicationLogger.info(f"Master account unblocked: {message}")
+                else:
+                    applicationLogger.warning(f"Failed to unblock master account: {message}")
+            
+            # Unblock child account if it exists
+            if 2 in self.account_manager.accounts:
+                success, message = self.account_manager.unblock_account(2)
+                if success:
+                    applicationLogger.info(f"Child account unblocked: {message}")
+                else:
+                    applicationLogger.warning(f"Failed to unblock child account: {message}")
+        except Exception as e:
+            applicationLogger.error(f"Error unblocking accounts: {e}")
+        
+        # Reset trading blocks (for successful completion) but NOT rejection blocks
         self.master_account_blocked = False
-        self.master_account_rejected_blocked = False
         self.child_account_blocked = False
-        self.child_account_rejected_blocked = False
+        # DO NOT reset rejection blocks - these should only be reset by explicit user action
+        
+        # Debug logging to understand the current state
+        child_status = self.state_manager.get_account_status(2)
+        applicationLogger.info(f"Child status after release: {child_status}")
+        if child_status:
+            applicationLogger.info(f"Child login_status: {child_status.get('login_status')}, order_status: {child_status.get('order_status')}")
         
         # Update UI status displays based on actual account states
         self._update_account_status_displays()
@@ -3739,6 +3910,9 @@ class MainWindow:
             self.child_order_status.set(self.get_ready_status_message(2))
         else:
             self.child_order_status.set("Child Not Logged In")
+        
+        # Update window title to reflect current status
+        self.update_window_title()
         
         applicationLogger.info("Buttons released - ready for new orders")
     
@@ -4116,6 +4290,11 @@ class MainWindow:
                     # Validate SL price
                     sl_price = float(sl_price_text)
                     
+                    # Ensure SL price is not negative
+                    if sl_price < 0:
+                        messagebox.showerror("Error", "SL price cannot be negative. Please enter a valid price.")
+                        return
+                    
                     # Check if SL price conflicts with configured trailing stop
                     if (self.enable_trailing_value.get() and 
                         self.target_price_level and 
@@ -4482,6 +4661,11 @@ class MainWindow:
             
             # Calculate SL and Target based on stored differences
             sl_price = round(buy_open_value + self.sl_difference_from_buy, 2)
+            # Ensure SL price never goes below 0
+            if sl_price < 0:
+                sl_price = 0.0
+                applicationLogger.info(f"SL price calculated as negative ({buy_open_value + self.sl_difference_from_buy}), setting to 0")
+            
             target_price = round(buy_open_value + self.target_difference_from_buy, 2)
             
             # Set SL price

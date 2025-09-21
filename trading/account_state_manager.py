@@ -8,6 +8,24 @@ from datetime import datetime
 from typing import Dict, Any, Optional, List
 from logger import applicationLogger
 
+def _convert_string_to_binary(value: str, field_type: str) -> int:
+    """Convert string state values to binary (0/1) format"""
+    if field_type == 'login_status':
+        return 1 if value in ['logged_in', 'active'] else 0
+    elif field_type == 'order_status':
+        return 1 if value in ['ready', 'active'] else 0
+    else:
+        return int(value) if str(value).isdigit() else 0
+
+def _convert_binary_to_string(value: int, field_type: str) -> str:
+    """Convert binary (0/1) values back to string for display purposes"""
+    if field_type == 'login_status':
+        return 'logged_in' if value == 1 else 'not_logged_in'
+    elif field_type == 'order_status':
+        return 'ready' if value == 1 else 'blocked'
+    else:
+        return str(value)
+
 class AccountStateManager:
     """Manages account states with CSV persistence and in-memory cache"""
     
@@ -28,6 +46,11 @@ class AccountStateManager:
             elif os.path.exists(self.csv_file_path):
                 self.df_states = pd.read_csv(self.csv_file_path)
                 applicationLogger.info(f"Loaded account states from {self.csv_file_path}")
+                
+                # Check if migration is needed (from string to binary format)
+                if self._needs_migration():
+                    applicationLogger.info("Migrating account states from string to binary format...")
+                    self._migrate_to_binary_format()
             else:
                 # Create default states
                 self._create_default_states()
@@ -51,8 +74,8 @@ class AccountStateManager:
         default_data = {
             'account_id': [1, 2],
             'account_name': ['Master', 'Child'],
-            'login_status': ['logged_in', 'not_logged_in'],  # Separate login status
-            'order_status': ['ready', 'ready'],  # Order status (ready, blocked, etc.)
+            'login_status': [1, 0],  # 1 = logged_in, 0 = not_logged_in
+            'order_status': [1, 1],  # 1 = ready, 0 = blocked
             'quantity': [0, 0],  # Current position quantity
             'reason': ['Master account always logged in', 'Not logged in'],
             'order_number': [None, None],
@@ -61,6 +84,55 @@ class AccountStateManager:
         
         self.df_states = pd.DataFrame(default_data)
         self._save_to_csv()
+    
+    def _needs_migration(self) -> bool:
+        """Check if the CSV file needs migration from string to binary format"""
+        try:
+            if self.df_states is None or self.df_states.empty:
+                return False
+            
+            # Check if login_status or order_status contain string values
+            for _, row in self.df_states.iterrows():
+                login_status = str(row['login_status'])
+                order_status = str(row['order_status'])
+                
+                # If any value is not 0 or 1, migration is needed
+                if (login_status not in ['0', '1'] or 
+                    order_status not in ['0', '1']):
+                    return True
+            
+            return False
+        except Exception as e:
+            applicationLogger.error(f"Error checking migration need: {e}")
+            return False
+    
+    def _migrate_to_binary_format(self):
+        """Migrate account states from string format to binary (0/1) format"""
+        try:
+            applicationLogger.info("Starting migration from string to binary format...")
+            
+            # Convert login_status and order_status to binary
+            for idx, row in self.df_states.iterrows():
+                # Convert login_status
+                old_login = str(row['login_status'])
+                new_login = _convert_string_to_binary(old_login, 'login_status')
+                self.df_states.at[idx, 'login_status'] = new_login
+                
+                # Convert order_status
+                old_order = str(row['order_status'])
+                new_order = _convert_string_to_binary(old_order, 'order_status')
+                self.df_states.at[idx, 'order_status'] = new_order
+                
+                applicationLogger.info(f"Account {row['account_id']}: {old_login}->{new_login}, {old_order}->{new_order}")
+            
+            # Save the migrated data
+            self._save_to_csv()
+            applicationLogger.info("Migration completed successfully - states converted to binary format")
+            
+        except Exception as e:
+            applicationLogger.error(f"Error during migration: {e}")
+            # If migration fails, create default states
+            self._create_default_states()
     
     def _update_cache(self):
         """Update in-memory cache from DataFrame"""
@@ -105,17 +177,17 @@ class AccountStateManager:
         Returns:
             bool: True if update successful, False otherwise
         """
-        # Map legacy status to order_status
-        order_status = 'ready' if status == 'active' else 'blocked'
+        # Map legacy status to order_status (1 = ready, 0 = blocked)
+        order_status = 1 if status == 'active' else 0
         return self.update_order_status(account_id, order_status, reason, order_number)
     
-    def update_login_status(self, account_id: int, login_status: str, reason: str) -> bool:
+    def update_login_status(self, account_id: int, login_status, reason: str) -> bool:
         """
         Update account login status
         
         Args:
             account_id: Account ID (1 for Master, 2 for Child)
-            login_status: New login status (logged_in, not_logged_in)
+            login_status: New login status (1 = logged_in, 0 = not_logged_in)
             reason: Reason for the status change
         
         Returns:
@@ -134,9 +206,9 @@ class AccountStateManager:
                 self.df_states.loc[mask, 'reason'] = reason
                 self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
                 
-                # Reset order status to 'ready' when account logs in successfully
-                if login_status == 'logged_in':
-                    self.df_states.loc[mask, 'order_status'] = 'ready'
+                # Reset order status to 'ready' (1) when account logs in successfully
+                if login_status == 1:
+                    self.df_states.loc[mask, 'order_status'] = 1
                     applicationLogger.info(f"Account {account_id} order status reset to 'ready' on successful login")
             else:
                 applicationLogger.error(f"Account {account_id} not found in states")
@@ -157,14 +229,14 @@ class AccountStateManager:
             applicationLogger.error(f"Error updating account {account_id} login status: {e}")
             return False
     
-    def update_order_status(self, account_id: int, order_status: str, reason: str, 
+    def update_order_status(self, account_id: int, order_status, reason: str, 
                            order_number: Optional[str] = None) -> bool:
         """
         Update account order status
         
         Args:
             account_id: Account ID (1 for Master, 2 for Child)
-            order_status: New order status (ready, blocked, etc.)
+            order_status: New order status (1 = ready, 0 = blocked)
             reason: Reason for the status change
             order_number: Order number that caused the status change (optional)
         
@@ -309,25 +381,25 @@ class AccountStateManager:
         status = self.get_account_status(account_id)
         if not status:
             return False
-        # Account can place orders if both logged in and order status is ready
-        return (status.get('login_status') == 'logged_in' and 
-                status.get('order_status') == 'ready')
+        # Account can place orders if both logged in (1) and order status is ready (1)
+        return (status.get('login_status') == 1 and 
+                status.get('order_status') == 1)
     
     def can_modify_orders(self, account_id: int) -> bool:
         """Check if account can modify orders"""
         status = self.get_account_status(account_id)
         if not status:
             return False
-        return (status.get('login_status') == 'logged_in' and 
-                status.get('order_status') == 'ready')
+        return (status.get('login_status') == 1 and 
+                status.get('order_status') == 1)
     
     def can_exit_orders(self, account_id: int) -> bool:
         """Check if account can place exit orders"""
         status = self.get_account_status(account_id)
         if not status:
             return False
-        return (status.get('login_status') == 'logged_in' and 
-                status.get('order_status') == 'ready')
+        return (status.get('login_status') == 1 and 
+                status.get('order_status') == 1)
     
     def get_active_accounts(self) -> List[int]:
         """Get list of accounts that can place orders"""
@@ -358,7 +430,7 @@ class AccountStateManager:
         status = self.get_account_status(account_id)
         if not status:
             return True
-        return status['order_status'] == 'blocked'
+        return status['order_status'] == 0
     
     def get_blocked_accounts(self) -> List[int]:
         """Get list of blocked accounts"""
@@ -373,14 +445,14 @@ class AccountStateManager:
         status = self.get_account_status(account_id)
         if not status:
             return True
-        return status['order_status'] == 'blocked'
+        return status['order_status'] == 0
     
     def is_account_logged_in(self, account_id: int) -> bool:
         """Check if account is logged in"""
         status = self.get_account_status(account_id)
         if not status:
             return False
-        return status['login_status'] == 'logged_in'
+        return status['login_status'] == 1
     
     def reset_account(self, account_id: int) -> bool:
         """Reset account to active state"""
@@ -413,22 +485,22 @@ class AccountStateManager:
             
             # Reset Master account - update login status and reset order status to ready
             if master_logged_in:
-                self.update_login_status(1, 'logged_in', 'Master account logged in')
-                self.update_order_status(1, 'ready', 'Master account reset after trading block')
+                self.update_login_status(1, 1, 'Master account logged in')
+                self.update_order_status(1, 1, 'Master account reset after trading block')
                 applicationLogger.info("Master account reset to ready (was logged in)")
             else:
-                self.update_login_status(1, 'not_logged_in', 'Master not logged in')
-                self.update_order_status(1, 'ready', 'Master account reset after trading block')
+                self.update_login_status(1, 0, 'Master not logged in')
+                self.update_order_status(1, 1, 'Master account reset after trading block')
                 applicationLogger.info("Master account set to not logged in but order status ready")
             
             # Reset Child account - update login status and reset order status to ready
             if child_logged_in:
-                self.update_login_status(2, 'logged_in', 'Child account logged in')
-                self.update_order_status(2, 'ready', 'Child account reset after trading block')
+                self.update_login_status(2, 1, 'Child account logged in')
+                self.update_order_status(2, 1, 'Child account reset after trading block')
                 applicationLogger.info("Child account reset to ready (was logged in)")
             else:
-                self.update_login_status(2, 'not_logged_in', 'Child not logged in')
-                self.update_order_status(2, 'ready', 'Child account reset after trading block')
+                self.update_login_status(2, 0, 'Child not logged in')
+                self.update_order_status(2, 1, 'Child account reset after trading block')
                 applicationLogger.info("Child account set to not logged in but order status ready")
             
             applicationLogger.info("Trading blocks reset while preserving actual login status")
@@ -447,8 +519,8 @@ class AccountStateManager:
         """Ensure Master account is always logged in (hardcoded requirement)"""
         try:
             master_status = self.get_account_status(1)
-            if not master_status or master_status['login_status'] != 'logged_in':
-                self.update_login_status(1, 'logged_in', 'Master account always logged in')
+            if not master_status or master_status['login_status'] != 1:
+                self.update_login_status(1, 1, 'Master account always logged in')
                 applicationLogger.info("Master account set to always logged in state")
         except Exception as e:
             applicationLogger.error(f"Error ensuring master account is logged in: {e}")
@@ -458,8 +530,8 @@ class AccountStateManager:
         try:
             for account_id in [1, 2]:
                 status = self.get_account_status(account_id)
-                if status and status.get('login_status') == 'logged_in' and status.get('order_status') == 'blocked':
-                    self.update_order_status(account_id, 'ready', 'Account unblocked on startup')
+                if status and status.get('login_status') == 1 and status.get('order_status') == 0:
+                    self.update_order_status(account_id, 1, 'Account unblocked on startup')
                     applicationLogger.info(f"Account {account_id} unblocked on startup - ready for orders")
         except Exception as e:
             applicationLogger.error(f"Error resetting blocked accounts on startup: {e}")
