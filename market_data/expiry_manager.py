@@ -251,7 +251,7 @@ class ExpiryManager:
             elif instrument == "BANKNIFTY":
                 return [15 * i for i in range(1, 10)]
             elif instrument == "SENSEX":
-                return [10 * i for i in range(1, 10)]
+                return [20 * i for i in range(1, 10)]  # SENSEX lot size is 20
             else:
                 return []
         except Exception as e:

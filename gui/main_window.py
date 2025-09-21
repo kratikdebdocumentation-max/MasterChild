@@ -48,6 +48,7 @@ class MainWindow:
         
         # Ensure Master account is always active
         self.state_manager.ensure_master_always_active()
+        self.state_manager.reset_blocked_accounts_on_startup()
         
         # Log current account states after initialization
         applicationLogger.info("Account states initialized - CSV reset on startup")
@@ -981,12 +982,20 @@ class MainWindow:
             # Check if there are any active orders
             has_active_orders = self.has_active_orders()
             
+            # Always reset quantity, price boxes, and trading symbols when index changes
+            self.qty1_var.set("")
+            self.price_value.set("")
+            self.master1_value.set("")
+            self.child_value.set("")
+            
             # Clear option selection if no active orders
             if not has_active_orders:
                 self.selected_option.set("")
                 self.selected_strike.set("")
                 self.index_ltp_value.set("--")
-                applicationLogger.info("Cleared option and strike selections - no active orders")
+                applicationLogger.info("Cleared option, strike, quantity, and price selections - no active orders")
+            else:
+                applicationLogger.info("Reset quantity and price boxes due to index change")
             
             # Fetch Index LTP immediately when Index is selected
             self.fetch_index_ltp(index)
@@ -1024,9 +1033,8 @@ class MainWindow:
                 strikes = self.expiry_manager.get_strike_list(index, default_prices.get(index, 20000), option_type)
                 self.strike_dropdown['values'] = strikes
             
-            # Update quantity list
-            quantities = self.expiry_manager.get_quantity_list(index)
-            self.qty_dropdown['values'] = quantities
+            # Update quantity dropdown based on index
+            self.update_quantity_options_for_index(index)
     
     def on_expiry_selected(self, *args):
         """Handle expiry selection"""
@@ -1236,6 +1244,25 @@ class MainWindow:
             if index in ["NIFTY", "BANKNIFTY", "SENSEX"]:
                 quantities = self.expiry_manager.get_quantity_list(index)
                 self.qty_dropdown['values'] = quantities
+    
+    def update_quantity_options_for_index(self, index: str):
+        """Update quantity dropdown based on index when no complete symbol is available"""
+        try:
+            if index == "SENSEX":
+                # For SENSEX, use lot size 20 to generate proper quantities
+                quantities = self.symbol_manager.get_quantity_options(20)
+                self.qty_dropdown['values'] = quantities
+                applicationLogger.info(f"Updated quantity options for {index} with lot size 20: {quantities}")
+            else:
+                # For other indices, use the default method
+                quantities = self.expiry_manager.get_quantity_list(index)
+                self.qty_dropdown['values'] = quantities
+                applicationLogger.info(f"Updated quantity options for {index} using default method: {quantities}")
+        except Exception as e:
+            applicationLogger.error(f"Error updating quantity options for {index}: {e}")
+            # Final fallback
+            quantities = self.expiry_manager.get_quantity_list(index)
+            self.qty_dropdown['values'] = quantities
     
     def _generate_sensex_symbol(self, expiry: str, strike: str, option: str) -> str:
         """
@@ -2243,6 +2270,9 @@ class MainWindow:
                 # Block the child account from sending orders
                 success, message = self.account_manager.logout_account(2)
                 if success:
+                    # Update state manager to reflect blocked status
+                    self.state_manager.update_order_status(2, 'blocked', 'Child account logged out - orders blocked')
+                    
                     # Block child account from sending any orders
                     self.child_orders_blocked = True
                     
@@ -4113,7 +4143,7 @@ class MainWindow:
                     
                     # Update SL difference from current buy order open value
                     if self.current_buy_order_open_value is not None:
-                        self.sl_difference_from_buy = sl_price - self.current_buy_order_open_value
+                        self.sl_difference_from_buy = round(sl_price - self.current_buy_order_open_value, 2)
                         applicationLogger.info(f"SL difference updated: {self.sl_difference_from_buy} points from buy price")
                     
                     # Check if buy orders are filled/completed
@@ -4181,7 +4211,7 @@ class MainWindow:
                     
                     # Update Target difference from current buy order open value
                     if self.current_buy_order_open_value is not None:
-                        self.target_difference_from_buy = target_price - self.current_buy_order_open_value
+                        self.target_difference_from_buy = round(target_price - self.current_buy_order_open_value, 2)
                         applicationLogger.info(f"Target difference updated: {self.target_difference_from_buy} points from buy price")
                     
                     # Check if buy orders are filled/completed
@@ -4451,8 +4481,8 @@ class MainWindow:
             self.current_buy_order_open_value = buy_open_value
             
             # Calculate SL and Target based on stored differences
-            sl_price = buy_open_value + self.sl_difference_from_buy
-            target_price = buy_open_value + self.target_difference_from_buy
+            sl_price = round(buy_open_value + self.sl_difference_from_buy, 2)
+            target_price = round(buy_open_value + self.target_difference_from_buy, 2)
             
             # Set SL price
             self.sl_price_value.set(str(sl_price))
@@ -4485,12 +4515,12 @@ class MainWindow:
                 
             # Update SL difference if SL is set
             if self.sl_price_level is not None:
-                self.sl_difference_from_buy = self.sl_price_level - buy_open_value
+                self.sl_difference_from_buy = round(self.sl_price_level - buy_open_value, 2)
                 applicationLogger.info(f"SL difference updated: {self.sl_difference_from_buy} points from buy price")
             
             # Update Target difference if Target is set
             if self.target_price_level is not None:
-                self.target_difference_from_buy = self.target_price_level - buy_open_value
+                self.target_difference_from_buy = round(self.target_price_level - buy_open_value, 2)
                 applicationLogger.info(f"Target difference updated: {self.target_difference_from_buy} points from buy price")
                 
         except Exception as e:

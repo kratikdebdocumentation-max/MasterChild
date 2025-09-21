@@ -1,0 +1,65 @@
+2025-09-21 10:43:05,002 - INFO - Starting master file download in background...
+2025-09-21 10:43:05,008 - INFO - Finding expiry dates (with caching)...
+2025-09-21 10:43:05,521 - INFO - System initialization completed (downloads in background)
+2025-09-21 10:43:05,536 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-21 10:43:05,536 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-21 10:43:06,730 - INFO - Loaded account states from account_states.csv
+2025-09-21 10:43:06,746 - INFO - Updated Master (ID: 1) order status to 'ready': Account unblocked on startup
+2025-09-21 10:43:06,746 - INFO - Account 1 unblocked on startup - ready for orders
+2025-09-21 10:43:06,753 - INFO - Updated Child (ID: 2) order status to 'ready': Account unblocked on startup
+2025-09-21 10:43:06,754 - INFO - Account 2 unblocked on startup - ready for orders
+2025-09-21 10:43:06,754 - INFO - Account states initialized - CSV reset on startup
+2025-09-21 10:43:07,206 - INFO - Deleted old master file: BFO_symbols.txt_2025-09-18.txt
+2025-09-21 10:43:07,212 - INFO - Deleted old master file: NFO_symbols.txt_2025-09-18.txt
+2025-09-21 10:43:07,216 - INFO - Deleted old master file: NSE_symbols.txt_2025-09-18.txt
+2025-09-21 10:43:07,223 - INFO - Deleted old master file: MCX_symbols.txt_2025-09-18.txt
+2025-09-21 10:43:07,226 - INFO - Cleanup completed: 4 old master files deleted
+2025-09-21 10:43:07,226 - INFO - Calculating expiry dates for all indices...
+2025-09-21 10:43:07,308 - INFO - SENSEX - Current: 25-Sep-2025, Next: 01-Oct-2025
+2025-09-21 10:43:07,683 - INFO - NIFTY - Current: 23-Sep-2025, Next: 30-Sep-2025
+2025-09-21 10:43:07,865 - INFO - BANKNIFTY - Current: 30-Sep-2025, Next: 28-Oct-2025
+2025-09-21 10:43:07,865 - INFO - Expiry dates saved to data\expiry_dates.csv
+2025-09-21 10:43:07,882 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-21 10:43:07,882 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-21 10:43:08,336 - INFO - Generated fresh 2FA for account 1: 816138
+2025-09-21 10:43:10,483 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-21 10:43:10,487 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-21 10:43:10,871 - INFO - Price input box enabled - no active positions
+2025-09-21 10:43:10,871 - INFO - UI states initialized successfully
+2025-09-21 10:44:22,164 - INFO - Generated fresh 2FA for account 2: 670395
+2025-09-21 10:44:22,803 - INFO - Account 2 order status reset to 'ready' on successful login
+2025-09-21 10:44:22,808 - INFO - Updated Child (ID: 2) login status to 'logged_in': Account logged in successfully
+2025-09-21 10:44:22,810 - INFO - Updated Child (ID: 2) order status to 'ready': Account ready for orders
+2025-09-21 10:44:22,815 - INFO - Child account logged in - Order blocking reset
+2025-09-21 10:44:23,585 - INFO - PnL calculated for account 2 (active): 0.0
+2025-09-21 10:44:26,038 - INFO - Account 2 (KRATIK YADAV) blocked from sending orders - PnL monitoring continues
+2025-09-21 10:44:26,040 - INFO - Child account blocked from sending orders - PnL monitoring continues
+2025-09-21 10:46:17,678 - INFO - Loaded account states from account_states.csv
+2025-09-21 10:46:17,686 - INFO - Updated Child (ID: 2) order status to 'blocked': Child account logged out - orders blocked
+2025-09-21 10:46:41,249 - INFO - Starting master file download in background...
+2025-09-21 10:46:41,249 - INFO - Finding expiry dates (with caching)...
+2025-09-21 10:46:41,522 - INFO - System initialization completed (downloads in background)
+2025-09-21 10:46:41,522 - INFO - Loaded settings from config/settings.json: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-21 10:46:41,522 - INFO - Loaded settings: {'child_default_lots': 1, 'default_sl_points': 20.0, 'default_target_points': 40.0}
+2025-09-21 10:46:41,713 - INFO - Loaded account states from account_states.csv
+2025-09-21 10:46:41,719 - INFO - Updated Child (ID: 2) order status to 'ready': Account unblocked on startup
+2025-09-21 10:46:41,719 - INFO - Account 2 unblocked on startup - ready for orders
+2025-09-21 10:46:41,719 - INFO - Account states initialized - CSV reset on startup
+2025-09-21 10:46:41,989 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-21 10:46:41,989 - INFO - Expiry dates already calculated today, loading from CSV
+2025-09-21 10:46:41,989 - INFO - SENSEX - Current expiry: 25-Sep-2025
+2025-09-21 10:46:41,994 - INFO - SENSEX - Next expiry: 01-Oct-2025
+2025-09-21 10:46:42,070 - INFO - Generated fresh 2FA for account 1: 975573
+2025-09-21 10:46:43,682 - INFO - PnL calculated for account 1 (active): 0.0
+2025-09-21 10:46:43,682 - INFO - Master account initialized successfully: ROOPAL SONI
+2025-09-21 10:46:43,933 - INFO - Price input box enabled - no active positions
+2025-09-21 10:46:43,933 - INFO - UI states initialized successfully
+2025-09-21 10:46:45,419 - INFO - Generated fresh 2FA for account 2: 101158
+2025-09-21 10:46:46,034 - INFO - Account 2 order status reset to 'ready' on successful login
+2025-09-21 10:46:46,034 - INFO - Updated Child (ID: 2) login status to 'logged_in': Account logged in successfully
+2025-09-21 10:46:46,040 - INFO - Updated Child (ID: 2) order status to 'ready': Account ready for orders
+2025-09-21 10:46:46,042 - INFO - Child account logged in - Order blocking reset
+2025-09-21 10:46:46,635 - INFO - PnL calculated for account 2 (active): 0.0
+2025-09-21 10:46:53,076 - INFO - Account 2 (KRATIK YADAV) blocked from sending orders - PnL monitoring continues
+2025-09-21 10:46:53,081 - INFO - Updated Child (ID: 2) order status to 'blocked': Child account logged out - orders blocked
+2025-09-21 10:46:53,083 - INFO - Child account blocked from sending orders - PnL monitoring continues

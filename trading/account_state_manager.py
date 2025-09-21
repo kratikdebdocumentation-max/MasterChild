@@ -133,6 +133,11 @@ class AccountStateManager:
                 self.df_states.loc[mask, 'login_status'] = login_status
                 self.df_states.loc[mask, 'reason'] = reason
                 self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
+                
+                # Reset order status to 'ready' when account logs in successfully
+                if login_status == 'logged_in':
+                    self.df_states.loc[mask, 'order_status'] = 'ready'
+                    applicationLogger.info(f"Account {account_id} order status reset to 'ready' on successful login")
             else:
                 applicationLogger.error(f"Account {account_id} not found in states")
                 return False
@@ -447,6 +452,17 @@ class AccountStateManager:
                 applicationLogger.info("Master account set to always logged in state")
         except Exception as e:
             applicationLogger.error(f"Error ensuring master account is logged in: {e}")
+    
+    def reset_blocked_accounts_on_startup(self):
+        """Reset any blocked accounts to ready state on startup"""
+        try:
+            for account_id in [1, 2]:
+                status = self.get_account_status(account_id)
+                if status and status.get('login_status') == 'logged_in' and status.get('order_status') == 'blocked':
+                    self.update_order_status(account_id, 'ready', 'Account unblocked on startup')
+                    applicationLogger.info(f"Account {account_id} unblocked on startup - ready for orders")
+        except Exception as e:
+            applicationLogger.error(f"Error resetting blocked accounts on startup: {e}")
     
     def print_states(self):
         """Print current states (for debugging)"""
