@@ -288,9 +288,10 @@ class ConfigWindow:
             # Close current application
             self.parent.quit()
             
-            # Start new instance
+            # Start new instance of main.py
             python = sys.executable
-            subprocess.Popen([python, __file__])
+            main_script = os.path.join(os.path.dirname(__file__), 'main.py')
+            subprocess.Popen([python, main_script])
             
         except Exception as e:
             logger.error(f"Error restarting application: {e}")

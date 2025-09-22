@@ -295,12 +295,6 @@ class MainWindow:
         )
         self.release_button.pack(side=tk.LEFT, padx=5)
         
-        # Reset rejection blocks button
-        self.reset_rejection_button = ttk.Button(
-            self.login_frame, text="RESET BLOCKS", 
-            command=self.reset_rejection_blocks, width=12
-        )
-        self.reset_rejection_button.pack(side=tk.LEFT, padx=5)
 
         # Premium Price display (reduced size)
         tk.Label(self.login_frame, text="Premium Price:").pack(side=tk.LEFT, padx=5)
@@ -914,9 +908,6 @@ class MainWindow:
         """Release buttons - TO BE IMPLEMENTED"""
         logger.info("Release buttons clicked - Function not implemented yet")
         
-    def reset_rejection_blocks(self):
-        """Reset rejection blocks - TO BE IMPLEMENTED"""
-        logger.info("Reset rejection blocks clicked - Function not implemented yet")
         
     def verify_pnl_from_broker(self):
         """Verify PnL from broker - TO BE IMPLEMENTED"""
@@ -928,6 +919,11 @@ class MainWindow:
             selected_index = self.selected_index.get()
             if selected_index:
                 logger.info(f"Index selected: {selected_index}")
+                
+                # Clear existing option and strike selections when index changes
+                self.selected_option.set("")  # Clear option dropdown
+                self.selected_strike.set("")  # Clear strike dropdown
+                logger.info("Option and strike selections cleared for new index")
                 
                 # Update index LTP
                 current_price = self.index_manager.get_index_price(selected_index)
@@ -957,10 +953,8 @@ class MainWindow:
                 if current_price > 0:
                     strikes = self.index_manager.get_strike_list(selected_index, current_price)
                     self.strike_dropdown['values'] = strikes
-                    if strikes:
-                        # Set middle strike as default (current price)
-                        middle_index = len(strikes) // 2
-                        self.selected_strike.set(strikes[middle_index])
+                    # Don't auto-select any strike - let user choose from dropdown
+                    logger.info(f"Strike dropdown populated with {len(strikes)} strikes for {selected_index}")
                 else:
                     self.strike_dropdown['values'] = []
         except Exception as e:
@@ -1690,10 +1684,208 @@ class MainWindow:
             thread.join()
         
         return results
+    
+    def _modify_single_order(self, account_id: int, api, order_id: str, symbol: str, quantity: int, new_price: float, account_name: str) -> bool:
+        """Helper method to modify a single order via API"""
+        try:
+            logger.info(f"Modifying {account_name} order: {order_id} to price: {new_price}")
+            
+            # Determine exchange based on symbol
+            if 'SENSEX' in symbol:
+                exchange = 'BFO'
+            else:
+                exchange = 'NFO'
+            
+            # Call the API to modify the order
+            modify_response = api.modify_order(
+                exchange=exchange,
+                tradingsymbol=symbol,
+                orderno=order_id,
+                newquantity=int(quantity),
+                newprice_type='LMT',
+                newprice=new_price
+            )
+            
+            # Check if modification was successful
+            if modify_response and modify_response.get('stat') == 'Ok':
+                logger.info(f"Successfully modified {account_name} order: {order_id}")
+                return True
+            else:
+                logger.error(f"Failed to modify {account_name} order {order_id}: {modify_response}")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Error modifying {account_name} order {order_id}: {e}")
+            return False
+    
+    def _modify_orders_parallel(self, modification_tasks, new_price):
+        """Modify multiple orders in parallel using threading"""
+        results = []
+        threads = []
+        
+        def modify_order_thread(task):
+            """Thread function to modify a single order"""
+            try:
+                account_id = task['account_id']
+                api = task['api']
+                order_id = task['order_id']
+                symbol = task['symbol']
+                quantity = task['quantity']
+                account_name = task['account_name']
+                
+                # Modify the order
+                success = self._modify_single_order(account_id, api, order_id, symbol, quantity, new_price, account_name)
+                
+                if success:
+                    # Update account state with new price
+                    self.account_state_manager.update_order_info(
+                        account_id, order_id, symbol, int(quantity), new_price
+                    )
+                    logger.info(f"{account_name} buy order modified successfully")
+                
+                # Store result
+                results.append({
+                    'account_id': account_id,
+                    'account_name': account_name,
+                    'success': success,
+                    'order_id': order_id,
+                    'new_price': new_price
+                })
+                
+            except Exception as e:
+                logger.error(f"Error in modification thread for {task['account_name']}: {e}")
+                results.append({
+                    'account_id': task['account_id'],
+                    'account_name': task['account_name'],
+                    'success': False,
+                    'order_id': task['order_id'],
+                    'new_price': new_price,
+                    'error': str(e)
+                })
+        
+        # Start threads for each modification task
+        for task in modification_tasks:
+            thread = threading.Thread(target=modify_order_thread, args=(task,))
+            thread.start()
+            threads.append(thread)
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+        
+        return results
         
     def modify_buy_orders(self):
-        """Modify buy orders - TO BE IMPLEMENTED"""
-        logger.info("Modify buy orders clicked - Function not implemented yet")
+        """Modify buy orders for both Master and Child accounts in parallel with coordination"""
+        try:
+            logger.info("Modify buy orders clicked")
+            
+            # 1. Validate inputs
+            if not self.modify_buy_value.get().strip():
+                messagebox.showerror("Error", "Please enter a price in the modify buy box")
+                return
+            
+            # Validate the price
+            try:
+                new_price = float(self.modify_buy_value.get())
+                if new_price <= 0:
+                    messagebox.showerror("Error", "Price must be greater than 0")
+                    return
+            except ValueError:
+                messagebox.showerror("Error", "Please enter a valid price")
+                return
+            
+            # Check if we have current trading symbol
+            if not self.current_trading_symbol:
+                messagebox.showerror("Error", "No trading symbol found. Please place buy orders first.")
+                return
+            
+            # 2. Check can_order flags for both accounts
+            master_can_order = self.account_state_manager.get_can_order(1)
+            child_can_order = self.account_state_manager.get_can_order(2)
+            
+            # If both accounts have can_order=0, show message
+            if master_can_order == 0 and child_can_order == 0:
+                messagebox.showinfo("Orders Already Cancelled", "All orders are already cancelled")
+                return
+            
+            # 3. Prepare modification tasks
+            modification_tasks = []
+            
+            # Prepare Master order modification if can_order=1
+            if master_can_order == 1:
+                master_api = self.account_manager.get_api(1)
+                if master_api:
+                    master_status = self.account_state_manager.get_account_status(1)
+                    if master_status and master_status.get('current_order_id'):
+                        modification_tasks.append({
+                            'account_id': 1,
+                            'api': master_api,
+                            'order_id': master_status['current_order_id'],
+                            'symbol': master_status['current_symbol'],
+                            'quantity': master_status['current_quantity'],
+                            'account_name': 'Master'
+                        })
+            
+            # Prepare Child order modification if can_order=1
+            if child_can_order == 1:
+                child_api = self.account_manager.get_api(2)
+                if child_api:
+                    child_status = self.account_state_manager.get_account_status(2)
+                    if child_status and child_status.get('current_order_id'):
+                        modification_tasks.append({
+                            'account_id': 2,
+                            'api': child_api,
+                            'order_id': child_status['current_order_id'],
+                            'symbol': child_status['current_symbol'],
+                            'quantity': child_status['current_quantity'],
+                            'account_name': 'Child'
+                        })
+            
+            if not modification_tasks:
+                messagebox.showwarning("No Orders", "No valid orders found to modify")
+                return
+            
+            # 4. Reset order states for coordination
+            self.order_states = {1: "PENDING", 2: "PENDING"}
+            logger.info("Order states reset for modify operations")
+            
+            # 5. Execute modifications in parallel using threading
+            results = self._modify_orders_parallel(modification_tasks, new_price)
+            
+            # 6. Process results
+            modified_any = False
+            modified_master = False
+            modified_child = False
+            
+            for result in results:
+                if result['success']:
+                    modified_any = True
+                    if result['account_id'] == 1:
+                        modified_master = True
+                        self.master_order_status.set("Master buy order modified by user")
+                    elif result['account_id'] == 2:
+                        modified_child = True
+                        self.child_order_status.set("Child buy order modified by user")
+            
+            # 7. Update UI based on what was modified
+            if modified_any:
+                # Disable modify button after successful modification
+                self.modify_buy_button.config(state="disabled", text="Orders Modified")
+                
+                # Show success message
+                if modified_master and modified_child:
+                    messagebox.showinfo("Success", "Both Master and Child buy orders modified successfully")
+                elif modified_master:
+                    messagebox.showinfo("Success", "Master buy order modified successfully")
+                elif modified_child:
+                    messagebox.showinfo("Success", "Child buy order modified successfully")
+            else:
+                messagebox.showwarning("No Orders", "No orders were successfully modified")
+                
+        except Exception as e:
+            logger.error(f"Error modifying buy orders: {e}")
+            messagebox.showerror("Error", f"Error modifying buy orders: {str(e)}")
         
     def cancel_exit_orders(self):
         """Cancel exit orders - TO BE IMPLEMENTED"""
