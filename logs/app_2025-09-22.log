@@ -11308,3 +11308,1118 @@
 2025-09-22 13:38:35,231 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528469', 'bq1': '1740', 'sq1': '120'}
 2025-09-22 13:38:36,314 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528470', 'bq1': '2040', 'sq1': '60'}
 2025-09-22 13:38:36,410 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528470', 'bq1': '1660', 'sq1': '220'}
+2025-09-22 13:38:42,428 - INFO - Loaded account states from account_state.csv
+2025-09-22 13:38:42,429 - INFO - Resetting account states to initial state on startup...
+2025-09-22 13:38:42,441 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-22 13:38:42,444 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 13:38:42,448 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-22 13:38:42,458 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 13:38:42,458 - INFO - Account states reset to initial state
+2025-09-22 13:38:42,459 - INFO - Loaded cached index prices from today
+2025-09-22 13:38:42,460 - INFO - Loaded cached expiry dates from today
+2025-09-22 13:38:42,703 - INFO - Attempting auto-login for master account...
+2025-09-22 13:38:42,704 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 13:38:42,704 - INFO - Generated fresh 2FA for account 1: 458819
+2025-09-22 13:38:43,329 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 13:38:43,336 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-22 13:38:43,342 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 13:38:43,344 - INFO - Refreshing market data...
+2025-09-22 13:38:43,345 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 13:38:43,346 - INFO - Index prices are current, no refresh needed
+2025-09-22 13:38:43,350 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 13:38:43,543 - INFO - Websocket connected
+2025-09-22 13:38:43,602 - INFO - WebSocket is now open for Account 1
+2025-09-22 13:38:44,421 - INFO - Attempting login for child account 2...
+2025-09-22 13:38:44,421 - INFO - Generated fresh 2FA for account 2: 612505
+2025-09-22 13:38:45,009 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-22 13:38:45,016 - INFO - Updated Child (ID: 2) login_status to '1': Child account 2 login successful
+2025-09-22 13:38:45,021 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-22 13:38:45,023 - INFO - Child account login successful: KRATIK YADAV
+2025-09-22 13:38:45,194 - INFO - Websocket connected
+2025-09-22 13:38:45,263 - INFO - WebSocket is now open for Account 2
+2025-09-22 13:38:47,713 - INFO - Index selected: SENSEX
+2025-09-22 13:38:47,713 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 13:38:47,713 - INFO - Not all required fields selected for strike selection
+2025-09-22 13:38:47,713 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-22 13:38:50,197 - INFO - On option selected called - Function not implemented yet
+2025-09-22 13:38:53,062 - INFO - Buy price box cleared for new symbol selection
+2025-09-22 13:38:53,064 - INFO - Generated trading symbol: SENSEX25SEP84500CE
+2025-09-22 13:38:53,064 - INFO - Trading symbol stored: SENSEX25SEP84500CE
+2025-09-22 13:38:53,065 - INFO - Getting token for trading symbol: SENSEX25SEP84500CE
+2025-09-22 13:38:53,070 - INFO - Found token for SENSEX25SEP84500CE: 841454
+2025-09-22 13:38:53,582 - INFO - Fetched price for SENSEX25SEP84500CE: 8.85
+2025-09-22 13:38:53,583 - INFO - Getting token for trading symbol: SENSEX25SEP84500CE
+2025-09-22 13:38:53,586 - INFO - Found token for SENSEX25SEP84500CE: 841454
+2025-09-22 13:38:53,587 - INFO - Subscribed to live price feed via master account: BFO|841454
+2025-09-22 13:38:53,587 - INFO - Auto-subscribed to SENSEX25SEP84500CE at price 8.85
+2025-09-22 13:38:53,587 - INFO - Strike selected: 84500, trading symbol: SENSEX25SEP84500CE
+2025-09-22 13:38:53,631 - INFO - Quote Received for Account 1: {'t': 'tk', 'e': 'BFO', 'tk': '841454', 'ts': 'SENSEX25SEP84500CE', 'pp': '2', 'ls': '20', 'ti': '0.05', 'lp': '8.85', 'pc': '-52.03', 'c': '18.45', 'ft': '1758528486', 'o': '14.05', 'h': '14.05', 'l': '8.10', 'ap': '10.23', 'v': '2534940', 'oi': '587080', 'bp1': '8.85', 'sp1': '8.90', 'bq1': '340', 'sq1': '2080'}
+2025-09-22 13:38:53,635 - INFO - Initial buy price set: 8.85
+2025-09-22 13:38:53,636 - INFO - Live price updated: 8.85
+2025-09-22 13:38:53,729 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528487', 'bq1': '220', 'sq1': '2060'}
+2025-09-22 13:38:54,806 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528488', 'sq1': '2140'}
+2025-09-22 13:38:54,892 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528489', 'bq1': '180', 'sq1': '2480'}
+2025-09-22 13:38:55,886 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528490', 'v': '2535080', 'bp1': '8.80', 'sp1': '8.85', 'bq1': '1300', 'sq1': '1300'}
+2025-09-22 13:38:56,983 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528491', 'bq1': '1160', 'sq1': '1280'}
+2025-09-22 13:38:58,070 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528492', 'bq1': '720', 'sq1': '1640'}
+2025-09-22 13:38:59,170 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528493', 'bq1': '1940', 'sq1': '500'}
+2025-09-22 13:38:59,250 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528493', 'bq1': '1700', 'sq1': '740'}
+2025-09-22 13:39:00,247 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.80', 'pc': '-52.30', 'ft': '1758528494', 'v': '2535340', 'bq1': '520', 'sq1': '1540'}
+2025-09-22 13:39:00,248 - INFO - Live price updated: 8.80
+2025-09-22 13:39:00,334 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528494', 'bq1': '380'}
+2025-09-22 13:39:01,334 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528495', 'bp1': '8.75', 'bq1': '4180', 'sq1': '1700'}
+2025-09-22 13:39:02,421 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528496', 'bq1': '3820', 'sq1': '1720'}
+2025-09-22 13:39:02,503 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528496', 'bq1': '3800'}
+2025-09-22 13:39:03,512 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528497', 'v': '2535400', 'sp1': '8.80', 'bq1': '3440', 'sq1': '740'}
+2025-09-22 13:39:03,595 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528497', 'bq1': '3680', 'sq1': '760'}
+2025-09-22 13:39:04,621 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528498', 'sp1': '8.85', 'bq1': '3980', 'sq1': '1800'}
+2025-09-22 13:39:04,683 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528498', 'bq1': '4360', 'sq1': '1700'}
+2025-09-22 13:39:05,002 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528499', 'oi': '587780'}
+2025-09-22 13:39:05,685 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528499', 'bp1': '8.80', 'bq1': '760', 'sq1': '780'}
+2025-09-22 13:39:05,768 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528499', 'bq1': '700', 'sq1': '600'}
+2025-09-22 13:39:06,783 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528500', 'bq1': '940', 'sq1': '380'}
+2025-09-22 13:39:07,861 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528502', 'bq1': '700', 'sq1': '720'}
+2025-09-22 13:39:08,949 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528503', 'v': '2535420', 'bq1': '1740', 'sq1': '680'}
+2025-09-22 13:39:10,038 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528504', 'bp1': '8.75', 'bq1': '3840', 'sq1': '1280'}
+2025-09-22 13:39:10,120 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528504', 'bq1': '3620', 'sq1': '1540'}
+2025-09-22 13:39:11,128 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528505', 'bq1': '3400', 'sq1': '1460'}
+2025-09-22 13:39:12,213 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528506', 'bq1': '3800', 'sq1': '1180'}
+2025-09-22 13:39:12,296 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528506', 'bq1': '4260'}
+2025-09-22 13:39:13,302 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528507', 'bq1': '4120', 'sq1': '1620'}
+2025-09-22 13:39:14,388 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528508', 'bq1': '4840', 'sq1': '620'}
+2025-09-22 13:39:14,471 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528508', 'bp1': '8.80', 'bq1': '560', 'sq1': '660'}
+2025-09-22 13:39:15,103 - INFO - Placing buy orders for SENSEX25SEP84500CE @ 4.0 qty 40
+2025-09-22 13:39:15,106 - INFO - Account 1 is active for order placement
+2025-09-22 13:39:15,108 - INFO - Account 2 is active for order placement
+2025-09-22 13:39:15,109 - INFO - Placing order for account 1: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP84500CE', 'quantity': 40, 'discloseqty': 0, 'price_type': 'LMT', 'price': 4.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-22 13:39:15,110 - INFO - Placing order for account 2: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP84500CE', 'quantity': 40, 'discloseqty': 0, 'price_type': 'LMT', 'price': 4.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-22 13:39:15,477 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528509', 'bq1': '840', 'sq1': '880'}
+2025-09-22 13:39:15,559 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528509', 'bq1': '860'}
+2025-09-22 13:39:15,816 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092200290328', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '4.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-22 13:39:15,817 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092200290330', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '4.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-22 13:39:15,822 - INFO - Account 2 - B PENDING NewAck
+2025-09-22 13:39:15,823 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '4.00'
+2025-09-22 13:39:15,824 - INFO - Account 1 - B PENDING NewAck
+2025-09-22 13:39:15,825 - INFO - Updated Child (ID: 2) order info: 25092200290328 SENSEX25SEP84500CE 40@4.0
+2025-09-22 13:39:15,825 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '4.00'
+2025-09-22 13:39:15,827 - INFO - Order placed successfully for account 2: 25092200290328
+2025-09-22 13:39:15,827 - INFO - Updated Master (ID: 1) order info: 25092200290330 SENSEX25SEP84500CE 40@4.0
+2025-09-22 13:39:15,828 - INFO - Order placed successfully for account 1: 25092200290330
+2025-09-22 13:39:15,829 - INFO - Buy orders placed successfully
+2025-09-22 13:39:15,829 - INFO - Account 1 order status updated to: PENDING
+2025-09-22 13:39:15,829 - INFO - Account 2 order status updated to: PENDING
+2025-09-22 13:39:15,830 - INFO - Order status updated for account 1: Buy Order PENDING @ 4.00
+2025-09-22 13:39:15,830 - INFO - Order status updated for account 2: Buy Order PENDING @ 4.00
+2025-09-22 13:39:15,830 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092200290328', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '4.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'PendingNew', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-22 13:39:15,831 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092200290330', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '4.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'PendingNew', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-22 13:39:15,831 - INFO - Account 2 - B PENDING PendingNew
+2025-09-22 13:39:15,831 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '4.00'
+2025-09-22 13:39:15,831 - INFO - Account 1 - B PENDING PendingNew
+2025-09-22 13:39:15,832 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '4.00'
+2025-09-22 13:39:15,832 - INFO - Account 2 order status updated to: PENDING
+2025-09-22 13:39:15,832 - INFO - Order status updated for account 2: Buy Order PENDING @ 4.00
+2025-09-22 13:39:15,833 - INFO - Account 1 order status updated to: PENDING
+2025-09-22 13:39:15,833 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092200290328', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '4.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'OPEN', 'reporttype': 'New', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758527711310793044', 'dscqty': '0', 'exch_tm': '22-09-2025 13:39:16'}
+2025-09-22 13:39:15,833 - INFO - Order status updated for account 1: Buy Order PENDING @ 4.00
+2025-09-22 13:39:15,834 - INFO - Account 2 - B OPEN New
+2025-09-22 13:39:15,834 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '4.00'
+2025-09-22 13:39:15,834 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092200290330', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '4.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'OPEN', 'reporttype': 'New', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758527711310793052', 'dscqty': '0', 'exch_tm': '22-09-2025 13:39:16'}
+2025-09-22 13:39:15,835 - INFO - Account 2 order status updated to: OPEN
+2025-09-22 13:39:15,835 - INFO - Account 1 - B OPEN New
+2025-09-22 13:39:15,835 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '4.00'
+2025-09-22 13:39:15,835 - INFO - Order status updated for account 2: Buy Order Open @ 4.00
+2025-09-22 13:39:15,836 - INFO - Account 1 order status updated to: OPEN
+2025-09-22 13:39:15,836 - INFO - Order status updated for account 1: Buy Order Open @ 4.00
+2025-09-22 13:39:16,580 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.85', 'pc': '-52.03', 'ft': '1758528510', 'v': '2537060', 'bq1': '1020', 'sq1': '380'}
+2025-09-22 13:39:16,582 - INFO - Live price updated: 8.85
+2025-09-22 13:39:17,651 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528511', 'v': '2537360', 'bp1': '8.75', 'bq1': '2800', 'sq1': '740'}
+2025-09-22 13:39:18,740 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528512', 'bq1': '2720'}
+2025-09-22 13:39:19,828 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528513', 'bq1': '2620', 'sq1': '1080'}
+2025-09-22 13:39:19,911 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528514', 'bq1': '2820', 'sq1': '1040'}
+2025-09-22 13:39:20,909 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528515', 'bq1': '2840', 'sq1': '760'}
+2025-09-22 13:39:20,997 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528515', 'bq1': '2620', 'sq1': '1420'}
+2025-09-22 13:39:22,001 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528516', 'sq1': '1260'}
+2025-09-22 13:39:22,080 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528516', 'bq1': '2640', 'sq1': '1020'}
+2025-09-22 13:39:23,090 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528517', 'bq1': '3420', 'sq1': '760'}
+2025-09-22 13:39:23,172 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528517', 'bq1': '3460'}
+2025-09-22 13:39:24,178 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528518', 'bq1': '3480'}
+2025-09-22 13:39:24,260 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528518', 'bq1': '2740', 'sq1': '1420'}
+2025-09-22 13:39:25,266 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528519', 'bp1': '8.80', 'bq1': '560', 'sq1': '840'}
+2025-09-22 13:39:27,438 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528521', 'bq1': '1320', 'sq1': '340'}
+2025-09-22 13:39:27,750 - INFO - Cancel master buy order clicked - Function not implemented yet
+2025-09-22 13:39:28,526 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528522', 'bq1': '660', 'sq1': '1340'}
+2025-09-22 13:39:28,610 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528522', 'bq1': '800', 'sq1': '1240'}
+2025-09-22 13:39:29,601 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528523', 'sp1': '8.90', 'bq1': '1880', 'sq1': '1880'}
+2025-09-22 13:39:30,702 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528524', 'bq1': '1680', 'sq1': '1380'}
+2025-09-22 13:39:30,786 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528524', 'bq1': '860', 'sq1': '2660'}
+2025-09-22 13:39:31,794 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528525', 'v': '2537420', 'sp1': '8.85', 'bq1': '1380', 'sq1': '660'}
+2025-09-22 13:39:31,809 - INFO - Cancel child buy order clicked - Function not implemented yet
+2025-09-22 13:39:32,698 - INFO - Cancel buy orders clicked - Function not implemented yet
+2025-09-22 13:39:32,880 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528527', 'bq1': '1800', 'sq1': '400'}
+2025-09-22 13:39:33,969 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528528', 'bq1': '660', 'sq1': '700'}
+2025-09-22 13:39:34,417 - INFO - Modify buy orders clicked - Function not implemented yet
+2025-09-22 13:39:35,057 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.75', 'pc': '-52.57', 'ft': '1758528529', 'v': '2537520', 'bp1': '8.75', 'bq1': '2800', 'sq1': '1500'}
+2025-09-22 13:39:35,061 - INFO - Live price updated: 8.75
+2025-09-22 13:39:36,142 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528530', 'bq1': '3180', 'sq1': '940'}
+2025-09-22 13:39:37,234 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528531', 'bq1': '2640', 'sq1': '1360'}
+2025-09-22 13:39:37,312 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528531', 'bq1': '2860'}
+2025-09-22 13:39:38,317 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528532', 'bq1': '2520', 'sq1': '1780'}
+2025-09-22 13:39:38,400 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528532', 'bq1': '2860', 'sq1': '2300'}
+2025-09-22 13:39:39,404 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528533', 'bq1': '2740', 'sq1': '2340'}
+2025-09-22 13:39:40,490 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528534', 'sq1': '1620'}
+2025-09-22 13:39:40,576 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528534', 'sq1': '2240'}
+2025-09-22 13:39:41,584 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528535', 'bq1': '2400', 'sq1': '2160'}
+2025-09-22 13:39:42,397 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092200290328', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '4.00', 'pcode': 'M', 'remarks': '', 'status': 'PENDING', 'reporttype': 'PendingCancel', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758527711310793044', 'dscqty': '0', 'exch_tm': '22-09-2025 13:39:16'}
+2025-09-22 13:39:42,399 - INFO - Account 2 - B PENDING PendingCancel
+2025-09-22 13:39:42,399 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '4.00'
+2025-09-22 13:39:42,399 - INFO - Account 2 order status updated to: PENDING
+2025-09-22 13:39:42,403 - INFO - Order status updated for account 2: Buy Order PENDING @ 4.00
+2025-09-22 13:39:42,403 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092200290328', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '4.00', 'pcode': 'M', 'remarks': '', 'rejreason': 'Order Cancelled', 'status': 'CANCELED', 'reporttype': 'Canceled', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758527711310793044', 'cancelqty': '40', 'dscqty': '0', 'exch_tm': '22-09-2025 13:39:43'}
+2025-09-22 13:39:42,408 - INFO - Account 2 - B CANCELED Canceled
+2025-09-22 13:39:42,409 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '4.00'
+2025-09-22 13:39:42,412 - INFO - Order status updated for account 2: Buy Order CANCELED @ 4.00
+2025-09-22 13:39:42,669 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528536', 'bq1': '2720', 'sq1': '2040'}
+2025-09-22 13:39:43,760 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528537', 'bq1': '2540', 'sq1': '2300'}
+2025-09-22 13:39:44,844 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528539', 'bq1': '2440', 'sq1': '1400'}
+2025-09-22 13:39:45,932 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528540', 'bq1': '2640', 'sq1': '1920'}
+2025-09-22 13:39:46,015 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528540', 'bq1': '2040', 'sq1': '2060'}
+2025-09-22 13:39:46,049 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092200290330', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '4.00', 'pcode': 'M', 'remarks': '', 'status': 'PENDING', 'reporttype': 'PendingCancel', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758527711310793052', 'dscqty': '0', 'exch_tm': '22-09-2025 13:39:16'}
+2025-09-22 13:39:46,051 - INFO - Account 1 - B PENDING PendingCancel
+2025-09-22 13:39:46,052 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '4.00'
+2025-09-22 13:39:46,054 - INFO - Account 1 order status updated to: PENDING
+2025-09-22 13:39:46,054 - INFO - Order status updated for account 1: Buy Order PENDING @ 4.00
+2025-09-22 13:39:46,055 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092200290330', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '4.00', 'pcode': 'M', 'remarks': '', 'rejreason': 'Order Cancelled', 'status': 'CANCELED', 'reporttype': 'Canceled', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758527711310793052', 'cancelqty': '40', 'dscqty': '0', 'exch_tm': '22-09-2025 13:39:46'}
+2025-09-22 13:39:46,058 - INFO - Account 1 - B CANCELED Canceled
+2025-09-22 13:39:46,058 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '4.00'
+2025-09-22 13:39:46,059 - INFO - Order status updated for account 1: Buy Order CANCELED @ 4.00
+2025-09-22 13:39:47,022 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528541', 'bq1': '2620', 'sq1': '1520'}
+2025-09-22 13:39:47,103 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528541', 'bq1': '2300'}
+2025-09-22 13:39:48,107 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528542', 'bq1': '2180', 'sq1': '2040'}
+2025-09-22 13:39:48,192 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528542', 'bq1': '2200', 'sq1': '1520'}
+2025-09-22 13:39:49,193 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528543', 'bq1': '2000', 'sq1': '1940'}
+2025-09-22 13:39:50,283 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528544', 'bq1': '2420', 'sq1': '1520'}
+2025-09-22 13:39:50,365 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528544', 'bq1': '2620'}
+2025-09-22 13:39:51,371 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.80', 'pc': '-52.30', 'ft': '1758528545', 'v': '2537540', 'bq1': '3220', 'sq1': '1120'}
+2025-09-22 13:39:51,372 - INFO - Live price updated: 8.80
+2025-09-22 13:39:51,453 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528545', 'bq1': '3300', 'sq1': '1040'}
+2025-09-22 13:39:52,455 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528546', 'bq1': '2520', 'sq1': '1840'}
+2025-09-22 13:39:52,541 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528546', 'bq1': '2740', 'sq1': '1320'}
+2025-09-22 13:39:53,548 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528547', 'bq1': '2760'}
+2025-09-22 13:39:54,633 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.75', 'pc': '-52.57', 'ft': '1758528548', 'v': '2537740', 'bq1': '2520', 'sq1': '1840'}
+2025-09-22 13:39:54,640 - INFO - Live price updated: 8.75
+2025-09-22 13:39:55,714 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528549', 'bq1': '2840'}
+2025-09-22 13:39:56,810 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528550', 'ap': '10.22', 'v': '2537840', 'bq1': '2700', 'sq1': '1040'}
+2025-09-22 13:39:57,896 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528552', 'bq1': '3200', 'sq1': '900'}
+2025-09-22 13:39:58,984 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.85', 'pc': '-52.03', 'ft': '1758528553', 'v': '2538020', 'bp1': '8.80', 'bq1': '500', 'sq1': '1840'}
+2025-09-22 13:39:58,989 - INFO - Live price updated: 8.85
+2025-09-22 13:40:00,073 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528554', 'bq1': '240'}
+2025-09-22 13:40:01,161 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528555', 'v': '2538080', 'bq1': '420', 'sq1': '1600'}
+2025-09-22 13:40:02,247 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528556', 'v': '2538140', 'sp1': '8.90', 'bq1': '1960', 'sq1': '1620'}
+2025-09-22 13:40:02,329 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528556', 'bq1': '1560', 'sq1': '2300'}
+2025-09-22 13:40:03,339 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528557', 'bq1': '1780', 'sq1': '2400'}
+2025-09-22 13:40:03,420 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528557', 'bq1': '860', 'sq1': '2420'}
+2025-09-22 13:40:04,424 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528558', 'bq1': '2780', 'sq1': '1880'}
+2025-09-22 13:40:04,507 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528558', 'bq1': '1880', 'sq1': '2400'}
+2025-09-22 13:40:05,515 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528559', 'bq1': '1380'}
+2025-09-22 13:40:06,599 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528560', 'bq1': '3340', 'sq1': '1500'}
+2025-09-22 13:40:07,688 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528561', 'bq1': '3400', 'sq1': '1820'}
+2025-09-22 13:40:08,774 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528562', 'v': '2538200', 'bq1': '3040', 'sq1': '1760'}
+2025-09-22 13:40:09,863 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528564', 'bp1': '8.85', 'bq1': '1220', 'sq1': '920'}
+2025-09-22 13:40:09,943 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528564', 'sq1': '1100'}
+2025-09-22 13:40:10,950 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.90', 'pc': '-51.76', 'ft': '1758528565', 'v': '2538260', 'bq1': '2500', 'sq1': '660'}
+2025-09-22 13:40:10,954 - INFO - Live price updated: 8.90
+2025-09-22 13:40:12,039 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528566', 'bq1': '2040', 'sq1': '860'}
+2025-09-22 13:40:13,125 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.85', 'pc': '-52.03', 'ft': '1758528567', 'v': '2538400', 'bq1': '20', 'sq1': '2040'}
+2025-09-22 13:40:13,130 - INFO - Live price updated: 8.85
+2025-09-22 13:40:14,213 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528568', 'v': '2538420', 'bp1': '8.80', 'bq1': '2380', 'sq1': '2260'}
+2025-09-22 13:40:14,308 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528568', 'bq1': '2880'}
+2025-09-22 13:40:15,299 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528569', 'sp1': '8.85', 'bq1': '1640', 'sq1': '640'}
+2025-09-22 13:40:16,389 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528570', 'bq1': '420', 'sq1': '1360'}
+2025-09-22 13:40:17,482 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528571', 'bp1': '8.75', 'bq1': '2840', 'sq1': '1860'}
+2025-09-22 13:40:18,565 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528572', 'bq1': '2640', 'sq1': '1920'}
+2025-09-22 13:40:19,650 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528573', 'sp1': '8.80', 'bq1': '980', 'sq1': '680'}
+2025-09-22 13:40:19,736 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528573', 'sq1': '580'}
+2025-09-22 13:40:20,738 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528574', 'bq1': '1720', 'sq1': '560'}
+2025-09-22 13:40:21,826 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528575', 'bq1': '1480'}
+2025-09-22 13:40:21,912 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528576', 'bq1': '1620'}
+2025-09-22 13:40:22,913 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528577', 'bq1': '720', 'sq1': '800'}
+2025-09-22 13:40:24,002 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528578', 'sp1': '8.85', 'bq1': '500', 'sq1': '2880'}
+2025-09-22 13:40:25,090 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528579', 'v': '2538500', 'bq1': '1680', 'sq1': '2740'}
+2025-09-22 13:40:25,177 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528579', 'bq1': '1340', 'sq1': '2760'}
+2025-09-22 13:40:26,178 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528580', 'bq1': '2280', 'sq1': '2160'}
+2025-09-22 13:40:27,266 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528581', 'bq1': '1780', 'sq1': '2380'}
+2025-09-22 13:40:27,347 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528581', 'bq1': '2140', 'sq1': '1460'}
+2025-09-22 13:40:28,347 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.70', 'pc': '-52.85', 'ft': '1758528582', 'v': '2539200', 'sp1': '8.80', 'bq1': '1240', 'sq1': '560'}
+2025-09-22 13:40:28,347 - INFO - Live price updated: 8.70
+2025-09-22 13:40:28,453 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528582', 'bq1': '1500', 'sq1': '360'}
+2025-09-22 13:40:30,519 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528584', 'bq1': '1320', 'sq1': '380'}
+2025-09-22 13:40:30,611 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528584', 'bq1': '1460'}
+2025-09-22 13:40:31,616 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528585', 'bq1': '940', 'sq1': '780'}
+2025-09-22 13:40:32,704 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528586', 'bq1': '1460', 'sq1': '360'}
+2025-09-22 13:40:33,791 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528587', 'bq1': '420', 'sq1': '1060'}
+2025-09-22 13:40:34,878 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528589', 'bq1': '1060', 'sq1': '680'}
+2025-09-22 13:40:35,960 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528590', 'bq1': '320', 'sq1': '1080'}
+2025-09-22 13:40:37,056 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.85', 'pc': '-52.03', 'ft': '1758528591', 'v': '2540200', 'bq1': '1040', 'sq1': '280'}
+2025-09-22 13:40:37,057 - INFO - Live price updated: 8.85
+2025-09-22 13:40:38,141 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528592', 'bq1': '1000', 'sq1': '440'}
+2025-09-22 13:40:39,244 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528593', 'bq1': '1380', 'sq1': '300'}
+2025-09-22 13:40:40,317 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528594', 'bq1': '420', 'sq1': '680'}
+2025-09-22 13:40:41,402 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.70', 'pc': '-52.85', 'ft': '1758528595', 'v': '2541200', 'bq1': '20', 'sq1': '1000'}
+2025-09-22 13:40:41,402 - INFO - Live price updated: 8.70
+2025-09-22 13:40:42,479 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528596', 'sq1': '980'}
+2025-09-22 13:40:43,591 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528597', 'bq1': '980', 'sq1': '800'}
+2025-09-22 13:40:43,663 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528597', 'bq1': '1140', 'sq1': '480'}
+2025-09-22 13:40:44,667 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528598', 'sp1': '8.85', 'bq1': '2000', 'sq1': '1540'}
+2025-09-22 13:40:45,744 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528599', 'bq1': '2160', 'sq1': '1420'}
+2025-09-22 13:40:45,837 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528600', 'bq1': '2260', 'sq1': '940'}
+2025-09-22 13:40:46,843 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528601', 'bq1': '2900', 'sq1': '1400'}
+2025-09-22 13:40:47,931 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528602', 'bp1': '8.80', 'bq1': '1760', 'sq1': '660'}
+2025-09-22 13:40:49,018 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528603', 'bq1': '1420'}
+2025-09-22 13:40:49,101 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528603', 'bq1': '1760'}
+2025-09-22 13:40:50,106 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528604', 'bq1': '1220'}
+2025-09-22 13:40:51,193 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.85', 'pc': '-52.03', 'ft': '1758528605', 'v': '2541260', 'bq1': '2740', 'sq1': '240'}
+2025-09-22 13:40:51,197 - INFO - Live price updated: 8.85
+2025-09-22 13:40:52,283 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528606', 'bp1': '8.85', 'sp1': '8.90', 'bq1': '780', 'sq1': '1760'}
+2025-09-22 13:40:53,360 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528607', 'bq1': '340', 'sq1': '1380'}
+2025-09-22 13:40:54,460 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528608', 'bq1': '1060', 'sq1': '1260'}
+2025-09-22 13:40:55,543 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.90', 'pc': '-51.76', 'ft': '1758528609', 'v': '2541320', 'bp1': '8.80', 'sp1': '8.85', 'bq1': '980', 'sq1': '400'}
+2025-09-22 13:40:55,545 - INFO - Live price updated: 8.90
+2025-09-22 13:40:55,628 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528609', 'bq1': '920'}
+2025-09-22 13:40:56,631 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.85', 'pc': '-52.03', 'ft': '1758528610', 'v': '2541380', 'bq1': '2120', 'sq1': '100'}
+2025-09-22 13:40:56,633 - INFO - Live price updated: 8.85
+2025-09-22 13:40:57,721 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528611', 'v': '2541440', 'bq1': '540', 'sq1': '1020'}
+2025-09-22 13:40:58,808 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528612', 'bq1': '900', 'sq1': '440'}
+2025-09-22 13:40:59,894 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528614', 'bq1': '1320', 'sq1': '600'}
+2025-09-22 13:41:00,983 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528615', 'bq1': '2060', 'sq1': '200'}
+2025-09-22 13:41:02,072 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528616', 'bq1': '1060', 'sq1': '320'}
+2025-09-22 13:41:03,151 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528617', 'bq1': '620', 'sq1': '760'}
+2025-09-22 13:41:03,240 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528617', 'bq1': '1060', 'sq1': '520'}
+2025-09-22 13:41:04,245 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528618', 'v': '2541940', 'sp1': '8.90', 'bq1': '1020', 'sq1': '2440'}
+2025-09-22 13:41:05,326 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528619', 'bq1': '1480', 'sq1': '2320'}
+2025-09-22 13:41:07,511 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528621', 'sp1': '8.85', 'bq1': '980', 'sq1': '660'}
+2025-09-22 13:41:08,596 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.90', 'pc': '-51.76', 'ft': '1758528622', 'v': '2543940', 'sp1': '8.90', 'bq1': '1240', 'sq1': '2180'}
+2025-09-22 13:41:08,598 - INFO - Live price updated: 8.90
+2025-09-22 13:41:08,679 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528622', 'bq1': '1840', 'sq1': '1720'}
+2025-09-22 13:41:09,682 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528623', 'bp1': '8.85', 'bq1': '840', 'sq1': '980'}
+2025-09-22 13:41:09,768 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528623', 'bp1': '8.80', 'bq1': '2220', 'sq1': '1160'}
+2025-09-22 13:41:10,774 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.85', 'pc': '-52.03', 'ft': '1758528624', 'v': '2544020', 'bp1': '8.85', 'bq1': '100', 'sq1': '700'}
+2025-09-22 13:41:10,781 - INFO - Live price updated: 8.85
+2025-09-22 13:41:10,856 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528625', 'bp1': '8.80', 'bq1': '1960', 'sq1': '720'}
+2025-09-22 13:41:11,862 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528626', 'bq1': '2040', 'sq1': '1320'}
+2025-09-22 13:41:12,941 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528627', 'bp1': '8.85', 'bq1': '760', 'sq1': '320'}
+2025-09-22 13:41:13,080 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528627', 'sq1': '480'}
+2025-09-22 13:41:14,036 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528628', 'bq1': '840', 'sq1': '400'}
+2025-09-22 13:41:15,126 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528629', 'bq1': '1020', 'sq1': '160'}
+2025-09-22 13:41:16,202 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528630', 'sp1': '8.95', 'bq1': '880', 'sq1': '2500'}
+2025-09-22 13:41:17,298 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528631', 'bq1': '960', 'sq1': '1960'}
+2025-09-22 13:41:17,380 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528631', 'bq1': '840', 'sq1': '2100'}
+2025-09-22 13:41:18,392 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528632', 'bq1': '2240', 'sq1': '1480'}
+2025-09-22 13:41:18,472 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528632', 'bq1': '1820', 'sq1': '1860'}
+2025-09-22 13:41:19,473 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528633', 'bq1': '1560', 'sq1': '1700'}
+2025-09-22 13:41:20,584 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528634', 'bq1': '2060', 'sq1': '2140'}
+2025-09-22 13:41:20,644 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528634', 'bq1': '840', 'sq1': '2320'}
+2025-09-22 13:41:21,635 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528635', 'bp1': '8.90', 'bq1': '400', 'sq1': '1460'}
+2025-09-22 13:41:21,731 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528635', 'bp1': '8.85', 'bq1': '1780', 'sq1': '1480'}
+2025-09-22 13:41:22,729 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528636', 'v': '2544100', 'bq1': '2040', 'sq1': '1840'}
+2025-09-22 13:41:23,832 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528638', 'bq1': '960', 'sq1': '2100'}
+2025-09-22 13:41:23,906 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528638', 'bq1': '1240', 'sq1': '2220'}
+2025-09-22 13:41:24,995 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528639', 'bq1': '1420', 'sq1': '1620'}
+2025-09-22 13:41:25,998 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528640', 'sq1': '2240'}
+2025-09-22 13:41:26,082 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528640', 'sq1': '2060'}
+2025-09-22 13:41:27,087 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528641', 'bp1': '8.80', 'sp1': '8.90', 'bq1': '2140', 'sq1': '1760'}
+2025-09-22 13:41:27,168 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528641', 'bq1': '2660', 'sq1': '960'}
+2025-09-22 13:41:28,175 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528642', 'bq1': '1900', 'sq1': '1080'}
+2025-09-22 13:41:29,260 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528643', 'bq1': '2600', 'sq1': '960'}
+2025-09-22 13:41:30,348 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528644', 'bq1': '2360', 'sq1': '1820'}
+2025-09-22 13:41:30,432 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528644', 'bq1': '1880'}
+2025-09-22 13:41:31,431 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528645', 'bq1': '1740', 'sq1': '1500'}
+2025-09-22 13:41:31,515 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528645', 'bq1': '1900', 'sq1': '1520'}
+2025-09-22 13:41:32,533 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528646', 'bq1': '2180'}
+2025-09-22 13:41:34,704 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528648', 'bq1': '2020', 'sq1': '1800'}
+2025-09-22 13:41:35,787 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.90', 'pc': '-51.76', 'ft': '1758528649', 'v': '2545100', 'bq1': '2720', 'sq1': '1260'}
+2025-09-22 13:41:35,790 - INFO - Live price updated: 8.90
+2025-09-22 13:41:37,957 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528652', 'bq1': '2000', 'sq1': '1600'}
+2025-09-22 13:41:39,059 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528653', 'bq1': '2540', 'sq1': '1640'}
+2025-09-22 13:41:40,139 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528654', 'sq1': '1480'}
+2025-09-22 13:41:40,221 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528654', 'bq1': '2560', 'sq1': '1920'}
+2025-09-22 13:41:41,233 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528655', 'bq1': '2540'}
+2025-09-22 13:41:41,310 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528655', 'bq1': '2980', 'sq1': '1220'}
+2025-09-22 13:41:42,315 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.80', 'pc': '-52.30', 'ft': '1758528656', 'v': '2545180', 'bq1': '3160', 'sq1': '2220'}
+2025-09-22 13:41:42,317 - INFO - Live price updated: 8.80
+2025-09-22 13:41:43,409 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528657', 'bq1': '3660', 'sq1': '1800'}
+2025-09-22 13:41:43,484 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528657', 'bq1': '2560', 'sq1': '1360'}
+2025-09-22 13:41:44,479 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528658', 'bp1': '8.85', 'bq1': '1520', 'sq1': '1080'}
+2025-09-22 13:41:44,572 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528658', 'sq1': '1260'}
+2025-09-22 13:41:45,576 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528659', 'v': '2547180', 'bp1': '8.80', 'bq1': '2520', 'sq1': '1420'}
+2025-09-22 13:41:46,658 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528660', 'bq1': '3440', 'sq1': '1360'}
+2025-09-22 13:41:47,752 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528661', 'bq1': '3200', 'sq1': '1400'}
+2025-09-22 13:41:48,840 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528663', 'sq1': '1360'}
+2025-09-22 13:41:51,014 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528665', 'v': '2547360', 'bq1': '2780', 'sq1': '1500'}
+2025-09-22 13:41:52,103 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528666', 'bq1': '2640', 'sq1': '1360'}
+2025-09-22 13:41:52,186 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528666', 'bq1': '2760', 'sq1': '1740'}
+2025-09-22 13:41:53,192 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528667', 'bq1': '1960', 'sq1': '1760'}
+2025-09-22 13:41:54,279 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528668', 'bq1': '2160', 'sq1': '1960'}
+2025-09-22 13:41:55,372 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528669', 'bq1': '1960', 'sq1': '1620'}
+2025-09-22 13:41:56,455 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528670', 'sq1': '1740'}
+2025-09-22 13:41:57,544 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528671', 'bq1': '2280', 'sq1': '1620'}
+2025-09-22 13:41:58,630 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528672', 'bq1': '2420', 'sq1': '1380'}
+2025-09-22 13:41:58,712 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528672', 'bq1': '3020'}
+2025-09-22 13:41:59,717 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528673', 'bq1': '2180', 'sq1': '1960'}
+2025-09-22 13:42:00,809 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528674', 'bq1': '2340', 'sq1': '1740'}
+2025-09-22 13:42:01,883 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528676', 'bq1': '2100'}
+2025-09-22 13:42:02,982 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528677', 'bq1': '2520', 'sq1': '1620'}
+2025-09-22 13:42:04,069 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528678', 'bq1': '2720', 'sq1': '1740'}
+2025-09-22 13:42:04,151 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528678', 'bq1': '3280', 'sq1': '940'}
+2025-09-22 13:42:04,311 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528678', 'oi': '587240'}
+2025-09-22 13:42:05,159 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528679', 'bq1': '2700', 'sq1': '1220'}
+2025-09-22 13:42:06,250 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528680', 'bq1': '2660'}
+2025-09-22 13:42:06,327 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528680', 'bq1': '2680'}
+2025-09-22 13:42:07,332 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.90', 'pc': '-51.76', 'ft': '1758528681', 'v': '2547380', 'bq1': '2660', 'sq1': '1080'}
+2025-09-22 13:42:07,333 - INFO - Live price updated: 8.90
+2025-09-22 13:42:07,416 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528681', 'bq1': '2680', 'sq1': '1200'}
+2025-09-22 13:42:08,426 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528682', 'v': '2547400', 'bq1': '2900', 'sq1': '1060'}
+2025-09-22 13:42:08,500 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528682', 'bq1': '2840', 'sq1': '1420'}
+2025-09-22 13:42:09,507 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528683', 'sq1': '1460'}
+2025-09-22 13:42:10,594 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528684', 'bq1': '3160', 'sq1': '1340'}
+2025-09-22 13:42:10,665 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528684', 'bq1': '2820', 'sq1': '1980'}
+2025-09-22 13:42:11,673 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528685', 'bq1': '2620', 'sq1': '1460'}
+2025-09-22 13:42:11,768 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528685', 'bq1': '3080', 'sq1': '1340'}
+2025-09-22 13:42:12,758 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528686', 'bq1': '2240', 'sq1': '1860'}
+2025-09-22 13:42:13,857 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528688', 'bq1': '860', 'sq1': '2040'}
+2025-09-22 13:42:13,941 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528688', 'bq1': '1660', 'sq1': '1980'}
+2025-09-22 13:42:14,954 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528689', 'bp1': '8.85', 'bq1': '460', 'sq1': '1900'}
+2025-09-22 13:42:15,032 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528689', 'sq1': '1380'}
+2025-09-22 13:42:16,042 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528690', 'bp1': '8.90', 'sp1': '8.95', 'bq1': '840', 'sq1': '960'}
+2025-09-22 13:42:17,121 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528691', 'bq1': '1320', 'sq1': '640'}
+2025-09-22 13:42:17,204 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528691', 'bq1': '1500'}
+2025-09-22 13:42:18,209 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528692', 'bq1': '1860', 'sq1': '360'}
+2025-09-22 13:42:19,296 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528693', 'bp1': '8.95', 'sp1': '9.00', 'bq1': '440', 'sq1': '2420'}
+2025-09-22 13:42:19,383 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528693', 'sq1': '2200'}
+2025-09-22 13:42:20,384 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528694', 'bp1': '8.90', 'bq1': '2040', 'sq1': '2080'}
+2025-09-22 13:42:20,465 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528694', 'bq1': '2560', 'sq1': '1440'}
+2025-09-22 13:42:21,468 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528695', 'bp1': '8.95', 'bq1': '1020', 'sq1': '700'}
+2025-09-22 13:42:21,554 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528695', 'sq1': '1120'}
+2025-09-22 13:42:22,559 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528696', 'bq1': '1040'}
+2025-09-22 13:42:23,646 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528697', 'bq1': '760', 'sq1': '1160'}
+2025-09-22 13:42:25,826 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528700', 'bq1': '1380'}
+2025-09-22 13:42:26,923 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528701', 'bq1': '1240', 'sq1': '1300'}
+2025-09-22 13:42:27,990 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528702', 'bq1': '1340', 'sq1': '1320'}
+2025-09-22 13:42:29,086 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528703', 'bq1': '1300', 'sq1': '1300'}
+2025-09-22 13:42:30,168 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528704', 'bp1': '8.90', 'bq1': '2500', 'sq1': '1860'}
+2025-09-22 13:42:30,257 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528704', 'bq1': '2480', 'sq1': '1420'}
+2025-09-22 13:42:31,261 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528705', 'bq1': '2440', 'sq1': '2000'}
+2025-09-22 13:42:32,349 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528706', 'sp1': '8.95', 'bq1': '2540', 'sq1': '540'}
+2025-09-22 13:42:32,430 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528706', 'bq1': '2700'}
+2025-09-22 13:42:33,439 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528707', 'bq1': '2820', 'sq1': '560'}
+2025-09-22 13:42:34,526 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528708', 'bq1': '2580', 'sq1': '780'}
+2025-09-22 13:42:35,611 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528709', 'bq1': '1940', 'sq1': '420'}
+2025-09-22 13:42:36,699 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528710', 'bq1': '2080', 'sq1': '760'}
+2025-09-22 13:42:37,786 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528711', 'bq1': '2140', 'sq1': '900'}
+2025-09-22 13:42:38,874 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528713', 'bp1': '8.95', 'sp1': '9.00', 'bq1': '100', 'sq1': '2040'}
+2025-09-22 13:42:39,962 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528714', 'bp1': '8.90', 'sp1': '8.95', 'bq1': '1040', 'sq1': '880'}
+2025-09-22 13:42:41,049 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528715', 'bq1': '1540', 'sq1': '580'}
+2025-09-22 13:42:42,240 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528716', 'bq1': '1460', 'sq1': '880'}
+2025-09-22 13:42:43,226 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528717', 'bq1': '1720', 'sq1': '720'}
+2025-09-22 13:42:44,316 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528718', 'bq1': '1740'}
+2025-09-22 13:42:46,492 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528720', 'bq1': '900', 'sq1': '600'}
+2025-09-22 13:42:47,577 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528721', 'bq1': '1540', 'sq1': '440'}
+2025-09-22 13:42:48,664 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528722', 'bq1': '160', 'sq1': '1380'}
+2025-09-22 13:42:49,745 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528723', 'v': '2547420', 'bp1': '8.85', 'bq1': '2480', 'sq1': '1400'}
+2025-09-22 13:42:50,840 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528725', 'bp1': '8.90', 'bq1': '1940', 'sq1': '140'}
+2025-09-22 13:42:51,928 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.95', 'pc': '-51.49', 'ft': '1758528726', 'v': '2547700', 'bp1': '8.95', 'sp1': '9.00', 'bq1': '400', 'sq1': '1180'}
+2025-09-22 13:42:51,930 - INFO - Live price updated: 8.95
+2025-09-22 13:42:53,018 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528727', 'v': '2547900', 'bq1': '480', 'sq1': '1660'}
+2025-09-22 13:42:54,104 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528728', 'v': '2548000', 'bq1': '260'}
+2025-09-22 13:42:54,176 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528728', 'bq1': '560', 'sq1': '1640'}
+2025-09-22 13:42:55,191 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528729', 'v': '2548100', 'bq1': '300'}
+2025-09-22 13:42:56,293 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.00', 'pc': '-51.22', 'ft': '1758528730', 'v': '2548740', 'sp1': '9.05', 'bq1': '1580', 'sq1': '3320'}
+2025-09-22 13:42:56,295 - INFO - Live price updated: 9.00
+2025-09-22 13:42:56,363 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528730', 'bq1': '1880', 'sq1': '3260'}
+2025-09-22 13:42:57,352 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528731', 'sp1': '9.00', 'bq1': '960', 'sq1': '540'}
+2025-09-22 13:42:58,455 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.90', 'pc': '-51.76', 'ft': '1758528732', 'v': '2549000', 'bp1': '8.90', 'bq1': '2540', 'sq1': '1840'}
+2025-09-22 13:42:58,457 - INFO - Live price updated: 8.90
+2025-09-22 13:42:58,538 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528732', 'bq1': '2320', 'sq1': '2240'}
+2025-09-22 13:42:59,544 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528733', 'bq1': '2400', 'sq1': '3020'}
+2025-09-22 13:43:00,630 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528734', 'v': '2549100', 'bq1': '1300', 'sq1': '2820'}
+2025-09-22 13:43:00,716 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528734', 'sp1': '8.95', 'bq1': '1940', 'sq1': '200'}
+2025-09-22 13:43:01,719 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528735', 'bq1': '1640', 'sq1': '680'}
+2025-09-22 13:43:01,800 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528735', 'bq1': '1740'}
+2025-09-22 13:43:02,805 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528736', 'sq1': '700'}
+2025-09-22 13:43:03,885 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528738', 'bp1': '8.85', 'bq1': '1960', 'sq1': '1300'}
+2025-09-22 13:43:03,976 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528738', 'sq1': '1700'}
+2025-09-22 13:43:04,983 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528739', 'bq1': '1720', 'sq1': '1600'}
+2025-09-22 13:43:06,069 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528740', 'bq1': '2000'}
+2025-09-22 13:43:06,152 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528740', 'bq1': '1960', 'sq1': '800'}
+2025-09-22 13:43:07,157 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528741', 'bq1': '1760', 'sq1': '1320'}
+2025-09-22 13:43:08,249 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528742', 'bq1': '2120', 'sq1': '1480'}
+2025-09-22 13:43:08,329 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528742', 'bq1': '1880', 'sq1': '1080'}
+2025-09-22 13:43:09,332 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528743', 'bp1': '8.90', 'bq1': '100', 'sq1': '1700'}
+2025-09-22 13:43:09,419 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528743', 'sq1': '1620'}
+2025-09-22 13:43:10,421 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528744', 'v': '2549200', 'bp1': '8.85', 'bq1': '2380', 'sq1': '1600'}
+2025-09-22 13:43:10,509 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528744', 'bq1': '2940', 'sq1': '800'}
+2025-09-22 13:43:11,507 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528745', 'bq1': '2580', 'sq1': '1480'}
+2025-09-22 13:43:12,604 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528746', 'bq1': '1860', 'sq1': '1600'}
+2025-09-22 13:43:13,690 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528747', 'bq1': '2340', 'sq1': '1400'}
+2025-09-22 13:43:13,769 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528747', 'sq1': '1800'}
+2025-09-22 13:43:14,781 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528748', 'bq1': '1820', 'sq1': '1980'}
+2025-09-22 13:43:14,857 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528749', 'bq1': '2020', 'sq1': '1960'}
+2025-09-22 13:43:15,862 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528750', 'bq1': '2540', 'sq1': '1480'}
+2025-09-22 13:43:16,968 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.95', 'pc': '-51.49', 'ft': '1758528751', 'v': '2549220', 'bq1': '720', 'sq1': '1760'}
+2025-09-22 13:43:16,970 - INFO - Live price updated: 8.95
+2025-09-22 13:43:17,042 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528751', 'bq1': '760', 'sq1': '2200'}
+2025-09-22 13:43:18,044 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528752', 'sp1': '8.90', 'bq1': '1740', 'sq1': '220'}
+2025-09-22 13:43:18,118 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528752', 'bq1': '1520'}
+2025-09-22 13:43:19,141 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528753', 'sp1': '8.95', 'bq1': '520', 'sq1': '2700'}
+2025-09-22 13:43:19,209 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528753', 'sq1': '2560'}
+2025-09-22 13:43:20,205 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528754', 'bq1': '1000', 'sq1': '2220'}
+2025-09-22 13:43:20,294 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528754', 'bq1': '840', 'sq1': '1480'}
+2025-09-22 13:43:21,298 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528755', 'bq1': '820', 'sq1': '2300'}
+2025-09-22 13:43:21,380 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528755', 'bq1': '1700', 'sq1': '1200'}
+2025-09-22 13:43:22,395 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528756', 'bq1': '2180', 'sq1': '2200'}
+2025-09-22 13:43:23,474 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528757', 'bq1': '1760', 'sq1': '2300'}
+2025-09-22 13:43:24,561 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528758', 'bq1': '1520', 'sq1': '2460'}
+2025-09-22 13:43:25,649 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528759', 'bq1': '1400', 'sq1': '2580'}
+2025-09-22 13:43:25,732 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528759', 'bq1': '1220', 'sq1': '2720'}
+2025-09-22 13:43:26,736 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528760', 'bq1': '620', 'sq1': '2440'}
+2025-09-22 13:43:27,830 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528762', 'bq1': '1080', 'sq1': '2260'}
+2025-09-22 13:43:28,914 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528763', 'bq1': '1040'}
+2025-09-22 13:43:30,005 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528764', 'bq1': '1320', 'sq1': '2040'}
+2025-09-22 13:43:31,091 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528765', 'bq1': '1860', 'sq1': '1940'}
+2025-09-22 13:43:32,174 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528766', 'bq1': '2000', 'sq1': '1800'}
+2025-09-22 13:43:33,261 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528767', 'bq1': '1660', 'sq1': '2540'}
+2025-09-22 13:43:34,350 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528768', 'bq1': '2040', 'sq1': '1860'}
+2025-09-22 13:43:35,467 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528769', 'bq1': '2440', 'sq1': '3000'}
+2025-09-22 13:43:35,522 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528769', 'bq1': '2640', 'sq1': '3080'}
+2025-09-22 13:43:36,524 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528770', 'sq1': '3000'}
+2025-09-22 13:43:37,608 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.90', 'pc': '-51.76', 'ft': '1758528771', 'v': '2549240', 'bq1': '2180', 'sq1': '3160'}
+2025-09-22 13:43:37,608 - INFO - Live price updated: 8.90
+2025-09-22 13:43:37,694 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528771', 'bq1': '2500'}
+2025-09-22 13:43:38,700 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528772', 'bq1': '2100', 'sq1': '3280'}
+2025-09-22 13:43:39,827 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528773', 'bq1': '2360', 'sq1': '2360'}
+2025-09-22 13:43:39,870 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528774', 'sq1': '2780'}
+2025-09-22 13:43:40,871 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528775', 'bq1': '2220', 'sq1': '2640'}
+2025-09-22 13:43:41,962 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528776', 'bq1': '2440', 'sq1': '2240'}
+2025-09-22 13:43:42,044 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528776', 'bq1': '2480', 'sq1': '2900'}
+2025-09-22 13:43:43,050 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528777', 'bq1': '2200', 'sq1': '2960'}
+2025-09-22 13:43:44,137 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528778', 'bq1': '2060'}
+2025-09-22 13:43:45,210 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528779', 'bq1': '1880'}
+2025-09-22 13:43:46,312 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528780', 'bq1': '2620', 'sq1': '2640'}
+2025-09-22 13:43:46,395 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528780', 'bq1': '2260', 'sq1': '2240'}
+2025-09-22 13:43:47,403 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528781', 'bq1': '1880', 'sq1': '2700'}
+2025-09-22 13:43:47,483 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528781', 'bq1': '1940'}
+2025-09-22 13:43:48,486 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528782', 'bq1': '2400', 'sq1': '2240'}
+2025-09-22 13:43:48,570 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528782', 'bq1': '2200', 'sq1': '2660'}
+2025-09-22 13:43:49,570 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.95', 'pc': '-51.49', 'ft': '1758528783', 'v': '2549540', 'bp1': '8.90', 'sp1': '9.00', 'bq1': '2340', 'sq1': '2060'}
+2025-09-22 13:43:49,570 - INFO - Live price updated: 8.95
+2025-09-22 13:43:50,662 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528784', 'bq1': '2960', 'sq1': '2200'}
+2025-09-22 13:43:50,746 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528784', 'bq1': '2760', 'sq1': '2280'}
+2025-09-22 13:43:51,750 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528785', 'bq1': '2660', 'sq1': '2180'}
+2025-09-22 13:43:52,841 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528787', 'bp1': '8.95', 'bq1': '1580', 'sq1': '1760'}
+2025-09-22 13:43:52,944 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528787', 'bq1': '2060', 'sq1': '1560'}
+2025-09-22 13:43:53,927 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528788', 'bq1': '1680', 'sq1': '2440'}
+2025-09-22 13:43:55,014 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528789', 'bq1': '1440'}
+2025-09-22 13:43:55,115 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528789', 'bq1': '1520', 'sq1': '2320'}
+2025-09-22 13:43:56,100 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528790', 'bq1': '1340', 'sq1': '2600'}
+2025-09-22 13:43:57,182 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528791', 'bq1': '2020', 'sq1': '2000'}
+2025-09-22 13:43:57,273 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528791', 'bq1': '1740', 'sq1': '500'}
+2025-09-22 13:43:58,292 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528792', 'bq1': '1800', 'sq1': '1020'}
+2025-09-22 13:44:00,440 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528794', 'bq1': '1740', 'sq1': '1180'}
+2025-09-22 13:44:00,537 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528794', 'sq1': '760'}
+2025-09-22 13:44:01,542 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528795', 'bq1': '3300', 'sq1': '600'}
+2025-09-22 13:44:02,625 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528796', 'bq1': '2980', 'sq1': '820'}
+2025-09-22 13:44:04,807 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528798', 'bq1': '2780', 'sq1': '1000'}
+2025-09-22 13:44:05,891 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528800', 'bq1': '2980', 'sq1': '840'}
+2025-09-22 13:44:05,974 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528800', 'bq1': '2440', 'sq1': '1020'}
+2025-09-22 13:44:06,980 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528801', 'bq1': '2600', 'sq1': '1040'}
+2025-09-22 13:44:08,068 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528802', 'bq1': '2340', 'sq1': '860'}
+2025-09-22 13:44:09,172 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528803', 'bq1': '1920', 'sq1': '1260'}
+2025-09-22 13:44:09,241 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528803', 'bq1': '1740', 'sq1': '1560'}
+2025-09-22 13:44:10,250 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528804', 'bq1': '2460', 'sq1': '980'}
+2025-09-22 13:44:11,332 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528805', 'sq1': '1020'}
+2025-09-22 13:44:12,420 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528806', 'bq1': '2120', 'sq1': '980'}
+2025-09-22 13:44:12,503 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528806', 'sq1': '940'}
+2025-09-22 13:44:13,518 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528807', 'bq1': '1580', 'sq1': '2160'}
+2025-09-22 13:44:14,588 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528808', 'bq1': '1420', 'sq1': '2840'}
+2025-09-22 13:44:15,684 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528809', 'bq1': '2820', 'sq1': '620'}
+2025-09-22 13:44:16,758 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528810', 'bq1': '2520'}
+2025-09-22 13:44:16,855 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528811', 'bq1': '2300', 'sq1': '1600'}
+2025-09-22 13:44:18,941 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528813', 'sq1': '860'}
+2025-09-22 13:44:20,034 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528814', 'bq1': '1480', 'sq1': '1400'}
+2025-09-22 13:44:20,117 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528814', 'bq1': '1780', 'sq1': '860'}
+2025-09-22 13:44:21,122 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528815', 'bq1': '2760', 'sq1': '1020'}
+2025-09-22 13:44:22,209 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528816', 'bq1': '1800', 'sq1': '980'}
+2025-09-22 13:44:23,288 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528817', 'bq1': '1280', 'sq1': '1280'}
+2025-09-22 13:44:24,386 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528818', 'bq1': '2140', 'sq1': '860'}
+2025-09-22 13:44:25,473 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528819', 'bq1': '1540', 'sq1': '1540'}
+2025-09-22 13:44:25,555 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528819', 'bq1': '1500', 'sq1': '2140'}
+2025-09-22 13:44:26,563 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528820', 'bq1': '2320', 'sq1': '1240'}
+2025-09-22 13:44:27,655 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528821', 'sq1': '1000'}
+2025-09-22 13:44:28,724 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528822', 'bq1': '2480', 'sq1': '1280'}
+2025-09-22 13:44:28,818 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528822', 'bq1': '2460', 'sq1': '780'}
+2025-09-22 13:44:29,826 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.00', 'pc': '-51.22', 'ft': '1758528823', 'v': '2550040', 'bp1': '9.00', 'sp1': '9.05', 'bq1': '800', 'sq1': '240'}
+2025-09-22 13:44:29,829 - INFO - Live price updated: 9.00
+2025-09-22 13:44:30,911 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528825', 'bq1': '1500', 'sq1': '640'}
+2025-09-22 13:44:31,997 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528826', 'bq1': '1400', 'sq1': '660'}
+2025-09-22 13:44:33,087 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528827', 'bq1': '1540', 'sq1': '540'}
+2025-09-22 13:44:33,170 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528827', 'bq1': '1300', 'sq1': '360'}
+2025-09-22 13:44:34,169 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528828', 'bq1': '1020', 'sq1': '640'}
+2025-09-22 13:44:35,261 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528829', 'bq1': '1320', 'sq1': '60'}
+2025-09-22 13:44:35,346 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528829', 'bq1': '1500'}
+2025-09-22 13:44:36,356 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.05', 'pc': '-50.95', 'ft': '1758528830', 'v': '2550100', 'sp1': '9.10', 'bq1': '1460', 'sq1': '1900'}
+2025-09-22 13:44:36,360 - INFO - Live price updated: 9.05
+2025-09-22 13:44:37,437 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528831', 'sp1': '9.05', 'bq1': '1360', 'sq1': '640'}
+2025-09-22 13:44:38,527 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528832', 'bq1': '1120', 'sq1': '900'}
+2025-09-22 13:44:39,612 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.00', 'pc': '-51.22', 'ft': '1758528833', 'v': '2550600', 'bq1': '1520', 'sq1': '360'}
+2025-09-22 13:44:39,615 - INFO - Live price updated: 9.00
+2025-09-22 13:44:40,701 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528834', 'bq1': '340', 'sq1': '1540'}
+2025-09-22 13:44:40,786 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528834', 'bq1': '1080', 'sq1': '840'}
+2025-09-22 13:44:41,792 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528835', 'bq1': '1620', 'sq1': '520'}
+2025-09-22 13:44:42,875 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528837', 'bq1': '1400', 'sq1': '820'}
+2025-09-22 13:44:43,963 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528838', 'bq1': '180', 'sq1': '1760'}
+2025-09-22 13:44:45,056 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528839', 'bq1': '340', 'sq1': '1560'}
+2025-09-22 13:44:45,132 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528839', 'bq1': '260'}
+2025-09-22 13:44:47,250 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528841', 'bq1': '160', 'sq1': '1260'}
+2025-09-22 13:44:48,314 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528842', 'bq1': '300', 'sq1': '1520'}
+2025-09-22 13:44:49,422 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528843', 'bq1': '680', 'sq1': '1500'}
+2025-09-22 13:44:50,490 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528844', 'bp1': '8.95', 'bq1': '3140', 'sq1': '1320'}
+2025-09-22 13:44:51,577 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528845', 'bq1': '2480', 'sq1': '2020'}
+2025-09-22 13:44:52,663 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528846', 'bq1': '2560', 'sq1': '1900'}
+2025-09-22 13:44:53,748 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528847', 'bq1': '2720'}
+2025-09-22 13:44:54,828 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528849', 'bq1': '2780', 'sq1': '2240'}
+2025-09-22 13:44:55,929 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528850', 'bq1': '3360', 'sq1': '1100'}
+2025-09-22 13:44:56,007 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528850', 'bq1': '3080'}
+2025-09-22 13:44:57,017 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528851', 'bq1': '2940', 'sq1': '2040'}
+2025-09-22 13:44:58,103 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528852', 'bq1': '2840', 'sq1': '1440'}
+2025-09-22 13:44:58,188 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528852', 'bp1': '9.00', 'bq1': '400', 'sq1': '1780'}
+2025-09-22 13:44:59,185 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528853', 'bp1': '8.95', 'bq1': '2620', 'sq1': '2380'}
+2025-09-22 13:44:59,282 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528853', 'bq1': '2120', 'sq1': '2180'}
+2025-09-22 13:45:00,270 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528854', 'sp1': '9.00', 'bq1': '2080', 'sq1': '420'}
+2025-09-22 13:45:00,362 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528854', 'bq1': '2180'}
+2025-09-22 13:45:01,369 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528855', 'v': '2550620', 'sp1': '9.05', 'bq1': '3540', 'sq1': '1220'}
+2025-09-22 13:45:01,450 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528855', 'bq1': '3040', 'sq1': '2200'}
+2025-09-22 13:45:02,456 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528856', 'bq1': '2940', 'sq1': '2300'}
+2025-09-22 13:45:04,617 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528858', 'oi': '587880'}
+2025-09-22 13:45:04,634 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528858', 'sp1': '9.00', 'bq1': '2840', 'sq1': '1700'}
+2025-09-22 13:45:04,720 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528858', 'bq1': '1400', 'sq1': '2440'}
+2025-09-22 13:45:05,732 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.95', 'pc': '-51.49', 'ft': '1758528859', 'v': '2551620', 'bp1': '8.90', 'sp1': '8.95', 'bq1': '2340', 'sq1': '160'}
+2025-09-22 13:45:05,732 - INFO - Live price updated: 8.95
+2025-09-22 13:45:05,801 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528859', 'v': '2551780', 'sp1': '9.00', 'bq1': '2760', 'sq1': '1560'}
+2025-09-22 13:45:06,807 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528860', 'bq1': '2880', 'sq1': '2140'}
+2025-09-22 13:45:06,889 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528861', 'bp1': '8.95', 'bq1': '260', 'sq1': '2000'}
+2025-09-22 13:45:07,893 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528862', 'v': '2551800', 'bq1': '420', 'sq1': '2240'}
+2025-09-22 13:45:07,978 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528862', 'bq1': '600', 'sq1': '2120'}
+2025-09-22 13:45:08,983 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528863', 'bq1': '620', 'sq1': '2440'}
+2025-09-22 13:45:10,070 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528864', 'bq1': '1460', 'sq1': '2060'}
+2025-09-22 13:45:10,153 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528864', 'bq1': '3000', 'sq1': '40'}
+2025-09-22 13:45:11,157 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528865', 'bp1': '9.00', 'sp1': '9.05', 'bq1': '320', 'sq1': '2440'}
+2025-09-22 13:45:12,248 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528866', 'sq1': '2800'}
+2025-09-22 13:45:13,334 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528867', 'bq1': '500', 'sq1': '2440'}
+2025-09-22 13:45:14,424 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528868', 'bq1': '320', 'sq1': '2280'}
+2025-09-22 13:45:15,513 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.00', 'pc': '-51.22', 'ft': '1758528869', 'v': '2551860', 'sq1': '2660'}
+2025-09-22 13:45:15,513 - INFO - Live price updated: 9.00
+2025-09-22 13:45:16,604 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528870', 'sq1': '2580'}
+2025-09-22 13:45:16,679 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528870', 'bq1': '800', 'sq1': '2560'}
+2025-09-22 13:45:17,674 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528871', 'sq1': '2500'}
+2025-09-22 13:45:18,772 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528872', 'bq1': '500', 'sq1': '2340'}
+2025-09-22 13:45:18,855 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528873', 'bq1': '240', 'sq1': '2780'}
+2025-09-22 13:45:19,859 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.95', 'pc': '-51.49', 'ft': '1758528874', 'v': '2552040', 'bp1': '8.95', 'sp1': '9.00', 'bq1': '1620', 'sq1': '320'}
+2025-09-22 13:45:19,860 - INFO - Live price updated: 8.95
+2025-09-22 13:45:19,943 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528874', 'bq1': '2160', 'sq1': '260'}
+2025-09-22 13:45:20,947 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528875', 'sp1': '9.05', 'bq1': '2420', 'sq1': '3000'}
+2025-09-22 13:45:21,041 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528875', 'bq1': '1880', 'sq1': '3140'}
+2025-09-22 13:45:22,040 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528876', 'bq1': '3020'}
+2025-09-22 13:45:22,119 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528876', 'bq1': '2680', 'sq1': '3420'}
+2025-09-22 13:45:23,124 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528877', 'sp1': '9.00', 'sq1': '340'}
+2025-09-22 13:45:24,221 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.00', 'pc': '-51.22', 'ft': '1758528878', 'v': '2553320', 'sp1': '9.05', 'bq1': '2740', 'sq1': '3340'}
+2025-09-22 13:45:24,227 - INFO - Live price updated: 9.00
+2025-09-22 13:45:24,297 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528878', 'bq1': '2720', 'sq1': '3260'}
+2025-09-22 13:45:25,295 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.95', 'pc': '-51.49', 'ft': '1758528879', 'v': '2553520', 'bq1': '2380', 'sq1': '3160'}
+2025-09-22 13:45:25,295 - INFO - Live price updated: 8.95
+2025-09-22 13:45:26,387 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528880', 'bq1': '2000', 'sq1': '3240'}
+2025-09-22 13:45:27,475 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528881', 'bq1': '2480', 'sq1': '3100'}
+2025-09-22 13:45:28,560 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528882', 'bq1': '2860', 'sq1': '3160'}
+2025-09-22 13:45:29,650 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528883', 'bq1': '2420', 'sq1': '3080'}
+2025-09-22 13:45:29,731 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528883', 'sq1': '2960'}
+2025-09-22 13:45:30,737 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528884', 'bp1': '9.00', 'bq1': '660', 'sq1': '1300'}
+2025-09-22 13:45:30,821 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.05', 'pc': '-50.95', 'ft': '1758528884', 'v': '2553600', 'sp1': '9.10', 'bq1': '1780', 'sq1': '1420'}
+2025-09-22 13:45:30,823 - INFO - Live price updated: 9.05
+2025-09-22 13:45:31,825 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528886', 'bq1': '2240', 'sq1': '2200'}
+2025-09-22 13:45:31,908 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528886', 'sq1': '2400'}
+2025-09-22 13:45:32,918 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528887', 'bq1': '2200', 'sq1': '2080'}
+2025-09-22 13:45:32,998 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.00', 'pc': '-51.22', 'ft': '1758528887', 'v': '2553660', 'bq1': '2140', 'sq1': '1920'}
+2025-09-22 13:45:33,002 - INFO - Live price updated: 9.00
+2025-09-22 13:45:35,088 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528889', 'v': '2553900', 'sp1': '9.05', 'bq1': '1200', 'sq1': '1000'}
+2025-09-22 13:45:35,172 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528889', 'bq1': '1340'}
+2025-09-22 13:45:36,177 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528890', 'bq1': '1520', 'sq1': '1320'}
+2025-09-22 13:45:37,267 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528891', 'bq1': '1120', 'sq1': '1480'}
+2025-09-22 13:45:38,352 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528892', 'bq1': '940', 'sq1': '1420'}
+2025-09-22 13:45:39,441 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528893', 'bp1': '8.95', 'bq1': '3440', 'sq1': '2140'}
+2025-09-22 13:45:39,539 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528893', 'bq1': '3740', 'sq1': '1900'}
+2025-09-22 13:45:40,536 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528894', 'bp1': '9.00', 'bq1': '1380', 'sq1': '1060'}
+2025-09-22 13:45:41,614 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528895', 'bq1': '1580', 'sq1': '1240'}
+2025-09-22 13:45:41,697 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.05', 'pc': '-50.95', 'ft': '1758528895', 'v': '2554240', 'bq1': '1500', 'sq1': '980'}
+2025-09-22 13:45:41,704 - INFO - Live price updated: 9.05
+2025-09-22 13:45:42,703 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.95', 'pc': '-51.49', 'ft': '1758528896', 'v': '2554360', 'bp1': '8.95', 'bq1': '2440', 'sq1': '2180'}
+2025-09-22 13:45:42,706 - INFO - Live price updated: 8.95
+2025-09-22 13:45:42,789 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528896', 'bq1': '2700', 'sq1': '1040'}
+2025-09-22 13:45:43,787 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528897', 'bp1': '9.00', 'bq1': '780', 'sq1': '520'}
+2025-09-22 13:45:44,877 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528899', 'bq1': '1540', 'sq1': '640'}
+2025-09-22 13:45:45,964 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.00', 'pc': '-51.22', 'ft': '1758528900', 'v': '2554480', 'bq1': '620', 'sq1': '1120'}
+2025-09-22 13:45:45,964 - INFO - Live price updated: 9.00
+2025-09-22 13:45:47,053 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528901', 'bq1': '740', 'sq1': '1300'}
+2025-09-22 13:45:48,140 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528902', 'bq1': '1720', 'sq1': '320'}
+2025-09-22 13:45:48,226 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528902', 'bq1': '1420', 'sq1': '600'}
+2025-09-22 13:45:49,228 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528903', 'bq1': '1560'}
+2025-09-22 13:45:50,315 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528904', 'bq1': '1700'}
+2025-09-22 13:45:51,406 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528905', 'bq1': '2400', 'sq1': '140'}
+2025-09-22 13:45:52,493 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528906', 'bq1': '2180'}
+2025-09-22 13:45:53,580 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528907', 'bq1': '1720', 'sq1': '460'}
+2025-09-22 13:45:53,663 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528907', 'bq1': '2020'}
+2025-09-22 13:45:54,668 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528908', 'bq1': '1500'}
+2025-09-22 13:45:54,751 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528908', 'bq1': '360', 'sq1': '700'}
+2025-09-22 13:45:55,775 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528909', 'bp1': '8.95', 'bq1': '920', 'sq1': '2440'}
+2025-09-22 13:45:56,843 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528911', 'bq1': '2160', 'sq1': '1880'}
+2025-09-22 13:45:56,926 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528911', 'bq1': '2020'}
+2025-09-22 13:45:57,923 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.95', 'pc': '-51.49', 'ft': '1758528912', 'v': '2554600', 'sp1': '9.00', 'bq1': '1260', 'sq1': '1020'}
+2025-09-22 13:45:57,923 - INFO - Live price updated: 8.95
+2025-09-22 13:45:59,044 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528913', 'bq1': '1580', 'sq1': '880'}
+2025-09-22 13:45:59,103 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528913', 'bq1': '1480', 'sq1': '900'}
+2025-09-22 13:46:00,118 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528914', 'bq1': '700', 'sq1': '2040'}
+2025-09-22 13:46:01,185 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528915', 'bq1': '1600', 'sq1': '1280'}
+2025-09-22 13:46:02,282 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528916', 'bq1': '2280', 'sq1': '740'}
+2025-09-22 13:46:03,371 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.00', 'pc': '-51.22', 'ft': '1758528917', 'v': '2554800', 'bq1': '1720', 'sq1': '880'}
+2025-09-22 13:46:03,373 - INFO - Live price updated: 9.00
+2025-09-22 13:46:04,445 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528918', 'bq1': '1340', 'sq1': '980'}
+2025-09-22 13:46:05,546 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528919', 'sp1': '9.05', 'bq1': '1180', 'sq1': '2320'}
+2025-09-22 13:46:06,634 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528920', 'bq1': '1460', 'sq1': '2000'}
+2025-09-22 13:46:06,719 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528920', 'bq1': '1860'}
+2025-09-22 13:46:07,723 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528921', 'bp1': '9.00', 'bq1': '440', 'sq1': '1740'}
+2025-09-22 13:46:08,812 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528922', 'bq1': '1920', 'sq1': '500'}
+2025-09-22 13:46:09,897 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528924', 'bq1': '2040', 'sq1': '140'}
+2025-09-22 13:46:09,985 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.05', 'pc': '-50.95', 'ft': '1758528924', 'v': '2554900', 'sp1': '9.10', 'bq1': '1060', 'sq1': '2580'}
+2025-09-22 13:46:09,987 - INFO - Live price updated: 9.05
+2025-09-22 13:46:10,986 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528925', 'bq1': '1960', 'sq1': '1980'}
+2025-09-22 13:46:11,067 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528925', 'bq1': '1760', 'sq1': '2280'}
+2025-09-22 13:46:12,073 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528926', 'bq1': '2020', 'sq1': '1980'}
+2025-09-22 13:46:12,155 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528926', 'bq1': '2220', 'sq1': '1680'}
+2025-09-22 13:46:13,170 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528927', 'bq1': '980', 'sq1': '2600'}
+2025-09-22 13:46:13,262 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528927', 'sp1': '9.05', 'bq1': '1020', 'sq1': '220'}
+2025-09-22 13:46:14,249 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528928', 'sp1': '9.10', 'bq1': '860', 'sq1': '2560'}
+2025-09-22 13:46:15,336 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528929', 'sp1': '9.05', 'bq1': '1280', 'sq1': '440'}
+2025-09-22 13:46:15,417 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528929', 'bq1': '1460'}
+2025-09-22 13:46:16,424 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528930', 'sp1': '9.10', 'bq1': '1200', 'sq1': '2660'}
+2025-09-22 13:46:16,505 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528930', 'bq1': '1400'}
+2025-09-22 13:46:17,513 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528931', 'bq1': '1720', 'sq1': '2640'}
+2025-09-22 13:46:18,598 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528932', 'sp1': '9.05', 'bq1': '200', 'sq1': '1640'}
+2025-09-22 13:46:19,686 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528933', 'bq1': '340', 'sq1': '1800'}
+2025-09-22 13:46:20,774 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.00', 'pc': '-51.22', 'ft': '1758528934', 'v': '2555060', 'bp1': '8.95', 'bq1': '2680', 'sq1': '2100'}
+2025-09-22 13:46:20,775 - INFO - Live price updated: 9.00
+2025-09-22 13:46:20,856 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528935', 'bq1': '2920', 'sq1': '1940'}
+2025-09-22 13:46:21,865 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528936', 'bq1': '2040', 'sq1': '2300'}
+2025-09-22 13:46:21,944 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528936', 'bq1': '2240'}
+2025-09-22 13:46:22,960 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528937', 'bq1': '1940', 'sq1': '2060'}
+2025-09-22 13:46:24,041 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528938', 'sp1': '9.00', 'bq1': '1280', 'sq1': '1480'}
+2025-09-22 13:46:24,122 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528938', 'bq1': '1080', 'sq1': '1820'}
+2025-09-22 13:46:25,126 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528939', 'bq1': '740', 'sq1': '2280'}
+2025-09-22 13:46:25,209 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528939', 'bq1': '1000', 'sq1': '1280'}
+2025-09-22 13:46:26,223 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.95', 'pc': '-51.49', 'ft': '1758528940', 'v': '2555760', 'bp1': '8.90', 'sp1': '8.95', 'bq1': '1120', 'sq1': '1180'}
+2025-09-22 13:46:26,226 - INFO - Live price updated: 8.95
+2025-09-22 13:46:27,302 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528941', 'bq1': '660', 'sq1': '1140'}
+2025-09-22 13:46:28,382 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528942', 'bq1': '800', 'sq1': '1120'}
+2025-09-22 13:46:29,468 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528943', 'v': '2556000', 'bq1': '760', 'sq1': '640'}
+2025-09-22 13:46:30,565 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528944', 'bq1': '940', 'sq1': '860'}
+2025-09-22 13:46:30,646 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528944', 'bq1': '500', 'sq1': '1500'}
+2025-09-22 13:46:31,654 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528945', 'bq1': '340', 'sq1': '1580'}
+2025-09-22 13:46:32,740 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528946', 'bq1': '780', 'sq1': '1140'}
+2025-09-22 13:46:33,911 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528948', 'bq1': '140', 'sq1': '1700'}
+2025-09-22 13:46:34,917 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528949', 'bq1': '600', 'sq1': '1140'}
+2025-09-22 13:46:34,998 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528949', 'bq1': '780'}
+2025-09-22 13:46:35,997 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528950', 'bq1': '760', 'sq1': '1800'}
+2025-09-22 13:46:36,086 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528950', 'bq1': '980', 'sq1': '1680'}
+2025-09-22 13:46:37,094 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528951', 'bq1': '1840', 'sq1': '700'}
+2025-09-22 13:46:40,355 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '8.90', 'pc': '-51.76', 'ft': '1758528954', 'v': '2556060', 'bq1': '1040', 'sq1': '980'}
+2025-09-22 13:46:40,355 - INFO - Live price updated: 8.90
+2025-09-22 13:46:40,437 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528954', 'sq1': '1180'}
+2025-09-22 13:46:41,442 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528955', 'bq1': '1320', 'sq1': '840'}
+2025-09-22 13:46:42,530 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528956', 'bq1': '520', 'sq1': '1780'}
+2025-09-22 13:46:42,613 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528956', 'bq1': '1300', 'sq1': '1320'}
+2025-09-22 13:46:43,619 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528957', 'bq1': '760', 'sq1': '1280'}
+2025-09-22 13:46:43,696 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528957', 'sq1': '1320'}
+2025-09-22 13:46:44,718 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528958', 'bq1': '1040', 'sq1': '980'}
+2025-09-22 13:46:45,792 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528959', 'bq1': '1180', 'sq1': '900'}
+2025-09-22 13:46:45,876 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528960', 'bq1': '420', 'sq1': '820'}
+2025-09-22 13:46:46,879 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528961', 'bq1': '1120', 'sq1': '1100'}
+2025-09-22 13:46:46,963 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528961', 'bq1': '1260', 'sq1': '520'}
+2025-09-22 13:46:47,968 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528962', 'v': '2556180', 'bq1': '900', 'sq1': '940'}
+2025-09-22 13:46:49,056 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528963', 'v': '2556200', 'bq1': '500', 'sq1': '1140'}
+2025-09-22 13:46:50,144 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528964', 'bq1': '1140', 'sq1': '940'}
+2025-09-22 13:46:51,232 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528965', 'bq1': '220', 'sq1': '1060'}
+2025-09-22 13:46:52,318 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528966', 'bq1': '660', 'sq1': '660'}
+2025-09-22 13:46:53,407 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528967', 'bp1': '8.85', 'bq1': '2720', 'sq1': '840'}
+2025-09-22 13:46:53,490 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528967', 'bq1': '2520', 'sq1': '760'}
+2025-09-22 13:46:54,495 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528968', 'bp1': '8.90', 'bq1': '1140', 'sq1': '180'}
+2025-09-22 13:46:54,577 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528968', 'bq1': '1200'}
+2025-09-22 13:46:55,583 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528969', 'bp1': '8.85', 'bq1': '2340', 'sq1': '460'}
+2025-09-22 13:46:56,671 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528970', 'bp1': '8.90', 'sp1': '9.00', 'bq1': '1740', 'sq1': '1300'}
+2025-09-22 13:46:56,753 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528970', 'bq1': '2360'}
+2025-09-22 13:46:57,761 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.05', 'pc': '-50.95', 'ft': '1758528971', 'v': '2556260', 'bp1': '9.00', 'sp1': '9.10', 'bq1': '2400', 'sq1': '480'}
+2025-09-22 13:46:57,764 - INFO - Live price updated: 9.05
+2025-09-22 13:46:57,846 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528972', 'bq1': '2100', 'sq1': '680'}
+2025-09-22 13:46:58,846 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528973', 'v': '2556460', 'bq1': '2040', 'sq1': '1300'}
+2025-09-22 13:46:59,934 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528974', 'bq1': '1860', 'sq1': '1220'}
+2025-09-22 13:47:00,017 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528974', 'bq1': '1560', 'sq1': '1820'}
+2025-09-22 13:47:01,023 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528975', 'bq1': '2060', 'sq1': '460'}
+2025-09-22 13:47:02,111 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528976', 'bp1': '9.05', 'sp1': '9.15', 'bq1': '1100', 'sq1': '1940'}
+2025-09-22 13:47:03,196 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528977', 'bp1': '9.10', 'bq1': '340', 'sq1': '1740'}
+2025-09-22 13:47:04,283 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.10', 'pc': '-50.68', 'ft': '1758528978', 'v': '2556620', 'bp1': '9.05', 'bq1': '1680', 'sq1': '1660'}
+2025-09-22 13:47:04,283 - INFO - Live price updated: 9.10
+2025-09-22 13:47:04,368 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528978', 'bq1': '1300', 'sq1': '2200'}
+2025-09-22 13:47:05,373 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528979', 'bq1': '2680', 'sq1': '1120'}
+2025-09-22 13:47:06,461 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528980', 'bp1': '9.10', 'bq1': '520', 'sq1': '1600'}
+2025-09-22 13:47:07,550 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528981', 'bq1': '360', 'sq1': '1380'}
+2025-09-22 13:47:07,663 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528981', 'bq1': '160', 'sq1': '2120'}
+2025-09-22 13:47:08,661 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528982', 'bq1': '620', 'sq1': '1180'}
+2025-09-22 13:47:09,728 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.15', 'pc': '-50.41', 'ft': '1758528983', 'ap': '10.21', 'v': '2557620', 'bq1': '880', 'sq1': '80'}
+2025-09-22 13:47:09,730 - INFO - Live price updated: 9.15
+2025-09-22 13:47:10,812 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528984', 'sp1': '9.20', 'bq1': '2020', 'sq1': '1440'}
+2025-09-22 13:47:10,901 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528985', 'sq1': '1500'}
+2025-09-22 13:47:11,899 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528986', 'bq1': '1800', 'sq1': '1640'}
+2025-09-22 13:47:12,987 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528987', 'v': '2557820', 'bp1': '9.15', 'bq1': '520', 'sq1': '1040'}
+2025-09-22 13:47:14,089 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528988', 'bq1': '500', 'sq1': '1240'}
+2025-09-22 13:47:15,162 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528989', 'bq1': '160', 'sq1': '1380'}
+2025-09-22 13:47:15,260 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528989', 'bq1': '320', 'sq1': '1080'}
+2025-09-22 13:47:16,255 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528990', 'bp1': '9.10', 'bq1': '1720', 'sq1': '1720'}
+2025-09-22 13:47:17,338 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528991', 'sp1': '9.15', 'bq1': '940', 'sq1': '60'}
+2025-09-22 13:47:18,426 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528992', 'bq1': '920', 'sq1': '720'}
+2025-09-22 13:47:19,513 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528993', 'bq1': '820', 'sq1': '340'}
+2025-09-22 13:47:20,604 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528994', 'sq1': '300'}
+2025-09-22 13:47:20,726 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528994', 'bq1': '1060', 'sq1': '220'}
+2025-09-22 13:47:21,711 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528995', 'bq1': '1400'}
+2025-09-22 13:47:21,806 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528995', 'v': '2557940', 'sp1': '9.20', 'bq1': '1300', 'sq1': '1440'}
+2025-09-22 13:47:22,776 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528996', 'bp1': '9.15', 'bq1': '1080', 'sq1': '160'}
+2025-09-22 13:47:22,892 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528997', 'bq1': '600', 'sq1': '380'}
+2025-09-22 13:47:23,865 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528998', 'v': '2558040', 'bq1': '560', 'sq1': '460'}
+2025-09-22 13:47:24,954 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528999', 'bp1': '9.10', 'bq1': '2180', 'sq1': '1280'}
+2025-09-22 13:47:25,038 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758528999', 'bq1': '2400'}
+2025-09-22 13:47:26,041 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529000', 'bp1': '9.15', 'bq1': '540', 'sq1': '1040'}
+2025-09-22 13:47:26,116 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529000', 'bq1': '680'}
+2025-09-22 13:47:27,133 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529001', 'bq1': '160', 'sq1': '1440'}
+2025-09-22 13:47:28,220 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529002', 'bq1': '1100', 'sq1': '1000'}
+2025-09-22 13:47:28,301 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529002', 'bq1': '1200', 'sq1': '1240'}
+2025-09-22 13:47:29,308 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.20', 'pc': '-50.14', 'ft': '1758529003', 'v': '2558660', 'bp1': '9.20', 'sp1': '9.25', 'bq1': '1420', 'sq1': '480'}
+2025-09-22 13:47:29,312 - INFO - Live price updated: 9.20
+2025-09-22 13:47:29,385 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529003', 'bq1': '1660'}
+2025-09-22 13:47:30,393 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529004', 'v': '2558720', 'bp1': '9.15', 'bq1': '2460', 'sq1': '1460'}
+2025-09-22 13:47:31,472 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529005', 'bp1': '9.20', 'bq1': '980', 'sq1': '1160'}
+2025-09-22 13:47:32,571 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529006', 'bp1': '9.15', 'sp1': '9.20', 'bq1': '1940', 'sq1': '560'}
+2025-09-22 13:47:33,652 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529007', 'bq1': '2180', 'sq1': '700'}
+2025-09-22 13:47:33,739 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529007', 'sq1': '540'}
+2025-09-22 13:47:34,741 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529008', 'bq1': '1600', 'sq1': '900'}
+2025-09-22 13:47:35,834 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.10', 'pc': '-50.68', 'ft': '1758529010', 'v': '2560220', 'bq1': '280', 'sq1': '1180'}
+2025-09-22 13:47:35,838 - INFO - Live price updated: 9.10
+2025-09-22 13:47:35,928 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529010', 'bq1': '820', 'sq1': '1380'}
+2025-09-22 13:47:36,945 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.15', 'pc': '-50.41', 'ft': '1758529011', 'v': '2561320', 'bq1': '440', 'sq1': '1100'}
+2025-09-22 13:47:36,947 - INFO - Live price updated: 9.15
+2025-09-22 13:47:37,000 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529011', 'bq1': '640', 'sq1': '1180'}
+2025-09-22 13:47:38,016 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.10', 'pc': '-50.68', 'ft': '1758529012', 'v': '2561380', 'bq1': '1000', 'sq1': '780'}
+2025-09-22 13:47:38,017 - INFO - Live price updated: 9.10
+2025-09-22 13:47:39,100 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529013', 'bq1': '900', 'sq1': '1180'}
+2025-09-22 13:47:39,177 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529013', 'bq1': '700'}
+2025-09-22 13:47:40,189 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.15', 'pc': '-50.41', 'ft': '1758529014', 'v': '2561540', 'bq1': '340', 'sq1': '1340'}
+2025-09-22 13:47:40,196 - INFO - Live price updated: 9.15
+2025-09-22 13:47:41,272 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529015', 'v': '2561880', 'bp1': '9.10', 'bq1': '1220', 'sq1': '2020'}
+2025-09-22 13:47:41,352 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529015', 'bq1': '1380', 'sq1': '1900'}
+2025-09-22 13:47:42,357 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529016', 'bq1': '1360', 'sq1': '1780'}
+2025-09-22 13:47:43,441 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529017', 'bq1': '600', 'sq1': '1840'}
+2025-09-22 13:47:43,518 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529017', 'sq1': '2080'}
+2025-09-22 13:47:44,535 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529018', 'bq1': '880', 'sq1': '2240'}
+2025-09-22 13:47:45,622 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.10', 'pc': '-50.68', 'ft': '1758529019', 'v': '2562080', 'bq1': '1080', 'sq1': '1920'}
+2025-09-22 13:47:45,627 - INFO - Live price updated: 9.10
+2025-09-22 13:47:45,704 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529019', 'sq1': '1520'}
+2025-09-22 13:47:47,797 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529021', 'bq1': '1420'}
+2025-09-22 13:47:48,886 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529023', 'sp1': '9.15', 'bq1': '300', 'sq1': '1180'}
+2025-09-22 13:47:48,968 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529023', 'bp1': '9.05', 'bq1': '2300', 'sq1': '1320'}
+2025-09-22 13:47:49,974 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529024', 'bq1': '2280', 'sq1': '1260'}
+2025-09-22 13:47:50,059 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529024', 'bq1': '2000', 'sq1': '1160'}
+2025-09-22 13:47:51,060 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529025', 'bq1': '2580', 'sq1': '1300'}
+2025-09-22 13:47:51,143 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529025', 'bq1': '2160'}
+2025-09-22 13:47:52,149 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529026', 'bq1': '2440', 'sq1': '1020'}
+2025-09-22 13:47:52,231 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529026', 'bq1': '2620'}
+2025-09-22 13:47:53,237 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529027', 'sp1': '9.10', 'bq1': '1880', 'sq1': '140'}
+2025-09-22 13:47:54,324 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529028', 'sp1': '9.15', 'bq1': '2700', 'sq1': '1580'}
+2025-09-22 13:47:55,411 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529029', 'bq1': '2120', 'sq1': '1460'}
+2025-09-22 13:47:56,510 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529030', 'bq1': '1760', 'sq1': '1580'}
+2025-09-22 13:47:57,586 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529031', 'v': '2562180', 'bq1': '1880', 'sq1': '1260'}
+2025-09-22 13:47:57,675 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529031', 'bq1': '2100', 'sq1': '1320'}
+2025-09-22 13:47:58,674 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529032', 'bq1': '2900', 'sq1': '1140'}
+2025-09-22 13:47:58,759 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529032', 'bq1': '2940'}
+2025-09-22 13:47:59,768 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.15', 'pc': '-50.41', 'ft': '1758529033', 'v': '2563180', 'bq1': '2620', 'sq1': '1260'}
+2025-09-22 13:47:59,769 - INFO - Live price updated: 9.15
+2025-09-22 13:48:00,854 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529035', 'bp1': '9.10', 'bq1': '760', 'sq1': '880'}
+2025-09-22 13:48:00,932 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529035', 'bq1': '940', 'sq1': '940'}
+2025-09-22 13:48:01,942 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.10', 'pc': '-50.68', 'ft': '1758529036', 'v': '2563280', 'bq1': '600', 'sq1': '960'}
+2025-09-22 13:48:01,942 - INFO - Live price updated: 9.10
+2025-09-22 13:48:03,027 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529037', 'bp1': '9.05', 'bq1': '2980', 'sq1': '860'}
+2025-09-22 13:48:03,108 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529037', 'bq1': '3080'}
+2025-09-22 13:48:04,113 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529038', 'bp1': '9.10', 'bq1': '600', 'sq1': '960'}
+2025-09-22 13:48:04,183 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529038', 'bq1': '320'}
+2025-09-22 13:48:04,935 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529039', 'oi': '585860'}
+2025-09-22 13:48:05,202 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529039', 'bp1': '9.05', 'bq1': '2680', 'sq1': '1380'}
+2025-09-22 13:48:06,291 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.15', 'pc': '-50.41', 'ft': '1758529040', 'v': '2563880', 'bq1': '3060', 'sq1': '780'}
+2025-09-22 13:48:06,295 - INFO - Live price updated: 9.15
+2025-09-22 13:48:06,371 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529040', 'bq1': '2980', 'sq1': '1000'}
+2025-09-22 13:48:07,375 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529041', 'v': '2563900', 'bq1': '2720', 'sq1': '1280'}
+2025-09-22 13:48:07,463 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529041', 'bq1': '2520'}
+2025-09-22 13:48:08,464 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529042', 'sq1': '1740'}
+2025-09-22 13:48:08,549 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529042', 'v': '2563920', 'bq1': '2500', 'sq1': '1640'}
+2025-09-22 13:48:09,550 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529043', 'bq1': '2180', 'sq1': '2140'}
+2025-09-22 13:48:09,634 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529043', 'bq1': '2080', 'sq1': '1820'}
+2025-09-22 13:48:10,643 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529044', 'v': '2564640', 'bp1': '9.10', 'sp1': '9.20', 'bq1': '1920', 'sq1': '1960'}
+2025-09-22 13:48:10,729 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529044', 'bq1': '2140'}
+2025-09-22 13:48:11,714 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529045', 'v': '2564700', 'bp1': '9.15', 'bq1': '20', 'sq1': '1300'}
+2025-09-22 13:48:12,860 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.20', 'pc': '-50.14', 'ft': '1758529046', 'v': '2564720', 'bp1': '9.10', 'bq1': '2320', 'sq1': '1660'}
+2025-09-22 13:48:12,866 - INFO - Live price updated: 9.20
+2025-09-22 13:48:13,915 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529048', 'v': '2564740', 'sp1': '9.15', 'bq1': '1240', 'sq1': '480'}
+2025-09-22 13:48:13,985 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529048', 'bq1': '1000', 'sq1': '600'}
+2025-09-22 13:48:15,044 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529049', 'bp1': '9.05', 'bq1': '2860', 'sq1': '1280'}
+2025-09-22 13:48:15,072 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529049', 'bq1': '2940', 'sq1': '1060'}
+2025-09-22 13:48:16,088 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529050', 'bq1': '2020', 'sq1': '1780'}
+2025-09-22 13:48:17,164 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529051', 'bq1': '2040', 'sq1': '1900'}
+2025-09-22 13:48:18,261 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529052', 'bq1': '1760', 'sq1': '1660'}
+2025-09-22 13:48:19,353 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.15', 'pc': '-50.41', 'ft': '1758529053', 'v': '2565260', 'bq1': '2060', 'sq1': '1180'}
+2025-09-22 13:48:19,358 - INFO - Live price updated: 9.15
+2025-09-22 13:48:19,423 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529053', 'bq1': '2500', 'sq1': '960'}
+2025-09-22 13:48:20,428 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529054', 'bq1': '2320', 'sq1': '1660'}
+2025-09-22 13:48:20,511 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529054', 'bp1': '9.10', 'bq1': '500', 'sq1': '1080'}
+2025-09-22 13:48:21,519 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529055', 'bq1': '920', 'sq1': '420'}
+2025-09-22 13:48:22,605 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529056', 'sq1': '400'}
+2025-09-22 13:48:23,698 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529057', 'bq1': '1160', 'sq1': '260'}
+2025-09-22 13:48:24,779 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529058', 'sp1': '9.20', 'bq1': '720', 'sq1': '2580'}
+2025-09-22 13:48:24,862 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529059', 'sp1': '9.15', 'bq1': '820', 'sq1': '540'}
+2025-09-22 13:48:25,872 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529060', 'bp1': '9.05', 'bq1': '2400', 'sq1': '2180'}
+2025-09-22 13:48:25,953 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529060', 'bq1': '2160', 'sq1': '2060'}
+2025-09-22 13:48:26,955 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529061', 'bq1': '2180'}
+2025-09-22 13:48:28,129 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529062', 'bq1': '2140'}
+2025-09-22 13:48:30,216 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529064', 'bq1': '1760', 'sq1': '2200'}
+2025-09-22 13:48:31,304 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529065', 'bq1': '2160', 'sq1': '2140'}
+2025-09-22 13:48:31,393 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529065', 'sq1': '2060'}
+2025-09-22 13:48:32,394 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529066', 'bq1': '2380', 'sq1': '2260'}
+2025-09-22 13:48:33,481 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529067', 'bq1': '2040', 'sq1': '2480'}
+2025-09-22 13:48:34,571 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529068', 'bq1': '1860', 'sq1': '2360'}
+2025-09-22 13:48:35,656 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.05', 'pc': '-50.95', 'ft': '1758529069', 'v': '2565280', 'sp1': '9.10', 'bq1': '1980', 'sq1': '100'}
+2025-09-22 13:48:35,656 - INFO - Live price updated: 9.05
+2025-09-22 13:48:35,738 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529069', 'sp1': '9.15', 'bq1': '1400', 'sq1': '2920'}
+2025-09-22 13:48:36,743 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529070', 'bq1': '1800', 'sq1': '3240'}
+2025-09-22 13:48:38,909 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529073', 'sp1': '9.10', 'bq1': '1400', 'sq1': '200'}
+2025-09-22 13:48:40,006 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529074', 'bq1': '1760', 'sq1': '560'}
+2025-09-22 13:48:41,096 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.10', 'pc': '-50.68', 'ft': '1758529075', 'v': '2565340', 'bp1': '9.10', 'sp1': '9.15', 'bq1': '1740', 'sq1': '680'}
+2025-09-22 13:48:41,100 - INFO - Live price updated: 9.10
+2025-09-22 13:48:41,178 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.15', 'pc': '-50.41', 'ft': '1758529075', 'v': '2565420', 'sp1': '9.20', 'bq1': '720', 'sq1': '1740'}
+2025-09-22 13:48:41,181 - INFO - Live price updated: 9.15
+2025-09-22 13:48:42,195 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529076', 'bq1': '1180', 'sq1': '3300'}
+2025-09-22 13:48:43,269 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529077', 'bq1': '620', 'sq1': '3920'}
+2025-09-22 13:48:43,354 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529077', 'sp1': '9.15', 'bq1': '740', 'sq1': '500'}
+2025-09-22 13:48:44,358 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529078', 'bq1': '1100', 'sq1': '820'}
+2025-09-22 13:48:45,445 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529079', 'bp1': '9.05', 'bq1': '3100', 'sq1': '1380'}
+2025-09-22 13:48:45,527 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529079', 'bq1': '3120', 'sq1': '1260'}
+2025-09-22 13:48:46,537 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529080', 'bp1': '9.10', 'bq1': '1440', 'sq1': '700'}
+2025-09-22 13:48:46,620 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529080', 'bq1': '1320', 'sq1': '400'}
+2025-09-22 13:48:47,621 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529081', 'bq1': '1200', 'sq1': '720'}
+2025-09-22 13:48:47,706 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529081', 'sq1': '960'}
+2025-09-22 13:48:48,708 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529082', 'bq1': '1420', 'sq1': '860'}
+2025-09-22 13:48:49,798 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529083', 'bq1': '1180', 'sq1': '980'}
+2025-09-22 13:48:49,880 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529084', 'bq1': '1260', 'sq1': '1240'}
+2025-09-22 13:48:50,886 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529085', 'bq1': '1080', 'sq1': '500'}
+2025-09-22 13:48:51,972 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529086', 'sp1': '9.20', 'bq1': '1360', 'sq1': '3080'}
+2025-09-22 13:48:52,058 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529086', 'bq1': '1600'}
+2025-09-22 13:48:53,059 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529087', 'bq1': '1120', 'sq1': '3400'}
+2025-09-22 13:48:54,147 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529088', 'bp1': '9.05', 'sp1': '9.15', 'bq1': '2480', 'sq1': '880'}
+2025-09-22 13:48:55,241 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529089', 'bq1': '2060', 'sq1': '1200'}
+2025-09-22 13:48:55,318 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529089', 'bq1': '1840', 'sq1': '1400'}
+2025-09-22 13:48:56,325 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529090', 'bq1': '1800', 'sq1': '1460'}
+2025-09-22 13:48:57,409 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529091', 'bq1': '2380', 'sq1': '1280'}
+2025-09-22 13:48:58,499 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529092', 'bq1': '2680', 'sq1': '840'}
+2025-09-22 13:48:59,586 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529093', 'bq1': '2480', 'sq1': '1900'}
+2025-09-22 13:49:00,673 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529094', 'bq1': '2680', 'sq1': '1760'}
+2025-09-22 13:49:00,755 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529094', 'bq1': '2940', 'sq1': '960'}
+2025-09-22 13:49:01,761 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529095', 'bq1': '1920', 'sq1': '1260'}
+2025-09-22 13:49:01,849 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529096', 'bq1': '2120', 'sq1': '1820'}
+2025-09-22 13:49:02,848 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529097', 'bq1': '2320', 'sq1': '1680'}
+2025-09-22 13:49:02,933 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529097', 'bq1': '2140'}
+2025-09-22 13:49:03,940 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529098', 'sp1': '9.10', 'bq1': '1440', 'sq1': '1060'}
+2025-09-22 13:49:04,022 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529098', 'bq1': '2080', 'sq1': '400'}
+2025-09-22 13:49:05,025 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529099', 'sp1': '9.15', 'bq1': '1880', 'sq1': '1380'}
+2025-09-22 13:49:05,108 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529099', 'bq1': '1860'}
+2025-09-22 13:49:06,118 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529100', 'bq1': '2480', 'sq1': '2240'}
+2025-09-22 13:49:07,191 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529101', 'bq1': '1960', 'sq1': '2100'}
+2025-09-22 13:49:08,288 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529102', 'bq1': '1540', 'sq1': '2380'}
+2025-09-22 13:49:08,370 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529102', 'bq1': '1840', 'sq1': '2240'}
+2025-09-22 13:49:09,375 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529103', 'bq1': '1600', 'sq1': '1880'}
+2025-09-22 13:49:09,454 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529103', 'bq1': '1260', 'sq1': '2820'}
+2025-09-22 13:49:10,474 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529104', 'bq1': '1440'}
+2025-09-22 13:49:10,554 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529104', 'bq1': '2240', 'sq1': '1320'}
+2025-09-22 13:49:11,553 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529105', 'bq1': '1580', 'sq1': '1460'}
+2025-09-22 13:49:11,650 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529105', 'sq1': '1980'}
+2025-09-22 13:49:12,651 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529106', 'bq1': '1240', 'sq1': '2420'}
+2025-09-22 13:49:13,717 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529107', 'bq1': '1820', 'sq1': '1440'}
+2025-09-22 13:49:14,818 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529108', 'sq1': '1520'}
+2025-09-22 13:49:14,898 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529109', 'bq1': '1340', 'sq1': '1540'}
+2025-09-22 13:49:15,900 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529110', 'bq1': '1820', 'sq1': '1440'}
+2025-09-22 13:49:21,789 - INFO - Loaded account states from account_state.csv
+2025-09-22 13:49:21,792 - INFO - Loaded configuration from configuration.csv
+2025-09-22 13:49:21,792 - INFO - Resetting account states to initial state on startup...
+2025-09-22 13:49:21,798 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-22 13:49:21,805 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 13:49:21,813 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-22 13:49:21,817 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 13:49:21,817 - INFO - Account states reset to initial state
+2025-09-22 13:49:21,817 - INFO - Loaded cached index prices from today
+2025-09-22 13:49:21,820 - INFO - Loaded cached expiry dates from today
+2025-09-22 13:49:22,332 - INFO - Attempting auto-login for master account...
+2025-09-22 13:49:22,333 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 13:49:22,334 - INFO - Generated fresh 2FA for account 1: 672554
+2025-09-22 13:49:23,030 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 13:49:23,033 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-22 13:49:23,038 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 13:49:23,040 - INFO - Refreshing market data...
+2025-09-22 13:49:23,040 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 13:49:23,041 - INFO - Index prices are current, no refresh needed
+2025-09-22 13:49:23,042 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 13:49:23,211 - INFO - Websocket connected
+2025-09-22 13:49:23,257 - INFO - WebSocket is now open for Account 1
+2025-09-22 13:50:05,877 - INFO - Attempting login for child account 2...
+2025-09-22 13:50:05,879 - INFO - Generated fresh 2FA for account 2: 662206
+2025-09-22 13:50:06,400 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-22 13:50:06,400 - INFO - Updated Child (ID: 2) login_status to '1': Child account 2 login successful
+2025-09-22 13:50:06,400 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-22 13:50:06,412 - INFO - Child account login successful: KRATIK YADAV
+2025-09-22 13:50:06,586 - INFO - Websocket connected
+2025-09-22 13:50:06,632 - INFO - WebSocket is now open for Account 2
+2025-09-22 13:50:08,358 - INFO - Index selected: SENSEX
+2025-09-22 13:50:08,359 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 13:50:08,359 - INFO - Not all required fields selected for strike selection
+2025-09-22 13:50:08,359 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-22 13:50:10,766 - INFO - On option selected called - Function not implemented yet
+2025-09-22 13:50:13,022 - INFO - Buy price box cleared for new symbol selection
+2025-09-22 13:50:13,023 - INFO - Generated trading symbol: SENSEX25SEP84500CE
+2025-09-22 13:50:13,024 - INFO - Trading symbol stored: SENSEX25SEP84500CE
+2025-09-22 13:50:13,024 - INFO - Getting token for trading symbol: SENSEX25SEP84500CE
+2025-09-22 13:50:13,027 - INFO - Found token for SENSEX25SEP84500CE: 841454
+2025-09-22 13:50:13,533 - INFO - Fetched price for SENSEX25SEP84500CE: 9.25
+2025-09-22 13:50:13,534 - INFO - Getting token for trading symbol: SENSEX25SEP84500CE
+2025-09-22 13:50:13,538 - INFO - Found token for SENSEX25SEP84500CE: 841454
+2025-09-22 13:50:13,539 - INFO - Subscribed to live price feed via master account: BFO|841454
+2025-09-22 13:50:13,539 - INFO - Auto-subscribed to SENSEX25SEP84500CE at price 9.25
+2025-09-22 13:50:13,540 - INFO - Strike selected: 84500, trading symbol: SENSEX25SEP84500CE
+2025-09-22 13:50:13,586 - INFO - Quote Received for Account 1: {'t': 'tk', 'e': 'BFO', 'tk': '841454', 'ts': 'SENSEX25SEP84500CE', 'pp': '2', 'ls': '20', 'ti': '0.05', 'lp': '9.30', 'pc': '-49.59', 'c': '18.45', 'ft': '1758529167', 'o': '14.05', 'h': '14.05', 'l': '8.10', 'ap': '10.21', 'v': '2566860', 'oi': '585860', 'bp1': '9.20', 'sp1': '9.30', 'bq1': '1400', 'sq1': '1380'}
+2025-09-22 13:50:13,589 - INFO - Initial buy price set: 9.30
+2025-09-22 13:50:13,590 - INFO - Live price updated: 9.30
+2025-09-22 13:50:13,637 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529167', 'bq1': '1420', 'sq1': '1620'}
+2025-09-22 13:50:14,642 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529168', 'bq1': '1600', 'sq1': '2520'}
+2025-09-22 13:50:14,725 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529168', 'bq1': '1400', 'sq1': '2540'}
+2025-09-22 13:50:15,732 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529169', 'bq1': '800', 'sq1': '3020'}
+2025-09-22 13:50:15,826 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529169', 'bq1': '680', 'sq1': '3200'}
+2025-09-22 13:50:16,808 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529171', 'sp1': '9.25', 'bq1': '600', 'sq1': '400'}
+2025-09-22 13:50:16,901 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529171', 'bq1': '1040', 'sq1': '220'}
+2025-09-22 13:50:17,906 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529172', 'bp1': '9.15', 'bq1': '2360', 'sq1': '1960'}
+2025-09-22 13:50:17,989 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529172', 'bq1': '2880', 'sq1': '1840'}
+2025-09-22 13:50:18,994 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529173', 'bq1': '1440', 'sq1': '1780'}
+2025-09-22 13:50:19,076 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529173', 'bq1': '1460', 'sq1': '2120'}
+2025-09-22 13:50:20,083 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529174', 'bq1': '1320', 'sq1': '1800'}
+2025-09-22 13:50:20,165 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529174', 'bq1': '1480'}
+2025-09-22 13:50:21,171 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529175', 'sp1': '9.20', 'bq1': '760', 'sq1': '720'}
+2025-09-22 13:50:21,257 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529175', 'bq1': '780'}
+2025-09-22 13:50:21,881 - INFO - Placing buy orders for SENSEX25SEP84500CE @ 5.0 master_qty 40
+2025-09-22 13:50:21,882 - INFO - Account 1 is active for order placement
+2025-09-22 13:50:21,883 - INFO - Account 2 is active for order placement
+2025-09-22 13:50:21,884 - INFO - Master account quantity: 40
+2025-09-22 13:50:21,884 - INFO - Child lots set to minimum for SENSEX: 20
+2025-09-22 13:50:21,884 - INFO - Placing order for account 1: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP84500CE', 'quantity': 40, 'discloseqty': 0, 'price_type': 'LMT', 'price': 5.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-22 13:50:21,885 - INFO - Child account quantity: 20 (master: 40, index: SENSEX)
+2025-09-22 13:50:21,886 - INFO - Placing order for account 2: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25SEP84500CE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 5.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-22 13:50:22,269 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529176', 'bp1': '9.10', 'bq1': '1480', 'sq1': '1800'}
+2025-09-22 13:50:22,506 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092200297606', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '5.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-22 13:50:22,515 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092200297607', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '20', 'prc': '5.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-22 13:50:22,516 - INFO - Account 1 - B PENDING NewAck
+2025-09-22 13:50:22,517 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '5.00'
+2025-09-22 13:50:22,517 - INFO - Account 2 - B PENDING NewAck
+2025-09-22 13:50:22,518 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '5.00'
+2025-09-22 13:50:22,535 - INFO - Updated Child (ID: 2) order info: 25092200297607 SENSEX25SEP84500CE 20@5.0
+2025-09-22 13:50:22,538 - INFO - Updated Master (ID: 1) order info: 25092200297606 SENSEX25SEP84500CE 40@5.0
+2025-09-22 13:50:22,546 - INFO - Order placed successfully for account 2: 25092200297607
+2025-09-22 13:50:22,546 - INFO - Order placed successfully for account 1: 25092200297606
+2025-09-22 13:50:22,549 - INFO - Buy orders placed successfully
+2025-09-22 13:50:22,552 - INFO - Account 1 order status updated to: PENDING
+2025-09-22 13:50:22,553 - INFO - Account 2 order status updated to: PENDING
+2025-09-22 13:50:22,554 - INFO - Order status updated for account 1: Buy Order PENDING @ 5.00
+2025-09-22 13:50:22,558 - INFO - Order status updated for account 2: Buy Order PENDING @ 5.00
+2025-09-22 13:50:22,559 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092200297606', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '5.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'PendingNew', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-22 13:50:22,559 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092200297607', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '20', 'prc': '5.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'PendingNew', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-22 13:50:22,560 - INFO - Account 1 - B PENDING PendingNew
+2025-09-22 13:50:22,560 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '5.00'
+2025-09-22 13:50:22,561 - INFO - Account 2 - B PENDING PendingNew
+2025-09-22 13:50:22,561 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '5.00'
+2025-09-22 13:50:22,566 - INFO - Account 1 order status updated to: PENDING
+2025-09-22 13:50:22,568 - INFO - Order status updated for account 1: Buy Order PENDING @ 5.00
+2025-09-22 13:50:22,570 - INFO - Account 2 order status updated to: PENDING
+2025-09-22 13:50:22,570 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092200297606', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '5.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'OPEN', 'reporttype': 'New', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758528786213335738', 'dscqty': '0', 'exch_tm': '22-09-2025 13:50:23'}
+2025-09-22 13:50:22,570 - INFO - Order status updated for account 2: Buy Order PENDING @ 5.00
+2025-09-22 13:50:22,571 - INFO - Account 1 - B OPEN New
+2025-09-22 13:50:22,571 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '5.00'
+2025-09-22 13:50:22,572 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092200297607', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '20', 'prc': '5.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'OPEN', 'reporttype': 'New', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758528786213335747', 'dscqty': '0', 'exch_tm': '22-09-2025 13:50:23'}
+2025-09-22 13:50:22,573 - INFO - Account 1 order status updated to: OPEN
+2025-09-22 13:50:22,573 - INFO - Account 2 - B OPEN New
+2025-09-22 13:50:22,573 - INFO - Order status updated for account 1: Buy Order Open @ 5.00
+2025-09-22 13:50:22,573 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '5.00'
+2025-09-22 13:50:22,576 - INFO - Account 2 order status updated to: OPEN
+2025-09-22 13:50:22,576 - INFO - Order status updated for account 2: Buy Order Open @ 5.00
+2025-09-22 13:50:23,348 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529177', 'bq1': '1600', 'sq1': '1740'}
+2025-09-22 13:50:24,435 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529178', 'sp1': '9.15', 'bq1': '260', 'sq1': '240'}
+2025-09-22 13:50:24,516 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529178', 'bq1': '140', 'sq1': '420'}
+2025-09-22 13:50:25,533 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529179', 'sp1': '9.20', 'bq1': '1120', 'sq1': '2240'}
+2025-09-22 13:50:25,607 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529179', 'bq1': '440', 'sq1': '2360'}
+2025-09-22 13:50:26,614 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529180', 'bq1': '1160', 'sq1': '2140'}
+2025-09-22 13:50:26,694 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529180', 'bq1': '1320', 'sq1': '1980'}
+2025-09-22 13:50:27,698 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529181', 'bq1': '440', 'sq1': '2180'}
+2025-09-22 13:50:27,777 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529181', 'bq1': '1560', 'sq1': '2120'}
+2025-09-22 13:50:28,783 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529182', 'bq1': '1160', 'sq1': '1980'}
+2025-09-22 13:50:28,866 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529183', 'bq1': '1200'}
+2025-09-22 13:50:29,874 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529184', 'sq1': '2580'}
+2025-09-22 13:50:29,955 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529184', 'bq1': '1500', 'sq1': '2360'}
+2025-09-22 13:50:30,961 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529185', 'bp1': '9.05', 'sp1': '9.15', 'bq1': '2940', 'sq1': '240'}
+2025-09-22 13:50:31,043 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529185', 'bq1': '2860', 'sq1': '660'}
+2025-09-22 13:50:32,047 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529186', 'bq1': '2940', 'sq1': '640'}
+2025-09-22 13:50:32,130 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529186', 'bq1': '2680', 'sq1': '1760'}
+2025-09-22 13:50:33,133 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529187', 'bq1': '2820', 'sq1': '1020'}
+2025-09-22 13:50:33,347 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092200297607', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '20', 'prc': '5.00', 'pcode': 'M', 'remarks': '', 'status': 'PENDING', 'reporttype': 'PendingCancel', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758528786213335747', 'dscqty': '0', 'exch_tm': '22-09-2025 13:50:23'}
+2025-09-22 13:50:33,349 - INFO - Account 2 - B PENDING PendingCancel
+2025-09-22 13:50:33,349 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '5.00'
+2025-09-22 13:50:33,351 - INFO - Account 2 order status updated to: PENDING
+2025-09-22 13:50:33,352 - INFO - Order status updated for account 2: Buy Order PENDING @ 5.00
+2025-09-22 13:50:33,354 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092200297607', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '20', 'prc': '5.00', 'pcode': 'M', 'remarks': '', 'rejreason': 'Order Cancelled', 'status': 'CANCELED', 'reporttype': 'Canceled', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758528786213335747', 'cancelqty': '20', 'dscqty': '0', 'exch_tm': '22-09-2025 13:50:34'}
+2025-09-22 13:50:33,357 - INFO - Account 2 - B CANCELED Canceled
+2025-09-22 13:50:33,357 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '5.00'
+2025-09-22 13:50:33,361 - INFO - Order status updated for account 2: Buy Order CANCELED @ 5.00
+2025-09-22 13:50:34,224 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529188', 'bp1': '9.10', 'bq1': '300', 'sq1': '1600'}
+2025-09-22 13:50:34,306 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529188', 'bp1': '9.05', 'bq1': '2360', 'sq1': '1340'}
+2025-09-22 13:50:35,309 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529189', 'bp1': '9.10', 'bq1': '660', 'sq1': '780'}
+2025-09-22 13:50:36,399 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529190', 'bq1': '1200', 'sq1': '400'}
+2025-09-22 13:50:37,486 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529191', 'bq1': '580', 'sq1': '940'}
+2025-09-22 13:50:37,520 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092200297606', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '5.00', 'pcode': 'M', 'remarks': '', 'status': 'PENDING', 'reporttype': 'PendingCancel', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758528786213335738', 'dscqty': '0', 'exch_tm': '22-09-2025 13:50:23'}
+2025-09-22 13:50:37,522 - INFO - Account 1 - B PENDING PendingCancel
+2025-09-22 13:50:37,523 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '5.00'
+2025-09-22 13:50:37,525 - INFO - Account 1 order status updated to: PENDING
+2025-09-22 13:50:37,526 - INFO - Order status updated for account 1: Buy Order PENDING @ 5.00
+2025-09-22 13:50:37,529 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092200297606', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84500CE', 'trantype': 'B', 'qty': '40', 'prc': '5.00', 'pcode': 'M', 'remarks': '', 'rejreason': 'Order Cancelled', 'status': 'CANCELED', 'reporttype': 'Canceled', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758528786213335738', 'cancelqty': '40', 'dscqty': '0', 'exch_tm': '22-09-2025 13:50:38'}
+2025-09-22 13:50:37,536 - INFO - Account 1 - B CANCELED Canceled
+2025-09-22 13:50:37,536 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '5.00'
+2025-09-22 13:50:37,538 - INFO - Order status updated for account 1: Buy Order CANCELED @ 5.00
+2025-09-22 13:50:37,569 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529191', 'bq1': '740', 'sq1': '720'}
+2025-09-22 13:50:38,574 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529192', 'bq1': '860', 'sq1': '1000'}
+2025-09-22 13:50:39,662 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529193', 'bq1': '1140', 'sq1': '220'}
+2025-09-22 13:50:39,746 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529193', 'bq1': '1160'}
+2025-09-22 13:50:40,750 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'lp': '9.10', 'pc': '-50.68', 'ft': '1758529194', 'v': '2567460', 'bq1': '1020'}
+2025-09-22 13:50:40,750 - INFO - Live price updated: 9.10
+2025-09-22 13:50:40,832 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529195', 'bq1': '700', 'sq1': '500'}
+2025-09-22 13:50:41,837 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529196', 'bq1': '800', 'sq1': '440'}
+2025-09-22 13:50:41,923 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841454', 'ft': '1758529196', 'bq1': '960'}

@@ -1,7 +1,7 @@
 setting_name,value,description
 default_auto_sl,20,Default auto stop loss points
 default_auto_target,30,Default auto target points
-child_lots,1,Default child account lots
+child_lots,min,Default child account lots
 sensex_lot_size,20,min qty for sensex options
 nifty_lot_size,75,min qty for nifty options
 banknifty_lot_size,35,min qty for banknifty options

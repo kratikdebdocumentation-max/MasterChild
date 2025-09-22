@@ -17,6 +17,8 @@ from trading.account_manager import AccountManager
 from trading.account_state_manager import AccountStateManager
 from trading.websocket_manager import WebSocketManager
 from config import Config
+from config_manager import ConfigManager
+from config_window import ConfigWindow
 
 # Import market data modules
 from market_data.simple_index_manager import SimpleIndexManager
@@ -48,6 +50,7 @@ class MainWindow:
         # Initialize account management
         self.account_manager = AccountManager()
         self.account_state_manager = AccountStateManager("account_state.csv")
+        self.config_manager = ConfigManager()
         
         # Reset account states to initial state on startup
         self.reset_account_states_on_startup()
@@ -1244,9 +1247,12 @@ class MainWindow:
             # 2. Get trading parameters
             trading_symbol = self.current_trading_symbol
             price = float(self.price_value.get())
-            quantity = int(self.qty1_var.get())
+            master_quantity = int(self.qty1_var.get())
             
-            logger.info(f"Placing buy orders for {trading_symbol} @ {price} qty {quantity}")
+            # Get index for lot size calculation
+            index = self.selected_index.get()
+            
+            logger.info(f"Placing buy orders for {trading_symbol} @ {price} master_qty {master_quantity}")
             
             # 3. Check active accounts and validate states
             active_accounts = []
@@ -1268,7 +1274,7 @@ class MainWindow:
             self.order_states = {1: "PENDING", 2: "PENDING"}
             
             # 5. Place orders in parallel
-            self._place_orders_parallel(active_accounts, trading_symbol, price, quantity)
+            self._place_orders_parallel(active_accounts, trading_symbol, price, master_quantity, index)
             
             # 6. Disable buy button and enable management buttons
             self.buy_button.config(state="disabled")
@@ -1286,8 +1292,8 @@ class MainWindow:
             messagebox.showerror("Error", f"Failed to place buy orders: {e}")
             logger.error(f"Error in place_buy_orders: {e}")
     
-    def _place_orders_parallel(self, active_accounts, trading_symbol, price, quantity):
-        """Place orders in parallel for active accounts"""
+    def _place_orders_parallel(self, active_accounts, trading_symbol, price, master_quantity, index):
+        """Place orders in parallel for active accounts with different quantities"""
         import threading
         
         def place_single_order(account_id):
@@ -1296,6 +1302,14 @@ class MainWindow:
                 if not api:
                     logger.error(f"No API available for account {account_id}")
                     return
+                
+                # Calculate quantity based on account type
+                if account_id == 1:  # Master account
+                    quantity = master_quantity
+                    logger.info(f"Master account quantity: {quantity}")
+                else:  # Child account
+                    quantity = self.config_manager.calculate_child_quantity(master_quantity, index)
+                    logger.info(f"Child account quantity: {quantity} (master: {master_quantity}, index: {index})")
                 
                 # Determine exchange and product type
                 if 'SENSEX' in trading_symbol:
@@ -1460,8 +1474,13 @@ class MainWindow:
         logger.info("Logout child account clicked - Function not implemented yet")
         
     def open_configuration(self):
-        """Open configuration - TO BE IMPLEMENTED"""
-        logger.info("Open configuration clicked - Function not implemented yet")
+        """Open configuration window"""
+        try:
+            config_window = ConfigWindow(self.root, self.config_manager)
+            config_window.open()
+        except Exception as e:
+            logger.error(f"Error opening configuration window: {e}")
+            messagebox.showerror("Error", f"Failed to open configuration window: {e}")
         
     def run(self):
         """Start the application"""

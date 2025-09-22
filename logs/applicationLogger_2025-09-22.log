@@ -241,3 +241,11 @@
 2025-09-22 13:30:37,539 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
 2025-09-22 13:37:16,047 - INFO - Loaded cached index prices from today
 2025-09-22 13:37:16,720 - INFO - Generated fresh 2FA for account 1: 025347
+2025-09-22 13:38:42,459 - INFO - Loaded cached index prices from today
+2025-09-22 13:38:42,704 - INFO - Generated fresh 2FA for account 1: 458819
+2025-09-22 13:38:44,421 - INFO - Generated fresh 2FA for account 2: 612505
+2025-09-22 13:49:21,817 - INFO - Loaded cached index prices from today
+2025-09-22 13:49:22,334 - INFO - Generated fresh 2FA for account 1: 672554
+2025-09-22 13:50:05,879 - INFO - Generated fresh 2FA for account 2: 662206
+2025-09-22 13:59:05,062 - INFO - Loaded cached index prices from today
+2025-09-22 13:59:05,436 - INFO - Generated fresh 2FA for account 1: 511898
