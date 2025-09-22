@@ -170,3 +170,74 @@
 2025-09-22 10:58:56,457 - INFO - Account 1 can_order reset to 1 on successful login
 2025-09-22 10:58:56,464 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
 2025-09-22 10:58:56,469 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 11:00:40,633 - INFO - Loaded account states from account_state.csv
+2025-09-22 11:00:40,641 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 11:00:40,644 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 11:00:40,646 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 11:00:40,649 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 11:00:40,650 - INFO - Loaded cached index prices from today
+2025-09-22 11:00:41,031 - INFO - Generated fresh 2FA for account 1: 735239
+2025-09-22 11:00:41,697 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 11:00:41,699 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 11:00:41,701 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 12:06:31,841 - INFO - Loaded account states from account_state.csv
+2025-09-22 12:06:31,848 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 12:06:31,855 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 12:06:31,862 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 12:06:31,867 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 12:06:31,868 - INFO - Loaded cached index prices from today
+2025-09-22 12:06:32,355 - INFO - Generated fresh 2FA for account 1: 105308
+2025-09-22 12:09:19,361 - INFO - Loaded account states from account_state.csv
+2025-09-22 12:09:19,369 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 12:09:19,374 - INFO - Updated Master (ID: 1) login status to '1': Master account always logged in
+2025-09-22 12:09:19,375 - INFO - Master account set to always logged in state
+2025-09-22 12:09:19,382 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 12:09:19,392 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 12:09:19,405 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 12:09:19,409 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 12:09:19,410 - INFO - Loaded cached index prices from today
+2025-09-22 12:09:19,841 - INFO - Generated fresh 2FA for account 1: 522814
+2025-09-22 12:12:13,175 - INFO - Loaded account states from account_state.csv
+2025-09-22 12:12:13,185 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 12:12:13,195 - INFO - Updated Master (ID: 1) login status to '1': Master account always logged in
+2025-09-22 12:12:13,196 - INFO - Master account set to always logged in state
+2025-09-22 12:12:13,202 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 12:12:13,207 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 12:12:13,214 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 12:12:13,217 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 12:12:13,224 - INFO - Loaded cached index prices from today
+2025-09-22 12:12:13,697 - INFO - Generated fresh 2FA for account 1: 433804
+2025-09-22 12:12:14,616 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 12:12:14,619 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 12:12:14,622 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 12:12:16,695 - INFO - Generated fresh 2FA for account 2: 444937
+2025-09-22 12:12:17,216 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-22 12:12:17,221 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-22 12:12:17,229 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-22 13:19:41,267 - INFO - Loaded account states from account_state.csv
+2025-09-22 13:19:41,285 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 13:19:41,292 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 13:19:41,299 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 13:19:41,310 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 13:19:41,312 - INFO - Loaded cached index prices from today
+2025-09-22 13:19:42,504 - INFO - Generated fresh 2FA for account 1: 926879
+2025-09-22 13:19:42,578 - INFO - Updated Master (ID: 1) can_order to '0': Order rejected for account 1
+2025-09-22 13:30:32,982 - INFO - Loaded account states from account_state.csv
+2025-09-22 13:30:32,986 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 13:30:32,997 - INFO - Updated Master (ID: 1) login status to '1': Master account always logged in
+2025-09-22 13:30:32,997 - INFO - Master account set to always logged in state
+2025-09-22 13:30:33,001 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 13:30:33,006 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 13:30:33,014 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 13:30:33,017 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 13:30:33,018 - INFO - Loaded cached index prices from today
+2025-09-22 13:30:33,281 - INFO - Generated fresh 2FA for account 1: 092066
+2025-09-22 13:30:34,014 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 13:30:34,017 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 13:30:34,024 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 13:30:37,002 - INFO - Generated fresh 2FA for account 2: 351077
+2025-09-22 13:30:37,533 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-22 13:30:37,535 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-22 13:30:37,539 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-22 13:37:16,047 - INFO - Loaded cached index prices from today
+2025-09-22 13:37:16,720 - INFO - Generated fresh 2FA for account 1: 025347

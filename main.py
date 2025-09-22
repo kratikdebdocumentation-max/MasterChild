@@ -135,6 +135,19 @@ class MainWindow:
         
         # Index LTP variable
         self.index_ltp_value = tk.StringVar()
+        
+        # Current trading symbol for order placement
+        self.current_trading_symbol = None
+        
+        # Order state tracking
+        self.order_states = {
+            1: "PENDING",  # Master account order status
+            2: "PENDING"   # Child account order status
+        }
+        
+        # Timeout timer for order management
+        self.timeout_timer = None
+        
         self.index_ltp_value.set("--")
         
         # Order status variables
@@ -662,23 +675,58 @@ class MainWindow:
         self.websocket_manager.set_sell_order_completed_callback(self.on_sell_order_completed)
     
     def update_live_price(self, live_price: float):
-        """Update live price display"""
+        """Update live price display and buy price box (first time only)"""
         try:
+            # Always update Premium Price box (live updates)
             self.premium_price_value.set(f"{live_price:.2f}")
-            logger.info(f"Live price updated: {live_price}")
+            
+            # Update Buy Price box ONLY if it's empty (first time only)
+            if not self.price_value.get().strip():
+                self.price_value.set(f"{live_price:.2f}")
+                logger.info(f"Initial buy price set: {live_price:.2f}")
+            
+            logger.info(f"Live price updated: {live_price:.2f}")
         except Exception as e:
             logger.error(f"Error updating live price: {e}")
     
     def update_order_status(self, account_num: int, status_message: str):
-        """Update order status display"""
+        """Update order status display and handle order state changes"""
         try:
+            # Update UI display
             if account_num == 1:
                 self.master_order_status.set(status_message)
             elif account_num == 2:
                 self.child_order_status.set(status_message)
+            
+            # Extract order status from message for state tracking
+            status = self._extract_order_status(status_message)
+            if status:
+                self._on_order_status_update(account_num, status)
+            
             logger.info(f"Order status updated for account {account_num}: {status_message}")
         except Exception as e:
             logger.error(f"Error updating order status: {e}")
+    
+    def _extract_order_status(self, status_message: str) -> str:
+        """Extract order status from status message"""
+        try:
+            status_message = status_message.upper()
+            
+            if "COMPLETE" in status_message:
+                return "COMPLETE"
+            elif "REJECTED" in status_message:
+                return "REJECTED"
+            elif "OPEN" in status_message:
+                return "OPEN"
+            elif "CANCELLED" in status_message:
+                return "CANCELLED"
+            elif "PENDING" in status_message:
+                return "PENDING"
+            else:
+                return None
+        except Exception as e:
+            logger.error(f"Error extracting order status from '{status_message}': {e}")
+            return None
     
     def on_buy_order_completed(self, account_num: int, symbol: str, price: float):
         """Handle buy order completion"""
@@ -972,9 +1020,17 @@ class MainWindow:
             
             # Only proceed if all required fields are selected
             if all([index, expiry, strike, option]):
+                # Clear Buy Price box for new symbol selection
+                self.price_value.set("")
+                logger.info("Buy price box cleared for new symbol selection")
+                
                 # Generate trading symbol
                 trading_symbol = self.concatenate_values()
                 if trading_symbol:
+                    # Store the trading symbol for order placement
+                    self.current_trading_symbol = trading_symbol
+                    logger.info(f"Trading symbol stored: {trading_symbol}")
+                    
                     # Automatically fetch price and subscribe
                     self.auto_fetch_and_subscribe(trading_symbol)
                     logger.info(f"Strike selected: {strike}, trading symbol: {trading_symbol}")
@@ -1170,8 +1226,174 @@ class MainWindow:
         return month_codes.get(month_num, str(month_num))
         
     def place_buy_orders(self):
-        """Place buy orders - TO BE IMPLEMENTED"""
-        logger.info("Place buy orders clicked - Function not implemented yet")
+        """Place buy orders with validation and parallel execution"""
+        try:
+            # 1. Validate inputs
+            if not self.qty1_var.get():
+                messagebox.showerror("Error", "Please select quantity")
+                return
+            
+            if not self.current_trading_symbol:
+                messagebox.showerror("Error", "Please select all required fields (Index, Expiry, Strike, Option)")
+                return
+            
+            if not self.price_value.get():
+                messagebox.showerror("Error", "Please enter buy price")
+                return
+            
+            # 2. Get trading parameters
+            trading_symbol = self.current_trading_symbol
+            price = float(self.price_value.get())
+            quantity = int(self.qty1_var.get())
+            
+            logger.info(f"Placing buy orders for {trading_symbol} @ {price} qty {quantity}")
+            
+            # 3. Check active accounts and validate states
+            active_accounts = []
+            for account_id in [1, 2]:  # Master and Child
+                login_status = self.account_state_manager.get_login_status(account_id)
+                can_order = self.account_state_manager.get_can_order(account_id)
+                
+                if login_status == 1 and can_order == 1:
+                    active_accounts.append(account_id)
+                    logger.info(f"Account {account_id} is active for order placement")
+                else:
+                    logger.warning(f"Account {account_id} not active - login: {login_status}, can_order: {can_order}")
+            
+            if not active_accounts:
+                messagebox.showerror("Error", "No active accounts found. Please login to accounts first.")
+                return
+            
+            # 4. Initialize order state tracking
+            self.order_states = {1: "PENDING", 2: "PENDING"}
+            
+            # 5. Place orders in parallel
+            self._place_orders_parallel(active_accounts, trading_symbol, price, quantity)
+            
+            # 6. Disable buy button and enable management buttons
+            self.buy_button.config(state="disabled")
+            self.cancel_buy_button.config(state="normal")
+            self.modify_buy_button.config(state="normal")
+            self.cancel_master_buy_button.config(state="normal")
+            self.cancel_child_buy_button.config(state="normal")
+            
+            logger.info("Buy orders placed successfully")
+            
+        except ValueError as e:
+            messagebox.showerror("Error", f"Invalid price or quantity: {e}")
+            logger.error(f"Value error in place_buy_orders: {e}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to place buy orders: {e}")
+            logger.error(f"Error in place_buy_orders: {e}")
+    
+    def _place_orders_parallel(self, active_accounts, trading_symbol, price, quantity):
+        """Place orders in parallel for active accounts"""
+        import threading
+        
+        def place_single_order(account_id):
+            try:
+                api = self.account_manager.get_api(account_id)
+                if not api:
+                    logger.error(f"No API available for account {account_id}")
+                    return
+                
+                # Determine exchange and product type
+                if 'SENSEX' in trading_symbol:
+                    exchange = 'BFO'
+                    product_type = 'M'
+                else:
+                    exchange = 'NFO'
+                    product_type = 'I'
+                
+                # Place order
+                order_params = {
+                    'buy_or_sell': 'B',
+                    'product_type': product_type,
+                    'exchange': exchange,
+                    'tradingsymbol': trading_symbol,
+                    'quantity': quantity,
+                    'discloseqty': 0,
+                    'price_type': 'LMT',
+                    'price': price,
+                    'trigger_price': None,
+                    'retention': 'DAY',
+                    'amo': 'NO',
+                    'remarks': None
+                }
+                
+                logger.info(f"Placing order for account {account_id}: {order_params}")
+                order_response = api.place_order(**order_params)
+                
+                if order_response and 'norenordno' in order_response:
+                    order_id = order_response['norenordno']
+                    # Update account state with order info
+                    self.account_state_manager.update_order_info(
+                        account_id, order_id, trading_symbol, quantity, price
+                    )
+                    logger.info(f"Order placed successfully for account {account_id}: {order_id}")
+                else:
+                    logger.error(f"Order placement failed for account {account_id}: {order_response}")
+                    
+            except Exception as e:
+                logger.error(f"Error placing order for account {account_id}: {e}")
+        
+        # Create and start threads for each active account
+        threads = []
+        for account_id in active_accounts:
+            thread = threading.Thread(target=place_single_order, args=(account_id,))
+            threads.append(thread)
+            thread.start()
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+    
+    def _timeout_handler(self, account_id):
+        """Handle timeout for order completion"""
+        try:
+            logger.info(f"Timeout reached for account {account_id}, cancelling order")
+            
+            # Cancel the order for the specified account
+            if account_id == 1:
+                self.cancel_master_buy_order()
+            else:
+                self.cancel_child_buy_order()
+                
+        except Exception as e:
+            logger.error(f"Error in timeout handler for account {account_id}: {e}")
+    
+    def _on_order_status_update(self, account_id: int, status: str):
+        """Handle order status updates from websocket"""
+        try:
+            # Update order state
+            self.order_states[account_id] = status
+            logger.info(f"Account {account_id} order status updated to: {status}")
+            
+            # Handle rejection - set can_order to 0
+            if status == "REJECTED":
+                self.account_state_manager.update_can_order(
+                    account_id, 0, f"Order rejected for account {account_id}"
+                )
+                logger.info(f"Account {account_id} can_order set to 0 due to rejection")
+            
+            # Check for timeout scenario: one COMPLETE, other OPEN
+            if status == "COMPLETE":
+                other_account = 2 if account_id == 1 else 1
+                if self.order_states[other_account] == "OPEN":
+                    # Start 5-second timer for the OPEN order
+                    import threading
+                    self.timeout_timer = threading.Timer(5.0, self._timeout_handler, args=[other_account])
+                    self.timeout_timer.start()
+                    logger.info(f"Started 5-second timeout timer for account {other_account}")
+            
+            # If OPEN order completes before timeout, cancel timer
+            elif status in ["COMPLETE", "REJECTED"] and self.timeout_timer:
+                self.timeout_timer.cancel()
+                self.timeout_timer = None
+                logger.info("Timeout timer cancelled - order completed before timeout")
+                
+        except Exception as e:
+            logger.error(f"Error handling order status update for account {account_id}: {e}")
         
     def place_exit_orders(self):
         """Place exit orders - TO BE IMPLEMENTED"""
