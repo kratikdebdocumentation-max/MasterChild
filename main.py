@@ -15,7 +15,13 @@ import time
 # Import trading modules
 from trading.account_manager import AccountManager
 from trading.account_state_manager import AccountStateManager
+from trading.websocket_manager import WebSocketManager
 from config import Config
+
+# Import market data modules
+from market_data.simple_index_manager import SimpleIndexManager
+from market_data.expiry_manager import ExpiryManager
+from market_data.symbol_manager import SymbolManager
 
 # Configure logging
 logging.basicConfig(
@@ -43,6 +49,23 @@ class MainWindow:
         self.account_manager = AccountManager()
         self.account_state_manager = AccountStateManager("account_state.csv")
         
+        # Reset account states to initial state on startup
+        self.reset_account_states_on_startup()
+        
+        # Initialize market data managers
+        self.index_manager = SimpleIndexManager()
+        self.expiry_manager = ExpiryManager()
+        self.symbol_manager = SymbolManager()
+        
+        # Initialize websocket manager
+        self.websocket_manager = WebSocketManager(self.account_manager)
+        
+        # Setup websocket callbacks
+        self.setup_websocket_callbacks()
+        
+        # Load configuration
+        self.config = Config.load_configuration_csv()
+        
         # Master account holder name
         self.master_account_name = tk.StringVar()
         self.master_account_name.set("Not Logged In")
@@ -58,6 +81,9 @@ class MainWindow:
         
         # Auto-login master account
         self.auto_login_master()
+        
+        # Initialize quantity dropdown with default values
+        self.update_quantity_dropdown()
         
     def center_window(self):
         """Center the window on the screen"""
@@ -361,7 +387,7 @@ class MainWindow:
         # Quantity selection (moved to left)
         tk.Label(self.trading_frame, text="Qty").pack(side=tk.LEFT, padx=5)
         self.qty_dropdown = ttk.Combobox(
-            self.trading_frame, textvariable=self.qty1_var, width=10
+            self.trading_frame, textvariable=self.qty1_var, width=10, state="readonly"
         )
         self.qty_dropdown.pack(side=tk.LEFT, padx=5)
         
@@ -620,6 +646,55 @@ class MainWindow:
         # Create logs directory if it doesn't exist
         import os
         os.makedirs("logs", exist_ok=True)
+    
+    def setup_websocket_callbacks(self):
+        """Setup websocket callbacks for live price updates and order status"""
+        # Set up live price callback
+        self.websocket_manager.set_live_price_callback(self.update_live_price)
+        
+        # Set up order status callback
+        self.websocket_manager.set_order_status_callback(self.update_order_status)
+        
+        # Set up buy order completed callback
+        self.websocket_manager.set_buy_order_completed_callback(self.on_buy_order_completed)
+        
+        # Set up sell order completed callback
+        self.websocket_manager.set_sell_order_completed_callback(self.on_sell_order_completed)
+    
+    def update_live_price(self, live_price: float):
+        """Update live price display"""
+        try:
+            self.premium_price_value.set(f"{live_price:.2f}")
+            logger.info(f"Live price updated: {live_price}")
+        except Exception as e:
+            logger.error(f"Error updating live price: {e}")
+    
+    def update_order_status(self, account_num: int, status_message: str):
+        """Update order status display"""
+        try:
+            if account_num == 1:
+                self.master_order_status.set(status_message)
+            elif account_num == 2:
+                self.child_order_status.set(status_message)
+            logger.info(f"Order status updated for account {account_num}: {status_message}")
+        except Exception as e:
+            logger.error(f"Error updating order status: {e}")
+    
+    def on_buy_order_completed(self, account_num: int, symbol: str, price: float):
+        """Handle buy order completion"""
+        try:
+            logger.info(f"Buy order completed for account {account_num}: {symbol} @ {price}")
+            # Additional logic can be added here for buy order completion
+        except Exception as e:
+            logger.error(f"Error handling buy order completion: {e}")
+    
+    def on_sell_order_completed(self, account_num: int, symbol: str, price: float):
+        """Handle sell order completion"""
+        try:
+            logger.info(f"Sell order completed for account {account_num}: {symbol} @ {price}")
+            # Additional logic can be added here for sell order completion
+        except Exception as e:
+            logger.error(f"Error handling sell order completion: {e}")
         
     # ===== BLANK FUNCTIONS - TO BE IMPLEMENTED =====
     
@@ -634,6 +709,12 @@ class MainWindow:
                     # Update account state
                     self.account_state_manager.update_login_status(1, 1, "Master account auto-login successful")
                     self.account_state_manager.update_can_order(1, 1, "Master account ready for orders")
+                    
+                    # Connect websocket feed for master account
+                    self.websocket_manager.connect_feed(1)
+                    
+                    # Refresh market data after successful login
+                    self.refresh_market_data()
                     
                     # Update UI
                     self.root.after(0, self.update_master_login_ui, True, client_name)
@@ -655,7 +736,7 @@ class MainWindow:
         if success:
             self.master_account_name.set(client_name)
             self.root.title(f"***Kratik's Soft*** - Master Account: {client_name}")
-            self.master_order_status.set("Master Logged In")
+            self.master_order_status.set(f"{client_name} - Order Ready")
             # Update login button style
             self.login_button2.config(style="LoginButton.TButton")
         else:
@@ -682,6 +763,9 @@ class MainWindow:
                     self.account_state_manager.update_login_status(account_num, 1, f"Child account {account_num} login successful")
                     self.account_state_manager.update_can_order(account_num, 1, f"Child account {account_num} ready for orders")
                     
+                    # Connect websocket feed for child account
+                    self.websocket_manager.connect_feed(account_num)
+                    
                     # Update UI
                     self.root.after(0, self.update_child_login_ui, True, client_name)
                     logger.info(f"Child account login successful: {client_name}")
@@ -700,7 +784,7 @@ class MainWindow:
     def update_child_login_ui(self, success, client_name):
         """Update UI after child login attempt"""
         if success:
-            self.child_order_status.set(f"Child Logged In: {client_name}")
+            self.child_order_status.set(f"{client_name} - Order Ready")
             # Update login button style
             self.login_button2.config(style="LoginSuccess.TButton", text=f"Child: {client_name}")
         else:
@@ -709,6 +793,71 @@ class MainWindow:
             messagebox.showerror("Login Error", f"Child account login failed: {client_name}")
             # Update login button style
             self.login_button2.config(style="LoginError.TButton", text="Login Child Account")
+    
+    def refresh_market_data(self):
+        """Refresh index prices and expiry dates"""
+        def refresh_thread():
+            try:
+                logger.info("Refreshing market data...")
+                
+                # Get master account API
+                api = self.account_manager.get_api(1)
+                if not api:
+                    logger.warning("No API available for market data refresh")
+                    return
+                
+                # Refresh index prices if needed
+                if self.index_manager.should_refresh_prices():
+                    logger.info("Refreshing index prices...")
+                    self.index_manager.fetch_index_prices(api)
+                else:
+                    logger.info("Index prices are current, no refresh needed")
+                
+                # Refresh expiry dates if needed
+                if self.expiry_manager.should_refresh_expiry():
+                    logger.info("Refreshing expiry dates...")
+                    self.expiry_manager.calculate_expiry_dates()
+                else:
+                    logger.info("Expiry dates are current, no refresh needed")
+                
+                # Update UI with current data
+                self.root.after(0, self.update_market_data_ui)
+                
+            except Exception as e:
+                logger.error(f"Error refreshing market data: {e}")
+        
+        # Run in separate thread to avoid blocking UI
+        threading.Thread(target=refresh_thread, daemon=True).start()
+    
+    def update_market_data_ui(self):
+        """Update UI with current market data"""
+        try:
+            # Update index LTP display
+            selected_index = self.selected_index.get()
+            if selected_index:
+                current_price = self.index_manager.get_index_price(selected_index)
+                if current_price > 0:
+                    self.index_ltp_value.set(f"{current_price:.2f}")
+                else:
+                    self.index_ltp_value.set("--")
+            
+            # Update expiry dropdown
+            self.update_expiry_dropdown()
+            
+        except Exception as e:
+            logger.error(f"Error updating market data UI: {e}")
+    
+    def update_expiry_dropdown(self):
+        """Update expiry dropdown with current data"""
+        try:
+            selected_index = self.selected_index.get()
+            if selected_index:
+                expiry_list = self.expiry_manager.get_expiry_list(selected_index)
+                self.expiry_dropdown['values'] = expiry_list
+                if expiry_list:
+                    self.expiry_value.set(expiry_list[0])  # Set first expiry as default
+        except Exception as e:
+            logger.error(f"Error updating expiry dropdown: {e}")
         
     def release_buttons(self):
         """Release buttons - TO BE IMPLEMENTED"""
@@ -723,8 +872,87 @@ class MainWindow:
         logger.info("Verify PnL from broker clicked - Function not implemented yet")
         
     def update_selections(self, *args):
-        """Update selections - TO BE IMPLEMENTED"""
-        logger.info("Update selections called - Function not implemented yet")
+        """Update selections when index changes"""
+        try:
+            selected_index = self.selected_index.get()
+            if selected_index:
+                logger.info(f"Index selected: {selected_index}")
+                
+                # Update index LTP
+                current_price = self.index_manager.get_index_price(selected_index)
+                if current_price > 0:
+                    self.index_ltp_value.set(f"{current_price:.2f}")
+                else:
+                    self.index_ltp_value.set("--")
+                
+                # Update expiry dropdown
+                self.update_expiry_dropdown()
+                
+                # Update strike dropdown (will be implemented later)
+                self.update_strike_dropdown()
+                
+                # Update quantity dropdown based on selected index
+                self.update_quantity_dropdown()
+                
+        except Exception as e:
+            logger.error(f"Error updating selections: {e}")
+    
+    def update_strike_dropdown(self):
+        """Update strike dropdown based on selected index and price"""
+        try:
+            selected_index = self.selected_index.get()
+            if selected_index:
+                current_price = self.index_manager.get_index_price(selected_index)
+                if current_price > 0:
+                    strikes = self.index_manager.get_strike_list(selected_index, current_price)
+                    self.strike_dropdown['values'] = strikes
+                    if strikes:
+                        # Set middle strike as default (current price)
+                        middle_index = len(strikes) // 2
+                        self.selected_strike.set(strikes[middle_index])
+                else:
+                    self.strike_dropdown['values'] = []
+        except Exception as e:
+            logger.error(f"Error updating strike dropdown: {e}")
+    
+    def update_quantity_dropdown(self):
+        """Update quantity dropdown based on selected index lot size"""
+        try:
+            selected_index = self.selected_index.get()
+            if selected_index:
+                # Generate quantity options as multiples of lot size
+                quantity_options = Config.generate_quantity_options(selected_index, max_multiple=10, config=self.config)
+                self.qty_dropdown['values'] = quantity_options
+                
+                # Set default quantity (1x lot size)
+                if quantity_options:
+                    self.qty1_var.set(quantity_options[0])
+                    logger.info(f"Updated quantity dropdown for {selected_index}: {quantity_options}")
+                else:
+                    self.qty1_var.set("")
+            else:
+                self.qty_dropdown['values'] = []
+                self.qty1_var.set("")
+        except Exception as e:
+            logger.error(f"Error updating quantity dropdown: {e}")
+    
+    def reset_account_states_on_startup(self):
+        """Reset all account states to initial state on program startup"""
+        try:
+            logger.info("Resetting account states to initial state on startup...")
+            
+            # Reset master account (ID: 1)
+            self.account_state_manager.update_login_status(1, 0, "Program startup - master not logged in")
+            self.account_state_manager.update_can_order(1, 0, "Program startup - master cannot place orders")
+            
+            # Reset child account (ID: 2)
+            self.account_state_manager.update_login_status(2, 0, "Program startup - child not logged in")
+            self.account_state_manager.update_can_order(2, 0, "Program startup - child cannot place orders")
+            
+            logger.info("Account states reset to initial state")
+            
+        except Exception as e:
+            logger.error(f"Error resetting account states: {e}")
         
     def on_expiry_selected(self, *args):
         """On expiry selected - TO BE IMPLEMENTED"""
@@ -735,8 +963,211 @@ class MainWindow:
         logger.info("On option selected called - Function not implemented yet")
         
     def on_strike_selected(self, *args):
-        """On strike selected - TO BE IMPLEMENTED"""
-        logger.info("On strike selected called - Function not implemented yet")
+        """Handle strike selection - automatically subscribe and fetch price"""
+        try:
+            strike = self.selected_strike.get()
+            index = self.selected_index.get()
+            option = self.selected_option.get()
+            expiry = self.expiry_value.get()
+            
+            # Only proceed if all required fields are selected
+            if all([index, expiry, strike, option]):
+                # Generate trading symbol
+                trading_symbol = self.concatenate_values()
+                if trading_symbol:
+                    # Automatically fetch price and subscribe
+                    self.auto_fetch_and_subscribe(trading_symbol)
+                    logger.info(f"Strike selected: {strike}, trading symbol: {trading_symbol}")
+                else:
+                    logger.warning("Could not generate trading symbol")
+            else:
+                logger.info("Not all required fields selected for strike selection")
+        except Exception as e:
+            logger.error(f"Error in on_strike_selected: {e}")
+    
+    def concatenate_values(self):
+        """Concatenate selected values to form trading symbol using old project logic"""
+        try:
+            index = self.selected_index.get()
+            expiry = self.expiry_value.get()
+            strike = self.selected_strike.get()
+            option = self.selected_option.get()
+            
+            if all([index, expiry, strike, option]):
+                if index == "SENSEX":
+                    trading_symbol = self._generate_sensex_symbol(expiry, strike, option)
+                else:
+                    # Convert CE/PE to C/P for NIFTY and BANKNIFTY (old project logic)
+                    if option == "CE":
+                        option_type = "C"
+                    elif option == "PE":
+                        option_type = "P"
+                    else:
+                        option_type = option
+                    
+                    trading_symbol = f"{index}{expiry}{option_type}{strike}"
+                
+                logger.info(f"Generated trading symbol: {trading_symbol}")
+                return trading_symbol
+            else:
+                logger.warning("Missing required fields for symbol generation")
+                return None
+        except Exception as e:
+            logger.error(f"Error concatenating values: {e}")
+            return None
+    
+    def auto_fetch_and_subscribe(self, trading_symbol):
+        """Automatically fetch current price for selected symbol and subscribe to websocket"""
+        try:
+            # Get master account API
+            api = self.account_manager.get_api(1)
+            if not api:
+                self.premium_price_value.set("No API")
+                logger.warning("No API available for fetching price")
+                return
+            
+            # Get current price using symbol manager
+            price = self.symbol_manager.get_latest_price(api, trading_symbol)
+            if price and price > 0:
+                self.premium_price_value.set(f"{price:.2f}")
+                logger.info(f"Fetched price for {trading_symbol}: {price}")
+                
+                # Subscribe to websocket for live updates
+                self.subscribe_to_live_price(api, trading_symbol)
+                logger.info(f"Auto-subscribed to {trading_symbol} at price {price}")
+            else:
+                self.premium_price_value.set("N/A")
+                logger.warning(f"Could not fetch price for {trading_symbol}")
+                
+        except Exception as e:
+            self.premium_price_value.set("Error")
+            logger.error(f"Error in auto-fetch for {trading_symbol}: {e}")
+    
+    def subscribe_to_live_price(self, api, trading_symbol: str):
+        """Subscribe to websocket for live price updates using master account (account 1) only"""
+        try:
+            # Determine exchange
+            if 'SENSEX' in trading_symbol:
+                exchange = 'BFO'
+            else:
+                exchange = 'NFO'
+            
+            # Get token from symbol manager
+            token = self.symbol_manager.get_token(trading_symbol)
+            if not token:
+                logger.error(f"Could not get token for {trading_symbol}")
+                return
+            
+            # Unsubscribe from previous subscription if exists
+            if self.current_subscription:
+                try:
+                    api.unsubscribe(self.current_subscription)
+                    logger.info(f"Unsubscribed from previous: {self.current_subscription}")
+                except Exception as e:
+                    logger.warning(f"Error unsubscribing from previous: {e}")
+            
+            # Subscribe to new symbol using master account's WebSocket (account 1)
+            websocket_token = f'{exchange}|{token}'
+            api.subscribe(websocket_token)
+            self.current_subscription = websocket_token
+            logger.info(f"Subscribed to live price feed via master account: {websocket_token}")
+            
+        except Exception as e:
+            logger.error(f"Error subscribing to live price: {e}")
+    
+    def _generate_sensex_symbol(self, expiry: str, strike: str, option: str) -> str:
+        """
+        Generate SENSEX symbol based on expiry type using old project logic
+        
+        Format Rules:
+        - Monthly expiry (last Thursday): SENSEX + YEAR + MONTH(3-letter) + STRIKE + OPTION
+          Example: SENSEX25SEP91600PE
+        - Weekly expiry: SENSEX + YEAR + MONTH(single char) + DAY + STRIKE + OPTION  
+          Example: SENSEX2591890200PE
+        
+        Args:
+            expiry: Expiry date in format like "11SEP25" or "25SEP25"
+            strike: Strike price as string
+            option: "CE" or "PE"
+            
+        Returns:
+            Formatted SENSEX symbol
+        """
+        try:
+            # Parse the expiry date
+            # Format: "11SEP25" or "25SEP25"
+            if len(expiry) == 7:  # Daily expiry like "11SEP25"
+                day = expiry[:2]
+                month = expiry[2:5]
+                year = expiry[5:]
+                
+                # Convert to datetime to check if it's monthly expiry
+                month_num = datetime.strptime(month, '%b').month
+                year_full = 2000 + int(year)
+                day_num = int(day)
+                
+                # Check if it's the last Thursday of the month (monthly expiry)
+                last_thursday = self._get_last_thursday(year_full, month_num)
+                
+                if day_num == last_thursday.day:
+                    # Monthly expiry format: SENSEX25SEP91600PE
+                    return f"SENSEX{year}{month}{strike}{option}"
+                else:
+                    # Weekly expiry format: SENSEX2591890200PE
+                    # Month encoding: 9=Sep, O=Oct, N=Nov, D=Dec
+                    month_code = self._get_month_code(month_num)
+                    return f"SENSEX{year}{month_code}{day_num:02d}{strike}{option}"
+            else:
+                # Fallback to original format
+                return f"SENSEX{expiry}{strike}{option}"
+                
+        except Exception as e:
+            logger.error(f"Error generating SENSEX symbol: {e}")
+            # Fallback to original format
+            return f"SENSEX{expiry}{strike}{option}"
+    
+    def _get_last_thursday(self, year: int, month: int) -> datetime:
+        """Get the last Thursday of the month"""
+        import calendar
+        from datetime import timedelta
+        
+        # Get the last day of the month
+        last_day = calendar.monthrange(year, month)[1]
+        last_date = datetime(year, month, last_day)
+        
+        # Find the last Thursday
+        days_back = (last_date.weekday() - 3) % 7
+        if days_back == 0 and last_date.weekday() != 3:
+            days_back = 7
+        last_thursday = last_date - timedelta(days=days_back)
+        
+        return last_thursday
+    
+    def _get_month_code(self, month_num: int) -> str:
+        """
+        Get month code for SENSEX weekly expiry symbols
+        
+        Args:
+            month_num: Month number (1-12)
+            
+        Returns:
+            Single character month code: 9=Sep, O=Oct, N=Nov, D=Dec
+        """
+        month_codes = {
+            1: '1',   # Jan
+            2: '2',   # Feb  
+            3: '3',   # Mar
+            4: '4',   # Apr
+            5: '5',   # May
+            6: '6',   # Jun
+            7: '7',   # Jul
+            8: '8',   # Aug
+            9: '9',   # Sep
+            10: 'O',  # Oct
+            11: 'N',  # Nov
+            12: 'D'   # Dec
+        }
+        return month_codes.get(month_num, str(month_num))
         
     def place_buy_orders(self):
         """Place buy orders - TO BE IMPLEMENTED"""

@@ -1,0 +1,384 @@
+"""
+Symbol and market data management
+"""
+import pandas as pd
+import glob
+from datetime import datetime
+from typing import Optional, List, Dict, Any
+import logging
+
+# Configure logger for this module
+logger = logging.getLogger(__name__)
+
+class SymbolManager:
+    """Manages symbol data and market information"""
+    
+    def __init__(self):
+        self.symbol_data = {}
+        self.latest_files = {}
+        self._load_latest_symbol_files()
+    
+    def _load_latest_symbol_files(self):
+        """Load the latest symbol files"""
+        try:
+            # Find latest NFO file
+            nfo_files = glob.glob("data/NFO_symbols.txt_*.txt")
+            if nfo_files:
+                files_with_dates = [(file, datetime.strptime(file.split('_')[-1].split('.txt')[0], "%Y-%m-%d")) 
+                                  for file in nfo_files]
+                latest_nfo = sorted(files_with_dates, key=lambda x: x[1], reverse=True)[0][0]
+                self.latest_files['NFO'] = latest_nfo
+                try:
+                    self.symbol_data['NFO'] = pd.read_csv(latest_nfo, on_bad_lines='skip')
+                except Exception as e:
+                    logger.warning(f"Error loading NFO file: {e}")
+                    # Fallback: try without error handling
+                    self.symbol_data['NFO'] = pd.read_csv(latest_nfo)
+            
+            # Find latest BFO file
+            bfo_files = glob.glob("data/BFO_symbols.txt_*.txt")
+            if bfo_files:
+                files_with_dates = [(file, datetime.strptime(file.split('_')[-1].split('.txt')[0], "%Y-%m-%d")) 
+                                  for file in bfo_files]
+                latest_bfo = sorted(files_with_dates, key=lambda x: x[1], reverse=True)[0][0]
+                self.latest_files['BFO'] = latest_bfo
+                try:
+                    self.symbol_data['BFO'] = pd.read_csv(latest_bfo, on_bad_lines='skip')
+                except Exception as e:
+                    logger.warning(f"Error loading BFO file: {e}")
+                    # Fallback: try without error handling
+                    self.symbol_data['BFO'] = pd.read_csv(latest_bfo)
+                
+        except Exception as e:
+            logger.error(f"Error loading symbol files: {e}")
+    
+    def get_token(self, trading_symbol: str) -> Optional[str]:
+        """
+        Get token for a trading symbol
+        
+        Args:
+            trading_symbol: Trading symbol
+            
+        Returns:
+            Token string or None
+        """
+        try:
+            logger.info(f"Getting token for trading symbol: {trading_symbol}")
+            
+            # Check if it's a SENSEX symbol (but not SX50)
+            if "SENSEX" in trading_symbol and not trading_symbol.startswith("SENSEX50"):
+                # For new format symbols, use them directly
+                if 'BFO' in self.symbol_data:
+                    row = self.symbol_data['BFO'][self.symbol_data['BFO']['TradingSymbol'] == trading_symbol]
+                    if not row.empty:
+                        token = str(row.iloc[0]['Token'])
+                        logger.info(f"Found token for {trading_symbol}: {token}")
+                        return token
+                    else:
+                        logger.error(f"No token found for {trading_symbol}")
+                        # Try to find similar symbols for debugging (excluding SX50)
+                        similar_symbols = self.symbol_data['BFO'][
+                            (self.symbol_data['BFO']['TradingSymbol'].str.contains('SENSEX')) & 
+                            (~self.symbol_data['BFO']['TradingSymbol'].str.startswith('SENSEX50'))
+                        ]['TradingSymbol'].unique()
+                        logger.info(f"Available SENSEX symbols (first 10): {similar_symbols[:10]}")
+                        
+                        # Fallback to old conversion method for backward compatibility
+                        try:
+                            bfo_trading_symbol = self._convert_sensex_format(trading_symbol)
+                            logger.info(f"Trying converted SENSEX symbol: {trading_symbol} -> {bfo_trading_symbol}")
+                            
+                            row = self.symbol_data['BFO'][self.symbol_data['BFO']['TradingSymbol'] == bfo_trading_symbol]
+                            if not row.empty:
+                                token = str(row.iloc[0]['Token'])
+                                logger.info(f"Found token for converted symbol {bfo_trading_symbol}: {token}")
+                                return token
+                        except Exception as e:
+                            logger.error(f"Error in fallback conversion: {e}")
+            else:
+                # Check NFO symbols
+                if 'NFO' in self.symbol_data:
+                    row = self.symbol_data['NFO'][self.symbol_data['NFO']['TradingSymbol'] == trading_symbol]
+                    if not row.empty:
+                        token = str(row.iloc[0]['Token'])
+                        logger.info(f"Found NFO token for {trading_symbol}: {token}")
+                        return token
+                    else:
+                        logger.error(f"No token found for {trading_symbol}")
+                        # Let's check what symbols are available
+                        available_symbols = self.symbol_data['NFO']['TradingSymbol'].unique()
+                        logger.info(f"Available NFO symbols (first 10): {available_symbols[:10]}")
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error getting token for {trading_symbol}: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return None
+    
+    def get_token_and_lot_size(self, trading_symbol: str) -> tuple[Optional[str], Optional[int]]:
+        """
+        Get token and lot size for a trading symbol
+        
+        Args:
+            trading_symbol: Trading symbol
+            
+        Returns:
+            tuple: (token, lot_size) or (None, None) if not found
+        """
+        try:
+            logger.info(f"Getting token and lot size for trading symbol: {trading_symbol}")
+            
+            # Check if it's a SENSEX symbol
+            if "SENSEX" in trading_symbol:
+                # For new format symbols, use them directly
+                if 'BFO' in self.symbol_data:
+                    row = self.symbol_data['BFO'][self.symbol_data['BFO']['TradingSymbol'] == trading_symbol]
+                    if not row.empty:
+                        token = str(row.iloc[0]['Token'])
+                        lot_size = int(row.iloc[0]['LotSize'])
+                        logger.info(f"Found token and lot size for {trading_symbol}: {token}, {lot_size}")
+                        return token, lot_size
+                    else:
+                        logger.error(f"No token found for {trading_symbol}")
+                        # Try to find similar symbols for debugging
+                        similar_symbols = self.symbol_data['BFO'][self.symbol_data['BFO']['TradingSymbol'].str.contains('SENSEX')]['TradingSymbol'].unique()
+                        logger.info(f"Available SENSEX symbols (first 10): {similar_symbols[:10]}")
+                        
+                        # Fallback to old conversion method for backward compatibility
+                        try:
+                            bfo_trading_symbol = self._convert_sensex_format(trading_symbol)
+                            logger.info(f"Trying converted SENSEX symbol: {trading_symbol} -> {bfo_trading_symbol}")
+                            
+                            row = self.symbol_data['BFO'][self.symbol_data['BFO']['TradingSymbol'] == bfo_trading_symbol]
+                            if not row.empty:
+                                token = str(row.iloc[0]['Token'])
+                                lot_size = int(row.iloc[0]['LotSize'])
+                                logger.info(f"Found token and lot size for converted symbol {bfo_trading_symbol}: {token}, {lot_size}")
+                                return token, lot_size
+                        except Exception as e:
+                            logger.error(f"Error in fallback conversion: {e}")
+            else:
+                # Check NFO symbols
+                if 'NFO' in self.symbol_data:
+                    row = self.symbol_data['NFO'][self.symbol_data['NFO']['TradingSymbol'] == trading_symbol]
+                    if not row.empty:
+                        token = str(row.iloc[0]['Token'])
+                        lot_size = int(row.iloc[0]['LotSize'])
+                        logger.info(f"Found NFO token and lot size for {trading_symbol}: {token}, {lot_size}")
+                        return token, lot_size
+                    else:
+                        logger.error(f"No token found for {trading_symbol}")
+                        # Let's check what symbols are available
+                        available_symbols = self.symbol_data['NFO']['TradingSymbol'].unique()
+                        logger.info(f"Available NFO symbols (first 10): {available_symbols[:10]}")
+            
+            return None, None
+            
+        except Exception as e:
+            logger.error(f"Error getting token and lot size for {trading_symbol}: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return None, None
+    
+    def get_lot_size_for_index(self, index: str) -> Optional[int]:
+        """
+        Get lot size for an index from master scrip file
+        
+        Args:
+            index: Index name (NIFTY, BANKNIFTY, SENSEX)
+            
+        Returns:
+            Lot size or None if not found
+        """
+        try:
+            logger.info(f"Getting lot size for index: {index}")
+            
+            if index == "SENSEX":
+                # Check BFO symbols for SENSEX
+                if 'BFO' in self.symbol_data:
+                    # Look for SENSEX option symbols
+                    sensex_symbols = self.symbol_data['BFO'][
+                        self.symbol_data['BFO']['Symbol'].str.contains('SX50OPT', na=False)
+                    ]
+                    if not sensex_symbols.empty:
+                        lot_size = int(sensex_symbols.iloc[0]['LotSize'])
+                        logger.info(f"Found SENSEX lot size from BFO: {lot_size}")
+                        return lot_size
+            else:
+                # Check NFO symbols for NIFTY and BANKNIFTY
+                if 'NFO' in self.symbol_data:
+                    # Look for index option symbols
+                    index_symbols = self.symbol_data['NFO'][
+                        self.symbol_data['NFO']['Symbol'] == index
+                    ]
+                    if not index_symbols.empty:
+                        lot_size = int(index_symbols.iloc[0]['LotSize'])
+                        logger.info(f"Found {index} lot size from NFO: {lot_size}")
+                        return lot_size
+            
+            logger.warning(f"Lot size not found for index: {index}")
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error getting lot size for index {index}: {e}")
+            return None
+
+    def get_quantity_options(self, lot_size: int, num_options: int = 10) -> list:
+        """
+        Generate quantity options as multiples of lot size
+        
+        Args:
+            lot_size: Lot size from master scrip file
+            num_options: Number of quantity options to generate
+            
+        Returns:
+            List of quantity options
+        """
+        try:
+            quantities = []
+            for i in range(1, num_options + 1):
+                quantity = lot_size * i
+                quantities.append(str(quantity))
+            
+            logger.info(f"Generated quantity options for lot size {lot_size}: {quantities}")
+            return quantities
+            
+        except Exception as e:
+            logger.error(f"Error generating quantity options: {e}")
+            # Fallback to default quantities
+            return [str(lot_size * i) for i in range(1, 11)]
+    
+    def _convert_sensex_format(self, input_str: str) -> str:
+        """Convert SENSEX symbol format"""
+        import calendar
+        from datetime import datetime, timedelta
+        
+        def is_last_friday(date):
+            """Check if the given date is the last Friday of the month."""
+            year = date.year
+            month = date.month
+            last_day = calendar.monthrange(year, month)[1]
+            last_date = datetime(year, month, last_day)
+            last_friday = last_date - timedelta(days=(last_date.weekday() - 4) % 7)
+            return date == last_friday
+        
+        parts = input_str.split('SENSEX')
+        if len(parts) < 2:
+            raise ValueError("Invalid input format")
+        
+        details = parts[1]
+        date_part = details[:7]  # e.g., 27DEC24 or 03JAN25
+        strike_price = details[7:-2]  # e.g., 78000
+        ce_pe = details[-2:]  # CE or PE
+        
+        day = int(date_part[:2])
+        month_str = date_part[2:5].upper()
+        year = int(date_part[5:])
+        
+        month = datetime.strptime(month_str, "%b").month
+        date_obj = datetime(2000 + year, month, day)
+        
+        if is_last_friday(date_obj):
+            output = f"SENSEX{year}{month_str}{strike_price}{ce_pe}"
+        else:
+            output = f"SENSEX{year}{month}{day:02d}{strike_price}{ce_pe}"
+        
+        return output
+    
+    def get_quotes(self, api, exchange: str, token: str) -> Optional[Dict[str, Any]]:
+        """
+        Get quotes for a symbol
+        
+        Args:
+            api: API instance
+            exchange: Exchange name
+            token: Symbol token
+            
+        Returns:
+            Quote data or None
+        """
+        try:
+            return api.get_quotes(exchange=exchange, token=token)
+        except Exception as e:
+            logger.error(f"Error getting quotes for {exchange}|{token}: {e}")
+            return None
+    
+    def get_latest_price(self, api, trading_symbol: str) -> Optional[float]:
+        """
+        Get latest price for a trading symbol
+        
+        Args:
+            api: API instance
+            trading_symbol: Trading symbol
+            
+        Returns:
+            Latest price or None
+        """
+        try:
+            # Determine exchange
+            if 'SENSEX' in trading_symbol:
+                exchange = 'BFO'
+            else:
+                exchange = 'NFO'
+            
+            # Get token
+            token = self.get_token(trading_symbol)
+            if not token:
+                return None
+            
+            # Get quotes
+            quotes = self.get_quotes(api, exchange, token)
+            if quotes:
+                return float(quotes.get('lp', 0))
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error getting latest price for {trading_symbol}: {e}")
+            return None
+    
+    def get_index_price(self, api, index_name: str) -> Optional[float]:
+        """
+        Get latest price for an index
+        
+        Args:
+            api: API instance
+            index_name: Index name (SENSEX, NIFTY, BANKNIFTY)
+            
+        Returns:
+            Latest index price or None
+        """
+        try:
+            # Index tokens mapping
+            index_tokens = {
+                'SENSEX': {'token': '1', 'exchange': 'BSE', 'name': 'BSE SENSEX'},
+                'NIFTY': {'token': '26000', 'exchange': 'NSE', 'name': 'NIFTY 50'},
+                'BANKNIFTY': {'token': '26009', 'exchange': 'NSE', 'name': 'NIFTY BANK'}
+            }
+            
+            if index_name not in index_tokens:
+                logger.error(f"Unknown index: {index_name}")
+                return None
+            
+            index_info = index_tokens[index_name]
+            logger.info(f"Fetching {index_name} price from {index_info['exchange']} with token {index_info['token']}")
+            
+            # Get quotes for the index
+            quotes = self.get_quotes(api, index_info['exchange'], index_info['token'])
+            if quotes:
+                price = float(quotes.get('lp', 0))
+                if price > 0:
+                    logger.info(f"Successfully fetched {index_name} price: {price}")
+                    return price
+                else:
+                    logger.warning(f"Invalid price received for {index_name}: {price}")
+                    return None
+            else:
+                logger.warning(f"No quotes received for {index_name} from {index_info['exchange']}")
+                return None
+            
+        except Exception as e:
+            logger.error(f"Error getting index price for {index_name}: {e}")
+            return None

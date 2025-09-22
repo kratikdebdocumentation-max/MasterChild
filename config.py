@@ -95,3 +95,71 @@ class Config:
                 print(f"Warning: {filename} not found at {file_path}")
         
         return credentials
+    
+    @classmethod
+    def load_configuration_csv(cls, csv_file_path: str = "configuration.csv") -> dict:
+        """Load configuration from CSV file"""
+        import csv
+        import os
+        
+        config = {}
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(current_dir, csv_file_path)
+        
+        if not os.path.exists(file_path):
+            print(f"Warning: Configuration file {csv_file_path} not found at {file_path}")
+            return config
+        
+        try:
+            with open(file_path, 'r', newline='', encoding='utf-8') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    setting_name = row.get('setting_name', '').strip()
+                    value = row.get('value', '').strip()
+                    if setting_name and value:
+                        # Convert numeric values
+                        try:
+                            config[setting_name] = int(value)
+                        except ValueError:
+                            config[setting_name] = value
+            print(f"Successfully loaded configuration from {csv_file_path}")
+        except Exception as e:
+            print(f"Error loading configuration from {csv_file_path}: {e}")
+        
+        return config
+    
+    @classmethod
+    def get_lot_size(cls, index_name: str, config: dict = None) -> int:
+        """Get lot size for an index from configuration"""
+        if config is None:
+            config = cls.load_configuration_csv()
+        
+        lot_size_mapping = {
+            'SENSEX': 'sensex_lot_size',
+            'NIFTY': 'nifty_lot_size', 
+            'BANKNIFTY': 'banknifty_lot_size'
+        }
+        
+        setting_name = lot_size_mapping.get(index_name)
+        if setting_name and setting_name in config:
+            return config[setting_name]
+        
+        # Default fallback values
+        default_lot_sizes = {
+            'SENSEX': 20,
+            'NIFTY': 75,
+            'BANKNIFTY': 35
+        }
+        return default_lot_sizes.get(index_name, 25)
+    
+    @classmethod
+    def generate_quantity_options(cls, index_name: str, max_multiple: int = 10, config: dict = None) -> list:
+        """Generate quantity options as multiples of lot size"""
+        lot_size = cls.get_lot_size(index_name, config)
+        quantities = []
+        
+        for i in range(1, max_multiple + 1):
+            quantity = lot_size * i
+            quantities.append(str(quantity))
+        
+        return quantities

@@ -1,0 +1,604 @@
+2025-09-22 00:03:49,700 - INFO - Loaded account states from account_state.csv
+2025-09-22 00:03:49,702 - INFO - Resetting account states to initial state on startup...
+2025-09-22 00:03:49,710 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 00:03:49,715 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 00:03:49,721 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 00:03:49,724 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 00:03:49,735 - INFO - Account states reset to initial state
+2025-09-22 00:03:49,735 - INFO - Loaded index prices from text file
+2025-09-22 00:03:49,744 - INFO - Loaded expiry dates from text files
+2025-09-22 00:03:49,996 - INFO - Attempting auto-login for master account...
+2025-09-22 00:03:49,996 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 00:03:49,996 - INFO - Generated fresh 2FA for account 1: 730970
+2025-09-22 00:03:51,657 - INFO - Attempting login for child account 2...
+2025-09-22 00:03:51,657 - INFO - Generated fresh 2FA for account 2: 492702
+2025-09-22 00:03:52,405 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 00:03:52,405 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 00:03:52,405 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 00:03:52,422 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 00:03:52,424 - INFO - Refreshing market data...
+2025-09-22 00:03:52,424 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 00:03:52,425 - INFO - Refreshing index prices...
+2025-09-22 00:03:52,427 - INFO - Fetching index prices from API...
+2025-09-22 00:03:52,428 - INFO - Fetching NIFTY price from NSE
+2025-09-22 00:03:53,070 - INFO - Fetched NIFTY price: 25774.05
+2025-09-22 00:03:53,070 - INFO - Fetching BANKNIFTY price from NSE
+2025-09-22 00:03:53,376 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-22 00:03:53,376 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-22 00:03:53,376 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-22 00:03:53,386 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-22 00:03:53,386 - INFO - Child account login successful: KRATIK YADAV
+2025-09-22 00:03:53,741 - INFO - Fetched BANKNIFTY price: 55424.05
+2025-09-22 00:03:53,741 - INFO - Fetching SENSEX price from BSE
+2025-09-22 00:03:54,324 - INFO - Fetched SENSEX price: 84284.76
+2025-09-22 00:03:54,324 - INFO - Saved index prices to cache files
+2025-09-22 00:03:54,339 - INFO - Successfully updated all index prices
+2025-09-22 00:03:54,342 - INFO - Refreshing expiry dates...
+2025-09-22 00:03:54,342 - INFO - Calculating expiry dates...
+2025-09-22 00:03:54,344 - INFO - NIFTY - Current: 2025-09-26, Next: 2025-10-31
+2025-09-22 00:03:54,346 - INFO - BANKNIFTY - Current: 2025-09-26, Next: 2025-10-31
+2025-09-22 00:03:54,346 - INFO - SENSEX - Current: 2025-09-26, Next: 2025-10-31
+2025-09-22 00:03:54,350 - INFO - Saved expiry dates to cache files
+2025-09-22 00:03:54,350 - INFO - Successfully calculated and saved expiry dates
+2025-09-22 00:03:54,890 - INFO - Index selected: NIFTY
+2025-09-22 00:03:54,893 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:03:54,893 - INFO - On strike selected called - Function not implemented yet
+2025-09-22 00:03:57,966 - INFO - On option selected called - Function not implemented yet
+2025-09-22 00:05:19,540 - INFO - Loaded account states from account_state.csv
+2025-09-22 00:05:19,542 - INFO - Resetting account states to initial state on startup...
+2025-09-22 00:05:19,554 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 00:05:19,561 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 00:05:19,565 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 00:05:19,569 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 00:05:19,569 - INFO - Account states reset to initial state
+2025-09-22 00:05:19,569 - INFO - Loaded cached index prices from today
+2025-09-22 00:05:19,573 - INFO - Loaded cached expiry dates from today
+2025-09-22 00:05:19,623 - INFO - Attempting auto-login for master account...
+2025-09-22 00:05:19,623 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 00:05:19,623 - INFO - Generated fresh 2FA for account 1: 659856
+2025-09-22 00:05:20,451 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 00:05:20,453 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 00:05:20,456 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 00:05:20,461 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 00:05:20,463 - INFO - Refreshing market data...
+2025-09-22 00:05:20,463 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 00:05:20,463 - INFO - Index prices are current, no refresh needed
+2025-09-22 00:05:20,463 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 00:05:23,817 - INFO - Index selected: BANKNIFTY
+2025-09-22 00:05:23,819 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:05:23,819 - INFO - On strike selected called - Function not implemented yet
+2025-09-22 00:10:14,775 - INFO - Loaded account states from account_state.csv
+2025-09-22 00:10:14,779 - INFO - Resetting account states to initial state on startup...
+2025-09-22 00:10:14,783 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 00:10:14,791 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 00:10:14,793 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 00:10:14,800 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 00:10:14,802 - INFO - Account states reset to initial state
+2025-09-22 00:10:14,802 - INFO - Loaded cached index prices from today
+2025-09-22 00:10:14,803 - INFO - Loaded cached expiry dates from today
+2025-09-22 00:10:14,868 - INFO - Attempting auto-login for master account...
+2025-09-22 00:10:14,868 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 00:10:14,868 - INFO - Generated fresh 2FA for account 1: 398014
+2025-09-22 00:10:15,751 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 00:10:15,751 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 00:10:15,757 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 00:10:15,757 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 00:10:15,762 - INFO - Refreshing market data...
+2025-09-22 00:10:15,762 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 00:10:15,764 - INFO - Index prices are current, no refresh needed
+2025-09-22 00:10:15,764 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 00:10:17,984 - INFO - Index selected: SENSEX
+2025-09-22 00:10:17,998 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:10:17,999 - INFO - On strike selected called - Function not implemented yet
+2025-09-22 00:10:18,001 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-22 00:10:25,911 - INFO - On option selected called - Function not implemented yet
+2025-09-22 00:10:27,758 - INFO - On option selected called - Function not implemented yet
+2025-09-22 00:10:34,254 - INFO - On strike selected called - Function not implemented yet
+2025-09-22 00:10:45,676 - INFO - Attempting login for child account 2...
+2025-09-22 00:10:45,676 - INFO - Generated fresh 2FA for account 2: 911024
+2025-09-22 00:10:46,323 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-22 00:10:46,327 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-22 00:10:46,330 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-22 00:10:46,334 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-22 00:10:46,334 - INFO - Child account login successful: KRATIK YADAV
+2025-09-22 00:14:51,359 - INFO - Loaded account states from account_state.csv
+2025-09-22 00:14:51,361 - INFO - Resetting account states to initial state on startup...
+2025-09-22 00:14:51,364 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 00:14:51,369 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 00:14:51,373 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 00:14:51,382 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 00:14:51,383 - INFO - Account states reset to initial state
+2025-09-22 00:14:51,384 - INFO - Loaded cached index prices from today
+2025-09-22 00:14:51,385 - INFO - Loaded cached expiry dates from today
+2025-09-22 00:14:51,598 - INFO - Attempting auto-login for master account...
+2025-09-22 00:14:51,598 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 00:14:51,598 - INFO - Generated fresh 2FA for account 1: 930585
+2025-09-22 00:14:52,258 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 00:14:52,260 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 00:14:52,262 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 00:14:52,264 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 00:14:52,265 - INFO - Refreshing market data...
+2025-09-22 00:14:52,266 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 00:14:52,266 - INFO - Index prices are current, no refresh needed
+2025-09-22 00:14:52,267 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 00:14:53,744 - INFO - Attempting login for child account 2...
+2025-09-22 00:14:53,744 - INFO - Generated fresh 2FA for account 2: 181017
+2025-09-22 00:14:54,199 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-22 00:14:54,199 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-22 00:14:54,215 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-22 00:14:54,215 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-22 00:14:54,215 - INFO - Child account login successful: KRATIK YADAV
+2025-09-22 00:14:58,546 - INFO - Index selected: NIFTY
+2025-09-22 00:14:58,546 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:14:58,546 - INFO - On strike selected called - Function not implemented yet
+2025-09-22 00:14:58,546 - INFO - Updated quantity dropdown for NIFTY: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-22 00:15:01,554 - INFO - On option selected called - Function not implemented yet
+2025-09-22 00:15:04,279 - INFO - On strike selected called - Function not implemented yet
+2025-09-22 00:27:33,582 - INFO - Starting websocket integration test...
+2025-09-22 00:27:33,725 - INFO - Loaded account states from account_state.csv
+2025-09-22 00:27:33,727 - INFO - Resetting account states to initial state on startup...
+2025-09-22 00:27:33,736 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 00:27:33,740 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 00:27:33,743 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 00:27:33,745 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 00:27:33,746 - INFO - Account states reset to initial state
+2025-09-22 00:27:33,746 - INFO - Loaded cached index prices from today
+2025-09-22 00:27:33,748 - INFO - Loaded cached expiry dates from today
+2025-09-22 00:27:34,122 - INFO - Attempting auto-login for master account...
+2025-09-22 00:27:34,122 - INFO - Testing symbol manager...
+2025-09-22 00:27:34,123 - INFO - Testing websocket manager...
+2025-09-22 00:27:34,123 - INFO - Generated fresh 2FA for account 1: 216807
+2025-09-22 00:27:34,123 - INFO - Symbol data loaded: ['NFO', 'BFO']
+2025-09-22 00:27:34,125 - INFO - Websocket manager initialized successfully
+2025-09-22 00:27:34,125 - INFO - Websocket integration test completed successfully!
+2025-09-22 00:27:50,538 - INFO - Loaded account states from account_state.csv
+2025-09-22 00:27:50,546 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 00:27:50,554 - INFO - Updated Master (ID: 1) login status to '1': Master account always logged in
+2025-09-22 00:27:50,554 - INFO - Master account set to always logged in state
+2025-09-22 00:27:50,555 - INFO - Resetting account states to initial state on startup...
+2025-09-22 00:27:50,562 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 00:27:50,569 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 00:27:50,572 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 00:27:50,577 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 00:27:50,577 - INFO - Account states reset to initial state
+2025-09-22 00:27:50,578 - INFO - Loaded cached index prices from today
+2025-09-22 00:27:50,579 - INFO - Loaded cached expiry dates from today
+2025-09-22 00:27:50,839 - INFO - Attempting auto-login for master account...
+2025-09-22 00:27:50,840 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 00:27:50,840 - INFO - Generated fresh 2FA for account 1: 216807
+2025-09-22 00:27:51,584 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 00:27:51,587 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 00:27:51,589 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 00:27:51,592 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 00:27:51,594 - INFO - Refreshing market data...
+2025-09-22 00:27:51,595 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 00:27:51,596 - INFO - Index prices are current, no refresh needed
+2025-09-22 00:27:51,596 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 00:27:51,753 - INFO - Websocket connected
+2025-09-22 00:27:51,794 - INFO - WebSocket is now open for Account 1
+2025-09-22 00:27:53,872 - INFO - Index selected: SENSEX
+2025-09-22 00:27:53,872 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:27:53,872 - INFO - Not all required fields selected for strike selection
+2025-09-22 00:27:53,872 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-22 00:27:56,477 - INFO - On option selected called - Function not implemented yet
+2025-09-22 00:28:03,333 - INFO - Generated trading symbol: SENSEX26SEP2584400CE
+2025-09-22 00:28:03,333 - INFO - Getting token for trading symbol: SENSEX26SEP2584400CE
+2025-09-22 00:28:03,339 - ERROR - No token found for SENSEX26SEP2584400CE
+2025-09-22 00:28:03,386 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-22 00:28:03,387 - INFO - Trying converted SENSEX symbol: SENSEX26SEP2584400CE -> SENSEX25SEP84400CE
+2025-09-22 00:28:03,392 - INFO - Found token for converted symbol SENSEX25SEP84400CE: 841765
+2025-09-22 00:28:03,842 - INFO - Fetched price for SENSEX26SEP2584400CE: 22.75
+2025-09-22 00:28:03,842 - INFO - Getting token for trading symbol: SENSEX26SEP2584400CE
+2025-09-22 00:28:03,849 - ERROR - No token found for SENSEX26SEP2584400CE
+2025-09-22 00:28:03,874 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-22 00:28:03,875 - INFO - Trying converted SENSEX symbol: SENSEX26SEP2584400CE -> SENSEX25SEP84400CE
+2025-09-22 00:28:03,877 - INFO - Found token for converted symbol SENSEX25SEP84400CE: 841765
+2025-09-22 00:28:03,878 - INFO - Subscribed to live price feed via master account: BFO|841765
+2025-09-22 00:28:03,878 - INFO - Auto-subscribed to SENSEX26SEP2584400CE at price 22.75
+2025-09-22 00:28:03,878 - INFO - Strike selected: 84400, trading symbol: SENSEX26SEP2584400CE
+2025-09-22 00:28:03,917 - INFO - Quote Received for Account 1: {'t': 'tk', 'e': 'BFO', 'tk': '841765', 'ts': 'SENSEX25SEP84400CE', 'pp': '2', 'ls': '20', 'ti': '0.05', 'lp': '22.75', 'pc': '6.06', 'c': '21.45', 'ft': '1758373446', 'o': '28.40', 'h': '0.00', 'l': '0.00', 'ap': '0.00', 'v': '60', 'oi': '113740', 'bp1': '0.00', 'sp1': '0.00', 'bq1': '0', 'sq1': '0'}
+2025-09-22 00:28:03,918 - INFO - Live price updated: 22.75
+2025-09-22 00:30:37,118 - INFO - Index selected: NIFTY
+2025-09-22 00:30:37,118 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:30:37,118 - INFO - Generated trading symbol: NIFTY26SEP2525750CE
+2025-09-22 00:30:37,118 - INFO - Getting token for trading symbol: NIFTY26SEP2525750CE
+2025-09-22 00:30:37,136 - ERROR - No token found for NIFTY26SEP2525750CE
+2025-09-22 00:30:37,155 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-22 00:30:37,157 - WARNING - Could not fetch price for NIFTY26SEP2525750CE
+2025-09-22 00:30:37,157 - INFO - Strike selected: 25750, trading symbol: NIFTY26SEP2525750CE
+2025-09-22 00:30:37,157 - INFO - Updated quantity dropdown for NIFTY: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-22 00:30:40,097 - INFO - Generated trading symbol: NIFTY26SEP2525800CE
+2025-09-22 00:30:40,097 - INFO - Getting token for trading symbol: NIFTY26SEP2525800CE
+2025-09-22 00:30:40,097 - ERROR - No token found for NIFTY26SEP2525800CE
+2025-09-22 00:30:40,117 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-22 00:30:40,117 - WARNING - Could not fetch price for NIFTY26SEP2525800CE
+2025-09-22 00:30:40,117 - INFO - Strike selected: 25800, trading symbol: NIFTY26SEP2525800CE
+2025-09-22 00:33:39,654 - INFO - Index selected: SENSEX
+2025-09-22 00:33:39,654 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:33:39,654 - INFO - Generated trading symbol: SENSEX26SEP2584300CE
+2025-09-22 00:33:39,654 - INFO - Getting token for trading symbol: SENSEX26SEP2584300CE
+2025-09-22 00:33:39,654 - ERROR - No token found for SENSEX26SEP2584300CE
+2025-09-22 00:33:39,663 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-22 00:33:39,679 - INFO - Trying converted SENSEX symbol: SENSEX26SEP2584300CE -> SENSEX25SEP84300CE
+2025-09-22 00:33:39,679 - INFO - Found token for converted symbol SENSEX25SEP84300CE: 841419
+2025-09-22 00:33:40,371 - INFO - Fetched price for SENSEX26SEP2584300CE: 25.6
+2025-09-22 00:33:40,371 - INFO - Getting token for trading symbol: SENSEX26SEP2584300CE
+2025-09-22 00:33:40,374 - ERROR - No token found for SENSEX26SEP2584300CE
+2025-09-22 00:33:40,391 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-22 00:33:40,391 - INFO - Trying converted SENSEX symbol: SENSEX26SEP2584300CE -> SENSEX25SEP84300CE
+2025-09-22 00:33:40,394 - INFO - Found token for converted symbol SENSEX25SEP84300CE: 841419
+2025-09-22 00:33:40,395 - INFO - Unsubscribed from previous: BFO|841765
+2025-09-22 00:33:40,395 - INFO - Subscribed to live price feed via master account: BFO|841419
+2025-09-22 00:33:40,395 - INFO - Auto-subscribed to SENSEX26SEP2584300CE at price 25.6
+2025-09-22 00:33:40,395 - INFO - Strike selected: 84300, trading symbol: SENSEX26SEP2584300CE
+2025-09-22 00:33:40,396 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-22 00:33:40,430 - INFO - Quote Received for Account 1: {'t': 'tk', 'e': 'BFO', 'tk': '841419', 'ts': 'SENSEX25SEP84300CE', 'pp': '2', 'ls': '20', 'ti': '0.05', 'lp': '25.60', 'pc': '2.81', 'c': '24.90', 'ft': '1758373455', 'o': '32.60', 'h': '0.00', 'l': '0.00', 'ap': '0.00', 'v': '100', 'oi': '120380', 'bp1': '0.00', 'sp1': '0.00', 'bq1': '0', 'sq1': '0'}
+2025-09-22 00:33:40,440 - INFO - Live price updated: 25.6
+2025-09-22 00:38:58,173 - INFO - Loaded account states from account_state.csv
+2025-09-22 00:38:58,175 - INFO - Resetting account states to initial state on startup...
+2025-09-22 00:38:58,180 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 00:38:58,186 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 00:38:58,200 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 00:38:58,210 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 00:38:58,240 - INFO - Account states reset to initial state
+2025-09-22 00:38:58,242 - INFO - Loaded cached index prices from today
+2025-09-22 00:38:58,245 - INFO - Loaded cached expiry dates from today
+2025-09-22 00:38:58,590 - INFO - Attempting auto-login for master account...
+2025-09-22 00:38:58,590 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 00:38:58,590 - INFO - Generated fresh 2FA for account 1: 237460
+2025-09-22 00:38:59,190 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 00:38:59,192 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 00:38:59,195 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 00:38:59,198 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 00:38:59,199 - INFO - Refreshing market data...
+2025-09-22 00:38:59,200 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 00:38:59,201 - INFO - Index prices are current, no refresh needed
+2025-09-22 00:38:59,202 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 00:38:59,384 - INFO - Websocket connected
+2025-09-22 00:38:59,432 - INFO - WebSocket is now open for Account 1
+2025-09-22 00:39:00,039 - INFO - Attempting login for child account 2...
+2025-09-22 00:39:00,039 - INFO - Generated fresh 2FA for account 2: 889895
+2025-09-22 00:39:00,526 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-22 00:39:00,534 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-22 00:39:00,546 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-22 00:39:00,564 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-22 00:39:00,583 - INFO - Child account login successful: KRATIK YADAV
+2025-09-22 00:39:00,780 - INFO - Websocket connected
+2025-09-22 00:39:00,836 - INFO - WebSocket is now open for Account 2
+2025-09-22 00:39:02,147 - INFO - Index selected: NIFTY
+2025-09-22 00:39:02,147 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:39:02,147 - INFO - Not all required fields selected for strike selection
+2025-09-22 00:39:02,147 - INFO - Updated quantity dropdown for NIFTY: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-22 00:39:04,290 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:39:06,170 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:44:29,520 - INFO - Loaded account states from account_state.csv
+2025-09-22 00:44:29,523 - INFO - Resetting account states to initial state on startup...
+2025-09-22 00:44:29,535 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 00:44:29,541 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 00:44:29,552 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 00:44:29,564 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 00:44:29,565 - INFO - Account states reset to initial state
+2025-09-22 00:44:29,567 - INFO - Loaded cached index prices from today
+2025-09-22 00:44:29,571 - INFO - Loaded cached expiry dates from today
+2025-09-22 00:44:29,919 - INFO - Attempting auto-login for master account...
+2025-09-22 00:44:29,921 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 00:44:29,922 - INFO - Generated fresh 2FA for account 1: 798468
+2025-09-22 00:44:30,698 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 00:44:30,710 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 00:44:30,714 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 00:44:30,718 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 00:44:30,723 - INFO - Refreshing market data...
+2025-09-22 00:44:30,724 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 00:44:30,727 - INFO - Index prices are current, no refresh needed
+2025-09-22 00:44:30,728 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 00:44:30,919 - INFO - Websocket connected
+2025-09-22 00:44:30,967 - INFO - WebSocket is now open for Account 1
+2025-09-22 00:44:55,125 - INFO - Index selected: NIFTY
+2025-09-22 00:44:55,127 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:44:55,128 - INFO - Not all required fields selected for strike selection
+2025-09-22 00:44:55,128 - INFO - Updated quantity dropdown for NIFTY: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-22 00:44:58,424 - INFO - On option selected called - Function not implemented yet
+2025-09-22 00:45:00,455 - INFO - Generated trading symbol: NIFTY23SEP2525850CE
+2025-09-22 00:45:00,456 - INFO - Getting token for trading symbol: NIFTY23SEP2525850CE
+2025-09-22 00:45:00,465 - ERROR - No token found for NIFTY23SEP2525850CE
+2025-09-22 00:45:00,483 - INFO - Available NFO symbols (first 10): ['ZYDUSLIFE30SEP25P1360' 'ZYDUSLIFE30SEP25C1360' 'ZYDUSLIFE30SEP25P1320'
+ 'ZYDUSLIFE30SEP25C1320' 'ZYDUSLIFE30SEP25P1280' 'ZYDUSLIFE30SEP25C1280'
+ 'ZYDUSLIFE30SEP25P1260' 'ZYDUSLIFE30SEP25C1260' 'ZYDUSLIFE30SEP25P1240'
+ 'ZYDUSLIFE30SEP25C1240']
+2025-09-22 00:45:00,484 - WARNING - Could not fetch price for NIFTY23SEP2525850CE
+2025-09-22 00:45:00,485 - INFO - Strike selected: 25850, trading symbol: NIFTY23SEP2525850CE
+2025-09-22 00:45:05,154 - INFO - Index selected: SENSEX
+2025-09-22 00:45:05,155 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 00:45:05,155 - INFO - Generated trading symbol: SENSEX25SEP2584300CE
+2025-09-22 00:45:05,156 - INFO - Getting token for trading symbol: SENSEX25SEP2584300CE
+2025-09-22 00:45:05,161 - ERROR - No token found for SENSEX25SEP2584300CE
+2025-09-22 00:45:05,186 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-22 00:45:05,186 - INFO - Trying converted SENSEX symbol: SENSEX25SEP2584300CE -> SENSEX2592584300CE
+2025-09-22 00:45:05,189 - WARNING - Could not fetch price for SENSEX25SEP2584300CE
+2025-09-22 00:45:05,190 - INFO - Strike selected: 84300, trading symbol: SENSEX25SEP2584300CE
+2025-09-22 00:45:05,190 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-22 00:45:11,797 - INFO - Generated trading symbol: SENSEX25SEP2584600CE
+2025-09-22 00:45:11,797 - INFO - Getting token for trading symbol: SENSEX25SEP2584600CE
+2025-09-22 00:45:11,802 - ERROR - No token found for SENSEX25SEP2584600CE
+2025-09-22 00:45:11,825 - INFO - Available SENSEX symbols (first 10): ['SENSEX25SEP91600PE' 'SENSEX25SEP91500PE' 'SENSEX25SEP91400PE'
+ 'SENSEX25SEP91300PE' 'SENSEX25SEP91200PE' 'SENSEX25SEP91100PE'
+ 'SENSEX25SEP91000PE' 'SENSEX25SEP90900PE' 'SENSEX25SEP90800PE'
+ 'SENSEX25SEP90700PE']
+2025-09-22 00:45:11,825 - INFO - Trying converted SENSEX symbol: SENSEX25SEP2584600CE -> SENSEX2592584600CE
+2025-09-22 00:45:11,834 - WARNING - Could not fetch price for SENSEX25SEP2584600CE
+2025-09-22 00:45:11,835 - INFO - Strike selected: 84600, trading symbol: SENSEX25SEP2584600CE
+2025-09-22 00:45:17,457 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 10:55:33,684 - INFO - Loaded account states from account_state.csv
+2025-09-22 10:55:33,693 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 10:55:33,697 - INFO - Updated Master (ID: 1) login status to '1': Master account always logged in
+2025-09-22 10:55:33,697 - INFO - Master account set to always logged in state
+2025-09-22 10:55:33,698 - INFO - Resetting account states to initial state on startup...
+2025-09-22 10:55:33,704 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 10:55:33,711 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 10:55:33,714 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 10:55:33,718 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 10:55:33,719 - INFO - Account states reset to initial state
+2025-09-22 10:55:33,719 - INFO - Loaded cached index prices from today
+2025-09-22 10:55:33,720 - INFO - Loaded cached expiry dates from today
+2025-09-22 10:55:33,964 - INFO - Attempting auto-login for master account...
+2025-09-22 10:55:33,964 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 10:55:33,965 - INFO - Generated fresh 2FA for account 1: 239780
+2025-09-22 10:55:34,636 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 10:55:34,640 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 10:55:34,643 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 10:55:34,648 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 10:55:34,650 - INFO - Refreshing market data...
+2025-09-22 10:55:34,650 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 10:55:34,651 - INFO - Index prices are current, no refresh needed
+2025-09-22 10:55:34,653 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 10:55:34,831 - INFO - Websocket connected
+2025-09-22 10:55:34,878 - INFO - WebSocket is now open for Account 1
+2025-09-22 10:55:35,247 - INFO - Attempting login for child account 2...
+2025-09-22 10:55:35,248 - INFO - Generated fresh 2FA for account 2: 727397
+2025-09-22 10:55:35,744 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-22 10:55:35,750 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-22 10:55:35,752 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-22 10:55:35,755 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-22 10:55:35,756 - INFO - Child account login successful: KRATIK YADAV
+2025-09-22 10:55:35,924 - INFO - Websocket connected
+2025-09-22 10:55:35,968 - INFO - WebSocket is now open for Account 2
+2025-09-22 10:55:39,319 - INFO - Index selected: SENSEX
+2025-09-22 10:55:39,319 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 10:55:39,319 - INFO - Not all required fields selected for strike selection
+2025-09-22 10:55:39,319 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-22 10:55:42,662 - INFO - On option selected called - Function not implemented yet
+2025-09-22 10:55:45,750 - INFO - Generated trading symbol: SENSEX25SEP84600CE
+2025-09-22 10:55:45,750 - INFO - Getting token for trading symbol: SENSEX25SEP84600CE
+2025-09-22 10:55:45,767 - INFO - Found token for SENSEX25SEP84600CE: 841797
+2025-09-22 10:55:46,249 - INFO - Fetched price for SENSEX25SEP84600CE: 9.25
+2025-09-22 10:55:46,249 - INFO - Getting token for trading symbol: SENSEX25SEP84600CE
+2025-09-22 10:55:46,249 - INFO - Found token for SENSEX25SEP84600CE: 841797
+2025-09-22 10:55:46,249 - INFO - Subscribed to live price feed via master account: BFO|841797
+2025-09-22 10:55:46,249 - INFO - Auto-subscribed to SENSEX25SEP84600CE at price 9.25
+2025-09-22 10:55:46,249 - INFO - Strike selected: 84600, trading symbol: SENSEX25SEP84600CE
+2025-09-22 10:55:46,294 - INFO - Quote Received for Account 1: {'t': 'tk', 'e': 'BFO', 'tk': '841797', 'ts': 'SENSEX25SEP84600CE', 'pp': '2', 'ls': '20', 'ti': '0.05', 'lp': '9.25', 'pc': '-41.27', 'c': '15.75', 'ft': '1758518699', 'o': '15.00', 'h': '15.00', 'l': '7.10', 'ap': '9.53', 'v': '501500', 'oi': '123620', 'bp1': '9.20', 'sp1': '9.30', 'bq1': '1240', 'sq1': '420'}
+2025-09-22 10:55:46,294 - INFO - Live price updated: 9.25
+2025-09-22 10:55:46,696 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518700', 'bq1': '540', 'sq1': '620'}
+2025-09-22 10:55:47,781 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518701', 'bq1': '840', 'sq1': '1080'}
+2025-09-22 10:55:48,857 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518702', 'bq1': '940', 'sq1': '360'}
+2025-09-22 10:55:49,950 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518703', 'bq1': '1480', 'sq1': '260'}
+2025-09-22 10:55:51,026 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518705', 'bq1': '1360', 'sq1': '500'}
+2025-09-22 10:55:52,106 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518706', 'bp1': '9.25', 'sp1': '9.35', 'bq1': '1000', 'sq1': '980'}
+2025-09-22 10:55:53,186 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518707', 'bq1': '1040'}
+2025-09-22 10:55:54,270 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518708', 'bq1': '940', 'sq1': '880'}
+2025-09-22 10:55:54,370 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518708', 'bq1': '1200', 'sq1': '700'}
+2025-09-22 10:55:55,362 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'lp': '9.35', 'pc': '-40.63', 'ft': '1758518709', 'v': '501600', 'bq1': '1380', 'sq1': '520'}
+2025-09-22 10:55:55,362 - INFO - Live price updated: 9.35
+2025-09-22 10:55:56,450 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518710', 'bp1': '9.30', 'sp1': '9.40', 'bq1': '1160', 'sq1': '1140'}
+2025-09-22 10:55:57,531 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518711', 'sp1': '9.35', 'bq1': '700', 'sq1': '620'}
+2025-09-22 10:55:57,609 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518711', 'bq1': '440', 'sq1': '720'}
+2025-09-22 10:55:58,612 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518712', 'bq1': '620', 'sq1': '680'}
+2025-09-22 10:55:58,692 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518712', 'bq1': '520'}
+2025-09-22 10:55:59,698 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518713', 'bq1': '1100', 'sq1': '260'}
+2025-09-22 10:56:00,780 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518714', 'bp1': '9.35', 'sp1': '9.40', 'bq1': '460', 'sq1': '440'}
+2025-09-22 10:56:01,867 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518715', 'bq1': '320', 'sq1': '300'}
+2025-09-22 10:56:02,950 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518716', 'bq1': '400', 'sq1': '200'}
+2025-09-22 10:56:04,032 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518718', 'sp1': '9.45', 'bq1': '1080', 'sq1': '1220'}
+2025-09-22 10:56:05,109 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518719', 'sq1': '720'}
+2025-09-22 10:56:06,197 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518720', 'sp1': '9.40', 'bq1': '1400', 'sq1': '80'}
+2025-09-22 10:56:07,286 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518721', 'sp1': '9.45', 'bq1': '860', 'sq1': '820'}
+2025-09-22 10:56:07,357 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518721', 'sp1': '9.40', 'bq1': '700', 'sq1': '320'}
+2025-09-22 10:56:08,364 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518722', 'sp1': '9.45', 'bq1': '1260', 'sq1': '960'}
+2025-09-22 10:56:09,450 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518723', 'bq1': '1040', 'sq1': '1060'}
+2025-09-22 10:56:10,526 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518724', 'sq1': '980'}
+2025-09-22 10:56:11,614 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'lp': '9.45', 'pc': '-40.00', 'ft': '1758518725', 'v': '501640', 'sp1': '9.40', 'bq1': '520', 'sq1': '120'}
+2025-09-22 10:56:11,615 - INFO - Live price updated: 9.45
+2025-09-22 10:56:12,697 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518726', 'sp1': '9.45', 'sq1': '1160'}
+2025-09-22 10:56:13,859 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518727', 'bq1': '440'}
+2025-09-22 10:56:14,854 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518728', 'bq1': '520', 'sq1': '1080'}
+2025-09-22 10:56:14,944 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518728', 'sp1': '9.40', 'bq1': '220', 'sq1': '440'}
+2025-09-22 10:56:15,947 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518729', 'bq1': '280', 'sq1': '680'}
+2025-09-22 10:56:16,018 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518730', 'bq1': '700', 'sq1': '40'}
+2025-09-22 10:56:17,032 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518731', 'bq1': '460', 'sq1': '280'}
+2025-09-22 10:56:17,104 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518731', 'sq1': '40'}
+2025-09-22 10:56:19,277 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518733', 'bq1': '400', 'sq1': '200'}
+2025-09-22 10:56:20,282 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518734', 'sq1': '160'}
+2025-09-22 10:56:20,360 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'lp': '9.40', 'pc': '-40.32', 'ft': '1758518734', 'v': '501700', 'sp1': '9.45', 'bq1': '320', 'sq1': '1240'}
+2025-09-22 10:56:20,361 - INFO - Live price updated: 9.4
+2025-09-22 10:56:21,361 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518735', 'bq1': '460'}
+2025-09-22 10:56:22,461 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518736', 'bq1': '660', 'sq1': '900'}
+2025-09-22 10:56:23,534 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518737', 'sp1': '9.40', 'bq1': '440', 'sq1': '100'}
+2025-09-22 10:56:24,615 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518738', 'sq1': '40'}
+2025-09-22 10:56:25,698 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'lp': '9.30', 'pc': '-40.95', 'ft': '1758518739', 'v': '501920', 'bp1': '9.25', 'sp1': '9.30', 'bq1': '1340', 'sq1': '180'}
+2025-09-22 10:56:25,698 - INFO - Live price updated: 9.3
+2025-09-22 10:56:26,780 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518740', 'bq1': '1300', 'sq1': '340'}
+2025-09-22 10:56:26,865 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518740', 'bq1': '1180'}
+2025-09-22 10:56:27,868 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'lp': '9.25', 'pc': '-41.27', 'ft': '1758518741', 'v': '502080', 'bq1': '520', 'sq1': '540'}
+2025-09-22 10:56:27,873 - INFO - Live price updated: 9.25
+2025-09-22 10:56:28,956 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518742', 'bq1': '940', 'sq1': '100'}
+2025-09-22 10:56:30,024 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518744', 'bq1': '720', 'sq1': '340'}
+2025-09-22 10:56:31,116 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518745', 'v': '502200', 'bp1': '9.20', 'sp1': '9.25', 'bq1': '1400'}
+2025-09-22 10:56:32,198 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518746', 'bq1': '1020', 'sq1': '400'}
+2025-09-22 10:56:32,274 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518746', 'bq1': '1300', 'sq1': '500'}
+2025-09-22 10:56:33,285 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'lp': '9.20', 'pc': '-41.59', 'ft': '1758518747', 'v': '502380', 'bq1': '1380', 'sq1': '100'}
+2025-09-22 10:56:33,286 - INFO - Live price updated: 9.2
+2025-09-22 10:56:34,367 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518748', 'bq1': '300', 'sq1': '540'}
+2025-09-22 10:56:35,522 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518749', 'v': '502680', 'bp1': '9.15', 'bq1': '1140', 'sq1': '840'}
+2025-09-22 10:56:36,530 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518750', 'bp1': '9.20', 'bq1': '300', 'sq1': '640'}
+2025-09-22 10:56:38,698 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518752', 'bq1': '240'}
+2025-09-22 10:56:39,782 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518753', 'sq1': '880'}
+2025-09-22 10:56:40,862 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518754', 'bq1': '160'}
+2025-09-22 10:56:40,941 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518754', 'sq1': '1180'}
+2025-09-22 10:56:41,950 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518755', 'sq1': '1080'}
+2025-09-22 10:56:46,282 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518760', 'bq1': '220', 'sq1': '840'}
+2025-09-22 10:56:47,363 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518761', 'sq1': '760'}
+2025-09-22 10:56:48,504 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518762', 'bq1': '60', 'sq1': '840'}
+2025-09-22 10:56:49,532 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518763', 'bq1': '120', 'sq1': '520'}
+2025-09-22 10:56:50,615 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518764', 'bq1': '300'}
+2025-09-22 10:56:51,704 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518765', 'bq1': '1140', 'sq1': '200'}
+2025-09-22 10:56:52,769 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518766', 'bq1': '1380', 'sq1': '80'}
+2025-09-22 10:56:53,865 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518767', 'bq1': '940', 'sq1': '260'}
+2025-09-22 10:56:54,946 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518768', 'bq1': '740', 'sq1': '160'}
+2025-09-22 10:56:56,027 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518770', 'bq1': '1240', 'sq1': '80'}
+2025-09-22 10:56:56,109 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518770', 'sq1': '160'}
+2025-09-22 10:56:57,114 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518771', 'bq1': '340', 'sq1': '580'}
+2025-09-22 10:56:58,197 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518772', 'bq1': '1260', 'sq1': '80'}
+2025-09-22 10:56:59,282 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518773', 'v': '502980', 'bq1': '680', 'sq1': '360'}
+2025-09-22 10:56:59,346 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518773', 'bq1': '1040', 'sq1': '160'}
+2025-09-22 10:57:00,370 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518774', 'v': '503100', 'bp1': '9.15', 'sp1': '9.20', 'bq1': '80', 'sq1': '1780'}
+2025-09-22 10:57:01,451 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'lp': '9.10', 'pc': '-42.22', 'ft': '1758518775', 'v': '503280', 'bp1': '9.10', 'bq1': '360', 'sq1': '1540'}
+2025-09-22 10:57:01,451 - INFO - Live price updated: 9.1
+2025-09-22 10:57:02,552 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518776', 'bq1': '760'}
+2025-09-22 10:57:03,614 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518777', 'bq1': '1000'}
+2025-09-22 10:57:04,692 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518778', 'bp1': '9.15', 'bq1': '80', 'sq1': '1700'}
+2025-09-22 10:57:05,781 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518779', 'sq1': '1420'}
+2025-09-22 10:57:06,336 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518780', 'oi': '124880'}
+2025-09-22 10:57:06,866 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518780', 'bq1': '180', 'sq1': '1260'}
+2025-09-22 10:57:06,943 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518780', 'bq1': '540', 'sq1': '1100'}
+2025-09-22 10:57:07,948 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518781', 'bq1': '200', 'sq1': '640'}
+2025-09-22 10:57:09,032 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518783', 'bq1': '360', 'sq1': '800'}
+2025-09-22 10:57:09,111 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518783', 'bq1': '740', 'sq1': '580'}
+2025-09-22 10:57:10,113 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518784', 'bq1': '580', 'sq1': '340'}
+2025-09-22 10:57:11,204 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'lp': '9.15', 'pc': '-41.90', 'ft': '1758518785', 'v': '503300', 'bq1': '560', 'sq1': '560'}
+2025-09-22 10:57:11,204 - INFO - Live price updated: 9.15
+2025-09-22 10:57:12,271 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518786', 'v': '503320', 'sq1': '320'}
+2025-09-22 10:57:13,447 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518787', 'bq1': '760', 'sq1': '700'}
+2025-09-22 10:57:14,450 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518788', 'bq1': '80', 'sq1': '900'}
+2025-09-22 10:57:15,529 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518789', 'bq1': '60', 'sq1': '1600'}
+2025-09-22 10:57:16,614 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518790', 'bq1': '80', 'sq1': '1000'}
+2025-09-22 10:57:16,691 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518790', 'bq1': '100', 'sq1': '700'}
+2025-09-22 10:57:17,698 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518791', 'bq1': '80', 'sq1': '1520'}
+2025-09-22 10:57:17,776 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518791', 'sq1': '1360'}
+2025-09-22 10:57:20,939 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518794', 'sq1': '1200'}
+2025-09-22 10:57:21,019 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518795', 'bq1': '240'}
+2025-09-22 10:57:22,031 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518796', 'bq1': '100', 'sq1': '660'}
+2025-09-22 10:57:23,120 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518797', 'bq1': '40', 'sq1': '1120'}
+2025-09-22 10:57:24,197 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518798', 'bq1': '100', 'sq1': '540'}
+2025-09-22 10:57:24,273 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518798', 'sq1': '660'}
+2025-09-22 10:57:25,280 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'lp': '9.35', 'pc': '-40.63', 'ft': '1758518799', 'v': '503360', 'bp1': '9.25', 'sp1': '9.30', 'bq1': '160', 'sq1': '320'}
+2025-09-22 10:57:25,280 - INFO - Live price updated: 9.35
+2025-09-22 10:57:25,364 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518799', 'sp1': '9.35', 'bq1': '500', 'sq1': '1780'}
+2025-09-22 10:57:26,380 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518800', 'bq1': '700', 'sq1': '1980'}
+2025-09-22 10:57:27,444 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518801', 'bq1': '640', 'sq1': '1680'}
+2025-09-22 10:57:27,536 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518801', 'bq1': '1180'}
+2025-09-22 10:57:28,531 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518802', 'bq1': '620', 'sq1': '1960'}
+2025-09-22 10:57:29,621 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518803', 'bq1': '460', 'sq1': '2060'}
+2025-09-22 10:57:30,697 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'BFO', 'tk': '841797', 'ft': '1758518804', 'sq1': '1960'}
+2025-09-22 10:58:55,234 - INFO - Loaded account states from account_state.csv
+2025-09-22 10:58:55,246 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 10:58:55,251 - INFO - Updated Master (ID: 1) login status to '1': Master account always logged in
+2025-09-22 10:58:55,251 - INFO - Master account set to always logged in state
+2025-09-22 10:58:55,255 - INFO - Resetting account states to initial state on startup...
+2025-09-22 10:58:55,265 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-22 10:58:55,270 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 10:58:55,274 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-22 10:58:55,282 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 10:58:55,284 - INFO - Account states reset to initial state
+2025-09-22 10:58:55,285 - INFO - Loaded cached index prices from today
+2025-09-22 10:58:55,287 - INFO - Loaded cached expiry dates from today
+2025-09-22 10:58:55,735 - INFO - Attempting auto-login for master account...
+2025-09-22 10:58:55,735 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 10:58:55,736 - INFO - Generated fresh 2FA for account 1: 954966
+2025-09-22 10:58:56,452 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 10:58:56,457 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-22 10:58:56,464 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-22 10:58:56,469 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 10:58:56,470 - INFO - Refreshing market data...
+2025-09-22 10:58:56,471 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 10:58:56,472 - INFO - Index prices are current, no refresh needed
+2025-09-22 10:58:56,472 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 10:58:56,634 - INFO - Websocket connected
+2025-09-22 10:58:56,676 - INFO - WebSocket is now open for Account 1
+2025-09-22 10:58:59,789 - INFO - Index selected: NIFTY
+2025-09-22 10:58:59,789 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 10:58:59,795 - INFO - Not all required fields selected for strike selection
+2025-09-22 10:58:59,795 - INFO - Updated quantity dropdown for NIFTY: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-22 10:59:03,200 - INFO - On option selected called - Function not implemented yet
+2025-09-22 10:59:11,063 - INFO - Generated trading symbol: NIFTY23SEP25C25700
+2025-09-22 10:59:11,063 - INFO - Getting token for trading symbol: NIFTY23SEP25C25700
+2025-09-22 10:59:11,071 - INFO - Found NFO token for NIFTY23SEP25C25700: 47793
+2025-09-22 10:59:11,579 - INFO - Fetched price for NIFTY23SEP25C25700: 2.05
+2025-09-22 10:59:11,579 - INFO - Getting token for trading symbol: NIFTY23SEP25C25700
+2025-09-22 10:59:11,588 - INFO - Found NFO token for NIFTY23SEP25C25700: 47793
+2025-09-22 10:59:11,588 - INFO - Subscribed to live price feed via master account: NFO|47793
+2025-09-22 10:59:11,588 - INFO - Auto-subscribed to NIFTY23SEP25C25700 at price 2.05
+2025-09-22 10:59:11,588 - INFO - Strike selected: 25700, trading symbol: NIFTY23SEP25C25700
+2025-09-22 10:59:11,626 - INFO - Quote Received for Account 1: {'t': 'tk', 'e': 'NFO', 'tk': '47793', 'ts': 'NIFTY23SEP25C25700', 'pp': '2', 'ls': '75', 'ti': '0.05', 'lp': '2.05', 'pc': '-55.43', 'c': '4.60', 'ft': '1758518951', 'o': '3.20', 'h': '3.55', 'l': '1.90', 'ap': '2.22', 'v': '70984050', 'oi': '8995725', 'poi': '9248700', 'bp1': '2.00', 'sp1': '2.05', 'bq1': '845925', 'sq1': '268725'}
+2025-09-22 10:59:11,626 - INFO - Live price updated: 2.05
+2025-09-22 10:59:12,088 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'ft': '1758518952', 'v': '70984125', 'bq1': '781275', 'sq1': '268650'}
+2025-09-22 10:59:13,492 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'ft': '1758518954', 'v': '70984575', 'bq1': '798150', 'sq1': '268200'}
+2025-09-22 10:59:15,097 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'ft': '1758518955', 'v': '70984650', 'bq1': '832275', 'sq1': '268125'}
+2025-09-22 10:59:16,901 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'ft': '1758518957', 'bq1': '865125'}
+2025-09-22 10:59:18,498 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'ft': '1758518959', 'bq1': '864600', 'sq1': '268200'}
+2025-09-22 10:59:20,105 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'ft': '1758518960', 'sq1': '268425'}
+2025-09-22 10:59:21,263 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'lp': '2.00', 'pc': '-56.52', 'ft': '1758518961'}
+2025-09-22 10:59:21,264 - INFO - Live price updated: 2.0
+2025-09-22 10:59:21,703 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'ft': '1758518962', 'v': '70985250', 'bq1': '864450', 'sq1': '268725'}
+2025-09-22 10:59:23,261 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'lp': '2.05', 'pc': '-55.43', 'ft': '1758518963'}
+2025-09-22 10:59:23,262 - INFO - Live price updated: 2.05
+2025-09-22 10:59:23,304 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'ft': '1758518963', 'v': '70990425', 'bq1': '858375', 'sq1': '275475'}
+2025-09-22 10:59:24,908 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '47793', 'ft': '1758518965', 'bq1': '839700', 'sq1': '274050'}
+2025-09-22 10:59:25,180 - INFO - Index selected: BANKNIFTY
+2025-09-22 10:59:25,181 - INFO - On expiry selected called - Function not implemented yet
+2025-09-22 10:59:25,182 - INFO - Generated trading symbol: BANKNIFTY30SEP25C55400
+2025-09-22 10:59:25,182 - INFO - Getting token for trading symbol: BANKNIFTY30SEP25C55400
+2025-09-22 10:59:25,193 - INFO - Found NFO token for BANKNIFTY30SEP25C55400: 54991
+2025-09-22 10:59:25,728 - INFO - Fetched price for BANKNIFTY30SEP25C55400: 566.8
+2025-09-22 10:59:25,728 - INFO - Getting token for trading symbol: BANKNIFTY30SEP25C55400
+2025-09-22 10:59:25,734 - INFO - Found NFO token for BANKNIFTY30SEP25C55400: 54991
+2025-09-22 10:59:25,734 - INFO - Unsubscribed from previous: NFO|47793
+2025-09-22 10:59:25,734 - INFO - Subscribed to live price feed via master account: NFO|54991
+2025-09-22 10:59:25,734 - INFO - Auto-subscribed to BANKNIFTY30SEP25C55400 at price 566.8
+2025-09-22 10:59:25,734 - INFO - Strike selected: 55400, trading symbol: BANKNIFTY30SEP25C55400
+2025-09-22 10:59:25,740 - INFO - Updated quantity dropdown for BANKNIFTY: ['35', '70', '105', '140', '175', '210', '245', '280', '315', '350']
+2025-09-22 10:59:25,778 - INFO - Quote Received for Account 1: {'t': 'tk', 'e': 'NFO', 'tk': '54991', 'ts': 'BANKNIFTY30SEP25C55400', 'pp': '2', 'ls': '35', 'ti': '0.05', 'lp': '566.80', 'pc': '16.40', 'c': '486.95', 'ft': '1758518965', 'o': '469.95', 'h': '606.55', 'l': '401.00', 'ap': '521.99', 'v': '1681225', 'oi': '249690', 'poi': '224315', 'bp1': '567.45', 'sp1': '568.80', 'bq1': '175', 'sq1': '105'}
+2025-09-22 10:59:25,779 - INFO - Live price updated: 566.8
+2025-09-22 10:59:26,186 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518966', 'bp1': '568.00', 'sp1': '569.45'}
+2025-09-22 10:59:27,382 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518967', 'bp1': '567.95', 'sp1': '569.20', 'bq1': '210', 'sq1': '70'}
+2025-09-22 10:59:27,604 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'lp': '568.05', 'pc': '16.65', 'ft': '1758518968'}
+2025-09-22 10:59:27,605 - INFO - Live price updated: 568.05
+2025-09-22 10:59:28,584 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518969', 'v': '1681260', 'bp1': '568.05', 'sp1': '569.40', 'bq1': '140', 'sq1': '105'}
+2025-09-22 10:59:29,790 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518970', 'bp1': '567.25', 'sp1': '568.55', 'bq1': '70', 'sq1': '140'}
+2025-09-22 10:59:30,788 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518971', 'bp1': '567.20', 'sp1': '567.95', 'bq1': '35', 'sq1': '175'}
+2025-09-22 10:59:31,990 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518972', 'sp1': '568.15', 'sq1': '35'}
+2025-09-22 10:59:33,190 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518973', 'sq1': '175'}
+2025-09-22 10:59:34,391 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518974', 'sp1': '568.20', 'sq1': '105'}
+2025-09-22 10:59:35,591 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518976', 'sp1': '568.25', 'sq1': '140'}
+2025-09-22 10:59:36,587 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518977', 'bp1': '567.65', 'sp1': '569.05', 'bq1': '70', 'sq1': '70'}
+2025-09-22 10:59:37,794 - INFO - Quote Received for Account 1: {'t': 'tf', 'e': 'NFO', 'tk': '54991', 'ft': '1758518978', 'bp1': '567.60', 'sp1': '568.95', 'bq1': '175'}

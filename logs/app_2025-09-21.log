@@ -72,3 +72,336 @@
 2025-09-21 22:51:59,141 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
 2025-09-21 22:51:59,157 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
 2025-09-21 22:51:59,157 - INFO - Child account login successful: KRATIK YADAV
+2025-09-21 22:54:15,745 - INFO - Loaded account states from account_state.csv
+2025-09-21 22:54:16,076 - INFO - Attempting auto-login for master account...
+2025-09-21 22:54:16,076 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 22:54:16,076 - INFO - Generated fresh 2FA for account 1: 669890
+2025-09-21 22:54:17,115 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 22:54:17,118 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 22:54:17,123 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 22:54:17,126 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 22:54:17,131 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 22:54:22,989 - INFO - Attempting login for child account 2...
+2025-09-21 22:54:22,990 - INFO - Generated fresh 2FA for account 2: 262261
+2025-09-21 22:54:23,703 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-21 22:54:23,703 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-21 22:54:23,703 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-21 22:54:23,714 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-21 22:54:23,714 - INFO - Child account login successful: KRATIK YADAV
+2025-09-21 22:54:35,571 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:54:44,743 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:54:44,745 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:54:44,844 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:54:44,969 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:54:45,083 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:54:45,300 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:54:45,406 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:55:56,170 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:55:56,354 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:55:56,500 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:55:56,673 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:55:56,843 - INFO - Update selections called - Function not implemented yet
+2025-09-21 22:55:56,985 - INFO - Update selections called - Function not implemented yet
+2025-09-21 23:03:26,427 - INFO - Loaded account states from account_state.csv
+2025-09-21 23:03:26,429 - INFO - No cached index prices found, will fetch when needed
+2025-09-21 23:03:26,429 - INFO - Loaded expiry dates from text files
+2025-09-21 23:03:26,497 - INFO - Attempting auto-login for master account...
+2025-09-21 23:03:26,497 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 23:03:26,498 - INFO - Generated fresh 2FA for account 1: 990608
+2025-09-21 23:03:27,373 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 23:03:27,375 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 23:03:27,381 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 23:03:27,385 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 23:03:27,385 - INFO - Refreshing market data...
+2025-09-21 23:03:27,389 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 23:03:27,389 - INFO - Refreshing index prices...
+2025-09-21 23:03:27,389 - INFO - Fetching index prices from API...
+2025-09-21 23:03:27,389 - INFO - Fetching NIFTY price from NSE
+2025-09-21 23:03:29,142 - INFO - Fetched NIFTY price: 25774.05
+2025-09-21 23:03:29,142 - INFO - Fetching BANKNIFTY price from NSE
+2025-09-21 23:03:29,802 - INFO - Fetched BANKNIFTY price: 55424.05
+2025-09-21 23:03:29,802 - INFO - Fetching SENSEX price from BSE
+2025-09-21 23:03:30,498 - INFO - Fetched SENSEX price: 84284.76
+2025-09-21 23:03:30,506 - INFO - Saved index prices to cache files
+2025-09-21 23:03:30,597 - INFO - Refreshing expiry dates...
+2025-09-21 23:03:30,597 - INFO - Calculating expiry dates...
+2025-09-21 23:03:30,597 - INFO - NIFTY - Current: 2025-09-26, Next: 2025-10-31
+2025-09-21 23:03:30,597 - INFO - BANKNIFTY - Current: 2025-09-26, Next: 2025-10-31
+2025-09-21 23:03:30,597 - INFO - SENSEX - Current: 2025-09-26, Next: 2025-10-31
+2025-09-21 23:03:30,605 - INFO - Saved expiry dates to cache files
+2025-09-21 23:04:22,587 - INFO - Loaded account states from account_state.csv
+2025-09-21 23:04:22,602 - INFO - Loaded cached index prices from today
+2025-09-21 23:04:22,617 - INFO - Loaded cached expiry dates from today
+2025-09-21 23:04:22,667 - INFO - Attempting auto-login for master account...
+2025-09-21 23:04:22,667 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 23:04:22,667 - INFO - Generated fresh 2FA for account 1: 467982
+2025-09-21 23:04:23,313 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 23:04:23,328 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 23:04:23,329 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 23:04:23,338 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 23:04:23,338 - INFO - Refreshing market data...
+2025-09-21 23:04:23,338 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 23:04:23,338 - INFO - Index prices are current, no refresh needed
+2025-09-21 23:04:23,338 - INFO - Expiry dates are current, no refresh needed
+2025-09-21 23:07:21,627 - INFO - Loaded account states from account_state.csv
+2025-09-21 23:07:21,627 - INFO - Resetting account states to initial state on startup...
+2025-09-21 23:07:21,635 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-21 23:07:21,638 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-21 23:07:21,643 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-21 23:07:21,648 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-21 23:07:21,648 - INFO - Account states reset to initial state
+2025-09-21 23:07:21,648 - INFO - Loaded cached index prices from today
+2025-09-21 23:07:21,650 - INFO - Loaded cached expiry dates from today
+2025-09-21 23:07:21,713 - INFO - Attempting auto-login for master account...
+2025-09-21 23:07:21,713 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 23:07:21,713 - INFO - Generated fresh 2FA for account 1: 200872
+2025-09-21 23:07:22,478 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 23:07:22,478 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 23:07:22,478 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 23:07:22,486 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 23:07:22,486 - INFO - Refreshing market data...
+2025-09-21 23:07:22,486 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 23:07:22,486 - INFO - Index prices are current, no refresh needed
+2025-09-21 23:07:22,486 - INFO - Expiry dates are current, no refresh needed
+2025-09-21 23:12:14,662 - INFO - Attempting login for child account 2...
+2025-09-21 23:12:14,664 - INFO - Generated fresh 2FA for account 2: 088440
+2025-09-21 23:12:15,612 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-21 23:12:15,617 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-21 23:12:15,621 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-21 23:12:15,625 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-21 23:12:15,625 - INFO - Child account login successful: KRATIK YADAV
+2025-09-21 23:12:46,318 - INFO - Loaded account states from account_state.csv
+2025-09-21 23:12:46,320 - INFO - Resetting account states to initial state on startup...
+2025-09-21 23:12:46,328 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-21 23:12:46,334 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-21 23:12:46,336 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-21 23:12:46,340 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-21 23:12:46,344 - INFO - Account states reset to initial state
+2025-09-21 23:12:46,344 - INFO - Loaded cached index prices from today
+2025-09-21 23:12:46,344 - INFO - Loaded cached expiry dates from today
+2025-09-21 23:12:46,598 - INFO - Attempting auto-login for master account...
+2025-09-21 23:12:46,598 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 23:12:46,598 - INFO - Generated fresh 2FA for account 1: 695055
+2025-09-21 23:12:47,346 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 23:12:47,347 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 23:12:47,353 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 23:12:47,355 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 23:12:47,358 - INFO - Refreshing market data...
+2025-09-21 23:12:47,358 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 23:12:47,358 - INFO - Index prices are current, no refresh needed
+2025-09-21 23:12:47,358 - INFO - Expiry dates are current, no refresh needed
+2025-09-21 23:12:56,218 - INFO - Attempting login for child account 2...
+2025-09-21 23:12:56,218 - INFO - Generated fresh 2FA for account 2: 897272
+2025-09-21 23:12:56,922 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-21 23:12:56,925 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-21 23:12:56,927 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-21 23:12:56,934 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-21 23:12:56,936 - INFO - Child account login successful: KRATIK YADAV
+2025-09-21 23:14:01,973 - INFO - Loaded account states from account_state.csv
+2025-09-21 23:14:01,976 - INFO - Resetting account states to initial state on startup...
+2025-09-21 23:14:01,986 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-21 23:14:01,993 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-21 23:14:02,001 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-21 23:14:02,007 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-21 23:14:02,011 - INFO - Account states reset to initial state
+2025-09-21 23:14:02,011 - INFO - Loaded cached index prices from today
+2025-09-21 23:14:02,013 - INFO - Loaded cached expiry dates from today
+2025-09-21 23:14:02,280 - INFO - Attempting auto-login for master account...
+2025-09-21 23:14:02,282 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 23:14:02,282 - INFO - Generated fresh 2FA for account 1: 622426
+2025-09-21 23:14:03,085 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 23:14:03,087 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 23:14:03,089 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 23:14:03,095 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 23:14:03,095 - INFO - Refreshing market data...
+2025-09-21 23:14:03,095 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 23:14:03,097 - INFO - Index prices are current, no refresh needed
+2025-09-21 23:14:03,098 - INFO - Expiry dates are current, no refresh needed
+2025-09-21 23:14:54,394 - INFO - Attempting login for child account 2...
+2025-09-21 23:14:54,396 - INFO - Generated fresh 2FA for account 2: 074568
+2025-09-21 23:14:55,034 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-21 23:14:55,049 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-21 23:14:55,053 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-21 23:14:55,060 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-21 23:14:55,062 - INFO - Child account login successful: KRATIK YADAV
+2025-09-21 23:20:04,405 - INFO - Loaded account states from account_state.csv
+2025-09-21 23:20:04,405 - INFO - Resetting account states to initial state on startup...
+2025-09-21 23:20:04,413 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-21 23:20:04,415 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-21 23:20:04,421 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-21 23:20:04,423 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-21 23:20:04,423 - INFO - Account states reset to initial state
+2025-09-21 23:20:04,427 - INFO - Loaded cached index prices from today
+2025-09-21 23:20:04,429 - INFO - Loaded cached expiry dates from today
+2025-09-21 23:20:04,471 - INFO - Attempting auto-login for master account...
+2025-09-21 23:20:04,471 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 23:20:04,471 - INFO - Generated fresh 2FA for account 1: 786006
+2025-09-21 23:20:05,282 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 23:20:05,287 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 23:20:05,289 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 23:20:05,295 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 23:20:05,297 - INFO - Refreshing market data...
+2025-09-21 23:20:05,297 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 23:20:05,299 - INFO - Index prices are current, no refresh needed
+2025-09-21 23:20:05,301 - INFO - Expiry dates are current, no refresh needed
+2025-09-21 23:20:07,572 - INFO - Attempting login for child account 2...
+2025-09-21 23:20:07,572 - INFO - Generated fresh 2FA for account 2: 551219
+2025-09-21 23:20:08,144 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-21 23:20:08,151 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-21 23:20:08,151 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-21 23:20:08,160 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-21 23:20:08,160 - INFO - Child account login successful: KRATIK YADAV
+2025-09-21 23:20:10,150 - INFO - Index selected: BANKNIFTY
+2025-09-21 23:20:10,150 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:20:10,150 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:20:13,166 - INFO - Index selected: NIFTY
+2025-09-21 23:20:13,171 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:20:13,171 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:20:15,197 - INFO - Index selected: SENSEX
+2025-09-21 23:20:15,197 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:20:15,204 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:20:18,308 - INFO - On option selected called - Function not implemented yet
+2025-09-21 23:20:25,495 - INFO - Index selected: NIFTY
+2025-09-21 23:20:25,495 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:20:25,495 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:20:28,761 - INFO - On option selected called - Function not implemented yet
+2025-09-21 23:20:35,467 - INFO - Index selected: SENSEX
+2025-09-21 23:20:35,467 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:20:35,470 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:22:40,797 - INFO - Loaded account states from account_state.csv
+2025-09-21 23:22:40,798 - INFO - Resetting account states to initial state on startup...
+2025-09-21 23:22:40,805 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-21 23:22:40,811 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-21 23:22:40,816 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-21 23:22:40,821 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-21 23:22:40,821 - INFO - Account states reset to initial state
+2025-09-21 23:22:40,823 - INFO - Loaded cached index prices from today
+2025-09-21 23:22:40,825 - INFO - Loaded cached expiry dates from today
+2025-09-21 23:22:40,873 - INFO - Attempting auto-login for master account...
+2025-09-21 23:22:40,873 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 23:22:40,873 - INFO - Generated fresh 2FA for account 1: 867067
+2025-09-21 23:22:41,643 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 23:22:41,648 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 23:22:41,648 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 23:22:41,655 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 23:22:41,658 - INFO - Refreshing market data...
+2025-09-21 23:22:41,658 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 23:22:41,660 - INFO - Index prices are current, no refresh needed
+2025-09-21 23:22:41,660 - INFO - Expiry dates are current, no refresh needed
+2025-09-21 23:22:50,617 - INFO - Attempting login for child account 2...
+2025-09-21 23:22:50,621 - INFO - Generated fresh 2FA for account 2: 830697
+2025-09-21 23:22:51,244 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-21 23:22:51,275 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-21 23:22:51,281 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-21 23:22:51,286 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-21 23:22:51,288 - INFO - Child account login successful: KRATIK YADAV
+2025-09-21 23:22:55,362 - INFO - Index selected: SENSEX
+2025-09-21 23:22:55,362 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:22:55,362 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:23:10,739 - INFO - Index selected: BANKNIFTY
+2025-09-21 23:23:10,739 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:23:10,739 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:23:25,688 - INFO - Index selected: NIFTY
+2025-09-21 23:23:25,689 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:23:25,691 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:38:09,101 - INFO - Loaded account states from account_state.csv
+2025-09-21 23:38:09,107 - INFO - Resetting account states to initial state on startup...
+2025-09-21 23:38:09,121 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-21 23:38:09,129 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-21 23:38:09,132 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-21 23:38:09,138 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-21 23:38:09,138 - INFO - Account states reset to initial state
+2025-09-21 23:38:09,139 - INFO - Loaded cached index prices from today
+2025-09-21 23:38:09,139 - INFO - Loaded cached expiry dates from today
+2025-09-21 23:38:09,184 - INFO - Attempting auto-login for master account...
+2025-09-21 23:38:09,184 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 23:38:09,186 - INFO - Generated fresh 2FA for account 1: 256025
+2025-09-21 23:38:09,968 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 23:38:09,968 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 23:38:09,974 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 23:38:09,981 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 23:38:09,981 - INFO - Refreshing market data...
+2025-09-21 23:38:09,981 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 23:38:09,983 - INFO - Index prices are current, no refresh needed
+2025-09-21 23:38:09,985 - INFO - Expiry dates are current, no refresh needed
+2025-09-21 23:38:10,709 - INFO - Attempting login for child account 2...
+2025-09-21 23:38:10,709 - INFO - Generated fresh 2FA for account 2: 808949
+2025-09-21 23:38:11,639 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-21 23:38:11,641 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-21 23:38:11,642 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-21 23:38:11,642 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-21 23:38:11,649 - INFO - Child account login successful: KRATIK YADAV
+2025-09-21 23:38:14,420 - INFO - Index selected: SENSEX
+2025-09-21 23:38:14,425 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:38:14,425 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:40:01,429 - INFO - Loaded account states from account_state.csv
+2025-09-21 23:40:01,429 - INFO - Resetting account states to initial state on startup...
+2025-09-21 23:40:01,438 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-21 23:40:01,442 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-21 23:40:01,446 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-21 23:40:01,451 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-21 23:40:01,452 - INFO - Account states reset to initial state
+2025-09-21 23:40:01,452 - INFO - Loaded cached index prices from today
+2025-09-21 23:40:01,454 - INFO - Loaded cached expiry dates from today
+2025-09-21 23:40:01,496 - INFO - Attempting auto-login for master account...
+2025-09-21 23:40:01,496 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 23:40:01,498 - INFO - Generated fresh 2FA for account 1: 191938
+2025-09-21 23:40:02,331 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 23:40:02,335 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 23:40:02,337 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 23:40:02,343 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 23:40:02,345 - INFO - Refreshing market data...
+2025-09-21 23:40:02,345 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 23:40:02,345 - INFO - Index prices are current, no refresh needed
+2025-09-21 23:40:02,347 - INFO - Expiry dates are current, no refresh needed
+2025-09-21 23:40:02,759 - INFO - Attempting login for child account 2...
+2025-09-21 23:40:02,759 - INFO - Generated fresh 2FA for account 2: 479507
+2025-09-21 23:40:04,183 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-21 23:40:04,183 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-21 23:40:04,187 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-21 23:40:04,195 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-21 23:40:04,195 - INFO - Child account login successful: KRATIK YADAV
+2025-09-21 23:40:07,072 - INFO - Index selected: BANKNIFTY
+2025-09-21 23:40:07,072 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:40:11,458 - INFO - Index selected: SENSEX
+2025-09-21 23:40:11,458 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:40:13,390 - INFO - Index selected: NIFTY
+2025-09-21 23:40:13,390 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:41:51,423 - INFO - Loaded account states from account_state.csv
+2025-09-21 23:41:51,431 - INFO - Resetting account states to initial state on startup...
+2025-09-21 23:41:51,436 - INFO - Updated Master (ID: 1) login status to '0': Program startup - master not logged in
+2025-09-21 23:41:51,439 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-21 23:41:51,439 - INFO - Updated Child (ID: 2) login status to '0': Program startup - child not logged in
+2025-09-21 23:41:51,450 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-21 23:41:51,450 - INFO - Account states reset to initial state
+2025-09-21 23:41:51,450 - INFO - Loaded cached index prices from today
+2025-09-21 23:41:51,450 - INFO - Loaded cached expiry dates from today
+2025-09-21 23:41:51,524 - INFO - Attempting auto-login for master account...
+2025-09-21 23:41:51,524 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-21 23:41:51,524 - INFO - Generated fresh 2FA for account 1: 337846
+2025-09-21 23:41:53,113 - INFO - Attempting login for child account 2...
+2025-09-21 23:41:53,113 - INFO - Generated fresh 2FA for account 2: 446837
+2025-09-21 23:41:53,411 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-21 23:41:53,411 - INFO - Account 1 can_order reset to 1 on successful login
+2025-09-21 23:41:53,416 - INFO - Updated Master (ID: 1) login status to '1': Master account auto-login successful
+2025-09-21 23:41:53,419 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-21 23:41:53,419 - INFO - Refreshing market data...
+2025-09-21 23:41:53,419 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-21 23:41:53,419 - INFO - Index prices are current, no refresh needed
+2025-09-21 23:41:53,419 - INFO - Expiry dates are current, no refresh needed
+2025-09-21 23:41:53,884 - INFO - Login Successful!, Welcome KRATIK YADAV - Child2 ACCOUNT
+2025-09-21 23:41:53,885 - INFO - Account 2 can_order reset to 1 on successful login
+2025-09-21 23:41:53,885 - INFO - Updated Child (ID: 2) login status to '1': Child account 2 login successful
+2025-09-21 23:41:53,893 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-21 23:41:53,893 - INFO - Child account login successful: KRATIK YADAV
+2025-09-21 23:41:55,642 - INFO - Index selected: BANKNIFTY
+2025-09-21 23:41:55,642 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:41:55,642 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:42:00,642 - INFO - Index selected: SENSEX
+2025-09-21 23:42:00,670 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:42:00,707 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:42:05,274 - INFO - Index selected: NIFTY
+2025-09-21 23:42:05,274 - INFO - On expiry selected called - Function not implemented yet
+2025-09-21 23:42:05,274 - INFO - On strike selected called - Function not implemented yet
+2025-09-21 23:42:07,818 - INFO - On option selected called - Function not implemented yet
+2025-09-21 23:42:16,377 - INFO - On strike selected called - Function not implemented yet
