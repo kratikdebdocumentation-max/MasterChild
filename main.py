@@ -1414,12 +1414,100 @@ class MainWindow:
         logger.info("Place exit orders clicked - Function not implemented yet")
         
     def cancel_master_buy_order(self):
-        """Cancel master buy order - TO BE IMPLEMENTED"""
-        logger.info("Cancel master buy order clicked - Function not implemented yet")
+        """Cancel master buy order"""
+        try:
+            logger.info("Cancel master buy order clicked")
+            
+            # Check if master account can order
+            can_order = self.account_state_manager.get_can_order(1)
+            if can_order == 0:
+                messagebox.showinfo("Order Already Cancelled", "Master order is already cancelled")
+                return
+            
+            # Get master API and order info
+            master_api = self.account_manager.get_api(1)
+            if not master_api:
+                messagebox.showerror("Error", "Master API not available")
+                return
+            
+            # Get order ID from account state
+            master_status = self.account_state_manager.get_account_status(1)
+            if not master_status or not master_status.get('current_order_id'):
+                messagebox.showwarning("No Order Found", "No master order found to cancel")
+                return
+            
+            order_id = master_status['current_order_id']
+            
+            # Cancel the order
+            success = self._cancel_single_order(1, master_api, order_id, "Master")
+            
+            if success:
+                # Update can_order flag to 0
+                self.account_state_manager.update_can_order(1, 0, "Order cancelled by user")
+                
+                # Update UI
+                self.master_order_status.set("Master buy order cancelled by user")
+                self.cancel_master_buy_button.config(state="disabled", text="Master Buy Cancelled")
+                
+                # Disable buy button until release
+                self.buy_button.config(state="disabled", text="Press RELEASE to Enable")
+                
+                logger.info("Master buy order cancelled successfully")
+                messagebox.showinfo("Success", "Master buy order cancelled successfully")
+            else:
+                messagebox.showerror("Error", "Failed to cancel master buy order")
+                
+        except Exception as e:
+            logger.error(f"Error cancelling master buy order: {e}")
+            messagebox.showerror("Error", f"Error cancelling master buy order: {str(e)}")
         
     def cancel_child_buy_order(self):
-        """Cancel child buy order - TO BE IMPLEMENTED"""
-        logger.info("Cancel child buy order clicked - Function not implemented yet")
+        """Cancel child buy order"""
+        try:
+            logger.info("Cancel child buy order clicked")
+            
+            # Check if child account can order
+            can_order = self.account_state_manager.get_can_order(2)
+            if can_order == 0:
+                messagebox.showinfo("Order Already Cancelled", "Child order is already cancelled")
+                return
+            
+            # Get child API and order info
+            child_api = self.account_manager.get_api(2)
+            if not child_api:
+                messagebox.showerror("Error", "Child API not available")
+                return
+            
+            # Get order ID from account state
+            child_status = self.account_state_manager.get_account_status(2)
+            if not child_status or not child_status.get('current_order_id'):
+                messagebox.showwarning("No Order Found", "No child order found to cancel")
+                return
+            
+            order_id = child_status['current_order_id']
+            
+            # Cancel the order
+            success = self._cancel_single_order(2, child_api, order_id, "Child")
+            
+            if success:
+                # Update can_order flag to 0
+                self.account_state_manager.update_can_order(2, 0, "Order cancelled by user")
+                
+                # Update UI
+                self.child_order_status.set("Child buy order cancelled by user")
+                self.cancel_child_buy_button.config(state="disabled", text="Child Buy Cancelled")
+                
+                # Disable buy button until release
+                self.buy_button.config(state="disabled", text="Press RELEASE to Enable")
+                
+                logger.info("Child buy order cancelled successfully")
+                messagebox.showinfo("Success", "Child buy order cancelled successfully")
+            else:
+                messagebox.showerror("Error", "Failed to cancel child buy order")
+                
+        except Exception as e:
+            logger.error(f"Error cancelling child buy order: {e}")
+            messagebox.showerror("Error", f"Error cancelling child buy order: {str(e)}")
         
     def set_sl_price(self):
         """Set SL price - TO BE IMPLEMENTED"""
@@ -1442,8 +1530,166 @@ class MainWindow:
         logger.info("Disable trail clicked - Function not implemented yet")
         
     def cancel_buy_orders(self):
-        """Cancel buy orders - TO BE IMPLEMENTED"""
-        logger.info("Cancel buy orders clicked - Function not implemented yet")
+        """Cancel buy orders for both Master and Child accounts in parallel"""
+        try:
+            logger.info("Cancel buy orders clicked")
+            
+            # Check can_order flags for both accounts
+            master_can_order = self.account_state_manager.get_can_order(1)
+            child_can_order = self.account_state_manager.get_can_order(2)
+            
+            # If both accounts have can_order=0, show message
+            if master_can_order == 0 and child_can_order == 0:
+                messagebox.showinfo("Orders Already Cancelled", "All orders are already cancelled")
+                return
+            
+            # Prepare cancellation tasks
+            cancellation_tasks = []
+            
+            # Prepare Master order cancellation if can_order=1
+            if master_can_order == 1:
+                master_api = self.account_manager.get_api(1)
+                if master_api:
+                    master_status = self.account_state_manager.get_account_status(1)
+                    if master_status and master_status.get('current_order_id'):
+                        order_id = master_status['current_order_id']
+                        cancellation_tasks.append({
+                            'account_id': 1,
+                            'api': master_api,
+                            'order_id': order_id,
+                            'account_name': 'Master'
+                        })
+            
+            # Prepare Child order cancellation if can_order=1
+            if child_can_order == 1:
+                child_api = self.account_manager.get_api(2)
+                if child_api:
+                    child_status = self.account_state_manager.get_account_status(2)
+                    if child_status and child_status.get('current_order_id'):
+                        order_id = child_status['current_order_id']
+                        cancellation_tasks.append({
+                            'account_id': 2,
+                            'api': child_api,
+                            'order_id': order_id,
+                            'account_name': 'Child'
+                        })
+            
+            if not cancellation_tasks:
+                messagebox.showwarning("No Orders", "No valid orders found to cancel")
+                return
+            
+            # Execute cancellations in parallel using threading
+            results = self._cancel_orders_parallel(cancellation_tasks)
+            
+            # Process results
+            cancelled_any = False
+            cancelled_master = False
+            cancelled_child = False
+            
+            for result in results:
+                if result['success']:
+                    cancelled_any = True
+                    if result['account_id'] == 1:
+                        cancelled_master = True
+                        self.master_order_status.set("Master buy order cancelled by user")
+                    elif result['account_id'] == 2:
+                        cancelled_child = True
+                        self.child_order_status.set("Child buy order cancelled by user")
+            
+            # Update UI based on what was cancelled
+            if cancelled_any:
+                # Disable all cancel buttons
+                self.cancel_buy_button.config(state="disabled", text="Buy Orders Cancelled")
+                self.cancel_master_buy_button.config(state="disabled")
+                self.cancel_child_buy_button.config(state="disabled")
+                
+                # Disable buy button until release
+                self.buy_button.config(state="disabled", text="Press RELEASE to Enable")
+                
+                # Show success message
+                if cancelled_master and cancelled_child:
+                    messagebox.showinfo("Success", "Both Master and Child buy orders cancelled successfully")
+                elif cancelled_master:
+                    messagebox.showinfo("Success", "Master buy order cancelled successfully")
+                elif cancelled_child:
+                    messagebox.showinfo("Success", "Child buy order cancelled successfully")
+            else:
+                messagebox.showwarning("No Orders", "No orders were successfully cancelled")
+                
+        except Exception as e:
+            logger.error(f"Error cancelling buy orders: {e}")
+            messagebox.showerror("Error", f"Error cancelling buy orders: {str(e)}")
+    
+    def _cancel_single_order(self, account_id: int, api, order_id: str, account_name: str) -> bool:
+        """Helper method to cancel a single order via API"""
+        try:
+            logger.info(f"Cancelling {account_name} order: {order_id}")
+            
+            # Call the API to cancel the order
+            cancel_response = api.cancel_order(orderno=order_id)
+            
+            # Check if cancellation was successful
+            if cancel_response and cancel_response.get('stat') == 'Ok':
+                logger.info(f"Successfully cancelled {account_name} order: {order_id}")
+                return True
+            else:
+                logger.error(f"Failed to cancel {account_name} order {order_id}: {cancel_response}")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Error cancelling {account_name} order {order_id}: {e}")
+            return False
+    
+    def _cancel_orders_parallel(self, cancellation_tasks):
+        """Cancel multiple orders in parallel using threading"""
+        results = []
+        threads = []
+        
+        def cancel_order_thread(task):
+            """Thread function to cancel a single order"""
+            try:
+                account_id = task['account_id']
+                api = task['api']
+                order_id = task['order_id']
+                account_name = task['account_name']
+                
+                # Cancel the order
+                success = self._cancel_single_order(account_id, api, order_id, account_name)
+                
+                if success:
+                    # Update can_order flag to 0
+                    self.account_state_manager.update_can_order(account_id, 0, "Order cancelled by user")
+                    logger.info(f"{account_name} buy order cancelled successfully")
+                
+                # Store result
+                results.append({
+                    'account_id': account_id,
+                    'account_name': account_name,
+                    'success': success,
+                    'order_id': order_id
+                })
+                
+            except Exception as e:
+                logger.error(f"Error in cancellation thread for {task['account_name']}: {e}")
+                results.append({
+                    'account_id': task['account_id'],
+                    'account_name': task['account_name'],
+                    'success': False,
+                    'order_id': task['order_id'],
+                    'error': str(e)
+                })
+        
+        # Start threads for each cancellation task
+        for task in cancellation_tasks:
+            thread = threading.Thread(target=cancel_order_thread, args=(task,))
+            thread.start()
+            threads.append(thread)
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+        
+        return results
         
     def modify_buy_orders(self):
         """Modify buy orders - TO BE IMPLEMENTED"""
