@@ -1141,11 +1141,13 @@ class MainWindow:
         try:
             # Clear order information for Master account
             self.account_state_manager.update_order_info(1, '', '', 0, 0.0)
-            logger.info("Order information cleared for Master account")
+            self.account_state_manager.clear_exit_order_info(1)
+            logger.info("Order information and exit order info cleared for Master account")
             
             # Clear order information for Child account
             self.account_state_manager.update_order_info(2, '', '', 0, 0.0)
-            logger.info("Order information cleared for Child account")
+            self.account_state_manager.clear_exit_order_info(2)
+            logger.info("Order information and exit order info cleared for Child account")
             
         except Exception as e:
             logger.error(f"Error clearing order information: {e}")
@@ -2344,11 +2346,22 @@ class MainWindow:
             # Place orders for each active account in parallel
             order_numbers = self._place_exit_orders_parallel(active_accounts, account_data, price, order_type)
                 
-            # Store exit order numbers
+            # Store exit order numbers and update CSV
             for i, account_id in enumerate(active_accounts):
                 if i < len(order_numbers) and order_numbers[i]:
                     self.exit_order_numbers[account_id] = order_numbers[i]
                     logger.info(f"Exit order placed for account {account_id}: {order_numbers[i]}")
+                    
+                    # Update exit order info in CSV
+                    symbol = account_data[account_id]['symbol']
+                    quantity = account_data[account_id]['quantity']
+                    self.account_state_manager.update_exit_order_info(
+                        account_id, 
+                        order_numbers[i], 
+                        order_type, 
+                        price, 
+                        quantity
+                    )
             
             # Update UI state
             self.exit_button.config(state='disabled', text="Exit Orders Placed")
@@ -2552,8 +2565,8 @@ class MainWindow:
     def exit_all_orders_market(self):
         """Exit all orders at market price for both master and child accounts"""
         try:
-            # Check if exit button is disabled (no orders to exit)
-            if self.exit_button['state'] == 'disabled':
+            # Check if exit all button is disabled (no orders to exit)
+            if self.exit_all_button['state'] == 'disabled':
                 messagebox.showwarning("Warning", "No orders to sell! Place buy orders first.")
                 return
             
@@ -2570,20 +2583,29 @@ class MainWindow:
             
             logger.info("Exiting all orders at market price")
             
-            # Get active accounts that can place orders
+            # Get active accounts that can exit positions
             active_accounts = []
             for account_id in [1, 2]:  # Master and Child
                 if (self.account_manager.accounts[account_id]['active'] and 
-                    self.account_state_manager.get_can_order(account_id) == 1):
+                    self.account_state_manager.get_can_exit(account_id) == 1):
                     active_accounts.append(account_id)
             
             if not active_accounts:
                 messagebox.showerror("Error", "No active accounts available for market exit")
                 return
             
-            # Place market exit orders for all active accounts
+            # Check for existing exit orders and modify or place new orders
             for account_id in active_accounts:
-                self._place_market_exit_order(account_id)
+                existing_order = self.account_state_manager.get_exit_order_info(account_id)
+                
+                if existing_order:
+                    # Modify existing order to market price
+                    logger.info(f"Found existing exit order for account {account_id}: {existing_order['order_number']}")
+                    self._modify_exit_order_to_market(account_id, existing_order)
+                else:
+                    # Place new market exit order
+                    logger.info(f"No existing exit order for account {account_id}, placing new market order")
+                    self._place_market_exit_order(account_id)
             
             messagebox.showinfo("Success", f"Market exit orders placed for {len(active_accounts)} account(s)")
             logger.info("Market exit orders placed successfully")
@@ -2609,13 +2631,25 @@ class MainWindow:
             logger.info("Exiting master orders at market price")
             
             if not (self.account_manager.accounts[1]['active'] and 
-                    self.account_state_manager.get_can_order(1) == 1):
-                messagebox.showerror("Error", "Master account is not active or cannot place orders")
+                    self.account_state_manager.get_can_exit(1) == 1):
+                messagebox.showerror("Error", "Master account is not active or cannot exit positions")
                 return
             
-            self._place_market_exit_order(1)
-            messagebox.showinfo("Success", "Master market exit order placed successfully")
-            logger.info("Master market exit order placed successfully")
+            # Check for existing exit order and modify or place new order
+            existing_order = self.account_state_manager.get_exit_order_info(1)
+            
+            if existing_order:
+                # Modify existing order to market price
+                logger.info(f"Found existing exit order for Master: {existing_order['order_number']}")
+                self._modify_exit_order_to_market(1, existing_order)
+                messagebox.showinfo("Success", "Master exit order modified to market price successfully")
+            else:
+                # Place new market exit order
+                logger.info("No existing exit order for Master, placing new market order")
+                self._place_market_exit_order(1)
+                messagebox.showinfo("Success", "Master market exit order placed successfully")
+            
+            logger.info("Master market exit process completed successfully")
             
         except Exception as e:
             messagebox.showerror("Error", f"Error placing master market exit order: {e}")
@@ -2638,13 +2672,25 @@ class MainWindow:
             logger.info("Exiting child orders at market price")
             
             if not (self.account_manager.accounts[2]['active'] and 
-                    self.account_state_manager.get_can_order(2) == 1):
-                messagebox.showerror("Error", "Child account is not active or cannot place orders")
+                    self.account_state_manager.get_can_exit(2) == 1):
+                messagebox.showerror("Error", "Child account is not active or cannot exit positions")
                 return
             
-            self._place_market_exit_order(2)
-            messagebox.showinfo("Success", "Child market exit order placed successfully")
-            logger.info("Child market exit order placed successfully")
+            # Check for existing exit order and modify or place new order
+            existing_order = self.account_state_manager.get_exit_order_info(2)
+            
+            if existing_order:
+                # Modify existing order to market price
+                logger.info(f"Found existing exit order for Child: {existing_order['order_number']}")
+                self._modify_exit_order_to_market(2, existing_order)
+                messagebox.showinfo("Success", "Child exit order modified to market price successfully")
+            else:
+                # Place new market exit order
+                logger.info("No existing exit order for Child, placing new market order")
+                self._place_market_exit_order(2)
+                messagebox.showinfo("Success", "Child market exit order placed successfully")
+            
+            logger.info("Child market exit process completed successfully")
             
         except Exception as e:
             messagebox.showerror("Error", f"Error placing child market exit order: {e}")
@@ -2743,6 +2789,87 @@ class MainWindow:
                 
         except Exception as e:
             logger.error(f"Error placing market exit order for account {account_id}: {e}")
+
+    def _modify_exit_order_to_market(self, account_id, existing_order):
+        """Helper function to modify existing exit order to market price"""
+        try:
+            api = self.account_manager.get_api(account_id)
+            if not api:
+                logger.error(f"No API available for account {account_id}")
+                return
+            
+            order_number = existing_order['order_number']
+            symbol = existing_order.get('symbol')
+            quantity = existing_order['quantity']
+            
+            # If symbol is not in existing order, get it from account state
+            if not symbol:
+                account_status = self.account_state_manager.get_account_status(account_id)
+                if account_status and account_status.get('current_symbol'):
+                    symbol = account_status['current_symbol']
+                else:
+                    logger.error(f"No symbol found for account {account_id}")
+                    return
+            
+            logger.info(f"Modifying existing exit order {order_number} to market price for account {account_id}")
+            
+            # Determine exchange and product type based on symbol
+            if 'SENSEX' in symbol:
+                exchange = 'BFO'
+                product_type = 'M'
+            else:
+                exchange = 'NFO'
+                product_type = 'I'
+            
+            # Modify order to market price
+            result = api.modify_order(
+                orderno=order_number,
+                exchange=exchange,
+                tradingsymbol=symbol,
+                newquantity=str(quantity),
+                newprice_type='MKT',
+                newprice='0',
+                newtrigger_price='0',
+                amo='NO'
+            )
+            
+            # Log the broker response
+            logger.info(f"Modify order response for account {account_id}: {result}")
+            
+            if result and result.get('stat') == 'Ok':
+                logger.info(f"Successfully modified exit order to market for account {account_id}: {order_number}")
+                
+                # Update exit order info in CSV with new price type
+                self.account_state_manager.update_exit_order_info(
+                    account_id, 
+                    order_number, 
+                    'MKT',  # Changed to market order
+                    0,      # Market orders have price 0
+                    quantity
+                )
+                
+                # Update order status display
+                if account_id == 1:
+                    self.master_order_status.set(f"Exit Order Modified to Market: {order_number}")
+                elif account_id == 2:
+                    self.child_order_status.set(f"Exit Order Modified to Market: {order_number}")
+            else:
+                # Log the rejection reason from broker
+                if result:
+                    error_msg = result.get('emsg', 'Unknown error')
+                    logger.warning(f"Modify exit order rejected for account {account_id}: {error_msg}")
+                    logger.info(f"Full modify rejection details: {result}")
+                else:
+                    logger.error(f"Modify exit order failed for account {account_id}: No response from broker")
+                
+                # Still update UI to show attempt was made
+                if account_id == 1:
+                    self.master_order_status.set("Exit Order Modify Attempted (Rejected)")
+                elif account_id == 2:
+                    self.child_order_status.set("Exit Order Modify Attempted (Rejected)")
+                
+        except Exception as e:
+            logger.error(f"Error modifying exit order for account {account_id}: {e}")
 
     def exit_all_orders_market_silent(self):
         """Exit all orders at market price without confirmation popup (for SL/Target breaches) - PARALLEL EXECUTION"""
@@ -3635,17 +3762,6 @@ class MainWindow:
         """Modify exit orders - TO BE IMPLEMENTED"""
         logger.info("Modify exit orders clicked - Function not implemented yet")
         
-    def exit_all_orders_market(self):
-        """Exit all orders at market - TO BE IMPLEMENTED"""
-        logger.info("Exit all orders at market clicked - Function not implemented yet")
-        
-    def exit_master_orders_market(self):
-        """Exit master orders at market - TO BE IMPLEMENTED"""
-        logger.info("Exit master orders at market clicked - Function not implemented yet")
-        
-    def exit_child_orders_market(self):
-        """Exit child orders at market - TO BE IMPLEMENTED"""
-        logger.info("Exit child orders at market clicked - Function not implemented yet")
         
     def logout_child_account(self):
         """Logout child account - TO BE IMPLEMENTED"""

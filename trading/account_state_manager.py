@@ -212,6 +212,11 @@ class AccountStateManager:
                 self.df_states.loc[mask, 'current_symbol'] = ''
                 self.df_states.loc[mask, 'current_quantity'] = ''
                 self.df_states.loc[mask, 'current_price'] = ''
+                # Clear exit order info as well
+                self.df_states.loc[mask, 'exit_order_number'] = ''
+                self.df_states.loc[mask, 'exit_order_type'] = ''
+                self.df_states.loc[mask, 'exit_price'] = ''
+                self.df_states.loc[mask, 'exit_quantity'] = ''
                 self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
                 self._save_to_csv()
                 
@@ -223,4 +228,72 @@ class AccountStateManager:
                 return False
         except Exception as e:
             logger.error(f"Error resetting position data for account {account_id}: {e}")
+            return False
+    
+    def update_exit_order_info(self, account_id: int, order_number: str, order_type: str, price: float, quantity: int) -> bool:
+        """Update exit order information"""
+        try:
+            mask = self.df_states['account_id'] == account_id
+            if mask.any():
+                self.df_states.loc[mask, 'exit_order_number'] = order_number
+                self.df_states.loc[mask, 'exit_order_type'] = order_type
+                self.df_states.loc[mask, 'exit_price'] = float(price)
+                self.df_states.loc[mask, 'exit_quantity'] = int(quantity)
+                self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
+                self._save_to_csv()
+                
+                account_name = self.df_states.loc[mask, 'account_name'].iloc[0]
+                logger.info(f"Updated {account_name} (ID: {account_id}) exit order info: {order_number} {order_type} {quantity}@{price}")
+                return True
+            else:
+                logger.error(f"Account {account_id} not found in states")
+                return False
+        except Exception as e:
+            logger.error(f"Error updating account {account_id} exit order info: {e}")
+            return False
+    
+    def get_exit_order_number(self, account_id: int) -> str:
+        """Get exit order number for account"""
+        status = self.get_account_status(account_id)
+        if not status:
+            return ""
+        return str(status.get('exit_order_number', ''))
+    
+    def get_exit_order_info(self, account_id: int) -> Optional[Dict[str, Any]]:
+        """Get complete exit order information for account"""
+        status = self.get_account_status(account_id)
+        if not status:
+            return None
+        
+        exit_order_number = str(status.get('exit_order_number', ''))
+        if not exit_order_number or exit_order_number.strip() == '':
+            return None
+            
+        return {
+            'order_number': exit_order_number,
+            'order_type': str(status.get('exit_order_type', '')),
+            'price': float(status.get('exit_price', 0)),
+            'quantity': int(status.get('exit_quantity', 0))
+        }
+    
+    def clear_exit_order_info(self, account_id: int) -> bool:
+        """Clear exit order information"""
+        try:
+            mask = self.df_states['account_id'] == account_id
+            if mask.any():
+                self.df_states.loc[mask, 'exit_order_number'] = ''
+                self.df_states.loc[mask, 'exit_order_type'] = ''
+                self.df_states.loc[mask, 'exit_price'] = ''
+                self.df_states.loc[mask, 'exit_quantity'] = ''
+                self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
+                self._save_to_csv()
+                
+                account_name = self.df_states.loc[mask, 'account_name'].iloc[0]
+                logger.info(f"Cleared exit order info for {account_name} (ID: {account_id})")
+                return True
+            else:
+                logger.error(f"Account {account_id} not found in states")
+                return False
+        except Exception as e:
+            logger.error(f"Error clearing exit order info for account {account_id}: {e}")
             return False
