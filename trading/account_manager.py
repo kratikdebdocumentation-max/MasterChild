@@ -55,6 +55,9 @@ class AccountManager:
             fresh_twoFA = pyotp.TOTP(creds['factor2']).now()
             applicationLogger.info(f"Generated fresh 2FA for account {account_num}: {fresh_twoFA}")
             
+            # Log login attempt details
+            applicationLogger.info(f"Attempting login for account {account_num} with userid: {creds['username']}")
+            
             login_status = account['api'].login(
                 userid=creds['username'],
                 password=creds['pwd'],
@@ -63,6 +66,10 @@ class AccountManager:
                 api_secret=creds['app_key'],
                 imei=creds['imei']
             )
+            
+            # Log the raw response for debugging
+            applicationLogger.info(f"Login response for account {account_num}: {login_status}")
+            applicationLogger.info(f"Login response type: {type(login_status)}")
             
             if login_status and 'uname' in login_status:
                 client_name = login_status.get('uname')
@@ -84,6 +91,10 @@ class AccountManager:
         except Exception as e:
             error_msg = f"Login failed for account {account_num}: {e}"
             applicationLogger.error(error_msg)
+            # Log additional details for JSON parsing errors
+            if "Expecting value" in str(e) or "JSON" in str(e):
+                applicationLogger.error(f"JSON parsing error detected. Check if broker API is responding correctly.")
+                applicationLogger.error(f"Account {account_num} credentials: userid={creds['username']}, vc={creds['vc']}")
             return False, error_msg
     
     def get_account(self, account_num: int) -> dict:
@@ -161,3 +172,83 @@ class AccountManager:
             error_msg = f"Error unblocking account {account_num}: {e}"
             applicationLogger.error(error_msg)
             return False, error_msg
+    
+    def get_positions(self, account_num: int) -> tuple[bool, list, str]:
+        """
+        Get positions for a specific account using get_positions API
+        
+        Args:
+            account_num: Account number to check positions for
+            
+        Returns:
+            tuple: (success, positions_list, message)
+        """
+        if account_num not in self.accounts:
+            return False, [], "Account not found"
+        
+        account = self.accounts[account_num]
+        api = account.get('api')
+        
+        if not api:
+            return False, [], "API not available for account"
+        
+        if not account.get('active', False):
+            return False, [], "Account not logged in"
+        
+        try:
+            positions = api.get_positions()
+            
+            if positions is None:
+                return True, [], "No positions found"
+            
+            # Filter for non-zero positions (open positions)
+            open_positions = []
+            if isinstance(positions, list):
+                for position in positions:
+                    if isinstance(position, dict):
+                        net_qty = position.get('netqty', '0')
+                        # Check if netqty is not zero (meaning there's an open position)
+                        if net_qty != '0' and float(net_qty) != 0.0:
+                            open_positions.append(position)
+            
+            client_name = account.get('client_name', f'Account {account_num}')
+            applicationLogger.info(f"Positions retrieved for {client_name}: {len(open_positions)} open positions found")
+            
+            return True, open_positions, f"Positions retrieved for {client_name}"
+            
+        except Exception as e:
+            error_msg = f"Error retrieving positions for account {account_num}: {e}"
+            applicationLogger.error(error_msg)
+            return False, [], error_msg
+    
+    def check_all_positions(self) -> tuple[bool, dict, str]:
+        """
+        Check positions for all active accounts
+        
+        Returns:
+            tuple: (has_open_positions, positions_by_account, summary_message)
+        """
+        all_positions = {}
+        total_open_positions = 0
+        
+        for account_num, account in self.accounts.items():
+            if account.get('active', False):
+                success, positions, message = self.get_positions(account_num)
+                if success:
+                    all_positions[account_num] = {
+                        'client_name': account.get('client_name', f'Account {account_num}'),
+                        'positions': positions,
+                        'count': len(positions)
+                    }
+                    total_open_positions += len(positions)
+                else:
+                    applicationLogger.warning(f"Could not retrieve positions for account {account_num}: {message}")
+        
+        has_open_positions = total_open_positions > 0
+        
+        if has_open_positions:
+            summary = f"Found {total_open_positions} open position(s) across {len(all_positions)} account(s)"
+        else:
+            summary = "No open positions found"
+        
+        return has_open_positions, all_positions, summary

@@ -64,12 +64,22 @@ class WebSocketManager:
                         else:
                             status_message = f"Order Complete @ {price}" if price else "Order Complete"
                         
-                        # Check if this is a buy order completion
+                        # Check if this is a buy order completion - ONLY for successfully filled orders
                         if trantype.upper() == 'B' and self.buy_order_completed_callback:
                             try:
                                 symbol = tick_data.get('tsym', '')
                                 price_float = float(price) if price else 0.0
-                                self.buy_order_completed_callback(account_num, symbol, price_float)
+                                
+                                # Additional validation: Check if order was actually filled (not rejected)
+                                # Look for rejection reason in the tick data
+                                rejreason = tick_data.get('rejreason', '')
+                                
+                                if not rejreason:  # No rejection reason = successfully filled
+                                    self.buy_order_completed_callback(account_num, symbol, price_float)
+                                    logger.info(f"Buy order successfully completed for account {account_num}: {symbol} @ {price_float}")
+                                else:
+                                    logger.warning(f"Buy order marked as COMPLETE but has rejection reason: {rejreason} - NOT calling completion callback")
+                                    
                             except (ValueError, TypeError) as e:
                                 logger.error(f"Error processing buy order completion: {e}")
                         
@@ -110,6 +120,13 @@ class WebSocketManager:
         def quote_update_callback(tick_data):
             """Handle quote updates - only for master account (account 1)"""
             logger.info(f"Quote Received for Account {account_num}: {tick_data}")
+            
+            # Update WebSocket health tracking
+            if hasattr(self, 'websocket_health_callback') and self.websocket_health_callback:
+                try:
+                    self.websocket_health_callback(account_num)
+                except Exception as e:
+                    logger.error(f"Error updating WebSocket health: {e}")
             
             # Only handle live price updates for master account (account 1)
             if account_num == 1 and 'lp' in tick_data and self.live_price_callback:
@@ -154,6 +171,10 @@ class WebSocketManager:
     def set_order_rejection_callback(self, callback: Callable[[int, str, str], None]):
         """Set callback for order rejection updates"""
         self.order_rejection_callback = callback
+    
+    def set_websocket_health_callback(self, callback: Callable[[int], None]):
+        """Set callback for WebSocket health updates"""
+        self.websocket_health_callback = callback
     
     def _process_order_update(self, tick_data: Dict[str, Any], account_num: int):
         """Process order update data"""

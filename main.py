@@ -175,6 +175,21 @@ class MainWindow:
         
         self.current_buy_order_open_value = None  # Track current buy order open value
         
+        # SL/Target state tracking for distance maintenance during order modifications
+        self.sl_target_states = {
+            'sl_calculated': False,
+            'target_calculated': False,
+            'sl_active': False,
+            'target_active': False,
+            'sl_triggered': False,
+            'target_triggered': False,
+            'sl_price': None,
+            'target_price': None,
+            'sl_points': 0,
+            'target_points': 0,
+            'buy_price': None
+        }
+        
         # Timeout timer for order management
         self.timeout_timer = None
         
@@ -213,6 +228,11 @@ class MainWindow:
         self.last_known_prices = {}  # Store last known price for each symbol
         self.order_coordination_active = False
         self.coordination_timer = None
+        
+        # WebSocket monitoring
+        self.websocket_health = {1: True, 2: True}  # Track WebSocket health
+        self.websocket_last_update = {1: None, 2: None}  # Track last update time
+        self.websocket_health_timer = None
         
         # Quantity variables
         self.qty1_var = tk.StringVar()
@@ -307,6 +327,7 @@ class MainWindow:
             command=self.release_buttons, width=12
         )
         self.release_button.pack(side=tk.LEFT, padx=5)
+        
         
 
         # Premium Price display (reduced size)
@@ -698,6 +719,9 @@ class MainWindow:
             # Check SL/Target breaches if monitoring is active
             self.check_sl_target_breach(live_price)
             
+            # Check trailing stop updates
+            self.check_trailing_stop(live_price)
+            
             logger.info(f"Live price updated: {live_price:.2f}")
         except Exception as e:
             logger.error(f"Error updating live price: {e}")
@@ -705,6 +729,7 @@ class MainWindow:
     def check_sl_target_breach(self, live_price: float):
         """Check for SL/Target breaches - from old project"""
         try:
+            
             # Check SL breach
             if self.sl_monitoring_active and self.sl_price_level is not None:
                 if live_price <= self.sl_price_level:
@@ -740,32 +765,48 @@ class MainWindow:
             logger.error(f"Error handling SL breach: {e}")
     
     def _trigger_target_breach(self, current_price: float):
-        """Handle Target breach - place exit orders - from old project"""
+        """Handle Target breach - start trailing if enabled, otherwise exit"""
         try:
             logger.info(f"TARGET HIT! Current price: {current_price}, Target: {self.target_price_level}")
             
-            # Stop Target monitoring
-            self.stop_target_monitoring()
-            
-            # Update UI to show breach
+            # Update UI to show target hit
             self.target_price_button.config(text=f"TARGET HIT @{current_price:.2f}", bg="green", fg="white")
             
-            # Place exit orders (placeholder for now)
-            self._place_exit_orders_for_breach("TARGET", current_price)
-            
-            logger.info("Target breach handled - exit orders placed")
+            # Check if trailing is enabled
+            if self.enable_trailing_value.get():
+                # Start trailing instead of exiting
+                logger.info("Trailing is enabled - starting trailing mode")
+                self.start_trailing_mode(current_price)
+                logger.info("Target breach handled - trailing mode started (no exit orders)")
+            else:
+                # Stop Target monitoring and exit
+                self.stop_target_monitoring()
+                self._place_exit_orders_for_breach("TARGET", current_price)
+                logger.info("Target breach handled - exit orders placed")
             
         except Exception as e:
             logger.error(f"Error handling Target breach: {e}")
     
     def _place_exit_orders_for_breach(self, breach_type: str, current_price: float):
-        """Place exit orders when SL or Target is breached"""
+        """Place exit orders when SL or Target is breached - PARALLEL EXECUTION"""
         try:
-            logger.info(f"Placing exit orders for {breach_type} breach at price {current_price}")
+            logger.info(f"Placing exit orders for {breach_type} breach at price {current_price} - PARALLEL MODE")
             
-            # This will be implemented when we add the exit order functionality
-            # For now, just log the action
-            logger.info(f"EXIT ORDERS PLACED - {breach_type} breach at {current_price}")
+            # Get active accounts that have positions to exit
+            active_accounts = []
+            for account_id in [1, 2]:  # Master and Child
+                if (self.account_manager.accounts[account_id]['active'] and 
+                    self.account_state_manager.get_can_exit(account_id) == 1):
+                    active_accounts.append(account_id)
+            
+            if not active_accounts:
+                logger.warning("No active accounts with positions available for breach exit orders")
+                return
+            
+            # Use silent market exit for SL/Target breaches (now parallel)
+            self.exit_all_orders_market_silent()
+            
+            logger.info(f"EXIT ORDERS PLACED IN PARALLEL - {breach_type} breach at {current_price} for {len(active_accounts)} account(s)")
             
             # Update UI to show exit orders placed
             if breach_type == "SL":
@@ -836,13 +877,6 @@ class MainWindow:
             logger.error(f"Error extracting order status from '{status_message}': {e}")
             return None
     
-    def on_buy_order_completed(self, account_num: int, symbol: str, price: float):
-        """Handle buy order completion"""
-        try:
-            logger.info(f"Buy order completed for account {account_num}: {symbol} @ {price}")
-            # Additional logic can be added here for buy order completion
-        except Exception as e:
-            logger.error(f"Error handling buy order completion: {e}")
     
     def on_sell_order_completed(self, account_num: int, symbol: str, price: float):
         """Handle sell order completion"""
@@ -875,6 +909,9 @@ class MainWindow:
                     # Update UI
                     self.root.after(0, self.update_master_login_ui, True, client_name)
                     logger.info(f"Master account auto-login successful: {client_name}")
+                    
+                    # Check positions after successful login
+                    self.root.after(1000, self.check_startup_positions)  # Delay to ensure UI is ready
                 else:
                     # Update UI to show login failed
                     self.root.after(0, self.update_master_login_ui, False, "Login Failed")
@@ -912,23 +949,45 @@ class MainWindow:
         def login_thread():
             try:
                 logger.info(f"Attempting login for child account {account_num}...")
-                success, client_name = self.account_manager.login_account(account_num)
                 
-                if success:
-                    # Update account state
-                    self.account_state_manager.update_login_status(account_num, 1, f"Child account {account_num} login successful")
-                    self.account_state_manager.update_can_order(account_num, 1, f"Child account {account_num} ready for orders")
-                    
-                    # Connect websocket feed for child account
-                    self.websocket_manager.connect_feed(account_num)
-                    
-                    # Update UI
-                    self.root.after(0, self.update_child_login_ui, True, client_name)
-                    logger.info(f"Child account login successful: {client_name}")
-                else:
-                    # Update UI to show login failed
-                    self.root.after(0, self.update_child_login_ui, False, "Login Failed")
-                    logger.error(f"Child account login failed")
+                # Try login with retry mechanism
+                max_retries = 3
+                for attempt in range(max_retries):
+                    try:
+                        logger.info(f"Login attempt {attempt + 1}/{max_retries} for child account {account_num}")
+                        success, client_name = self.account_manager.login_account(account_num)
+                        
+                        if success:
+                            # Update account state
+                            self.account_state_manager.update_login_status(account_num, 1, f"Child account {account_num} login successful")
+                            self.account_state_manager.update_can_order(account_num, 1, f"Child account {account_num} ready for orders")
+                            
+                            # Connect websocket feed for child account
+                            self.websocket_manager.connect_feed(account_num)
+                            
+                            # Update UI
+                            self.root.after(0, self.update_child_login_ui, True, client_name)
+                            logger.info(f"Child account login successful: {client_name}")
+                            
+                            # Check positions after successful login (if master is also logged in)
+                            if self.account_manager.is_account_active(1):  # Only check if master is also active
+                                self.root.after(1000, self.check_startup_positions)  # Delay to ensure UI is ready
+                            return  # Success, exit retry loop
+                        else:
+                            logger.warning(f"Login attempt {attempt + 1} failed: {client_name}")
+                            if attempt < max_retries - 1:
+                                import time
+                                time.sleep(2)  # Wait 2 seconds before retry
+                            
+                    except Exception as e:
+                        logger.error(f"Login attempt {attempt + 1} error: {e}")
+                        if attempt < max_retries - 1:
+                            import time
+                            time.sleep(2)  # Wait 2 seconds before retry
+                
+                # All retries failed
+                self.root.after(0, self.update_child_login_ui, False, "Login Failed - All retries exhausted")
+                logger.error(f"Child account login failed after {max_retries} attempts")
                     
             except Exception as e:
                 logger.error(f"Error during child login: {e}")
@@ -1154,10 +1213,43 @@ class MainWindow:
             self.sl_price_button.config(state="disabled", text="SL Price")
             self.target_price_button.config(state="disabled", text="Target Price")
             
+            # Reset trailing controls
+            self._reset_trailing_controls()
+            
             logger.info("SL/Target controls reset to initial state")
             
         except Exception as e:
             logger.error(f"Error resetting SL/Target controls: {e}")
+    
+    def _reset_trailing_controls(self):
+        """Reset trailing controls to initial state"""
+        try:
+            # Stop any active trailing monitoring
+            self.stop_trailing_monitoring()
+            
+            # Reset trailing variables
+            self.trailing_active = False
+            self.trailing_start_price = None
+            self.trailing_high_price = None
+            self.trailing_stop_price = None
+            
+            # Reset trailing UI controls
+            self.enable_trailing_value.set(False)
+            self.trail_value.set("")
+            self.trail_type_selected.set("")
+            self.trail_status_text.set("Trailing Disabled")
+            
+            # Reset button states
+            self.enable_trail_button.config(state="normal", bg="lightgreen")
+            self.disable_trail_button.config(state="disabled", bg="gray")
+            
+            # Clear trailing stop display
+            self.trailing_stop_display_label.config(text="")
+            
+            logger.info("Trailing controls reset to initial state")
+            
+        except Exception as e:
+            logger.error(f"Error resetting trailing controls: {e}")
     
     def _update_order_status_displays(self):
         """Update order status displays based on account states"""
@@ -1165,18 +1257,22 @@ class MainWindow:
             # Update Master order status
             master_status = self.account_state_manager.get_account_status(1)
             if master_status and master_status.get('login_status') == 1:
-                self.master_order_status.set("Master account ready for orders")
+                # Get client name from account manager
+                master_client_name = self.account_manager.accounts[1].get('client_name', 'Master')
+                self.master_order_status.set(f"{master_client_name} ready for orders")
             else:
                 self.master_order_status.set("Master Not Logged In")
             
             # Update Child order status
             child_status = self.account_state_manager.get_account_status(2)
             if child_status and child_status.get('login_status') == 1:
-                self.child_order_status.set("Child account ready for orders")
+                # Get client name from account manager
+                child_client_name = self.account_manager.accounts[2].get('client_name', 'Child')
+                self.child_order_status.set(f"{child_client_name} ready for orders")
             else:
                 self.child_order_status.set("Child Not Logged In")
             
-            logger.info("Order status displays updated")
+            logger.info("Order status displays updated with client names")
             
         except Exception as e:
             logger.error(f"Error updating order status displays: {e}")
@@ -1193,11 +1289,15 @@ class MainWindow:
                 self.timeout_timer.cancel()
                 self.timeout_timer = None
             
-            # TODO: Add SL/Target monitoring stop when implemented
-            # if self.sl_monitoring_active:
-            #     self.stop_sl_monitoring()
-            # if self.target_monitoring_active:
-            #     self.stop_target_monitoring()
+            # Stop SL/Target monitoring
+            if hasattr(self, 'sl_monitoring_active') and self.sl_monitoring_active:
+                self.stop_sl_monitoring()
+            if hasattr(self, 'target_monitoring_active') and self.target_monitoring_active:
+                self.stop_target_monitoring()
+            
+            # Stop trailing monitoring
+            if hasattr(self, 'trailing_active') and self.trailing_active:
+                self.stop_trailing_monitoring()
             
             logger.info("Monitoring stopped and timers cleared")
             
@@ -1290,10 +1390,71 @@ class MainWindow:
             self.account_state_manager.update_login_status(2, 0, "Program startup - child not logged in")
             self.account_state_manager.update_can_order(2, 0, "Program startup - child cannot place orders")
             
+            # Clear order information for both accounts on startup
+            self.account_state_manager.update_order_info(1, '', '', 0, 0.0)
+            self.account_state_manager.update_order_info(2, '', '', 0, 0.0)
+            logger.info("Order information cleared on startup for both accounts")
+            
             logger.info("Account states reset to initial state")
             
         except Exception as e:
             logger.error(f"Error resetting account states: {e}")
+    
+    def check_startup_positions(self):
+        """Check for open positions on startup and warn user"""
+        try:
+            # Check positions for all logged-in accounts
+            has_open_positions, all_positions, summary = self.account_manager.check_all_positions()
+            
+            if has_open_positions:
+                # Build detailed warning message
+                warning_msg = "⚠️ OPEN POSITIONS DETECTED ⚠️\n\n"
+                warning_msg += f"{summary}\n\n"
+                warning_msg += "POSITION DETAILS:\n"
+                warning_msg += "─" * 50 + "\n"
+                
+                for account_num, account_data in all_positions.items():
+                    if account_data['count'] > 0:
+                        client_name = account_data['client_name']
+                        warning_msg += f"\n🔸 {client_name}:\n"
+                        
+                        for i, position in enumerate(account_data['positions'], 1):
+                            symbol = position.get('tsym', 'Unknown')
+                            net_qty = position.get('netqty', '0')
+                            exchange = position.get('exch', 'Unknown')
+                            avg_price = position.get('netavgprc', '0')
+                            
+                            warning_msg += f"   {i}. {symbol} ({exchange})\n"
+                            warning_msg += f"      Qty: {net_qty}, Avg Price: ₹{avg_price}\n"
+                
+                warning_msg += "\n" + "─" * 50 + "\n"
+                warning_msg += "❗ IMPORTANT: Please close all existing positions\n"
+                warning_msg += "before placing new orders to avoid conflicts.\n\n"
+                warning_msg += "Would you like to continue anyway?"
+                
+                # Show warning dialog with Yes/No options
+                result = messagebox.askyesno(
+                    "Open Positions Warning", 
+                    warning_msg,
+                    icon='warning'
+                )
+                
+                if result:
+                    logger.warning("User chose to continue despite open positions")
+                    messagebox.showinfo("Reminder", "Please remember to close existing positions before placing new orders.")
+                else:
+                    logger.info("User chose to exit due to open positions")
+                    messagebox.showinfo("Exiting", "Please close existing positions and restart the application.")
+                    self.root.quit()
+                    return
+            else:
+                logger.info("Position check completed - No open positions found")
+                
+        except Exception as e:
+            logger.error(f"Error checking startup positions: {e}")
+            messagebox.showwarning("Position Check Error", 
+                                 f"Could not check positions on startup: {str(e)}\n\n"
+                                 "Please manually verify that you have no open positions before trading.")
         
     def on_expiry_selected(self, *args):
         """On expiry selected - TO BE IMPLEMENTED"""
@@ -1569,8 +1730,8 @@ class MainWindow:
             # 6. Auto-set SL and Target based on buy order price
             self.auto_set_sl_target_from_buy_price(price)
             
-            # 7. Disable buy button and enable management buttons
-            self.buy_button.config(state="disabled")
+            # 7. Disable buy button with price display and enable management buttons
+            self.buy_button.config(state="disabled", text=f"Buy @{price}")
             self.cancel_buy_button.config(state="normal")
             self.modify_buy_button.config(state="normal")
             self.cancel_master_buy_button.config(state="normal")
@@ -1693,7 +1854,22 @@ class MainWindow:
             self.target_button_state = "confirmed"
             self.target_price_button.config(text=f"Target Set @{target_price}", bg="orange", fg="white")
             
+            # Update sl_target_states for distance maintenance during buy order modifications
+            sl_points = buy_open_value - sl_price  # Points difference for SL
+            target_points = target_price - buy_open_value  # Points difference for Target
+            
+            self.sl_target_states.update({
+                'sl_calculated': True,
+                'target_calculated': True,
+                'sl_price': sl_price,
+                'target_price': target_price,
+                'sl_points': sl_points,
+                'target_points': target_points,
+                'buy_price': buy_open_value
+            })
+            
             logger.info(f"UI values set - SL: {self.sl_price_value.get()}, Target: {self.target_price_value.get()}")
+            logger.info(f"SL/Target points calculated - SL points: {sl_points}, Target points: {target_points}")
             
             # Start monitoring if buy orders are filled
             if self._are_buy_orders_filled():
@@ -1709,13 +1885,23 @@ class MainWindow:
             logger.error(f"Traceback: {traceback.format_exc()}")
     
     def _are_buy_orders_filled(self):
-        """Check if buy orders are filled/completed - from old project"""
+        """Check if buy orders are filled/completed - only returns True for actually filled orders"""
         try:
-            # Check if both Master and Child orders are completed
-            master_status = self.order_states.get(1, "PENDING")
-            child_status = self.order_states.get(2, "PENDING")
+            # Check if accounts have actual filled positions (not just ability to order)
+            master_filled_qty = self.account_state_manager.get_filled_quantity(1)
+            child_filled_qty = self.account_state_manager.get_filled_quantity(2)
+            master_can_exit = self.account_state_manager.get_can_exit(1)
+            child_can_exit = self.account_state_manager.get_can_exit(2)
             
-            return master_status == "COMPLETE" and child_status == "COMPLETE"
+            logger.info(f"Buy orders filled check - Master: filled_qty={master_filled_qty}, can_exit={master_can_exit}")
+            logger.info(f"Buy orders filled check - Child: filled_qty={child_filled_qty}, can_exit={child_can_exit}")
+            
+            # Only return True if at least one account has actual filled positions
+            has_filled_positions = (master_filled_qty > 0 and master_can_exit == 1) or (child_filled_qty > 0 and child_can_exit == 1)
+            
+            logger.info(f"Buy orders filled result: {has_filled_positions}")
+            return has_filled_positions
+            
         except Exception as e:
             logger.error(f"Error checking if buy orders are filled: {e}")
             return False
@@ -1738,6 +1924,26 @@ class MainWindow:
             self.sl_price_level = new_sl_price
             self.sl_button_state = "confirmed"
             self.sl_price_button.config(text=f"SL Set @{new_sl_price}", bg="orange", fg="white")
+            
+            # Update sl_target_states with new SL points for proper distance maintenance during buy order modification
+            if hasattr(self, 'current_buy_order_open_value') and self.current_buy_order_open_value:
+                # Calculate new SL points based on manual SL price
+                new_sl_points = self.current_buy_order_open_value - new_sl_price
+                
+                # Update sl_target_states to maintain this distance during future buy order modifications
+                if not hasattr(self, 'sl_target_states'):
+                    self.sl_target_states = {}
+                
+                self.sl_target_states.update({
+                    'sl_calculated': True,
+                    'sl_price': new_sl_price,
+                    'sl_points': new_sl_points,
+                    'buy_price': self.current_buy_order_open_value
+                })
+                
+                logger.info(f"Manual SL set - Price: {new_sl_price}, Points from buy: {new_sl_points}, Buy price: {self.current_buy_order_open_value}")
+            else:
+                logger.warning("No current buy price available - SL points cannot be calculated for distance maintenance")
             
             # Check if buy orders are completed and start monitoring
             if self._are_buy_orders_filled():
@@ -1798,6 +2004,10 @@ class MainWindow:
             self.order_states[account_id] = status
             logger.info(f"Account {account_id} order status updated to: {status}")
             
+            # CRITICAL DEBUG: Log detailed information about the status
+            logger.info(f"DEBUG - Account {account_id} status: '{status}' (type: {type(status)})")
+            logger.info(f"DEBUG - Current account can_order: {self.account_state_manager.get_can_order(account_id)}")
+            
             # Handle rejection - set can_order to 0
             if status == "REJECTED":
                 self.account_state_manager.update_can_order(
@@ -1828,15 +2038,50 @@ class MainWindow:
                 if account_status:
                     symbol = account_status.get('current_symbol', '')
                     price = account_status.get('current_price', 0.0)
-                    self.on_buy_order_completed(account_id, symbol, price)
+                    
+                    # Additional safety check: Only activate if account can still order (not rejected)
+                    can_order = self.account_state_manager.get_can_order(account_id)
+                    if can_order == 1:  # Account can still order = order was successful
+                        self.on_buy_order_completed(account_id, symbol, price)
+                        logger.info(f"SL/Target monitoring activated for account {account_id} - order was successful")
+                    else:
+                        logger.warning(f"Order marked as COMPLETE but account {account_id} cannot order - likely rejected. NOT activating SL/Target monitoring")
                 
         except Exception as e:
             logger.error(f"Error handling order status update for account {account_id}: {e}")
     
     def on_buy_order_completed(self, account_num: int, symbol: str, price: float):
-        """Handle buy order completion - start SL/Target monitoring if configured - from old project"""
+        """Handle buy order completion - track filled quantity and start monitoring"""
         try:
             logger.info(f"Buy order completed for account {account_num}: {symbol} @ {price}")
+            
+            # CRITICAL VALIDATION: Check if account can still order (not rejected)
+            can_order = self.account_state_manager.get_can_order(account_num)
+            if can_order == 0:
+                logger.warning(f"Buy order completion called for account {account_num} but account cannot order - likely rejected. NOT activating SL/Target")
+                return
+            
+            # ADDITIONAL VALIDATION: Check if account is active
+            if not self.account_manager.accounts[account_num]['active']:
+                logger.warning(f"Buy order completion called for account {account_num} but account is not active. NOT activating SL/Target")
+                return
+            
+            # Get the filled quantity from account state (should be set during order placement)
+            filled_qty = self.account_state_manager.get_filled_quantity(account_num)
+            if filled_qty == 0:
+                # Fallback: use the quantity from current order info if not set
+                account_status = self.account_state_manager.get_account_status(account_num)
+                if account_status and account_status.get('current_quantity'):
+                    filled_qty = int(float(account_status['current_quantity']))
+                    # Update filled quantity in state
+                    self.account_state_manager.update_filled_quantity(account_num, filled_qty)
+            
+            # FINAL VALIDATION: Only proceed if we have actual filled quantity
+            if filled_qty <= 0:
+                logger.warning(f"Buy order completion called for account {account_num} but no filled quantity. NOT activating SL/Target")
+                return
+            
+            logger.info(f"Account {account_num} filled quantity: {filled_qty} - VALID for SL/Target activation")
             
             # Check if SL and Target prices are set
             sl_price_text = self.sl_price_value.get().strip()
@@ -1858,8 +2103,125 @@ class MainWindow:
                 except ValueError:
                     logger.warning("Invalid Target price format")
             
+            # Enable exit buttons based on accounts with positions
+            self._update_exit_button_states()
+                
+            logger.info("Exit buttons updated after buy order completion")
+            
         except Exception as e:
             logger.error(f"Error handling buy order completion: {e}")
+    
+    def _update_exit_button_states(self):
+        """Update exit button states based on accounts with positions"""
+        try:
+            master_can_exit = self.account_state_manager.get_can_exit(1)
+            child_can_exit = self.account_state_manager.get_can_exit(2)
+            
+            # Enable general exit buttons if any account has position
+            if master_can_exit or child_can_exit:
+                self.exit_button.config(state='normal')
+                self.exit_all_button.config(state='normal')
+            else:
+                self.exit_button.config(state='disabled')
+                self.exit_all_button.config(state='disabled')
+            
+            # Enable individual exit buttons based on account positions
+            if master_can_exit and self.account_manager.accounts[1]['active']:
+                self.exit_master_button.config(state='normal')
+            else:
+                self.exit_master_button.config(state='disabled')
+                
+            if child_can_exit and self.account_manager.accounts[2]['active']:
+                self.exit_child_button.config(state='normal')
+            else:
+                self.exit_child_button.config(state='disabled')
+                
+            
+        except Exception as e:
+            logger.error(f"Error updating exit button states: {e}")
+    
+    def start_websocket_health_monitoring(self):
+        """Start monitoring WebSocket health"""
+        try:
+            import datetime
+            current_time = datetime.datetime.now()
+            
+            # Update last update time for the account
+            for account_id in [1, 2]:
+                if self.account_manager.accounts[account_id]['active']:
+                    self.websocket_last_update[account_id] = current_time
+            
+            # Start periodic health check (every 30 seconds)
+            if not self.websocket_health_timer:
+                self._schedule_websocket_health_check()
+                
+        except Exception as e:
+            logger.error(f"Error starting WebSocket health monitoring: {e}")
+    
+    def _schedule_websocket_health_check(self):
+        """Schedule the next WebSocket health check"""
+        try:
+            import threading
+            self.websocket_health_timer = threading.Timer(30.0, self._check_websocket_health)
+            self.websocket_health_timer.start()
+        except Exception as e:
+            logger.error(f"Error scheduling WebSocket health check: {e}")
+    
+    def _check_websocket_health(self):
+        """Check WebSocket health and alert on failures"""
+        try:
+            import datetime
+            current_time = datetime.datetime.now()
+            alert_needed = False
+            alert_message = "⚠️ WEBSOCKET CONNECTION ISSUES DETECTED ⚠️\n\n"
+            
+            for account_id in [1, 2]:
+                if self.account_manager.accounts[account_id]['active']:
+                    last_update = self.websocket_last_update.get(account_id)
+                    
+                    if last_update:
+                        time_diff = (current_time - last_update).total_seconds()
+                        
+                        # Consider connection failed if no updates for 60 seconds
+                        if time_diff > 60:
+                            self.websocket_health[account_id] = False
+                            account_name = "Master" if account_id == 1 else "Child"
+                            alert_message += f"• {account_name} account: No data for {int(time_diff)} seconds\n"
+                            alert_needed = True
+                        else:
+                            self.websocket_health[account_id] = True
+            
+            if alert_needed:
+                alert_message += "\n🚫 AUTOMATED ACTIONS PAUSED 🚫\n"
+                alert_message += "• Stop Loss monitoring may be affected\n"
+                alert_message += "• Target monitoring may be affected\n"
+                alert_message += "• Real-time price updates unavailable\n\n"
+                alert_message += "Please check your internet connection and broker status."
+                
+                # Show alert popup
+                messagebox.showwarning("WebSocket Connection Alert", alert_message)
+                logger.critical("WebSocket health check failed - automated actions paused")
+                
+                # Pause SL/Target monitoring
+                self.sl_monitoring_active = False
+                self.target_monitoring_active = False
+            
+            # Schedule next check
+            self._schedule_websocket_health_check()
+            
+        except Exception as e:
+            logger.error(f"Error in WebSocket health check: {e}")
+            # Continue monitoring even if there's an error
+            self._schedule_websocket_health_check()
+    
+    def update_websocket_health(self, account_id: int):
+        """Update WebSocket health timestamp for account"""
+        try:
+            import datetime
+            self.websocket_last_update[account_id] = datetime.datetime.now()
+            self.websocket_health[account_id] = True
+        except Exception as e:
+            logger.error(f"Error updating WebSocket health for account {account_id}: {e}")
     
     def start_sl_monitoring(self, sl_price):
         """Start monitoring Stop Loss price - from old project"""
@@ -1916,10 +2278,590 @@ class MainWindow:
         except Exception as e:
             logger.error(f"Error starting price monitoring: {e}")
         
-    def place_exit_orders(self):
-        """Place exit orders - TO BE IMPLEMENTED"""
-        logger.info("Place exit orders clicked - Function not implemented yet")
+    def place_exit_orders(self, order_type='LMT'):
+        """Place exit orders across all active accounts
         
+        Args:
+            order_type: 'LMT' for limit orders, 'MKT' for market orders
+        """
+        try:
+            # Check if exit button is disabled (orders already placed)
+            if self.exit_button['state'] == 'disabled':
+                messagebox.showwarning("Warning", "Exit orders already placed! Use RELEASE button to enable new orders.")
+                return
+                
+            if not self.qty1_var.get():
+                messagebox.showerror("Error", "Please select quantity")
+                return
+            
+            # If exit price box is empty, populate with current LTP and return (don't place order yet)
+            if not self.price1_value.get().strip():
+                current_ltp = self.premium_price_value.get()
+                if current_ltp:
+                    self.price1_value.set(current_ltp)
+                    logger.info(f"Exit price box populated with current LTP: {current_ltp}")
+                    return  # Stop here - user needs to press button again to place order
+                else:
+                    messagebox.showerror("Error", "Please fetch current price first")
+                    return
+            
+            price = float(self.price1_value.get())
+            
+            # Get active accounts that have positions to exit
+            active_accounts = []
+            account_data = {}
+            
+            for account_id in [1, 2]:  # Master and Child
+                if (self.account_manager.accounts[account_id]['active'] and 
+                    self.account_state_manager.get_can_exit(account_id) == 1):
+                    
+                    # Get position details from account state
+                    account_status = self.account_state_manager.get_account_status(account_id)
+                    filled_qty = self.account_state_manager.get_filled_quantity(account_id)
+                    
+                    if account_status and account_status.get('current_symbol') and filled_qty > 0:
+                        active_accounts.append(account_id)
+                        account_data[account_id] = {
+                            'symbol': account_status['current_symbol'],
+                            'quantity': filled_qty,  # Use actual filled quantity
+                            'order_id': account_status['current_order_id']
+                        }
+                        logger.info(f"Account {account_id} exit position: {account_status['current_symbol']} filled_qty={filled_qty}")
+                    else:
+                        logger.warning(f"Account {account_id} has no position to exit - filled_qty: {filled_qty}")
+            
+            if not active_accounts:
+                messagebox.showerror("Error", "No active accounts with positions available for exit orders")
+                return
+            
+            logger.info(f"Placing exit orders for accounts: {active_accounts}")
+            
+            # Set quantities from account state data
+            for account_id in active_accounts:
+                self.quantities[account_id] = account_data[account_id]['quantity']
+                logger.info(f"Account {account_id} quantity from state: {self.quantities[account_id]}")
+            
+            # Place orders for each active account in parallel
+            order_numbers = self._place_exit_orders_parallel(active_accounts, account_data, price, order_type)
+                
+            # Store exit order numbers
+            for i, account_id in enumerate(active_accounts):
+                if i < len(order_numbers) and order_numbers[i]:
+                    self.exit_order_numbers[account_id] = order_numbers[i]
+                    logger.info(f"Exit order placed for account {account_id}: {order_numbers[i]}")
+            
+            # Update UI state
+            self.exit_button.config(state='disabled', text="Exit Orders Placed")
+            self.cancel_exit_button.config(state='normal')
+            self.modify_exit_button.config(state='normal')
+            
+            # Update order status displays
+            for account_id in active_accounts:
+                if account_id == 1:
+                    self.master_order_status.set(f"Exit Order Placed: {self.exit_order_numbers[account_id]}")
+                elif account_id == 2:
+                    self.child_order_status.set(f"Exit Order Placed: {self.exit_order_numbers[account_id]}")
+            
+            messagebox.showinfo("Success", f"Exit orders placed successfully for {len(active_accounts)} account(s)")
+            logger.info("Exit orders placed successfully")
+                
+        except ValueError as e:
+            messagebox.showerror("Error", f"Invalid input: {e}")
+            logger.error(f"Value error in place_exit_orders: {e}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Error placing exit orders: {e}")
+            logger.error(f"Error in place_exit_orders: {e}")
+        
+    def modify_exit_orders(self):
+        """Modify exit orders across all active accounts"""
+        try:
+            # If modify exit box is empty, populate with current LTP and return (don't place order yet)
+            if not self.modify_exit_value.get().strip():
+                current_ltp = self.premium_price_value.get()
+                if current_ltp:
+                    self.modify_exit_value.set(current_ltp)
+                    logger.info(f"Modify Exit box populated with current LTP: {current_ltp}")
+                    return  # Stop here - user needs to press button again to place order
+                else:
+                    messagebox.showerror("Error", "Please fetch current price first")
+                    return
+            
+            price = float(self.modify_exit_value.get())
+            
+            # Get active accounts that can place orders, have positions, and have exit orders
+            active_accounts = []
+            account_data = {}
+            
+            for account_id in [1, 2]:  # Master and Child
+                if (self.account_manager.accounts[account_id]['active'] and 
+                    self.account_state_manager.get_can_order(account_id) == 1 and
+                    self.exit_order_numbers[account_id]):
+                    
+                    # Get position details from account state
+                    account_status = self.account_state_manager.get_account_status(account_id)
+                    if account_status and account_status.get('current_symbol') and account_status.get('current_quantity'):
+                        active_accounts.append(account_id)
+                        account_data[account_id] = {
+                            'symbol': account_status['current_symbol'],
+                            'quantity': int(account_status['current_quantity']),
+                            'order_id': account_status['current_order_id']
+                        }
+                        logger.info(f"Account {account_id} position for modify: {account_status['current_symbol']} qty={account_status['current_quantity']}")
+                    else:
+                        logger.warning(f"Account {account_id} has no position data in account state")
+            
+            if not active_accounts:
+                messagebox.showerror("Error", "No modifiable exit orders found")
+                return
+            
+            logger.info(f"Modifying exit orders for accounts: {active_accounts}")
+            
+            # Modify orders for each active account individually
+            modified_orders = []
+            
+            for account_id in active_accounts:
+                api = self.account_manager.get_api(account_id)
+                if not api:
+                    logger.error(f"No API available for account {account_id}")
+                    modified_orders.append(None)
+                    continue
+                
+                # Get account-specific data
+                symbol = account_data[account_id]['symbol']
+                quantity = account_data[account_id]['quantity']
+                order_number = self.exit_order_numbers[account_id]
+                
+                # Determine exchange and product type based on symbol
+                if 'BFO' in symbol:
+                    exchange = 'BFO'
+                    product_type = 'M'
+                else:
+                    exchange = 'NFO'
+                    product_type = 'I'
+                
+                # Modify individual exit order directly
+                result = api.modify_order(
+                    orderno=order_number,
+                    newprice=str(price),
+                    newqty=str(quantity),
+                    newproducttype=product_type,
+                    newordertype='LMT',
+                    newtriggerprice='0'
+                )
+                
+                if result and result.get('stat') == 'Ok':
+                    modified_order = result.get('norenordno')
+                else:
+                    modified_order = None
+                
+                modified_orders.append(modified_order)
+            
+            # Update order status displays
+            for i, account_id in enumerate(active_accounts):
+                if i < len(modified_orders) and modified_orders[i]:
+                    if account_id == 1:
+                        self.master_order_status.set(f"Exit Order Modified: {modified_orders[i]}")
+                    elif account_id == 2:
+                        self.child_order_status.set(f"Exit Order Modified: {modified_orders[i]}")
+                    logger.info(f"Exit order modified for account {account_id}: {modified_orders[i]}")
+            
+            messagebox.showinfo("Success", f"Exit orders modified successfully for {len(active_accounts)} account(s)")
+            logger.info("Exit orders modified successfully")
+                
+        except ValueError as e:
+            messagebox.showerror("Error", f"Invalid input: {e}")
+            logger.error(f"Value error in modify_exit_orders: {e}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Error modifying exit orders: {e}")
+            logger.error(f"Error in modify_exit_orders: {e}")
+
+    def cancel_exit_orders(self):
+        """Cancel exit orders across all active accounts"""
+        try:
+            # Get active accounts that can place orders and have exit orders
+            active_accounts = []
+            for account_id in [1, 2]:  # Master and Child
+                if (self.account_manager.accounts[account_id]['active'] and 
+                    self.account_state_manager.get_can_order(account_id) == 1 and
+                    self.exit_order_numbers[account_id]):
+                    active_accounts.append(account_id)
+            
+            if not active_accounts:
+                messagebox.showerror("Error", "No exit orders found to cancel")
+                return
+            
+            logger.info(f"Cancelling exit orders for accounts: {active_accounts}")
+            
+            # Cancel orders for each active account
+            apis = []
+            order_numbers = []
+            active_flags = []
+            
+            for account_id in active_accounts:
+                api = self.account_manager.get_api(account_id)
+                if api:
+                    apis.append(api)
+                    order_numbers.append(self.exit_order_numbers[account_id])
+                    active_flags.append(True)
+                else:
+                    logger.error(f"No API available for account {account_id}")
+                    active_flags.append(False)
+            
+            # Cancel exit orders directly
+            cancelled_orders = []
+            for i, account_id in enumerate(active_accounts):
+                if i < len(apis) and i < len(order_numbers) and active_flags[i]:
+                    api = apis[i]
+                    order_number = order_numbers[i]
+                    
+                    # Cancel order directly
+                    result = api.cancel_order(orderno=order_number)
+                    
+                    if result and result.get('stat') == 'Ok':
+                        cancelled_orders.append(order_number)
+                        logger.info(f"Exit order cancelled for account {account_id}: {order_number}")
+                    else:
+                        logger.error(f"Failed to cancel exit order for account {account_id}: {result}")
+                        cancelled_orders.append(None)
+                else:
+                    cancelled_orders.append(None)
+            
+            # Clear exit order numbers and update UI
+            for account_id in active_accounts:
+                self.exit_order_numbers[account_id] = ''
+                if account_id == 1:
+                    self.master_order_status.set("Exit Order Cancelled")
+                elif account_id == 2:
+                    self.child_order_status.set("Exit Order Cancelled")
+                logger.info(f"Exit order cancelled for account {account_id}")
+                
+                # Update UI state
+                self.exit_button.config(state='normal', text="SELL Order")
+                self.cancel_exit_button.config(state='disabled')
+                self.modify_exit_button.config(state='disabled')
+                
+                messagebox.showinfo("Success", f"Exit orders cancelled successfully for {len(active_accounts)} account(s)")
+                logger.info("Exit orders cancelled successfully")
+            else:
+                messagebox.showerror("Error", "No valid APIs available for cancelling exit orders")
+                
+        except Exception as e:
+            messagebox.showerror("Error", f"Error cancelling exit orders: {e}")
+            logger.error(f"Error in cancel_exit_orders: {e}")
+
+    def exit_all_orders_market(self):
+        """Exit all orders at market price for both master and child accounts"""
+        try:
+            # Check if exit button is disabled (no orders to exit)
+            if self.exit_button['state'] == 'disabled':
+                messagebox.showwarning("Warning", "No orders to sell! Place buy orders first.")
+                return
+            
+            # Show confirmation popup
+            result = messagebox.askyesno(
+                "Confirm Exit All Orders", 
+                "Are you sure you want to exit all orders at market price?\n\nThis action cannot be undone.",
+                icon='warning'
+            )
+            
+            if not result:
+                logger.info("Exit all orders cancelled by user")
+                return
+            
+            logger.info("Exiting all orders at market price")
+            
+            # Get active accounts that can place orders
+            active_accounts = []
+            for account_id in [1, 2]:  # Master and Child
+                if (self.account_manager.accounts[account_id]['active'] and 
+                    self.account_state_manager.get_can_order(account_id) == 1):
+                    active_accounts.append(account_id)
+            
+            if not active_accounts:
+                messagebox.showerror("Error", "No active accounts available for market exit")
+                return
+            
+            # Place market exit orders for all active accounts
+            for account_id in active_accounts:
+                self._place_market_exit_order(account_id)
+            
+            messagebox.showinfo("Success", f"Market exit orders placed for {len(active_accounts)} account(s)")
+            logger.info("Market exit orders placed successfully")
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Error placing market exit orders: {e}")
+            logger.error(f"Error in exit_all_orders_market: {e}")
+
+    def exit_master_orders_market(self):
+        """Exit master account orders at market price"""
+        try:
+            # Show confirmation popup
+            result = messagebox.askyesno(
+                "Confirm Exit Master Orders", 
+                "Are you sure you want to exit Master orders at market price?\n\nThis action cannot be undone.",
+                icon='warning'
+            )
+            
+            if not result:
+                logger.info("Exit master orders cancelled by user")
+                return
+            
+            logger.info("Exiting master orders at market price")
+            
+            if not (self.account_manager.accounts[1]['active'] and 
+                    self.account_state_manager.get_can_order(1) == 1):
+                messagebox.showerror("Error", "Master account is not active or cannot place orders")
+                return
+            
+            self._place_market_exit_order(1)
+            messagebox.showinfo("Success", "Master market exit order placed successfully")
+            logger.info("Master market exit order placed successfully")
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Error placing master market exit order: {e}")
+            logger.error(f"Error in exit_master_orders_market: {e}")
+
+    def exit_child_orders_market(self):
+        """Exit child account orders at market price"""
+        try:
+            # Show confirmation popup
+            result = messagebox.askyesno(
+                "Confirm Exit Child Orders", 
+                "Are you sure you want to exit Child orders at market price?\n\nThis action cannot be undone.",
+                icon='warning'
+            )
+            
+            if not result:
+                logger.info("Exit child orders cancelled by user")
+                return
+            
+            logger.info("Exiting child orders at market price")
+            
+            if not (self.account_manager.accounts[2]['active'] and 
+                    self.account_state_manager.get_can_order(2) == 1):
+                messagebox.showerror("Error", "Child account is not active or cannot place orders")
+                return
+            
+            self._place_market_exit_order(2)
+            messagebox.showinfo("Success", "Child market exit order placed successfully")
+            logger.info("Child market exit order placed successfully")
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Error placing child market exit order: {e}")
+            logger.error(f"Error in exit_child_orders_market: {e}")
+
+    def _place_market_exit_order(self, account_id):
+        """Helper function to place market exit order for a specific account"""
+        try:
+            # Get position details from account state
+            account_status = self.account_state_manager.get_account_status(account_id)
+            if not account_status or not account_status.get('current_symbol') or not account_status.get('current_quantity'):
+                logger.error(f"No position data found for account {account_id} in account state")
+                return
+            
+            symbol = account_status['current_symbol']
+            quantity = int(account_status['current_quantity'])
+            
+            api = self.account_manager.get_api(account_id)
+            if not api:
+                logger.error(f"No API available for account {account_id}")
+                return
+            
+            # Check if API is properly authenticated before placing order
+            try:
+                # Check API connection by getting order book
+                orderbook_response = api.get_orderbook()
+                if not orderbook_response:
+                    logger.warning(f"API not authenticated for account {account_id}, attempting re-login...")
+                    # Attempt to re-login
+                    success, client_name = self.account_manager.login_account(account_id)
+                    if not success:
+                        logger.error(f"Failed to re-authenticate account {account_id}: {client_name}")
+                        return
+                    logger.info(f"Successfully re-authenticated account {account_id}: {client_name}")
+            except Exception as e:
+                logger.warning(f"API authentication check failed for account {account_id}: {e}")
+                # Attempt to re-login
+                success, client_name = self.account_manager.login_account(account_id)
+                if not success:
+                    logger.error(f"Failed to re-authenticate account {account_id}: {client_name}")
+                    return
+                logger.info(f"Successfully re-authenticated account {account_id}: {client_name}")
+            
+            logger.info(f"Market exit for account {account_id}: {symbol} qty={quantity}")
+            
+            # Determine exchange and product type based on symbol
+            if 'SENSEX' in symbol:  # Fixed: Check for SENSEX instead of BFO
+                exchange = 'BFO'
+                product_type = 'M'
+            else:
+                exchange = 'NFO'
+                product_type = 'I'
+            
+            # Place market exit order directly
+            result = api.place_order(
+                buy_or_sell='S',
+                product_type=product_type,
+                exchange=exchange,
+                tradingsymbol=symbol,
+                quantity=str(quantity),
+                discloseqty=0,
+                price_type='MKT',
+                price='0',
+                trigger_price='0',
+                retention='DAY',
+                remarks='market_exit'
+            )
+            
+            # Log the broker response
+            logger.info(f"Broker response for account {account_id}: {result}")
+            
+            if result and result.get('stat') == 'Ok':
+                order_number = result.get('norenordno')
+                self.exit_order_numbers[account_id] = order_number
+                logger.info(f"Market exit order placed for account {account_id}: {order_number}")
+                
+                # Update order status display
+                if account_id == 1:
+                    self.master_order_status.set(f"Market Exit Order: {order_number}")
+                elif account_id == 2:
+                    self.child_order_status.set(f"Market Exit Order: {order_number}")
+            else:
+                # Log the rejection reason from broker
+                if result:
+                    error_msg = result.get('emsg', 'Unknown error')
+                    logger.warning(f"Market exit order rejected for account {account_id}: {error_msg}")
+                    logger.info(f"Full rejection details: {result}")
+                else:
+                    logger.error(f"Market exit order failed for account {account_id}: No response from broker")
+                
+                # Still update UI to show attempt was made
+                if account_id == 1:
+                    self.master_order_status.set("Market Exit Attempted (Rejected)")
+                elif account_id == 2:
+                    self.child_order_status.set("Market Exit Attempted (Rejected)")
+                
+        except Exception as e:
+            logger.error(f"Error placing market exit order for account {account_id}: {e}")
+
+    def exit_all_orders_market_silent(self):
+        """Exit all orders at market price without confirmation popup (for SL/Target breaches) - PARALLEL EXECUTION"""
+        try:
+            logger.info("Executing silent market exit for SL/Target - PARALLEL MODE")
+            
+            # Get active accounts that have positions to exit
+            active_accounts = []
+            for account_id in [1, 2]:  # Master and Child
+                if (self.account_manager.accounts[account_id]['active'] and 
+                    self.account_state_manager.get_can_exit(account_id) == 1):
+                    active_accounts.append(account_id)
+            
+            if not active_accounts:
+                logger.warning("No active accounts with positions available for silent market exit")
+                return
+            
+            # Place market exit orders in parallel using threading
+            self._place_market_exit_orders_parallel(active_accounts)
+            
+            logger.info(f"Silent market exit orders placed in parallel for {len(active_accounts)} account(s)")
+            
+        except Exception as e:
+            logger.error(f"Error in silent market exit: {e}")
+    
+    def _place_market_exit_orders_parallel(self, active_accounts):
+        """Place market exit orders in parallel using threading"""
+        import threading
+        
+        def place_single_market_exit(account_id):
+            """Place market exit order for single account"""
+            try:
+                logger.info(f"Placing parallel market exit for account {account_id}")
+                self._place_market_exit_order(account_id)
+            except Exception as e:
+                logger.error(f"Error in parallel market exit for account {account_id}: {e}")
+        
+        # Create and start threads for each active account
+        threads = []
+        for account_id in active_accounts:
+            thread = threading.Thread(target=place_single_market_exit, args=(account_id,))
+            threads.append(thread)
+            thread.start()
+            logger.info(f"Started parallel exit thread for account {account_id}")
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+        
+        logger.info("All parallel market exit threads completed")
+    
+    def _place_exit_orders_parallel(self, active_accounts, account_data, price, order_type):
+        """Place exit orders in parallel using threading"""
+        import threading
+        
+        order_numbers = [None] * len(active_accounts)  # Initialize with None values
+        
+        def place_single_exit_order(account_id, index):
+            """Place exit order for single account"""
+            try:
+                logger.info(f"Placing parallel exit order for account {account_id}")
+                
+                api = self.account_manager.get_api(account_id)
+                if not api:
+                    logger.error(f"No API available for account {account_id}")
+                    return
+                
+                # Get account-specific data
+                symbol = account_data[account_id]['symbol']
+                quantity = account_data[account_id]['quantity']
+                
+                # Determine exchange and product type based on symbol
+                if 'BFO' in symbol:
+                    exchange = 'BFO'
+                    product_type = 'M'
+                else:
+                    exchange = 'NFO'
+                    product_type = 'I'
+                
+                # Place individual exit order directly
+                result = api.place_order(
+                    buy_or_sell='S',
+                    product_type=product_type,
+                    exchange=exchange,
+                    tradingsymbol=symbol,
+                    quantity=str(quantity),
+                    discloseqty=0,
+                    price_type=order_type,
+                    price=str(price) if order_type == 'LMT' else '0',
+                    trigger_price='0',
+                    retention='DAY',
+                    remarks='exit_order'
+                )
+                
+                if result and result.get('stat') == 'Ok':
+                    order_number = result.get('norenordno')
+                    order_numbers[index] = order_number
+                    logger.info(f"Exit order placed for account {account_id}: {order_number}")
+                else:
+                    logger.error(f"Exit order failed for account {account_id}: {result}")
+                    
+            except Exception as e:
+                logger.error(f"Error in parallel exit order for account {account_id}: {e}")
+        
+        # Create and start threads for each active account
+        threads = []
+        for i, account_id in enumerate(active_accounts):
+            thread = threading.Thread(target=place_single_exit_order, args=(account_id, i))
+            threads.append(thread)
+            thread.start()
+            logger.info(f"Started parallel exit thread for account {account_id}")
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+        
+        logger.info("All parallel exit order threads completed")
+        return order_numbers
+
     def cancel_master_buy_order(self):
         """Cancel master buy order"""
         try:
@@ -2015,17 +2957,280 @@ class MainWindow:
             messagebox.showerror("Error", f"Error cancelling child buy order: {str(e)}")
         
         
-    def on_trail_type_changed(self, event):
-        """On trail type changed - TO BE IMPLEMENTED"""
-        logger.info("Trail type changed - Function not implemented yet")
+    def on_trail_type_changed(self, event=None):
+        """Handle trail type dropdown selection change"""
+        try:
+            trail_type = self.trail_type_selected.get()
+            
+            # Clear current trail value when type changes
+            self.trail_value.set("")
+            
+            # Update status message based on selected type
+            if trail_type == "Point":
+                self.trail_status_text.set("Point Trail Selected - Enter value and click Enable")
+            elif trail_type == "Percent":
+                self.trail_status_text.set("Percent Trail Selected - Enter value and click Enable")
+            else:
+                self.trail_status_text.set("Trailing Disabled")
+            
+            logger.info(f"Trail type changed to: {trail_type}")
+            
+        except Exception as e:
+            logger.error(f"Error handling trail type change: {e}")
         
     def enable_trail(self):
-        """Enable trail - TO BE IMPLEMENTED"""
-        logger.info("Enable trail clicked - Function not implemented yet")
+        """Enable trailing stop with current settings"""
+        try:
+            trail_type = self.trail_type_selected.get()
+            trail_value_text = self.trail_value.get().strip()
+            
+            # Validate inputs
+            if not trail_type:
+                messagebox.showerror("Error", "Please select a trail type (Point or Percent)")
+                return
+                
+            if not trail_value_text:
+                messagebox.showerror("Error", "Please enter a trail value")
+                return
+            
+            # Check if target price is set
+            if not self.target_price_level:
+                messagebox.showerror("Error", "Please set a target price first before enabling trailing")
+                return
+            
+            trail_value = float(trail_value_text)
+            
+            # Validate based on trail type
+            if trail_type == "Point":
+                if trail_value <= 0:
+                    messagebox.showerror("Error", "Point trail must be greater than 0")
+                    return
+            elif trail_type == "Percent":
+                if trail_value <= 0 or trail_value >= 100:
+                    messagebox.showerror("Error", "Percent trail must be between 0 and 100")
+                    return
+            
+            # Calculate what the trailing stop would be at current target price
+            if trail_type == "Point":
+                calculated_trailing_stop = self.target_price_level - trail_value
+            else:  # Percent
+                calculated_trailing_stop = self.target_price_level * (1 - trail_value / 100)
+            
+            # Check if trailing stop would be below SL price (if SL is set)
+            if self.sl_price_level and calculated_trailing_stop < self.sl_price_level:
+                messagebox.showerror("Error", 
+                    f"Trailing stop price ({calculated_trailing_stop:.2f}) cannot be below SL price ({self.sl_price_level})\n"
+                    f"Please reduce trail value or increase SL price")
+                return
+            
+            # Enable trailing
+            self.enable_trailing_value.set(True)
+            
+            # Update status based on trail type
+            if trail_type == "Point":
+                self.trail_status_text.set(f"Trailing Ready - Point Trail: {trail_value} (Will activate when target reached)")
+            else:
+                self.trail_status_text.set(f"Trailing Ready - Percent Trail: {trail_value}% (Will activate when target reached)")
+            
+            # Update button states
+            self.enable_trail_button.config(state="disabled", bg="gray")
+            self.disable_trail_button.config(state="normal", bg="lightcoral")
+            
+            logger.info(f"Trailing configured - {trail_type} trail: {trail_value} (Ready for target activation)")
+            
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid trail value")
+        except Exception as e:
+            logger.error(f"Error enabling trail: {e}")
+            messagebox.showerror("Error", f"Error enabling trail: {e}")
         
     def disable_trail(self):
-        """Disable trail - TO BE IMPLEMENTED"""
-        logger.info("Disable trail clicked - Function not implemented yet")
+        """Disable trailing stop"""
+        try:
+            self.enable_trailing_value.set(False)
+            self.trail_status_text.set("Trailing Disabled")
+            
+            # Stop any active trailing mode
+            if self.trailing_active:
+                self.trailing_active = False
+                self.trailing_start_price = None
+                self.trailing_high_price = None
+                self.trailing_stop_price = None
+                # Clear trailing stop display
+                self.trailing_stop_display_label.config(text="")
+                logger.info("Active trailing mode stopped")
+            
+            # Update button states
+            self.enable_trail_button.config(state="normal", bg="lightgreen")
+            self.disable_trail_button.config(state="disabled", bg="gray")
+            
+            logger.info("Trailing disabled")
+            
+        except Exception as e:
+            logger.error(f"Error disabling trail: {e}")
+            messagebox.showerror("Error", f"Error disabling trail: {e}")
+    
+    def start_trailing_mode(self, current_price):
+        """Start trailing mode when target is reached"""
+        try:
+            # Stop target monitoring (we're now in trailing mode)
+            self.stop_target_monitoring()
+            
+            # Set up trailing variables
+            self.trailing_active = True
+            self.trailing_start_price = current_price
+            self.trailing_high_price = current_price
+            
+            # Calculate initial trailing stop based on trail type
+            trail_type = self.trail_type_selected.get()
+            trail_value = float(self.trail_value.get())
+            
+            if trail_type == "Point":
+                self.trailing_stop_price = current_price - trail_value
+            else:  # Percent
+                self.trailing_stop_price = current_price * (1 - trail_value / 100)
+            
+            # Update status for both accounts
+            self.master_order_status.set(f"TRAILING ACTIVE @ {current_price} (Stop: {self.trailing_stop_price:.2f})")
+            self.child_order_status.set(f"TRAILING ACTIVE @ {current_price} (Stop: {self.trailing_stop_price:.2f})")
+            
+            # Update trail status
+            self.trail_status_text.set(f"Trailing Active - Stop: {self.trailing_stop_price:.2f}")
+            
+            # Update real-time trailing stop display
+            self.update_trailing_stop_display(current_price)
+            
+            logger.info(f"Trailing mode started at {current_price}, initial stop: {self.trailing_stop_price:.2f}")
+            
+        except Exception as e:
+            logger.error(f"Error starting trailing mode: {e}")
+    
+    def check_trailing_stop(self, current_price):
+        """Check if trailing stop should be triggered or updated"""
+        try:
+            if not self.trailing_active:
+                return
+                
+            current_price_float = float(current_price)
+            
+            # Update trailing high if price moved up
+            if current_price_float > self.trailing_high_price:
+                self.trailing_high_price = current_price_float
+                
+                # Update trailing stop
+                trail_type = self.trail_type_selected.get()
+                trail_value = float(self.trail_value.get())
+                
+                if trail_type == "Point":
+                    new_trailing_stop = current_price_float - trail_value
+                else:  # Percent
+                    new_trailing_stop = current_price_float * (1 - trail_value / 100)
+                
+                # Only update if new stop is higher (never move stop down)
+                if new_trailing_stop > self.trailing_stop_price:
+                    self.trailing_stop_price = new_trailing_stop
+                    
+                    # Update status for both accounts
+                    self.master_order_status.set(f"TRAILING @ {current_price_float} (Stop: {self.trailing_stop_price:.2f})")
+                    self.child_order_status.set(f"TRAILING @ {current_price_float} (Stop: {self.trailing_stop_price:.2f})")
+                    
+                    # Update trail status
+                    self.trail_status_text.set(f"Trailing Active - Stop: {self.trailing_stop_price:.2f}")
+                    
+                    # Update real-time trailing stop display
+                    self.update_trailing_stop_display(current_price_float)
+                    
+                    logger.info(f"Trailing stop updated to {self.trailing_stop_price:.2f} (High: {self.trailing_high_price:.2f})")
+            
+            # Check if trailing stop is hit
+            elif current_price_float <= self.trailing_stop_price:
+                logger.warning(f"TRAILING STOP HIT! Current: {current_price_float}, Stop: {self.trailing_stop_price:.2f}")
+                self.execute_trailing_stop_exit(current_price_float)
+                
+        except Exception as e:
+            logger.error(f"Error checking trailing stop: {e}")
+    
+    def execute_trailing_stop_exit(self, current_price):
+        """Execute market order exit when trailing stop is hit"""
+        try:
+            logger.info(f"Executing trailing stop exit at {current_price}")
+            
+            # Stop trailing
+            self.trailing_active = False
+            self.trailing_start_price = None
+            self.trailing_high_price = None
+            self.trailing_stop_price = None
+            
+            # Update status for both accounts
+            self.master_order_status.set(f"TRAILING STOP HIT @ {current_price}")
+            self.child_order_status.set(f"TRAILING STOP HIT @ {current_price}")
+            
+            # Update trail status
+            self.trail_status_text.set(f"Trailing Stop Hit @ {current_price}")
+            
+            # Clear trailing stop display
+            self.trailing_stop_display_label.config(text="")
+            
+            # Execute market orders for both accounts
+            self._execute_trailing_market_orders(current_price)
+            
+        except Exception as e:
+            logger.error(f"Error executing trailing stop exit: {e}")
+    
+    def _execute_trailing_market_orders(self, current_price):
+        """Execute market orders for trailing stop exit"""
+        try:
+            logger.info("Executing trailing stop market exit orders")
+            
+            # Get active accounts that can place orders
+            active_accounts = []
+            for account_id in [1, 2]:  # Master and Child
+                if (self.account_manager.accounts[account_id]['active'] and 
+                    self.account_state_manager.get_can_order(account_id) == 1):
+                    active_accounts.append(account_id)
+            
+            if not active_accounts:
+                logger.warning("No active accounts available for trailing stop exit")
+                return
+            
+            # Use the same fixed market exit function for consistency
+            for account_id in active_accounts:
+                self._place_market_exit_order(account_id)
+            
+            logger.info(f"Trailing stop market exit orders placed for {len(active_accounts)} account(s)")
+            
+        except Exception as e:
+            logger.error(f"Error executing trailing stop market orders: {e}")
+    
+    def update_trailing_stop_display(self, current_price):
+        """Update real-time trailing stop display"""
+        try:
+            if self.trailing_active and self.trailing_stop_price:
+                display_text = f"Trailing Stop: {self.trailing_stop_price:.2f} | High: {self.trailing_high_price:.2f}"
+                self.trailing_stop_display_label.config(text=display_text)
+            else:
+                self.trailing_stop_display_label.config(text="")
+        except Exception as e:
+            logger.error(f"Error updating trailing stop display: {e}")
+    
+    def stop_trailing_monitoring(self):
+        """Stop trailing monitoring"""
+        try:
+            self.trailing_active = False
+            self.trailing_start_price = None
+            self.trailing_high_price = None
+            self.trailing_stop_price = None
+            
+            # Clear trail status display
+            self.trail_status_text.set("Trailing Inactive")
+            
+            # Clear trailing stop display
+            self.trailing_stop_display_label.config(text="")
+            
+            logger.info("Trailing monitoring stopped")
+            
+        except Exception as e:
+            logger.error(f"Error stopping trailing monitoring: {e}")
         
     def cancel_buy_orders(self):
         """Cancel buy orders for both Master and Child accounts in parallel"""
@@ -2368,8 +3573,8 @@ class MainWindow:
             
             # 7. Update UI based on what was modified
             if modified_any:
-                # Disable modify button after successful modification
-                self.modify_buy_button.config(state="disabled", text="Orders Modified")
+                # Keep modify button enabled for further modifications
+                self.modify_buy_button.config(text="Modify Buy")
                 
                 # Adjust SL/Target prices based on new buy price
                 self._adjust_sl_target_for_modified_price(new_price)
@@ -2455,9 +3660,12 @@ class MainWindow:
             logger.error(f"Error opening configuration window: {e}")
             messagebox.showerror("Error", f"Failed to open configuration window: {e}")
         
+    
     def run(self):
         """Start the application"""
         logger.info("Starting Master-Child Trading GUI - Original UI Layout")
+        
+        
         self.root.mainloop()
 
 if __name__ == "__main__":
