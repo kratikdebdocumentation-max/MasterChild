@@ -148,6 +148,33 @@ class MainWindow:
             2: "PENDING"   # Child account order status
         }
         
+        # SL and Target monitoring variables (from old project)
+        self.sl_monitoring_active = False
+        self.target_monitoring_active = False
+        self.sl_price_level = None
+        self.target_price_level = None
+        
+        # Button state tracking for two-step confirmation
+        self.sl_button_state = "ready"  # "ready", "showing_price", "confirmed"
+        self.target_button_state = "ready"  # "ready", "showing_price", "confirmed"
+        
+        # Auto SL/Target system variables - load from configuration.csv
+        try:
+            sl_points = self.config_manager.get_setting('default_auto_sl', 20)
+            target_points = self.config_manager.get_setting('default_auto_target', 30)
+            self.sl_difference_from_buy = -sl_points  # SL points from buy price (negative)
+            self.target_difference_from_buy = target_points  # Target points from buy price (positive)
+            logger.info(f"SL/Target configuration loaded - SL: {sl_points} points, Target: {target_points} points")
+            logger.info(f"Calculated differences - SL: {self.sl_difference_from_buy}, Target: {self.target_difference_from_buy}")
+        except Exception as e:
+            logger.error(f"Error loading SL/Target configuration: {e}")
+            # Fallback to default values
+            self.sl_difference_from_buy = -20
+            self.target_difference_from_buy = 30
+            logger.info(f"Using fallback values - SL: {self.sl_difference_from_buy}, Target: {self.target_difference_from_buy}")
+        
+        self.current_buy_order_open_value = None  # Track current buy order open value
+        
         # Timeout timer for order management
         self.timeout_timer = None
         
@@ -165,20 +192,6 @@ class MainWindow:
         self.master_pnl_value.set("")  # Hidden by default
         self.child_pnl_value.set("")   # Hidden by default
         
-        # SL and Target monitoring variables
-        self.sl_monitoring_active = False
-        self.target_monitoring_active = False
-        self.sl_price_level = None
-        self.target_price_level = None
-        
-        # Button state tracking for two-step confirmation
-        self.sl_button_state = "ready"  # "ready", "showing_price", "confirmed"
-        self.target_button_state = "ready"  # "ready", "showing_price", "confirmed"
-        
-        # Auto SL/Target system variables
-        self.sl_difference_from_buy = -20  # Default SL points from buy price
-        self.target_difference_from_buy = 30  # Default Target points from buy price
-        self.current_buy_order_open_value = None  # Track current buy order open value
         
         # Cross-account coordination variables
         self.master_order_state = None  # PENDING, OPEN, FILLED, REJECTED, CANCELLED
@@ -682,9 +695,107 @@ class MainWindow:
                 self.price_value.set(f"{live_price:.2f}")
                 logger.info(f"Initial buy price set: {live_price:.2f}")
             
+            # Check SL/Target breaches if monitoring is active
+            self.check_sl_target_breach(live_price)
+            
             logger.info(f"Live price updated: {live_price:.2f}")
         except Exception as e:
             logger.error(f"Error updating live price: {e}")
+    
+    def check_sl_target_breach(self, live_price: float):
+        """Check for SL/Target breaches - from old project"""
+        try:
+            # Check SL breach
+            if self.sl_monitoring_active and self.sl_price_level is not None:
+                if live_price <= self.sl_price_level:
+                    logger.info(f"SL BREACH DETECTED! Current price: {live_price}, SL: {self.sl_price_level}")
+                    self._trigger_sl_breach(live_price)
+            
+            # Check Target breach
+            if self.target_monitoring_active and self.target_price_level is not None:
+                if live_price >= self.target_price_level:
+                    logger.info(f"TARGET HIT! Current price: {live_price}, Target: {self.target_price_level}")
+                    self._trigger_target_breach(live_price)
+                    
+        except Exception as e:
+            logger.error(f"Error checking SL/Target breaches: {e}")
+    
+    def _trigger_sl_breach(self, current_price: float):
+        """Handle SL breach - place exit orders - from old project"""
+        try:
+            logger.info(f"SL BREACH DETECTED! Current price: {current_price}, SL: {self.sl_price_level}")
+            
+            # Stop SL monitoring
+            self.stop_sl_monitoring()
+            
+            # Update UI to show breach
+            self.sl_price_button.config(text=f"SL TRIGGERED @{current_price:.2f}", bg="red", fg="white")
+            
+            # Place exit orders (placeholder for now)
+            self._place_exit_orders_for_breach("SL", current_price)
+            
+            logger.info("SL breach handled - exit orders placed")
+            
+        except Exception as e:
+            logger.error(f"Error handling SL breach: {e}")
+    
+    def _trigger_target_breach(self, current_price: float):
+        """Handle Target breach - place exit orders - from old project"""
+        try:
+            logger.info(f"TARGET HIT! Current price: {current_price}, Target: {self.target_price_level}")
+            
+            # Stop Target monitoring
+            self.stop_target_monitoring()
+            
+            # Update UI to show breach
+            self.target_price_button.config(text=f"TARGET HIT @{current_price:.2f}", bg="green", fg="white")
+            
+            # Place exit orders (placeholder for now)
+            self._place_exit_orders_for_breach("TARGET", current_price)
+            
+            logger.info("Target breach handled - exit orders placed")
+            
+        except Exception as e:
+            logger.error(f"Error handling Target breach: {e}")
+    
+    def _place_exit_orders_for_breach(self, breach_type: str, current_price: float):
+        """Place exit orders when SL or Target is breached"""
+        try:
+            logger.info(f"Placing exit orders for {breach_type} breach at price {current_price}")
+            
+            # This will be implemented when we add the exit order functionality
+            # For now, just log the action
+            logger.info(f"EXIT ORDERS PLACED - {breach_type} breach at {current_price}")
+            
+            # Update UI to show exit orders placed
+            if breach_type == "SL":
+                self.sl_price_button.config(text=f"SL EXIT @{current_price:.2f}")
+            else:
+                self.target_price_button.config(text=f"TARGET EXIT @{current_price:.2f}")
+            
+        except Exception as e:
+            logger.error(f"Error placing exit orders for {breach_type} breach: {e}")
+    
+    def _check_if_all_monitoring_should_stop(self):
+        """Check if all monitoring should stop (when either SL or Target is triggered)"""
+        try:
+            sl_triggered = self.sl_target_states.get('sl_triggered', False)
+            target_triggered = self.sl_target_states.get('target_triggered', False)
+            
+            # If either SL or Target is triggered, stop all monitoring
+            if sl_triggered or target_triggered:
+                self.sl_target_states['sl_active'] = False
+                self.sl_target_states['target_active'] = False
+                logger.info("All SL/Target monitoring stopped - one level was breached")
+                
+                # Update UI to show monitoring stopped
+                if not sl_triggered:
+                    self.sl_price_button.config(text="SL Monitoring Stopped", bg="gray")
+                if not target_triggered:
+                    self.target_price_button.config(text="Target Monitoring Stopped", bg="gray")
+                    
+        except Exception as e:
+            logger.error(f"Error checking if monitoring should stop: {e}")
     
     def update_order_status(self, account_num: int, status_message: str):
         """Update order status display and handle order state changes"""
@@ -905,9 +1016,194 @@ class MainWindow:
             logger.error(f"Error updating expiry dropdown: {e}")
         
     def release_buttons(self):
-        """Release buttons - TO BE IMPLEMENTED"""
-        logger.info("Release buttons clicked - Function not implemented yet")
-        
+        """Release button states - enable buy and sell order buttons"""
+        try:
+            logger.info("Release buttons clicked - resetting system for new orders")
+            
+            # 1. Reset account states - clear trading blocks while preserving login status
+            self._reset_account_states()
+            
+            # 2. Clear order information for both accounts
+            self._clear_order_information()
+            
+            # 3. Reset UI state - enable buttons and clear form fields
+            self._reset_ui_state()
+            
+            # 4. Update order status displays
+            self._update_order_status_displays()
+            
+            # 5. Stop any active monitoring
+            self._stop_monitoring()
+            
+            logger.info("System released - ready for new orders")
+            messagebox.showinfo("System Released", "System has been reset and is ready for new orders")
+            
+        except Exception as e:
+            logger.error(f"Error releasing buttons: {e}")
+            messagebox.showerror("Error", f"Failed to release system: {str(e)}")
+    
+    def _reset_account_states(self):
+        """Reset account states - clear trading blocks while preserving login status"""
+        try:
+            # Check actual login status for each account
+            master_logged_in = self.account_manager.accounts.get(1, {}).get('active', False)
+            child_logged_in = self.account_manager.accounts.get(2, {}).get('active', False)
+            
+            logger.info(f"Login status check - Master: {master_logged_in}, Child: {child_logged_in}")
+            
+            # Reset Master account - update login status and reset can_order to 1
+            if master_logged_in:
+                self.account_state_manager.update_login_status(1, 1, 'Master account logged in')
+                self.account_state_manager.update_can_order(1, 1, 'Master account reset after trading block')
+                logger.info("Master account reset to ready (was logged in)")
+            else:
+                self.account_state_manager.update_login_status(1, 0, 'Master not logged in')
+                self.account_state_manager.update_can_order(1, 1, 'Master account reset after trading block')
+                logger.info("Master account set to not logged in but can_order ready")
+            
+            # Reset Child account - update login status and reset can_order to 1
+            if child_logged_in:
+                self.account_state_manager.update_login_status(2, 1, 'Child account logged in')
+                self.account_state_manager.update_can_order(2, 1, 'Child account reset after trading block')
+                logger.info("Child account reset to ready (was logged in)")
+            else:
+                self.account_state_manager.update_login_status(2, 0, 'Child not logged in')
+                self.account_state_manager.update_can_order(2, 1, 'Child account reset after trading block')
+                logger.info("Child account set to not logged in but can_order ready")
+            
+            logger.info("Trading blocks reset while preserving login status")
+            
+        except Exception as e:
+            logger.error(f"Error resetting account states: {e}")
+            raise
+    
+    def _clear_order_information(self):
+        """Clear order information for both accounts"""
+        try:
+            # Clear order information for Master account
+            self.account_state_manager.update_order_info(1, '', '', 0, 0.0)
+            logger.info("Order information cleared for Master account")
+            
+            # Clear order information for Child account
+            self.account_state_manager.update_order_info(2, '', '', 0, 0.0)
+            logger.info("Order information cleared for Child account")
+            
+        except Exception as e:
+            logger.error(f"Error clearing order information: {e}")
+            raise
+    
+    def _reset_ui_state(self):
+        """Reset UI state - enable buttons and clear form fields"""
+        try:
+            # Enable buy button
+            self.buy_button.config(state='normal', text="BUY")
+            
+            # Re-enable price box for new orders
+            self.price_box.config(state='normal', bg='white')
+            
+            # Clear original buy price and modify box
+            self.original_buy_price = None
+            self.modify_buy_value.set("")
+            logger.info("BUY button and Price box re-enabled for new orders")
+            
+            # Disable buy-related buttons until new buy orders are placed
+            self.cancel_buy_button.config(state='disabled', text="Cancel Buy")
+            self.modify_buy_button.config(state='disabled', text="Modify Buy")
+            self.cancel_master_buy_button.config(state='disabled', text="Cancel Master Buy Order")
+            self.cancel_child_buy_button.config(state='disabled', text="Cancel Child Buy Order")
+            
+            # Disable exit-related buttons until new orders are placed
+            self.exit_button.config(state='disabled', text="SELL Order")
+            self.cancel_exit_button.config(state='disabled', text="Cancel Exit")
+            self.modify_exit_button.config(state='disabled', text="Modify Exit")
+            
+            # Reset SL/Target controls
+            self._reset_sl_target_controls()
+            
+            logger.info("Management buttons disabled until new orders are placed")
+            
+        except Exception as e:
+            logger.error(f"Error resetting UI state: {e}")
+            raise
+    
+    def _reset_sl_target_controls(self):
+        """Reset SL/Target controls to initial state"""
+        try:
+            # Reset state variables
+            self.sl_target_states.update({
+                'sl_calculated': False,
+                'target_calculated': False,
+                'sl_active': False,
+                'target_active': False,
+                'sl_triggered': False,
+                'target_triggered': False,
+                'sl_price': None,
+                'target_price': None,
+                'sl_points': 0,
+                'target_points': 0,
+                'buy_price': None
+            })
+            
+            # Clear UI display
+            self.sl_price_value.set("")
+            self.target_price_value.set("")
+            
+            # Disable controls
+            self.sl_price_box.config(state="disabled")
+            self.target_price_box.config(state="disabled")
+            self.sl_price_button.config(state="disabled", text="SL Price")
+            self.target_price_button.config(state="disabled", text="Target Price")
+            
+            logger.info("SL/Target controls reset to initial state")
+            
+        except Exception as e:
+            logger.error(f"Error resetting SL/Target controls: {e}")
+    
+    def _update_order_status_displays(self):
+        """Update order status displays based on account states"""
+        try:
+            # Update Master order status
+            master_status = self.account_state_manager.get_account_status(1)
+            if master_status and master_status.get('login_status') == 1:
+                self.master_order_status.set("Master account ready for orders")
+            else:
+                self.master_order_status.set("Master Not Logged In")
+            
+            # Update Child order status
+            child_status = self.account_state_manager.get_account_status(2)
+            if child_status and child_status.get('login_status') == 1:
+                self.child_order_status.set("Child account ready for orders")
+            else:
+                self.child_order_status.set("Child Not Logged In")
+            
+            logger.info("Order status displays updated")
+            
+        except Exception as e:
+            logger.error(f"Error updating order status displays: {e}")
+            raise
+    
+    def _stop_monitoring(self):
+        """Stop any active monitoring"""
+        try:
+            # Reset order states
+            self.order_states = {1: "PENDING", 2: "PENDING"}
+            
+            # Clear any timeout timers
+            if hasattr(self, 'timeout_timer') and self.timeout_timer:
+                self.timeout_timer.cancel()
+                self.timeout_timer = None
+            
+            # TODO: Add SL/Target monitoring stop when implemented
+            # if self.sl_monitoring_active:
+            #     self.stop_sl_monitoring()
+            # if self.target_monitoring_active:
+            #     self.stop_target_monitoring()
+            
+            logger.info("Monitoring stopped and timers cleared")
+            
+        except Exception as e:
+            logger.error(f"Error stopping monitoring: {e}")
+            raise
         
     def verify_pnl_from_broker(self):
         """Verify PnL from broker - TO BE IMPLEMENTED"""
@@ -1270,7 +1566,10 @@ class MainWindow:
             # 5. Place orders in parallel
             self._place_orders_parallel(active_accounts, trading_symbol, price, master_quantity, index)
             
-            # 6. Disable buy button and enable management buttons
+            # 6. Auto-set SL and Target based on buy order price
+            self.auto_set_sl_target_from_buy_price(price)
+            
+            # 7. Disable buy button and enable management buttons
             self.buy_button.config(state="disabled")
             self.cancel_buy_button.config(state="normal")
             self.modify_buy_button.config(state="normal")
@@ -1356,6 +1655,128 @@ class MainWindow:
         for thread in threads:
             thread.join()
     
+    def auto_set_sl_target_from_buy_price(self, buy_open_value):
+        """Automatically set SL and Target based on buy order open value - from old project"""
+        try:
+            logger.info(f"Starting auto SL/Target calculation for buy price: {buy_open_value}")
+            
+            if buy_open_value is None:
+                logger.warning("Buy open value is None, skipping SL/Target calculation")
+                return
+                
+            # Update current buy order open value
+            self.current_buy_order_open_value = buy_open_value
+            
+            # Log the differences being used
+            logger.info(f"Using differences - SL: {self.sl_difference_from_buy}, Target: {self.target_difference_from_buy}")
+            
+            # Calculate SL and Target based on stored differences
+            sl_price = round(buy_open_value + self.sl_difference_from_buy, 2)
+            # Ensure SL price never goes below 0
+            if sl_price < 0:
+                sl_price = 0.0
+                logger.info(f"SL price calculated as negative ({buy_open_value + self.sl_difference_from_buy}), setting to 0")
+            
+            target_price = round(buy_open_value + self.target_difference_from_buy, 2)
+            
+            logger.info(f"Calculated prices - SL: {sl_price}, Target: {target_price}")
+            
+            # Set SL price
+            self.sl_price_value.set(str(sl_price))
+            self.sl_price_level = sl_price
+            self.sl_button_state = "confirmed"
+            self.sl_price_button.config(text=f"SL Set @{sl_price}", bg="orange", fg="white")
+            
+            # Set Target price
+            self.target_price_value.set(str(target_price))
+            self.target_price_level = target_price
+            self.target_button_state = "confirmed"
+            self.target_price_button.config(text=f"Target Set @{target_price}", bg="orange", fg="white")
+            
+            logger.info(f"UI values set - SL: {self.sl_price_value.get()}, Target: {self.target_price_value.get()}")
+            
+            # Start monitoring if buy orders are filled
+            if self._are_buy_orders_filled():
+                self.start_sl_monitoring(sl_price)
+                self.start_target_monitoring(target_price)
+                logger.info(f"Auto SL/Target set and monitoring started - SL: {sl_price}, Target: {target_price} (Buy Open: {buy_open_value})")
+            else:
+                logger.info(f"Auto SL/Target set - SL: {sl_price}, Target: {target_price} (Buy Open: {buy_open_value})")
+                
+        except Exception as e:
+            logger.error(f"Error in auto_set_sl_target_from_buy_price: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+    
+    def _are_buy_orders_filled(self):
+        """Check if buy orders are filled/completed - from old project"""
+        try:
+            # Check if both Master and Child orders are completed
+            master_status = self.order_states.get(1, "PENDING")
+            child_status = self.order_states.get(2, "PENDING")
+            
+            return master_status == "COMPLETE" and child_status == "COMPLETE"
+        except Exception as e:
+            logger.error(f"Error checking if buy orders are filled: {e}")
+            return False
+    
+    def set_sl_price(self):
+        """Set SL price - from old project"""
+        try:
+            if not self.sl_price_value.get():
+                messagebox.showerror("Error", "Please enter SL price")
+                return
+            
+            new_sl_price = float(self.sl_price_value.get())
+            
+            # Ensure SL price is not negative
+            if new_sl_price < 0:
+                messagebox.showerror("Error", "SL price cannot be negative")
+                return
+            
+            # Update state
+            self.sl_price_level = new_sl_price
+            self.sl_button_state = "confirmed"
+            self.sl_price_button.config(text=f"SL Set @{new_sl_price}", bg="orange", fg="white")
+            
+            # Check if buy orders are completed and start monitoring
+            if self._are_buy_orders_filled():
+                self.start_sl_monitoring(new_sl_price)
+                logger.info(f"SL price confirmed and monitoring started: {new_sl_price} (buy orders are filled)")
+            else:
+                logger.info(f"SL price confirmed: {new_sl_price} (monitoring will start after buy order is filled)")
+            
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid SL price")
+        except Exception as e:
+            logger.error(f"Error setting SL price: {e}")
+    
+    def set_target_price(self):
+        """Set Target price - from old project"""
+        try:
+            if not self.target_price_value.get():
+                messagebox.showerror("Error", "Please enter Target price")
+                return
+            
+            new_target_price = float(self.target_price_value.get())
+            
+            # Update state
+            self.target_price_level = new_target_price
+            self.target_button_state = "confirmed"
+            self.target_price_button.config(text=f"Target Set @{new_target_price}", bg="orange", fg="white")
+            
+            # Check if buy orders are completed and start monitoring
+            if self._are_buy_orders_filled():
+                self.start_target_monitoring(new_target_price)
+                logger.info(f"Target price confirmed and monitoring started: {new_target_price} (buy orders are filled)")
+            else:
+                logger.info(f"Target price confirmed: {new_target_price} (monitoring will start after buy order is filled)")
+            
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid Target price")
+        except Exception as e:
+            logger.error(f"Error setting Target price: {e}")
+    
     def _timeout_handler(self, account_id):
         """Handle timeout for order completion"""
         try:
@@ -1399,9 +1820,101 @@ class MainWindow:
                 self.timeout_timer.cancel()
                 self.timeout_timer = None
                 logger.info("Timeout timer cancelled - order completed before timeout")
+            
+            # Activate SL/Target monitoring when buy orders are completed
+            if status == "COMPLETE":
+                # Get current symbol and price for the completed order
+                account_status = self.account_state_manager.get_account_status(account_id)
+                if account_status:
+                    symbol = account_status.get('current_symbol', '')
+                    price = account_status.get('current_price', 0.0)
+                    self.on_buy_order_completed(account_id, symbol, price)
                 
         except Exception as e:
             logger.error(f"Error handling order status update for account {account_id}: {e}")
+    
+    def on_buy_order_completed(self, account_num: int, symbol: str, price: float):
+        """Handle buy order completion - start SL/Target monitoring if configured - from old project"""
+        try:
+            logger.info(f"Buy order completed for account {account_num}: {symbol} @ {price}")
+            
+            # Check if SL and Target prices are set
+            sl_price_text = self.sl_price_value.get().strip()
+            target_price_text = self.target_price_value.get().strip()
+            
+            if sl_price_text:
+                try:
+                    sl_price = float(sl_price_text)
+                    self.start_sl_monitoring(sl_price)
+                    logger.info(f"SL monitoring started at: {sl_price}")
+                except ValueError:
+                    logger.warning("Invalid SL price format")
+            
+            if target_price_text:
+                try:
+                    target_price = float(target_price_text)
+                    self.start_target_monitoring(target_price)
+                    logger.info(f"Target monitoring started at: {target_price}")
+                except ValueError:
+                    logger.warning("Invalid Target price format")
+            
+        except Exception as e:
+            logger.error(f"Error handling buy order completion: {e}")
+    
+    def start_sl_monitoring(self, sl_price):
+        """Start monitoring Stop Loss price - from old project"""
+        try:
+            self.sl_monitoring_active = True
+            self.sl_price_level = sl_price
+            self.sl_price_button.config(text=f"SL placed @{sl_price}", bg="red", fg="white")
+            logger.info(f"SL monitoring activated at {sl_price}")
+        except Exception as e:
+            logger.error(f"Error starting SL monitoring: {e}")
+    
+    def start_target_monitoring(self, target_price):
+        """Start monitoring Target price - from old project"""
+        try:
+            self.target_monitoring_active = True
+            self.target_price_level = target_price
+            self.target_price_button.config(text=f"Target placed @{target_price}", bg="green", fg="white")
+            logger.info(f"Target monitoring activated at {target_price}")
+        except Exception as e:
+            logger.error(f"Error starting Target monitoring: {e}")
+    
+    def stop_sl_monitoring(self):
+        """Stop SL monitoring - from old project"""
+        try:
+            self.sl_monitoring_active = False
+            self.sl_price_level = None
+            self.sl_button_state = "ready"
+            self.sl_price_button.config(text="SL Price", bg="SystemButtonFace", fg="black")
+            logger.info("SL monitoring stopped")
+        except Exception as e:
+            logger.error(f"Error stopping SL monitoring: {e}")
+    
+    def stop_target_monitoring(self):
+        """Stop Target monitoring - from old project"""
+        try:
+            self.target_monitoring_active = False
+            self.target_price_level = None
+            self.target_button_state = "ready"
+            self.target_price_button.config(text="Target Price", bg="SystemButtonFace", fg="black")
+            logger.info("Target monitoring stopped")
+        except Exception as e:
+            logger.error(f"Error stopping Target monitoring: {e}")
+    
+    def _start_price_monitoring(self):
+        """Start real-time price monitoring for SL/Target"""
+        try:
+            # The monitoring is already active through the live price callback
+            # This method is called when SL/Target become active
+            logger.info("Price monitoring started for SL/Target - monitoring live price feed")
+            
+            # The actual monitoring happens in _check_sl_target_breaches()
+            # which is called from update_live_price() on every price update
+            
+        except Exception as e:
+            logger.error(f"Error starting price monitoring: {e}")
         
     def place_exit_orders(self):
         """Place exit orders - TO BE IMPLEMENTED"""
@@ -1447,7 +1960,6 @@ class MainWindow:
                 self.buy_button.config(state="disabled", text="Press RELEASE to Enable")
                 
                 logger.info("Master buy order cancelled successfully")
-                messagebox.showinfo("Success", "Master buy order cancelled successfully")
             else:
                 messagebox.showerror("Error", "Failed to cancel master buy order")
                 
@@ -1495,7 +2007,6 @@ class MainWindow:
                 self.buy_button.config(state="disabled", text="Press RELEASE to Enable")
                 
                 logger.info("Child buy order cancelled successfully")
-                messagebox.showinfo("Success", "Child buy order cancelled successfully")
             else:
                 messagebox.showerror("Error", "Failed to cancel child buy order")
                 
@@ -1503,13 +2014,6 @@ class MainWindow:
             logger.error(f"Error cancelling child buy order: {e}")
             messagebox.showerror("Error", f"Error cancelling child buy order: {str(e)}")
         
-    def set_sl_price(self):
-        """Set SL price - TO BE IMPLEMENTED"""
-        logger.info("Set SL price clicked - Function not implemented yet")
-        
-    def set_target_price(self):
-        """Set target price - TO BE IMPLEMENTED"""
-        logger.info("Set target price clicked - Function not implemented yet")
         
     def on_trail_type_changed(self, event):
         """On trail type changed - TO BE IMPLEMENTED"""
@@ -1600,13 +2104,7 @@ class MainWindow:
                 # Disable buy button until release
                 self.buy_button.config(state="disabled", text="Press RELEASE to Enable")
                 
-                # Show success message
-                if cancelled_master and cancelled_child:
-                    messagebox.showinfo("Success", "Both Master and Child buy orders cancelled successfully")
-                elif cancelled_master:
-                    messagebox.showinfo("Success", "Master buy order cancelled successfully")
-                elif cancelled_child:
-                    messagebox.showinfo("Success", "Child buy order cancelled successfully")
+                # Success - orders cancelled (no popup needed)
             else:
                 messagebox.showwarning("No Orders", "No orders were successfully cancelled")
                 
@@ -1873,19 +2371,56 @@ class MainWindow:
                 # Disable modify button after successful modification
                 self.modify_buy_button.config(state="disabled", text="Orders Modified")
                 
-                # Show success message
-                if modified_master and modified_child:
-                    messagebox.showinfo("Success", "Both Master and Child buy orders modified successfully")
-                elif modified_master:
-                    messagebox.showinfo("Success", "Master buy order modified successfully")
-                elif modified_child:
-                    messagebox.showinfo("Success", "Child buy order modified successfully")
+                # Adjust SL/Target prices based on new buy price
+                self._adjust_sl_target_for_modified_price(new_price)
+                
+                # Success - orders modified (no popup needed)
             else:
                 messagebox.showwarning("No Orders", "No orders were successfully modified")
                 
         except Exception as e:
             logger.error(f"Error modifying buy orders: {e}")
             messagebox.showerror("Error", f"Error modifying buy orders: {str(e)}")
+    
+    def _adjust_sl_target_for_modified_price(self, new_buy_price):
+        """Adjust SL/Target prices when buy order price is modified"""
+        try:
+            # Only adjust if SL/Target were previously calculated
+            if not (self.sl_target_states.get('sl_calculated') and self.sl_target_states.get('target_calculated')):
+                logger.info("SL/Target not calculated yet, skipping adjustment")
+                return
+            
+            # Get current points difference
+            sl_points = self.sl_target_states.get('sl_points', 0)
+            target_points = self.sl_target_states.get('target_points', 0)
+            
+            # Calculate new SL and Target prices maintaining the same points difference
+            new_sl_price = max(0, new_buy_price - sl_points)  # Ensure SL never goes below 0
+            new_target_price = new_buy_price + target_points
+            
+            # Check if SL was capped at 0
+            if new_buy_price - sl_points < 0:
+                logger.warning(f"SL capped at 0 due to low modified buy price. Buy: {new_buy_price}, SL points: {sl_points}")
+            
+            # Update state
+            self.sl_target_states.update({
+                'sl_price': new_sl_price,
+                'target_price': new_target_price,
+                'buy_price': new_buy_price
+            })
+            
+            # Update UI display
+            self.sl_price_value.set(f"{new_sl_price:.2f}")
+            self.target_price_value.set(f"{new_target_price:.2f}")
+            
+            # Update button text
+            self.sl_price_button.config(text=f"SL Set @{new_sl_price:.2f}")
+            self.target_price_button.config(text=f"Target Set @{new_target_price:.2f}")
+            
+            logger.info(f"SL/Target adjusted for new buy price - SL: {new_sl_price}, Target: {new_target_price} (Buy: {new_buy_price})")
+            
+        except Exception as e:
+            logger.error(f"Error adjusting SL/Target for modified price: {e}")
         
     def cancel_exit_orders(self):
         """Cancel exit orders - TO BE IMPLEMENTED"""

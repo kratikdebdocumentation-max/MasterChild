@@ -13895,3 +13895,25 @@
 2025-09-22 20:19:58,211 - INFO - On expiry selected called - Function not implemented yet
 2025-09-22 20:19:58,213 - INFO - Strike dropdown populated with 15 strikes for SENSEX
 2025-09-22 20:19:58,213 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-22 23:48:48,877 - INFO - Loaded account states from account_state.csv
+2025-09-22 23:48:48,897 - INFO - Loaded configuration from configuration.csv
+2025-09-22 23:48:48,897 - INFO - Resetting account states to initial state on startup...
+2025-09-22 23:48:48,907 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-22 23:48:48,912 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-22 23:48:48,916 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-22 23:48:48,923 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-22 23:48:48,924 - INFO - Account states reset to initial state
+2025-09-22 23:48:48,939 - INFO - Loaded cached index prices from today
+2025-09-22 23:48:48,963 - INFO - Loaded cached expiry dates from today
+2025-09-22 23:48:49,586 - INFO - Attempting auto-login for master account...
+2025-09-22 23:48:49,586 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-22 23:48:49,586 - INFO - Generated fresh 2FA for account 1: 567767
+2025-09-22 23:48:50,486 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-22 23:48:50,491 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-22 23:48:50,495 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-22 23:48:50,498 - INFO - Refreshing market data...
+2025-09-22 23:48:50,498 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-22 23:48:50,498 - INFO - Index prices are current, no refresh needed
+2025-09-22 23:48:50,498 - INFO - Expiry dates are current, no refresh needed
+2025-09-22 23:48:50,686 - INFO - Websocket connected
+2025-09-22 23:48:50,745 - INFO - WebSocket is now open for Account 1

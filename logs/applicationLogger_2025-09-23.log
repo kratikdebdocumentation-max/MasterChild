@@ -1,0 +1,31 @@
+2025-09-23 00:08:32,701 - INFO - Loaded index prices from text file
+2025-09-23 00:08:33,247 - INFO - Generated fresh 2FA for account 1: 401067
+2025-09-23 00:08:34,131 - INFO - Fetching index prices from API...
+2025-09-23 00:08:34,131 - INFO - Fetching NIFTY price from NSE
+2025-09-23 00:08:34,871 - INFO - Fetched NIFTY price: 25202.35
+2025-09-23 00:08:34,874 - INFO - Fetching BANKNIFTY price from NSE
+2025-09-23 00:08:35,491 - INFO - Fetched BANKNIFTY price: 55284.75
+2025-09-23 00:08:35,491 - INFO - Fetching SENSEX price from BSE
+2025-09-23 00:08:36,176 - INFO - Fetched SENSEX price: 82159.97
+2025-09-23 00:08:36,194 - INFO - Saved index prices to cache files
+2025-09-23 00:08:36,195 - INFO - Successfully updated all index prices
+2025-09-23 00:08:37,782 - INFO - Generated fresh 2FA for account 2: 085890
+2025-09-23 11:10:09,370 - INFO - Loaded cached index prices from today
+2025-09-23 11:10:09,838 - INFO - Generated fresh 2FA for account 1: 385618
+2025-09-23 11:10:14,609 - INFO - Generated fresh 2FA for account 2: 949331
+2025-09-23 11:18:51,342 - INFO - Loaded cached index prices from today
+2025-09-23 11:18:51,797 - INFO - Generated fresh 2FA for account 1: 226977
+2025-09-23 11:19:57,100 - INFO - Generated fresh 2FA for account 2: 911860
+2025-09-23 13:12:18,329 - INFO - Loaded cached index prices from today
+2025-09-23 13:12:18,840 - INFO - Generated fresh 2FA for account 1: 182771
+2025-09-23 13:12:34,150 - INFO - Generated fresh 2FA for account 2: 523118
+2025-09-23 13:17:50,546 - INFO - Loaded cached index prices from today
+2025-09-23 13:17:50,818 - INFO - Generated fresh 2FA for account 1: 446591
+2025-09-23 13:17:57,118 - INFO - Generated fresh 2FA for account 2: 854498
+2025-09-23 13:26:03,189 - INFO - Loaded cached index prices from today
+2025-09-23 13:26:03,608 - INFO - Generated fresh 2FA for account 1: 494689
+2025-09-23 13:26:05,437 - INFO - Generated fresh 2FA for account 2: 320860
+2025-09-23 13:29:16,495 - INFO - Loaded cached index prices from today
+2025-09-23 13:29:16,918 - INFO - Generated fresh 2FA for account 1: 574097
+2025-09-23 13:29:18,763 - INFO - Generated fresh 2FA for account 2: 883179
+2025-09-23 13:36:16,764 - INFO - Loaded cached index prices from today
