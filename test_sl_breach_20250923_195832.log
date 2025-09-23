@@ -1,0 +1,60 @@
+2025-09-23 19:58:33,470 - INFO - === SL BREACH TESTER INITIALIZED ===
+2025-09-23 19:58:33,478 - INFO - Loaded account states from account_state.csv
+2025-09-23 19:58:33,696 - INFO - Loaded account states from account_state.csv
+2025-09-23 19:58:33,703 - INFO - Loaded configuration from configuration.csv
+2025-09-23 19:58:33,704 - INFO - Resetting account states to initial state on startup...
+2025-09-23 19:58:33,711 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-23 19:58:33,723 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-23 19:58:33,730 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-23 19:58:33,741 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-23 19:58:33,757 - INFO - Updated Master (ID: 1) order info:   0@0.0
+2025-09-23 19:58:33,763 - INFO - Updated Child (ID: 2) order info:   0@0.0
+2025-09-23 19:58:33,764 - INFO - Order information cleared on startup for both accounts
+2025-09-23 19:58:33,764 - INFO - Account states reset to initial state
+2025-09-23 19:58:33,765 - INFO - Loaded cached index prices from today
+2025-09-23 19:58:33,768 - INFO - Loaded cached expiry dates from today
+2025-09-23 19:58:34,012 - ERROR - Error loading SL/Target configuration: bad operand type for unary -: 'str'
+2025-09-23 19:58:34,012 - INFO - Using fallback values - SL: -20, Target: 30
+2025-09-23 19:58:34,406 - INFO - Attempting auto-login for master account...
+2025-09-23 19:58:34,406 - INFO - MainWindow initialized for testing
+2025-09-23 19:58:34,407 - INFO - Generated fresh 2FA for account 1: 023668
+2025-09-23 19:58:34,460 - INFO - Setting up dummy positions for SL breach test...
+2025-09-23 19:58:34,461 - INFO - Attempting login for account 1 with userid: FA32246
+2025-09-23 19:58:34,475 - INFO - Updated Master (ID: 1) order info: TEST_MASTER_001 NIFTY23SEP25C25100 75@50.0
+2025-09-23 19:58:34,484 - INFO - Updated Master (ID: 1) filled_quantity: 75
+2025-09-23 19:58:34,494 - INFO - Updated Master (ID: 1) can_order to '1': Test Master ready
+2025-09-23 19:58:34,505 - INFO - Updated Child (ID: 2) order info: TEST_CHILD_002 NIFTY23SEP25C25100 75@50.0
+2025-09-23 19:58:34,508 - INFO - Updated Child (ID: 2) filled_quantity: 75
+2025-09-23 19:58:34,515 - INFO - Updated Child (ID: 2) can_order to '1': Test Child ready
+2025-09-23 19:58:34,516 - INFO - Dummy positions set up successfully
+2025-09-23 19:58:34,520 - INFO - Account 1 verification:
+2025-09-23 19:58:34,521 - INFO -   - filled_qty: 0
+2025-09-23 19:58:34,521 - INFO -   - can_exit: 0
+2025-09-23 19:58:34,522 - INFO -   - can_order: 1
+2025-09-23 19:58:34,522 - INFO -   - active: True
+2025-09-23 19:58:34,522 - INFO -   - symbol: NIFTY23SEP25C25100
+2025-09-23 19:58:34,523 - INFO -   - quantity: 75
+2025-09-23 19:58:34,525 - INFO - Account 2 verification:
+2025-09-23 19:58:34,525 - INFO -   - filled_qty: 0
+2025-09-23 19:58:34,526 - INFO -   - can_exit: 0
+2025-09-23 19:58:34,526 - INFO -   - can_order: 1
+2025-09-23 19:58:34,526 - INFO -   - active: True
+2025-09-23 19:58:34,526 - INFO -   - symbol: NIFTY23SEP25C25100
+2025-09-23 19:58:34,527 - INFO -   - quantity: 75
+2025-09-23 19:58:34,527 - INFO - === TESTING SL BREACH FUNCTION ===
+2025-09-23 19:58:34,527 - INFO - Test parameters:
+2025-09-23 19:58:34,527 - INFO -   - Breach type: SL
+2025-09-23 19:58:34,528 - INFO -   - Current price: 45.0
+2025-09-23 19:58:34,528 - INFO -   - Entry price: 50.0 (simulated)
+2025-09-23 19:58:34,528 - INFO -   - Expected action: Market exit orders for both accounts
+2025-09-23 19:58:34,528 - INFO - Calling _place_exit_orders_for_breach function...
+2025-09-23 19:58:34,529 - INFO - Placing exit orders for SL breach at price 45.0 - PARALLEL MODE
+2025-09-23 19:58:34,529 - WARNING - No active accounts with positions available for breach exit orders
+2025-09-23 19:58:34,530 - INFO - SL breach function call completed
+2025-09-23 19:58:34,530 - INFO - 
+==================================================
+2025-09-23 19:58:34,530 - INFO - === TESTING MARKET EXIT FUNCTION ===
+2025-09-23 19:58:34,530 - INFO - Calling exit_all_orders_market_silent function...
+2025-09-23 19:58:34,530 - INFO - Executing silent market exit for SL/Target - PARALLEL MODE
+2025-09-23 19:58:34,531 - WARNING - No active accounts with positions available for silent market exit
+2025-09-23 19:58:34,532 - INFO - Market exit function call completed
