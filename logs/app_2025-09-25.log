@@ -1,0 +1,277 @@
+2025-09-25 00:50:01,225 - INFO - Loaded account states from account_state.csv
+2025-09-25 00:50:01,248 - INFO - Loaded configuration from configuration.csv
+2025-09-25 00:50:01,248 - INFO - Resetting account states to initial state on startup...
+2025-09-25 00:50:01,266 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-25 00:50:01,269 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-25 00:50:01,271 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-25 00:50:01,279 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-25 00:50:01,284 - INFO - Updated Master (ID: 1) order info:   0@0.0
+2025-09-25 00:50:01,289 - INFO - Updated Child (ID: 2) order info:   0@0.0
+2025-09-25 00:50:01,296 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-25 00:50:01,305 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-25 00:50:01,305 - INFO - Order information and exit order info cleared on startup for both accounts
+2025-09-25 00:50:01,305 - INFO - Account states reset to initial state
+2025-09-25 00:50:01,305 - INFO - Loaded index prices from text file
+2025-09-25 00:50:01,305 - INFO - Loaded expiry dates from text files
+2025-09-25 00:50:01,522 - ERROR - Error loading SL/Target configuration: bad operand type for unary -: 'str'
+2025-09-25 00:50:01,522 - INFO - Using fallback values - SL: -20, Target: 30
+2025-09-25 00:50:01,838 - INFO - Attempting auto-login for master account...
+2025-09-25 00:50:01,838 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-25 00:50:01,838 - INFO - Generated fresh 2FA for account 1: 431009
+2025-09-25 00:50:01,838 - INFO - Attempting login for account 1 with userid: FA32246
+2025-09-25 00:50:02,563 - INFO - Login response for account 1: {'request_time': '00:50:02 25-09-2025', 'actid': 'FA32246', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'ROOPAL SONI', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'MCX', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': 'b142bb5b28e700cdbfb84fa854bbb140bcf1e30776d88240e941a2c5b904bb9c', 'susertokenspl': '37d400c446aa0880e44c1f3e649e27e848c3f9bf64432942fe99c945aaedd336', 'email': 'kratik.kunal@gmail.com', 'uid': 'FA32246', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '9424018696', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'MCX', 'NIPO', 'BSTAR', 'BFO'], 'values': ['l', 'calls', 'Puts'], 'mws': {'l': [], 'calls': [{'exch': 'NFO', 'token': '54979', 'tsym': 'ADANIGREEN28OCT25P1100', 'cname': 'ADANIGREEN OCT 1100 PE ', 'dname': 'ADANIGREEN OCT 1100 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54957', 'tsym': 'ADANIGREEN28OCT25P660', 'cname': 'ADANIGREEN OCT 660 PE ', 'dname': 'ADANIGREEN OCT 660 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54995', 'tsym': 'ADANIGREEN25NOV25P600', 'cname': 'ADANIGREEN NOV 600 PE ', 'dname': 'ADANIGREEN NOV 600 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54991', 'tsym': 'BANKNIFTY30SEP25C55400', 'cname': 'BANKNIFTY 30SEP25 55400 CE ', 'dname': 'BANKNIFTY 30SEP25 55400 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '35', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '54983', 'tsym': 'ADANIGREEN28OCT25P1180', 'cname': 'ADANIGREEN OCT 1180 PE ', 'dname': 'ADANIGREEN OCT 1180 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54965', 'tsym': 'ADANIGREEN28OCT25P820', 'cname': 'ADANIGREEN OCT 820 PE ', 'dname': 'ADANIGREEN OCT 820 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54953', 'tsym': 'ADANIGREEN28OCT25P520', 'cname': 'ADANIGREEN OCT 520 PE ', 'dname': 'ADANIGREEN OCT 520 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}], 'Puts': [{'exch': 'BFO', 'token': '1146943', 'tsym': 'SENSEX25SEP82000PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '60487', 'tsym': 'NIFTY30SEP25C25200', 'cname': 'NIFTY 30SEP25 25200 CE ', 'dname': 'NIFTY 30SEP25 25200 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '64694', 'tsym': 'NIFTY30SEP25C25000', 'cname': 'NIFTY 30SEP25 25000 CE ', 'dname': 'NIFTY 30SEP25 25000 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '841640', 'tsym': 'SENSEX25SEP81500PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'BFO', 'token': '841453', 'tsym': 'SENSEX25SEP82200CE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '841835', 'tsym': 'SENSEX25SEP82500CE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '1146714', 'tsym': 'SENSEX25SEP81000PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'BSE', 'token': '1', 'tsym': 'SENSEX', 'cname': 'BSE SENSEX', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}, {'exch': 'NFO', 'token': '48898', 'tsym': 'MCX25NOV25F', 'cname': 'MCX NOV FUT', 'dname': 'MCX NOV FUT', 'instname': 'FUTSTK', 'pp': '2', 'ls': '125', 'ti': '0.50', 'optt': 'XX'}, {'exch': 'MCX', 'token': '456955', 'tsym': 'COPPER30SEP25', 'instname': 'FUTCOM', 'pp': '2', 'ls': '2500', 'ti': '0.05', 'optt': 'XX'}, {'exch': 'NSE', 'token': '4598', 'tsym': 'HERITGFOOD-EQ', 'cname': 'HERITAGE FOODS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '2885', 'tsym': 'RELIANCE-EQ', 'cname': 'RELIANCE INDUSTRIES LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.10'}, {'exch': 'NSE', 'token': '31181', 'tsym': 'MCX-EQ', 'cname': 'MULTI COMMODITY EXCHANGE', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.50'}, {'exch': 'NSE', 'token': '8003', 'tsym': 'SILVER-EQ', 'cname': 'BIRLASLAMC - SILVER', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}, {'exch': 'NSE', 'token': '26037', 'tsym': 'Nifty Fin Service', 'cname': 'FIN NIFTY', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758741602', 'lastpwdtime': '1757444505'}
+2025-09-25 00:50:02,563 - INFO - Login response type: <class 'dict'>
+2025-09-25 00:50:02,563 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-25 00:50:02,570 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-25 00:50:02,578 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-25 00:50:02,587 - INFO - Refreshing market data...
+2025-09-25 00:50:02,587 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-25 00:50:02,594 - INFO - Refreshing index prices...
+2025-09-25 00:50:02,605 - INFO - Fetching index prices from API...
+2025-09-25 00:50:02,607 - INFO - Fetching NIFTY price from NSE
+2025-09-25 00:50:02,764 - INFO - Websocket connected
+2025-09-25 00:50:02,813 - INFO - WebSocket is now open for Account 1
+2025-09-25 00:50:03,214 - INFO - Fetched NIFTY price: 25056.9
+2025-09-25 00:50:03,214 - INFO - Fetching BANKNIFTY price from NSE
+2025-09-25 00:50:03,795 - INFO - Fetched BANKNIFTY price: 55121.5
+2025-09-25 00:50:03,795 - INFO - Fetching SENSEX price from BSE
+2025-09-25 00:50:04,335 - INFO - Positions retrieved for ROOPAL SONI: 0 open positions found
+2025-09-25 00:50:04,335 - INFO - Position check completed - No open positions found
+2025-09-25 00:50:04,520 - INFO - Fetched SENSEX price: 81715.63
+2025-09-25 00:50:04,520 - INFO - Saved index prices to cache files
+2025-09-25 00:50:04,526 - INFO - Successfully updated all index prices
+2025-09-25 00:50:04,528 - INFO - Refreshing expiry dates...
+2025-09-25 00:50:04,529 - INFO - Calculating expiry dates from master files...
+2025-09-25 00:50:04,541 - INFO - Using NFO file: data\NFO_symbols.txt_2025-09-21.txt
+2025-09-25 00:50:04,732 - INFO - NIFTY - Current: 2025-09-23, Next: 2025-09-30
+2025-09-25 00:50:04,732 - INFO - BANKNIFTY - Current: 2025-09-30, Next: 2025-10-28
+2025-09-25 00:50:04,737 - INFO - Using BFO file: data\BFO_symbols.txt_2025-09-21.txt
+2025-09-25 00:50:04,812 - INFO - SENSEX - Current: 2025-09-25, Next: 2025-10-01
+2025-09-25 00:50:04,824 - INFO - Saved expiry dates to files and cache
+2025-09-25 00:50:04,827 - INFO - Successfully calculated and saved expiry dates
+2025-09-25 00:50:06,588 - INFO - Index selected: NIFTY
+2025-09-25 00:50:06,588 - INFO - On option selected called - Function not implemented yet
+2025-09-25 00:50:06,588 - INFO - Not all required fields selected for strike selection
+2025-09-25 00:50:06,590 - INFO - Option and strike selections cleared for new index
+2025-09-25 00:50:06,590 - INFO - On expiry selected called - Function not implemented yet
+2025-09-25 00:50:06,590 - INFO - Strike dropdown populated with 15 strikes for NIFTY
+2025-09-25 00:50:06,592 - INFO - Updated quantity dropdown for NIFTY: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-25 01:57:59,738 - INFO - Loaded account states from account_state.csv
+2025-09-25 01:57:59,756 - INFO - Loaded configuration from configuration.csv
+2025-09-25 01:57:59,765 - INFO - Resetting account states to initial state on startup...
+2025-09-25 01:57:59,773 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-25 01:57:59,782 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-25 01:57:59,788 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-25 01:57:59,814 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-25 01:57:59,841 - INFO - Updated Master (ID: 1) order info:   0@0.0
+2025-09-25 01:57:59,854 - INFO - Updated Child (ID: 2) order info:   0@0.0
+2025-09-25 01:57:59,881 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-25 01:57:59,888 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-25 01:57:59,890 - INFO - Order information and exit order info cleared on startup for both accounts
+2025-09-25 01:57:59,980 - INFO - Account states reset to initial state
+2025-09-25 01:57:59,984 - INFO - Loaded cached index prices from today
+2025-09-25 01:57:59,989 - INFO - NIFTY current expiry (2025-09-23) has passed, need fresh data
+2025-09-25 01:57:59,991 - INFO - Expiry dates in cache are expired or invalid
+2025-09-25 01:57:59,991 - INFO - Calculating fresh expiry dates from master files...
+2025-09-25 01:57:59,991 - INFO - Calculating expiry dates from master files...
+2025-09-25 01:57:59,993 - INFO - Using NFO file: data\NFO_symbols.txt_2025-09-21.txt
+2025-09-25 01:58:00,167 - INFO - NIFTY - Current: 2025-09-23, Next: 2025-09-30
+2025-09-25 01:58:00,167 - INFO - BANKNIFTY - Current: 2025-09-30, Next: 2025-10-28
+2025-09-25 01:58:00,167 - INFO - Using BFO file: data\BFO_symbols.txt_2025-09-21.txt
+2025-09-25 01:58:00,241 - INFO - SENSEX - Current: 2025-09-25, Next: 2025-10-01
+2025-09-25 01:58:00,244 - INFO - Saved expiry dates to files and cache
+2025-09-25 01:58:00,244 - INFO - Successfully calculated and saved expiry dates
+2025-09-25 01:58:00,433 - ERROR - Error loading SL/Target configuration: bad operand type for unary -: 'str'
+2025-09-25 01:58:00,433 - INFO - Using fallback values - SL: -20, Target: 30
+2025-09-25 01:58:00,648 - INFO - Attempting auto-login for master account...
+2025-09-25 01:58:00,648 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-25 01:58:00,648 - INFO - Generated fresh 2FA for account 1: 099773
+2025-09-25 01:58:00,648 - INFO - Attempting login for account 1 with userid: FA32246
+2025-09-25 01:58:01,305 - INFO - Login response for account 1: {'request_time': '01:58:01 25-09-2025', 'actid': 'FA32246', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'ROOPAL SONI', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'MCX', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': '322cee383614a2367d74cf9f0c50721fe7c1cf6802c19b1ecd0f94dc5a84dd29', 'susertokenspl': '17c3b69472c07a6cc288c4205da8e3231942791e184b0c05b938da94552326f2', 'email': 'kratik.kunal@gmail.com', 'uid': 'FA32246', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '9424018696', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'MCX', 'NIPO', 'BSTAR', 'BFO'], 'values': ['l', 'calls', 'Puts'], 'mws': {'l': [], 'calls': [{'exch': 'NFO', 'token': '54979', 'tsym': 'ADANIGREEN28OCT25P1100', 'cname': 'ADANIGREEN OCT 1100 PE ', 'dname': 'ADANIGREEN OCT 1100 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54957', 'tsym': 'ADANIGREEN28OCT25P660', 'cname': 'ADANIGREEN OCT 660 PE ', 'dname': 'ADANIGREEN OCT 660 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54995', 'tsym': 'ADANIGREEN25NOV25P600', 'cname': 'ADANIGREEN NOV 600 PE ', 'dname': 'ADANIGREEN NOV 600 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54991', 'tsym': 'BANKNIFTY30SEP25C55400', 'cname': 'BANKNIFTY 30SEP25 55400 CE ', 'dname': 'BANKNIFTY 30SEP25 55400 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '35', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '54983', 'tsym': 'ADANIGREEN28OCT25P1180', 'cname': 'ADANIGREEN OCT 1180 PE ', 'dname': 'ADANIGREEN OCT 1180 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54965', 'tsym': 'ADANIGREEN28OCT25P820', 'cname': 'ADANIGREEN OCT 820 PE ', 'dname': 'ADANIGREEN OCT 820 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54953', 'tsym': 'ADANIGREEN28OCT25P520', 'cname': 'ADANIGREEN OCT 520 PE ', 'dname': 'ADANIGREEN OCT 520 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}], 'Puts': [{'exch': 'BFO', 'token': '1146943', 'tsym': 'SENSEX25SEP82000PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '60487', 'tsym': 'NIFTY30SEP25C25200', 'cname': 'NIFTY 30SEP25 25200 CE ', 'dname': 'NIFTY 30SEP25 25200 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '64694', 'tsym': 'NIFTY30SEP25C25000', 'cname': 'NIFTY 30SEP25 25000 CE ', 'dname': 'NIFTY 30SEP25 25000 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '841640', 'tsym': 'SENSEX25SEP81500PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'BFO', 'token': '841453', 'tsym': 'SENSEX25SEP82200CE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '841835', 'tsym': 'SENSEX25SEP82500CE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '1146714', 'tsym': 'SENSEX25SEP81000PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'BSE', 'token': '1', 'tsym': 'SENSEX', 'cname': 'BSE SENSEX', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}, {'exch': 'NFO', 'token': '48898', 'tsym': 'MCX25NOV25F', 'cname': 'MCX NOV FUT', 'dname': 'MCX NOV FUT', 'instname': 'FUTSTK', 'pp': '2', 'ls': '125', 'ti': '0.50', 'optt': 'XX'}, {'exch': 'MCX', 'token': '456955', 'tsym': 'COPPER30SEP25', 'instname': 'FUTCOM', 'pp': '2', 'ls': '2500', 'ti': '0.05', 'optt': 'XX'}, {'exch': 'NSE', 'token': '4598', 'tsym': 'HERITGFOOD-EQ', 'cname': 'HERITAGE FOODS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '2885', 'tsym': 'RELIANCE-EQ', 'cname': 'RELIANCE INDUSTRIES LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.10'}, {'exch': 'NSE', 'token': '31181', 'tsym': 'MCX-EQ', 'cname': 'MULTI COMMODITY EXCHANGE', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.50'}, {'exch': 'NSE', 'token': '8003', 'tsym': 'SILVER-EQ', 'cname': 'BIRLASLAMC - SILVER', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}, {'exch': 'NSE', 'token': '26037', 'tsym': 'Nifty Fin Service', 'cname': 'FIN NIFTY', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758745681', 'lastpwdtime': '1757444505'}
+2025-09-25 01:58:01,309 - INFO - Login response type: <class 'dict'>
+2025-09-25 01:58:01,309 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-25 01:58:01,309 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-25 01:58:01,320 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-25 01:58:01,321 - INFO - Refreshing market data...
+2025-09-25 01:58:01,324 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-25 01:58:01,325 - INFO - Index prices are current, no refresh needed
+2025-09-25 01:58:01,329 - INFO - Expiry dates are current, no refresh needed
+2025-09-25 01:58:01,504 - INFO - Websocket connected
+2025-09-25 01:58:01,554 - INFO - WebSocket is now open for Account 1
+2025-09-25 01:58:02,936 - INFO - Positions retrieved for ROOPAL SONI: 0 open positions found
+2025-09-25 01:58:02,936 - INFO - Position check completed - No open positions found
+2025-09-25 01:58:04,370 - INFO - Index selected: NIFTY
+2025-09-25 01:58:04,370 - INFO - On option selected called - Function not implemented yet
+2025-09-25 01:58:04,370 - INFO - Not all required fields selected for strike selection
+2025-09-25 01:58:04,370 - INFO - Option and strike selections cleared for new index
+2025-09-25 01:58:04,370 - INFO - On expiry selected called - Function not implemented yet
+2025-09-25 01:58:04,386 - INFO - Strike dropdown populated with 15 strikes for NIFTY
+2025-09-25 01:58:04,386 - INFO - Updated quantity dropdown for NIFTY: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-25 02:03:16,481 - INFO - Loaded account states from account_state.csv
+2025-09-25 02:03:16,484 - INFO - Loaded configuration from configuration.csv
+2025-09-25 02:03:16,486 - INFO - Resetting account states to initial state on startup...
+2025-09-25 02:03:16,495 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-25 02:03:16,506 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-25 02:03:16,514 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-25 02:03:16,521 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-25 02:03:16,547 - INFO - Updated Master (ID: 1) order info:   0@0.0
+2025-09-25 02:03:16,581 - INFO - Updated Child (ID: 2) order info:   0@0.0
+2025-09-25 02:03:16,589 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-25 02:03:16,597 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-25 02:03:16,599 - INFO - Order information and exit order info cleared on startup for both accounts
+2025-09-25 02:03:16,599 - INFO - Account states reset to initial state
+2025-09-25 02:03:16,599 - INFO - Loaded cached index prices from today
+2025-09-25 02:03:16,602 - INFO - NIFTY current expiry (2025-09-23) has passed, need fresh data
+2025-09-25 02:03:16,602 - INFO - Expiry dates in cache are expired or invalid
+2025-09-25 02:03:16,602 - INFO - Calculating fresh expiry dates from master files...
+2025-09-25 02:03:16,602 - INFO - Calculating expiry dates from master files...
+2025-09-25 02:03:16,602 - INFO - Using NFO file: data\NFO_symbols.txt_2025-09-21.txt
+2025-09-25 02:03:16,730 - INFO - NIFTY - Current: 2025-09-23, Next: 2025-09-30
+2025-09-25 02:03:16,746 - INFO - BANKNIFTY - Current: 2025-09-30, Next: 2025-10-28
+2025-09-25 02:03:16,749 - INFO - Using BFO file: data\BFO_symbols.txt_2025-09-21.txt
+2025-09-25 02:03:16,815 - INFO - SENSEX - Current: 2025-09-25, Next: 2025-10-01
+2025-09-25 02:03:16,819 - INFO - Saved expiry dates to files and cache
+2025-09-25 02:03:16,819 - INFO - Successfully calculated and saved expiry dates
+2025-09-25 02:03:17,028 - ERROR - Error loading SL/Target configuration: bad operand type for unary -: 'str'
+2025-09-25 02:03:17,028 - INFO - Using fallback values - SL: -20, Target: 30
+2025-09-25 02:03:17,276 - INFO - Attempting auto-login for master account...
+2025-09-25 02:03:17,276 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-25 02:03:17,276 - INFO - Generated fresh 2FA for account 1: 582378
+2025-09-25 02:03:17,276 - INFO - Attempting login for account 1 with userid: FA32246
+2025-09-25 02:03:17,965 - INFO - Login response for account 1: {'request_time': '02:03:18 25-09-2025', 'actid': 'FA32246', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'ROOPAL SONI', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'MCX', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': '2208275f3bab01a110c27fb6e966e9e834d559954151d6d4d7bea9a9dedbebe8', 'susertokenspl': '46d842ab8ee38548b1fb954ecd9b232cf23d52af3cab434d7b584503adb0a70e', 'email': 'kratik.kunal@gmail.com', 'uid': 'FA32246', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '9424018696', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'MCX', 'NIPO', 'BSTAR', 'BFO'], 'values': ['l', 'calls', 'Puts'], 'mws': {'l': [], 'calls': [{'exch': 'NFO', 'token': '54979', 'tsym': 'ADANIGREEN28OCT25P1100', 'cname': 'ADANIGREEN OCT 1100 PE ', 'dname': 'ADANIGREEN OCT 1100 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54957', 'tsym': 'ADANIGREEN28OCT25P660', 'cname': 'ADANIGREEN OCT 660 PE ', 'dname': 'ADANIGREEN OCT 660 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54995', 'tsym': 'ADANIGREEN25NOV25P600', 'cname': 'ADANIGREEN NOV 600 PE ', 'dname': 'ADANIGREEN NOV 600 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54991', 'tsym': 'BANKNIFTY30SEP25C55400', 'cname': 'BANKNIFTY 30SEP25 55400 CE ', 'dname': 'BANKNIFTY 30SEP25 55400 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '35', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '54983', 'tsym': 'ADANIGREEN28OCT25P1180', 'cname': 'ADANIGREEN OCT 1180 PE ', 'dname': 'ADANIGREEN OCT 1180 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54965', 'tsym': 'ADANIGREEN28OCT25P820', 'cname': 'ADANIGREEN OCT 820 PE ', 'dname': 'ADANIGREEN OCT 820 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54953', 'tsym': 'ADANIGREEN28OCT25P520', 'cname': 'ADANIGREEN OCT 520 PE ', 'dname': 'ADANIGREEN OCT 520 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}], 'Puts': [{'exch': 'BFO', 'token': '1146943', 'tsym': 'SENSEX25SEP82000PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '60487', 'tsym': 'NIFTY30SEP25C25200', 'cname': 'NIFTY 30SEP25 25200 CE ', 'dname': 'NIFTY 30SEP25 25200 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '64694', 'tsym': 'NIFTY30SEP25C25000', 'cname': 'NIFTY 30SEP25 25000 CE ', 'dname': 'NIFTY 30SEP25 25000 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '841640', 'tsym': 'SENSEX25SEP81500PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'BFO', 'token': '841453', 'tsym': 'SENSEX25SEP82200CE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '841835', 'tsym': 'SENSEX25SEP82500CE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '1146714', 'tsym': 'SENSEX25SEP81000PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'BSE', 'token': '1', 'tsym': 'SENSEX', 'cname': 'BSE SENSEX', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}, {'exch': 'NFO', 'token': '48898', 'tsym': 'MCX25NOV25F', 'cname': 'MCX NOV FUT', 'dname': 'MCX NOV FUT', 'instname': 'FUTSTK', 'pp': '2', 'ls': '125', 'ti': '0.50', 'optt': 'XX'}, {'exch': 'MCX', 'token': '456955', 'tsym': 'COPPER30SEP25', 'instname': 'FUTCOM', 'pp': '2', 'ls': '2500', 'ti': '0.05', 'optt': 'XX'}, {'exch': 'NSE', 'token': '4598', 'tsym': 'HERITGFOOD-EQ', 'cname': 'HERITAGE FOODS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '2885', 'tsym': 'RELIANCE-EQ', 'cname': 'RELIANCE INDUSTRIES LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.10'}, {'exch': 'NSE', 'token': '31181', 'tsym': 'MCX-EQ', 'cname': 'MULTI COMMODITY EXCHANGE', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.50'}, {'exch': 'NSE', 'token': '8003', 'tsym': 'SILVER-EQ', 'cname': 'BIRLASLAMC - SILVER', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}, {'exch': 'NSE', 'token': '26037', 'tsym': 'Nifty Fin Service', 'cname': 'FIN NIFTY', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758745998', 'lastpwdtime': '1757444505'}
+2025-09-25 02:03:17,968 - INFO - Login response type: <class 'dict'>
+2025-09-25 02:03:17,968 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-25 02:03:17,974 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-25 02:03:17,977 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-25 02:03:17,985 - INFO - Refreshing market data...
+2025-09-25 02:03:17,985 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-25 02:03:17,988 - INFO - Index prices are current, no refresh needed
+2025-09-25 02:03:17,990 - INFO - Expiry dates are current, no refresh needed
+2025-09-25 02:03:18,153 - INFO - Websocket connected
+2025-09-25 02:03:18,210 - INFO - WebSocket is now open for Account 1
+2025-09-25 02:03:19,611 - INFO - Positions retrieved for ROOPAL SONI: 0 open positions found
+2025-09-25 02:03:19,611 - INFO - Position check completed - No open positions found
+2025-09-25 02:03:20,208 - INFO - Index selected: NIFTY
+2025-09-25 02:03:20,208 - INFO - On option selected called - Function not implemented yet
+2025-09-25 02:03:20,208 - INFO - Not all required fields selected for strike selection
+2025-09-25 02:03:20,208 - INFO - Option and strike selections cleared for new index
+2025-09-25 02:03:20,208 - INFO - On expiry selected called - Function not implemented yet
+2025-09-25 02:03:20,208 - INFO - Strike dropdown populated with 15 strikes for NIFTY
+2025-09-25 02:03:20,208 - INFO - Updated quantity dropdown for NIFTY: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-25 02:15:07,209 - INFO - Loaded account states from account_state.csv
+2025-09-25 02:15:07,212 - INFO - Loaded configuration from configuration.csv
+2025-09-25 02:15:07,212 - INFO - Resetting account states to initial state on startup...
+2025-09-25 02:15:07,220 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-25 02:15:07,227 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-25 02:15:07,230 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-25 02:15:07,237 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-25 02:15:07,242 - INFO - Updated Master (ID: 1) order info:   0@0.0
+2025-09-25 02:15:07,250 - INFO - Updated Child (ID: 2) order info:   0@0.0
+2025-09-25 02:15:07,259 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-25 02:15:07,262 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-25 02:15:07,262 - INFO - Order information and exit order info cleared on startup for both accounts
+2025-09-25 02:15:07,262 - INFO - Account states reset to initial state
+2025-09-25 02:15:07,262 - INFO - Loaded cached index prices from today
+2025-09-25 02:15:07,262 - INFO - NIFTY current expiry (2025-09-23) has passed, need fresh data
+2025-09-25 02:15:07,262 - INFO - Expiry dates in cache are expired or invalid
+2025-09-25 02:15:07,262 - INFO - Calculating fresh expiry dates from master files...
+2025-09-25 02:15:07,262 - INFO - Calculating expiry dates from master files...
+2025-09-25 02:15:07,262 - INFO - Using NFO file: data\NFO_symbols.txt_2025-09-21.txt
+2025-09-25 02:15:07,430 - INFO - NIFTY - Current: 2025-09-23, Next: 2025-09-30
+2025-09-25 02:15:07,430 - INFO - BANKNIFTY - Current: 2025-09-30, Next: 2025-10-28
+2025-09-25 02:15:07,435 - INFO - Using BFO file: data\BFO_symbols.txt_2025-09-21.txt
+2025-09-25 02:15:07,503 - INFO - SENSEX - Current: 2025-09-25, Next: 2025-10-01
+2025-09-25 02:15:07,509 - INFO - Saved expiry dates to files and cache
+2025-09-25 02:15:07,509 - INFO - Successfully calculated and saved expiry dates
+2025-09-25 02:15:07,708 - ERROR - Error loading SL/Target configuration: bad operand type for unary -: 'str'
+2025-09-25 02:15:07,708 - INFO - Using fallback values - SL: -20, Target: 30
+2025-09-25 02:15:07,948 - INFO - Checking master files...
+2025-09-25 02:15:07,948 - INFO - Master file missing: data/NSE_symbols.txt_2025-09-25.txt
+2025-09-25 02:15:07,948 - INFO - Master files are missing or outdated, downloading fresh files...
+2025-09-25 02:15:07,950 - INFO - Downloading NSE_symbols.txt.zip...
+2025-09-25 02:15:07,950 - INFO - Attempting auto-login for master account...
+2025-09-25 02:15:07,950 - INFO - Generated fresh 2FA for account 1: 219549
+2025-09-25 02:15:07,950 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-25 02:15:07,950 - INFO - Attempting login for account 1 with userid: FA32246
+2025-09-25 02:15:08,797 - INFO - Login response for account 1: {'request_time': '02:15:08 25-09-2025', 'actid': 'FA32246', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'ROOPAL SONI', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'MCX', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': '2bc7d9c71de3996e7ddcaccd89e4f26c10ee6803f38ee66578df0a17d21f56ca', 'susertokenspl': 'e9e78f22587ba65fc463ebdbb5c612869a31d02ae5aaf0d815f0bfd0890c2a13', 'email': 'kratik.kunal@gmail.com', 'uid': 'FA32246', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '9424018696', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'MCX', 'NIPO', 'BSTAR', 'BFO'], 'values': ['l', 'calls', 'Puts'], 'mws': {'l': [], 'calls': [{'exch': 'NFO', 'token': '54979', 'tsym': 'ADANIGREEN28OCT25P1100', 'cname': 'ADANIGREEN OCT 1100 PE ', 'dname': 'ADANIGREEN OCT 1100 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54957', 'tsym': 'ADANIGREEN28OCT25P660', 'cname': 'ADANIGREEN OCT 660 PE ', 'dname': 'ADANIGREEN OCT 660 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54995', 'tsym': 'ADANIGREEN25NOV25P600', 'cname': 'ADANIGREEN NOV 600 PE ', 'dname': 'ADANIGREEN NOV 600 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54991', 'tsym': 'BANKNIFTY30SEP25C55400', 'cname': 'BANKNIFTY 30SEP25 55400 CE ', 'dname': 'BANKNIFTY 30SEP25 55400 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '35', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '54983', 'tsym': 'ADANIGREEN28OCT25P1180', 'cname': 'ADANIGREEN OCT 1180 PE ', 'dname': 'ADANIGREEN OCT 1180 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54965', 'tsym': 'ADANIGREEN28OCT25P820', 'cname': 'ADANIGREEN OCT 820 PE ', 'dname': 'ADANIGREEN OCT 820 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54953', 'tsym': 'ADANIGREEN28OCT25P520', 'cname': 'ADANIGREEN OCT 520 PE ', 'dname': 'ADANIGREEN OCT 520 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}], 'Puts': [{'exch': 'BFO', 'token': '1146943', 'tsym': 'SENSEX25SEP82000PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '60487', 'tsym': 'NIFTY30SEP25C25200', 'cname': 'NIFTY 30SEP25 25200 CE ', 'dname': 'NIFTY 30SEP25 25200 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '64694', 'tsym': 'NIFTY30SEP25C25000', 'cname': 'NIFTY 30SEP25 25000 CE ', 'dname': 'NIFTY 30SEP25 25000 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '841640', 'tsym': 'SENSEX25SEP81500PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'BFO', 'token': '841453', 'tsym': 'SENSEX25SEP82200CE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '841835', 'tsym': 'SENSEX25SEP82500CE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '1146714', 'tsym': 'SENSEX25SEP81000PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'BSE', 'token': '1', 'tsym': 'SENSEX', 'cname': 'BSE SENSEX', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}, {'exch': 'NFO', 'token': '48898', 'tsym': 'MCX25NOV25F', 'cname': 'MCX NOV FUT', 'dname': 'MCX NOV FUT', 'instname': 'FUTSTK', 'pp': '2', 'ls': '125', 'ti': '0.50', 'optt': 'XX'}, {'exch': 'MCX', 'token': '456955', 'tsym': 'COPPER30SEP25', 'instname': 'FUTCOM', 'pp': '2', 'ls': '2500', 'ti': '0.05', 'optt': 'XX'}, {'exch': 'NSE', 'token': '4598', 'tsym': 'HERITGFOOD-EQ', 'cname': 'HERITAGE FOODS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '2885', 'tsym': 'RELIANCE-EQ', 'cname': 'RELIANCE INDUSTRIES LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.10'}, {'exch': 'NSE', 'token': '31181', 'tsym': 'MCX-EQ', 'cname': 'MULTI COMMODITY EXCHANGE', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.50'}, {'exch': 'NSE', 'token': '8003', 'tsym': 'SILVER-EQ', 'cname': 'BIRLASLAMC - SILVER', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}, {'exch': 'NSE', 'token': '26037', 'tsym': 'Nifty Fin Service', 'cname': 'FIN NIFTY', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758746708', 'lastpwdtime': '1757444505'}
+2025-09-25 02:15:08,797 - INFO - Login response type: <class 'dict'>
+2025-09-25 02:15:08,797 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-25 02:15:08,801 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-25 02:15:08,808 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-25 02:15:08,810 - INFO - Refreshing market data...
+2025-09-25 02:15:08,810 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-25 02:15:08,812 - INFO - Index prices are current, no refresh needed
+2025-09-25 02:15:08,815 - INFO - Expiry dates are current, no refresh needed
+2025-09-25 02:15:08,971 - INFO - Websocket connected
+2025-09-25 02:15:09,010 - INFO - WebSocket is now open for Account 1
+2025-09-25 02:15:09,052 - INFO - Extracted and renamed to: data/NSE_symbols.txt_2025-09-25.txt
+2025-09-25 02:15:09,054 - INFO - Downloading NFO_symbols.txt.zip...
+2025-09-25 02:15:10,430 - INFO - Positions retrieved for ROOPAL SONI: 0 open positions found
+2025-09-25 02:15:10,430 - INFO - Position check completed - No open positions found
+2025-09-25 02:15:10,887 - INFO - Extracted and renamed to: data/NFO_symbols.txt_2025-09-25.txt
+2025-09-25 02:15:10,889 - INFO - Downloading MCX_symbols.txt.zip...
+2025-09-25 02:15:11,660 - INFO - Extracted and renamed to: data/MCX_symbols.txt_2025-09-25.txt
+2025-09-25 02:15:11,662 - INFO - Downloading BFO_symbols.txt.zip...
+2025-09-25 02:15:12,578 - INFO - Extracted and renamed to: data/BFO_symbols.txt_2025-09-25.txt
+2025-09-25 02:15:12,580 - INFO - Successfully downloaded 4 master files
+2025-09-25 02:15:12,676 - INFO - Cleanup completed: 0 old master files deleted
+2025-09-25 02:15:13,911 - INFO - Index selected: NIFTY
+2025-09-25 02:15:13,914 - INFO - On option selected called - Function not implemented yet
+2025-09-25 02:15:13,914 - INFO - Not all required fields selected for strike selection
+2025-09-25 02:15:13,915 - INFO - Option and strike selections cleared for new index
+2025-09-25 02:15:13,916 - INFO - On expiry selected called - Function not implemented yet
+2025-09-25 02:15:13,921 - INFO - Strike dropdown populated with 15 strikes for NIFTY
+2025-09-25 02:15:13,931 - INFO - Updated quantity dropdown for NIFTY: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-25 02:15:17,027 - INFO - On expiry selected called - Function not implemented yet
+2025-09-25 02:15:18,685 - INFO - On expiry selected called - Function not implemented yet
+2025-09-25 02:20:27,658 - INFO - Loaded account states from account_state.csv
+2025-09-25 02:20:27,665 - INFO - Loaded configuration from configuration.csv
+2025-09-25 02:20:27,665 - INFO - Resetting account states to initial state on startup...
+2025-09-25 02:20:27,673 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-25 02:20:27,679 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-25 02:20:27,684 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-25 02:20:27,686 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-25 02:20:27,694 - INFO - Updated Master (ID: 1) order info:   0@0.0
+2025-09-25 02:20:27,700 - INFO - Updated Child (ID: 2) order info:   0@0.0
+2025-09-25 02:20:27,710 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-25 02:20:27,710 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-25 02:20:27,710 - INFO - Order information and exit order info cleared on startup for both accounts
+2025-09-25 02:20:27,710 - INFO - Account states reset to initial state
+2025-09-25 02:20:27,710 - INFO - Loaded cached index prices from today
+2025-09-25 02:20:27,718 - INFO - All expiry dates are valid
+2025-09-25 02:20:27,718 - INFO - Loaded cached expiry dates from today
+2025-09-25 02:20:27,948 - ERROR - Error loading SL/Target configuration: bad operand type for unary -: 'str'
+2025-09-25 02:20:27,948 - INFO - Using fallback values - SL: -20, Target: 30
+2025-09-25 02:20:28,001 - INFO - Checking master files...
+2025-09-25 02:20:28,001 - INFO - All master files are current
+2025-09-25 02:20:28,001 - INFO - Attempting auto-login for master account...
+2025-09-25 02:20:28,009 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-25 02:20:28,009 - INFO - Generated fresh 2FA for account 1: 717234
+2025-09-25 02:20:28,009 - INFO - Attempting login for account 1 with userid: FA32246
+2025-09-25 02:20:28,743 - INFO - Login response for account 1: {'request_time': '02:20:28 25-09-2025', 'actid': 'FA32246', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'ROOPAL SONI', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'MCX', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': '732bf9a25f7f0d9f1435ae9f908309835b16793397ab3cf3eec04e187658526c', 'susertokenspl': '82a427416d7c376c60b18d8cb270b03d8d784b40b998f7c0e72f280e36fe9ccd', 'email': 'kratik.kunal@gmail.com', 'uid': 'FA32246', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '9424018696', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'MCX', 'NIPO', 'BSTAR', 'BFO'], 'values': ['l', 'calls', 'Puts'], 'mws': {'l': [], 'calls': [{'exch': 'NFO', 'token': '54979', 'tsym': 'ADANIGREEN28OCT25P1100', 'cname': 'ADANIGREEN OCT 1100 PE ', 'dname': 'ADANIGREEN OCT 1100 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54957', 'tsym': 'ADANIGREEN28OCT25P660', 'cname': 'ADANIGREEN OCT 660 PE ', 'dname': 'ADANIGREEN OCT 660 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54995', 'tsym': 'ADANIGREEN25NOV25P600', 'cname': 'ADANIGREEN NOV 600 PE ', 'dname': 'ADANIGREEN NOV 600 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54991', 'tsym': 'BANKNIFTY30SEP25C55400', 'cname': 'BANKNIFTY 30SEP25 55400 CE ', 'dname': 'BANKNIFTY 30SEP25 55400 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '35', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '54983', 'tsym': 'ADANIGREEN28OCT25P1180', 'cname': 'ADANIGREEN OCT 1180 PE ', 'dname': 'ADANIGREEN OCT 1180 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54965', 'tsym': 'ADANIGREEN28OCT25P820', 'cname': 'ADANIGREEN OCT 820 PE ', 'dname': 'ADANIGREEN OCT 820 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54953', 'tsym': 'ADANIGREEN28OCT25P520', 'cname': 'ADANIGREEN OCT 520 PE ', 'dname': 'ADANIGREEN OCT 520 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}], 'Puts': [{'exch': 'BFO', 'token': '1146943', 'tsym': 'SENSEX25SEP82000PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '60487', 'tsym': 'NIFTY30SEP25C25200', 'cname': 'NIFTY 30SEP25 25200 CE ', 'dname': 'NIFTY 30SEP25 25200 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '64694', 'tsym': 'NIFTY30SEP25C25000', 'cname': 'NIFTY 30SEP25 25000 CE ', 'dname': 'NIFTY 30SEP25 25000 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '841640', 'tsym': 'SENSEX25SEP81500PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'BFO', 'token': '841453', 'tsym': 'SENSEX25SEP82200CE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '841835', 'tsym': 'SENSEX25SEP82500CE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BFO', 'token': '1146714', 'tsym': 'SENSEX25SEP81000PE', 'instname': 'OPTIDX', 'pp': '2', 'ls': '20', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'BSE', 'token': '1', 'tsym': 'SENSEX', 'cname': 'BSE SENSEX', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}, {'exch': 'NFO', 'token': '48898', 'tsym': 'MCX25NOV25F', 'cname': 'MCX NOV FUT', 'dname': 'MCX NOV FUT', 'instname': 'FUTSTK', 'pp': '2', 'ls': '125', 'ti': '0.50', 'optt': 'XX'}, {'exch': 'MCX', 'token': '456955', 'tsym': 'COPPER30SEP25', 'instname': 'FUTCOM', 'pp': '2', 'ls': '2500', 'ti': '0.05', 'optt': 'XX'}, {'exch': 'NSE', 'token': '4598', 'tsym': 'HERITGFOOD-EQ', 'cname': 'HERITAGE FOODS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '2885', 'tsym': 'RELIANCE-EQ', 'cname': 'RELIANCE INDUSTRIES LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.10'}, {'exch': 'NSE', 'token': '31181', 'tsym': 'MCX-EQ', 'cname': 'MULTI COMMODITY EXCHANGE', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.50'}, {'exch': 'NSE', 'token': '8003', 'tsym': 'SILVER-EQ', 'cname': 'BIRLASLAMC - SILVER', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}, {'exch': 'NSE', 'token': '26037', 'tsym': 'Nifty Fin Service', 'cname': 'FIN NIFTY', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758747028', 'lastpwdtime': '1757444505'}
+2025-09-25 02:20:28,743 - INFO - Login response type: <class 'dict'>
+2025-09-25 02:20:28,743 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-25 02:20:28,758 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-25 02:20:28,762 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-25 02:20:28,764 - INFO - Refreshing market data...
+2025-09-25 02:20:28,764 - INFO - Master account auto-login successful: ROOPAL SONI
+2025-09-25 02:20:28,764 - INFO - Index prices are current, no refresh needed
+2025-09-25 02:20:28,768 - INFO - Expiry dates are current, no refresh needed
+2025-09-25 02:20:28,944 - INFO - Websocket connected
+2025-09-25 02:20:28,993 - INFO - WebSocket is now open for Account 1
+2025-09-25 02:20:30,380 - INFO - Positions retrieved for ROOPAL SONI: 0 open positions found
+2025-09-25 02:20:30,382 - INFO - Position check completed - No open positions found
+2025-09-25 02:20:30,679 - INFO - Index selected: NIFTY
+2025-09-25 02:20:30,679 - INFO - On option selected called - Function not implemented yet
+2025-09-25 02:20:30,679 - INFO - Not all required fields selected for strike selection
+2025-09-25 02:20:30,679 - INFO - Option and strike selections cleared for new index
+2025-09-25 02:20:30,679 - INFO - On expiry selected called - Function not implemented yet
+2025-09-25 02:20:30,679 - INFO - Strike dropdown populated with 15 strikes for NIFTY
+2025-09-25 02:20:30,679 - INFO - Updated quantity dropdown for NIFTY: ['75', '150', '225', '300', '375', '450', '525', '600', '675', '750']
+2025-09-25 02:20:35,241 - INFO - Index selected: SENSEX
+2025-09-25 02:20:35,241 - INFO - On option selected called - Function not implemented yet
+2025-09-25 02:20:35,241 - INFO - Not all required fields selected for strike selection
+2025-09-25 02:20:35,241 - INFO - Option and strike selections cleared for new index
+2025-09-25 02:20:35,243 - INFO - On expiry selected called - Function not implemented yet
+2025-09-25 02:20:35,243 - INFO - Strike dropdown populated with 15 strikes for SENSEX
+2025-09-25 02:20:35,243 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']

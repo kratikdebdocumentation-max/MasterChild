@@ -6,7 +6,7 @@ import os
 import json
 import glob
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, date
 from typing import Dict, List, Optional, Tuple
 import logging
 
@@ -33,55 +33,59 @@ class ExpiryManager:
                 with open(cache_file, 'r') as f:
                     cache_data = json.load(f)
                 
-                today = datetime.now().strftime('%Y-%m-%d')
-                if cache_data.get('date') == today and cache_data.get('expiry_dates'):
-                    self.expiry_dates = cache_data['expiry_dates']
-                    logger.info("Loaded cached expiry dates from today")
-                    return
+            today = datetime.now().strftime('%Y-%m-%d')
             
-            # Try to load from individual text files
-            self._load_from_text_files()
+            # Check if cache is from today AND all expiry dates are valid
+            if (cache_data.get('date') == today and 
+                cache_data.get('expiry_dates') and
+                self._are_expiry_dates_valid(cache_data['expiry_dates'])):
+                
+                self.expiry_dates = cache_data['expiry_dates']
+                logger.info("Loaded cached expiry dates from today")
+                return
+            else:
+                # Log why cache was rejected
+                if cache_data.get('date') != today:
+                    logger.info(f"Cache date ({cache_data.get('date')}) is not today ({today})")
+                elif not cache_data.get('expiry_dates'):
+                    logger.info("No expiry dates in cache")
+                else:
+                    logger.info("Expiry dates in cache are expired or invalid")
+            
+            # If cache is invalid, calculate fresh dates from master files
+            logger.info("Calculating fresh expiry dates from master files...")
+            self.calculate_expiry_dates()
             
         except Exception as e:
             logger.error(f"Error loading cached expiry: {e}")
+            # If everything fails, try to calculate fresh dates
+            self.calculate_expiry_dates()
     
-    def _load_from_text_files(self):
-        """Load expiry dates from individual text files (old project format)"""
+    def _are_expiry_dates_valid(self, expiry_dates: dict) -> bool:
+        """Check if all expiry dates are still valid (not expired)"""
         try:
-            # Load NIFTY expiry (current,next format)
-            with open('data/nf_expiry_dates.txt', 'r') as file:
-                content = file.read().strip()
-                if ',' in content:
-                    current, next_date = content.split(',', 1)
-                    self.expiry_dates['NIFTY'] = {
-                        'current': current.strip(),
-                        'next': next_date.strip()
-                    }
+            today = datetime.now().date()
             
-            # Load BANKNIFTY expiry (current,next format)
-            with open('data/bn_expiry_dates.txt', 'r') as file:
-                content = file.read().strip()
-                if ',' in content:
-                    current, next_date = content.split(',', 1)
-                    self.expiry_dates['BANKNIFTY'] = {
-                        'current': current.strip(),
-                        'next': next_date.strip()
-                    }
+            for index, dates in expiry_dates.items():
+                current = dates.get('current', '')
+                
+                # Only check current expiry date (next expiry is always in future)
+                if current:
+                    try:
+                        current_date = datetime.strptime(current, '%Y-%m-%d').date()
+                        if current_date < today:
+                            logger.info(f"{index} current expiry ({current}) has passed, need fresh data")
+                            return False
+                    except ValueError:
+                        logger.warning(f"Invalid date format for {index} current: {current}")
+                        return False
             
-            # Load SENSEX expiry (current,next format)
-            with open('data/sx_expiry_dates.txt', 'r') as file:
-                content = file.read().strip()
-                if ',' in content:
-                    current, next_date = content.split(',', 1)
-                    self.expiry_dates['SENSEX'] = {
-                        'current': current.strip(),
-                        'next': next_date.strip()
-                    }
-            
-            logger.info("Loaded expiry dates from text files")
+            logger.info("All expiry dates are valid")
+            return True
             
         except Exception as e:
-            logger.error(f"Error loading from text files: {e}")
+            logger.error(f"Error validating expiry dates: {e}")
+            return False
     
     def get_expiry_list(self, index: str) -> List[str]:
         """Get expiry list for dropdown (current and next)"""
@@ -167,6 +171,7 @@ class ExpiryManager:
             
             # Read NFO file
             df = pd.read_csv(latest_nfo)
+            today = datetime.now().date()
             
             # Get NIFTY dates
             nifty_df = df[df['Symbol'] == 'NIFTY']
@@ -176,11 +181,20 @@ class ExpiryManager:
             banknifty_df = df[df['Symbol'] == 'BANKNIFTY']
             banknifty_dates = sorted(banknifty_df['Expiry'].unique())
             
-            # Convert to datetime and sort
-            nifty_dates = sorted([datetime.strptime(date, '%d-%b-%Y') for date in nifty_dates])
-            banknifty_dates = sorted([datetime.strptime(date, '%d-%b-%Y') for date in banknifty_dates])
+            # Convert to datetime, filter future dates, and sort
+            nifty_dates = sorted([datetime.strptime(date, '%d-%b-%Y').date() for date in nifty_dates if datetime.strptime(date, '%d-%b-%Y').date() >= today])
+            banknifty_dates = sorted([datetime.strptime(date, '%d-%b-%Y').date() for date in banknifty_dates if datetime.strptime(date, '%d-%b-%Y').date() >= today])
             
-            # Get current and next (first two dates)
+            # Check if we have enough future dates
+            if len(nifty_dates) < 2:
+                logger.error(f"Not enough future NIFTY expiry dates found: {len(nifty_dates)}")
+                return None, None
+                
+            if len(banknifty_dates) < 2:
+                logger.error(f"Not enough future BANKNIFTY expiry dates found: {len(banknifty_dates)}")
+                return None, None
+            
+            # Get current and next (first two future dates)
             nifty_current = nifty_dates[0].strftime('%Y-%m-%d')
             nifty_next = nifty_dates[1].strftime('%Y-%m-%d')
             
@@ -209,6 +223,7 @@ class ExpiryManager:
             
             # Read BFO file
             df = pd.read_csv(latest_bfo)
+            today = datetime.now().date()
             
             # Look for BSXOPT symbol (not SX50OPT) - same as old project
             sensex_df = df[df['Symbol'] == 'BSXOPT']
@@ -219,10 +234,15 @@ class ExpiryManager:
             
             sensex_dates = sorted(sensex_df['Expiry'].unique())
             
-            # Convert to datetime and sort
-            sensex_dates = sorted([datetime.strptime(date, '%d-%b-%Y') for date in sensex_dates])
+            # Convert to datetime, filter future dates, and sort
+            sensex_dates = sorted([datetime.strptime(date, '%d-%b-%Y').date() for date in sensex_dates if datetime.strptime(date, '%d-%b-%Y').date() >= today])
             
-            # Get current and next (first two dates)
+            # Check if we have enough future dates
+            if len(sensex_dates) < 2:
+                logger.error(f"Not enough future SENSEX expiry dates found: {len(sensex_dates)}")
+                return None
+            
+            # Get current and next (first two future dates)
             sensex_current = sensex_dates[0].strftime('%Y-%m-%d')
             sensex_next = sensex_dates[1].strftime('%Y-%m-%d')
             

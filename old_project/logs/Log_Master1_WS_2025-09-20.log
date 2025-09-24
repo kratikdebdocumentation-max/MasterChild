@@ -1,0 +1,12 @@
+2025-09-20 11:08:35,736 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-20 11:11:44,761 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-20 11:47:49,491 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-20 11:52:00,120 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-20 11:53:03,907 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-20 11:53:48,273 - INFO - {'t': 'om', 'norenordno': '25092000000861', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84400CE', 'trantype': 'B', 'qty': '60', 'prc': '28.40', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-20 11:53:48,306 - INFO - {'t': 'om', 'norenordno': '25092000000861', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84400CE', 'trantype': 'B', 'qty': '60', 'prc': '28.40', 'pcode': 'M', 'remarks': '', 'rejreason': 'RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 1,364.41 Available:INR 339.59 for C-FA32246 [SHOONYA]', 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-20 11:55:33,853 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-20 11:55:56,323 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-20 19:07:47,449 - INFO - Login Successful!, Welcome ROOPAL SONI - Master ACCOUNT
+2025-09-20 19:08:07,701 - INFO - {'t': 'om', 'norenordno': '25092000003993', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84600CE', 'trantype': 'B', 'qty': '20', 'prc': '21.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-20 19:08:07,718 - INFO - {'t': 'om', 'norenordno': '25092000003993', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25SEP84600CE', 'trantype': 'B', 'qty': '20', 'prc': '21.00', 'pcode': 'M', 'remarks': '', 'rejreason': 'RED:RULE:{Allow CAC credit but disallow collateral and daylong cash for option buy}Shortfall:INR 80.41 Available:INR 339.59 for C-FA32246 [SHOONYA]', 'status': 'REJECTED', 'reporttype': 'Rejected', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}

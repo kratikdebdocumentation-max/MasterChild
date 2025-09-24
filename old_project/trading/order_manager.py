@@ -1,0 +1,582 @@
+"""
+Order management for trading operations
+"""
+import threading
+import pandas as pd
+import os
+from typing import List, Dict, Any, Optional
+from config import Config
+from logger import applicationLogger
+from .dynamic_order_manager import DynamicOrderManager
+
+class OrderManager:
+    """Manages order operations and tracking"""
+    
+    def __init__(self):
+        self.order_data = {}
+        self.file_path = "orders.csv"
+        self.margin_shortfall_occurred = False
+        self.margin_shortfall_details = None
+        self.dynamic_order_manager = DynamicOrderManager()
+        self._initialize_order_dataframe()
+    
+    def _initialize_order_dataframe(self):
+        """Initialize order DataFrame"""
+        columns = ['norenordno', 'uid', 'actid', 'exch', 'tsym', 'trantype',
+                  'qty', 'prc', 'pcode', 'remarks', 'status', 'reporttype',
+                  'prctyp', 'ret', 'exchordid', 'dscqty', 'rejreason']
+        
+        if os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0:
+            try:
+                self.df_orders = pd.read_csv(self.file_path, on_bad_lines='skip')
+            except pd.errors.EmptyDataError:
+                self.df_orders = pd.DataFrame(columns=columns)
+            except Exception as e:
+                applicationLogger.warning(f"Error loading orders CSV file: {e}")
+                self.df_orders = pd.DataFrame(columns=columns)
+        else:
+            self.df_orders = pd.DataFrame(columns=columns)
+    
+    def place_buy_orders(self, apis: List, quantities: List[int], 
+                        trading_symbol: str, price: float, 
+                        active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place buy orders across multiple accounts
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        order_numbers = [None] * len(apis)
+        lock = threading.Lock()
+        
+        def place_order(api, qty, index):
+            try:
+                # Determine correct exchange and product type for options
+                if 'SENSEX' in trading_symbol:
+                    exchange = 'BFO'
+                    product_type = 'M'  # Use 'M' for Sensex
+                else:
+                    exchange = 'NFO'
+                    product_type = 'I'  # Use 'I' for NIFTY/BANKNIFTY
+                
+                # Log all parameters being sent to API
+                order_params = {
+                    'buy_or_sell': 'B',
+                    'product_type': product_type,
+                    'exchange': exchange,
+                    'tradingsymbol': trading_symbol,
+                    'quantity': qty,
+                    'discloseqty': 0,
+                    'price_type': 'LMT',  # Use LMT for limit orders, MKT for market orders
+                    'price': price,
+                    'trigger_price': None,
+                    'retention': Config.RETENTION,
+                    'amo': 'NO',
+                    'remarks': None
+                }
+                
+                applicationLogger.info(f"Placing order for account {index + 1} with parameters: {order_params}")
+                applicationLogger.info(f"API instance for account {index + 1}: {api is not None}")
+                
+                # Place order directly as per API documentation
+                order_place = api.place_order(
+                    buy_or_sell=order_params['buy_or_sell'],
+                    product_type=order_params['product_type'],
+                    exchange=order_params['exchange'],
+                    tradingsymbol=order_params['tradingsymbol'],
+                    quantity=order_params['quantity'],
+                    discloseqty=order_params['discloseqty'],
+                    price_type=order_params['price_type'],
+                    price=order_params['price'],
+                    trigger_price=order_params['trigger_price'],
+                    retention=order_params['retention'],
+                    amo=order_params['amo'],
+                    remarks=order_params['remarks']
+                )
+                
+                applicationLogger.info(f"API response: {order_place}")
+                applicationLogger.info(f"API response type: {type(order_place)}")
+                
+                if order_place and 'norenordno' in order_place:
+                    norenordno = order_place.get('norenordno')
+                    with lock:
+                        order_numbers[index] = norenordno
+                    applicationLogger.info(f"Buy order placed successfully: {order_place}")
+                else:
+                    applicationLogger.error(f"Order placement failed: {order_place}")
+                    if order_place:
+                        applicationLogger.error(f"Response keys: {order_place.keys() if hasattr(order_place, 'keys') else 'No keys'}")
+                        
+                        # Check for margin shortfall error
+                        error_msg = order_place.get('emsg', '')
+                        if 'margin' in error_msg.lower() or 'shortfall' in error_msg.lower():
+                            applicationLogger.error(f"Margin shortfall detected for account {index + 1}: {error_msg}")
+                            # Set a flag to indicate margin shortfall
+                            with lock:
+                                if not hasattr(place_order, 'margin_shortfall_detected'):
+                                    place_order.margin_shortfall_detected = []
+                                place_order.margin_shortfall_detected.append((index, error_msg))
+                    
+            except Exception as e:
+                applicationLogger.error(f"Error placing buy order: {e}")
+                import traceback
+                applicationLogger.error(f"Traceback: {traceback.format_exc()}")
+        
+        # Create and start threads for placing orders
+        threads = []
+        for i, (api, qty, is_active) in enumerate(zip(apis, quantities, active_accounts)):
+            applicationLogger.info(f"Account {i + 1}: API={api is not None}, Qty={qty}, Active={is_active}")
+            if is_active:
+                thread = threading.Thread(target=place_order, args=(api, qty, i))
+                threads.append(thread)
+                thread.start()
+            else:
+                applicationLogger.warning(f"Account {i + 1} is not active, skipping order placement")
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+        
+        # Check for margin shortfall and cancel other orders if needed
+        margin_shortfall_detected = getattr(place_order, 'margin_shortfall_detected', [])
+        if margin_shortfall_detected:
+            applicationLogger.warning(f"Margin shortfall detected in {len(margin_shortfall_detected)} account(s)")
+            
+            # Cancel all successful orders due to margin shortfall
+            cancelled_orders = []
+            for i, order_num in enumerate(order_numbers):
+                if order_num and i not in [failed_index for failed_index, _ in margin_shortfall_detected]:
+                    try:
+                        api = apis[i]
+                        if api:
+                            cancel_result = api.cancel_order(order_num)
+                            if cancel_result and cancel_result.get('stat') == 'Ok':
+                                cancelled_orders.append((i + 1, order_num))
+                                applicationLogger.info(f"Cancelled order {order_num} for account {i + 1} due to margin shortfall")
+                            else:
+                                applicationLogger.error(f"Failed to cancel order {order_num} for account {i + 1}: {cancel_result}")
+                    except Exception as e:
+                        applicationLogger.error(f"Error cancelling order for account {i + 1}: {e}")
+            
+            # Set a flag to indicate margin shortfall occurred
+            self.margin_shortfall_occurred = True
+            self.margin_shortfall_details = {
+                'failed_accounts': margin_shortfall_detected,
+                'cancelled_orders': cancelled_orders
+            }
+        
+        return order_numbers
+    
+    def place_sell_orders(self, apis: List, quantities: List[int], 
+                         trading_symbol: str, price: float, 
+                         active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place sell orders across multiple accounts
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        order_numbers = [None] * len(apis)
+        lock = threading.Lock()
+        
+        def place_order(api, qty, index):
+            try:
+                # Determine correct exchange and product type for options
+                if 'SENSEX' in trading_symbol:
+                    exchange = 'BFO'
+                    product_type = 'M'  # Use 'M' for Sensex
+                else:
+                    exchange = 'NFO'
+                    product_type = 'I'  # Use 'I' for NIFTY/BANKNIFTY
+                
+                order_place = api.place_order(
+                    buy_or_sell='S',
+                    product_type=product_type,
+                    exchange=exchange,
+                    tradingsymbol=trading_symbol,
+                    quantity=qty,
+                    discloseqty=0,
+                    price_type='LMT',  # Use LMT for limit orders, MKT for market orders
+                    price=price,
+                    trigger_price=None,
+                    retention=Config.RETENTION,
+                    amo='NO',
+                    remarks=None
+                )
+                
+                if order_place and 'norenordno' in order_place:
+                    norenordno = order_place.get('norenordno')
+                    with lock:
+                        order_numbers[index] = norenordno
+                    applicationLogger.info(f"Sell order placed successfully: {order_place}")
+                else:
+                    applicationLogger.error(f"Sell order placement failed: {order_place}")
+                    
+            except Exception as e:
+                applicationLogger.error(f"Error placing sell order: {e}")
+        
+        # Create and start threads for placing orders
+        threads = []
+        for i, (api, qty, is_active) in enumerate(zip(apis, quantities, active_accounts)):
+            if is_active:
+                thread = threading.Thread(target=place_order, args=(api, qty, i))
+                threads.append(thread)
+                thread.start()
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+        
+        return order_numbers
+    
+    def place_exit_orders(self, apis: List, quantities: List[int], 
+                         trading_symbol: str, price: float, 
+                         active_accounts: List[bool], order_type: str = 'LMT') -> List[Optional[str]]:
+        """
+        Place exit orders across multiple accounts
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            order_type: 'LMT' for limit orders, 'MKT' for market orders
+            
+        Returns:
+            List of order numbers
+        """
+        order_numbers = [None] * len(apis)
+        lock = threading.Lock()
+        
+        def place_order(api, qty, index):
+            try:
+                # Determine correct exchange and product type for options
+                if 'SENSEX' in trading_symbol:
+                    exchange = 'BFO'
+                    product_type = 'M'  # Use 'M' for Sensex
+                else:
+                    exchange = 'NFO'
+                    product_type = 'I'  # Use 'I' for NIFTY/BANKNIFTY
+                
+                # Set price based on order type
+                order_price = price if order_type == 'LMT' else 0.0
+                
+                order_place = api.place_order(
+                    buy_or_sell='S',
+                    product_type=product_type,
+                    exchange=exchange,
+                    tradingsymbol=trading_symbol,
+                    quantity=qty,
+                    discloseqty=0,
+                    price_type=order_type,  # Use LMT for limit orders, MKT for market orders
+                    price=order_price,
+                    trigger_price=None,
+                    retention=Config.RETENTION,
+                    amo='NO',
+                    remarks=None
+                )
+                
+                if order_place and 'norenordno' in order_place:
+                    norenordno = order_place.get('norenordno')
+                    with lock:
+                        order_numbers[index] = norenordno
+                    applicationLogger.info(f"Exit order placed successfully: {order_place}")
+                else:
+                    applicationLogger.error(f"Exit order placement failed: {order_place}")
+                    
+            except Exception as e:
+                applicationLogger.error(f"Error placing exit order: {e}")
+        
+        # Create and start threads for placing orders
+        threads = []
+        for i, (api, qty, is_active) in enumerate(zip(apis, quantities, active_accounts)):
+            if is_active:
+                thread = threading.Thread(target=place_order, args=(api, qty, i))
+                threads.append(thread)
+                thread.start()
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+        
+        return order_numbers
+    
+    def cancel_orders(self, apis: List, order_numbers: List[str], 
+                     active_accounts: List[bool]) -> None:
+        """
+        Cancel orders across multiple accounts
+        
+        Args:
+            apis: List of API instances
+            order_numbers: List of order numbers to cancel
+            active_accounts: List of active account flags
+        """
+        def cancel_order(api, order_no):
+            try:
+                api.cancel_order(orderno=order_no)
+                applicationLogger.info(f"Order {order_no} cancelled successfully")
+            except Exception as e:
+                applicationLogger.error(f"Error cancelling order {order_no}: {e}")
+        
+        threads = []
+        for i, (api, order_no, is_active) in enumerate(zip(apis, order_numbers, active_accounts)):
+            if is_active and order_no:
+                thread = threading.Thread(target=cancel_order, args=(api, order_no))
+                threads.append(thread)
+                thread.start()
+        
+        for thread in threads:
+            thread.join()
+    
+    def modify_orders(self, apis: List, order_numbers: List[str], 
+                     quantities: List[int], trading_symbol: str, 
+                     price: float, active_accounts: List[bool]) -> None:
+        """
+        Modify orders across multiple accounts
+        
+        Args:
+            apis: List of API instances
+            order_numbers: List of order numbers to modify
+            quantities: List of new quantities
+            trading_symbol: Trading symbol
+            price: New price
+            active_accounts: List of active account flags
+        """
+        def modify_order(api, order_no, qty):
+            try:
+                # Determine correct exchange for options
+                if 'SENSEX' in trading_symbol:
+                    exchange = 'BFO'
+                else:
+                    exchange = 'NFO'
+                
+                api.modify_order(
+                    exchange=exchange,
+                    tradingsymbol=trading_symbol,
+                    orderno=order_no,
+                    newquantity=qty,
+                    newprice_type=Config.PRICE_TYPE,
+                    newprice=price
+                )
+                applicationLogger.info(f"Order {order_no} modified successfully")
+            except Exception as e:
+                applicationLogger.error(f"Error modifying order {order_no}: {e}")
+        
+        threads = []
+        for i, (api, order_no, qty, is_active) in enumerate(zip(apis, order_numbers, quantities, active_accounts)):
+            if is_active and order_no:
+                applicationLogger.info(f"Modifying order {order_no} for account {i+1} with quantity {qty} and price {price}")
+                thread = threading.Thread(target=modify_order, args=(api, order_no, qty))
+                threads.append(thread)
+                thread.start()
+            else:
+                applicationLogger.warning(f"Skipping order modification for account {i+1}: active={is_active}, order_no={order_no}")
+        
+        for thread in threads:
+            thread.join()
+    
+    def handle_order_update(self, order: Dict[str, Any]) -> None:
+        """
+        Handle order update and save to CSV
+        
+        Args:
+            order: Order data dictionary
+        """
+        order_number = order['norenordno']
+        
+        # Check if the order already exists in the DataFrame
+        if order_number in self.df_orders['norenordno'].values:
+            # Update the existing order
+            applicationLogger.info(f"Updating order {order_number}")
+            self.df_orders.loc[self.df_orders['norenordno'] == order_number] = order
+        else:
+            # Add the new order
+            applicationLogger.info(f"New order received: {order_number}")
+            self.df_orders = pd.concat([self.df_orders, pd.DataFrame([order])], ignore_index=True)
+        
+        # Write the updated DataFrame to a CSV file
+        self.df_orders.to_csv(self.file_path, index=False)
+        applicationLogger.info(f"Order data saved to {self.file_path}")
+    
+    def get_order_book(self, api) -> List[Dict[str, Any]]:
+        """
+        Get order book for an account
+        
+        Args:
+            api: API instance
+            
+        Returns:
+            List of orders
+        """
+        try:
+            return api.get_order_book()
+        except Exception as e:
+            applicationLogger.error(f"Error fetching order book: {e}")
+            return []
+    
+    def place_dynamic_buy_orders(self, apis: List, quantities: List[int], 
+                                trading_symbol: str, price: float, 
+                                active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place buy orders (NO dynamic management - just regular limit orders)
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        # Place regular buy orders (no dynamic management)
+        order_numbers = self.place_buy_orders(apis, quantities, trading_symbol, price, active_accounts)
+        
+        applicationLogger.info("Buy orders placed as regular limit orders - no dynamic management")
+        
+        return order_numbers
+    
+    def place_dynamic_target_orders(self, apis: List, quantities: List[int], 
+                                  trading_symbol: str, price: float, 
+                                  active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place target orders (sell) with dynamic price adjustment
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        # First place the initial sell orders
+        order_numbers = self.place_sell_orders(apis, quantities, trading_symbol, price, active_accounts)
+        
+        # Start dynamic management for each successful order
+        for i, (api, order_no, is_active) in enumerate(zip(apis, order_numbers, active_accounts)):
+            if is_active and order_no and api:
+                # Determine exchange
+                exchange = 'BFO' if 'SENSEX' in trading_symbol else 'NFO'
+                
+                # Start dynamic management in background thread
+                thread = threading.Thread(
+                    target=self.dynamic_order_manager.execute_dynamic_target_order,
+                    args=(api, order_no, price, quantities[i], trading_symbol, exchange)
+                )
+                thread.daemon = True
+                thread.start()
+                applicationLogger.info(f"Started dynamic management for target order {order_no}")
+        
+        return order_numbers
+    
+    def place_dynamic_stop_loss_orders(self, apis: List, quantities: List[int], 
+                                     trading_symbol: str, price: float, 
+                                     active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place stop loss orders (sell) with dynamic price adjustment
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        # First place the initial sell orders
+        order_numbers = self.place_sell_orders(apis, quantities, trading_symbol, price, active_accounts)
+        
+        # Start dynamic management for each successful order
+        for i, (api, order_no, is_active) in enumerate(zip(apis, order_numbers, active_accounts)):
+            if is_active and order_no and api:
+                # Determine exchange
+                exchange = 'BFO' if 'SENSEX' in trading_symbol else 'NFO'
+                
+                # Start dynamic management in background thread
+                thread = threading.Thread(
+                    target=self.dynamic_order_manager.execute_dynamic_stop_loss_order,
+                    args=(api, order_no, price, quantities[i], trading_symbol, exchange)
+                )
+                thread.daemon = True
+                thread.start()
+                applicationLogger.info(f"Started dynamic management for stop loss order {order_no}")
+        
+        return order_numbers
+    
+    def place_dynamic_trailing_target_orders(self, apis: List, quantities: List[int], 
+                                           trading_symbol: str, price: float, 
+                                           active_accounts: List[bool]) -> List[Optional[str]]:
+        """
+        Place trailing target orders (sell) with dynamic price adjustment
+        
+        Args:
+            apis: List of API instances
+            quantities: List of quantities for each account
+            trading_symbol: Trading symbol
+            price: Order price
+            active_accounts: List of active account flags
+            
+        Returns:
+            List of order numbers
+        """
+        # First place the initial sell orders
+        order_numbers = self.place_sell_orders(apis, quantities, trading_symbol, price, active_accounts)
+        
+        # Start dynamic management for each successful order
+        for i, (api, order_no, is_active) in enumerate(zip(apis, order_numbers, active_accounts)):
+            if is_active and order_no and api:
+                # Determine exchange
+                exchange = 'BFO' if 'SENSEX' in trading_symbol else 'NFO'
+                
+                # Start dynamic management in background thread
+                thread = threading.Thread(
+                    target=self.dynamic_order_manager.execute_dynamic_trailing_target_order,
+                    args=(api, order_no, price, quantities[i], trading_symbol, exchange)
+                )
+                thread.daemon = True
+                thread.start()
+                applicationLogger.info(f"Started dynamic management for trailing target order {order_no}")
+        
+        return order_numbers
+    
+    def stop_dynamic_management(self, order_id: str) -> bool:
+        """
+        Stop dynamic management for a specific order
+        
+        Args:
+            order_id: Order ID to stop managing
+            
+        Returns:
+            bool: True if order was found and stopped
+        """
+        return self.dynamic_order_manager.stop_order_management(order_id)
+    
+    def get_active_dynamic_orders(self) -> Dict[str, Dict[str, Any]]:
+        """
+        Get currently active dynamic orders
+        
+        Returns:
+            Dict of active orders
+        """
+        return self.dynamic_order_manager.get_active_orders()

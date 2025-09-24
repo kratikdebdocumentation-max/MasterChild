@@ -25,6 +25,9 @@ from market_data.simple_index_manager import SimpleIndexManager
 from market_data.expiry_manager import ExpiryManager
 from market_data.symbol_manager import SymbolManager
 
+# Import master file downloader
+from master_file_downloader import download_master_files, should_download_master_files, cleanup_old_master_files
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -82,6 +85,9 @@ class MainWindow:
         # Setup logging
         self.setup_logging()
         
+        # Download master files if needed
+        self.download_master_files_if_needed()
+        
         # Auto-login master account
         self.auto_login_master()
         
@@ -96,6 +102,36 @@ class MainWindow:
         x = (self.root.winfo_screenwidth() // 2) - (width // 2)
         y = (self.root.winfo_screenheight() // 2) - (height // 2)
         self.root.geometry(f'{width}x{height}+{x}+{y}')
+    
+    def download_master_files_if_needed(self):
+        """Download master files if they are missing or outdated"""
+        try:
+            logger.info("Checking master files...")
+            
+            # Check if download is needed
+            if should_download_master_files():
+                logger.info("Master files are missing or outdated, downloading fresh files...")
+                
+                # Download in a separate thread to avoid blocking UI
+                def download_thread():
+                    try:
+                        success = download_master_files()
+                        if success:
+                            logger.info("✅ Master files downloaded successfully")
+                            # Clean up old files
+                            cleanup_old_master_files()
+                        else:
+                            logger.warning("⚠️ Failed to download some master files")
+                    except Exception as e:
+                        logger.error(f"Error downloading master files: {e}")
+                
+                # Start download in background
+                threading.Thread(target=download_thread, daemon=True).start()
+            else:
+                logger.info("✅ Master files are up to date")
+                
+        except Exception as e:
+            logger.error(f"Error checking master files: {e}")
     
     def setup_variables(self):
         """Setup Tkinter variables"""

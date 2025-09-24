@@ -1,0 +1,5 @@
+norenordno,uid,actid,exch,tsym,trantype,qty,prc,pcode,remarks,status,reporttype,prctyp,ret,exchordid,dscqty,rejreason,t
+25091000473320,FA32246,FA32246,BFO,SENSEX2591181200CE,B,20,409.45,I,,PENDING,NewAck,LMT,DAY,,0, ,om
+25091100520779,FA32246,FA32246,NFO,NIFTY16SEP25C24850,B,75,233.00,I,,PENDING,NewAck,LMT,DAY,,0, ,om
+,om,
+25091100520780,FA42242,FA42242,NFO,NIFTY16SEP25C24850,B,25,233.00,I,,REJECTED,Rejected,LMT,DAY,,,ORA:Quantity 25 is not a multiple of lot size 75.00,om,Yes
