@@ -820,6 +820,10 @@ class MainWindow:
     def _check_if_all_monitoring_should_stop(self):
         """Check if all monitoring should stop (when either SL or Target is triggered)"""
         try:
+            # Initialize sl_target_states if it doesn't exist
+            if not hasattr(self, 'sl_target_states'):
+                self.sl_target_states = {}
+            
             sl_triggered = self.sl_target_states.get('sl_triggered', False)
             target_triggered = self.sl_target_states.get('target_triggered', False)
             
@@ -1190,6 +1194,10 @@ class MainWindow:
     def _reset_sl_target_controls(self):
         """Reset SL/Target controls to initial state"""
         try:
+            # Initialize sl_target_states if it doesn't exist
+            if not hasattr(self, 'sl_target_states'):
+                self.sl_target_states = {}
+            
             # Reset state variables
             self.sl_target_states.update({
                 'sl_calculated': False,
@@ -1209,11 +1217,11 @@ class MainWindow:
             self.sl_price_value.set("")
             self.target_price_value.set("")
             
-            # Disable controls
-            self.sl_price_box.config(state="disabled")
-            self.target_price_box.config(state="disabled")
-            self.sl_price_button.config(state="disabled", text="SL Price")
-            self.target_price_button.config(state="disabled", text="Target Price")
+            # Enable controls for new input
+            self.sl_price_box.config(state="normal")
+            self.target_price_box.config(state="normal")
+            self.sl_price_button.config(state="normal", text="SL Price")
+            self.target_price_button.config(state="normal", text="Target Price")
             
             # Reset trailing controls
             self._reset_trailing_controls()
@@ -3737,6 +3745,10 @@ class MainWindow:
     def _adjust_sl_target_for_modified_price(self, new_buy_price):
         """Adjust SL/Target prices when buy order price is modified"""
         try:
+            # Initialize sl_target_states if it doesn't exist
+            if not hasattr(self, 'sl_target_states'):
+                self.sl_target_states = {}
+            
             # Check if either SL or Target were previously calculated
             sl_calculated = self.sl_target_states.get('sl_calculated', False)
             target_calculated = self.sl_target_states.get('target_calculated', False)
