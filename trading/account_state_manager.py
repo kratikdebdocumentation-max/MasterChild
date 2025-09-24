@@ -45,7 +45,6 @@ class AccountStateManager:
             'current_quantity': ['', ''],
             'current_price': ['', ''],
             'filled_quantity': [0, 0],  # Track actual filled quantity
-            'can_exit': [0, 0]  # 1 = can exit position, 0 = no position to exit
         }
         
         self.df_states = pd.DataFrame(default_data)
@@ -74,7 +73,8 @@ class AccountStateManager:
                     'current_order_id': row['current_order_id'],
                     'current_symbol': row['current_symbol'],
                     'current_quantity': row['current_quantity'],
-                    'current_price': row['current_price']
+                    'current_price': row['current_price'],
+                    'filled_quantity': int(row['filled_quantity'])
                 }
             return None
         except Exception as e:
@@ -173,12 +173,14 @@ class AccountStateManager:
             mask = self.df_states['account_id'] == account_id
             if mask.any():
                 self.df_states.loc[mask, 'filled_quantity'] = filled_qty
-                self.df_states.loc[mask, 'can_exit'] = 1 if filled_qty > 0 else 0
+                
+                # Get account name first
+                account_name = self.df_states.loc[mask, 'account_name'].iloc[0]
+                
+                logger.info(f"Updated {account_name} (ID: {account_id}) filled_quantity: {filled_qty}")
+                
                 self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
                 self._save_to_csv()
-                
-                account_name = self.df_states.loc[mask, 'account_name'].iloc[0]
-                logger.info(f"Updated {account_name} (ID: {account_id}) filled_quantity: {filled_qty}")
                 return True
             else:
                 logger.error(f"Account {account_id} not found in states")
@@ -194,12 +196,6 @@ class AccountStateManager:
             return 0
         return int(status.get('filled_quantity', 0))
     
-    def get_can_exit(self, account_id: int) -> int:
-        """Get can_exit status for account (1 = can exit, 0 = no position)"""
-        status = self.get_account_status(account_id)
-        if not status:
-            return 0
-        return int(status.get('can_exit', 0))
     
     def reset_position_data(self, account_id: int) -> bool:
         """Reset position data after exit"""
@@ -207,21 +203,22 @@ class AccountStateManager:
             mask = self.df_states['account_id'] == account_id
             if mask.any():
                 self.df_states.loc[mask, 'filled_quantity'] = 0
-                self.df_states.loc[mask, 'can_exit'] = 0
                 self.df_states.loc[mask, 'current_order_id'] = ''
                 self.df_states.loc[mask, 'current_symbol'] = ''
                 self.df_states.loc[mask, 'current_quantity'] = ''
                 self.df_states.loc[mask, 'current_price'] = ''
+                
+                # Debug logging
+                account_name = self.df_states.loc[mask, 'account_name'].iloc[0]
+                logger.info(f"RESET POSITION DATA - {account_name} (ID: {account_id}) - position data cleared")
                 # Clear exit order info as well
                 self.df_states.loc[mask, 'exit_order_number'] = ''
                 self.df_states.loc[mask, 'exit_order_type'] = ''
                 self.df_states.loc[mask, 'exit_price'] = ''
                 self.df_states.loc[mask, 'exit_quantity'] = ''
+                
                 self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
                 self._save_to_csv()
-                
-                account_name = self.df_states.loc[mask, 'account_name'].iloc[0]
-                logger.info(f"Reset position data for {account_name} (ID: {account_id})")
                 return True
             else:
                 logger.error(f"Account {account_id} not found in states")
@@ -229,6 +226,7 @@ class AccountStateManager:
         except Exception as e:
             logger.error(f"Error resetting position data for account {account_id}: {e}")
             return False
+    
     
     def update_exit_order_info(self, account_id: int, order_number: str, order_type: str, price: float, quantity: int) -> bool:
         """Update exit order information"""

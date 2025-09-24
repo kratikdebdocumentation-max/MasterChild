@@ -538,6 +538,13 @@ class MainWindow:
         )
         self.sl_price_button.grid(row=0, column=3, padx=10, pady=5)
         
+        # SL Monitoring status label
+        self.sl_monitoring_label = tk.Label(
+            self.status_frame, text="", 
+            font=("Arial", 8), fg="green"
+        )
+        self.sl_monitoring_label.grid(row=0, column=4, padx=5, pady=5)
+        
         # Target Price box first, then button
         self.target_price_box = tk.Entry(
             self.status_frame, textvariable=self.target_price_value, width=10
@@ -729,18 +736,35 @@ class MainWindow:
     def check_sl_target_breach(self, live_price: float):
         """Check for SL/Target breaches - from old project"""
         try:
-            
             # Check SL breach
             if self.sl_monitoring_active and self.sl_price_level is not None:
                 if live_price <= self.sl_price_level:
+                    # Stop monitoring immediately to prevent duplicate triggers
+                    self.sl_monitoring_active = False
                     logger.info(f"SL BREACH DETECTED! Current price: {live_price}, SL: {self.sl_price_level}")
                     self._trigger_sl_breach(live_price)
+                else:
+                    # Log comparison info periodically (every 10th check to avoid spam)
+                    if not hasattr(self, '_sl_check_counter'):
+                        self._sl_check_counter = 0
+                    self._sl_check_counter += 1
+                    if self._sl_check_counter % 10 == 0:
+                        logger.info(f"SL Monitoring - Current: {live_price}, SL Level: {self.sl_price_level}, Gap: {live_price - self.sl_price_level:.2f}")
             
             # Check Target breach
             if self.target_monitoring_active and self.target_price_level is not None:
                 if live_price >= self.target_price_level:
+                    # Stop monitoring immediately to prevent duplicate triggers
+                    self.target_monitoring_active = False
                     logger.info(f"TARGET HIT! Current price: {live_price}, Target: {self.target_price_level}")
                     self._trigger_target_breach(live_price)
+                else:
+                    # Log comparison info periodically (every 10th check to avoid spam)
+                    if not hasattr(self, '_target_check_counter'):
+                        self._target_check_counter = 0
+                    self._target_check_counter += 1
+                    if self._target_check_counter % 10 == 0:
+                        logger.info(f"TARGET Monitoring - Current: {live_price}, Target Level: {self.target_price_level}, Gap: {self.target_price_level - live_price:.2f}")
                     
         except Exception as e:
             logger.error(f"Error checking SL/Target breaches: {e}")
@@ -750,7 +774,7 @@ class MainWindow:
         try:
             logger.info(f"SL BREACH DETECTED! Current price: {current_price}, SL: {self.sl_price_level}")
             
-            # Stop SL monitoring
+            # Stop SL monitoring (already stopped in check_sl_target_breach, but ensure UI is updated)
             self.stop_sl_monitoring()
             
             # Update UI to show breach
@@ -769,6 +793,9 @@ class MainWindow:
         try:
             logger.info(f"TARGET HIT! Current price: {current_price}, Target: {self.target_price_level}")
             
+            # Stop target monitoring (already stopped in check_sl_target_breach, but ensure UI is updated)
+            self.stop_target_monitoring()
+            
             # Update UI to show target hit
             self.target_price_button.config(text=f"TARGET HIT @{current_price:.2f}", bg="green", fg="white")
             
@@ -779,8 +806,7 @@ class MainWindow:
                 self.start_trailing_mode(current_price)
                 logger.info("Target breach handled - trailing mode started (no exit orders)")
             else:
-                # Stop Target monitoring and exit
-                self.stop_target_monitoring()
+                # Exit immediately (target monitoring already stopped above)
                 self._place_exit_orders_for_breach("TARGET", current_price)
                 logger.info("Target breach handled - exit orders placed")
             
@@ -792,11 +818,23 @@ class MainWindow:
         try:
             logger.info(f"Placing exit orders for {breach_type} breach at price {current_price} - PARALLEL MODE")
             
+            # Refresh state to ensure we have the latest values
+            self.account_state_manager._initialize_states()
+            
+            # Debug: Check filled quantity status for both accounts
+            master_filled_qty = self.account_state_manager.get_filled_quantity(1)
+            child_filled_qty = self.account_state_manager.get_filled_quantity(2)
+            master_active = self.account_manager.accounts[1]['active']
+            child_active = self.account_manager.accounts[2]['active']
+            
+            logger.info(f"SL BREACH DEBUG - Master: active={master_active}, filled_qty={master_filled_qty}")
+            logger.info(f"SL BREACH DEBUG - Child: active={child_active}, filled_qty={child_filled_qty}")
+            
             # Get active accounts that have positions to exit
             active_accounts = []
             for account_id in [1, 2]:  # Master and Child
                 if (self.account_manager.accounts[account_id]['active'] and 
-                    self.account_state_manager.get_can_exit(account_id) == 1):
+                    self.account_state_manager.get_filled_quantity(account_id) > 0):
                     active_accounts.append(account_id)
             
             if not active_accounts:
@@ -1222,6 +1260,7 @@ class MainWindow:
             self.target_price_box.config(state="normal")
             self.sl_price_button.config(state="normal", text="SL Price")
             self.target_price_button.config(state="normal", text="Target Price")
+            self.sl_monitoring_label.config(text="", fg="green")
             
             # Reset trailing controls
             self._reset_trailing_controls()
@@ -1403,7 +1442,11 @@ class MainWindow:
             # Clear order information for both accounts on startup
             self.account_state_manager.update_order_info(1, '', '', 0, 0.0)
             self.account_state_manager.update_order_info(2, '', '', 0, 0.0)
-            logger.info("Order information cleared on startup for both accounts")
+            
+            # Clear exit order information for both accounts on startup
+            self.account_state_manager.clear_exit_order_info(1)
+            self.account_state_manager.clear_exit_order_info(2)
+            logger.info("Order information and exit order info cleared on startup for both accounts")
             
             logger.info("Account states reset to initial state")
             
@@ -1900,14 +1943,12 @@ class MainWindow:
             # Check if accounts have actual filled positions (not just ability to order)
             master_filled_qty = self.account_state_manager.get_filled_quantity(1)
             child_filled_qty = self.account_state_manager.get_filled_quantity(2)
-            master_can_exit = self.account_state_manager.get_can_exit(1)
-            child_can_exit = self.account_state_manager.get_can_exit(2)
             
-            logger.info(f"Buy orders filled check - Master: filled_qty={master_filled_qty}, can_exit={master_can_exit}")
-            logger.info(f"Buy orders filled check - Child: filled_qty={child_filled_qty}, can_exit={child_can_exit}")
+            logger.info(f"Buy orders filled check - Master: filled_qty={master_filled_qty}")
+            logger.info(f"Buy orders filled check - Child: filled_qty={child_filled_qty}")
             
             # Only return True if at least one account has actual filled positions
-            has_filled_positions = (master_filled_qty > 0 and master_can_exit == 1) or (child_filled_qty > 0 and child_can_exit == 1)
+            has_filled_positions = (master_filled_qty > 0) or (child_filled_qty > 0)
             
             logger.info(f"Buy orders filled result: {has_filled_positions}")
             return has_filled_positions
@@ -1933,7 +1974,15 @@ class MainWindow:
             # Update state
             self.sl_price_level = new_sl_price
             self.sl_button_state = "confirmed"
-            self.sl_price_button.config(text=f"SL Set @{new_sl_price}", bg="orange", fg="white")
+            
+            # Check if monitoring is currently active to maintain button color
+            if self.sl_monitoring_active:
+                # Keep RED color when monitoring is active
+                self.sl_price_button.config(text=f"SL placed @{new_sl_price}", bg="red", fg="white")
+                logger.info(f"SL price updated during active monitoring: {new_sl_price}")
+            else:
+                # Use orange color when not monitoring
+                self.sl_price_button.config(text=f"SL Set @{new_sl_price}", bg="orange", fg="white")
             
             # Update sl_target_states with new SL points for proper distance maintenance during buy order modification
             if hasattr(self, 'current_buy_order_open_value') and self.current_buy_order_open_value:
@@ -1979,7 +2028,15 @@ class MainWindow:
             # Update state
             self.target_price_level = new_target_price
             self.target_button_state = "confirmed"
-            self.target_price_button.config(text=f"Target Set @{new_target_price}", bg="orange", fg="white")
+            
+            # Check if monitoring is currently active to maintain button color
+            if self.target_monitoring_active:
+                # Keep GREEN color when monitoring is active
+                self.target_price_button.config(text=f"Target placed @{new_target_price}", bg="green", fg="white")
+                logger.info(f"Target price updated during active monitoring: {new_target_price}")
+            else:
+                # Use orange color when not monitoring
+                self.target_price_button.config(text=f"Target Set @{new_target_price}", bg="orange", fg="white")
             
             # Update sl_target_states with new Target points for proper distance maintenance during buy order modification
             if hasattr(self, 'current_buy_order_open_value') and self.current_buy_order_open_value:
@@ -2134,6 +2191,8 @@ class MainWindow:
                     logger.warning("Invalid Target price format")
             
             # Enable exit buttons based on accounts with positions
+            # Refresh state to ensure we have latest values
+            self.account_state_manager._initialize_states()  # Reload state from CSV
             self._update_exit_button_states()
                 
             logger.info("Exit buttons updated after buy order completion")
@@ -2144,24 +2203,29 @@ class MainWindow:
     def _update_exit_button_states(self):
         """Update exit button states based on accounts with positions"""
         try:
-            master_can_exit = self.account_state_manager.get_can_exit(1)
-            child_can_exit = self.account_state_manager.get_can_exit(2)
+            # Debug logging with more details
+            master_filled_qty = self.account_state_manager.get_filled_quantity(1)
+            child_filled_qty = self.account_state_manager.get_filled_quantity(2)
+            logger.info(f"Exit button state update - Master: filled_qty={master_filled_qty}")
+            logger.info(f"Exit button state update - Child: filled_qty={child_filled_qty}")
             
             # Enable general exit buttons if any account has position
-            if master_can_exit or child_can_exit:
+            if master_filled_qty > 0 or child_filled_qty > 0:
                 self.exit_button.config(state='normal')
                 self.exit_all_button.config(state='normal')
+                logger.info("SELL buttons ENABLED - at least one account has position")
             else:
                 self.exit_button.config(state='disabled')
                 self.exit_all_button.config(state='disabled')
+                logger.info("SELL buttons DISABLED - no accounts have positions")
             
             # Enable individual exit buttons based on account positions
-            if master_can_exit and self.account_manager.accounts[1]['active']:
+            if master_filled_qty > 0 and self.account_manager.accounts[1]['active']:
                 self.exit_master_button.config(state='normal')
             else:
                 self.exit_master_button.config(state='disabled')
                 
-            if child_can_exit and self.account_manager.accounts[2]['active']:
+            if child_filled_qty > 0 and self.account_manager.accounts[2]['active']:
                 self.exit_child_button.config(state='normal')
             else:
                 self.exit_child_button.config(state='disabled')
@@ -2259,7 +2323,8 @@ class MainWindow:
             self.sl_monitoring_active = True
             self.sl_price_level = sl_price
             self.sl_price_button.config(text=f"SL placed @{sl_price}", bg="red", fg="white")
-            logger.info(f"SL monitoring activated at {sl_price}")
+            self.sl_monitoring_label.config(text="Monitoring Activated", fg="green")
+            logger.info(f"SL MONITORING ACTIVATED - Price: {sl_price} - Monitoring for price <= {sl_price}")
         except Exception as e:
             logger.error(f"Error starting SL monitoring: {e}")
     
@@ -2269,7 +2334,7 @@ class MainWindow:
             self.target_monitoring_active = True
             self.target_price_level = target_price
             self.target_price_button.config(text=f"Target placed @{target_price}", bg="green", fg="white")
-            logger.info(f"Target monitoring activated at {target_price}")
+            logger.info(f"TARGET MONITORING ACTIVATED - Price: {target_price} - Monitoring for price >= {target_price}")
         except Exception as e:
             logger.error(f"Error starting Target monitoring: {e}")
     
@@ -2280,6 +2345,7 @@ class MainWindow:
             self.sl_price_level = None
             self.sl_button_state = "ready"
             self.sl_price_button.config(text="SL Price", bg="SystemButtonFace", fg="black")
+            self.sl_monitoring_label.config(text="", fg="green")
             logger.info("SL monitoring stopped")
         except Exception as e:
             logger.error(f"Error stopping SL monitoring: {e}")
@@ -2343,7 +2409,7 @@ class MainWindow:
             
             for account_id in [1, 2]:  # Master and Child
                 if (self.account_manager.accounts[account_id]['active'] and 
-                    self.account_state_manager.get_can_exit(account_id) == 1):
+                    self.account_state_manager.get_filled_quantity(account_id) > 0):
                     
                     # Get position details from account state
                     account_status = self.account_state_manager.get_account_status(account_id)
@@ -2611,15 +2677,14 @@ class MainWindow:
             
             logger.info("Exiting all orders at market price")
             
-            # Get active accounts that can exit positions
+            # Get logged-in accounts (check login_status == 1)
             active_accounts = []
             for account_id in [1, 2]:  # Master and Child
-                if (self.account_manager.accounts[account_id]['active'] and 
-                    self.account_state_manager.get_can_exit(account_id) == 1):
+                if self.account_state_manager.get_login_status(account_id) == 1:
                     active_accounts.append(account_id)
             
             if not active_accounts:
-                messagebox.showerror("Error", "No active accounts available for market exit")
+                messagebox.showerror("Error", "No logged-in accounts available for market exit")
                 return
             
             # Check for existing exit orders and modify or place new orders
@@ -2658,9 +2723,8 @@ class MainWindow:
             
             logger.info("Exiting master orders at market price")
             
-            if not (self.account_manager.accounts[1]['active'] and 
-                    self.account_state_manager.get_can_exit(1) == 1):
-                messagebox.showerror("Error", "Master account is not active or cannot exit positions")
+            if self.account_state_manager.get_login_status(1) != 1:
+                messagebox.showerror("Error", "Master account is not logged in")
                 return
             
             # Check for existing exit order and modify or place new order
@@ -2699,9 +2763,8 @@ class MainWindow:
             
             logger.info("Exiting child orders at market price")
             
-            if not (self.account_manager.accounts[2]['active'] and 
-                    self.account_state_manager.get_can_exit(2) == 1):
-                messagebox.showerror("Error", "Child account is not active or cannot exit positions")
+            if self.account_state_manager.get_login_status(2) != 1:
+                messagebox.showerror("Error", "Child account is not logged in")
                 return
             
             # Check for existing exit order and modify or place new order
@@ -2741,26 +2804,7 @@ class MainWindow:
                 logger.error(f"No API available for account {account_id}")
                 return
             
-            # Check if API is properly authenticated before placing order
-            try:
-                # Check API connection by getting order book
-                orderbook_response = api.get_orderbook()
-                if not orderbook_response:
-                    logger.warning(f"API not authenticated for account {account_id}, attempting re-login...")
-                    # Attempt to re-login
-                    success, client_name = self.account_manager.login_account(account_id)
-                    if not success:
-                        logger.error(f"Failed to re-authenticate account {account_id}: {client_name}")
-                        return
-                    logger.info(f"Successfully re-authenticated account {account_id}: {client_name}")
-            except Exception as e:
-                logger.warning(f"API authentication check failed for account {account_id}: {e}")
-                # Attempt to re-login
-                success, client_name = self.account_manager.login_account(account_id)
-                if not success:
-                    logger.error(f"Failed to re-authenticate account {account_id}: {client_name}")
-                    return
-                logger.info(f"Successfully re-authenticated account {account_id}: {client_name}")
+            # Use existing API object directly - no need to re-authenticate
             
             logger.info(f"Market exit for account {account_id}: {symbol} qty={quantity}")
             
@@ -2794,6 +2838,15 @@ class MainWindow:
                 order_number = result.get('norenordno')
                 self.exit_order_numbers[account_id] = order_number
                 logger.info(f"Market exit order placed for account {account_id}: {order_number}")
+                
+                # Store exit order info in account state manager
+                self.account_state_manager.update_exit_order_info(
+                    account_id, 
+                    order_number, 
+                    'MKT',  # Market order
+                    0,      # Market orders have price 0
+                    quantity
+                )
                 
                 # Update order status display
                 if account_id == 1:
@@ -2904,15 +2957,14 @@ class MainWindow:
         try:
             logger.info("Executing silent market exit for SL/Target - PARALLEL MODE")
             
-            # Get active accounts that have positions to exit
+            # Get logged-in accounts (check login_status == 1)
             active_accounts = []
             for account_id in [1, 2]:  # Master and Child
-                if (self.account_manager.accounts[account_id]['active'] and 
-                    self.account_state_manager.get_can_exit(account_id) == 1):
+                if self.account_state_manager.get_login_status(account_id) == 1:
                     active_accounts.append(account_id)
             
             if not active_accounts:
-                logger.warning("No active accounts with positions available for silent market exit")
+                logger.warning("No logged-in accounts available for silent market exit")
                 return
             
             # Place market exit orders in parallel using threading
@@ -3299,6 +3351,8 @@ class MainWindow:
             
             # Check if trailing stop is hit
             elif current_price_float <= self.trailing_stop_price:
+                # Stop trailing immediately to prevent duplicate triggers
+                self.trailing_active = False
                 logger.warning(f"TRAILING STOP HIT! Current: {current_price_float}, Stop: {self.trailing_stop_price:.2f}")
                 self.execute_trailing_stop_exit(current_price_float)
                 
@@ -3348,11 +3402,10 @@ class MainWindow:
                 logger.warning("No active accounts available for trailing stop exit")
                 return
             
-            # Use the same fixed market exit function for consistency
-            for account_id in active_accounts:
-                self._place_market_exit_order(account_id)
+            # Place market exit orders in parallel using threading
+            self._place_market_exit_orders_parallel(active_accounts)
             
-            logger.info(f"Trailing stop market exit orders placed for {len(active_accounts)} account(s)")
+            logger.info(f"Trailing stop market exit orders placed in parallel for {len(active_accounts)} account(s)")
             
         except Exception as e:
             logger.error(f"Error executing trailing stop market orders: {e}")
