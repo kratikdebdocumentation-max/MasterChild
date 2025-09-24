@@ -1973,6 +1973,26 @@ class MainWindow:
             self.target_button_state = "confirmed"
             self.target_price_button.config(text=f"Target Set @{new_target_price}", bg="orange", fg="white")
             
+            # Update sl_target_states with new Target points for proper distance maintenance during buy order modification
+            if hasattr(self, 'current_buy_order_open_value') and self.current_buy_order_open_value:
+                # Calculate new Target points based on manual Target price
+                new_target_points = new_target_price - self.current_buy_order_open_value
+                
+                # Update sl_target_states to maintain this distance during future buy order modifications
+                if not hasattr(self, 'sl_target_states'):
+                    self.sl_target_states = {}
+                
+                self.sl_target_states.update({
+                    'target_calculated': True,
+                    'target_price': new_target_price,
+                    'target_points': new_target_points,
+                    'buy_price': self.current_buy_order_open_value
+                })
+                
+                logger.info(f"Manual Target set - Price: {new_target_price}, Points from buy: {new_target_points}, Buy price: {self.current_buy_order_open_value}")
+            else:
+                logger.warning("No current buy price available - Target points cannot be calculated for distance maintenance")
+            
             # Check if buy orders are completed and start monitoring
             if self._are_buy_orders_filled():
                 self.start_target_monitoring(new_target_price)
@@ -3717,39 +3737,57 @@ class MainWindow:
     def _adjust_sl_target_for_modified_price(self, new_buy_price):
         """Adjust SL/Target prices when buy order price is modified"""
         try:
-            # Only adjust if SL/Target were previously calculated
-            if not (self.sl_target_states.get('sl_calculated') and self.sl_target_states.get('target_calculated')):
-                logger.info("SL/Target not calculated yet, skipping adjustment")
+            # Check if either SL or Target were previously calculated
+            sl_calculated = self.sl_target_states.get('sl_calculated', False)
+            target_calculated = self.sl_target_states.get('target_calculated', False)
+            
+            if not (sl_calculated or target_calculated):
+                logger.info("Neither SL nor Target calculated yet, skipping adjustment")
                 return
             
             # Get current points difference
             sl_points = self.sl_target_states.get('sl_points', 0)
             target_points = self.sl_target_states.get('target_points', 0)
             
-            # Calculate new SL and Target prices maintaining the same points difference
-            new_sl_price = max(0, new_buy_price - sl_points)  # Ensure SL never goes below 0
-            new_target_price = new_buy_price + target_points
+            # Calculate new prices maintaining the same points difference
+            new_sl_price = None
+            new_target_price = None
             
-            # Check if SL was capped at 0
-            if new_buy_price - sl_points < 0:
-                logger.warning(f"SL capped at 0 due to low modified buy price. Buy: {new_buy_price}, SL points: {sl_points}")
+            if sl_calculated:
+                new_sl_price = max(0, new_buy_price - sl_points)  # Ensure SL never goes below 0
+                # Check if SL was capped at 0
+                if new_buy_price - sl_points < 0:
+                    logger.warning(f"SL capped at 0 due to low modified buy price. Buy: {new_buy_price}, SL points: {sl_points}")
+            
+            if target_calculated:
+                new_target_price = new_buy_price + target_points
             
             # Update state
-            self.sl_target_states.update({
-                'sl_price': new_sl_price,
-                'target_price': new_target_price,
-                'buy_price': new_buy_price
-            })
+            state_update = {'buy_price': new_buy_price}
+            if new_sl_price is not None:
+                state_update['sl_price'] = new_sl_price
+            if new_target_price is not None:
+                state_update['target_price'] = new_target_price
             
-            # Update UI display
-            self.sl_price_value.set(f"{new_sl_price:.2f}")
-            self.target_price_value.set(f"{new_target_price:.2f}")
+            self.sl_target_states.update(state_update)
             
-            # Update button text
-            self.sl_price_button.config(text=f"SL Set @{new_sl_price:.2f}")
-            self.target_price_button.config(text=f"Target Set @{new_target_price:.2f}")
+            # Update UI display and button text
+            if new_sl_price is not None:
+                self.sl_price_value.set(f"{new_sl_price:.2f}")
+                self.sl_price_button.config(text=f"SL Set @{new_sl_price:.2f}")
             
-            logger.info(f"SL/Target adjusted for new buy price - SL: {new_sl_price}, Target: {new_target_price} (Buy: {new_buy_price})")
+            if new_target_price is not None:
+                self.target_price_value.set(f"{new_target_price:.2f}")
+                self.target_price_button.config(text=f"Target Set @{new_target_price:.2f}")
+            
+            # Log the adjustment
+            adjustment_parts = []
+            if new_sl_price is not None:
+                adjustment_parts.append(f"SL: {new_sl_price}")
+            if new_target_price is not None:
+                adjustment_parts.append(f"Target: {new_target_price}")
+            
+            logger.info(f"SL/Target adjusted for new buy price - {', '.join(adjustment_parts)} (Buy: {new_buy_price})")
             
         except Exception as e:
             logger.error(f"Error adjusting SL/Target for modified price: {e}")
