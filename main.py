@@ -805,6 +805,54 @@ class MainWindow:
         """Test connection restored display for child account"""
         self.update_order_status(2, "CONNECTION RESTORED", "NETWORK_RESTORED")
     
+    def disable_selection_row(self):
+        """Disable all components in the selection row (Index, Index LTP, Expiry, Option, Strike)"""
+        try:
+            logger.info("Disabling selection row components")
+            
+            # Disable Index dropdown
+            self.index_dropdown.config(state='disabled')
+            
+            # Disable Expiry dropdown
+            self.expiry_dropdown.config(state='disabled')
+            
+            # Disable Option dropdown
+            self.option_dropdown.config(state='disabled')
+            
+            # Disable Strike dropdown
+            self.strike_dropdown.config(state='disabled')
+            
+            # Index LTP is already read-only (Label), so no need to disable
+            
+            logger.info("Selection row components disabled")
+            
+        except Exception as e:
+            logger.error(f"Error disabling selection row: {e}")
+    
+    def enable_selection_row(self):
+        """Enable all components in the selection row (Index, Index LTP, Expiry, Option, Strike)"""
+        try:
+            logger.info("Enabling selection row components")
+            
+            # Enable Index dropdown
+            self.index_dropdown.config(state='normal')
+            
+            # Enable Expiry dropdown
+            self.expiry_dropdown.config(state='normal')
+            
+            # Enable Option dropdown
+            self.option_dropdown.config(state='normal')
+            
+            # Enable Strike dropdown
+            self.strike_dropdown.config(state='normal')
+            
+            # Index LTP is already read-only (Label), so no need to enable
+            
+            logger.info("Selection row components enabled")
+            
+        except Exception as e:
+            logger.error(f"Error enabling selection row: {e}")
+    
     def get_websocket_status(self, account_num: int) -> str:
         """Get websocket connection status for an account"""
         try:
@@ -1341,6 +1389,9 @@ class MainWindow:
             # 5. Stop any active monitoring
             self._stop_monitoring()
             
+            # 6. Re-enable selection row components
+            self.enable_selection_row()
+            
             logger.info("System released - ready for new orders")
             messagebox.showinfo("System Released", "System has been reset and is ready for new orders")
             
@@ -1430,6 +1481,9 @@ class MainWindow:
             
             # Reset SL/Target controls
             self._reset_sl_target_controls()
+            
+            # Re-enable selection row components
+            self.enable_selection_row()
             
             logger.info("Management buttons disabled until new orders are placed")
             
@@ -1654,6 +1708,9 @@ class MainWindow:
             # Clear exit order information for both accounts on startup
             self.account_state_manager.clear_exit_order_info(1)
             self.account_state_manager.clear_exit_order_info(2)
+            
+            # Ensure selection row is enabled on startup
+            self.enable_selection_row()
             logger.info("Position data and exit order info cleared on startup for both accounts")
             
             logger.info("Account states reset to initial state")
@@ -1987,6 +2044,9 @@ class MainWindow:
             
             # 4. Initialize order state tracking
             self.order_states = {1: "PENDING", 2: "PENDING"}
+            
+            # 5. Disable selection row components to prevent changes during order execution
+            self.disable_selection_row()
             
             # 5. Place orders in parallel
             self._place_orders_parallel(active_accounts, trading_symbol, price, master_quantity, index)
