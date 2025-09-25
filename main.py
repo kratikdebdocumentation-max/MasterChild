@@ -1389,6 +1389,9 @@ class MainWindow:
             # 6. Re-enable selection row components
             self.enable_selection_row()
             
+            # 7. Update PnL button state (enable when no positions)
+            self.update_verify_pnl_button_state()
+            
             logger.info("System released - ready for new orders")
             messagebox.showinfo("System Released", "System has been reset and is ready for new orders")
             
@@ -1614,8 +1617,113 @@ class MainWindow:
             raise
         
     def verify_pnl_from_broker(self):
-        """Verify PnL from broker - TO BE IMPLEMENTED"""
-        logger.info("Verify PnL from broker clicked - Function not implemented yet")
+        """Verify PnL by fetching actual data from broker and show for 1 second"""
+        try:
+            logger.info("Verifying PnL from broker...")
+            
+            # Show PnL display
+            self.show_pnl_display()
+            
+            pnl_found = False
+            for account_num in [1, 2]:  # Master and child accounts
+                # Only verify if account is active
+                if self.account_manager.accounts.get(account_num, {}).get('active', False):
+                    api = self.account_manager.get_api(account_num)
+                    if api:
+                        # Get actual PnL from broker
+                        broker_pnl = self.calculate_pnl(api)
+                        
+                        # Update PnL display
+                        self.update_pnl_display(account_num, broker_pnl)
+                        pnl_found = True
+                        
+                        logger.info(f"Verified PnL for account {account_num} (active): {broker_pnl}")
+            
+            if not pnl_found:
+                logger.warning("No active accounts found for PnL verification")
+                # Set empty values to show that button was pressed
+                self.master_pnl_value.set("No Data")
+                self.child_pnl_value.set("No Data")
+            
+            # Log verification complete
+            logger.info("PnL verification completed successfully")
+            
+            # Schedule hiding PnL display after 1 second
+            self.root.after(1000, self.hide_pnl_display)
+            
+        except Exception as e:
+            logger.error(f"Error verifying PnL from broker: {e}")
+            # Show error in PnL display
+            self.master_pnl_value.set("Error")
+            self.child_pnl_value.set("Error")
+            self.root.after(1000, self.hide_pnl_display)
+    
+    def calculate_pnl(self, api):
+        """Calculate PnL for a given API account"""
+        try:
+            ret = api.get_positions()
+            if ret is None or not ret:
+                return 0.0
+            
+            mtm = 0
+            pnl = 0
+            for i in ret:
+                mtm += float(i.get('urmtom', 0))
+                pnl += float(i.get('rpnl', 0))
+            
+            day_m2m = mtm + pnl
+            return round(day_m2m, 2)
+            
+        except Exception as e:
+            logger.error(f"Error calculating PnL: {e}")
+            return 0.0
+    
+    def update_pnl_display(self, account_num, pnl_value):
+        """Update PnL display for specific account"""
+        try:
+            if account_num == 1:  # Master account
+                self.master_pnl_value.set(f"{pnl_value}")
+            elif account_num == 2:  # Child account
+                self.child_pnl_value.set(f"{pnl_value}")
+        except Exception as e:
+            logger.error(f"Error updating PnL display: {e}")
+    
+    def show_pnl_display(self):
+        """Show PnL display (widgets are always visible, just ensure values are set)"""
+        try:
+            # Widgets are always visible, this method just ensures they're ready
+            logger.debug("PnL display ready to show values")
+        except Exception as e:
+            logger.error(f"Error preparing PnL display: {e}")
+    
+    def hide_pnl_display(self):
+        """Clear PnL display values"""
+        try:
+            self.master_pnl_value.set("")
+            self.child_pnl_value.set("")
+            logger.debug("PnL display values cleared")
+        except Exception as e:
+            logger.error(f"Error clearing PnL display: {e}")
+    
+    def update_verify_pnl_button_state(self):
+        """Update Show PnL button state based on active positions"""
+        try:
+            # Check if any account has an active position (filled quantity > 0)
+            has_active_position = any(
+                self.account_state_manager.get_filled_quantity(account_num) > 0
+                for account_num in [1, 2]
+            )
+            
+            # Disable button if any position is active, enable otherwise
+            if has_active_position:
+                self.verify_pnl_button.config(state='disabled')
+                logger.debug("Show PnL button disabled - active position detected")
+            else:
+                self.verify_pnl_button.config(state='normal')
+                logger.debug("Show PnL button enabled - no active positions")
+                
+        except Exception as e:
+            logger.error(f"Error updating Show PnL button state: {e}")
         
     def update_selections(self, *args):
         """Update selections when index changes"""
@@ -2483,8 +2591,11 @@ class MainWindow:
             # Refresh state to ensure we have latest values
             self.account_state_manager._initialize_states()  # Reload state from CSV
             self._update_exit_button_states()
+            
+            # Update PnL button state (disable when positions are active)
+            self.update_verify_pnl_button_state()
                 
-            logger.info("Exit buttons updated after buy order completion")
+            logger.info("Exit buttons and PnL button state updated after buy order completion")
             
         except Exception as e:
             logger.error(f"Error handling buy order completion: {e}")
