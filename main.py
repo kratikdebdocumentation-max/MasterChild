@@ -900,9 +900,6 @@ class MainWindow:
                 logger.info(f"Initial buy price set: {live_price:.2f}")
             elif not current_price_value and self.buy_price_manually_cleared:
                 logger.info("Buy price field is empty but manually cleared - NOT auto-filling")
-            elif current_price_value:
-                logger.info(f"Buy price field has value: '{current_price_value}' - NOT auto-filling")
-            
             # Check SL/Target breaches if monitoring is active
             self.check_sl_target_breach(live_price)
             
