@@ -476,7 +476,15 @@ class MainWindow:
         self.trading_frame = tk.Frame(self.root)
         self.trading_frame.pack(side=tk.TOP, pady=10)
         
-        # Quantity selection (moved to left)
+        # Master Position button (leftmost in trading frame)
+        self.master_position_button = tk.Button(
+            self.trading_frame, text="Master Position", 
+            command=self.show_master_position_info, width=15, height=2,
+            state="normal"
+        )
+        self.master_position_button.pack(side=tk.LEFT, padx=5)
+        
+        # Quantity selection (moved to right of Master Position)
         tk.Label(self.trading_frame, text="Qty").pack(side=tk.LEFT, padx=5)
         self.qty_dropdown = ttk.Combobox(
             self.trading_frame, textvariable=self.qty1_var, width=10, state="readonly"
@@ -666,26 +674,34 @@ class MainWindow:
         self.order_frame = tk.Frame(self.root)
         self.order_frame.pack(side=tk.TOP, pady=10)
         
+        # Child Position button (leftmost)
+        self.child_position_button = tk.Button(
+            self.order_frame, text="Child Position", 
+            command=self.show_child_position_info, width=15, height=2,
+            state="normal"
+        )
+        self.child_position_button.grid(row=0, column=0, padx=5, pady=5)
+        
         # Cancel Buy and Modify Buy (left side)
         self.cancel_buy_button = tk.Button(
             self.order_frame, text="Cancel Buy", 
             command=self.cancel_buy_orders, width=15, height=2,
             state="disabled"
         )
-        self.cancel_buy_button.grid(row=0, column=0, padx=5, pady=5)
+        self.cancel_buy_button.grid(row=0, column=1, padx=5, pady=5)
         
         # Modify Buy box first, then button
         self.modify_buy_box = tk.Entry(
             self.order_frame, textvariable=self.modify_buy_value, width=10
         )
-        self.modify_buy_box.grid(row=0, column=1, padx=5, pady=5)
+        self.modify_buy_box.grid(row=0, column=2, padx=5, pady=5)
         
         self.modify_buy_button = tk.Button(
             self.order_frame, text="Modify Buy", 
             command=self.modify_buy_orders, width=15, height=2,
             state="disabled"
         )
-        self.modify_buy_button.grid(row=0, column=2, padx=5, pady=5)
+        self.modify_buy_button.grid(row=0, column=3, padx=5, pady=5)
         
         # Cancel Exit and Modify Exit (right side)
         self.cancel_exit_button = tk.Button(
@@ -693,20 +709,20 @@ class MainWindow:
             command=self.cancel_exit_orders, width=15, height=2,
             state="disabled"
         )
-        self.cancel_exit_button.grid(row=0, column=3, padx=5, pady=5)
+        self.cancel_exit_button.grid(row=0, column=4, padx=5, pady=5)
         
         # Modify Exit box first, then button
         self.modify_exit_box = tk.Entry(
             self.order_frame, textvariable=self.modify_exit_value, width=10
         )
-        self.modify_exit_box.grid(row=0, column=4, padx=5, pady=5)
+        self.modify_exit_box.grid(row=0, column=5, padx=5, pady=5)
         
         self.modify_exit_button = tk.Button(
             self.order_frame, text="Modify Exit", 
             command=self.modify_exit_orders, width=15, height=2,
             state="disabled"
         )
-        self.modify_exit_button.grid(row=0, column=5, padx=5, pady=5)
+        self.modify_exit_button.grid(row=0, column=6, padx=5, pady=5)
 
     def create_bottom_control_panel(self):
         """Create bottom control panel with exit and logout buttons"""
@@ -1722,6 +1738,50 @@ class MainWindow:
                 
         except Exception as e:
             logger.error(f"Error updating Show PnL button state: {e}")
+    
+    def show_master_position_info(self):
+        """Show Master account position information"""
+        try:
+            logger.info("Master Position button clicked - showing Master position information")
+            
+            account_num = 1
+            filled_qty = self.account_state_manager.get_filled_quantity(account_num)
+            account_status = self.account_state_manager.get_account_status(account_num)
+            
+            if filled_qty > 0:
+                symbol = account_status.get('current_symbol', 'Unknown') if account_status else 'Unknown'
+                price = account_status.get('current_price', 0.0) if account_status else 0.0
+                position_text = f"Master Position:\n{filled_qty} lots of {symbol} @ {price}"
+            else:
+                position_text = "Master Position:\nNo position"
+            
+            messagebox.showinfo("Master Position", position_text)
+            
+        except Exception as e:
+            logger.error(f"Error showing Master position information: {e}")
+            messagebox.showerror("Error", f"Failed to retrieve Master position information: {str(e)}")
+    
+    def show_child_position_info(self):
+        """Show Child account position information"""
+        try:
+            logger.info("Child Position button clicked - showing Child position information")
+            
+            account_num = 2
+            filled_qty = self.account_state_manager.get_filled_quantity(account_num)
+            account_status = self.account_state_manager.get_account_status(account_num)
+            
+            if filled_qty > 0:
+                symbol = account_status.get('current_symbol', 'Unknown') if account_status else 'Unknown'
+                price = account_status.get('current_price', 0.0) if account_status else 0.0
+                position_text = f"Child Position:\n{filled_qty} lots of {symbol} @ {price}"
+            else:
+                position_text = "Child Position:\nNo position"
+            
+            messagebox.showinfo("Child Position", position_text)
+            
+        except Exception as e:
+            logger.error(f"Error showing Child position information: {e}")
+            messagebox.showerror("Error", f"Failed to retrieve Child position information: {str(e)}")
         
     def update_selections(self, *args):
         """Update selections when index changes"""
