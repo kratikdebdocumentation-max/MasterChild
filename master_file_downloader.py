@@ -181,11 +181,11 @@ if __name__ == "__main__":
         print("Downloading fresh master files...")
         success = download_master_files()
         if success:
-            print("✅ Master files downloaded successfully")
+            print("[SUCCESS] Master files downloaded successfully")
         else:
-            print("❌ Failed to download master files")
+            print("[ERROR] Failed to download master files")
     else:
-        print("✅ Master files are up to date")
+        print("[SUCCESS] Master files are up to date")
     
     # Cleanup old files
     print("Cleaning up old files...")

@@ -113,7 +113,7 @@ class WebSocketManager:
                         else:
                             status_message = f"Order {status} @ {price}" if price else f"Order {status}"
                     
-                    self.order_status_callback(account_num, status_message)
+                    self.order_status_callback(account_num, status_message, trantype)
                 except Exception as e:
                     logger.error(f"Error updating order status: {e}")
         
@@ -148,7 +148,7 @@ class WebSocketManager:
         """Set callback for live price updates"""
         self.live_price_callback = callback
     
-    def set_order_status_callback(self, callback: Callable[[int, str], None]):
+    def set_order_status_callback(self, callback: Callable[[int, str, str], None]):
         """Set callback for order status updates"""
         self.order_status_callback = callback
     

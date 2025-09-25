@@ -23,6 +23,24 @@ class AccountStateManager:
         try:
             if os.path.exists(self.csv_file_path):
                 self.df_states = pd.read_csv(self.csv_file_path)
+                # Ensure proper data types to avoid warnings
+                self.df_states = self.df_states.astype({
+                    'account_id': 'int64',
+                    'account_name': 'object',
+                    'login_status': 'int64',
+                    'can_order': 'int64',
+                    'reason': 'object',
+                    'last_updated': 'object',
+                    'current_order_id': 'object',
+                    'current_symbol': 'object',
+                    'current_quantity': 'float64',
+                    'current_price': 'float64',
+                    'filled_quantity': 'int64',
+                    'exit_order_number': 'object',
+                    'exit_order_type': 'object',
+                    'exit_price': 'float64',
+                    'exit_quantity': 'int64'
+                })
                 logger.info(f"Loaded account states from {self.csv_file_path}")
             else:
                 self._create_default_states()
@@ -42,12 +60,34 @@ class AccountStateManager:
             'last_updated': [datetime.now().isoformat(), datetime.now().isoformat()],
             'current_order_id': ['', ''],
             'current_symbol': ['', ''],
-            'current_quantity': ['', ''],
-            'current_price': ['', ''],
+            'current_quantity': [0.0, 0.0],  # Use float instead of empty string
+            'current_price': [0.0, 0.0],  # Use float instead of empty string
             'filled_quantity': [0, 0],  # Track actual filled quantity
+            'exit_order_number': ['', ''],
+            'exit_order_type': ['', ''],
+            'exit_price': [0.0, 0.0],  # Use float instead of empty string
+            'exit_quantity': [0, 0],  # Use int instead of empty string
         }
         
         self.df_states = pd.DataFrame(default_data)
+        # Explicitly set data types to avoid warnings
+        self.df_states = self.df_states.astype({
+            'account_id': 'int64',
+            'account_name': 'object',
+            'login_status': 'int64',
+            'can_order': 'int64',
+            'reason': 'object',
+            'last_updated': 'object',
+            'current_order_id': 'object',
+            'current_symbol': 'object',
+            'current_quantity': 'float64',
+            'current_price': 'float64',
+            'filled_quantity': 'int64',
+            'exit_order_number': 'object',
+            'exit_order_type': 'object',
+            'exit_price': 'float64',
+            'exit_quantity': 'int64'
+        })
         self._save_to_csv()
     
     def _save_to_csv(self):
@@ -205,8 +245,8 @@ class AccountStateManager:
                 self.df_states.loc[mask, 'filled_quantity'] = 0
                 self.df_states.loc[mask, 'current_order_id'] = ''
                 self.df_states.loc[mask, 'current_symbol'] = ''
-                self.df_states.loc[mask, 'current_quantity'] = ''
-                self.df_states.loc[mask, 'current_price'] = ''
+                self.df_states.loc[mask, 'current_quantity'] = 0.0  # Use float instead of empty string
+                self.df_states.loc[mask, 'current_price'] = 0.0  # Use float instead of empty string
                 
                 # Debug logging
                 account_name = self.df_states.loc[mask, 'account_name'].iloc[0]
@@ -214,8 +254,8 @@ class AccountStateManager:
                 # Clear exit order info as well
                 self.df_states.loc[mask, 'exit_order_number'] = ''
                 self.df_states.loc[mask, 'exit_order_type'] = ''
-                self.df_states.loc[mask, 'exit_price'] = ''
-                self.df_states.loc[mask, 'exit_quantity'] = ''
+                self.df_states.loc[mask, 'exit_price'] = 0.0  # Use float instead of empty string
+                self.df_states.loc[mask, 'exit_quantity'] = 0  # Use int instead of empty string
                 
                 self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
                 self._save_to_csv()
@@ -281,8 +321,8 @@ class AccountStateManager:
             if mask.any():
                 self.df_states.loc[mask, 'exit_order_number'] = ''
                 self.df_states.loc[mask, 'exit_order_type'] = ''
-                self.df_states.loc[mask, 'exit_price'] = ''
-                self.df_states.loc[mask, 'exit_quantity'] = ''
+                self.df_states.loc[mask, 'exit_price'] = 0.0  # Use float instead of empty string
+                self.df_states.loc[mask, 'exit_quantity'] = 0  # Use int instead of empty string
                 self.df_states.loc[mask, 'last_updated'] = datetime.now().isoformat()
                 self._save_to_csv()
                 

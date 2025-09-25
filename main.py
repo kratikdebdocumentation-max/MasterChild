@@ -117,18 +117,18 @@ class MainWindow:
                     try:
                         success = download_master_files()
                         if success:
-                            logger.info("✅ Master files downloaded successfully")
+                            logger.info("[SUCCESS] Master files downloaded successfully")
                             # Clean up old files
                             cleanup_old_master_files()
                         else:
-                            logger.warning("⚠️ Failed to download some master files")
+                            logger.warning("[WARNING] Failed to download some master files")
                     except Exception as e:
                         logger.error(f"Error downloading master files: {e}")
                 
                 # Start download in background
                 threading.Thread(target=download_thread, daemon=True).start()
             else:
-                logger.info("✅ Master files are up to date")
+                logger.info("[SUCCESS] Master files are up to date")
                 
         except Exception as e:
             logger.error(f"Error checking master files: {e}")
@@ -149,6 +149,12 @@ class MainWindow:
         
         # Store original buy price for modify functionality
         self.original_buy_price = None
+        
+        # Flag to track if buy price field was manually cleared by user
+        self.buy_price_manually_cleared = False
+        
+        # Track previous value to detect manual changes
+        self.previous_price_value = ""
 
         self.sl_price_value = tk.StringVar()
         self.target_price_value = tk.StringVar()
@@ -196,8 +202,8 @@ class MainWindow:
         
         # Auto SL/Target system variables - load from configuration.csv
         try:
-            sl_points = self.config_manager.get_setting('default_auto_sl', 20)
-            target_points = self.config_manager.get_setting('default_auto_target', 30)
+            sl_points = int(self.config_manager.get_setting('default_auto_sl', 20))
+            target_points = int(self.config_manager.get_setting('default_auto_target', 30))
             self.sl_difference_from_buy = -sl_points  # SL points from buy price (negative)
             self.target_difference_from_buy = target_points  # Target points from buy price (positive)
             logger.info(f"SL/Target configuration loaded - SL: {sl_points} points, Target: {target_points} points")
@@ -478,6 +484,14 @@ class MainWindow:
         )
         self.price_box.pack(side=tk.LEFT, padx=5)
         
+        # Bind events to detect manual clearing
+        self.price_box.bind('<KeyPress>', self.on_price_box_key_press)
+        self.price_box.bind('<FocusIn>', self.on_price_box_focus_in)
+        self.price_box.bind('<KeyRelease>', self.on_price_box_key_release)
+        
+        # Add trace to detect value changes
+        self.price_value.trace('w', self.on_price_value_changed)
+        
         # Buy button
         self.buy_button = ttk.Button(
             self.trading_frame, text="BUY", 
@@ -754,10 +768,18 @@ class MainWindow:
             # Always update Premium Price box (live updates)
             self.premium_price_value.set(f"{live_price:.2f}")
             
-            # Update Buy Price box ONLY if it's empty (first time only)
-            if not self.price_value.get().strip():
+            # Debug logging
+            current_price_value = self.price_value.get().strip()
+            logger.info(f"Live price update - Current value: '{current_price_value}', Manually cleared: {self.buy_price_manually_cleared}")
+            
+            # Update Buy Price box ONLY if it's empty AND not manually cleared by user
+            if not current_price_value and not self.buy_price_manually_cleared:
                 self.price_value.set(f"{live_price:.2f}")
                 logger.info(f"Initial buy price set: {live_price:.2f}")
+            elif not current_price_value and self.buy_price_manually_cleared:
+                logger.info("Buy price field is empty but manually cleared - NOT auto-filling")
+            elif current_price_value:
+                logger.info(f"Buy price field has value: '{current_price_value}' - NOT auto-filling")
             
             # Check SL/Target breaches if monitoring is active
             self.check_sl_target_breach(live_price)
@@ -916,7 +938,7 @@ class MainWindow:
         except Exception as e:
             logger.error(f"Error checking if monitoring should stop: {e}")
     
-    def update_order_status(self, account_num: int, status_message: str):
+    def update_order_status(self, account_num: int, status_message: str, trantype: str = "Unknown"):
         """Update order status display and handle order state changes"""
         try:
             # Update UI display
@@ -928,7 +950,7 @@ class MainWindow:
             # Extract order status from message for state tracking
             status = self._extract_order_status(status_message)
             if status:
-                self._on_order_status_update(account_num, status)
+                self._on_order_status_update(account_num, status, trantype)
             
             logger.info(f"Order status updated for account {account_num}: {status_message}")
         except Exception as e:
@@ -963,6 +985,59 @@ class MainWindow:
             # Additional logic can be added here for sell order completion
         except Exception as e:
             logger.error(f"Error handling sell order completion: {e}")
+    
+    def on_price_box_key_press(self, event):
+        """Handle key press in price box to detect manual clearing"""
+        try:
+            # Store current value before key press
+            self.previous_price_value = self.price_value.get()
+            
+            # Check if user is deleting/clearing content
+            if event.keysym in ['BackSpace', 'Delete'] or event.char in ['\x08', '\x7f']:  # Backspace, Delete
+                # Check if the field will be empty after this key press
+                current_text = self.price_value.get()
+                if len(current_text) <= 1:  # Will be empty or almost empty
+                    self.buy_price_manually_cleared = True
+                    logger.info("Buy price field manually cleared by user - auto-fill disabled")
+        except Exception as e:
+            logger.error(f"Error handling price box key press: {e}")
+    
+    def on_price_box_key_release(self, event):
+        """Handle key release in price box"""
+        try:
+            # Check if user is actively editing (not just clicking)
+            if event.keysym in ['BackSpace', 'Delete'] or event.char in ['\x08', '\x7f']:
+                current_text = self.price_value.get()
+                if len(current_text) == 0:  # Field is now empty
+                    self.buy_price_manually_cleared = True
+                    logger.info("Buy price field cleared by user - auto-fill disabled")
+        except Exception as e:
+            logger.error(f"Error handling price box key release: {e}")
+    
+    def on_price_value_changed(self, *args):
+        """Handle price value changes via trace"""
+        try:
+            current_value = self.price_value.get()
+            
+            # If value changed from non-empty to empty, user manually cleared it
+            if self.previous_price_value and not current_value:
+                self.buy_price_manually_cleared = True
+                logger.info("Buy price field value changed to empty - auto-fill disabled")
+            
+            # Update previous value
+            self.previous_price_value = current_value
+            
+        except Exception as e:
+            logger.error(f"Error handling price value change: {e}")
+    
+    def on_price_box_focus_in(self, event):
+        """Handle focus in on price box"""
+        try:
+            # Store current value when focusing
+            self.previous_price_value = self.price_value.get()
+            logger.info(f"User focused on price box - current value: '{self.previous_price_value}'")
+        except Exception as e:
+            logger.error(f"Error handling price box focus in: {e}")
         
     # ===== BLANK FUNCTIONS - TO BE IMPLEMENTED =====
     
@@ -1243,7 +1318,10 @@ class MainWindow:
             # Clear original buy price and modify box
             self.original_buy_price = None
             self.modify_buy_value.set("")
-            logger.info("BUY button and Price box re-enabled for new orders")
+            # Reset manual clear flag for new orders
+            self.buy_price_manually_cleared = False
+            self.previous_price_value = ""
+            logger.info("BUY button and Price box re-enabled for new orders - auto-fill re-enabled")
             
             # Disable buy-related buttons until new buy orders are placed
             self.cancel_buy_button.config(state='disabled', text="Cancel Buy")
@@ -1497,7 +1575,7 @@ class MainWindow:
             
             if has_open_positions:
                 # Build detailed warning message
-                warning_msg = "⚠️ OPEN POSITIONS DETECTED ⚠️\n\n"
+                warning_msg = "[WARNING] OPEN POSITIONS DETECTED [WARNING]\n\n"
                 warning_msg += f"{summary}\n\n"
                 warning_msg += "POSITION DETAILS:\n"
                 warning_msg += "─" * 50 + "\n"
@@ -1565,7 +1643,10 @@ class MainWindow:
             if all([index, expiry, strike, option]):
                 # Clear Buy Price box for new symbol selection
                 self.price_value.set("")
-                logger.info("Buy price box cleared for new symbol selection")
+                # Reset manual clear flag for new symbol
+                self.buy_price_manually_cleared = False
+                self.previous_price_value = ""
+                logger.info("Buy price box cleared for new symbol selection - auto-fill re-enabled")
                 
                 # Generate trading symbol
                 trading_symbol = self.concatenate_values()
@@ -2120,7 +2201,7 @@ class MainWindow:
         except Exception as e:
             logger.error(f"Error in timeout handler for account {account_id}: {e}")
     
-    def _on_order_status_update(self, account_id: int, status: str):
+    def _on_order_status_update(self, account_id: int, status: str, trantype: str = "Unknown"):
         """Handle order status updates from websocket"""
         try:
             # Update order state
@@ -2130,6 +2211,7 @@ class MainWindow:
             # CRITICAL DEBUG: Log detailed information about the status
             logger.info(f"DEBUG - Account {account_id} status: '{status}' (type: {type(status)})")
             logger.info(f"DEBUG - Current account can_order: {self.account_state_manager.get_can_order(account_id)}")
+            logger.info(f"DEBUG - Transaction type: '{trantype}'")
             
             # Handle rejection - set can_order to 0
             if status == "REJECTED":
@@ -2154,8 +2236,8 @@ class MainWindow:
                 self.timeout_timer = None
                 logger.info("Timeout timer cancelled - order completed before timeout")
             
-            # Activate SL/Target monitoring when buy orders are completed
-            if status == "COMPLETE":
+            # Activate SL/Target monitoring ONLY when BUY orders are completed
+            if status == "COMPLETE" and trantype.upper() == 'B':
                 # Get current symbol and price for the completed order
                 account_status = self.account_state_manager.get_account_status(account_id)
                 if account_status:
@@ -2166,9 +2248,13 @@ class MainWindow:
                     can_order = self.account_state_manager.get_can_order(account_id)
                     if can_order == 1:  # Account can still order = order was successful
                         self.on_buy_order_completed(account_id, symbol, price)
-                        logger.info(f"SL/Target monitoring activated for account {account_id} - order was successful")
+                        logger.info(f"SL/Target monitoring activated for account {account_id} - BUY order was successful")
                     else:
                         logger.warning(f"Order marked as COMPLETE but account {account_id} cannot order - likely rejected. NOT activating SL/Target monitoring")
+            elif status == "COMPLETE" and trantype.upper() == 'S':
+                logger.info(f"SELL order completed for account {account_id} - NOT activating SL/Target monitoring")
+            elif status == "COMPLETE":
+                logger.warning(f"Order completed for account {account_id} but unknown transaction type: '{trantype}' - NOT activating SL/Target monitoring")
                 
         except Exception as e:
             logger.error(f"Error handling order status update for account {account_id}: {e}")
@@ -2303,7 +2389,7 @@ class MainWindow:
             import datetime
             current_time = datetime.datetime.now()
             alert_needed = False
-            alert_message = "⚠️ WEBSOCKET CONNECTION ISSUES DETECTED ⚠️\n\n"
+            alert_message = "[WARNING] WEBSOCKET CONNECTION ISSUES DETECTED [WARNING]\n\n"
             
             for account_id in [1, 2]:
                 if self.account_manager.accounts[account_id]['active']:
@@ -2559,57 +2645,26 @@ class MainWindow:
             
             logger.info(f"Modifying exit orders for accounts: {active_accounts}")
             
-            # Modify orders for each active account individually
-            modified_orders = []
-            
-            for account_id in active_accounts:
-                api = self.account_manager.get_api(account_id)
-                if not api:
-                    logger.error(f"No API available for account {account_id}")
-                    modified_orders.append(None)
-                    continue
-                
-                # Get account-specific data
-                symbol = account_data[account_id]['symbol']
-                quantity = account_data[account_id]['quantity']
-                order_number = self.exit_order_numbers[account_id]
-                
-                # Determine exchange and product type based on symbol
-                if 'BFO' in symbol:
-                    exchange = 'BFO'
-                    product_type = 'M'
-                else:
-                    exchange = 'NFO'
-                    product_type = 'I'
-                
-                # Modify individual exit order directly
-                result = api.modify_order(
-                    orderno=order_number,
-                    newprice=str(price),
-                    newqty=str(quantity),
-                    newproducttype=product_type,
-                    newordertype='LMT',
-                    newtriggerprice='0'
-                )
-                
-                if result and result.get('stat') == 'Ok':
-                    modified_order = result.get('norenordno')
-                else:
-                    modified_order = None
-                
-                modified_orders.append(modified_order)
+            # Modify orders in parallel using threading
+            modified_orders = self._modify_exit_orders_parallel(active_accounts, account_data, price)
             
             # Update order status displays
+            successful_modifications = 0
             for i, account_id in enumerate(active_accounts):
                 if i < len(modified_orders) and modified_orders[i]:
+                    successful_modifications += 1
                     if account_id == 1:
                         self.master_order_status.set(f"Exit Order Modified: {modified_orders[i]}")
                     elif account_id == 2:
                         self.child_order_status.set(f"Exit Order Modified: {modified_orders[i]}")
                     logger.info(f"Exit order modified for account {account_id}: {modified_orders[i]}")
             
-            messagebox.showinfo("Success", f"Exit orders modified successfully for {len(active_accounts)} account(s)")
-            logger.info("Exit orders modified successfully")
+            if successful_modifications > 0:
+                messagebox.showinfo("Success", f"Exit orders modified successfully for {successful_modifications} account(s)")
+                logger.info(f"Exit orders modified successfully for {successful_modifications} account(s)")
+            else:
+                messagebox.showerror("Error", "No exit orders were successfully modified")
+                logger.error("No exit orders were successfully modified")
                 
         except ValueError as e:
             messagebox.showerror("Error", f"Invalid input: {e}")
@@ -2650,26 +2705,12 @@ class MainWindow:
                     logger.error(f"No API available for account {account_id}")
                     active_flags.append(False)
             
-            # Cancel exit orders directly
-            cancelled_orders = []
-            for i, account_id in enumerate(active_accounts):
-                if i < len(apis) and i < len(order_numbers) and active_flags[i]:
-                    api = apis[i]
-                    order_number = order_numbers[i]
-                    
-                    # Cancel order directly
-                    result = api.cancel_order(orderno=order_number)
-                    
-                    if result and result.get('stat') == 'Ok':
-                        cancelled_orders.append(order_number)
-                        logger.info(f"Exit order cancelled for account {account_id}: {order_number}")
-                    else:
-                        logger.error(f"Failed to cancel exit order for account {account_id}: {result}")
-                        cancelled_orders.append(None)
-                else:
-                    cancelled_orders.append(None)
+            # Cancel exit orders in parallel using threading
+            cancelled_orders = self._cancel_exit_orders_parallel(active_accounts, apis, order_numbers, active_flags)
             
             # Clear exit order numbers and update UI
+            successful_cancels = sum(1 for result in cancelled_orders if result is not None)
+            
             for account_id in active_accounts:
                 self.exit_order_numbers[account_id] = ''
                 if account_id == 1:
@@ -2677,16 +2718,18 @@ class MainWindow:
                 elif account_id == 2:
                     self.child_order_status.set("Exit Order Cancelled")
                 logger.info(f"Exit order cancelled for account {account_id}")
-                
-                # Update UI state
-                self.exit_button.config(state='normal', text="SELL Order")
-                self.cancel_exit_button.config(state='disabled')
-                self.modify_exit_button.config(state='disabled')
-                
-                messagebox.showinfo("Success", f"Exit orders cancelled successfully for {len(active_accounts)} account(s)")
-                logger.info("Exit orders cancelled successfully")
+            
+            # Update UI state
+            self.exit_button.config(state='normal', text="SELL Order")
+            self.cancel_exit_button.config(state='disabled')
+            self.modify_exit_button.config(state='disabled')
+            
+            if successful_cancels > 0:
+                messagebox.showinfo("Success", f"Exit orders cancelled successfully for {successful_cancels} account(s)")
+                logger.info(f"Exit orders cancelled successfully for {successful_cancels} account(s)")
             else:
-                messagebox.showerror("Error", "No valid APIs available for cancelling exit orders")
+                messagebox.showerror("Error", "No exit orders were successfully cancelled")
+                logger.error("No exit orders were successfully cancelled")
                 
         except Exception as e:
             messagebox.showerror("Error", f"Error cancelling exit orders: {e}")
@@ -3104,6 +3147,116 @@ class MainWindow:
         
         logger.info("All parallel exit order threads completed")
         return order_numbers
+
+    def _cancel_exit_orders_parallel(self, active_accounts, apis, order_numbers, active_flags):
+        """Cancel exit orders in parallel using threading"""
+        import threading
+        
+        cancelled_orders = [None] * len(active_accounts)
+        
+        def cancel_single_exit_order(account_id, index):
+            """Cancel exit order for single account"""
+            try:
+                if index < len(apis) and index < len(order_numbers) and active_flags[index]:
+                    api = apis[index]
+                    order_number = order_numbers[index]
+                    
+                    # Cancel order directly
+                    result = api.cancel_order(orderno=order_number)
+                    
+                    if result and result.get('stat') == 'Ok':
+                        cancelled_orders[index] = order_number
+                        logger.info(f"Exit order cancelled for account {account_id}: {order_number}")
+                    else:
+                        logger.error(f"Failed to cancel exit order for account {account_id}: {result}")
+                        cancelled_orders[index] = None
+                else:
+                    logger.warning(f"Skipping cancel for account {account_id} - no valid API or order number")
+                    cancelled_orders[index] = None
+                    
+            except Exception as e:
+                logger.error(f"Error cancelling exit order for account {account_id}: {e}")
+                cancelled_orders[index] = None
+        
+        # Create and start threads for each active account
+        threads = []
+        for i, account_id in enumerate(active_accounts):
+            thread = threading.Thread(target=cancel_single_exit_order, args=(account_id, i))
+            threads.append(thread)
+            thread.start()
+            logger.info(f"Started parallel cancel thread for account {account_id}")
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+        
+        logger.info("All parallel cancel threads completed")
+        return cancelled_orders
+
+    def _modify_exit_orders_parallel(self, active_accounts, account_data, price):
+        """Modify exit orders in parallel using threading"""
+        import threading
+        
+        modified_orders = [None] * len(active_accounts)
+        
+        def modify_single_exit_order(account_id, index):
+            """Modify exit order for single account"""
+            try:
+                api = self.account_manager.get_api(account_id)
+                if not api:
+                    logger.error(f"No API available for account {account_id}")
+                    modified_orders[index] = None
+                    return
+                
+                # Get account-specific data
+                symbol = account_data[account_id]['symbol']
+                quantity = account_data[account_id]['quantity']
+                order_number = self.exit_order_numbers[account_id]
+                
+                # Determine exchange and product type based on symbol
+                if 'BFO' in symbol:
+                    exchange = 'BFO'
+                    product_type = 'M'
+                else:
+                    exchange = 'NFO'
+                    product_type = 'I'
+                
+                # Modify individual exit order directly
+                result = api.modify_order(
+                    orderno=order_number,
+                    newprice=str(price),
+                    newqty=str(quantity),
+                    newproducttype=product_type,
+                    newordertype='LMT',
+                    newtriggerprice='0'
+                )
+                
+                if result and result.get('stat') == 'Ok':
+                    modified_order = result.get('norenordno')
+                    modified_orders[index] = modified_order
+                    logger.info(f"Exit order modified for account {account_id}: {modified_order}")
+                else:
+                    logger.error(f"Failed to modify exit order for account {account_id}: {result}")
+                    modified_orders[index] = None
+                    
+            except Exception as e:
+                logger.error(f"Error modifying exit order for account {account_id}: {e}")
+                modified_orders[index] = None
+        
+        # Create and start threads for each active account
+        threads = []
+        for i, account_id in enumerate(active_accounts):
+            thread = threading.Thread(target=modify_single_exit_order, args=(account_id, i))
+            threads.append(thread)
+            thread.start()
+            logger.info(f"Started parallel modify thread for account {account_id}")
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join()
+        
+        logger.info("All parallel modify threads completed")
+        return modified_orders
 
     def cancel_master_buy_order(self):
         """Cancel master buy order"""
