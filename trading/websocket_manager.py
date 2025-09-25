@@ -130,7 +130,6 @@ class WebSocketManager:
         
         def quote_update_callback(tick_data):
             """Handle quote updates - only for master account (account 1)"""
-            logger.info(f"Quote Received for Account {account_num}: {tick_data}")
             
             # Update WebSocket health tracking
             if hasattr(self, 'websocket_health_callback') and self.websocket_health_callback:
