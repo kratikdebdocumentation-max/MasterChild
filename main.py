@@ -69,6 +69,12 @@ class MainWindow:
         # Setup websocket callbacks
         self.setup_websocket_callbacks()
         
+        # Start websocket connection monitoring
+        self.websocket_manager.start_connection_monitoring()
+        
+        # Setup window close handler
+        self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
+        
         # Load configuration
         self.config = Config.load_configuration_csv()
         
@@ -762,6 +768,74 @@ class MainWindow:
         # Set up sell order completed callback
         self.websocket_manager.set_sell_order_completed_callback(self.on_sell_order_completed)
     
+    def handle_websocket_error(self, account_num: int, error_message: str):
+        """Handle websocket errors and trigger reconnection"""
+        try:
+            logger.error(f"WebSocket error for account {account_num}: {error_message}")
+            
+            # Check if it's a connection lost error
+            if any(keyword in error_message.lower() for keyword in ['connection lost', '502 bad gateway', 'disconnected', 'closed']):
+                logger.warning(f"WebSocket connection lost for account {account_num}, triggering reconnection")
+                self.websocket_manager.mark_connection_lost(account_num)
+            
+        except Exception as e:
+            logger.error(f"Error handling websocket error: {e}")
+    
+    def trigger_network_failure_display(self, account_num: int):
+        """Manually trigger network failure display for testing"""
+        try:
+            logger.info(f"Manually triggering network failure display for account {account_num}")
+            self.update_order_status(account_num, "NETWORK FAIL - EXIT Manual", "NETWORK_ERROR")
+        except Exception as e:
+            logger.error(f"Error triggering network failure display: {e}")
+    
+    def test_network_failure_master(self):
+        """Test network failure display for master account"""
+        self.trigger_network_failure_display(1)
+    
+    def test_network_failure_child(self):
+        """Test network failure display for child account"""
+        self.trigger_network_failure_display(2)
+    
+    def test_connection_restore_master(self):
+        """Test connection restored display for master account"""
+        self.update_order_status(1, "CONNECTION RESTORED", "NETWORK_RESTORED")
+    
+    def test_connection_restore_child(self):
+        """Test connection restored display for child account"""
+        self.update_order_status(2, "CONNECTION RESTORED", "NETWORK_RESTORED")
+    
+    def get_websocket_status(self, account_num: int) -> str:
+        """Get websocket connection status for an account"""
+        try:
+            return self.websocket_manager.get_connection_status(account_num)
+        except Exception as e:
+            logger.error(f"Error getting websocket status: {e}")
+            return "unknown"
+    
+    def is_websocket_connected(self, account_num: int) -> bool:
+        """Check if websocket is connected for an account"""
+        try:
+            return self.websocket_manager.is_connected(account_num)
+        except Exception as e:
+            logger.error(f"Error checking websocket connection: {e}")
+            return False
+    
+    def on_closing(self):
+        """Handle application closing"""
+        try:
+            logger.info("Application closing - cleaning up resources")
+            
+            # Stop websocket connection monitoring
+            self.websocket_manager.stop_connection_monitoring()
+            
+            # Close the window
+            self.root.destroy()
+            
+        except Exception as e:
+            logger.error(f"Error during application closing: {e}")
+            self.root.destroy()
+    
     def update_live_price(self, live_price: float):
         """Update live price display and buy price box (first time only)"""
         try:
@@ -954,6 +1028,18 @@ class MainWindow:
                 self.master_order_status.set(status_message)
             elif account_num == 2:
                 self.child_order_status.set(status_message)
+            
+            # Handle network failure status specially
+            if status_message == "NETWORK FAIL - EXIT Manual":
+                logger.warning(f"Network failure detected for account {account_num} - Manual exit required")
+                # Don't process this as a normal order status update
+                return
+            
+            # Handle connection restored status
+            if status_message == "CONNECTION RESTORED":
+                logger.info(f"Network connection restored for account {account_num}")
+                # Don't process this as a normal order status update
+                return
             
             # Extract order status from message for state tracking
             status = self._extract_order_status(status_message)

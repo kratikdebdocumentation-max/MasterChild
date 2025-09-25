@@ -3,6 +3,7 @@ WebSocket management for real-time data feeds
 """
 import threading
 import logging
+import time
 from typing import Callable, Dict, Any
 
 # Configure logger for this module
@@ -22,6 +23,16 @@ class WebSocketManager:
         self.pnl_update_callback = None
         self.order_state_callback = None
         self.order_rejection_callback = None
+        
+        # Retry logic properties
+        self.connection_status = {}  # Track connection status for each account
+        self.retry_attempts = {}    # Track retry attempts for each account
+        self.max_retry_attempts = 5  # Maximum retry attempts
+        self.base_retry_delay = 5    # Base delay in seconds
+        self.max_retry_delay = 300   # Maximum delay in seconds (5 minutes)
+        self.retry_threads = {}      # Track retry threads
+        self.connection_monitor_thread = None
+        self.monitor_active = False
     
     def setup_websocket_callbacks(self, account_num: int):
         """Setup WebSocket callbacks for a specific account"""
@@ -239,6 +250,7 @@ class WebSocketManager:
         try:
             api = self.account_manager.get_api(account_num)
             if not api:
+                logger.error(f"No API available for account {account_num}")
                 return False
             
             order_callback, quote_callback, open_callback = self.setup_websocket_callbacks(account_num)
@@ -249,10 +261,14 @@ class WebSocketManager:
                 socket_open_callback=open_callback
             )
             
+            # Mark connection as established
+            self.mark_connection_established(account_num)
             return True
             
         except Exception as e:
             logger.error(f"Error connecting WebSocket for account {account_num}: {e}")
+            # Mark connection as lost to trigger retry
+            self.mark_connection_lost(account_num)
             return False
     
     def subscribe_to_symbol(self, api, exchange: str, token: str) -> bool:
@@ -296,3 +312,127 @@ class WebSocketManager:
         except Exception as e:
             logger.error(f"Error unsubscribing from symbol: {e}")
             return False
+    
+    def start_connection_monitoring(self):
+        """Start connection monitoring thread"""
+        if self.monitor_active:
+            return
+            
+        self.monitor_active = True
+        self.connection_monitor_thread = threading.Thread(target=self._monitor_connections, daemon=True)
+        self.connection_monitor_thread.start()
+        logger.info("WebSocket connection monitoring started")
+    
+    def stop_connection_monitoring(self):
+        """Stop connection monitoring"""
+        self.monitor_active = False
+        if self.connection_monitor_thread:
+            self.connection_monitor_thread.join(timeout=1)
+        logger.info("WebSocket connection monitoring stopped")
+    
+    def _monitor_connections(self):
+        """Monitor websocket connections and handle reconnections"""
+        while self.monitor_active:
+            try:
+                for account_num in [1, 2]:  # Master and Child accounts
+                    if account_num in self.connection_status:
+                        status = self.connection_status[account_num]
+                        if status == "disconnected" and account_num not in self.retry_threads:
+                            logger.info(f"Account {account_num} is disconnected, starting retry process")
+                            self._start_retry_process(account_num)
+                
+                time.sleep(10)  # Check every 10 seconds
+            except Exception as e:
+                logger.error(f"Error in connection monitoring: {e}")
+                time.sleep(30)  # Wait longer on error
+    
+    def _start_retry_process(self, account_num: int):
+        """Start retry process for a disconnected account"""
+        if account_num in self.retry_threads:
+            return  # Already retrying
+        
+        retry_thread = threading.Thread(target=self._retry_connection, args=(account_num,), daemon=True)
+        self.retry_threads[account_num] = retry_thread
+        retry_thread.start()
+    
+    def _retry_connection(self, account_num: int):
+        """Retry websocket connection with exponential backoff"""
+        attempt = 0
+        
+        while attempt < self.max_retry_attempts and self.monitor_active:
+            try:
+                attempt += 1
+                self.retry_attempts[account_num] = attempt
+                
+                # Calculate delay with exponential backoff
+                delay = min(self.base_retry_delay * (2 ** (attempt - 1)), self.max_retry_delay)
+                logger.info(f"Retry attempt {attempt}/{self.max_retry_attempts} for account {account_num} in {delay} seconds")
+                
+                time.sleep(delay)
+                
+                if not self.monitor_active:
+                    break
+                
+                # Attempt reconnection
+                logger.info(f"Attempting to reconnect account {account_num}...")
+                success = self.connect_feed(account_num)
+                
+                if success:
+                    logger.info(f"Successfully reconnected account {account_num}")
+                    self.connection_status[account_num] = "connected"
+                    self.retry_attempts[account_num] = 0
+                    break
+                else:
+                    logger.warning(f"Reconnection attempt {attempt} failed for account {account_num}")
+                    
+            except Exception as e:
+                logger.error(f"Error in retry attempt {attempt} for account {account_num}: {e}")
+        
+        # Clean up retry thread
+        if account_num in self.retry_threads:
+            del self.retry_threads[account_num]
+        
+        if attempt >= self.max_retry_attempts:
+            logger.error(f"Max retry attempts reached for account {account_num}. Manual intervention required.")
+            self.connection_status[account_num] = "failed"
+    
+    def mark_connection_lost(self, account_num: int):
+        """Mark connection as lost and trigger retry process"""
+        logger.warning(f"WebSocket connection lost for account {account_num}")
+        self.connection_status[account_num] = "disconnected"
+        
+        # Notify order status callback about network failure
+        if self.order_status_callback:
+            try:
+                self.order_status_callback(account_num, "NETWORK FAIL - EXIT Manual", "NETWORK_ERROR")
+            except Exception as e:
+                logger.error(f"Error notifying order status callback: {e}")
+        
+        # Start retry process if monitoring is active
+        if self.monitor_active and account_num not in self.retry_threads:
+            self._start_retry_process(account_num)
+    
+    def mark_connection_established(self, account_num: int):
+        """Mark connection as established"""
+        logger.info(f"WebSocket connection established for account {account_num}")
+        self.connection_status[account_num] = "connected"
+        self.retry_attempts[account_num] = 0
+        
+        # Notify order status callback about connection restored
+        if self.order_status_callback:
+            try:
+                self.order_status_callback(account_num, "CONNECTION RESTORED", "NETWORK_RESTORED")
+            except Exception as e:
+                logger.error(f"Error notifying order status callback: {e}")
+        
+        # Clean up any retry thread
+        if account_num in self.retry_threads:
+            del self.retry_threads[account_num]
+    
+    def get_connection_status(self, account_num: int) -> str:
+        """Get connection status for an account"""
+        return self.connection_status.get(account_num, "unknown")
+    
+    def is_connected(self, account_num: int) -> bool:
+        """Check if account is connected"""
+        return self.connection_status.get(account_num) == "connected"
