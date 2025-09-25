@@ -797,9 +797,11 @@ class MainWindow:
             # Check SL breach
             if self.sl_monitoring_active and self.sl_price_level is not None:
                 if live_price <= self.sl_price_level:
-                    # Stop monitoring immediately to prevent duplicate triggers
+                    # Stop both monitoring systems immediately to prevent duplicate triggers
                     self.sl_monitoring_active = False
+                    self.target_monitoring_active = False
                     logger.info(f"SL BREACH DETECTED! Current price: {live_price}, SL: {self.sl_price_level}")
+                    logger.info("Both SL and Target monitoring stopped due to SL breach")
                     self._trigger_sl_breach(live_price)
                 else:
                     # Log comparison info periodically (every 10th check to avoid spam)
@@ -812,9 +814,11 @@ class MainWindow:
             # Check Target breach
             if self.target_monitoring_active and self.target_price_level is not None:
                 if live_price >= self.target_price_level:
-                    # Stop monitoring immediately to prevent duplicate triggers
+                    # Stop both monitoring systems immediately to prevent duplicate triggers
+                    self.sl_monitoring_active = False
                     self.target_monitoring_active = False
                     logger.info(f"TARGET HIT! Current price: {live_price}, Target: {self.target_price_level}")
+                    logger.info("Both SL and Target monitoring stopped due to Target breach")
                     self._trigger_target_breach(live_price)
                 else:
                     # Log comparison info periodically (every 10th check to avoid spam)
@@ -832,16 +836,18 @@ class MainWindow:
         try:
             logger.info(f"SL BREACH DETECTED! Current price: {current_price}, SL: {self.sl_price_level}")
             
-            # Stop SL monitoring (already stopped in check_sl_target_breach, but ensure UI is updated)
+            # Stop both monitoring systems (already stopped in check_sl_target_breach, but ensure UI is updated)
             self.stop_sl_monitoring()
+            self.stop_target_monitoring()
             
             # Update UI to show breach
             self.sl_price_button.config(text=f"SL TRIGGERED @{current_price:.2f}", bg="red", fg="white")
+            self.target_price_button.config(text="Target Monitoring Stopped", bg="gray", fg="white")
             
             # Place exit orders (placeholder for now)
             self._place_exit_orders_for_breach("SL", current_price)
             
-            logger.info("SL breach handled - exit orders placed")
+            logger.info("SL breach handled - both monitoring stopped, exit orders placed")
             
         except Exception as e:
             logger.error(f"Error handling SL breach: {e}")
@@ -851,22 +857,24 @@ class MainWindow:
         try:
             logger.info(f"TARGET HIT! Current price: {current_price}, Target: {self.target_price_level}")
             
-            # Stop target monitoring (already stopped in check_sl_target_breach, but ensure UI is updated)
+            # Stop both monitoring systems (already stopped in check_sl_target_breach, but ensure UI is updated)
+            self.stop_sl_monitoring()
             self.stop_target_monitoring()
             
             # Update UI to show target hit
             self.target_price_button.config(text=f"TARGET HIT @{current_price:.2f}", bg="green", fg="white")
+            self.sl_price_button.config(text="SL Monitoring Stopped", bg="gray", fg="white")
             
             # Check if trailing is enabled
             if self.enable_trailing_value.get():
                 # Start trailing instead of exiting
                 logger.info("Trailing is enabled - starting trailing mode")
                 self.start_trailing_mode(current_price)
-                logger.info("Target breach handled - trailing mode started (no exit orders)")
+                logger.info("Target breach handled - both monitoring stopped, trailing mode started (no exit orders)")
             else:
-                # Exit immediately (target monitoring already stopped above)
+                # Exit immediately (both monitoring already stopped above)
                 self._place_exit_orders_for_breach("TARGET", current_price)
-                logger.info("Target breach handled - exit orders placed")
+                logger.info("Target breach handled - both monitoring stopped, exit orders placed")
             
         except Exception as e:
             logger.error(f"Error handling Target breach: {e}")
@@ -1292,15 +1300,15 @@ class MainWindow:
     def _clear_order_information(self):
         """Clear order information for both accounts"""
         try:
-            # Clear order information for Master account
-            self.account_state_manager.update_order_info(1, '', '', 0, 0.0)
+            # Reset position data for Master account (includes filled_quantity)
+            self.account_state_manager.reset_position_data(1)
             self.account_state_manager.clear_exit_order_info(1)
-            logger.info("Order information and exit order info cleared for Master account")
+            logger.info("Position data and exit order info cleared for Master account")
             
-            # Clear order information for Child account
-            self.account_state_manager.update_order_info(2, '', '', 0, 0.0)
+            # Reset position data for Child account (includes filled_quantity)
+            self.account_state_manager.reset_position_data(2)
             self.account_state_manager.clear_exit_order_info(2)
-            logger.info("Order information and exit order info cleared for Child account")
+            logger.info("Position data and exit order info cleared for Child account")
             
         except Exception as e:
             logger.error(f"Error clearing order information: {e}")
@@ -1553,14 +1561,14 @@ class MainWindow:
             self.account_state_manager.update_login_status(2, 0, "Program startup - child not logged in")
             self.account_state_manager.update_can_order(2, 0, "Program startup - child cannot place orders")
             
-            # Clear order information for both accounts on startup
-            self.account_state_manager.update_order_info(1, '', '', 0, 0.0)
-            self.account_state_manager.update_order_info(2, '', '', 0, 0.0)
+            # Reset position data for both accounts on startup (includes filled_quantity)
+            self.account_state_manager.reset_position_data(1)
+            self.account_state_manager.reset_position_data(2)
             
             # Clear exit order information for both accounts on startup
             self.account_state_manager.clear_exit_order_info(1)
             self.account_state_manager.clear_exit_order_info(2)
-            logger.info("Order information and exit order info cleared on startup for both accounts")
+            logger.info("Position data and exit order info cleared on startup for both accounts")
             
             logger.info("Account states reset to initial state")
             
@@ -2102,9 +2110,17 @@ class MainWindow:
                 self.sl_price_button.config(text=f"SL Set @{new_sl_price}", bg="orange", fg="white")
             
             # Update sl_target_states with new SL points for proper distance maintenance during buy order modification
-            if hasattr(self, 'current_buy_order_open_value') and self.current_buy_order_open_value:
-                # Calculate new SL points based on manual SL price
-                new_sl_points = self.current_buy_order_open_value - new_sl_price
+            # Use current price field value instead of stored buy order value for manual SL calculation
+            current_buy_price = None
+            if self.price_value.get().strip():
+                try:
+                    current_buy_price = float(self.price_value.get())
+                except ValueError:
+                    logger.warning("Invalid buy price in field - cannot calculate SL points")
+            
+            if current_buy_price:
+                # Calculate new SL points based on current price field value
+                new_sl_points = current_buy_price - new_sl_price
                 
                 # Update sl_target_states to maintain this distance during future buy order modifications
                 if not hasattr(self, 'sl_target_states'):
@@ -2114,12 +2130,12 @@ class MainWindow:
                     'sl_calculated': True,
                     'sl_price': new_sl_price,
                     'sl_points': new_sl_points,
-                    'buy_price': self.current_buy_order_open_value
+                    'buy_price': current_buy_price
                 })
                 
-                logger.info(f"Manual SL set - Price: {new_sl_price}, Points from buy: {new_sl_points}, Buy price: {self.current_buy_order_open_value}")
+                logger.info(f"Manual SL set - Price: {new_sl_price}, Points from buy: {new_sl_points}, Buy price: {current_buy_price}")
             else:
-                logger.warning("No current buy price available - SL points cannot be calculated for distance maintenance")
+                logger.warning("No current buy price in field - SL points cannot be calculated for distance maintenance")
             
             # Check if buy orders are completed and start monitoring
             if self._are_buy_orders_filled():
@@ -2156,9 +2172,17 @@ class MainWindow:
                 self.target_price_button.config(text=f"Target Set @{new_target_price}", bg="orange", fg="white")
             
             # Update sl_target_states with new Target points for proper distance maintenance during buy order modification
-            if hasattr(self, 'current_buy_order_open_value') and self.current_buy_order_open_value:
-                # Calculate new Target points based on manual Target price
-                new_target_points = new_target_price - self.current_buy_order_open_value
+            # Use current price field value instead of stored buy order value for manual Target calculation
+            current_buy_price = None
+            if self.price_value.get().strip():
+                try:
+                    current_buy_price = float(self.price_value.get())
+                except ValueError:
+                    logger.warning("Invalid buy price in field - cannot calculate Target points")
+            
+            if current_buy_price:
+                # Calculate new Target points based on current price field value
+                new_target_points = new_target_price - current_buy_price
                 
                 # Update sl_target_states to maintain this distance during future buy order modifications
                 if not hasattr(self, 'sl_target_states'):
@@ -2168,12 +2192,12 @@ class MainWindow:
                     'target_calculated': True,
                     'target_price': new_target_price,
                     'target_points': new_target_points,
-                    'buy_price': self.current_buy_order_open_value
+                    'buy_price': current_buy_price
                 })
                 
-                logger.info(f"Manual Target set - Price: {new_target_price}, Points from buy: {new_target_points}, Buy price: {self.current_buy_order_open_value}")
+                logger.info(f"Manual Target set - Price: {new_target_price}, Points from buy: {new_target_points}, Buy price: {current_buy_price}")
             else:
-                logger.warning("No current buy price available - Target points cannot be calculated for distance maintenance")
+                logger.warning("No current buy price in field - Target points cannot be calculated for distance maintenance")
             
             # Check if buy orders are completed and start monitoring
             if self._are_buy_orders_filled():
