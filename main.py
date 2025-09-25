@@ -892,7 +892,6 @@ class MainWindow:
             
             # Debug logging
             current_price_value = self.price_value.get().strip()
-            logger.info(f"Live price update - Current value: '{current_price_value}', Manually cleared: {self.buy_price_manually_cleared}")
             
             # Update Buy Price box ONLY if it's empty AND not manually cleared by user
             if not current_price_value and not self.buy_price_manually_cleared:
@@ -906,7 +905,6 @@ class MainWindow:
             # Check trailing stop updates
             self.check_trailing_stop(live_price)
             
-            logger.info(f"Live price updated: {live_price:.2f}")
         except Exception as e:
             logger.error(f"Error updating live price: {e}")
     
