@@ -1715,20 +1715,26 @@ class MainWindow:
             self.root.after(1000, self.hide_pnl_display)
     
     def calculate_pnl(self, api):
-        """Calculate PnL for a given API account"""
+        """Calculate PnL for a given API account using trade book"""
         try:
-            ret = api.get_positions()
+            ret = api.get_trade_book()
             if ret is None or not ret:
                 return 0.0
             
-            mtm = 0
-            pnl = 0
-            for i in ret:
-                mtm += float(i.get('urmtom', 0))
-                pnl += float(i.get('rpnl', 0))
+            # Process trade book to calculate PnL
+            symbol_groups = self.process_trade_book_data(ret)
+            total_pnl = 0.0
             
-            day_m2m = mtm + pnl
-            return round(day_m2m, 2)
+            for symbol, transactions in symbol_groups.items():
+                position_info = self.calculate_net_position(transactions)
+                
+                # Only calculate PnL for open positions
+                if position_info['is_open']:
+                    # TODO: Get current price and calculate actual PnL
+                    # For now, return 0 as placeholder
+                    total_pnl += 0.0
+            
+            return round(total_pnl, 2)
             
         except Exception as e:
             logger.error(f"Error calculating PnL: {e}")
@@ -1781,6 +1787,65 @@ class MainWindow:
         except Exception as e:
             logger.error(f"Error updating Show PnL button state: {e}")
     
+    def process_trade_book_data(self, trade_book_data):
+        """Process trade book data and group transactions by symbol"""
+        try:
+            symbol_groups = {}
+            
+            for trade in trade_book_data:
+                symbol = trade.get('tsym', 'Unknown')
+                trantype = trade.get('trantype', 'Unknown')
+                
+                if symbol not in symbol_groups:
+                    symbol_groups[symbol] = {'buy': [], 'sell': []}
+                
+                if trantype == 'B':  # Buy
+                    symbol_groups[symbol]['buy'].append(trade)
+                elif trantype == 'S':  # Sell
+                    symbol_groups[symbol]['sell'].append(trade)
+            
+            logger.info(f"Processed trade book data: {len(symbol_groups)} symbols found")
+            return symbol_groups
+            
+        except Exception as e:
+            logger.error(f"Error processing trade book data: {e}")
+            return {}
+    
+    def calculate_net_position(self, symbol_transactions):
+        """Calculate net position for a symbol"""
+        try:
+            buy_qty = sum(int(trade.get('flqty', 0)) for trade in symbol_transactions.get('buy', []))
+            sell_qty = sum(int(trade.get('flqty', 0)) for trade in symbol_transactions.get('sell', []))
+            
+            net_qty = buy_qty - sell_qty
+            
+            # Calculate average buy price
+            avg_buy_price = 0.0
+            if symbol_transactions.get('buy'):
+                total_buy_value = sum(float(trade.get('flprc', 0)) * int(trade.get('flqty', 0)) for trade in symbol_transactions['buy'])
+                avg_buy_price = total_buy_value / buy_qty if buy_qty > 0 else 0.0
+            
+            return {
+                'net_qty': net_qty,
+                'buy_qty': buy_qty,
+                'sell_qty': sell_qty,
+                'avg_buy_price': avg_buy_price,
+                'is_open': net_qty > 0
+            }
+            
+        except Exception as e:
+            logger.error(f"Error calculating net position: {e}")
+            return {'net_qty': 0, 'buy_qty': 0, 'sell_qty': 0, 'avg_buy_price': 0.0, 'is_open': False}
+    
+    def exit_position(self, symbol, qty):
+        """Exit position - to be implemented later"""
+        try:
+            logger.info(f"Exit position called for {symbol} with quantity {qty}")
+            # TODO: Implement exit position logic
+            messagebox.showinfo("Exit Position", f"Exit position functionality for {symbol} (Qty: {qty}) will be implemented soon")
+        except Exception as e:
+            logger.error(f"Error in exit position: {e}")
+
     def show_broker_position_info(self):
         """Show broker position information"""
         try:
@@ -1804,14 +1869,14 @@ class MainWindow:
             messagebox.showerror("Error", f"Failed to retrieve broker position information: {str(e)}")
     
     def show_order_book(self):
-        """Show order book in a new window with Master and Child sections"""
+        """Show trade book in a new window with Open Positions and Trade History sections"""
         try:
-            logger.info("Order Book button clicked - showing order book")
+            logger.info("Trade Book button clicked - showing trade book")
             
             # Create new window
             order_window = tk.Toplevel(self.root)
-            order_window.title("Order Book - Master & Child Orders")
-            order_window.geometry("900x700")
+            order_window.title("Trade Book & Position Status - Master & Child")
+            order_window.geometry("1200x800")
             order_window.resizable(True, True)
             
             # Center the window
@@ -1826,96 +1891,214 @@ class MainWindow:
             main_frame = tk.Frame(order_window)
             main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
             
-            # Create Master Orders section
-            master_frame = tk.LabelFrame(main_frame, text="Master Orders", font=("Arial", 12, "bold"))
-            master_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+            # Create Open Positions section
+            positions_frame = tk.LabelFrame(main_frame, text="Open Positions", font=("Arial", 12, "bold"))
+            positions_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
             
-            # Create Treeview for Master orders
-            master_columns = ('Order Id', 'Symbol', 'Qty', 'Type', 'Status', 'Action')
-            self.master_tree = ttk.Treeview(master_frame, columns=master_columns, show='headings', height=8)
+            # Create Treeview for Open Positions
+            positions_columns = ('Account', 'Symbol', 'Net Qty', 'Avg Buy Price', 'Current Price', 'PnL', 'Action')
+            self.positions_tree = ttk.Treeview(positions_frame, columns=positions_columns, show='headings', height=6)
             
-            # Define column headings and widths for Master
-            for col in master_columns:
-                self.master_tree.heading(col, text=col)
+            # Define column headings and widths for Positions
+            for col in positions_columns:
+                self.positions_tree.heading(col, text=col)
             
-            self.master_tree.column('Order Id', width=120)
-            self.master_tree.column('Symbol', width=150)
-            self.master_tree.column('Qty', width=80)
-            self.master_tree.column('Type', width=80)
-            self.master_tree.column('Status', width=100)
-            self.master_tree.column('Action', width=100)
+            self.positions_tree.column('Account', width=80)
+            self.positions_tree.column('Symbol', width=200)
+            self.positions_tree.column('Net Qty', width=80)
+            self.positions_tree.column('Avg Buy Price', width=100)
+            self.positions_tree.column('Current Price', width=100)
+            self.positions_tree.column('PnL', width=100)
+            self.positions_tree.column('Action', width=100)
             
-            # Add scrollbar for Master orders
-            master_scrollbar = ttk.Scrollbar(master_frame, orient=tk.VERTICAL, command=self.master_tree.yview)
-            self.master_tree.configure(yscrollcommand=master_scrollbar.set)
+            # Add scrollbar for Positions
+            positions_scrollbar = ttk.Scrollbar(positions_frame, orient=tk.VERTICAL, command=self.positions_tree.yview)
+            self.positions_tree.configure(yscrollcommand=positions_scrollbar.set)
             
-            # Pack Master tree and scrollbar
-            self.master_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-            master_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+            # Pack Positions tree and scrollbar
+            self.positions_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+            positions_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
             
             # Create separator
             separator = tk.Frame(main_frame, height=2, bg="gray")
             separator.pack(fill=tk.X, padx=10, pady=5)
             
-            # Create Child Orders section
-            child_frame = tk.LabelFrame(main_frame, text="Child Orders", font=("Arial", 12, "bold"))
-            child_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+            # Create Trade History section
+            history_frame = tk.LabelFrame(main_frame, text="Trade History", font=("Arial", 12, "bold"))
+            history_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
             
-            # Create Treeview for Child orders
-            child_columns = ('Order Id', 'Symbol', 'Qty', 'Type', 'Status', 'Action')
-            self.child_tree = ttk.Treeview(child_frame, columns=child_columns, show='headings', height=8)
+            # Create Treeview for Trade History
+            history_columns = ('Account', 'Symbol', 'Type', 'Qty', 'Fill Price', 'Fill Time', 'Status', 'Action')
+            self.history_tree = ttk.Treeview(history_frame, columns=history_columns, show='headings', height=8)
             
-            # Define column headings and widths for Child
-            for col in child_columns:
-                self.child_tree.heading(col, text=col)
+            # Define column headings and widths for History
+            for col in history_columns:
+                self.history_tree.heading(col, text=col)
             
-            self.child_tree.column('Order Id', width=120)
-            self.child_tree.column('Symbol', width=150)
-            self.child_tree.column('Qty', width=80)
-            self.child_tree.column('Type', width=80)
-            self.child_tree.column('Status', width=100)
-            self.child_tree.column('Action', width=100)
+            self.history_tree.column('Account', width=80)
+            self.history_tree.column('Symbol', width=200)
+            self.history_tree.column('Type', width=60)
+            self.history_tree.column('Qty', width=80)
+            self.history_tree.column('Fill Price', width=100)
+            self.history_tree.column('Fill Time', width=120)
+            self.history_tree.column('Status', width=80)
+            self.history_tree.column('Action', width=80)
             
-            # Add scrollbar for Child orders
-            child_scrollbar = ttk.Scrollbar(child_frame, orient=tk.VERTICAL, command=self.child_tree.yview)
-            self.child_tree.configure(yscrollcommand=child_scrollbar.set)
+            # Add scrollbar for History
+            history_scrollbar = ttk.Scrollbar(history_frame, orient=tk.VERTICAL, command=self.history_tree.yview)
+            self.history_tree.configure(yscrollcommand=history_scrollbar.set)
             
-            # Pack Child tree and scrollbar
-            self.child_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-            child_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+            # Pack History tree and scrollbar
+            self.history_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+            history_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
             
-            # Fetch and display order book data for both accounts
-            self.populate_order_book_sections()
+            # Bind click events for action buttons
+            self.positions_tree.bind('<Button-1>', self.on_positions_click)
+            self.history_tree.bind('<Button-1>', self.on_history_click)
+            
+            # Fetch and display trade book data for both accounts
+            self.populate_trade_book_sections()
             
             # Add refresh button
             refresh_button = tk.Button(order_window, text="Refresh All", 
-                                    command=self.populate_order_book_sections)
+                                    command=self.populate_trade_book_sections)
             refresh_button.pack(pady=10)
             
         except Exception as e:
             logger.error(f"Error showing order book: {e}")
             messagebox.showerror("Error", f"Failed to show order book: {str(e)}")
     
-    def populate_order_book_sections(self):
-        """Populate both Master and Child order book sections with data"""
+    def populate_trade_book_sections(self):
+        """Populate both Open Positions and Trade History sections with data"""
         try:
             # Clear existing data from both trees
-            for item in self.master_tree.get_children():
-                self.master_tree.delete(item)
-            for item in self.child_tree.get_children():
-                self.child_tree.delete(item)
+            for item in self.positions_tree.get_children():
+                self.positions_tree.delete(item)
+            for item in self.history_tree.get_children():
+                self.history_tree.delete(item)
             
-            # Populate Master Orders (Account 1)
-            self.populate_account_orders(1, self.master_tree, "Master")
+            # Process data for both accounts
+            all_positions = []
+            all_history = []
             
-            # Populate Child Orders (Account 2)
-            self.populate_account_orders(2, self.child_tree, "Child")
+            for account_num in [1, 2]:  # Master and Child
+                account_name = "Master" if account_num == 1 else "Child"
+                
+                # Get trade book data
+                success, trade_book_data, message = self.account_manager.get_trade_book(account_num)
+                
+                if success and trade_book_data:
+                    # Process trade book data
+                    symbol_groups = self.process_trade_book_data(trade_book_data)
+                    
+                    # Process each symbol
+                    for symbol, transactions in symbol_groups.items():
+                        # Calculate net position
+                        position_info = self.calculate_net_position(transactions)
+                        
+                        # Add to positions if open
+                        if position_info['is_open']:
+                            all_positions.append({
+                                'account': account_name,
+                                'symbol': symbol,
+                                'net_qty': position_info['net_qty'],
+                                'avg_buy_price': position_info['avg_buy_price'],
+                                'current_price': 0.0,  # TODO: Get current price
+                                'pnl': 0.0,  # TODO: Calculate PnL
+                                'account_num': account_num
+                            })
+                        
+                        # Add all transactions to history
+                        for trade in transactions.get('buy', []) + transactions.get('sell', []):
+                            all_history.append({
+                                'account': account_name,
+                                'symbol': symbol,
+                                'type': 'Buy' if trade.get('trantype') == 'B' else 'Sell',
+                                'qty': trade.get('flqty', '0'),
+                                'fill_price': trade.get('flprc', '0.00'),
+                                'fill_time': trade.get('norentm', 'N/A'),
+                                'status': 'COMPLETE',
+                                'account_num': account_num
+                            })
+                else:
+                    # No data or error
+                    if not success:
+                        all_history.append({
+                            'account': account_name,
+                            'symbol': f'Error: {message}',
+                            'type': '',
+                            'qty': '',
+                            'fill_price': '',
+                            'fill_time': '',
+                            'status': '',
+                            'account_num': account_num
+                        })
+            
+            # Populate positions tree
+            for pos in all_positions:
+                self.positions_tree.insert('', 'end', values=(
+                    pos['account'],
+                    pos['symbol'],
+                    pos['net_qty'],
+                    f"{pos['avg_buy_price']:.2f}",
+                    f"{pos['current_price']:.2f}",
+                    f"{pos['pnl']:.2f}",
+                    "Exit"
+                ))
+            
+            # Populate history tree
+            for trade in all_history:
+                self.history_tree.insert('', 'end', values=(
+                    trade['account'],
+                    trade['symbol'],
+                    trade['type'],
+                    trade['qty'],
+                    trade['fill_price'],
+                    trade['fill_time'],
+                    trade['status'],
+                    "View"
+                ))
+            
+            # Show summary
+            logger.info(f"Trade book populated: {len(all_positions)} open positions, {len(all_history)} trade records")
                 
         except Exception as e:
-            logger.error(f"Error populating order book sections: {e}")
+            logger.error(f"Error populating trade book sections: {e}")
             # Show error in both sections
-            self.master_tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', ''))
-            self.child_tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', ''))
+            self.positions_tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', '', ''))
+            self.history_tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', '', '', ''))
+    
+    def on_positions_click(self, event):
+        """Handle click on positions tree"""
+        try:
+            item = self.positions_tree.selection()[0] if self.positions_tree.selection() else None
+            if item:
+                values = self.positions_tree.item(item, 'values')
+                if len(values) >= 7 and values[6] == "Exit":  # Action column
+                    symbol = values[1]  # Symbol column
+                    qty = values[2]    # Net Qty column
+                    self.exit_position(symbol, qty)
+        except Exception as e:
+            logger.error(f"Error handling positions click: {e}")
+    
+    def on_history_click(self, event):
+        """Handle click on history tree"""
+        try:
+            item = self.history_tree.selection()[0] if self.history_tree.selection() else None
+            if item:
+                values = self.history_tree.item(item, 'values')
+                if len(values) >= 8 and values[7] == "View":  # Action column
+                    symbol = values[1]  # Symbol column
+                    trade_type = values[2]  # Type column
+                    qty = values[3]    # Qty column
+                    price = values[4]  # Fill Price column
+                    time = values[5]   # Fill Time column
+                    
+                    # Show trade details
+                    details = f"Trade Details:\n\nSymbol: {symbol}\nType: {trade_type}\nQuantity: {qty}\nPrice: {price}\nTime: {time}"
+                    messagebox.showinfo("Trade Details", details)
+        except Exception as e:
+            logger.error(f"Error handling history click: {e}")
     
     def populate_account_orders(self, account_num, tree, account_name):
         """Populate order book table for a specific account"""

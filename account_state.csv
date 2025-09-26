@@ -1,3 +1,3 @@
 account_id,account_name,login_status,can_order,reason,last_updated,current_order_id,current_symbol,current_quantity,current_price,filled_quantity,exit_order_number,exit_order_type,exit_price,exit_quantity
-1,Master,1,0,Order cancelled by user,2025-09-26T13:38:10.002952,25092600393220,SENSEX25O0179500PE,20.0,31.0,0,,,0.0,0
-2,Child,1,0,Order cancelled by user,2025-09-26T13:38:10.027377,25092600393219,SENSEX25O0179500PE,20.0,31.0,0,,,0.0,0
+1,Master,1,1,Master account ready for orders,2025-09-26T14:27:00.159357,25092600459344,SENSEX25O0179500PE,20.0,50.0,0,,,0.0,0
+2,Child,1,0,Order cancelled by user,2025-09-26T14:29:39.821971,25092600459343,SENSEX25O0179500PE,20.0,50.0,0,,,0.0,0

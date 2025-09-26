@@ -173,15 +173,15 @@ class AccountManager:
             applicationLogger.error(error_msg)
             return False, error_msg
     
-    def get_positions(self, account_num: int) -> tuple[bool, list, str]:
+    def get_trade_book(self, account_num: int) -> tuple[bool, list, str]:
         """
-        Get positions for a specific account using get_positions API
+        Get trade book for a specific account using get_trade_book API
         
         Args:
-            account_num: Account number to check positions for
+            account_num: Account number to check trade book for
             
         Returns:
-            tuple: (success, positions_list, message)
+            tuple: (success, trade_book_list, message)
         """
         if account_num not in self.accounts:
             return False, [], "Account not found"
@@ -196,34 +196,31 @@ class AccountManager:
             return False, [], "Account not logged in"
         
         try:
-            positions = api.get_positions()
+            trade_book = api.get_trade_book()
             
-            if positions is None:
-                return True, [], "No positions found"
+            if trade_book is None:
+                return True, [], "No trade book data found"
             
-            # Filter for non-zero positions (open positions)
-            open_positions = []
-            if isinstance(positions, list):
-                for position in positions:
-                    if isinstance(position, dict):
-                        net_qty = position.get('netqty', '0')
-                        # Check if netqty is not zero (meaning there's an open position)
-                        if net_qty != '0' and float(net_qty) != 0.0:
-                            open_positions.append(position)
+            # Filter for successful trades only
+            valid_trades = []
+            if isinstance(trade_book, list):
+                for trade in trade_book:
+                    if isinstance(trade, dict) and trade.get('stat') == 'Ok':
+                        valid_trades.append(trade)
             
             client_name = account.get('client_name', f'Account {account_num}')
-            applicationLogger.info(f"Positions retrieved for {client_name}: {len(open_positions)} open positions found")
+            applicationLogger.info(f"Trade book retrieved for {client_name}: {len(valid_trades)} trades found")
             
-            return True, open_positions, f"Positions retrieved for {client_name}"
+            return True, valid_trades, f"Trade book retrieved for {client_name}"
             
         except Exception as e:
-            error_msg = f"Error retrieving positions for account {account_num}: {e}"
+            error_msg = f"Error retrieving trade book for account {account_num}: {e}"
             applicationLogger.error(error_msg)
             return False, [], error_msg
     
     def check_all_positions(self) -> tuple[bool, dict, str]:
         """
-        Check positions for all active accounts
+        Check positions for all active accounts using trade book
         
         Returns:
             tuple: (has_open_positions, positions_by_account, summary_message)
@@ -233,16 +230,18 @@ class AccountManager:
         
         for account_num, account in self.accounts.items():
             if account.get('active', False):
-                success, positions, message = self.get_positions(account_num)
-                if success:
+                success, trade_book, message = self.get_trade_book(account_num)
+                if success and trade_book:
+                    # Process trade book to find open positions
+                    open_positions = self._extract_open_positions_from_trade_book(trade_book)
                     all_positions[account_num] = {
                         'client_name': account.get('client_name', f'Account {account_num}'),
-                        'positions': positions,
-                        'count': len(positions)
+                        'positions': open_positions,
+                        'count': len(open_positions)
                     }
-                    total_open_positions += len(positions)
+                    total_open_positions += len(open_positions)
                 else:
-                    applicationLogger.warning(f"Could not retrieve positions for account {account_num}: {message}")
+                    applicationLogger.warning(f"Could not retrieve trade book for account {account_num}: {message}")
         
         has_open_positions = total_open_positions > 0
         
@@ -252,3 +251,49 @@ class AccountManager:
             summary = "No open positions found"
         
         return has_open_positions, all_positions, summary
+    
+    def _extract_open_positions_from_trade_book(self, trade_book_data):
+        """Extract open positions from trade book data"""
+        try:
+            symbol_groups = {}
+            
+            # Group transactions by symbol
+            for trade in trade_book_data:
+                symbol = trade.get('tsym', 'Unknown')
+                trantype = trade.get('trantype', 'Unknown')
+                
+                if symbol not in symbol_groups:
+                    symbol_groups[symbol] = {'buy': [], 'sell': []}
+                
+                if trantype == 'B':  # Buy
+                    symbol_groups[symbol]['buy'].append(trade)
+                elif trantype == 'S':  # Sell
+                    symbol_groups[symbol]['sell'].append(trade)
+            
+            # Calculate net positions
+            open_positions = []
+            for symbol, transactions in symbol_groups.items():
+                buy_qty = sum(int(trade.get('flqty', 0)) for trade in transactions.get('buy', []))
+                sell_qty = sum(int(trade.get('flqty', 0)) for trade in transactions.get('sell', []))
+                
+                net_qty = buy_qty - sell_qty
+                
+                # Only include if there's an open position (net_qty > 0)
+                if net_qty > 0:
+                    # Calculate average buy price
+                    avg_buy_price = 0.0
+                    if transactions.get('buy'):
+                        total_buy_value = sum(float(trade.get('flprc', 0)) * int(trade.get('flqty', 0)) for trade in transactions['buy'])
+                        avg_buy_price = total_buy_value / buy_qty if buy_qty > 0 else 0.0
+                    
+                    open_positions.append({
+                        'symbol': symbol,
+                        'net_qty': net_qty,
+                        'avg_buy_price': avg_buy_price
+                    })
+            
+            return open_positions
+            
+        except Exception as e:
+            applicationLogger.error(f"Error extracting open positions from trade book: {e}")
+            return []

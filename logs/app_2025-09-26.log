@@ -2364,3 +2364,650 @@
 2025-09-26 13:36:38,844 - INFO - WebSocket is now open for Account 1
 2025-09-26 13:36:40,304 - INFO - Positions retrieved for KRATIK YADAV: 0 open positions found
 2025-09-26 13:36:40,304 - INFO - Position check completed - No open positions found
+2025-09-26 13:37:30,195 - INFO - Attempting login for child account 2...
+2025-09-26 13:37:30,195 - INFO - Login attempt 1/3 for child account 2
+2025-09-26 13:37:30,195 - INFO - Generated fresh 2FA for account 2: 723347
+2025-09-26 13:37:30,195 - INFO - Attempting login for account 2 with userid: FA32246
+2025-09-26 13:37:31,021 - INFO - Login response for account 2: {'request_time': '13:37:31 26-09-2025', 'actid': 'FA32246', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'ROOPAL SONI', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'MCX', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': '181c9e4e9610b6801a4a2d7e3c723f64f25a84e88a21d4815396b256d85e7956', 'susertokenspl': 'f196fb5234c64560f5492299a90d2a81ce087c1b81b1c70678013b9323027577', 'email': 'kratik.kunal@gmail.com', 'uid': 'FA32246', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '9424018696', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'MCX', 'NIPO', 'BSTAR', 'BFO'], 'values': ['l', 'calls', 'Puts'], 'mws': {'l': [], 'calls': [{'exch': 'NFO', 'token': '54979', 'tsym': 'ADANIGREEN28OCT25P1100', 'cname': 'ADANIGREEN OCT 1100 PE ', 'dname': 'ADANIGREEN OCT 1100 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54957', 'tsym': 'ADANIGREEN28OCT25P660', 'cname': 'ADANIGREEN OCT 660 PE ', 'dname': 'ADANIGREEN OCT 660 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54995', 'tsym': 'ADANIGREEN25NOV25P600', 'cname': 'ADANIGREEN NOV 600 PE ', 'dname': 'ADANIGREEN NOV 600 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54991', 'tsym': 'BANKNIFTY30SEP25C55400', 'cname': 'BANKNIFTY 30SEP25 55400 CE ', 'dname': 'BANKNIFTY 30SEP25 55400 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '35', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '54983', 'tsym': 'ADANIGREEN28OCT25P1180', 'cname': 'ADANIGREEN OCT 1180 PE ', 'dname': 'ADANIGREEN OCT 1180 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54965', 'tsym': 'ADANIGREEN28OCT25P820', 'cname': 'ADANIGREEN OCT 820 PE ', 'dname': 'ADANIGREEN OCT 820 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54953', 'tsym': 'ADANIGREEN28OCT25P520', 'cname': 'ADANIGREEN OCT 520 PE ', 'dname': 'ADANIGREEN OCT 520 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}], 'Puts': [{'exch': 'NFO', 'token': '60487', 'tsym': 'NIFTY30SEP25C25200', 'cname': 'NIFTY 30SEP25 25200 CE ', 'dname': 'NIFTY 30SEP25 25200 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '64694', 'tsym': 'NIFTY30SEP25C25000', 'cname': 'NIFTY 30SEP25 25000 CE ', 'dname': 'NIFTY 30SEP25 25000 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BSE', 'token': '1', 'tsym': 'SENSEX', 'cname': 'BSE SENSEX', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}, {'exch': 'NFO', 'token': '48898', 'tsym': 'MCX25NOV25F', 'cname': 'MCX NOV FUT', 'dname': 'MCX NOV FUT', 'instname': 'FUTSTK', 'pp': '2', 'ls': '125', 'ti': '0.50', 'optt': 'XX'}, {'exch': 'MCX', 'token': '456955', 'tsym': 'COPPER30SEP25', 'instname': 'FUTCOM', 'pp': '2', 'ls': '2500', 'ti': '0.05', 'optt': 'XX'}, {'exch': 'NSE', 'token': '4598', 'tsym': 'HERITGFOOD-EQ', 'cname': 'HERITAGE FOODS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '2885', 'tsym': 'RELIANCE-EQ', 'cname': 'RELIANCE INDUSTRIES LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.10'}, {'exch': 'NSE', 'token': '31181', 'tsym': 'MCX-EQ', 'cname': 'MULTI COMMODITY EXCHANGE', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.50'}, {'exch': 'NSE', 'token': '8003', 'tsym': 'SILVER-EQ', 'cname': 'BIRLASLAMC - SILVER', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}, {'exch': 'NSE', 'token': '26037', 'tsym': 'Nifty Fin Service', 'cname': 'FIN NIFTY', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758874051', 'lastpwdtime': '1757444505'}
+2025-09-26 13:37:31,021 - INFO - Login response type: <class 'dict'>
+2025-09-26 13:37:31,021 - INFO - Login Successful!, Welcome ROOPAL SONI - Child2 ACCOUNT
+2025-09-26 13:37:31,037 - INFO - Updated Child (ID: 2) login_status to '1': Child account 2 login successful
+2025-09-26 13:37:31,047 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-26 13:37:31,047 - INFO - WebSocket connection established for account 2
+2025-09-26 13:37:31,047 - INFO - Network connection restored for account 2
+2025-09-26 13:37:31,054 - INFO - Child account login successful: ROOPAL SONI
+2025-09-26 13:37:31,237 - INFO - Websocket connected
+2025-09-26 13:37:31,277 - INFO - WebSocket is now open for Account 2
+2025-09-26 13:37:32,690 - INFO - Positions retrieved for KRATIK YADAV: 0 open positions found
+2025-09-26 13:37:33,353 - INFO - Positions retrieved for ROOPAL SONI: 0 open positions found
+2025-09-26 13:37:33,353 - INFO - Position check completed - No open positions found
+2025-09-26 13:37:35,323 - INFO - Index selected: SENSEX
+2025-09-26 13:37:35,329 - INFO - On option selected called - Function not implemented yet
+2025-09-26 13:37:35,329 - INFO - Not all required fields selected for strike selection
+2025-09-26 13:37:35,329 - INFO - Option and strike selections cleared for new index
+2025-09-26 13:37:35,329 - INFO - On expiry selected called - Function not implemented yet
+2025-09-26 13:37:35,329 - INFO - Strike dropdown populated with 15 strikes for SENSEX
+2025-09-26 13:37:35,335 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-26 13:37:38,931 - INFO - On option selected called - Function not implemented yet
+2025-09-26 13:37:44,893 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 13:37:44,893 - INFO - Generated trading symbol: SENSEX25O017PE
+2025-09-26 13:37:44,893 - INFO - Trading symbol stored: SENSEX25O017PE
+2025-09-26 13:37:44,893 - INFO - Getting token for trading symbol: SENSEX25O017PE
+2025-09-26 13:37:44,901 - ERROR - No token found for SENSEX25O017PE
+2025-09-26 13:37:44,958 - INFO - Available SENSEX symbols (first 10): ['SENSEX26SEP86000PE' 'SENSEX26SEP85000PE' 'SENSEX26SEP84000PE'
+ 'SENSEX26SEP83000PE' 'SENSEX26SEP82000PE' 'SENSEX26SEP81000PE'
+ 'SENSEX26SEP80000PE' 'SENSEX26SEP79000PE' 'SENSEX26SEP78000PE'
+ 'SENSEX26SEP77000PE']
+2025-09-26 13:37:44,958 - ERROR - Error in fallback conversion: invalid literal for int() with base 10: '7P'
+2025-09-26 13:37:44,958 - WARNING - Could not fetch price for SENSEX25O017PE
+2025-09-26 13:37:44,958 - INFO - Strike selected: 7, trading symbol: SENSEX25O017PE
+2025-09-26 13:37:44,983 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 13:37:44,983 - INFO - Generated trading symbol: SENSEX25O0179PE
+2025-09-26 13:37:44,983 - INFO - Trading symbol stored: SENSEX25O0179PE
+2025-09-26 13:37:44,983 - INFO - Getting token for trading symbol: SENSEX25O0179PE
+2025-09-26 13:37:44,991 - ERROR - No token found for SENSEX25O0179PE
+2025-09-26 13:37:45,024 - INFO - Available SENSEX symbols (first 10): ['SENSEX26SEP86000PE' 'SENSEX26SEP85000PE' 'SENSEX26SEP84000PE'
+ 'SENSEX26SEP83000PE' 'SENSEX26SEP82000PE' 'SENSEX26SEP81000PE'
+ 'SENSEX26SEP80000PE' 'SENSEX26SEP79000PE' 'SENSEX26SEP78000PE'
+ 'SENSEX26SEP77000PE']
+2025-09-26 13:37:45,025 - ERROR - Error in fallback conversion: time data 'O01' does not match format '%b'
+2025-09-26 13:37:45,026 - WARNING - Could not fetch price for SENSEX25O0179PE
+2025-09-26 13:37:45,026 - INFO - Strike selected: 79, trading symbol: SENSEX25O0179PE
+2025-09-26 13:37:45,404 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 13:37:45,412 - INFO - Generated trading symbol: SENSEX25O01795PE
+2025-09-26 13:37:45,412 - INFO - Trading symbol stored: SENSEX25O01795PE
+2025-09-26 13:37:45,412 - INFO - Getting token for trading symbol: SENSEX25O01795PE
+2025-09-26 13:37:45,419 - ERROR - No token found for SENSEX25O01795PE
+2025-09-26 13:37:45,470 - INFO - Available SENSEX symbols (first 10): ['SENSEX26SEP86000PE' 'SENSEX26SEP85000PE' 'SENSEX26SEP84000PE'
+ 'SENSEX26SEP83000PE' 'SENSEX26SEP82000PE' 'SENSEX26SEP81000PE'
+ 'SENSEX26SEP80000PE' 'SENSEX26SEP79000PE' 'SENSEX26SEP78000PE'
+ 'SENSEX26SEP77000PE']
+2025-09-26 13:37:45,470 - ERROR - Error in fallback conversion: time data 'O01' does not match format '%b'
+2025-09-26 13:37:45,470 - WARNING - Could not fetch price for SENSEX25O01795PE
+2025-09-26 13:37:45,470 - INFO - Strike selected: 795, trading symbol: SENSEX25O01795PE
+2025-09-26 13:37:45,544 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 13:37:45,544 - INFO - Generated trading symbol: SENSEX25O017950PE
+2025-09-26 13:37:45,544 - INFO - Trading symbol stored: SENSEX25O017950PE
+2025-09-26 13:37:45,544 - INFO - Getting token for trading symbol: SENSEX25O017950PE
+2025-09-26 13:37:45,550 - ERROR - No token found for SENSEX25O017950PE
+2025-09-26 13:37:45,576 - INFO - Available SENSEX symbols (first 10): ['SENSEX26SEP86000PE' 'SENSEX26SEP85000PE' 'SENSEX26SEP84000PE'
+ 'SENSEX26SEP83000PE' 'SENSEX26SEP82000PE' 'SENSEX26SEP81000PE'
+ 'SENSEX26SEP80000PE' 'SENSEX26SEP79000PE' 'SENSEX26SEP78000PE'
+ 'SENSEX26SEP77000PE']
+2025-09-26 13:37:45,576 - ERROR - Error in fallback conversion: time data 'O01' does not match format '%b'
+2025-09-26 13:37:45,576 - WARNING - Could not fetch price for SENSEX25O017950PE
+2025-09-26 13:37:45,576 - INFO - Strike selected: 7950, trading symbol: SENSEX25O017950PE
+2025-09-26 13:37:45,707 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 13:37:45,707 - INFO - Generated trading symbol: SENSEX25O0179500PE
+2025-09-26 13:37:45,707 - INFO - Trading symbol stored: SENSEX25O0179500PE
+2025-09-26 13:37:45,707 - INFO - Getting token for trading symbol: SENSEX25O0179500PE
+2025-09-26 13:37:45,711 - INFO - Found token for SENSEX25O0179500PE: 865016
+2025-09-26 13:37:46,475 - INFO - Fetched price for SENSEX25O0179500PE: 61.5
+2025-09-26 13:37:46,475 - INFO - Getting token for trading symbol: SENSEX25O0179500PE
+2025-09-26 13:37:46,478 - INFO - Found token for SENSEX25O0179500PE: 865016
+2025-09-26 13:37:46,478 - INFO - Subscribed to live price feed via master account: BFO|865016
+2025-09-26 13:37:46,483 - INFO - Auto-subscribed to SENSEX25O0179500PE at price 61.5
+2025-09-26 13:37:46,483 - INFO - Strike selected: 79500, trading symbol: SENSEX25O0179500PE
+2025-09-26 13:37:46,537 - INFO - Initial buy price set: 61.50
+2025-09-26 13:37:48,787 - INFO - User focused on price box - current value: '61.50'
+2025-09-26 13:37:50,093 - INFO - Buy price field value changed to empty - auto-fill disabled
+2025-09-26 13:37:52,006 - INFO - Placing buy orders for SENSEX25O0179500PE @ 30.0 master_qty 20
+2025-09-26 13:37:52,009 - INFO - Account 1 is active for order placement
+2025-09-26 13:37:52,009 - INFO - Account 2 is active for order placement
+2025-09-26 13:37:52,009 - INFO - Disabling selection row components
+2025-09-26 13:37:52,009 - INFO - Selection row components disabled
+2025-09-26 13:37:52,014 - INFO - Master account quantity: 20
+2025-09-26 13:37:52,014 - INFO - Child lots set to minimum for SENSEX: 20
+2025-09-26 13:37:52,014 - INFO - Placing order for account 1: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25O0179500PE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 30.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-26 13:37:52,017 - INFO - Child account quantity: 20 (master: 20, index: SENSEX)
+2025-09-26 13:37:52,020 - INFO - Placing order for account 2: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25O0179500PE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 30.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-26 13:37:52,859 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600393219', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '30.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-26 13:37:52,867 - INFO - Account 2 - B PENDING NewAck
+2025-09-26 13:37:52,867 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '30.00'
+2025-09-26 13:37:52,871 - INFO - Updated Child (ID: 2) order info: 25092600393219 SENSEX25O0179500PE 20@30.0
+2025-09-26 13:37:52,871 - INFO - Order placed successfully for account 2: 25092600393219
+2025-09-26 13:37:52,879 - INFO - Updated Master (ID: 1) order info: 25092600393220 SENSEX25O0179500PE 20@30.0
+2025-09-26 13:37:52,879 - INFO - Order placed successfully for account 1: 25092600393220
+2025-09-26 13:37:52,879 - INFO - Starting auto SL/Target calculation for buy price: 30.0
+2025-09-26 13:37:52,879 - INFO - Using differences - SL: -3, Target: 40
+2025-09-26 13:37:52,879 - INFO - Calculated prices - SL: 27.0, Target: 70.0
+2025-09-26 13:37:52,879 - INFO - UI values set - SL: 27.0, Target: 70.0
+2025-09-26 13:37:52,884 - INFO - SL/Target points calculated - SL points: 3.0, Target points: 40.0
+2025-09-26 13:37:52,885 - INFO - Buy orders filled check - Master: filled_qty=0
+2025-09-26 13:37:52,887 - INFO - Buy orders filled check - Child: filled_qty=0
+2025-09-26 13:37:52,887 - INFO - Buy orders filled result: False
+2025-09-26 13:37:52,887 - INFO - Auto SL/Target set - SL: 27.0, Target: 70.0 (Buy Open: 30.0)
+2025-09-26 13:37:52,890 - INFO - Buy price box disabled
+2025-09-26 13:37:52,892 - INFO - Modify buy box populated with price: 30.0
+2025-09-26 13:37:52,892 - INFO - Buy orders placed successfully
+2025-09-26 13:37:52,894 - INFO - Account 2 order status updated to: PENDING
+2025-09-26 13:37:52,896 - INFO - DEBUG - Account 2 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 13:37:52,896 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600393220', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '30.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-26 13:37:52,900 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:37:52,904 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:37:52,904 - INFO - Account 1 - B PENDING NewAck
+2025-09-26 13:37:52,906 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '30.00'
+2025-09-26 13:37:52,907 - INFO - Order status updated for account 2: Buy Order PENDING @ 30.00
+2025-09-26 13:37:52,910 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600393219', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '30.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'PendingNew', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-26 13:37:52,910 - INFO - Account 2 - B PENDING PendingNew
+2025-09-26 13:37:52,910 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '30.00'
+2025-09-26 13:37:52,930 - INFO - Account 1 order status updated to: PENDING
+2025-09-26 13:37:52,930 - INFO - Account 2 order status updated to: PENDING
+2025-09-26 13:37:52,932 - INFO - DEBUG - Account 1 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 13:37:52,932 - INFO - DEBUG - Account 2 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 13:37:52,937 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:37:52,942 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:37:52,942 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:37:52,944 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:37:52,945 - INFO - Order status updated for account 1: Buy Order PENDING @ 30.00
+2025-09-26 13:37:52,945 - INFO - Order status updated for account 2: Buy Order PENDING @ 30.00
+2025-09-26 13:37:52,947 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600393220', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '30.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'PendingNew', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-26 13:37:52,949 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600393219', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '30.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'OPEN', 'reporttype': 'New', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830874', 'dscqty': '0', 'exch_tm': '26-09-2025 13:37:53'}
+2025-09-26 13:37:52,950 - INFO - Account 1 - B PENDING PendingNew
+2025-09-26 13:37:52,950 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '30.00'
+2025-09-26 13:37:52,950 - INFO - Account 2 - B OPEN New
+2025-09-26 13:37:52,950 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '30.00'
+2025-09-26 13:37:52,952 - INFO - Account 1 order status updated to: PENDING
+2025-09-26 13:37:52,952 - INFO - DEBUG - Account 1 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 13:37:52,958 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:37:52,958 - INFO - Account 2 order status updated to: OPEN
+2025-09-26 13:37:52,961 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:37:52,961 - INFO - DEBUG - Account 2 status: 'OPEN' (type: <class 'str'>)
+2025-09-26 13:37:52,961 - INFO - Order status updated for account 1: Buy Order PENDING @ 30.00
+2025-09-26 13:37:52,961 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:37:52,961 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600393220', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '30.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'OPEN', 'reporttype': 'New', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830878', 'dscqty': '0', 'exch_tm': '26-09-2025 13:37:53'}
+2025-09-26 13:37:52,965 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:37:52,965 - INFO - Account 1 - B OPEN New
+2025-09-26 13:37:52,966 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '30.00'
+2025-09-26 13:37:52,966 - INFO - Order status updated for account 2: Buy Order Open @ 30.00
+2025-09-26 13:37:52,966 - INFO - Account 1 order status updated to: OPEN
+2025-09-26 13:37:52,966 - INFO - DEBUG - Account 1 status: 'OPEN' (type: <class 'str'>)
+2025-09-26 13:37:52,972 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:37:52,972 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:37:52,975 - INFO - Order status updated for account 1: Buy Order Open @ 30.00
+2025-09-26 13:38:00,907 - INFO - Modify buy orders clicked
+2025-09-26 13:38:00,917 - INFO - Order states reset for modify operations
+2025-09-26 13:38:00,917 - INFO - Modifying Master order: 25092600393220 to price: 31.0
+2025-09-26 13:38:00,920 - INFO - Modifying Child order: 25092600393219 to price: 31.0
+2025-09-26 13:38:01,807 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600393220', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '31.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'ModAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830878', 'dscqty': '0', 'exch_tm': '26-09-2025 13:37:53'}
+2025-09-26 13:38:01,807 - INFO - Account 1 - B PENDING ModAck
+2025-09-26 13:38:01,807 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '31.00'
+2025-09-26 13:38:01,814 - INFO - Successfully modified Master order: 25092600393220
+2025-09-26 13:38:01,821 - INFO - Updated Master (ID: 1) order info: 25092600393220 SENSEX25O0179500PE 20@31.0
+2025-09-26 13:38:01,823 - INFO - Master buy order modified successfully
+2025-09-26 13:38:01,849 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600393219', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '31.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'ModAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830874', 'dscqty': '0', 'exch_tm': '26-09-2025 13:37:53'}
+2025-09-26 13:38:01,853 - INFO - Successfully modified Child order: 25092600393219
+2025-09-26 13:38:01,867 - INFO - Account 2 - B PENDING ModAck
+2025-09-26 13:38:01,868 - INFO - Order status debug - status: 'PENDING', reporttype: 'ModAck', trantype: 'B', price: '31.00'
+2025-09-26 13:38:01,874 - INFO - Updated Child (ID: 2) order info: 25092600393219 SENSEX25O0179500PE 20@31.0
+2025-09-26 13:38:01,875 - INFO - Child buy order modified successfully
+2025-09-26 13:38:01,877 - INFO - SL/Target adjusted for new buy price - SL: 28.0, Target: 71.0 (Buy: 31.0)
+2025-09-26 13:38:01,878 - INFO - Account 1 order status updated to: PENDING
+2025-09-26 13:38:01,879 - INFO - Account 2 order status updated to: PENDING
+2025-09-26 13:38:01,881 - INFO - DEBUG - Account 1 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 13:38:01,882 - INFO - DEBUG - Account 2 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 13:38:01,885 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:38:01,889 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:38:01,891 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:38:01,892 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:38:01,892 - INFO - Order status updated for account 1: Buy Order PENDING @ 31.00
+2025-09-26 13:38:01,893 - INFO - Order status updated for account 2: Buy Order PENDING @ 31.00
+2025-09-26 13:38:01,893 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600393220', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '31.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'PendingReplace', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830878', 'dscqty': '0', 'exch_tm': '26-09-2025 13:37:53'}
+2025-09-26 13:38:01,895 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600393219', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '31.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'PendingReplace', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830874', 'dscqty': '0', 'exch_tm': '26-09-2025 13:37:53'}
+2025-09-26 13:38:01,897 - INFO - Account 1 - B PENDING PendingReplace
+2025-09-26 13:38:01,897 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '31.00'
+2025-09-26 13:38:01,897 - INFO - Account 2 - B PENDING PendingReplace
+2025-09-26 13:38:01,897 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingReplace', trantype: 'B', price: '31.00'
+2025-09-26 13:38:01,901 - INFO - Account 1 order status updated to: PENDING
+2025-09-26 13:38:01,901 - INFO - Account 2 order status updated to: PENDING
+2025-09-26 13:38:01,903 - INFO - DEBUG - Account 1 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 13:38:01,905 - INFO - DEBUG - Account 2 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 13:38:01,907 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:38:01,909 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:38:01,909 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:38:01,909 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:38:01,909 - INFO - Order status updated for account 1: Buy Order PENDING @ 31.00
+2025-09-26 13:38:01,913 - INFO - Order status updated for account 2: Buy Order PENDING @ 31.00
+2025-09-26 13:38:01,914 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600393220', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '31.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'OPEN', 'reporttype': 'Replaced', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830878', 'dscqty': '0', 'exch_tm': '26-09-2025 13:38:02'}
+2025-09-26 13:38:01,916 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600393219', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '31.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'OPEN', 'reporttype': 'Replaced', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830874', 'dscqty': '0', 'exch_tm': '26-09-2025 13:38:02'}
+2025-09-26 13:38:01,917 - INFO - Account 1 - B OPEN Replaced
+2025-09-26 13:38:01,919 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '31.00'
+2025-09-26 13:38:01,919 - INFO - Account 2 - B OPEN Replaced
+2025-09-26 13:38:01,919 - INFO - Order status debug - status: 'OPEN', reporttype: 'Replaced', trantype: 'B', price: '31.00'
+2025-09-26 13:38:01,924 - INFO - Account 1 order status updated to: OPEN
+2025-09-26 13:38:01,925 - INFO - DEBUG - Account 1 status: 'OPEN' (type: <class 'str'>)
+2025-09-26 13:38:01,925 - INFO - Account 2 order status updated to: OPEN
+2025-09-26 13:38:01,927 - INFO - DEBUG - Account 2 status: 'OPEN' (type: <class 'str'>)
+2025-09-26 13:38:01,927 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:38:01,931 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 13:38:01,931 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:38:01,931 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:38:01,931 - INFO - Order status updated for account 1: Buy Order OPEN @ 31.00
+2025-09-26 13:38:01,931 - INFO - Order status updated for account 2: Buy Order OPEN @ 31.00
+2025-09-26 13:38:09,152 - INFO - Cancel buy orders clicked
+2025-09-26 13:38:09,152 - INFO - Cancelling Master order: 25092600393220
+2025-09-26 13:38:09,157 - INFO - Cancelling Child order: 25092600393219
+2025-09-26 13:38:10,002 - INFO - Successfully cancelled Master order: 25092600393220
+2025-09-26 13:38:10,007 - INFO - Updated Master (ID: 1) can_order to '0': Order cancelled by user
+2025-09-26 13:38:10,007 - INFO - Master buy order cancelled successfully
+2025-09-26 13:38:10,021 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600393219', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '31.00', 'pcode': 'M', 'remarks': '', 'status': 'PENDING', 'reporttype': 'PendingCancel', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830874', 'dscqty': '0', 'exch_tm': '26-09-2025 13:38:02'}
+2025-09-26 13:38:10,023 - INFO - Successfully cancelled Child order: 25092600393219
+2025-09-26 13:38:10,027 - INFO - Account 2 - B PENDING PendingCancel
+2025-09-26 13:38:10,027 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '31.00'
+2025-09-26 13:38:10,031 - INFO - Updated Child (ID: 2) can_order to '0': Order cancelled by user
+2025-09-26 13:38:10,033 - INFO - Child buy order cancelled successfully
+2025-09-26 13:38:10,037 - INFO - Buy price box disabled
+2025-09-26 13:38:10,040 - INFO - Account 2 order status updated to: PENDING
+2025-09-26 13:38:10,041 - INFO - DEBUG - Account 2 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 13:38:10,041 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600393220', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '31.00', 'pcode': 'M', 'remarks': '', 'status': 'PENDING', 'reporttype': 'PendingCancel', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830878', 'dscqty': '0', 'exch_tm': '26-09-2025 13:38:02'}
+2025-09-26 13:38:10,047 - INFO - DEBUG - Current account can_order: 0
+2025-09-26 13:38:10,048 - INFO - Account 1 - B PENDING PendingCancel
+2025-09-26 13:38:10,049 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '31.00'
+2025-09-26 13:38:10,049 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:38:10,049 - INFO - Order status updated for account 2: Buy Order PENDING @ 31.00
+2025-09-26 13:38:10,051 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600393219', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '31.00', 'pcode': 'M', 'remarks': '', 'rejreason': 'Order Cancelled', 'status': 'CANCELED', 'reporttype': 'Canceled', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830874', 'cancelqty': '20', 'dscqty': '0', 'exch_tm': '26-09-2025 13:38:10'}
+2025-09-26 13:38:10,052 - INFO - Account 2 - B CANCELED Canceled
+2025-09-26 13:38:10,054 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '31.00'
+2025-09-26 13:38:10,054 - INFO - Account 1 order status updated to: PENDING
+2025-09-26 13:38:10,057 - INFO - Order status updated for account 2: Buy Order CANCELED @ 31.00
+2025-09-26 13:38:10,057 - INFO - DEBUG - Account 1 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 13:38:10,060 - INFO - DEBUG - Current account can_order: 0
+2025-09-26 13:38:10,060 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 13:38:10,063 - INFO - Order status updated for account 1: Buy Order PENDING @ 31.00
+2025-09-26 13:38:10,067 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600393220', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '31.00', 'pcode': 'M', 'remarks': '', 'rejreason': 'Order Cancelled', 'status': 'CANCELED', 'reporttype': 'Canceled', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758873673041830878', 'cancelqty': '20', 'dscqty': '0', 'exch_tm': '26-09-2025 13:38:10'}
+2025-09-26 13:38:10,067 - INFO - Account 1 - B CANCELED Canceled
+2025-09-26 13:38:10,067 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '31.00'
+2025-09-26 13:38:10,069 - INFO - Order status updated for account 1: Buy Order CANCELED @ 31.00
+2025-09-26 13:39:27,923 - INFO - Open orders check - Master: False, Child: False
+2025-09-26 13:39:27,928 - INFO - Monitoring check - SL: False, Target: False, States SL: False, States Target: False
+2025-09-26 13:39:27,928 - INFO - Release buttons clicked - resetting system for new orders
+2025-09-26 13:39:27,928 - INFO - Login status check - Master: True, Child: True
+2025-09-26 13:39:27,928 - INFO - Updated Master (ID: 1) login_status to '1': Master account logged in
+2025-09-26 13:39:27,937 - INFO - Updated Master (ID: 1) can_order to '1': Master account reset after trading block
+2025-09-26 13:39:27,944 - INFO - Master account reset to ready (was logged in)
+2025-09-26 13:39:27,954 - INFO - Updated Child (ID: 2) login_status to '1': Child account logged in
+2025-09-26 13:39:27,954 - INFO - Updated Child (ID: 2) can_order to '1': Child account reset after trading block
+2025-09-26 13:39:27,954 - INFO - Child account reset to ready (was logged in)
+2025-09-26 13:39:27,962 - INFO - Trading blocks reset while preserving login status
+2025-09-26 13:39:27,970 - INFO - RESET POSITION DATA - Master (ID: 1) - position data cleared
+2025-09-26 13:39:27,996 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-26 13:39:27,996 - INFO - Position data and exit order info cleared for Master account
+2025-09-26 13:39:28,007 - INFO - RESET POSITION DATA - Child (ID: 2) - position data cleared
+2025-09-26 13:39:28,039 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-26 13:39:28,039 - INFO - Position data and exit order info cleared for Child account
+2025-09-26 13:39:28,043 - INFO - Buy price box enabled
+2025-09-26 13:39:28,045 - INFO - BUY button and Price box re-enabled for new orders - auto-fill re-enabled
+2025-09-26 13:39:28,048 - INFO - Trailing monitoring stopped
+2025-09-26 13:39:28,048 - INFO - Trailing controls reset to initial state
+2025-09-26 13:39:28,048 - INFO - SL/Target controls reset to initial state
+2025-09-26 13:39:28,048 - INFO - Enabling selection row components
+2025-09-26 13:39:28,055 - INFO - Selection row components enabled
+2025-09-26 13:39:28,055 - INFO - Management buttons disabled until new orders are placed
+2025-09-26 13:39:28,057 - INFO - Order status displays updated with client names
+2025-09-26 13:39:28,057 - INFO - Monitoring stopped and timers cleared
+2025-09-26 13:39:28,061 - INFO - Enabling selection row components
+2025-09-26 13:39:28,061 - INFO - Selection row components enabled
+2025-09-26 13:39:28,065 - INFO - System released - ready for new orders
+2025-09-26 13:42:23,422 - INFO - Order Book button clicked - showing order book
+2025-09-26 13:42:24,212 - INFO - Master order book data: [{'stat': 'Ok', 'norenordno': '25092600393220', 'kidid': '3', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'rejby': 'EXCH', 'src_uid': 'FA42242', 'qty': '20', 'rorgqty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758874090', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': 'Order Cancelled', 'token': '865016', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '31.00', 'rorgprc': '30.00', 'rprc': '31.00', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'CANCELED', 'st_intrn': 'CANCELED', 'norentm': '13:38:10 26-09-2025', 'exch_tm': '26-09-2025 13:38:10', 'exchordid': '1758873673041830878', 'cancelqty': '20', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600385431', 'kidid': '2', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'rejby': 'EXCH', 'src_uid': 'FA42242', 'qty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758873738', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': 'Order Cancelled', 'token': '865016', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '30.00', 'rprc': '30.00', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'CANCELED', 'st_intrn': 'CANCELED', 'norentm': '13:32:18 26-09-2025', 'exch_tm': '26-09-2025 13:32:18', 'exchordid': '1758873673041131018', 'cancelqty': '20', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600365617', 'kidid': '1', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0182000CE', 'rejby': '', 'src_uid': '', 'qty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758872696', 'trantype': 'S', 'prctyp': 'MKT', 'ret': 'DAY', 'rejreason': ' ', 'token': '865469', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '0.00', 'rprc': '55.90', 'avgprc': '55.95', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'COMPLETE', 'st_intrn': 'COMPLETE', 'fillshares': '20', 'norentm': '13:14:56 26-09-2025', 'exch_tm': '26-09-2025 13:14:56', 'remarks': 'market_exit', 'exchordid': '1758871905439395874', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600359934', 'kidid': '2', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0182000CE', 'rejby': '', 'src_uid': 'FA42242', 'qty': '20', 'rorgqty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758872486', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': ' ', 'token': '865469', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '61.00', 'rorgprc': '60.00', 'rprc': '61.00', 'avgprc': '60.80', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'COMPLETE', 'st_intrn': 'COMPLETE', 'fillshares': '20', 'norentm': '13:11:26 26-09-2025', 'exch_tm': '26-09-2025 13:11:26', 'exchordid': '1758871905439088357', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600356730', 'kidid': '2', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0182000CE', 'rejby': 'EXCH', 'src_uid': 'FA42242', 'qty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758872006', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': 'Order Cancelled', 'token': '865469', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '30.00', 'rprc': '30.00', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'CANCELED', 'st_intrn': 'CANCELED', 'norentm': '13:03:26 26-09-2025', 'exch_tm': '26-09-2025 13:03:26', 'exchordid': '1758871905439015905', 'cancelqty': '20', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600347896', 'kidid': '3', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0182500CE', 'rejby': 'EXCH', 'src_uid': 'FA42242', 'qty': '20', 'rorgqty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758871681', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': 'Order Cancelled', 'token': '865399', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'WEB', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '23.00', 'rorgprc': '25.00', 'rprc': '23.00', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'CANCELED', 'st_intrn': 'CANCELED', 'norentm': '12:58:01 26-09-2025', 'exch_tm': '26-09-2025 12:58:01', 'exchordid': '1758870800231555448', 'cancelqty': '20', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600337612', 'kidid': '2', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0182500CE', 'rejby': 'EXCH', 'src_uid': 'FA42242', 'qty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758870520', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': 'Order Cancelled', 'token': '865399', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '16.00', 'rprc': '16.00', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'CANCELED', 'st_intrn': 'CANCELED', 'norentm': '12:38:40 26-09-2025', 'exch_tm': '26-09-2025 12:38:40', 'exchordid': '1758869835883590060', 'cancelqty': '20', 'rqty': '20'}]
+2025-09-26 13:42:24,841 - INFO - Child order book data: [{'stat': 'Ok', 'norenordno': '25092600393219', 'kidid': '3', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'rejby': 'EXCH', 'src_uid': 'FA32246', 'qty': '20', 'rorgqty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758874090', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': 'Order Cancelled', 'token': '865016', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '31.00', 'rorgprc': '30.00', 'rprc': '31.00', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'CANCELED', 'st_intrn': 'CANCELED', 'norentm': '13:38:10 26-09-2025', 'exch_tm': '26-09-2025 13:38:10', 'exchordid': '1758873673041830874', 'cancelqty': '20', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600385434', 'kidid': '2', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'rejby': 'EXCH', 'src_uid': 'FA32246', 'qty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758873738', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': 'Order Cancelled', 'token': '865016', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '30.00', 'rprc': '30.00', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'CANCELED', 'st_intrn': 'CANCELED', 'norentm': '13:32:18 26-09-2025', 'exch_tm': '26-09-2025 13:32:18', 'exchordid': '1758873673041131027', 'cancelqty': '20', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600365618', 'kidid': '1', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0182000CE', 'rejby': '', 'src_uid': '', 'qty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758872696', 'trantype': 'S', 'prctyp': 'MKT', 'ret': 'DAY', 'rejreason': ' ', 'token': '865469', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '0.00', 'rprc': '55.90', 'avgprc': '55.95', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'COMPLETE', 'st_intrn': 'COMPLETE', 'fillshares': '20', 'norentm': '13:14:56 26-09-2025', 'exch_tm': '26-09-2025 13:14:56', 'remarks': 'market_exit', 'exchordid': '1758871905439395878', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600359933', 'kidid': '2', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0182000CE', 'rejby': '', 'src_uid': 'FA32246', 'qty': '20', 'rorgqty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758872486', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': ' ', 'token': '865469', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '61.00', 'rorgprc': '60.00', 'rprc': '61.00', 'avgprc': '60.80', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'COMPLETE', 'st_intrn': 'COMPLETE', 'fillshares': '20', 'norentm': '13:11:26 26-09-2025', 'exch_tm': '26-09-2025 13:11:26', 'exchordid': '1758871905439088355', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600356731', 'kidid': '2', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0182000CE', 'rejby': 'EXCH', 'src_uid': 'FA32246', 'qty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758872006', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': 'Order Cancelled', 'token': '865469', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'API', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '30.00', 'rprc': '30.00', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'CANCELED', 'st_intrn': 'CANCELED', 'norentm': '13:03:26 26-09-2025', 'exch_tm': '26-09-2025 13:03:26', 'exchordid': '1758871905439015909', 'cancelqty': '20', 'rqty': '20'}, {'stat': 'Ok', 'norenordno': '25092600347897', 'kidid': '3', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0182500CE', 'rejby': 'EXCH', 'src_uid': 'FA32246', 'qty': '20', 'rorgqty': '20', 'ipaddr': '103.187.213.248', 'ordenttm': '1758871686', 'trantype': 'B', 'prctyp': 'LMT', 'ret': 'DAY', 'rejreason': 'Order Cancelled', 'token': '865399', 'mult': '1', 'prcftr': '1.000000', 'instname': 'OPTIDX', 'ordersource': 'WEB', 'pp': '2', 'ls': '20', 'ti': '0.05', 'prc': '23.00', 'rorgprc': '25.00', 'rprc': '23.00', 'dscqty': '0', 'brnchid': 'HO', 'C': 'C', 's_prdt_ali': 'NRML', 'prd': 'M', 'status': 'CANCELED', 'st_intrn': 'CANCELED', 'norentm': '12:58:06 26-09-2025', 'exch_tm': '26-09-2025 12:58:06', 'exchordid': '1758870800231555451', 'cancelqty': '20', 'rqty': '20'}]
+2025-09-26 13:42:54,988 - INFO - Open orders check - Master: False, Child: False
+2025-09-26 13:42:54,988 - INFO - Monitoring check - SL: False, Target: False, States SL: False, States Target: False
+2025-09-26 13:42:54,988 - INFO - Release buttons clicked - resetting system for new orders
+2025-09-26 13:42:54,988 - INFO - Login status check - Master: True, Child: True
+2025-09-26 13:42:54,996 - INFO - Updated Master (ID: 1) login_status to '1': Master account logged in
+2025-09-26 13:42:55,004 - INFO - Updated Master (ID: 1) can_order to '1': Master account reset after trading block
+2025-09-26 13:42:55,004 - INFO - Master account reset to ready (was logged in)
+2025-09-26 13:42:55,013 - INFO - Updated Child (ID: 2) login_status to '1': Child account logged in
+2025-09-26 13:42:55,024 - INFO - Updated Child (ID: 2) can_order to '1': Child account reset after trading block
+2025-09-26 13:42:55,024 - INFO - Child account reset to ready (was logged in)
+2025-09-26 13:42:55,024 - INFO - Trading blocks reset while preserving login status
+2025-09-26 13:42:55,029 - INFO - RESET POSITION DATA - Master (ID: 1) - position data cleared
+2025-09-26 13:42:55,054 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-26 13:42:55,056 - INFO - Position data and exit order info cleared for Master account
+2025-09-26 13:42:55,072 - INFO - RESET POSITION DATA - Child (ID: 2) - position data cleared
+2025-09-26 13:42:55,096 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-26 13:42:55,098 - INFO - Position data and exit order info cleared for Child account
+2025-09-26 13:42:55,102 - INFO - Buy price box enabled
+2025-09-26 13:42:55,102 - INFO - BUY button and Price box re-enabled for new orders - auto-fill re-enabled
+2025-09-26 13:42:55,102 - INFO - Trailing monitoring stopped
+2025-09-26 13:42:55,102 - INFO - Trailing controls reset to initial state
+2025-09-26 13:42:55,107 - INFO - SL/Target controls reset to initial state
+2025-09-26 13:42:55,107 - INFO - Enabling selection row components
+2025-09-26 13:42:55,107 - INFO - Selection row components enabled
+2025-09-26 13:42:55,107 - INFO - Management buttons disabled until new orders are placed
+2025-09-26 13:42:55,114 - INFO - Order status displays updated with client names
+2025-09-26 13:42:55,114 - INFO - Monitoring stopped and timers cleared
+2025-09-26 13:42:55,116 - INFO - Enabling selection row components
+2025-09-26 13:42:55,119 - INFO - Selection row components enabled
+2025-09-26 13:42:55,125 - INFO - System released - ready for new orders
+2025-09-26 14:12:04,074 - INFO - Loaded account states from account_state.csv
+2025-09-26 14:12:04,077 - INFO - Loaded configuration from configuration.csv
+2025-09-26 14:12:04,078 - INFO - Resetting account states to initial state on startup...
+2025-09-26 14:12:04,092 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-26 14:12:04,099 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-26 14:12:04,107 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-26 14:12:04,113 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-26 14:12:04,118 - INFO - RESET POSITION DATA - Master (ID: 1) - position data cleared
+2025-09-26 14:12:04,130 - INFO - RESET POSITION DATA - Child (ID: 2) - position data cleared
+2025-09-26 14:12:04,142 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-26 14:12:04,155 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-26 14:12:04,155 - INFO - Enabling selection row components
+2025-09-26 14:12:04,155 - ERROR - Error enabling selection row: 'MainWindow' object has no attribute 'index_dropdown'
+2025-09-26 14:12:04,155 - INFO - Position data and exit order info cleared on startup for both accounts
+2025-09-26 14:12:04,155 - INFO - Account states reset to initial state
+2025-09-26 14:12:04,155 - INFO - Loaded cached index prices from today
+2025-09-26 14:12:04,155 - INFO - All expiry dates are valid
+2025-09-26 14:12:04,162 - INFO - Loaded cached expiry dates from today
+2025-09-26 14:12:04,501 - INFO - WebSocket connection monitoring started
+2025-09-26 14:12:04,508 - INFO - SL/Target configuration loaded - SL: 3 points, Target: 40 points
+2025-09-26 14:12:04,514 - INFO - Calculated differences - SL: -3, Target: 40
+2025-09-26 14:12:04,857 - INFO - Checking master files...
+2025-09-26 14:12:04,857 - INFO - All master files are current
+2025-09-26 14:12:04,857 - INFO - [SUCCESS] Master files are up to date
+2025-09-26 14:12:04,857 - INFO - Attempting auto-login for master account...
+2025-09-26 14:12:04,857 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-26 14:12:04,857 - INFO - Generated fresh 2FA for account 1: 624087
+2025-09-26 14:12:04,857 - INFO - Attempting login for account 1 with userid: FA42242
+2025-09-26 14:12:05,664 - INFO - Login response for account 1: {'request_time': '14:12:06 26-09-2025', 'actid': 'FA42242', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'KRATIK YADAV', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': 'e558e56ade842885a239411c5451f97027615a09d81e45d2dbc958b2001fd5a5', 'susertokenspl': '9b6d2e8f3a04d2a7cffb15db6ca43dac2d235d826d795aef149220b8dde4c6a2', 'email': 'kratikiafk@gmail.com', 'uid': 'FA42242', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '6265650705', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'NIPO', 'BSTAR', 'BFO'], 'values': ['4', '3', '2'], 'mws': {'4': [{'exch': 'NFO', 'token': '68495', 'tsym': 'BANKINDIA28OCT25P105', 'cname': 'BANKINDIA OCT 105 PE ', 'dname': 'BANKINDIA OCT 105 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '68471', 'tsym': 'BANKINDIA30SEP25P142.5', 'cname': 'BANKINDIA SEP 142.50 PE ', 'dname': 'BANKINDIA SEP 142.50 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}], '3': [], '2': [{'exch': 'NSE', 'token': '2088', 'tsym': 'MAHSEAMLES-EQ', 'cname': 'MAHARASHTRA SEAMLESS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '23402', 'tsym': 'SRM-EQ', 'cname': 'SRM CONTRACTORS LIMITED', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '18110', 'tsym': 'VASCONEQ-EQ', 'cname': 'VASCON ENGINEERS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758876126', 'lastpwdtime': '1756959759'}
+2025-09-26 14:12:05,667 - INFO - Login response type: <class 'dict'>
+2025-09-26 14:12:05,669 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-26 14:12:05,674 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-26 14:12:05,678 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-26 14:12:05,682 - INFO - WebSocket connection established for account 1
+2025-09-26 14:12:05,682 - INFO - Network connection restored for account 1
+2025-09-26 14:12:05,684 - INFO - Refreshing market data...
+2025-09-26 14:12:05,684 - INFO - Master account auto-login successful: KRATIK YADAV
+2025-09-26 14:12:05,684 - INFO - Index prices are current, no refresh needed
+2025-09-26 14:12:05,684 - INFO - Expiry dates are current, no refresh needed
+2025-09-26 14:12:05,864 - INFO - Websocket connected
+2025-09-26 14:12:05,907 - INFO - WebSocket is now open for Account 1
+2025-09-26 14:12:06,585 - INFO - Attempting login for child account 2...
+2025-09-26 14:12:06,585 - INFO - Login attempt 1/3 for child account 2
+2025-09-26 14:12:06,585 - INFO - Generated fresh 2FA for account 2: 901785
+2025-09-26 14:12:06,593 - INFO - Attempting login for account 2 with userid: FA32246
+2025-09-26 14:12:06,692 - ERROR - Error checking startup positions: 'AccountManager' object has no attribute 'get_positions'
+2025-09-26 14:12:07,329 - INFO - Login response for account 2: {'request_time': '14:12:08 26-09-2025', 'actid': 'FA32246', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'ROOPAL SONI', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'MCX', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': '6f315841dc9cb76293cd0bbbc74b77423b32bace600b3609e952215a371c294c', 'susertokenspl': '7562752bada89a5693ee588b03c715d0b7739364fd7f28393081ed8e5e39edfa', 'email': 'kratik.kunal@gmail.com', 'uid': 'FA32246', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '9424018696', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'MCX', 'NIPO', 'BSTAR', 'BFO'], 'values': ['l', 'calls', 'Puts'], 'mws': {'l': [], 'calls': [{'exch': 'NFO', 'token': '54979', 'tsym': 'ADANIGREEN28OCT25P1100', 'cname': 'ADANIGREEN OCT 1100 PE ', 'dname': 'ADANIGREEN OCT 1100 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54957', 'tsym': 'ADANIGREEN28OCT25P660', 'cname': 'ADANIGREEN OCT 660 PE ', 'dname': 'ADANIGREEN OCT 660 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54995', 'tsym': 'ADANIGREEN25NOV25P600', 'cname': 'ADANIGREEN NOV 600 PE ', 'dname': 'ADANIGREEN NOV 600 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54991', 'tsym': 'BANKNIFTY30SEP25C55400', 'cname': 'BANKNIFTY 30SEP25 55400 CE ', 'dname': 'BANKNIFTY 30SEP25 55400 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '35', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '54983', 'tsym': 'ADANIGREEN28OCT25P1180', 'cname': 'ADANIGREEN OCT 1180 PE ', 'dname': 'ADANIGREEN OCT 1180 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54965', 'tsym': 'ADANIGREEN28OCT25P820', 'cname': 'ADANIGREEN OCT 820 PE ', 'dname': 'ADANIGREEN OCT 820 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54953', 'tsym': 'ADANIGREEN28OCT25P520', 'cname': 'ADANIGREEN OCT 520 PE ', 'dname': 'ADANIGREEN OCT 520 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}], 'Puts': [{'exch': 'NFO', 'token': '60487', 'tsym': 'NIFTY30SEP25C25200', 'cname': 'NIFTY 30SEP25 25200 CE ', 'dname': 'NIFTY 30SEP25 25200 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '64694', 'tsym': 'NIFTY30SEP25C25000', 'cname': 'NIFTY 30SEP25 25000 CE ', 'dname': 'NIFTY 30SEP25 25000 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BSE', 'token': '1', 'tsym': 'SENSEX', 'cname': 'BSE SENSEX', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}, {'exch': 'NFO', 'token': '48898', 'tsym': 'MCX25NOV25F', 'cname': 'MCX NOV FUT', 'dname': 'MCX NOV FUT', 'instname': 'FUTSTK', 'pp': '2', 'ls': '125', 'ti': '0.50', 'optt': 'XX'}, {'exch': 'MCX', 'token': '456955', 'tsym': 'COPPER30SEP25', 'instname': 'FUTCOM', 'pp': '2', 'ls': '2500', 'ti': '0.05', 'optt': 'XX'}, {'exch': 'NSE', 'token': '4598', 'tsym': 'HERITGFOOD-EQ', 'cname': 'HERITAGE FOODS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '2885', 'tsym': 'RELIANCE-EQ', 'cname': 'RELIANCE INDUSTRIES LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.10'}, {'exch': 'NSE', 'token': '31181', 'tsym': 'MCX-EQ', 'cname': 'MULTI COMMODITY EXCHANGE', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.50'}, {'exch': 'NSE', 'token': '8003', 'tsym': 'SILVER-EQ', 'cname': 'BIRLASLAMC - SILVER', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}, {'exch': 'NSE', 'token': '26037', 'tsym': 'Nifty Fin Service', 'cname': 'FIN NIFTY', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758876128', 'lastpwdtime': '1757444505'}
+2025-09-26 14:12:07,342 - INFO - Login response type: <class 'dict'>
+2025-09-26 14:12:07,343 - INFO - Login Successful!, Welcome ROOPAL SONI - Child2 ACCOUNT
+2025-09-26 14:12:07,351 - INFO - Updated Child (ID: 2) login_status to '1': Child account 2 login successful
+2025-09-26 14:12:07,360 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-26 14:12:07,366 - INFO - WebSocket connection established for account 2
+2025-09-26 14:12:07,366 - INFO - Network connection restored for account 2
+2025-09-26 14:12:07,368 - INFO - Child account login successful: ROOPAL SONI
+2025-09-26 14:12:07,524 - INFO - Websocket connected
+2025-09-26 14:12:07,569 - INFO - WebSocket is now open for Account 2
+2025-09-26 14:12:08,389 - ERROR - Error checking startup positions: 'AccountManager' object has no attribute 'get_positions'
+2025-09-26 14:12:15,819 - INFO - Trade Book button clicked - showing trade book
+2025-09-26 14:12:16,557 - INFO - Trade book retrieved for KRATIK YADAV: 2 trades found
+2025-09-26 14:12:16,557 - INFO - Processed trade book data: 1 symbols found
+2025-09-26 14:12:17,252 - INFO - Trade book retrieved for ROOPAL SONI: 2 trades found
+2025-09-26 14:12:17,252 - INFO - Processed trade book data: 1 symbols found
+2025-09-26 14:12:17,252 - INFO - Trade book populated: 0 open positions, 4 trade records
+2025-09-26 14:17:04,384 - INFO - Application closing - cleaning up resources
+2025-09-26 14:17:04,520 - INFO - WebSocket connection monitoring stopped
+2025-09-26 14:17:53,319 - INFO - Loaded account states from account_state.csv
+2025-09-26 14:17:53,326 - INFO - Loaded configuration from configuration.csv
+2025-09-26 14:17:53,326 - INFO - Resetting account states to initial state on startup...
+2025-09-26 14:17:53,338 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-26 14:17:53,346 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-26 14:17:53,346 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-26 14:17:53,360 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-26 14:17:53,365 - INFO - RESET POSITION DATA - Master (ID: 1) - position data cleared
+2025-09-26 14:17:53,378 - INFO - RESET POSITION DATA - Child (ID: 2) - position data cleared
+2025-09-26 14:17:53,389 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-26 14:17:53,389 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-26 14:17:53,396 - INFO - Enabling selection row components
+2025-09-26 14:17:53,396 - ERROR - Error enabling selection row: 'MainWindow' object has no attribute 'index_dropdown'
+2025-09-26 14:17:53,396 - INFO - Position data and exit order info cleared on startup for both accounts
+2025-09-26 14:17:53,396 - INFO - Account states reset to initial state
+2025-09-26 14:17:53,396 - INFO - Loaded cached index prices from today
+2025-09-26 14:17:53,403 - INFO - All expiry dates are valid
+2025-09-26 14:17:53,403 - INFO - Loaded cached expiry dates from today
+2025-09-26 14:17:53,758 - INFO - WebSocket connection monitoring started
+2025-09-26 14:17:53,767 - INFO - SL/Target configuration loaded - SL: 3 points, Target: 40 points
+2025-09-26 14:17:53,770 - INFO - Calculated differences - SL: -3, Target: 40
+2025-09-26 14:17:53,832 - INFO - Checking master files...
+2025-09-26 14:17:53,838 - INFO - All master files are current
+2025-09-26 14:17:53,841 - INFO - [SUCCESS] Master files are up to date
+2025-09-26 14:17:53,857 - INFO - Attempting auto-login for master account...
+2025-09-26 14:17:53,857 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-26 14:17:53,857 - INFO - Generated fresh 2FA for account 1: 688628
+2025-09-26 14:17:53,861 - INFO - Attempting login for account 1 with userid: FA42242
+2025-09-26 14:17:54,643 - INFO - Login response for account 1: {'request_time': '14:17:55 26-09-2025', 'actid': 'FA42242', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'KRATIK YADAV', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': '18e977ad7845f529738646e4a705126494ecd34c37af9708ec663b95b916c06d', 'susertokenspl': 'e723d4c4547a24c9c099f320b9d355b68f3257299e9306dadeaba10b6cfaa0b9', 'email': 'kratikiafk@gmail.com', 'uid': 'FA42242', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '6265650705', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'NIPO', 'BSTAR', 'BFO'], 'values': ['4', '3', '2'], 'mws': {'4': [{'exch': 'NFO', 'token': '68495', 'tsym': 'BANKINDIA28OCT25P105', 'cname': 'BANKINDIA OCT 105 PE ', 'dname': 'BANKINDIA OCT 105 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '68471', 'tsym': 'BANKINDIA30SEP25P142.5', 'cname': 'BANKINDIA SEP 142.50 PE ', 'dname': 'BANKINDIA SEP 142.50 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}], '3': [], '2': [{'exch': 'NSE', 'token': '2088', 'tsym': 'MAHSEAMLES-EQ', 'cname': 'MAHARASHTRA SEAMLESS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '23402', 'tsym': 'SRM-EQ', 'cname': 'SRM CONTRACTORS LIMITED', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '18110', 'tsym': 'VASCONEQ-EQ', 'cname': 'VASCON ENGINEERS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758876475', 'lastpwdtime': '1756959759'}
+2025-09-26 14:17:54,643 - INFO - Login response type: <class 'dict'>
+2025-09-26 14:17:54,643 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-26 14:17:54,659 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-26 14:17:54,668 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-26 14:17:54,668 - INFO - WebSocket connection established for account 1
+2025-09-26 14:17:54,674 - INFO - Network connection restored for account 1
+2025-09-26 14:17:54,674 - INFO - Refreshing market data...
+2025-09-26 14:17:54,676 - INFO - Master account auto-login successful: KRATIK YADAV
+2025-09-26 14:17:54,676 - INFO - Index prices are current, no refresh needed
+2025-09-26 14:17:54,676 - INFO - Expiry dates are current, no refresh needed
+2025-09-26 14:17:54,836 - INFO - Websocket connected
+2025-09-26 14:17:54,875 - INFO - WebSocket is now open for Account 1
+2025-09-26 14:17:56,301 - INFO - Trade book retrieved for KRATIK YADAV: 2 trades found
+2025-09-26 14:17:56,309 - INFO - Position check completed - No open positions found
+2025-09-26 14:18:16,024 - INFO - Attempting login for child account 2...
+2025-09-26 14:18:16,025 - INFO - Login attempt 1/3 for child account 2
+2025-09-26 14:18:16,025 - INFO - Generated fresh 2FA for account 2: 495276
+2025-09-26 14:18:16,026 - INFO - Attempting login for account 2 with userid: FA32246
+2025-09-26 14:18:16,687 - INFO - Login response for account 2: {'request_time': '14:18:17 26-09-2025', 'actid': 'FA32246', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'ROOPAL SONI', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD', 'MCX']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'MCX', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'MCX', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': 'b36a1549d61659c7c077b10c9f9c7a56d30d541138c25e97d1a7f5eed37aae29', 'susertokenspl': '79b025531845eb40437fce0221ba7a0672075f247886f7092c2baa6f3cbebfd5', 'email': 'kratik.kunal@gmail.com', 'uid': 'FA32246', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '9424018696', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'MCX', 'NIPO', 'BSTAR', 'BFO'], 'values': ['l', 'calls', 'Puts'], 'mws': {'l': [], 'calls': [{'exch': 'NFO', 'token': '54979', 'tsym': 'ADANIGREEN28OCT25P1100', 'cname': 'ADANIGREEN OCT 1100 PE ', 'dname': 'ADANIGREEN OCT 1100 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54957', 'tsym': 'ADANIGREEN28OCT25P660', 'cname': 'ADANIGREEN OCT 660 PE ', 'dname': 'ADANIGREEN OCT 660 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54995', 'tsym': 'ADANIGREEN25NOV25P600', 'cname': 'ADANIGREEN NOV 600 PE ', 'dname': 'ADANIGREEN NOV 600 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54991', 'tsym': 'BANKNIFTY30SEP25C55400', 'cname': 'BANKNIFTY 30SEP25 55400 CE ', 'dname': 'BANKNIFTY 30SEP25 55400 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '35', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '54983', 'tsym': 'ADANIGREEN28OCT25P1180', 'cname': 'ADANIGREEN OCT 1180 PE ', 'dname': 'ADANIGREEN OCT 1180 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54965', 'tsym': 'ADANIGREEN28OCT25P820', 'cname': 'ADANIGREEN OCT 820 PE ', 'dname': 'ADANIGREEN OCT 820 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '54953', 'tsym': 'ADANIGREEN28OCT25P520', 'cname': 'ADANIGREEN OCT 520 PE ', 'dname': 'ADANIGREEN OCT 520 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '600', 'ti': '0.05', 'optt': 'PE'}], 'Puts': [{'exch': 'NFO', 'token': '60487', 'tsym': 'NIFTY30SEP25C25200', 'cname': 'NIFTY 30SEP25 25200 CE ', 'dname': 'NIFTY 30SEP25 25200 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'NFO', 'token': '64694', 'tsym': 'NIFTY30SEP25C25000', 'cname': 'NIFTY 30SEP25 25000 CE ', 'dname': 'NIFTY 30SEP25 25000 CE ', 'instname': 'OPTIDX', 'pp': '2', 'ls': '75', 'ti': '0.05', 'optt': 'CE'}, {'exch': 'BSE', 'token': '1', 'tsym': 'SENSEX', 'cname': 'BSE SENSEX', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}, {'exch': 'NFO', 'token': '48898', 'tsym': 'MCX25NOV25F', 'cname': 'MCX NOV FUT', 'dname': 'MCX NOV FUT', 'instname': 'FUTSTK', 'pp': '2', 'ls': '125', 'ti': '0.50', 'optt': 'XX'}, {'exch': 'MCX', 'token': '456955', 'tsym': 'COPPER30SEP25', 'instname': 'FUTCOM', 'pp': '2', 'ls': '2500', 'ti': '0.05', 'optt': 'XX'}, {'exch': 'NSE', 'token': '4598', 'tsym': 'HERITGFOOD-EQ', 'cname': 'HERITAGE FOODS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '2885', 'tsym': 'RELIANCE-EQ', 'cname': 'RELIANCE INDUSTRIES LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.10'}, {'exch': 'NSE', 'token': '31181', 'tsym': 'MCX-EQ', 'cname': 'MULTI COMMODITY EXCHANGE', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.50'}, {'exch': 'NSE', 'token': '8003', 'tsym': 'SILVER-EQ', 'cname': 'BIRLASLAMC - SILVER', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}, {'exch': 'NSE', 'token': '26037', 'tsym': 'Nifty Fin Service', 'cname': 'FIN NIFTY', 'instname': 'UNDIND', 'pp': '2', 'ls': '1', 'ti': '0.05', 'nontrd': '1'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758876497', 'lastpwdtime': '1757444505'}
+2025-09-26 14:18:16,693 - INFO - Login response type: <class 'dict'>
+2025-09-26 14:18:16,693 - INFO - Login Successful!, Welcome ROOPAL SONI - Child2 ACCOUNT
+2025-09-26 14:18:16,701 - INFO - Updated Child (ID: 2) login_status to '1': Child account 2 login successful
+2025-09-26 14:18:16,704 - INFO - Updated Child (ID: 2) can_order to '1': Child account 2 ready for orders
+2025-09-26 14:18:16,710 - INFO - WebSocket connection established for account 2
+2025-09-26 14:18:16,710 - INFO - Network connection restored for account 2
+2025-09-26 14:18:16,710 - INFO - Child account login successful: ROOPAL SONI
+2025-09-26 14:18:16,904 - INFO - Websocket connected
+2025-09-26 14:18:16,957 - INFO - WebSocket is now open for Account 2
+2025-09-26 14:18:18,355 - INFO - Trade book retrieved for KRATIK YADAV: 2 trades found
+2025-09-26 14:18:19,063 - INFO - Trade book retrieved for ROOPAL SONI: 2 trades found
+2025-09-26 14:18:19,063 - INFO - Position check completed - No open positions found
+2025-09-26 14:18:20,789 - INFO - Trade Book button clicked - showing trade book
+2025-09-26 14:18:21,524 - INFO - Trade book retrieved for KRATIK YADAV: 2 trades found
+2025-09-26 14:18:21,524 - INFO - Processed trade book data: 1 symbols found
+2025-09-26 14:18:22,136 - INFO - Trade book retrieved for ROOPAL SONI: 2 trades found
+2025-09-26 14:18:22,136 - INFO - Processed trade book data: 1 symbols found
+2025-09-26 14:18:22,143 - INFO - Trade book populated: 0 open positions, 4 trade records
+2025-09-26 14:23:49,250 - INFO - Trade Book button clicked - showing trade book
+2025-09-26 14:23:50,043 - INFO - Trade book retrieved for KRATIK YADAV: 2 trades found
+2025-09-26 14:23:50,043 - INFO - Processed trade book data: 1 symbols found
+2025-09-26 14:23:50,715 - INFO - Trade book retrieved for ROOPAL SONI: 2 trades found
+2025-09-26 14:23:50,715 - INFO - Processed trade book data: 1 symbols found
+2025-09-26 14:23:50,715 - INFO - Trade book populated: 0 open positions, 4 trade records
+2025-09-26 14:26:26,861 - INFO - Index selected: SENSEX
+2025-09-26 14:26:26,861 - INFO - On option selected called - Function not implemented yet
+2025-09-26 14:26:26,861 - INFO - Not all required fields selected for strike selection
+2025-09-26 14:26:26,861 - INFO - Option and strike selections cleared for new index
+2025-09-26 14:26:26,861 - INFO - On expiry selected called - Function not implemented yet
+2025-09-26 14:26:26,861 - INFO - Strike dropdown populated with 15 strikes for SENSEX
+2025-09-26 14:26:26,861 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-26 14:26:28,644 - INFO - On option selected called - Function not implemented yet
+2025-09-26 14:26:36,442 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 14:26:36,442 - INFO - Generated trading symbol: SENSEX25O017CE
+2025-09-26 14:26:36,442 - INFO - Trading symbol stored: SENSEX25O017CE
+2025-09-26 14:26:36,442 - INFO - Getting token for trading symbol: SENSEX25O017CE
+2025-09-26 14:26:36,450 - ERROR - No token found for SENSEX25O017CE
+2025-09-26 14:26:36,475 - INFO - Available SENSEX symbols (first 10): ['SENSEX26SEP86000PE' 'SENSEX26SEP85000PE' 'SENSEX26SEP84000PE'
+ 'SENSEX26SEP83000PE' 'SENSEX26SEP82000PE' 'SENSEX26SEP81000PE'
+ 'SENSEX26SEP80000PE' 'SENSEX26SEP79000PE' 'SENSEX26SEP78000PE'
+ 'SENSEX26SEP77000PE']
+2025-09-26 14:26:36,475 - ERROR - Error in fallback conversion: invalid literal for int() with base 10: '7C'
+2025-09-26 14:26:36,475 - WARNING - Could not fetch price for SENSEX25O017CE
+2025-09-26 14:26:36,475 - INFO - Strike selected: 7, trading symbol: SENSEX25O017CE
+2025-09-26 14:26:36,491 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 14:26:36,491 - INFO - Generated trading symbol: SENSEX25O0179CE
+2025-09-26 14:26:36,491 - INFO - Trading symbol stored: SENSEX25O0179CE
+2025-09-26 14:26:36,491 - INFO - Getting token for trading symbol: SENSEX25O0179CE
+2025-09-26 14:26:36,499 - ERROR - No token found for SENSEX25O0179CE
+2025-09-26 14:26:36,531 - INFO - Available SENSEX symbols (first 10): ['SENSEX26SEP86000PE' 'SENSEX26SEP85000PE' 'SENSEX26SEP84000PE'
+ 'SENSEX26SEP83000PE' 'SENSEX26SEP82000PE' 'SENSEX26SEP81000PE'
+ 'SENSEX26SEP80000PE' 'SENSEX26SEP79000PE' 'SENSEX26SEP78000PE'
+ 'SENSEX26SEP77000PE']
+2025-09-26 14:26:36,531 - ERROR - Error in fallback conversion: time data 'O01' does not match format '%b'
+2025-09-26 14:26:36,531 - WARNING - Could not fetch price for SENSEX25O0179CE
+2025-09-26 14:26:36,531 - INFO - Strike selected: 79, trading symbol: SENSEX25O0179CE
+2025-09-26 14:26:36,770 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 14:26:36,770 - INFO - Generated trading symbol: SENSEX25O01795CE
+2025-09-26 14:26:36,770 - INFO - Trading symbol stored: SENSEX25O01795CE
+2025-09-26 14:26:36,770 - INFO - Getting token for trading symbol: SENSEX25O01795CE
+2025-09-26 14:26:36,779 - ERROR - No token found for SENSEX25O01795CE
+2025-09-26 14:26:36,804 - INFO - Available SENSEX symbols (first 10): ['SENSEX26SEP86000PE' 'SENSEX26SEP85000PE' 'SENSEX26SEP84000PE'
+ 'SENSEX26SEP83000PE' 'SENSEX26SEP82000PE' 'SENSEX26SEP81000PE'
+ 'SENSEX26SEP80000PE' 'SENSEX26SEP79000PE' 'SENSEX26SEP78000PE'
+ 'SENSEX26SEP77000PE']
+2025-09-26 14:26:36,804 - ERROR - Error in fallback conversion: time data 'O01' does not match format '%b'
+2025-09-26 14:26:36,804 - WARNING - Could not fetch price for SENSEX25O01795CE
+2025-09-26 14:26:36,804 - INFO - Strike selected: 795, trading symbol: SENSEX25O01795CE
+2025-09-26 14:26:37,423 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 14:26:37,423 - INFO - Generated trading symbol: SENSEX25O017950CE
+2025-09-26 14:26:37,423 - INFO - Trading symbol stored: SENSEX25O017950CE
+2025-09-26 14:26:37,423 - INFO - Getting token for trading symbol: SENSEX25O017950CE
+2025-09-26 14:26:37,431 - ERROR - No token found for SENSEX25O017950CE
+2025-09-26 14:26:37,453 - INFO - Available SENSEX symbols (first 10): ['SENSEX26SEP86000PE' 'SENSEX26SEP85000PE' 'SENSEX26SEP84000PE'
+ 'SENSEX26SEP83000PE' 'SENSEX26SEP82000PE' 'SENSEX26SEP81000PE'
+ 'SENSEX26SEP80000PE' 'SENSEX26SEP79000PE' 'SENSEX26SEP78000PE'
+ 'SENSEX26SEP77000PE']
+2025-09-26 14:26:37,453 - ERROR - Error in fallback conversion: time data 'O01' does not match format '%b'
+2025-09-26 14:26:37,453 - WARNING - Could not fetch price for SENSEX25O017950CE
+2025-09-26 14:26:37,453 - INFO - Strike selected: 7950, trading symbol: SENSEX25O017950CE
+2025-09-26 14:26:37,577 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 14:26:37,577 - INFO - Generated trading symbol: SENSEX25O0179500CE
+2025-09-26 14:26:37,577 - INFO - Trading symbol stored: SENSEX25O0179500CE
+2025-09-26 14:26:37,577 - INFO - Getting token for trading symbol: SENSEX25O0179500CE
+2025-09-26 14:26:37,585 - INFO - Found token for SENSEX25O0179500CE: 865409
+2025-09-26 14:26:38,231 - INFO - Fetched price for SENSEX25O0179500CE: 1112.65
+2025-09-26 14:26:38,231 - INFO - Getting token for trading symbol: SENSEX25O0179500CE
+2025-09-26 14:26:38,239 - INFO - Found token for SENSEX25O0179500CE: 865409
+2025-09-26 14:26:38,239 - INFO - Subscribed to live price feed via master account: BFO|865409
+2025-09-26 14:26:38,239 - INFO - Auto-subscribed to SENSEX25O0179500CE at price 1112.65
+2025-09-26 14:26:38,239 - INFO - Strike selected: 79500, trading symbol: SENSEX25O0179500CE
+2025-09-26 14:26:38,273 - INFO - Initial buy price set: 1112.65
+2025-09-26 14:26:43,547 - INFO - On option selected called - Function not implemented yet
+2025-09-26 14:26:46,040 - INFO - Buy price field value changed to empty - auto-fill disabled
+2025-09-26 14:26:46,040 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 14:26:46,042 - INFO - Generated trading symbol: SENSEX25O017950PE
+2025-09-26 14:26:46,042 - INFO - Trading symbol stored: SENSEX25O017950PE
+2025-09-26 14:26:46,042 - INFO - Getting token for trading symbol: SENSEX25O017950PE
+2025-09-26 14:26:46,044 - ERROR - No token found for SENSEX25O017950PE
+2025-09-26 14:26:46,064 - INFO - Available SENSEX symbols (first 10): ['SENSEX26SEP86000PE' 'SENSEX26SEP85000PE' 'SENSEX26SEP84000PE'
+ 'SENSEX26SEP83000PE' 'SENSEX26SEP82000PE' 'SENSEX26SEP81000PE'
+ 'SENSEX26SEP80000PE' 'SENSEX26SEP79000PE' 'SENSEX26SEP78000PE'
+ 'SENSEX26SEP77000PE']
+2025-09-26 14:26:46,064 - ERROR - Error in fallback conversion: time data 'O01' does not match format '%b'
+2025-09-26 14:26:46,064 - WARNING - Could not fetch price for SENSEX25O017950PE
+2025-09-26 14:26:46,064 - INFO - Strike selected: 7950, trading symbol: SENSEX25O017950PE
+2025-09-26 14:26:46,424 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-26 14:26:46,424 - INFO - Generated trading symbol: SENSEX25O0179500PE
+2025-09-26 14:26:46,424 - INFO - Trading symbol stored: SENSEX25O0179500PE
+2025-09-26 14:26:46,424 - INFO - Getting token for trading symbol: SENSEX25O0179500PE
+2025-09-26 14:26:46,424 - INFO - Found token for SENSEX25O0179500PE: 865016
+2025-09-26 14:26:47,070 - INFO - Fetched price for SENSEX25O0179500PE: 107.0
+2025-09-26 14:26:47,070 - INFO - Getting token for trading symbol: SENSEX25O0179500PE
+2025-09-26 14:26:47,074 - INFO - Found token for SENSEX25O0179500PE: 865016
+2025-09-26 14:26:47,079 - INFO - Unsubscribed from previous: BFO|865409
+2025-09-26 14:26:47,079 - INFO - Subscribed to live price feed via master account: BFO|865016
+2025-09-26 14:26:47,079 - INFO - Auto-subscribed to SENSEX25O0179500PE at price 107.0
+2025-09-26 14:26:47,079 - INFO - Strike selected: 79500, trading symbol: SENSEX25O0179500PE
+2025-09-26 14:26:47,120 - INFO - Initial buy price set: 107.00
+2025-09-26 14:26:52,095 - INFO - User focused on price box - current value: '107.00'
+2025-09-26 14:26:53,825 - INFO - Buy price field value changed to empty - auto-fill disabled
+2025-09-26 14:26:59,249 - INFO - Placing buy orders for SENSEX25O0179500PE @ 50.0 master_qty 20
+2025-09-26 14:26:59,253 - INFO - Account 1 is active for order placement
+2025-09-26 14:26:59,257 - INFO - Account 2 is active for order placement
+2025-09-26 14:26:59,257 - INFO - Disabling selection row components
+2025-09-26 14:26:59,257 - INFO - Selection row components disabled
+2025-09-26 14:26:59,261 - INFO - Master account quantity: 20
+2025-09-26 14:26:59,261 - INFO - Child lots set to minimum for SENSEX: 20
+2025-09-26 14:26:59,261 - INFO - Placing order for account 1: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25O0179500PE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 50.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-26 14:26:59,261 - INFO - Child account quantity: 20 (master: 20, index: SENSEX)
+2025-09-26 14:26:59,261 - INFO - Placing order for account 2: {'buy_or_sell': 'B', 'product_type': 'M', 'exchange': 'BFO', 'tradingsymbol': 'SENSEX25O0179500PE', 'quantity': 20, 'discloseqty': 0, 'price_type': 'LMT', 'price': 50.0, 'trigger_price': None, 'retention': 'DAY', 'amo': 'NO', 'remarks': None}
+2025-09-26 14:27:00,145 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600459343', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '50.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-26 14:27:00,149 - INFO - Account 2 - B PENDING NewAck
+2025-09-26 14:27:00,149 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '50.00'
+2025-09-26 14:27:00,161 - INFO - Updated Child (ID: 2) order info: 25092600459343 SENSEX25O0179500PE 20@50.0
+2025-09-26 14:27:00,165 - INFO - Order placed successfully for account 2: 25092600459343
+2025-09-26 14:27:00,167 - INFO - Updated Master (ID: 1) order info: 25092600459344 SENSEX25O0179500PE 20@50.0
+2025-09-26 14:27:00,167 - INFO - Order placed successfully for account 1: 25092600459344
+2025-09-26 14:27:00,169 - INFO - Starting auto SL/Target calculation for buy price: 50.0
+2025-09-26 14:27:00,169 - INFO - Using differences - SL: -3, Target: 40
+2025-09-26 14:27:00,169 - INFO - Calculated prices - SL: 47.0, Target: 90.0
+2025-09-26 14:27:00,169 - INFO - UI values set - SL: 47.0, Target: 90.0
+2025-09-26 14:27:00,169 - INFO - SL/Target points calculated - SL points: 3.0, Target points: 40.0
+2025-09-26 14:27:00,181 - INFO - Buy orders filled check - Master: filled_qty=0
+2025-09-26 14:27:00,181 - INFO - Buy orders filled check - Child: filled_qty=0
+2025-09-26 14:27:00,181 - INFO - Buy orders filled result: False
+2025-09-26 14:27:00,183 - INFO - Auto SL/Target set - SL: 47.0, Target: 90.0 (Buy Open: 50.0)
+2025-09-26 14:27:00,183 - INFO - Buy price box disabled
+2025-09-26 14:27:00,185 - INFO - Modify buy box populated with price: 50.0
+2025-09-26 14:27:00,185 - INFO - Buy orders placed successfully
+2025-09-26 14:27:00,193 - INFO - Account 2 order status updated to: PENDING
+2025-09-26 14:27:00,193 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600459344', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '50.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'NewAck', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-26 14:27:00,193 - INFO - DEBUG - Account 2 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 14:27:00,198 - INFO - Account 1 - B PENDING NewAck
+2025-09-26 14:27:00,198 - INFO - Order status debug - status: 'PENDING', reporttype: 'NewAck', trantype: 'B', price: '50.00'
+2025-09-26 14:27:00,201 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 14:27:00,203 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 14:27:00,205 - INFO - Order status updated for account 2: Buy Order PENDING @ 50.00
+2025-09-26 14:27:00,207 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600459343', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '50.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'PendingNew', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-26 14:27:00,207 - INFO - Account 2 - B PENDING PendingNew
+2025-09-26 14:27:00,209 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '50.00'
+2025-09-26 14:27:00,217 - INFO - Account 1 order status updated to: PENDING
+2025-09-26 14:27:00,217 - INFO - Account 2 order status updated to: PENDING
+2025-09-26 14:27:00,217 - INFO - DEBUG - Account 1 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 14:27:00,225 - INFO - DEBUG - Account 2 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 14:27:00,229 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 14:27:00,234 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 14:27:00,234 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 14:27:00,234 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 14:27:00,236 - INFO - Order status updated for account 1: Buy Order PENDING @ 50.00
+2025-09-26 14:27:00,236 - INFO - Order status updated for account 2: Buy Order PENDING @ 50.00
+2025-09-26 14:27:00,236 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600459344', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '50.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'PENDING', 'reporttype': 'PendingNew', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '', 'dscqty': '0'}
+2025-09-26 14:27:00,240 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600459343', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '50.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'OPEN', 'reporttype': 'New', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758876697092751670', 'dscqty': '0', 'exch_tm': '26-09-2025 14:27:00'}
+2025-09-26 14:27:00,240 - INFO - Account 1 - B PENDING PendingNew
+2025-09-26 14:27:00,242 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingNew', trantype: 'B', price: '50.00'
+2025-09-26 14:27:00,242 - INFO - Account 2 - B OPEN New
+2025-09-26 14:27:00,242 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '50.00'
+2025-09-26 14:27:00,244 - INFO - Account 1 order status updated to: PENDING
+2025-09-26 14:27:00,244 - INFO - DEBUG - Account 1 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 14:27:00,244 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 14:27:00,244 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 14:27:00,244 - INFO - Account 2 order status updated to: OPEN
+2025-09-26 14:27:00,244 - INFO - Order status updated for account 1: Buy Order PENDING @ 50.00
+2025-09-26 14:27:00,250 - INFO - DEBUG - Account 2 status: 'OPEN' (type: <class 'str'>)
+2025-09-26 14:27:00,250 - INFO - Order update for account 1: {'t': 'om', 'norenordno': '25092600459344', 'uid': 'FA42242', 'actid': 'FA42242', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '50.00', 'pcode': 'M', 'remarks': '', 'rejreason': ' ', 'status': 'OPEN', 'reporttype': 'New', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758876697092751671', 'dscqty': '0', 'exch_tm': '26-09-2025 14:27:00'}
+2025-09-26 14:27:00,254 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 14:27:00,259 - INFO - Account 1 - B OPEN New
+2025-09-26 14:27:00,259 - INFO - Order status debug - status: 'OPEN', reporttype: 'New', trantype: 'B', price: '50.00'
+2025-09-26 14:27:00,259 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 14:27:00,261 - INFO - Account 1 order status updated to: OPEN
+2025-09-26 14:27:00,262 - INFO - Order status updated for account 2: Buy Order Open @ 50.00
+2025-09-26 14:27:00,262 - INFO - DEBUG - Account 1 status: 'OPEN' (type: <class 'str'>)
+2025-09-26 14:27:00,263 - INFO - DEBUG - Current account can_order: 1
+2025-09-26 14:27:00,263 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 14:27:00,263 - INFO - Order status updated for account 1: Buy Order Open @ 50.00
+2025-09-26 14:29:38,939 - INFO - Cancel buy orders clicked
+2025-09-26 14:29:38,954 - INFO - Cancelling Master order: 25092600459344
+2025-09-26 14:29:38,954 - INFO - Cancelling Child order: 25092600459343
+2025-09-26 14:29:39,821 - INFO - Successfully cancelled Child order: 25092600459343
+2025-09-26 14:29:39,821 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600459343', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '50.00', 'pcode': 'M', 'remarks': '', 'status': 'PENDING', 'reporttype': 'PendingCancel', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758876697092751670', 'dscqty': '0', 'exch_tm': '26-09-2025 14:27:00'}
+2025-09-26 14:29:39,821 - INFO - Account 2 - B PENDING PendingCancel
+2025-09-26 14:29:39,826 - INFO - Order status debug - status: 'PENDING', reporttype: 'PendingCancel', trantype: 'B', price: '50.00'
+2025-09-26 14:29:39,829 - INFO - Updated Child (ID: 2) can_order to '0': Order cancelled by user
+2025-09-26 14:29:39,829 - INFO - Child buy order cancelled successfully
+2025-09-26 14:29:39,854 - ERROR - Failed to cancel Master order 25092600459344: None
+2025-09-26 14:29:39,862 - INFO - Buy price box disabled
+2025-09-26 14:29:39,862 - INFO - Account 2 order status updated to: PENDING
+2025-09-26 14:29:39,862 - INFO - DEBUG - Account 2 status: 'PENDING' (type: <class 'str'>)
+2025-09-26 14:29:39,870 - INFO - DEBUG - Current account can_order: 0
+2025-09-26 14:29:39,870 - INFO - DEBUG - Transaction type: 'B'
+2025-09-26 14:29:39,870 - INFO - Order status updated for account 2: Buy Order PENDING @ 50.00
+2025-09-26 14:29:39,870 - INFO - Order update for account 2: {'t': 'om', 'norenordno': '25092600459343', 'uid': 'FA32246', 'actid': 'FA32246', 'exch': 'BFO', 'tsym': 'SENSEX25O0179500PE', 'trantype': 'B', 'qty': '20', 'prc': '50.00', 'pcode': 'M', 'remarks': '', 'rejreason': 'Order Cancelled', 'status': 'CANCELED', 'reporttype': 'Canceled', 'prctyp': 'LMT', 'ret': 'DAY', 'exchordid': '1758876697092751670', 'cancelqty': '20', 'dscqty': '0', 'exch_tm': '26-09-2025 14:29:40'}
+2025-09-26 14:29:39,874 - INFO - Account 2 - B CANCELED Canceled
+2025-09-26 14:29:39,874 - INFO - Order status debug - status: 'CANCELED', reporttype: 'Canceled', trantype: 'B', price: '50.00'
+2025-09-26 14:29:39,882 - INFO - Order status updated for account 2: Buy Order CANCELED @ 50.00
+2025-09-26 14:29:42,638 - INFO - Application closing - cleaning up resources
+2025-09-26 14:29:43,651 - INFO - WebSocket connection monitoring stopped
