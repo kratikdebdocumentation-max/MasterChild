@@ -516,3 +516,225 @@
 2025-09-27 01:23:53,338 - INFO - Application closing - cleaning up resources
 2025-09-27 01:23:53,338 - INFO - Log monitoring stopped
 2025-09-27 01:23:54,342 - INFO - WebSocket connection monitoring stopped
+2025-09-27 01:39:22,789 - INFO - Loaded account states from account_state.csv
+2025-09-27 01:39:22,795 - INFO - Loaded configuration from configuration.csv
+2025-09-27 01:39:22,795 - INFO - Resetting account states to initial state on startup...
+2025-09-27 01:39:22,803 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-27 01:39:22,807 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-27 01:39:22,813 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-27 01:39:22,817 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-27 01:39:22,820 - INFO - RESET POSITION DATA - Master (ID: 1) - position data cleared
+2025-09-27 01:39:22,824 - INFO - RESET POSITION DATA - Child (ID: 2) - position data cleared
+2025-09-27 01:39:22,834 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-27 01:39:22,840 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-27 01:39:22,840 - INFO - Enabling selection row components
+2025-09-27 01:39:22,840 - ERROR - Error enabling selection row: 'MainWindow' object has no attribute 'index_dropdown'
+2025-09-27 01:39:22,840 - INFO - Position data and exit order info cleared on startup for both accounts
+2025-09-27 01:39:22,840 - INFO - Account states reset to initial state
+2025-09-27 01:39:22,840 - INFO - Loaded cached index prices from today
+2025-09-27 01:39:22,844 - INFO - All expiry dates are valid
+2025-09-27 01:39:22,844 - INFO - Loaded cached expiry dates from today
+2025-09-27 01:39:23,040 - INFO - WebSocket connection monitoring started
+2025-09-27 01:39:23,040 - INFO - Telegram configuration loaded successfully
+2025-09-27 01:39:23,040 - INFO - Log monitoring started
+2025-09-27 01:39:28,419 - INFO - Telegram notification sent successfully
+2025-09-27 01:39:28,419 - INFO - SL/Target configuration loaded - SL: 5 points, Target: 40 points
+2025-09-27 01:39:28,419 - INFO - Calculated differences - SL: -5, Target: 40
+2025-09-27 01:39:28,732 - INFO - Checking master files...
+2025-09-27 01:39:28,734 - INFO - All master files are current
+2025-09-27 01:39:28,734 - INFO - [SUCCESS] Master files are up to date
+2025-09-27 01:39:28,734 - INFO - Attempting auto-login for master account...
+2025-09-27 01:39:28,734 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-27 01:39:28,734 - INFO - Generated fresh 2FA for account 1: 879754
+2025-09-27 01:39:28,736 - INFO - Attempting login for account 1 with userid: FA42242
+2025-09-27 01:39:29,420 - INFO - Login response for account 1: {'request_time': '01:39:30 27-09-2025', 'actid': 'FA42242', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'KRATIK YADAV', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': 'f84160e4438f75a0fcbd22f9dac0565671ffa17a893bb6b7197ce9d13a829ded', 'susertokenspl': '95eb311515794d96ef559eb6b4d6bdf6f63b1bc21cf1ce5ac38773481c928401', 'email': 'kratikiafk@gmail.com', 'uid': 'FA42242', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '6265650705', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'NIPO', 'BSTAR', 'BFO'], 'values': ['4', '3', '2'], 'mws': {'4': [{'exch': 'NFO', 'token': '68495', 'tsym': 'BANKINDIA28OCT25P105', 'cname': 'BANKINDIA OCT 105 PE ', 'dname': 'BANKINDIA OCT 105 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '68471', 'tsym': 'BANKINDIA30SEP25P142.5', 'cname': 'BANKINDIA SEP 142.50 PE ', 'dname': 'BANKINDIA SEP 142.50 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}], '3': [], '2': [{'exch': 'NSE', 'token': '2088', 'tsym': 'MAHSEAMLES-EQ', 'cname': 'MAHARASHTRA SEAMLESS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '23402', 'tsym': 'SRM-EQ', 'cname': 'SRM CONTRACTORS LIMITED', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '18110', 'tsym': 'VASCONEQ-EQ', 'cname': 'VASCON ENGINEERS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758917370', 'lastpwdtime': '1756959759'}
+2025-09-27 01:39:29,421 - INFO - Login response type: <class 'dict'>
+2025-09-27 01:39:29,422 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-27 01:39:29,428 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-27 01:39:29,435 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-27 01:39:29,437 - INFO - WebSocket connection established for account 1
+2025-09-27 01:39:29,438 - INFO - Network connection restored for account 1
+2025-09-27 01:39:29,439 - INFO - Refreshing market data...
+2025-09-27 01:39:29,440 - INFO - Master account auto-login successful: KRATIK YADAV
+2025-09-27 01:39:29,440 - INFO - Index prices are current, no refresh needed
+2025-09-27 01:39:29,443 - INFO - Expiry dates are current, no refresh needed
+2025-09-27 01:39:29,644 - INFO - Websocket connected
+2025-09-27 01:39:29,699 - INFO - WebSocket is now open for Account 1
+2025-09-27 01:40:23,077 - INFO - Log monitoring active after 60 second startup delay
+2025-09-27 01:42:34,573 - INFO - Application closing - cleaning up resources
+2025-09-27 01:42:36,586 - INFO - Log monitoring stopped
+2025-09-27 01:42:37,587 - INFO - WebSocket connection monitoring stopped
+2025-09-27 01:42:45,877 - INFO - Loaded account states from account_state.csv
+2025-09-27 01:42:45,890 - INFO - Loaded configuration from configuration.csv
+2025-09-27 01:42:45,897 - INFO - Resetting account states to initial state on startup...
+2025-09-27 01:42:45,904 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-27 01:42:45,908 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-27 01:42:45,913 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-27 01:42:45,920 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-27 01:42:45,921 - INFO - RESET POSITION DATA - Master (ID: 1) - position data cleared
+2025-09-27 01:42:45,929 - INFO - RESET POSITION DATA - Child (ID: 2) - position data cleared
+2025-09-27 01:42:45,940 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-27 01:42:45,946 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-27 01:42:45,946 - INFO - Enabling selection row components
+2025-09-27 01:42:45,946 - ERROR - Error enabling selection row: 'MainWindow' object has no attribute 'index_dropdown'
+2025-09-27 01:42:45,946 - INFO - Position data and exit order info cleared on startup for both accounts
+2025-09-27 01:42:45,946 - INFO - Account states reset to initial state
+2025-09-27 01:42:45,960 - INFO - Loaded cached index prices from today
+2025-09-27 01:42:45,978 - INFO - All expiry dates are valid
+2025-09-27 01:42:45,978 - INFO - Loaded cached expiry dates from today
+2025-09-27 01:42:46,248 - INFO - WebSocket connection monitoring started
+2025-09-27 01:42:46,278 - INFO - Telegram configuration loaded successfully
+2025-09-27 01:42:46,278 - INFO - Log monitoring started
+2025-09-27 01:42:46,278 - INFO - Validating Telegram configuration...
+2025-09-27 01:42:46,278 - INFO - Telegram configuration valid - Bot: 8251403343..., Channel: -1003134886368
+2025-09-27 01:42:46,278 - INFO - Testing Telegram notification...
+2025-09-27 01:42:47,646 - INFO - Telegram notification sent successfully
+2025-09-27 01:42:47,646 - INFO - SL/Target configuration loaded - SL: 5 points, Target: 40 points
+2025-09-27 01:42:47,646 - INFO - Calculated differences - SL: -5, Target: 40
+2025-09-27 01:42:47,936 - INFO - Checking master files...
+2025-09-27 01:42:47,941 - INFO - All master files are current
+2025-09-27 01:42:47,941 - INFO - [SUCCESS] Master files are up to date
+2025-09-27 01:42:47,941 - INFO - Attempting auto-login for master account...
+2025-09-27 01:42:47,941 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-27 01:42:47,941 - INFO - Generated fresh 2FA for account 1: 851037
+2025-09-27 01:42:47,941 - INFO - Attempting login for account 1 with userid: FA42242
+2025-09-27 01:42:48,570 - INFO - Login response for account 1: {'request_time': '01:42:50 27-09-2025', 'actid': 'FA42242', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'KRATIK YADAV', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': '0b3fad0f79264d377e62bbf9d097724f0e40040259379fe6cd2f5b6e25e37eb6', 'susertokenspl': 'c497a3f2bc1ea9c0ddced1fa963080646e0ae589a6db1bbaf5ed6311c4ad5d56', 'email': 'kratikiafk@gmail.com', 'uid': 'FA42242', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '6265650705', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'NIPO', 'BSTAR', 'BFO'], 'values': ['4', '3', '2'], 'mws': {'4': [{'exch': 'NFO', 'token': '68495', 'tsym': 'BANKINDIA28OCT25P105', 'cname': 'BANKINDIA OCT 105 PE ', 'dname': 'BANKINDIA OCT 105 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '68471', 'tsym': 'BANKINDIA30SEP25P142.5', 'cname': 'BANKINDIA SEP 142.50 PE ', 'dname': 'BANKINDIA SEP 142.50 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}], '3': [], '2': [{'exch': 'NSE', 'token': '2088', 'tsym': 'MAHSEAMLES-EQ', 'cname': 'MAHARASHTRA SEAMLESS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '23402', 'tsym': 'SRM-EQ', 'cname': 'SRM CONTRACTORS LIMITED', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '18110', 'tsym': 'VASCONEQ-EQ', 'cname': 'VASCON ENGINEERS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758917570', 'lastpwdtime': '1756959759'}
+2025-09-27 01:42:48,571 - INFO - Login response type: <class 'dict'>
+2025-09-27 01:42:48,572 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-27 01:42:48,577 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-27 01:42:48,580 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-27 01:42:48,581 - INFO - WebSocket connection established for account 1
+2025-09-27 01:42:48,582 - INFO - Network connection restored for account 1
+2025-09-27 01:42:48,583 - INFO - Refreshing market data...
+2025-09-27 01:42:48,583 - INFO - Master account auto-login successful: KRATIK YADAV
+2025-09-27 01:42:48,583 - INFO - Index prices are current, no refresh needed
+2025-09-27 01:42:48,584 - INFO - Expiry dates are current, no refresh needed
+2025-09-27 01:42:48,771 - INFO - Websocket connected
+2025-09-27 01:42:48,818 - INFO - WebSocket is now open for Account 1
+2025-09-27 01:42:53,819 - INFO - Index selected: SENSEX
+2025-09-27 01:42:53,820 - INFO - On option selected called - Function not implemented yet
+2025-09-27 01:42:53,821 - INFO - Not all required fields selected for strike selection
+2025-09-27 01:42:53,822 - INFO - Option and strike selections cleared for new index
+2025-09-27 01:42:53,822 - INFO - On expiry selected called - Function not implemented yet
+2025-09-27 01:42:53,824 - INFO - Strike dropdown populated with 15 strikes for SENSEX
+2025-09-27 01:42:53,824 - INFO - Updated quantity dropdown for SENSEX: ['20', '40', '60', '80', '100', '120', '140', '160', '180', '200']
+2025-09-27 01:42:56,683 - INFO - On option selected called - Function not implemented yet
+2025-09-27 01:42:58,934 - INFO - Buy price box cleared for new symbol selection - auto-fill re-enabled
+2025-09-27 01:42:58,936 - INFO - Generated trading symbol: SENSEX25O0180000CE
+2025-09-27 01:42:58,936 - INFO - Trading symbol stored: SENSEX25O0180000CE
+2025-09-27 01:42:58,936 - INFO - Getting token for trading symbol: SENSEX25O0180000CE
+2025-09-27 01:42:58,941 - INFO - Found token for SENSEX25O0180000CE: 865367
+2025-09-27 01:42:59,564 - INFO - Fetched price for SENSEX25O0180000CE: 738.2
+2025-09-27 01:42:59,564 - INFO - Getting token for trading symbol: SENSEX25O0180000CE
+2025-09-27 01:42:59,564 - INFO - Found token for SENSEX25O0180000CE: 865367
+2025-09-27 01:42:59,564 - INFO - Subscribed to live price feed via master account: BFO|865367
+2025-09-27 01:42:59,574 - INFO - Auto-subscribed to SENSEX25O0180000CE at price 738.2
+2025-09-27 01:42:59,574 - INFO - Strike selected: 80000, trading symbol: SENSEX25O0180000CE
+2025-09-27 01:42:59,618 - INFO - Initial buy price set: 738.20
+2025-09-27 01:43:08,078 - INFO - Application closing - cleaning up resources
+2025-09-27 01:43:08,291 - INFO - Log monitoring stopped
+2025-09-27 01:43:09,307 - INFO - WebSocket connection monitoring stopped
+2025-09-27 01:52:07,722 - INFO - Loaded account states from account_state.csv
+2025-09-27 01:52:07,727 - INFO - Loaded configuration from configuration.csv
+2025-09-27 01:52:07,727 - INFO - Resetting account states to initial state on startup...
+2025-09-27 01:52:07,735 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-27 01:52:07,740 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-27 01:52:07,744 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-27 01:52:07,749 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-27 01:52:07,752 - INFO - RESET POSITION DATA - Master (ID: 1) - position data cleared
+2025-09-27 01:52:07,758 - INFO - RESET POSITION DATA - Child (ID: 2) - position data cleared
+2025-09-27 01:52:07,765 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-27 01:52:07,768 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-27 01:52:07,768 - INFO - Enabling selection row components
+2025-09-27 01:52:07,768 - ERROR - Error enabling selection row: 'MainWindow' object has no attribute 'index_dropdown'
+2025-09-27 01:52:07,768 - INFO - Position data and exit order info cleared on startup for both accounts
+2025-09-27 01:52:07,768 - INFO - Account states reset to initial state
+2025-09-27 01:52:07,768 - INFO - Loaded cached index prices from today
+2025-09-27 01:52:07,776 - INFO - All expiry dates are valid
+2025-09-27 01:52:07,776 - INFO - Loaded cached expiry dates from today
+2025-09-27 01:52:07,999 - INFO - WebSocket connection monitoring started
+2025-09-27 01:52:07,999 - INFO - Telegram configuration loaded successfully
+2025-09-27 01:52:07,999 - INFO - Log monitoring started
+2025-09-27 01:52:07,999 - INFO - Validating Telegram configuration...
+2025-09-27 01:52:08,002 - INFO - Telegram configuration valid - Bot: 8251403343..., Channel: -1003134886368
+2025-09-27 01:52:08,002 - INFO - Testing Telegram notification...
+2025-09-27 01:52:09,277 - INFO - Telegram notification sent successfully
+2025-09-27 01:52:09,281 - INFO - Testing order completion notifications...
+2025-09-27 01:52:10,673 - INFO - Order completion notification sent for MASTER - BUY NIFTY25SEP24000CE
+2025-09-27 01:52:11,956 - INFO - Order completion notification sent for CHILD - SELL BANKNIFTY25SEP50000CE
+2025-09-27 01:52:11,959 - INFO - SL/Target configuration loaded - SL: 5 points, Target: 40 points
+2025-09-27 01:52:11,961 - INFO - Calculated differences - SL: -5, Target: 40
+2025-09-27 01:52:12,319 - INFO - Checking master files...
+2025-09-27 01:52:12,320 - INFO - All master files are current
+2025-09-27 01:52:12,320 - INFO - [SUCCESS] Master files are up to date
+2025-09-27 01:52:12,320 - INFO - Attempting auto-login for master account...
+2025-09-27 01:52:12,321 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-27 01:52:12,321 - INFO - Generated fresh 2FA for account 1: 407581
+2025-09-27 01:52:12,322 - INFO - Attempting login for account 1 with userid: FA42242
+2025-09-27 01:52:12,947 - INFO - Login response for account 1: {'request_time': '01:52:14 27-09-2025', 'actid': 'FA42242', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'KRATIK YADAV', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': '7f4b03b374e07d94566cbb894af7f45fa5a8f4d550f172a9354b805806e07f93', 'susertokenspl': 'a52f480c95cd490ad812878fefdb923f8b609f6d1f6c71fab15ed135749c629c', 'email': 'kratikiafk@gmail.com', 'uid': 'FA42242', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '6265650705', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'NIPO', 'BSTAR', 'BFO'], 'values': ['4', '3', '2'], 'mws': {'4': [{'exch': 'NFO', 'token': '68495', 'tsym': 'BANKINDIA28OCT25P105', 'cname': 'BANKINDIA OCT 105 PE ', 'dname': 'BANKINDIA OCT 105 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '68471', 'tsym': 'BANKINDIA30SEP25P142.5', 'cname': 'BANKINDIA SEP 142.50 PE ', 'dname': 'BANKINDIA SEP 142.50 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}], '3': [], '2': [{'exch': 'NSE', 'token': '2088', 'tsym': 'MAHSEAMLES-EQ', 'cname': 'MAHARASHTRA SEAMLESS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '23402', 'tsym': 'SRM-EQ', 'cname': 'SRM CONTRACTORS LIMITED', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '18110', 'tsym': 'VASCONEQ-EQ', 'cname': 'VASCON ENGINEERS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758918134', 'lastpwdtime': '1756959759'}
+2025-09-27 01:52:12,949 - INFO - Login response type: <class 'dict'>
+2025-09-27 01:52:12,950 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-27 01:52:12,956 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-27 01:52:12,960 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-27 01:52:12,961 - INFO - WebSocket connection established for account 1
+2025-09-27 01:52:12,962 - INFO - Network connection restored for account 1
+2025-09-27 01:52:12,964 - INFO - Refreshing market data...
+2025-09-27 01:52:12,965 - INFO - Master account auto-login successful: KRATIK YADAV
+2025-09-27 01:52:12,966 - INFO - Index prices are current, no refresh needed
+2025-09-27 01:52:12,967 - INFO - Expiry dates are current, no refresh needed
+2025-09-27 01:52:13,134 - INFO - Websocket connected
+2025-09-27 01:52:13,181 - INFO - WebSocket is now open for Account 1
+2025-09-27 01:53:01,103 - INFO - Application closing - cleaning up resources
+2025-09-27 01:53:02,047 - INFO - Log monitoring stopped
+2025-09-27 01:53:03,061 - INFO - WebSocket connection monitoring stopped
+2025-09-27 01:53:12,236 - INFO - Loaded account states from account_state.csv
+2025-09-27 01:53:12,236 - INFO - Loaded configuration from configuration.csv
+2025-09-27 01:53:12,236 - INFO - Resetting account states to initial state on startup...
+2025-09-27 01:53:12,248 - INFO - Updated Master (ID: 1) login_status to '0': Program startup - master not logged in
+2025-09-27 01:53:12,251 - INFO - Updated Master (ID: 1) can_order to '0': Program startup - master cannot place orders
+2025-09-27 01:53:12,257 - INFO - Updated Child (ID: 2) login_status to '0': Program startup - child not logged in
+2025-09-27 01:53:12,262 - INFO - Updated Child (ID: 2) can_order to '0': Program startup - child cannot place orders
+2025-09-27 01:53:12,267 - INFO - RESET POSITION DATA - Master (ID: 1) - position data cleared
+2025-09-27 01:53:12,274 - INFO - RESET POSITION DATA - Child (ID: 2) - position data cleared
+2025-09-27 01:53:12,283 - INFO - Cleared exit order info for Master (ID: 1)
+2025-09-27 01:53:12,283 - INFO - Cleared exit order info for Child (ID: 2)
+2025-09-27 01:53:12,283 - INFO - Enabling selection row components
+2025-09-27 01:53:12,283 - ERROR - Error enabling selection row: 'MainWindow' object has no attribute 'index_dropdown'
+2025-09-27 01:53:12,283 - INFO - Position data and exit order info cleared on startup for both accounts
+2025-09-27 01:53:12,283 - INFO - Account states reset to initial state
+2025-09-27 01:53:12,292 - INFO - Loaded cached index prices from today
+2025-09-27 01:53:12,292 - INFO - All expiry dates are valid
+2025-09-27 01:53:12,292 - INFO - Loaded cached expiry dates from today
+2025-09-27 01:53:12,492 - INFO - WebSocket connection monitoring started
+2025-09-27 01:53:12,492 - INFO - Telegram configuration loaded successfully
+2025-09-27 01:53:12,494 - INFO - Log monitoring started
+2025-09-27 01:53:12,496 - INFO - Validating Telegram configuration...
+2025-09-27 01:53:12,496 - INFO - Telegram configuration valid - Bot: 8251403343..., Channel: -1003134886368
+2025-09-27 01:53:12,496 - INFO - Testing Telegram notification...
+2025-09-27 01:53:13,792 - INFO - Telegram notification sent successfully
+2025-09-27 01:53:13,795 - INFO - Testing order completion notifications...
+2025-09-27 01:53:15,010 - INFO - Order completion notification sent for MASTER - BUY NIFTY25SEP24000CE
+2025-09-27 01:53:16,231 - INFO - Order completion notification sent for CHILD - SELL BANKNIFTY25SEP50000CE
+2025-09-27 01:53:16,237 - INFO - SL/Target configuration loaded - SL: 5 points, Target: 40 points
+2025-09-27 01:53:16,237 - INFO - Calculated differences - SL: -5, Target: 40
+2025-09-27 01:53:16,586 - INFO - Checking master files...
+2025-09-27 01:53:16,587 - INFO - All master files are current
+2025-09-27 01:53:16,587 - INFO - [SUCCESS] Master files are up to date
+2025-09-27 01:53:16,588 - INFO - Attempting auto-login for master account...
+2025-09-27 01:53:16,588 - INFO - Starting Master-Child Trading GUI - Original UI Layout
+2025-09-27 01:53:16,588 - INFO - Generated fresh 2FA for account 1: 649789
+2025-09-27 01:53:16,589 - INFO - Attempting login for account 1 with userid: FA42242
+2025-09-27 01:53:17,236 - INFO - Login response for account 1: {'request_time': '01:53:18 27-09-2025', 'actid': 'FA42242', 'access_type': ['MOB', 'TT', 'WEB', 'API'], 'uname': 'KRATIK YADAV', 'prarr': [{'prd': 'C', 's_prdt_ali': 'CNC', 'exch': ['NSE', 'BSE', 'NIPO', 'BSTAR']}, {'prd': 'M', 's_prdt_ali': 'NRML', 'exch': ['NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'I', 's_prdt_ali': 'MIS', 'exch': ['NSE', 'BSE', 'NFO', 'BFO', 'CDS', 'BCD']}, {'prd': 'H', 's_prdt_ali': 'CO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}, {'prd': 'B', 's_prdt_ali': 'BO', 'exch': ['NSE', 'NFO', 'CDS', 'BSE']}], 'exch_prd': [{'exch': 'NSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'NFO', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'CDS', 'prds': ['M', 'I', 'H', 'B']}, {'exch': 'BSE', 'prds': ['C', 'I', 'H', 'B']}, {'exch': 'BCD', 'prds': ['M', 'I']}, {'exch': 'NIPO', 'prds': ['C']}, {'exch': 'BSTAR', 'prds': ['C']}, {'exch': 'BFO', 'prds': ['M', 'I']}], 'stat': 'Ok', 'susertoken': '68fd53bd1c94c45daf8c1ac8714671909632b6e4b74d4c6d1b5948c2f9846f69', 'susertokenspl': 'e98847a1dea92730441f2e544e38f4e1b7163e42478dff13d1011aa19e4e154f', 'email': 'kratikiafk@gmail.com', 'uid': 'FA42242', 'brnchid': 'HO', 'totp_set': '1', 'm_num': '6265650705', 'orarr': ['MKT', 'LMT', 'SL-LMT', 'SL-MKT'], 'exarr': ['NSE', 'NFO', 'CDS', 'BSE', 'BCD', 'NIPO', 'BSTAR', 'BFO'], 'values': ['4', '3', '2'], 'mws': {'4': [{'exch': 'NFO', 'token': '68495', 'tsym': 'BANKINDIA28OCT25P105', 'cname': 'BANKINDIA OCT 105 PE ', 'dname': 'BANKINDIA OCT 105 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}, {'exch': 'NFO', 'token': '68471', 'tsym': 'BANKINDIA30SEP25P142.5', 'cname': 'BANKINDIA SEP 142.50 PE ', 'dname': 'BANKINDIA SEP 142.50 PE ', 'instname': 'OPTSTK', 'pp': '2', 'ls': '5200', 'ti': '0.05', 'optt': 'PE'}], '3': [], '2': [{'exch': 'NSE', 'token': '2088', 'tsym': 'MAHSEAMLES-EQ', 'cname': 'MAHARASHTRA SEAMLESS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '23402', 'tsym': 'SRM-EQ', 'cname': 'SRM CONTRACTORS LIMITED', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.05'}, {'exch': 'NSE', 'token': '18110', 'tsym': 'VASCONEQ-EQ', 'cname': 'VASCON ENGINEERS LTD', 'instname': 'EQ', 'pp': '2', 'ls': '1', 'ti': '0.01'}]}, 'brkname': 'FINV', 'dmsg': '', 'lastaccesstime': '1758918198', 'lastpwdtime': '1756959759'}
+2025-09-27 01:53:17,238 - INFO - Login response type: <class 'dict'>
+2025-09-27 01:53:17,239 - INFO - Login Successful!, Welcome KRATIK YADAV - Master ACCOUNT
+2025-09-27 01:53:17,244 - INFO - Updated Master (ID: 1) login_status to '1': Master account auto-login successful
+2025-09-27 01:53:17,251 - INFO - Updated Master (ID: 1) can_order to '1': Master account ready for orders
+2025-09-27 01:53:17,253 - INFO - WebSocket connection established for account 1
+2025-09-27 01:53:17,254 - INFO - Network connection restored for account 1
+2025-09-27 01:53:17,255 - INFO - Refreshing market data...
+2025-09-27 01:53:17,255 - INFO - Master account auto-login successful: KRATIK YADAV
+2025-09-27 01:53:17,256 - INFO - Index prices are current, no refresh needed
+2025-09-27 01:53:17,258 - INFO - Expiry dates are current, no refresh needed
+2025-09-27 01:53:17,462 - INFO - Websocket connected
+2025-09-27 01:53:17,507 - INFO - WebSocket is now open for Account 1
+2025-09-27 01:54:12,601 - INFO - Log monitoring active after 60 second startup delay

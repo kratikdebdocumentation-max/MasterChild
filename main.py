@@ -336,6 +336,12 @@ class LogMonitor:
         self.startup_delay = 60  # 1 minute delay before monitoring starts
         self.error_detected = False  # Flag to stop monitoring after first error
         
+        # Load Telegram configuration
+        self.telegram_config = self._load_telegram_config()
+        self.telegram_bot_token = self.telegram_config.get('bot_token', '')
+        self.telegram_channel_id = self.telegram_config.get('channel_id', '')
+        self.telegram_enabled = self.telegram_config.get('enabled', False)
+        
         # Error patterns to monitor
         self.error_patterns = [
             r"websocket run forever ended in exception",
@@ -391,6 +397,167 @@ class LogMonitor:
             self.reset_monitoring()
             self.start_monitoring()
     
+    def _load_telegram_config(self):
+        """Load Telegram configuration from file"""
+        try:
+            import json
+            config_file = 'telegram_config.json'
+            if os.path.exists(config_file):
+                with open(config_file, 'r') as f:
+                    config = json.load(f)
+                    logger.info("Telegram configuration loaded successfully")
+                    return config
+            else:
+                logger.warning("Telegram config file not found, using defaults")
+                return {'enabled': False, 'bot_token': '', 'channel_id': '', 'timeout': 10}
+        except Exception as e:
+            logger.error(f"Error loading Telegram configuration: {e}")
+            return {'enabled': False, 'bot_token': '', 'channel_id': '', 'timeout': 10}
+    
+    def send_telegram_notification(self, error_message, account_info):
+        """Send notification to Telegram channel"""
+        if not self.telegram_enabled:
+            return
+        
+        try:
+            import requests
+            
+            # Format the message for Telegram
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            message = f"🚨 **WebSocket Error Alert** 🚨\n\n"
+            message += f"**Account:** {account_info}\n"
+            message += f"**Time:** {timestamp}\n"
+            message += f"**Error:** `{error_message}`\n\n"
+            message += f"⚠️ **Action Required:** Check your trading system immediately!"
+            
+            # Telegram API URL
+            url = f"https://api.telegram.org/bot{self.telegram_bot_token}/sendMessage"
+            
+            # Message data
+            data = {
+                'chat_id': self.telegram_channel_id,
+                'text': message,
+                'parse_mode': 'Markdown'
+            }
+            
+            # Send the message
+            timeout = self.telegram_config.get('timeout', 10)
+            response = requests.post(url, data=data, timeout=timeout)
+            
+            if response.status_code == 200:
+                logger.info("Telegram notification sent successfully")
+            else:
+                logger.error(f"Failed to send Telegram notification: {response.status_code} - {response.text}")
+                
+        except ImportError:
+            logger.error("Requests library not available for Telegram notifications")
+        except Exception as e:
+            logger.error(f"Error sending Telegram notification: {e}")
+    
+    def validate_telegram_config(self):
+        """Validate Telegram configuration"""
+        if not self.telegram_enabled:
+            return False
+        
+        if not self.telegram_bot_token:
+            return False
+        
+        if not self.telegram_channel_id:
+            return False
+        
+        return True
+    
+    def send_order_completion_notification(self, account_id, symbol, price, quantity, trantype, status):
+        """Send order completion notification to Telegram channel"""
+        if not self.telegram_enabled:
+            return
+        
+        try:
+            import requests
+            
+            # Determine account name
+            account_name = "MASTER" if account_id == 1 else "CHILD"
+            
+            # Determine order type and emoji
+            order_type = "BUY" if trantype.upper() == 'B' else "SELL"
+            emoji = "✅" if status == "COMPLETE" else "⚠️"
+            
+            # Format the message for Telegram
+            message = f"{account_name} → {emoji} {order_type} ORDER COMPLETED\n\n"
+            message += f"**Symbol:** `{symbol}`\n"
+            message += f"**Price:** {price}\n"
+            message += f"**Quantity:** {quantity}\n"
+            message += f"**Status:** {status}\n"
+            message += f"**Account:** {account_name} (ID: {account_id})"
+            
+            # Telegram API URL
+            url = f"https://api.telegram.org/bot{self.telegram_bot_token}/sendMessage"
+            
+            # Message data
+            data = {
+                'chat_id': self.telegram_channel_id,
+                'text': message,
+                'parse_mode': 'Markdown'
+            }
+            
+            # Send the message (non-blocking)
+            timeout = self.telegram_config.get('timeout', 10)
+            response = requests.post(url, data=data, timeout=timeout)
+            
+            if response.status_code == 200:
+                logger.info(f"Order completion notification sent for {account_name} - {order_type} {symbol}")
+            else:
+                logger.error(f"Failed to send order completion notification: {response.status_code} - {response.text}")
+                
+        except ImportError:
+            logger.error("Requests library not available for order completion notifications")
+        except Exception as e:
+            logger.error(f"Error sending order completion notification: {e}")
+    
+    def send_startup_notification(self):
+        """Send startup welcome message to Telegram channel"""
+        if not self.telegram_enabled:
+            return
+        
+        try:
+            import requests
+            
+            # Get current timestamp
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
+            # Format the welcome message
+            message = f"🚀 **Trading System Started** 🚀\n\n"
+            message += f"**Time:** {timestamp}\n"
+            message += f"**Status:** Online and Ready\n"
+            message += f"**Monitoring:** WebSocket Errors & Order Completions\n\n"
+            message += f"✅ **Ready for Trading!**\n"
+            message += f"📊 Order completions will be notified\n"
+            message += f"⚠️ WebSocket errors will be alerted"
+            
+            # Telegram API URL
+            url = f"https://api.telegram.org/bot{self.telegram_bot_token}/sendMessage"
+            
+            # Message data
+            data = {
+                'chat_id': self.telegram_channel_id,
+                'text': message,
+                'parse_mode': 'Markdown'
+            }
+            
+            # Send the message
+            timeout = self.telegram_config.get('timeout', 10)
+            response = requests.post(url, data=data, timeout=timeout)
+            
+            if response.status_code == 200:
+                logger.info("Startup notification sent successfully")
+            else:
+                logger.error(f"Failed to send startup notification: {response.status_code} - {response.text}")
+                
+        except ImportError:
+            logger.error("Requests library not available for startup notification")
+        except Exception as e:
+            logger.error(f"Error sending startup notification: {e}")
+    
     
     def _monitor_loop(self):
         """Main monitoring loop"""
@@ -405,7 +572,6 @@ class LogMonitor:
         
         while self.running and not self.error_detected:
             try:
-                print(f"DEBUG: Monitoring active, checking files... (error_detected: {self.error_detected})")
                 self._check_log_files()
                 time.sleep(5)  # Check every 5 seconds (balanced frequency)
             except Exception as e:
@@ -447,16 +613,12 @@ class LogMonitor:
                 new_content = f.read()
                 self.file_positions[current_log] = f.tell()
             
-            print(f"DEBUG: Read {len(new_content)} new characters from log file")
             logger.debug(f"Read {len(new_content)} new characters from log file")
             
             # Check for error patterns only in new content
             if new_content.strip():
-                print(f"DEBUG: Processing new content: {new_content[:200]}...")
                 logger.debug(f"Processing new content: {new_content[:200]}...")
                 self._process_new_content(new_content, current_log)
-            else:
-                print("DEBUG: No new content to process")
                 
         except Exception as e:
             logger.error(f"Error checking log files: {e}")
@@ -475,7 +637,6 @@ class LogMonitor:
             # Check for error patterns
             for pattern in self.error_patterns:
                 if re.search(pattern, line, re.IGNORECASE):
-                    print(f"DEBUG: ERROR DETECTED! Pattern '{pattern}' matched line: {line.strip()}")
                     # Extract account info
                     account_info = self._extract_account_info(line)
                     
@@ -483,12 +644,14 @@ class LogMonitor:
                     logger.error(f"WebSocket error detected: {line.strip()}")
                     logger.error(f"Pattern matched: {pattern}")
                     
+                    # Send Telegram notification
+                    self.send_telegram_notification(line.strip(), account_info)
+                    
                     # Show popup directly on main thread (synchronous)
                     try:
                         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                         detailed_message = f"WebSocket connection error detected:\n\n{line.strip()}\n\nTime: {timestamp}\nLog: {os.path.basename(log_file)}"
                         
-                        print(f"DEBUG: Attempting to show popup...")
                         # Create and show dialog directly
                         WebSocketErrorDialog.show_error(
                             self.main_window.root,
@@ -496,10 +659,8 @@ class LogMonitor:
                             detailed_message,
                             account_info
                         )
-                        print(f"DEBUG: Popup displayed successfully!")
                         logger.error("Error popup displayed successfully")
                     except Exception as e:
-                        print(f"DEBUG: Error showing popup: {e}")
                         logger.error(f"Error showing popup: {e}")
                     
                     # Mark error as detected and stop monitoring
@@ -586,14 +747,13 @@ class MainWindow:
         self.log_monitor = LogMonitor(self)
         self.log_monitor.start_monitoring()
         
-        # Test pattern matching with actual error message
-        test_line = "2025-09-26 21:13:27,456 - WARNING - websocket run forever ended in exception, socket is already opened"
-        print(f"DEBUG: Testing pattern matching with: {test_line}")
-        for pattern in self.log_monitor.error_patterns:
-            if re.search(pattern, test_line, re.IGNORECASE):
-                print(f"DEBUG: Pattern '{pattern}' MATCHES the test line!")
-            else:
-                print(f"DEBUG: Pattern '{pattern}' does NOT match the test line")
+        # Validate Telegram configuration and send welcome message
+        if self.log_monitor.validate_telegram_config():
+            logger.info("Telegram notifications enabled for order completions and WebSocket errors")
+            # Send welcome message
+            self.log_monitor.send_startup_notification()
+        else:
+            logger.warning("Telegram configuration invalid, notifications disabled")
         
         
         # Setup window close handler
@@ -3673,6 +3833,23 @@ class MainWindow:
                 self.timeout_timer.cancel()
                 self.timeout_timer = None
                 logger.info("Timeout timer cancelled - order completed before timeout")
+            
+            # Send Telegram notification for any completed order
+            if status == "COMPLETE":
+                # Get order details for notification
+                account_status = self.account_state_manager.get_account_status(account_id)
+                if account_status:
+                    symbol = account_status.get('current_symbol', '')
+                    price = account_status.get('current_price', 0.0)
+                    quantity = account_status.get('current_quantity', 0)
+                    
+                    # Send Telegram notification (non-blocking)
+                    try:
+                        self.log_monitor.send_order_completion_notification(
+                            account_id, symbol, price, quantity, trantype, status
+                        )
+                    except Exception as e:
+                        logger.error(f"Error sending order completion notification: {e}")
             
             # Activate SL/Target monitoring ONLY when BUY orders are completed
             if status == "COMPLETE" and trantype.upper() == 'B':
