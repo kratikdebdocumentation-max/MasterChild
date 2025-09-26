@@ -476,13 +476,6 @@ class MainWindow:
         self.trading_frame = tk.Frame(self.root)
         self.trading_frame.pack(side=tk.TOP, pady=10)
         
-        # Master Position button (leftmost in trading frame)
-        self.master_position_button = tk.Button(
-            self.trading_frame, text="Master Position", 
-            command=self.show_master_position_info, width=15, height=2,
-            state="normal"
-        )
-        self.master_position_button.pack(side=tk.LEFT, padx=5)
         
         # Quantity selection (moved to right of Master Position)
         tk.Label(self.trading_frame, text="Qty").pack(side=tk.LEFT, padx=5)
@@ -674,10 +667,10 @@ class MainWindow:
         self.order_frame = tk.Frame(self.root)
         self.order_frame.pack(side=tk.TOP, pady=10)
         
-        # Child Position button (leftmost)
+        # Broker Positions button (leftmost)
         self.child_position_button = tk.Button(
-            self.order_frame, text="Child Position", 
-            command=self.show_child_position_info, width=15, height=2,
+            self.order_frame, text="Broker Positions", 
+            command=self.show_order_book, width=15, height=2,
             state="normal"
         )
         self.child_position_button.grid(row=0, column=0, padx=5, pady=5)
@@ -1380,9 +1373,58 @@ class MainWindow:
         except Exception as e:
             logger.error(f"Error updating expiry dropdown: {e}")
         
+    def has_open_orders_or_monitoring(self):
+        """Check if there are open buy orders or active SL/Target monitoring"""
+        try:
+            # Check for open buy orders
+            master_has_open = self.order_states.get(1) == "OPEN"
+            child_has_open = self.order_states.get(2) == "OPEN"
+            
+            # Check for active monitoring
+            sl_monitoring = self.sl_monitoring_active
+            target_monitoring = self.target_monitoring_active
+            
+            # Check if any monitoring is active in the states
+            sl_active_in_states = self.sl_target_states.get('sl_active', False)
+            target_active_in_states = self.sl_target_states.get('target_active', False)
+            
+            has_open_orders = master_has_open or child_has_open
+            has_active_monitoring = sl_monitoring or target_monitoring or sl_active_in_states or target_active_in_states
+            
+            logger.info(f"Open orders check - Master: {master_has_open}, Child: {child_has_open}")
+            logger.info(f"Monitoring check - SL: {sl_monitoring}, Target: {target_monitoring}, States SL: {sl_active_in_states}, States Target: {target_active_in_states}")
+            
+            return has_open_orders or has_active_monitoring
+            
+        except Exception as e:
+            logger.error(f"Error checking open orders or monitoring: {e}")
+            return False  # If we can't determine, assume safe to release
+
+    def set_buy_price_box_state(self, state):
+        """Control the buy price box state (disabled/normal)"""
+        try:
+            if state == "disabled":
+                self.price_box.config(state="disabled", bg="lightgray")
+                logger.info("Buy price box disabled")
+            elif state == "normal":
+                self.price_box.config(state="normal", bg="white")
+                logger.info("Buy price box enabled")
+            else:
+                logger.warning(f"Invalid state for buy price box: {state}")
+        except Exception as e:
+            logger.error(f"Error setting buy price box state: {e}")
+
     def release_buttons(self):
         """Release button states - enable buy and sell order buttons"""
         try:
+            # Check if there are open orders or active monitoring
+            if self.has_open_orders_or_monitoring():
+                messagebox.showwarning(
+                    "Cannot Release", 
+                    "Close Open Orders first!\n\nPlease cancel any open buy orders and stop SL/Target monitoring before releasing the system."
+                )
+                return
+            
             logger.info("Release buttons clicked - resetting system for new orders")
             
             # 1. Reset account states - clear trading blocks while preserving login status
@@ -1472,7 +1514,7 @@ class MainWindow:
             self.buy_button.config(state='normal', text="BUY")
             
             # Re-enable price box for new orders
-            self.price_box.config(state='normal', bg='white')
+            self.set_buy_price_box_state("normal")
             
             # Clear original buy price and modify box
             self.original_buy_price = None
@@ -1739,32 +1781,10 @@ class MainWindow:
         except Exception as e:
             logger.error(f"Error updating Show PnL button state: {e}")
     
-    def show_master_position_info(self):
-        """Show Master account position information"""
+    def show_broker_position_info(self):
+        """Show broker position information"""
         try:
-            logger.info("Master Position button clicked - showing Master position information")
-            
-            account_num = 1
-            filled_qty = self.account_state_manager.get_filled_quantity(account_num)
-            account_status = self.account_state_manager.get_account_status(account_num)
-            
-            if filled_qty > 0:
-                symbol = account_status.get('current_symbol', 'Unknown') if account_status else 'Unknown'
-                price = account_status.get('current_price', 0.0) if account_status else 0.0
-                position_text = f"Master Position:\n{filled_qty} lots of {symbol} @ {price}"
-            else:
-                position_text = "Master Position:\nNo position"
-            
-            messagebox.showinfo("Master Position", position_text)
-            
-        except Exception as e:
-            logger.error(f"Error showing Master position information: {e}")
-            messagebox.showerror("Error", f"Failed to retrieve Master position information: {str(e)}")
-    
-    def show_child_position_info(self):
-        """Show Child account position information"""
-        try:
-            logger.info("Child Position button clicked - showing Child position information")
+            logger.info("Broker Positions button clicked - showing broker position information")
             
             account_num = 2
             filled_qty = self.account_state_manager.get_filled_quantity(account_num)
@@ -1773,15 +1793,180 @@ class MainWindow:
             if filled_qty > 0:
                 symbol = account_status.get('current_symbol', 'Unknown') if account_status else 'Unknown'
                 price = account_status.get('current_price', 0.0) if account_status else 0.0
-                position_text = f"Child Position:\n{filled_qty} lots of {symbol} @ {price}"
+                position_text = f"Broker Position:\n{filled_qty} lots of {symbol} @ {price}"
             else:
-                position_text = "Child Position:\nNo position"
+                position_text = "Broker Position:\nNo position"
             
-            messagebox.showinfo("Child Position", position_text)
+            messagebox.showinfo("Broker Positions", position_text)
             
         except Exception as e:
-            logger.error(f"Error showing Child position information: {e}")
-            messagebox.showerror("Error", f"Failed to retrieve Child position information: {str(e)}")
+            logger.error(f"Error showing broker position information: {e}")
+            messagebox.showerror("Error", f"Failed to retrieve broker position information: {str(e)}")
+    
+    def show_order_book(self):
+        """Show order book in a new window with Master and Child sections"""
+        try:
+            logger.info("Order Book button clicked - showing order book")
+            
+            # Create new window
+            order_window = tk.Toplevel(self.root)
+            order_window.title("Order Book - Master & Child Orders")
+            order_window.geometry("900x700")
+            order_window.resizable(True, True)
+            
+            # Center the window
+            order_window.update_idletasks()
+            width = order_window.winfo_width()
+            height = order_window.winfo_height()
+            x = (order_window.winfo_screenwidth() // 2) - (width // 2)
+            y = (order_window.winfo_screenheight() // 2) - (height // 2)
+            order_window.geometry(f'{width}x{height}+{x}+{y}')
+            
+            # Create main frame
+            main_frame = tk.Frame(order_window)
+            main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+            
+            # Create Master Orders section
+            master_frame = tk.LabelFrame(main_frame, text="Master Orders", font=("Arial", 12, "bold"))
+            master_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+            
+            # Create Treeview for Master orders
+            master_columns = ('Order Id', 'Symbol', 'Qty', 'Type', 'Status', 'Action')
+            self.master_tree = ttk.Treeview(master_frame, columns=master_columns, show='headings', height=8)
+            
+            # Define column headings and widths for Master
+            for col in master_columns:
+                self.master_tree.heading(col, text=col)
+            
+            self.master_tree.column('Order Id', width=120)
+            self.master_tree.column('Symbol', width=150)
+            self.master_tree.column('Qty', width=80)
+            self.master_tree.column('Type', width=80)
+            self.master_tree.column('Status', width=100)
+            self.master_tree.column('Action', width=100)
+            
+            # Add scrollbar for Master orders
+            master_scrollbar = ttk.Scrollbar(master_frame, orient=tk.VERTICAL, command=self.master_tree.yview)
+            self.master_tree.configure(yscrollcommand=master_scrollbar.set)
+            
+            # Pack Master tree and scrollbar
+            self.master_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+            master_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+            
+            # Create separator
+            separator = tk.Frame(main_frame, height=2, bg="gray")
+            separator.pack(fill=tk.X, padx=10, pady=5)
+            
+            # Create Child Orders section
+            child_frame = tk.LabelFrame(main_frame, text="Child Orders", font=("Arial", 12, "bold"))
+            child_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+            
+            # Create Treeview for Child orders
+            child_columns = ('Order Id', 'Symbol', 'Qty', 'Type', 'Status', 'Action')
+            self.child_tree = ttk.Treeview(child_frame, columns=child_columns, show='headings', height=8)
+            
+            # Define column headings and widths for Child
+            for col in child_columns:
+                self.child_tree.heading(col, text=col)
+            
+            self.child_tree.column('Order Id', width=120)
+            self.child_tree.column('Symbol', width=150)
+            self.child_tree.column('Qty', width=80)
+            self.child_tree.column('Type', width=80)
+            self.child_tree.column('Status', width=100)
+            self.child_tree.column('Action', width=100)
+            
+            # Add scrollbar for Child orders
+            child_scrollbar = ttk.Scrollbar(child_frame, orient=tk.VERTICAL, command=self.child_tree.yview)
+            self.child_tree.configure(yscrollcommand=child_scrollbar.set)
+            
+            # Pack Child tree and scrollbar
+            self.child_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+            child_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+            
+            # Fetch and display order book data for both accounts
+            self.populate_order_book_sections()
+            
+            # Add refresh button
+            refresh_button = tk.Button(order_window, text="Refresh All", 
+                                    command=self.populate_order_book_sections)
+            refresh_button.pack(pady=10)
+            
+        except Exception as e:
+            logger.error(f"Error showing order book: {e}")
+            messagebox.showerror("Error", f"Failed to show order book: {str(e)}")
+    
+    def populate_order_book_sections(self):
+        """Populate both Master and Child order book sections with data"""
+        try:
+            # Clear existing data from both trees
+            for item in self.master_tree.get_children():
+                self.master_tree.delete(item)
+            for item in self.child_tree.get_children():
+                self.child_tree.delete(item)
+            
+            # Populate Master Orders (Account 1)
+            self.populate_account_orders(1, self.master_tree, "Master")
+            
+            # Populate Child Orders (Account 2)
+            self.populate_account_orders(2, self.child_tree, "Child")
+                
+        except Exception as e:
+            logger.error(f"Error populating order book sections: {e}")
+            # Show error in both sections
+            self.master_tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', ''))
+            self.child_tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', ''))
+    
+    def populate_account_orders(self, account_num, tree, account_name):
+        """Populate order book table for a specific account"""
+        try:
+            # Get API for this account
+            api = self.account_manager.get_api(account_num)
+            
+            if api:
+                ret = api.get_order_book()
+                logger.info(f"{account_name} order book data: {ret}")
+                
+                if ret and isinstance(ret, list):
+                    orders_found = False
+                    for order in ret:
+                        if isinstance(order, dict) and order.get('stat') == 'Ok':
+                            orders_found = True
+                            # Extract relevant information
+                            order_id = order.get('norenordno', 'N/A')
+                            symbol = order.get('tsym', 'N/A')
+                            qty = order.get('qty', 'N/A')
+                            trantype = order.get('trantype', 'N/A')
+                            status = order.get('status', 'N/A')
+                            
+                            # Determine action based on status
+                            action = 'N/A'
+                            if status == 'OPEN':
+                                action = 'Cancel'
+                            elif status == 'COMPLETE':
+                                action = 'View'
+                            elif status == 'REJECTED':
+                                action = 'View'
+                            elif status == 'CANCELED':
+                                action = 'View'
+                            
+                            # Insert row into tree
+                            tree.insert('', 'end', values=(
+                                order_id, symbol, qty, trantype, status, action
+                            ))
+                    
+                    if not orders_found:
+                        tree.insert('', 'end', values=('No orders found', '', '', '', '', ''))
+                else:
+                    # No orders or error
+                    tree.insert('', 'end', values=('No orders found', '', '', '', '', ''))
+            else:
+                # API not available
+                tree.insert('', 'end', values=('API not available', '', '', '', '', ''))
+                
+        except Exception as e:
+            logger.error(f"Error populating {account_name} order book: {e}")
+            tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', ''))
         
     def update_selections(self, *args):
         """Update selections when index changes"""
@@ -2219,6 +2404,12 @@ class MainWindow:
             
             # 7. Disable buy button with price display and enable management buttons
             self.buy_button.config(state="disabled", text=f"Buy @{price}")
+            self.set_buy_price_box_state("disabled")  # Disable price box when buy orders are placed
+            
+            # 8. Populate modify buy box with the buy order price
+            self.modify_buy_value.set(str(price))
+            logger.info(f"Modify buy box populated with price: {price}")
+            
             self.cancel_buy_button.config(state="normal")
             self.modify_buy_button.config(state="normal")
             self.cancel_master_buy_button.config(state="normal")
@@ -3632,6 +3823,7 @@ class MainWindow:
                 
                 # Disable buy button until release
                 self.buy_button.config(state="disabled", text="Press RELEASE to Enable")
+                self.set_buy_price_box_state("disabled")  # Disable price box when buy button is disabled
                 
                 logger.info("Master buy order cancelled successfully")
             else:
@@ -3679,6 +3871,7 @@ class MainWindow:
                 
                 # Disable buy button until release
                 self.buy_button.config(state="disabled", text="Press RELEASE to Enable")
+                self.set_buy_price_box_state("disabled")  # Disable price box when buy button is disabled
                 
                 logger.info("Child buy order cancelled successfully")
             else:
@@ -4041,6 +4234,7 @@ class MainWindow:
                 
                 # Disable buy button until release
                 self.buy_button.config(state="disabled", text="Press RELEASE to Enable")
+                self.set_buy_price_box_state("disabled")  # Disable price box when buy button is disabled
                 
                 # Success - orders cancelled (no popup needed)
             else:
