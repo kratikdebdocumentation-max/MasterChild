@@ -11,6 +11,8 @@ import logging
 from datetime import datetime
 import threading
 import time
+import re
+import os
 
 # Import trading modules
 from trading.account_manager import AccountManager
@@ -162,6 +164,391 @@ class CenteredConfirmationDialog:
         dialog = CenteredConfirmationDialog(parent, title, message, icon)
         return dialog.result
 
+class WebSocketErrorDialog:
+    """Custom error dialog for websocket disconnection errors"""
+    
+    def __init__(self, parent, title, message, account_info=""):
+        self.parent = parent
+        self.dialog = None
+        
+        # Create the dialog window
+        self.dialog = tk.Toplevel(parent)
+        self.dialog.title(title)
+        self.dialog.resizable(False, False)
+        
+        # Make it modal and always on top
+        self.dialog.transient(parent)
+        self.dialog.grab_set()
+        self.dialog.attributes('-topmost', True)
+        
+        # Create the dialog content
+        self.create_widgets(message, account_info)
+        
+        # Center the dialog on the parent window
+        self.center_on_parent()
+        
+        # Focus on the dialog
+        self.dialog.focus()
+        
+        # Make it stay on top
+        self.dialog.lift()
+        self.dialog.focus_force()
+    
+    def create_widgets(self, message, account_info):
+        """Create the dialog widgets"""
+        # Main frame with red border for error
+        main_frame = tk.Frame(self.dialog, padx=20, pady=20, relief=tk.RAISED, bd=2, bg='#ffebee')
+        main_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # Title frame
+        title_frame = tk.Frame(main_frame, bg='#ffebee')
+        title_frame.pack(fill=tk.X, pady=(0, 15))
+        
+        # Error icon and title
+        error_icon = tk.Label(title_frame, text="⚠", font=("Arial", 32, "bold"), 
+                             fg="red", bg='#ffebee')
+        error_icon.pack(side=tk.LEFT, padx=(0, 15))
+        
+        title_label = tk.Label(title_frame, text="WEBSOCKET DISCONNECTED", 
+                              font=("Arial", 16, "bold"), fg="red", bg='#ffebee')
+        title_label.pack(side=tk.LEFT)
+        
+        # Message frame
+        message_frame = tk.Frame(main_frame, bg='#ffebee')
+        message_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 20))
+        
+        # Account info if available
+        if account_info:
+            account_label = tk.Label(message_frame, text=f"Account: {account_info}", 
+                                   font=("Arial", 12, "bold"), fg="darkred", bg='#ffebee')
+            account_label.pack(anchor=tk.W, pady=(0, 10))
+        
+        # Main error message
+        error_message = tk.Label(message_frame, text=message, font=("Arial", 12), 
+                                wraplength=500, justify=tk.LEFT, fg="darkred", bg='#ffebee')
+        error_message.pack(anchor=tk.W, pady=(0, 10))
+        
+        # Action instructions
+        instructions = [
+            "IMMEDIATE ACTION REQUIRED:",
+            "1. RESTART the program immediately",
+            "2. Check your internet connection",
+            "3. Manage your positions quickly",
+            "4. Do not place new orders until reconnected"
+        ]
+        
+        for instruction in instructions:
+            if instruction.startswith("IMMEDIATE"):
+                color = "red"
+                font_weight = "bold"
+            else:
+                color = "darkred"
+                font_weight = "normal"
+            
+            inst_label = tk.Label(message_frame, text=instruction, font=("Arial", 11, font_weight), 
+                                 fg=color, bg='#ffebee', anchor=tk.W)
+            inst_label.pack(anchor=tk.W, pady=2)
+        
+        # Button frame
+        button_frame = tk.Frame(main_frame, bg='#ffebee')
+        button_frame.pack(fill=tk.X, pady=(10, 0))
+        
+        # Action buttons
+        restart_button = tk.Button(button_frame, text="RESTART APP", command=self.restart_clicked, 
+                                  width=15, font=("Arial", 10, "bold"), bg='#f44336', fg='white',
+                                  relief=tk.RAISED, bd=2)
+        restart_button.pack(side=tk.LEFT, padx=(0, 10))
+        
+        ok_button = tk.Button(button_frame, text="I UNDERSTAND", command=self.ok_clicked, 
+                             width=15, font=("Arial", 10, "bold"), bg='#4CAF50', fg='white',
+                             relief=tk.RAISED, bd=2)
+        ok_button.pack(side=tk.RIGHT)
+        
+        # Bind Enter key to OK
+        self.dialog.bind('<Return>', lambda e: self.ok_clicked())
+        
+        # Set focus to OK button
+        ok_button.focus()
+    
+    def center_on_parent(self):
+        """Center the dialog on the parent window"""
+        self.dialog.update_idletasks()
+        
+        # Get parent window geometry
+        if self.parent and self.parent.winfo_exists():
+            parent_x = self.parent.winfo_x()
+            parent_y = self.parent.winfo_y()
+            parent_width = self.parent.winfo_width()
+            parent_height = self.parent.winfo_height()
+            
+            # Get dialog size
+            dialog_width = self.dialog.winfo_width()
+            dialog_height = self.dialog.winfo_height()
+            
+            # Calculate center position
+            x = parent_x + (parent_width - dialog_width) // 2
+            y = parent_y + (parent_height - dialog_height) // 2
+            
+            # Ensure dialog stays on screen
+            screen_width = self.dialog.winfo_screenwidth()
+            screen_height = self.dialog.winfo_screenheight()
+            
+            x = max(0, min(x, screen_width - dialog_width))
+            y = max(0, min(y, screen_height - dialog_height))
+            
+            self.dialog.geometry(f"{dialog_width}x{dialog_height}+{x}+{y}")
+        else:
+            # Fallback to screen center if parent is not available
+            self.dialog.update_idletasks()
+            width = self.dialog.winfo_width()
+            height = self.dialog.winfo_height()
+            x = (self.dialog.winfo_screenwidth() // 2) - (width // 2)
+            y = (self.dialog.winfo_screenheight() // 2) - (height // 2)
+            self.dialog.geometry(f"{width}x{height}+{x}+{y}")
+    
+    def ok_clicked(self):
+        """Handle OK button click"""
+        self.dialog.destroy()
+    
+    def restart_clicked(self):
+        """Handle Restart button click"""
+        self.dialog.destroy()
+        # Restart the application
+        os.execv(sys.executable, [sys.executable] + sys.argv)
+    
+    @staticmethod
+    def show_error(parent, title, message, account_info=""):
+        """Static method to show error dialog"""
+        dialog = WebSocketErrorDialog(parent, title, message, account_info)
+        return dialog
+
+class LogMonitor:
+    """Monitor log files for WebSocket disconnection errors"""
+    
+    def __init__(self, main_window):
+        self.main_window = main_window
+        self.running = False
+        self.monitor_thread = None
+        self.log_files = []
+        self.file_positions = {}
+        self.seen_errors = set()  # Track already shown errors to avoid duplicates
+        self.startup_time = time.time()  # Track when monitoring started
+        self.startup_delay = 60  # 1 minute delay before monitoring starts
+        self.error_detected = False  # Flag to stop monitoring after first error
+        
+        # Error patterns to monitor
+        self.error_patterns = [
+            r"websocket run forever ended in exception",
+            r"socket is already opened",
+            r"WebSocket connection lost",
+            r"Connection timeout",
+            r"WebSocket error",
+            r"websocket.*disconnect",
+            r"websocket.*error",
+            r"connection.*lost",
+            r"connection.*failed"
+        ]
+        
+        # Account patterns to extract account info
+        self.account_patterns = [
+            r"account\s*(\d+)",
+            r"master.*account",
+            r"child.*account",
+            r"account.*(\d+)"
+        ]
+    
+    def start_monitoring(self):
+        """Start the log monitoring thread"""
+        if self.running:
+            return
+        
+        self.running = True
+        self.monitor_thread = threading.Thread(target=self._monitor_loop, daemon=True)
+        self.monitor_thread.start()
+        logger.info("Log monitoring started")
+    
+    def stop_monitoring(self):
+        """Stop the log monitoring thread"""
+        self.running = False
+        if self.monitor_thread and self.monitor_thread.is_alive():
+            self.monitor_thread.join(timeout=2)
+        logger.info("Log monitoring stopped")
+    
+    def is_monitoring(self):
+        """Check if monitoring is currently active"""
+        return self.running and self.monitor_thread and self.monitor_thread.is_alive()
+    
+    def reset_monitoring(self):
+        """Reset monitoring state to allow monitoring to start again"""
+        self.error_detected = False
+        self.seen_errors.clear()
+        self.file_positions.clear()
+        logger.info("Log monitoring state reset")
+    
+    def restart_monitoring(self):
+        """Restart monitoring after reset"""
+        if not self.running:
+            self.reset_monitoring()
+            self.start_monitoring()
+    
+    
+    def _monitor_loop(self):
+        """Main monitoring loop"""
+        # Wait for startup delay before beginning monitoring
+        while self.running and (time.time() - self.startup_time) < self.startup_delay:
+            time.sleep(1)  # Check every second during startup delay
+        
+        if not self.running:
+            return
+            
+        logger.info(f"Log monitoring active after {self.startup_delay} second startup delay")
+        
+        while self.running and not self.error_detected:
+            try:
+                print(f"DEBUG: Monitoring active, checking files... (error_detected: {self.error_detected})")
+                self._check_log_files()
+                time.sleep(5)  # Check every 5 seconds (balanced frequency)
+            except Exception as e:
+                logger.error(f"Error in log monitoring: {e}")
+                time.sleep(10)  # Wait longer on error
+        
+        if self.error_detected:
+            logger.info("Log monitoring stopped after first error detection")
+        else:
+            logger.info("Log monitoring stopped normally")
+    
+    def _check_log_files(self):
+        """Check all log files for new errors"""
+        if self.error_detected:
+            return  # Don't check if error already detected
+            
+        try:
+            # Get current log file
+            current_log = f'logs/app_{datetime.now().strftime("%Y-%m-%d")}.log'
+            logger.debug(f"Checking log file: {current_log}")
+            
+            # Check if file exists
+            if not os.path.exists(current_log):
+                logger.debug(f"Log file does not exist: {current_log}")
+                return
+            
+            # Initialize file position if not exists
+            if current_log not in self.file_positions:
+                # Start from end of file to avoid reading old content
+                with open(current_log, 'r', encoding='utf-8', errors='ignore') as f:
+                    f.seek(0, 2)  # Seek to end
+                    self.file_positions[current_log] = f.tell()
+                logger.debug(f"Initialized file position for {current_log}: {self.file_positions[current_log]}")
+                return
+            
+            # Read only new content
+            with open(current_log, 'r', encoding='utf-8', errors='ignore') as f:
+                f.seek(self.file_positions[current_log])
+                new_content = f.read()
+                self.file_positions[current_log] = f.tell()
+            
+            print(f"DEBUG: Read {len(new_content)} new characters from log file")
+            logger.debug(f"Read {len(new_content)} new characters from log file")
+            
+            # Check for error patterns only in new content
+            if new_content.strip():
+                print(f"DEBUG: Processing new content: {new_content[:200]}...")
+                logger.debug(f"Processing new content: {new_content[:200]}...")
+                self._process_new_content(new_content, current_log)
+            else:
+                print("DEBUG: No new content to process")
+                
+        except Exception as e:
+            logger.error(f"Error checking log files: {e}")
+    
+    def _process_new_content(self, content, log_file):
+        """Process new log content for error patterns"""
+        if self.error_detected:
+            return  # Stop processing if error already detected
+            
+        lines = content.split('\n')
+        
+        for line in lines:
+            if not line.strip() or self.error_detected:
+                continue
+            
+            # Check for error patterns
+            for pattern in self.error_patterns:
+                if re.search(pattern, line, re.IGNORECASE):
+                    print(f"DEBUG: ERROR DETECTED! Pattern '{pattern}' matched line: {line.strip()}")
+                    # Extract account info
+                    account_info = self._extract_account_info(line)
+                    
+                    # Show error popup immediately
+                    logger.error(f"WebSocket error detected: {line.strip()}")
+                    logger.error(f"Pattern matched: {pattern}")
+                    
+                    # Show popup directly on main thread (synchronous)
+                    try:
+                        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                        detailed_message = f"WebSocket connection error detected:\n\n{line.strip()}\n\nTime: {timestamp}\nLog: {os.path.basename(log_file)}"
+                        
+                        print(f"DEBUG: Attempting to show popup...")
+                        # Create and show dialog directly
+                        WebSocketErrorDialog.show_error(
+                            self.main_window.root,
+                            "WebSocket Disconnection Error",
+                            detailed_message,
+                            account_info
+                        )
+                        print(f"DEBUG: Popup displayed successfully!")
+                        logger.error("Error popup displayed successfully")
+                    except Exception as e:
+                        print(f"DEBUG: Error showing popup: {e}")
+                        logger.error(f"Error showing popup: {e}")
+                    
+                    # Mark error as detected and stop monitoring
+                    self.error_detected = True
+                    logger.error("Stopping log monitoring after first error detection")
+                    self.running = False
+                    return  # Exit immediately after first error
+    
+    def _extract_account_info(self, line):
+        """Extract account information from log line"""
+        for pattern in self.account_patterns:
+            match = re.search(pattern, line, re.IGNORECASE)
+            if match:
+                if "master" in pattern.lower():
+                    return "Master Account"
+                elif "child" in pattern.lower():
+                    return f"Child Account {match.group(1) if match.groups() else ''}"
+                elif match.groups():
+                    account_num = match.group(1)
+                    return "Master Account" if account_num == "1" else f"Child Account {account_num}"
+        
+        return "Unknown Account"
+    
+    def _show_error_popup(self, error_line, account_info, log_file):
+        """Show error popup on main thread"""
+        try:
+            # Create detailed error message
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            detailed_message = f"WebSocket connection error detected:\n\n{error_line}\n\nTime: {timestamp}\nLog: {os.path.basename(log_file)}"
+            
+            # Schedule popup on main thread
+            self.main_window.root.after(0, self._display_error_popup, detailed_message, account_info)
+            
+        except Exception as e:
+            logger.error(f"Error showing error popup: {e}")
+    
+    def _display_error_popup(self, message, account_info):
+        """Display error popup on main thread"""
+        try:
+            WebSocketErrorDialog.show_error(
+                self.main_window.root,
+                "WebSocket Disconnection Error",
+                message,
+                account_info
+            )
+        except Exception as e:
+            logger.error(f"Error displaying error popup: {e}")
+    
+
 class MainWindow:
     """Main application window - Recreated with original UI layout"""
     
@@ -194,6 +581,20 @@ class MainWindow:
         
         # Start websocket connection monitoring
         self.websocket_manager.start_connection_monitoring()
+        
+        # Initialize log monitor for WebSocket errors
+        self.log_monitor = LogMonitor(self)
+        self.log_monitor.start_monitoring()
+        
+        # Test pattern matching with actual error message
+        test_line = "2025-09-26 21:13:27,456 - WARNING - websocket run forever ended in exception, socket is already opened"
+        print(f"DEBUG: Testing pattern matching with: {test_line}")
+        for pattern in self.log_monitor.error_patterns:
+            if re.search(pattern, test_line, re.IGNORECASE):
+                print(f"DEBUG: Pattern '{pattern}' MATCHES the test line!")
+            else:
+                print(f"DEBUG: Pattern '{pattern}' does NOT match the test line")
+        
         
         # Setup window close handler
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
@@ -937,6 +1338,19 @@ class MainWindow:
         """Test connection restored display for child account"""
         self.update_order_status(2, "CONNECTION RESTORED", "NETWORK_RESTORED")
     
+    def test_websocket_error_dialog(self):
+        """Test WebSocket error dialog display"""
+        try:
+            logger.info("Testing WebSocket error dialog")
+            WebSocketErrorDialog.show_error(
+                self.root,
+                "WebSocket Disconnection Error",
+                "WebSocket connection error detected:\n\nwebsocket run forever ended in exception, socket is already opened\n\nTime: 2025-09-26 15:21:14\nLog: app_2025-09-26.log",
+                "Master Account"
+            )
+        except Exception as e:
+            logger.error(f"Error testing WebSocket error dialog: {e}")
+    
     def disable_selection_row(self):
         """Disable all components in the selection row (Index, Index LTP, Expiry, Option, Strike)"""
         try:
@@ -1001,10 +1415,15 @@ class MainWindow:
             logger.error(f"Error checking websocket connection: {e}")
             return False
     
+    
     def on_closing(self):
         """Handle application closing"""
         try:
             logger.info("Application closing - cleaning up resources")
+            
+            # Stop log monitoring
+            if hasattr(self, 'log_monitor'):
+                self.log_monitor.stop_monitoring()
             
             # Stop websocket connection monitoring
             self.websocket_manager.stop_connection_monitoring()
