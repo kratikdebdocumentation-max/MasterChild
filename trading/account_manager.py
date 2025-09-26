@@ -218,6 +218,51 @@ class AccountManager:
             applicationLogger.error(error_msg)
             return False, [], error_msg
     
+    def get_order_book(self, account_num: int) -> tuple[bool, list, str]:
+        """
+        Get order book for a specific account using get_order_book API
+        
+        Args:
+            account_num: Account number to check order book for
+            
+        Returns:
+            tuple: (success, order_book_list, message)
+        """
+        if account_num not in self.accounts:
+            return False, [], "Account not found"
+        
+        account = self.accounts[account_num]
+        api = account.get('api')
+        
+        if not api:
+            return False, [], "API not available for account"
+        
+        if not account.get('active', False):
+            return False, [], "Account not logged in"
+        
+        try:
+            order_book = api.get_order_book()
+            
+            if order_book is None:
+                return True, [], "No order book data found"
+            
+            # Filter for successful orders only
+            valid_orders = []
+            if isinstance(order_book, list):
+                for order in order_book:
+                    if isinstance(order, dict) and order.get('stat') == 'Ok':
+                        valid_orders.append(order)
+            
+            client_name = account.get('client_name', f'Account {account_num}')
+            applicationLogger.info(f"Order book retrieved for {client_name}: {len(valid_orders)} orders found")
+            
+            return True, valid_orders, f"Order book retrieved for {client_name}"
+            
+        except Exception as e:
+            error_msg = f"Error retrieving order book for account {account_num}: {e}"
+            applicationLogger.error(error_msg)
+            return False, [], error_msg
+    
     def check_all_positions(self) -> tuple[bool, dict, str]:
         """
         Check positions for all active accounts using trade book

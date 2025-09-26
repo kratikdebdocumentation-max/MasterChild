@@ -39,6 +39,129 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+class CenteredConfirmationDialog:
+    """Custom confirmation dialog that centers on parent window"""
+    
+    def __init__(self, parent, title, message, icon='question'):
+        self.parent = parent
+        self.result = None
+        self.dialog = None
+        
+        # Create the dialog window
+        self.dialog = tk.Toplevel(parent)
+        self.dialog.title(title)
+        self.dialog.resizable(False, False)
+        
+        # Make it modal
+        self.dialog.transient(parent)
+        self.dialog.grab_set()
+        
+        # Create the dialog content
+        self.create_widgets(message, icon)
+        
+        # Center the dialog on the parent window
+        self.center_on_parent()
+        
+        # Focus on the dialog
+        self.dialog.focus()
+        
+        # Wait for user response
+        self.dialog.wait_window()
+    
+    def create_widgets(self, message, icon):
+        """Create the dialog widgets"""
+        # Main frame
+        main_frame = tk.Frame(self.dialog, padx=20, pady=20)
+        main_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # Icon and message frame
+        content_frame = tk.Frame(main_frame)
+        content_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # Icon (using text symbol for simplicity)
+        icon_text = "?" if icon == 'question' else "!"
+        icon_label = tk.Label(content_frame, text=icon_text, font=("Arial", 24, "bold"), 
+                             fg="blue" if icon == 'question' else "orange")
+        icon_label.pack(side=tk.LEFT, padx=(0, 15))
+        
+        # Message label
+        message_label = tk.Label(content_frame, text=message, font=("Arial", 10), 
+                                wraplength=400, justify=tk.LEFT)
+        message_label.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        
+        # Button frame
+        button_frame = tk.Frame(main_frame)
+        button_frame.pack(fill=tk.X, pady=(20, 0))
+        
+        # Yes button
+        yes_button = tk.Button(button_frame, text="Yes", command=self.yes_clicked, 
+                              width=10, font=("Arial", 10, "bold"))
+        yes_button.pack(side=tk.RIGHT, padx=(10, 0))
+        
+        # No button
+        no_button = tk.Button(button_frame, text="No", command=self.no_clicked, 
+                             width=10, font=("Arial", 10))
+        no_button.pack(side=tk.RIGHT)
+        
+        # Bind Enter and Escape keys
+        self.dialog.bind('<Return>', lambda e: self.yes_clicked())
+        self.dialog.bind('<Escape>', lambda e: self.no_clicked())
+        
+        # Set focus to Yes button
+        yes_button.focus()
+    
+    def center_on_parent(self):
+        """Center the dialog on the parent window"""
+        self.dialog.update_idletasks()
+        
+        # Get parent window geometry
+        if self.parent and self.parent.winfo_exists():
+            parent_x = self.parent.winfo_x()
+            parent_y = self.parent.winfo_y()
+            parent_width = self.parent.winfo_width()
+            parent_height = self.parent.winfo_height()
+            
+            # Get dialog size
+            dialog_width = self.dialog.winfo_width()
+            dialog_height = self.dialog.winfo_height()
+            
+            # Calculate center position
+            x = parent_x + (parent_width - dialog_width) // 2
+            y = parent_y + (parent_height - dialog_height) // 2
+            
+            # Ensure dialog stays on screen
+            screen_width = self.dialog.winfo_screenwidth()
+            screen_height = self.dialog.winfo_screenheight()
+            
+            x = max(0, min(x, screen_width - dialog_width))
+            y = max(0, min(y, screen_height - dialog_height))
+            
+            self.dialog.geometry(f"{dialog_width}x{dialog_height}+{x}+{y}")
+        else:
+            # Fallback to screen center if parent is not available
+            self.dialog.update_idletasks()
+            width = self.dialog.winfo_width()
+            height = self.dialog.winfo_height()
+            x = (self.dialog.winfo_screenwidth() // 2) - (width // 2)
+            y = (self.dialog.winfo_screenheight() // 2) - (height // 2)
+            self.dialog.geometry(f"{width}x{height}+{x}+{y}")
+    
+    def yes_clicked(self):
+        """Handle Yes button click"""
+        self.result = True
+        self.dialog.destroy()
+    
+    def no_clicked(self):
+        """Handle No button click"""
+        self.result = False
+        self.dialog.destroy()
+    
+    @staticmethod
+    def askyesno(parent, title, message, icon='question'):
+        """Static method to show confirmation dialog"""
+        dialog = CenteredConfirmationDialog(parent, title, message, icon)
+        return dialog.result
+
 class MainWindow:
     """Main application window - Recreated with original UI layout"""
     
@@ -47,7 +170,7 @@ class MainWindow:
         self.root.title("***Kratik's Soft*** - Master Account Not Logged In")
         self.root.geometry("900x490")
         
-        # Center the window on screen
+        # Position the window at right bottom of screen
         self.center_window()
         
         # Initialize account management
@@ -101,12 +224,12 @@ class MainWindow:
         self.update_quantity_dropdown()
         
     def center_window(self):
-        """Center the window on the screen"""
+        """Position the window at right bottom of the screen"""
         self.root.update_idletasks()
         width = self.root.winfo_width()
         height = self.root.winfo_height()
-        x = (self.root.winfo_screenwidth() // 2) - (width // 2)
-        y = (self.root.winfo_screenheight() // 2) - (height // 2)
+        x = self.root.winfo_screenwidth() - width - 50  # 50 pixels from right edge
+        y = self.root.winfo_screenheight() - height - 50  # 50 pixels from bottom edge
         self.root.geometry(f'{width}x{height}+{x}+{y}')
     
     def download_master_files_if_needed(self):
@@ -1209,8 +1332,6 @@ class MainWindow:
                     self.root.after(0, self.update_master_login_ui, True, client_name)
                     logger.info(f"Master account auto-login successful: {client_name}")
                     
-                    # Check positions after successful login
-                    self.root.after(1000, self.check_startup_positions)  # Delay to ensure UI is ready
                 else:
                     # Update UI to show login failed
                     self.root.after(0, self.update_master_login_ui, False, "Login Failed")
@@ -1268,9 +1389,6 @@ class MainWindow:
                             self.root.after(0, self.update_child_login_ui, True, client_name)
                             logger.info(f"Child account login successful: {client_name}")
                             
-                            # Check positions after successful login (if master is also logged in)
-                            if self.account_manager.is_account_active(1):  # Only check if master is also active
-                                self.root.after(1000, self.check_startup_positions)  # Delay to ensure UI is ready
                             return  # Success, exit retry loop
                         else:
                             logger.warning(f"Login attempt {attempt + 1} failed: {client_name}")
@@ -1413,7 +1531,7 @@ class MainWindow:
                 logger.warning(f"Invalid state for buy price box: {state}")
         except Exception as e:
             logger.error(f"Error setting buy price box state: {e}")
-
+        
     def release_buttons(self):
         """Release button states - enable buy and sell order buttons"""
         try:
@@ -1838,14 +1956,198 @@ class MainWindow:
             return {'net_qty': 0, 'buy_qty': 0, 'sell_qty': 0, 'avg_buy_price': 0.0, 'is_open': False}
     
     def exit_position(self, symbol, qty):
-        """Exit position - to be implemented later"""
+        """Exit position by placing market sell order"""
         try:
             logger.info(f"Exit position called for {symbol} with quantity {qty}")
-            # TODO: Implement exit position logic
-            messagebox.showinfo("Exit Position", f"Exit position functionality for {symbol} (Qty: {qty}) will be implemented soon")
+            
+            # Get the broker position window as parent
+            broker_window = self._get_broker_position_window()
+            
+            # Show confirmation popup
+            result = CenteredConfirmationDialog.askyesno(
+                broker_window,
+                "Confirm Exit Position", 
+                f"Are you sure you want to EXIT this position?\n\n"
+                f"Symbol: {symbol}\n"
+                f"Quantity: {qty}\n\n"
+                f"This will place a MARKET SELL order to close the position.",
+                icon='question'
+            )
+            
+            if result:
+                # Find which account has this position
+                account_id = self._find_account_for_position(symbol, qty)
+                
+                if account_id:
+                    # Get API for the account
+                    api = self.account_manager.get_api(account_id)
+                    account_name = "Master" if account_id == 1 else "Child"
+                    
+                    if api:
+                        # Place market sell order to exit position
+                        success = self._place_exit_order(api, symbol, int(qty), account_name)
+                        
+                        if success:
+                            logger.info(f"Successfully placed exit order for {account_name}: {symbol} qty {qty}")
+                            messagebox.showinfo("Position Exited", f"Market sell order for {symbol} (Qty: {qty}) has been placed successfully", parent=broker_window)
+                            
+                            # Refresh the broker position window
+                            self.populate_trade_book_sections()
+                        else:
+                            logger.error(f"Failed to place exit order for {account_name}: {symbol}")
+                            messagebox.showerror("Exit Failed", f"Failed to place exit order for {symbol}. Please try again.", parent=broker_window)
+                    else:
+                        logger.error(f"API not available for {account_name} account")
+                        messagebox.showerror("Error", f"API not available for {account_name} account", parent=broker_window)
+                else:
+                    logger.error(f"Could not find account for position {symbol}")
+                    messagebox.showerror("Error", f"Could not find account for position {symbol}", parent=broker_window)
+            else:
+                logger.info(f"Exit position cancelled for {symbol}")
+                
         except Exception as e:
             logger.error(f"Error in exit position: {e}")
-
+            broker_window = self._get_broker_position_window()
+            messagebox.showerror("Error", f"Failed to exit position: {str(e)}", parent=broker_window)
+    
+    def _find_account_for_position(self, symbol, qty):
+        """Find which account (1 or 2) has the given position"""
+        try:
+            # Check both accounts for the position
+            for account_num in [1, 2]:
+                success, trade_book_data, message = self.account_manager.get_trade_book(account_num)
+                if success and trade_book_data:
+                    symbol_groups = self.process_trade_book_data(trade_book_data)
+                    if symbol in symbol_groups:
+                        position_info = self.calculate_net_position(symbol_groups[symbol])
+                        if position_info['is_open'] and position_info['net_qty'] == int(qty):
+                            return account_num
+            return None
+        except Exception as e:
+            logger.error(f"Error finding account for position {symbol}: {e}")
+            return None
+    
+    def _place_exit_order(self, api, symbol, quantity, account_name):
+        """Place market sell order to exit position"""
+        try:
+            logger.info(f"Placing market sell order for {account_name}: {symbol} qty {quantity}")
+            
+            # Determine exchange and product type based on symbol
+            if 'SENSEX' in symbol:
+                exchange = 'BFO'
+                product_type = 'M'
+            else:
+                exchange = 'NFO'
+                product_type = 'I'
+            
+            # Place market sell order
+            result = api.place_order(
+                buy_or_sell='S',
+                product_type=product_type,
+                exchange=exchange,
+                tradingsymbol=symbol,
+                quantity=str(quantity),
+                discloseqty=0,
+                price_type='MKT',
+                price='0',
+                trigger_price='0',
+                retention='DAY',
+                amo='NO',
+                remarks=f'exit_position_{symbol}'
+            )
+            
+            if result and 'norenordno' in result:
+                order_id = result['norenordno']
+                logger.info(f"Exit order placed successfully for {account_name}: Order ID {order_id}")
+                return True
+            else:
+                logger.error(f"Failed to place exit order for {account_name}: {result}")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Error placing exit order for {account_name}: {e}")
+            return False
+    
+    def cancel_order(self, order_id, symbol, qty, price):
+        """Cancel open buy order"""
+        try:
+            logger.info(f"Cancel order called for Order ID: {order_id}, Symbol: {symbol}")
+            
+            # Get the broker position window as parent
+            broker_window = self._get_broker_position_window()
+            
+            # Show confirmation popup
+            result = CenteredConfirmationDialog.askyesno(
+                broker_window,
+                "Confirm Cancel Order", 
+                f"Are you sure you want to CANCEL this order?\n\n"
+                f"Order ID: {order_id}\n"
+                f"Symbol: {symbol}\n"
+                f"Quantity: {qty}\n"
+                f"Price: {price}\n\n"
+                f"This will cancel the pending buy order.",
+                icon='question'
+            )
+            
+            if result:
+                # Find which account this order belongs to
+                account_id = self._find_account_for_order(order_id)
+                
+                if account_id:
+                    # Get API for the account
+                    api = self.account_manager.get_api(account_id)
+                    account_name = "Master" if account_id == 1 else "Child"
+                    
+                    if api:
+                        # Cancel the order using API
+                        cancel_response = api.cancel_order(orderno=order_id)
+                        
+                        if cancel_response and cancel_response.get('stat') == 'Ok':
+                            logger.info(f"Successfully cancelled {account_name} order: {order_id}")
+                            messagebox.showinfo("Order Cancelled", f"Order {order_id} for {symbol} has been cancelled successfully")
+                            
+                            # Refresh the broker position window
+                            self.populate_trade_book_sections()
+                        else:
+                            logger.error(f"Failed to cancel {account_name} order {order_id}: {cancel_response}")
+                            messagebox.showerror("Cancel Failed", f"Failed to cancel order {order_id}. Please try again.")
+                    else:
+                        logger.error(f"API not available for {account_name} account")
+                        messagebox.showerror("Error", f"API not available for {account_name} account")
+                else:
+                    logger.error(f"Could not find account for order {order_id}")
+                    messagebox.showerror("Error", f"Could not find account for order {order_id}")
+            else:
+                logger.info(f"Cancel order cancelled for Order ID: {order_id}")
+                
+        except Exception as e:
+            logger.error(f"Error in cancel order: {e}")
+            messagebox.showerror("Error", f"Failed to cancel order: {str(e)}")
+    
+    def _find_account_for_order(self, order_id):
+        """Find which account (1 or 2) contains the given order ID"""
+        try:
+            # Check both accounts for the order
+            for account_num in [1, 2]:
+                success, order_book_data, message = self.account_manager.get_order_book(account_num)
+                if success and order_book_data:
+                    for order in order_book_data:
+                        if order.get('norenordno') == order_id:
+                            return account_num
+            return None
+        except Exception as e:
+            logger.error(f"Error finding account for order {order_id}: {e}")
+            return None
+    
+    def _get_broker_position_window(self):
+        """Get the broker position window reference if it exists"""
+        try:
+            if hasattr(self, 'broker_position_window') and self.broker_position_window.winfo_exists():
+                return self.broker_position_window
+            return None
+        except:
+            return None
+    
     def show_broker_position_info(self):
         """Show broker position information"""
         try:
@@ -1874,30 +2176,30 @@ class MainWindow:
             logger.info("Trade Book button clicked - showing trade book")
             
             # Create new window
-            order_window = tk.Toplevel(self.root)
-            order_window.title("Trade Book & Position Status - Master & Child")
-            order_window.geometry("1200x800")
-            order_window.resizable(True, True)
+            self.broker_position_window = tk.Toplevel(self.root)
+            self.broker_position_window.title("Trade Book & Position Status - Master & Child")
+            self.broker_position_window.geometry("900x600")
+            self.broker_position_window.resizable(True, True)
             
-            # Center the window
-            order_window.update_idletasks()
-            width = order_window.winfo_width()
-            height = order_window.winfo_height()
-            x = (order_window.winfo_screenwidth() // 2) - (width // 2)
-            y = (order_window.winfo_screenheight() // 2) - (height // 2)
-            order_window.geometry(f'{width}x{height}+{x}+{y}')
+            # Position window at top left of screen
+            self.broker_position_window.update_idletasks()
+            width = self.broker_position_window.winfo_width()
+            height = self.broker_position_window.winfo_height()
+            x = 50  # 50 pixels from left edge
+            y = 50  # 50 pixels from top edge
+            self.broker_position_window.geometry(f'{width}x{height}+{x}+{y}')
             
             # Create main frame
-            main_frame = tk.Frame(order_window)
+            main_frame = tk.Frame(self.broker_position_window)
             main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
             
             # Create Open Positions section
-            positions_frame = tk.LabelFrame(main_frame, text="Open Positions", font=("Arial", 12, "bold"))
+            positions_frame = tk.LabelFrame(main_frame, text="Open Positions (Exit Required)", font=("Arial", 12, "bold"))
             positions_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
             
             # Create Treeview for Open Positions
             positions_columns = ('Account', 'Symbol', 'Net Qty', 'Avg Buy Price', 'Current Price', 'PnL', 'Action')
-            self.positions_tree = ttk.Treeview(positions_frame, columns=positions_columns, show='headings', height=6)
+            self.positions_tree = ttk.Treeview(positions_frame, columns=positions_columns, show='headings', height=4)
             
             # Define column headings and widths for Positions
             for col in positions_columns:
@@ -1920,16 +2222,49 @@ class MainWindow:
             positions_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
             
             # Create separator
-            separator = tk.Frame(main_frame, height=2, bg="gray")
-            separator.pack(fill=tk.X, padx=10, pady=5)
+            separator1 = tk.Frame(main_frame, height=2, bg="gray")
+            separator1.pack(fill=tk.X, padx=10, pady=5)
+            
+            # Create Open Orders section
+            orders_frame = tk.LabelFrame(main_frame, text="Open Orders (Cancel Required)", font=("Arial", 12, "bold"))
+            orders_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+            
+            # Create Treeview for Open Orders
+            orders_columns = ('Account', 'Order ID', 'Symbol', 'Qty', 'Price', 'Type', 'Time', 'Action')
+            self.orders_tree = ttk.Treeview(orders_frame, columns=orders_columns, show='headings', height=4)
+            
+            # Define column headings and widths for Orders
+            for col in orders_columns:
+                self.orders_tree.heading(col, text=col)
+            
+            self.orders_tree.column('Account', width=80)
+            self.orders_tree.column('Order ID', width=120)
+            self.orders_tree.column('Symbol', width=200)
+            self.orders_tree.column('Qty', width=80)
+            self.orders_tree.column('Price', width=100)
+            self.orders_tree.column('Type', width=60)
+            self.orders_tree.column('Time', width=120)
+            self.orders_tree.column('Action', width=100)
+            
+            # Add scrollbar for Orders
+            orders_scrollbar = ttk.Scrollbar(orders_frame, orient=tk.VERTICAL, command=self.orders_tree.yview)
+            self.orders_tree.configure(yscrollcommand=orders_scrollbar.set)
+            
+            # Pack Orders tree and scrollbar
+            self.orders_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+            orders_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+            
+            # Create separator
+            separator2 = tk.Frame(main_frame, height=2, bg="gray")
+            separator2.pack(fill=tk.X, padx=10, pady=5)
             
             # Create Trade History section
             history_frame = tk.LabelFrame(main_frame, text="Trade History", font=("Arial", 12, "bold"))
             history_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
             
             # Create Treeview for Trade History
-            history_columns = ('Account', 'Symbol', 'Type', 'Qty', 'Fill Price', 'Fill Time', 'Status', 'Action')
-            self.history_tree = ttk.Treeview(history_frame, columns=history_columns, show='headings', height=8)
+            history_columns = ('Account', 'Symbol', 'Type', 'Qty', 'Fill Price', 'Fill Time', 'Status')
+            self.history_tree = ttk.Treeview(history_frame, columns=history_columns, show='headings', height=6)
             
             # Define column headings and widths for History
             for col in history_columns:
@@ -1942,7 +2277,6 @@ class MainWindow:
             self.history_tree.column('Fill Price', width=100)
             self.history_tree.column('Fill Time', width=120)
             self.history_tree.column('Status', width=80)
-            self.history_tree.column('Action', width=80)
             
             # Add scrollbar for History
             history_scrollbar = ttk.Scrollbar(history_frame, orient=tk.VERTICAL, command=self.history_tree.yview)
@@ -1954,13 +2288,13 @@ class MainWindow:
             
             # Bind click events for action buttons
             self.positions_tree.bind('<Button-1>', self.on_positions_click)
-            self.history_tree.bind('<Button-1>', self.on_history_click)
+            self.orders_tree.bind('<Button-1>', self.on_orders_click)
             
             # Fetch and display trade book data for both accounts
             self.populate_trade_book_sections()
             
             # Add refresh button
-            refresh_button = tk.Button(order_window, text="Refresh All", 
+            refresh_button = tk.Button(self.broker_position_window, text="Refresh All", 
                                     command=self.populate_trade_book_sections)
             refresh_button.pack(pady=10)
             
@@ -1971,14 +2305,17 @@ class MainWindow:
     def populate_trade_book_sections(self):
         """Populate both Open Positions and Trade History sections with data"""
         try:
-            # Clear existing data from both trees
+            # Clear existing data from all trees
             for item in self.positions_tree.get_children():
                 self.positions_tree.delete(item)
+            for item in self.orders_tree.get_children():
+                self.orders_tree.delete(item)
             for item in self.history_tree.get_children():
                 self.history_tree.delete(item)
             
             # Process data for both accounts
             all_positions = []
+            all_orders = []
             all_history = []
             
             for account_num in [1, 2]:  # Master and Child
@@ -2033,6 +2370,27 @@ class MainWindow:
                             'status': '',
                             'account_num': account_num
                         })
+                
+                # Get order book data
+                success, order_book_data, message = self.account_manager.get_order_book(account_num)
+                
+                if success and order_book_data:
+                    # Process order book data for open buy orders
+                    for order in order_book_data:
+                        if (order.get('status') == 'OPEN' and 
+                            order.get('trantype') == 'B' and 
+                            order.get('stat') == 'Ok'):
+                            
+                            all_orders.append({
+                                'account': account_name,
+                                'order_id': order.get('norenordno', 'N/A'),
+                                'symbol': order.get('tsym', 'N/A'),
+                                'qty': order.get('qty', '0'),
+                                'price': order.get('prc', '0.00'),
+                                'type': 'Buy',
+                                'time': order.get('norentm', 'N/A'),
+                                'account_num': account_num
+                            })
             
             # Populate positions tree
             for pos in all_positions:
@@ -2046,6 +2404,19 @@ class MainWindow:
                     "Exit"
                 ))
             
+            # Populate orders tree
+            for order in all_orders:
+                self.orders_tree.insert('', 'end', values=(
+                    order['account'],
+                    order['order_id'],
+                    order['symbol'],
+                    order['qty'],
+                    order['price'],
+                    order['type'],
+                    order['time'],
+                    "Cancel"
+                ))
+            
             # Populate history tree
             for trade in all_history:
                 self.history_tree.insert('', 'end', values=(
@@ -2055,18 +2426,18 @@ class MainWindow:
                     trade['qty'],
                     trade['fill_price'],
                     trade['fill_time'],
-                    trade['status'],
-                    "View"
+                    trade['status']
                 ))
             
             # Show summary
-            logger.info(f"Trade book populated: {len(all_positions)} open positions, {len(all_history)} trade records")
+            logger.info(f"Data populated: {len(all_positions)} open positions, {len(all_orders)} open orders, {len(all_history)} trade records")
                 
         except Exception as e:
-            logger.error(f"Error populating trade book sections: {e}")
-            # Show error in both sections
+            logger.error(f"Error populating sections: {e}")
+            # Show error in all sections
             self.positions_tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', '', ''))
-            self.history_tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', '', '', ''))
+            self.orders_tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', '', '', ''))
+            self.history_tree.insert('', 'end', values=(f'Error: {str(e)}', '', '', '', '', '', ''))
     
     def on_positions_click(self, event):
         """Handle click on positions tree"""
@@ -2081,24 +2452,20 @@ class MainWindow:
         except Exception as e:
             logger.error(f"Error handling positions click: {e}")
     
-    def on_history_click(self, event):
-        """Handle click on history tree"""
+    def on_orders_click(self, event):
+        """Handle click on orders tree"""
         try:
-            item = self.history_tree.selection()[0] if self.history_tree.selection() else None
+            item = self.orders_tree.selection()[0] if self.orders_tree.selection() else None
             if item:
-                values = self.history_tree.item(item, 'values')
-                if len(values) >= 8 and values[7] == "View":  # Action column
-                    symbol = values[1]  # Symbol column
-                    trade_type = values[2]  # Type column
-                    qty = values[3]    # Qty column
-                    price = values[4]  # Fill Price column
-                    time = values[5]   # Fill Time column
-                    
-                    # Show trade details
-                    details = f"Trade Details:\n\nSymbol: {symbol}\nType: {trade_type}\nQuantity: {qty}\nPrice: {price}\nTime: {time}"
-                    messagebox.showinfo("Trade Details", details)
+                values = self.orders_tree.item(item, 'values')
+                if len(values) >= 8 and values[7] == "Cancel":  # Action column
+                    order_id = values[1]  # Order ID column
+                    symbol = values[2]    # Symbol column
+                    qty = values[3]      # Qty column
+                    price = values[4]    # Price column
+                    self.cancel_order(order_id, symbol, qty, price)
         except Exception as e:
-            logger.error(f"Error handling history click: {e}")
+            logger.error(f"Error handling orders click: {e}")
     
     def populate_account_orders(self, account_num, tree, account_name):
         """Populate order book table for a specific account"""
@@ -2249,61 +2616,6 @@ class MainWindow:
         except Exception as e:
             logger.error(f"Error resetting account states: {e}")
     
-    def check_startup_positions(self):
-        """Check for open positions on startup and warn user"""
-        try:
-            # Check positions for all logged-in accounts
-            has_open_positions, all_positions, summary = self.account_manager.check_all_positions()
-            
-            if has_open_positions:
-                # Build detailed warning message
-                warning_msg = "[WARNING] OPEN POSITIONS DETECTED [WARNING]\n\n"
-                warning_msg += f"{summary}\n\n"
-                warning_msg += "POSITION DETAILS:\n"
-                warning_msg += "─" * 50 + "\n"
-                
-                for account_num, account_data in all_positions.items():
-                    if account_data['count'] > 0:
-                        client_name = account_data['client_name']
-                        warning_msg += f"\n🔸 {client_name}:\n"
-                        
-                        for i, position in enumerate(account_data['positions'], 1):
-                            symbol = position.get('tsym', 'Unknown')
-                            net_qty = position.get('netqty', '0')
-                            exchange = position.get('exch', 'Unknown')
-                            avg_price = position.get('netavgprc', '0')
-                            
-                            warning_msg += f"   {i}. {symbol} ({exchange})\n"
-                            warning_msg += f"      Qty: {net_qty}, Avg Price: ₹{avg_price}\n"
-                
-                warning_msg += "\n" + "─" * 50 + "\n"
-                warning_msg += "❗ IMPORTANT: Please close all existing positions\n"
-                warning_msg += "before placing new orders to avoid conflicts.\n\n"
-                warning_msg += "Would you like to continue anyway?"
-                
-                # Show warning dialog with Yes/No options
-                result = messagebox.askyesno(
-                    "Open Positions Warning", 
-                    warning_msg,
-                    icon='warning'
-                )
-                
-                if result:
-                    logger.warning("User chose to continue despite open positions")
-                    messagebox.showinfo("Reminder", "Please remember to close existing positions before placing new orders.")
-                else:
-                    logger.info("User chose to exit due to open positions")
-                    messagebox.showinfo("Exiting", "Please close existing positions and restart the application.")
-                    self.root.quit()
-                    return
-            else:
-                logger.info("Position check completed - No open positions found")
-                
-        except Exception as e:
-            logger.error(f"Error checking startup positions: {e}")
-            messagebox.showwarning("Position Check Error", 
-                                 f"Could not check positions on startup: {str(e)}\n\n"
-                                 "Please manually verify that you have no open positions before trading.")
         
     def on_expiry_selected(self, *args):
         """On expiry selected - TO BE IMPLEMENTED"""
