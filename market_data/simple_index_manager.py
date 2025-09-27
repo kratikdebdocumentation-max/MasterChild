@@ -133,8 +133,8 @@ class SimpleIndexManager:
             applicationLogger.error(f"Error getting {index} price from API: {e}")
             return None
     
-    def get_strike_list(self, index: str, current_price: float) -> list:
-        """Generate strike list around current price"""
+    def get_strike_list(self, index: str, current_price: float, option_type: str = None) -> list:
+        """Generate strike list around current price based on option type"""
         try:
             if index not in self.strike_intervals:
                 return []
@@ -144,11 +144,29 @@ class SimpleIndexManager:
             # Round to nearest interval
             rounded_price = round(current_price / interval) * interval
             
-            # Generate 15 strikes (7 below + current + 7 above)
+            # Generate strikes based on option type
             strikes = []
-            for i in range(-7, 8):
-                strike = rounded_price + (i * interval)
-                strikes.append(int(strike))
+            if option_type == "CE":
+                # CE: 2 below + current + 20 above (biased towards higher strikes)
+                for i in range(-2, 21):
+                    strike = rounded_price + (i * interval)
+                    strikes.append(int(strike))
+                # Ensure CE strikes are sorted in descending order
+                strikes.sort(reverse=True)
+            elif option_type == "PE":
+                # PE: 20 below + current + 2 above (biased towards lower strikes)
+                for i in range(-20, 3):
+                    strike = rounded_price + (i * interval)
+                    strikes.append(int(strike))
+                # Ensure PE strikes are sorted in ascending order
+                strikes.sort()
+            else:
+                # Default: 7 below + current + 7 above (balanced distribution)
+                for i in range(-7, 8):
+                    strike = rounded_price + (i * interval)
+                    strikes.append(int(strike))
+                # Ensure default strikes are sorted in ascending order
+                strikes.sort()
             
             return strikes
             

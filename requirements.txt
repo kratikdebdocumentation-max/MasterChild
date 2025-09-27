@@ -2,7 +2,7 @@
 # Requirements for trading system
 
 # GUI Framework
-tkinter  # Built-in with Python
+#tkinter  # Built-in with Python
 
 # Trading API and dependencies
 requests

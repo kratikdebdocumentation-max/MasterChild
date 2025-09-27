@@ -3129,16 +3129,19 @@ class MainWindow:
             logger.error(f"Error updating selections: {e}")
     
     def update_strike_dropdown(self):
-        """Update strike dropdown based on selected index and price"""
+        """Update strike dropdown based on selected index, price, and option type"""
         try:
             selected_index = self.selected_index.get()
+            selected_option = self.selected_option.get()
+            
             if selected_index:
                 current_price = self.index_manager.get_index_price(selected_index)
                 if current_price > 0:
-                    strikes = self.index_manager.get_strike_list(selected_index, current_price)
+                    # Pass option type to get appropriate strike range
+                    strikes = self.index_manager.get_strike_list(selected_index, current_price, selected_option)
                     self.strike_dropdown['values'] = strikes
                     # Don't auto-select any strike - let user choose from dropdown
-                    logger.info(f"Strike dropdown populated with {len(strikes)} strikes for {selected_index}")
+                    logger.info(f"Strike dropdown populated with {len(strikes)} strikes for {selected_index} {selected_option}")
                 else:
                     self.strike_dropdown['values'] = []
         except Exception as e:
@@ -3201,8 +3204,19 @@ class MainWindow:
         logger.info("On expiry selected called - Function not implemented yet")
         
     def on_option_selected(self, *args):
-        """On option selected - TO BE IMPLEMENTED"""
-        logger.info("On option selected called - Function not implemented yet")
+        """On option selected - update strike dropdown with appropriate range"""
+        try:
+            selected_option = self.selected_option.get()
+            selected_index = self.selected_index.get()
+            
+            if selected_option and selected_index:
+                logger.info(f"Option type changed to {selected_option}, updating strike dropdown")
+                # Update strike dropdown with new option type
+                self.update_strike_dropdown()
+            else:
+                logger.info(f"Option type changed to {selected_option}, but no index selected")
+        except Exception as e:
+            logger.error(f"Error handling option selection: {e}")
         
     def on_strike_selected(self, *args):
         """Handle strike selection - automatically subscribe and fetch price"""
