@@ -3222,6 +3222,9 @@ class MainWindow:
         """Handle strike selection - automatically subscribe and fetch price"""
         try:
             strike = self.selected_strike.get()
+            # Remove arrow prefix if present (→ 24350 -> 24350)
+            if strike.startswith("→ "):
+                strike = strike[2:]
             index = self.selected_index.get()
             option = self.selected_option.get()
             expiry = self.expiry_value.get()
@@ -3258,6 +3261,9 @@ class MainWindow:
             index = self.selected_index.get()
             expiry = self.expiry_value.get()
             strike = self.selected_strike.get()
+            # Remove arrow prefix if present (→ 24350 -> 24350)
+            if strike.startswith("→ "):
+                strike = strike[2:]
             option = self.selected_option.get()
             
             if all([index, expiry, strike, option]):

@@ -153,6 +153,8 @@ class SimpleIndexManager:
                     strikes.append(int(strike))
                 # Ensure CE strikes are sorted in descending order
                 strikes.sort(reverse=True)
+                # Add arrow prefix to current strike
+                strikes = [f"→ {strike}" if strike == rounded_price else str(strike) for strike in strikes]
             elif option_type == "PE":
                 # PE: 20 below + current + 2 above (biased towards lower strikes)
                 for i in range(-20, 3):
@@ -160,6 +162,8 @@ class SimpleIndexManager:
                     strikes.append(int(strike))
                 # Ensure PE strikes are sorted in ascending order
                 strikes.sort()
+                # Add arrow prefix to current strike
+                strikes = [f"→ {strike}" if strike == rounded_price else str(strike) for strike in strikes]
             else:
                 # Default: 7 below + current + 7 above (balanced distribution)
                 for i in range(-7, 8):
@@ -167,6 +171,8 @@ class SimpleIndexManager:
                     strikes.append(int(strike))
                 # Ensure default strikes are sorted in ascending order
                 strikes.sort()
+                # Add arrow prefix to current strike
+                strikes = [f"→ {strike}" if strike == rounded_price else str(strike) for strike in strikes]
             
             return strikes
             
