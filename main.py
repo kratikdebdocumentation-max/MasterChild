@@ -2379,8 +2379,9 @@ class MainWindow:
             
             pnl_found = False
             for account_num in [1, 2]:  # Master and child accounts
-                # Only verify if account is active
-                if self.account_manager.accounts.get(account_num, {}).get('active', False):
+                account = self.account_manager.accounts.get(account_num, {})
+                # Verify if account is active or blocked (both can show PnL)
+                if account.get('active', False) or account.get('blocked', False):
                     api = self.account_manager.get_api(account_num)
                     if api:
                         # Get actual PnL from broker
@@ -2390,10 +2391,11 @@ class MainWindow:
                         self.update_pnl_display(account_num, broker_pnl)
                         pnl_found = True
                         
-                        logger.info(f"Verified PnL for account {account_num} (active): {broker_pnl}")
+                        status = "blocked" if account.get('blocked', False) else "active"
+                        logger.info(f"Verified PnL for account {account_num} ({status}): {broker_pnl}")
             
             if not pnl_found:
-                logger.warning("No active accounts found for PnL verification")
+                logger.warning("No active or blocked accounts found for PnL verification")
                 # Set empty values to show that button was pressed
                 self.master_pnl_value.set("No Data")
                 self.child_pnl_value.set("No Data")
@@ -2412,26 +2414,20 @@ class MainWindow:
             self.root.after(1000, self.hide_pnl_display)
     
     def calculate_pnl(self, api):
-        """Calculate PnL for a given API account using trade book"""
+        """Calculate PnL for a given API account using positions"""
         try:
-            ret = api.get_trade_book()
+            ret = api.get_positions()
             if ret is None or not ret:
                 return 0.0
             
-            # Process trade book to calculate PnL
-            symbol_groups = self.process_trade_book_data(ret)
-            total_pnl = 0.0
+            mtm = 0
+            pnl = 0
+            for i in ret:
+                mtm += float(i.get('urmtom', 0))
+                pnl += float(i.get('rpnl', 0))
             
-            for symbol, transactions in symbol_groups.items():
-                position_info = self.calculate_net_position(transactions)
-                
-                # Only calculate PnL for open positions
-                if position_info['is_open']:
-                    # TODO: Get current price and calculate actual PnL
-                    # For now, return 0 as placeholder
-                    total_pnl += 0.0
-            
-            return round(total_pnl, 2)
+            day_m2m = mtm + pnl
+            return round(day_m2m, 2)
             
         except Exception as e:
             logger.error(f"Error calculating PnL: {e}")
