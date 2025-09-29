@@ -4413,6 +4413,9 @@ class MainWindow:
                     logger.info(f"No existing exit order for account {account_id}, placing new market order")
                     self._place_market_exit_order(account_id)
             
+            # Stop all monitoring after placing exit orders
+            self._stop_monitoring()
+            
             messagebox.showinfo("Success", f"Market exit orders placed for {len(active_accounts)} account(s)")
             logger.info("Market exit orders placed successfully")
             
@@ -4454,6 +4457,10 @@ class MainWindow:
                 self._place_market_exit_order(1)
                 messagebox.showinfo("Success", "Master market exit order placed successfully")
             
+            # Update master account can_order flag to 0 (master can no longer place orders)
+            self.account_state_manager.update_can_order(1, 0, "Master account exited at market price")
+            logger.info("Master account can_order set to 0 after market exit")
+            
             logger.info("Master market exit process completed successfully")
             
         except Exception as e:
@@ -4493,6 +4500,10 @@ class MainWindow:
                 logger.info("No existing exit order for Child, placing new market order")
                 self._place_market_exit_order(2)
                 messagebox.showinfo("Success", "Child market exit order placed successfully")
+            
+            # Update child account can_order flag to 0 (child can no longer place orders)
+            self.account_state_manager.update_can_order(2, 0, "Child account exited at market price")
+            logger.info("Child account can_order set to 0 after market exit")
             
             logger.info("Child market exit process completed successfully")
             
