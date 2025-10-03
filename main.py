@@ -1430,7 +1430,7 @@ class MainWindow:
         # Child Account Logout
         self.child_logout_button = tk.Button(
             self.bottom_frame, text="Child Account Logout", 
-            command=self.logout_child_account, width=25, height=2
+            command=self.logout_child_account, width=25, height=2, state='disabled'
         )
         self.child_logout_button.grid(row=0, column=3, padx=5, pady=5)
         
@@ -2304,8 +2304,7 @@ class MainWindow:
             self.trail_status_text.set("Trailing Disabled")
             
             # Reset button states
-            self.enable_trail_button.config(state="normal", bg="lightgreen")
-            self.disable_trail_button.config(state="disabled", bg="gray")
+            self.update_trail_button_states()
             
             # Clear trailing stop display
             self.trailing_stop_display_label.config(text="")
@@ -5036,11 +5035,6 @@ class MainWindow:
                 messagebox.showerror("Error", "Please enter a trail value")
                 return
             
-            # Check if target price is set
-            if not self.target_price_level:
-                messagebox.showerror("Error", "Please set a target price first before enabling trailing")
-                return
-            
             trail_value = float(trail_value_text)
             
             # Validate based on trail type
@@ -5053,11 +5047,27 @@ class MainWindow:
                     messagebox.showerror("Error", "Percent trail must be between 0 and 100")
                     return
             
-            # Calculate what the trailing stop would be at current target price
+            # Determine reference price for calculation
+            reference_price = None
+            
+            if self.trailing_active:
+                # If trailing is already active, use current trailing high price
+                reference_price = self.trailing_high_price
+                logger.info(f"Editing trailing value - using current trailing high: {reference_price}")
+            elif self.target_price_level:
+                # If target is set but trailing not active, use target price
+                reference_price = self.target_price_level
+                logger.info(f"Setting up trailing - using target price: {reference_price}")
+            else:
+                # No reference price available
+                messagebox.showerror("Error", "Please set a target price first before enabling trailing")
+                return
+            
+            # Calculate what the trailing stop would be at reference price
             if trail_type == "Point":
-                calculated_trailing_stop = self.target_price_level - trail_value
+                calculated_trailing_stop = reference_price - trail_value
             else:  # Percent
-                calculated_trailing_stop = self.target_price_level * (1 - trail_value / 100)
+                calculated_trailing_stop = reference_price * (1 - trail_value / 100)
             
             # Check if trailing stop would be below SL price (if SL is set)
             if self.sl_price_level and calculated_trailing_stop < self.sl_price_level:
@@ -5069,17 +5079,32 @@ class MainWindow:
             # Enable trailing
             self.enable_trailing_value.set(True)
             
-            # Update status based on trail type
-            if trail_type == "Point":
-                self.trail_status_text.set(f"Trailing Ready - Point Trail: {trail_value} (Will activate when target reached)")
+            if self.trailing_active:
+                # Update existing trailing with new value
+                self.trailing_stop_price = calculated_trailing_stop
+                
+                # Update status for both accounts
+                self.master_order_status.set(f"TRAILING @ {self.trailing_high_price} (Stop: {self.trailing_stop_price:.2f})")
+                self.child_order_status.set(f"TRAILING @ {self.trailing_high_price} (Stop: {self.trailing_stop_price:.2f})")
+                
+                # Update trail status
+                self.trail_status_text.set(f"Trailing Active - Stop: {self.trailing_stop_price:.2f}")
+                
+                # Update real-time trailing stop display
+                self.update_trailing_stop_display(self.trailing_high_price)
+                
+                logger.info(f"Trailing value updated - {trail_type} trail: {trail_value}, new stop: {self.trailing_stop_price:.2f}")
             else:
-                self.trail_status_text.set(f"Trailing Ready - Percent Trail: {trail_value}% (Will activate when target reached)")
+                # Initial setup - update status based on trail type
+                if trail_type == "Point":
+                    self.trail_status_text.set(f"Trailing Ready - Point Trail: {trail_value}")
+                else:
+                    self.trail_status_text.set(f"Trailing Ready - Percent Trail: {trail_value}%")
+                
+                logger.info(f"Trailing configured - {trail_type} trail: {trail_value} (Ready for target activation)")
             
             # Update button states
-            self.enable_trail_button.config(state="disabled", bg="gray")
-            self.disable_trail_button.config(state="normal", bg="lightcoral")
-            
-            logger.info(f"Trailing configured - {trail_type} trail: {trail_value} (Ready for target activation)")
+            self.update_trail_button_states()
             
         except ValueError:
             messagebox.showerror("Error", "Please enter a valid trail value")
@@ -5104,14 +5129,43 @@ class MainWindow:
                 logger.info("Active trailing mode stopped")
             
             # Update button states
-            self.enable_trail_button.config(state="normal", bg="lightgreen")
-            self.disable_trail_button.config(state="disabled", bg="gray")
+            self.update_trail_button_states()
             
             logger.info("Trailing disabled")
             
         except Exception as e:
             logger.error(f"Error disabling trail: {e}")
             messagebox.showerror("Error", f"Error disabling trail: {e}")
+    
+    def update_trail_button_states(self):
+        """Update trail button states based on current trailing status"""
+        try:
+            logger.info(f"DEBUG: update_trail_button_states called - trailing_active={self.trailing_active}, enable_trailing_value={self.enable_trailing_value.get()}")
+            
+            if self.trailing_active:
+                # Trailing is active - enable editing
+                self.enable_trail_button.config(state="normal", bg="lightgreen", text="Update")
+                self.disable_trail_button.config(state="normal", bg="lightcoral")
+                logger.info("Button states: Trailing active - Enable button set to 'Update'")
+            elif self.enable_trailing_value.get():
+                # Trailing is enabled but not active yet - allow editing values
+                self.enable_trail_button.config(state="normal", bg="lightgreen", text="Update")
+                self.disable_trail_button.config(state="normal", bg="lightcoral")
+                logger.info("Button states: Trailing enabled but not active - Enable button set to 'Update' for editing")
+            else:
+                # Trailing not enabled - check if target is set
+                if self.target_price_level:
+                    # Target is set but trailing not enabled - ready to enable
+                    self.enable_trail_button.config(state="normal", bg="lightgreen", text="Enable")
+                    self.disable_trail_button.config(state="disabled", bg="gray")
+                    logger.info("Button states: Target set, trailing not enabled - Enable button ready")
+                else:
+                    # No target set - can't enable trailing
+                    self.enable_trail_button.config(state="disabled", bg="gray", text="Enable")
+                    self.disable_trail_button.config(state="disabled", bg="gray")
+                    logger.info("Button states: No target set - Enable button disabled")
+        except Exception as e:
+            logger.error(f"Error updating trail button states: {e}")
     
     def start_trailing_mode(self, current_price):
         """Start trailing mode when target is reached"""
@@ -5143,7 +5197,11 @@ class MainWindow:
             # Update real-time trailing stop display
             self.update_trailing_stop_display(current_price)
             
+            # Update button states for editing capability
+            self.update_trail_button_states()
+            
             logger.info(f"Trailing mode started at {current_price}, initial stop: {self.trailing_stop_price:.2f}")
+            logger.info(f"Button states updated - Enable button should now show 'Update' and be enabled")
             
         except Exception as e:
             logger.error(f"Error starting trailing mode: {e}")
